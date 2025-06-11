@@ -2,6 +2,8 @@
 
 Collection of packages created by [@stephansama](https://github.com/stephansama)
 
+All packages are packaged underneath the @stephansama scope
+
 - [alfred-kaomoji](./packages/alfred-kaomoji/README.md)
 - [remark-asciinema](./packages/remark-asciinema/README.md)
 

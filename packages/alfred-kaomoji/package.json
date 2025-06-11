@@ -1,13 +1,27 @@
 {
-  "name": "alfred-kaomoji",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.11.0"
+	"name": "@stephansama/alfred-kaomoji",
+	"main": "index.js",
+	"version": "1.0.0",
+	"license": "MIT",
+	"description": "",
+	"keywords": [
+		"alfred",
+		"kaomoji",
+		"emoji",
+		"picker"
+	],
+	"author": {
+		"email": "stephanrandle.dev@gmail.com",
+		"name": "Stephan Randle",
+		"url": "https://stephanrandle.netlify.app/"
+	},
+	"repository": {
+		"url": "https://github.com/stephansama/packages",
+		"type": "git",
+		"directory": "packages/remark-asciinema"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"packageManager": "pnpm@10.11.0"
 }

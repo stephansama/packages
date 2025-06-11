@@ -1,5 +1,5 @@
 {
-	"name": "remark-asciinema",
+	"name": "@stephansama/remark-asciinema",
 	"type": "module",
 	"readme": "./README.md",
 	"license": "MIT",
@@ -11,12 +11,12 @@
 		"remark-plugin"
 	],
 	"author": {
-		"email": "stephanrandle@hotmail.com",
+		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
 		"url": "https://stephanrandle.netlify.app/"
 	},
 	"repository": {
-		"url": "https://github.com/stephansama/remark-asciinema",
+		"url": "https://github.com/stephansama/packages",
 		"type": "git",
 		"directory": "packages/remark-asciinema"
 	},

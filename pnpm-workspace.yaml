@@ -1,6 +1,6 @@
 packages:
   - configs/*
-  - examples/*
+  - examples/**
   - packages/*
 catalog:
   typescript: ^5.8.3

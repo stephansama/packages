@@ -1,4 +1,6 @@
 .DS_Store
+.astro
+.next
 .turbo
 dist
 node_modules

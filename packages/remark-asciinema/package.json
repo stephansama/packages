@@ -1,13 +1,55 @@
 {
 	"name": "remark-asciinema",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\""
+	"type": "module",
+	"readme": "./README.md",
+	"license": "MIT",
+	"version": "1.0.3",
+	"description": "A remark plugin that transforms Asciinema links into embedded players or screenshots.",
+	"keywords": [
+		"asciinema",
+		"remark",
+		"remark-plugin"
+	],
+	"author": {
+		"email": "stephanrandle@hotmail.com",
+		"name": "Stephan Randle",
+		"url": "https://stephanrandle.netlify.app/"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"packageManager": "pnpm@10.11.0"
+	"repository": {
+		"url": "https://github.com/stephansama/remark-asciinema",
+		"type": "git",
+		"directory": "packages/remark-asciinema"
+	},
+	"scripts": {
+		"build": "tsup",
+		"prepublish": "tsup",
+		"dev": "tsup --watch",
+		"test": "vitest run",
+		"test:coverage": "vitest run --coverage",
+		"test:ui": "vitest run --ui"
+	},
+	"files": [
+		"dist",
+		"package.json"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./package.json": "./package.json"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"devDependencies": {
+		"@config/tsconfig": "workspace:*",
+		"remark": "^15.0.1",
+		"tsup": "^8.3.6",
+		"unist-builder": "^4.0.0",
+		"unist-util-is": "^6.0.0",
+		"unist-util-visit": "^5.0.0"
+	}
 }

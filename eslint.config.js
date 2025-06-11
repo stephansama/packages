@@ -1,9 +1,11 @@
 import pluginJs from "@eslint/js";
 import gitignore from "eslint-config-flat-gitignore";
 import globals from "globals";
+import tseslint from "typescript-eslint";
 
 /** @type {import('eslint').Linter.Config[]} */
 const configs = [
+	{ files: ["**/*.{js,mjs,cjs,ts}"] },
 	gitignore(),
 	{ languageOptions: { globals: { ...globals.browser, ...globals.node } } },
 	{
@@ -15,6 +17,7 @@ const configs = [
 		],
 	},
 	pluginJs.configs.recommended,
+	...tseslint.configs.recommended,
 	{
 		rules: {
 			"@typescript-eslint/ban-ts-comment": "off",

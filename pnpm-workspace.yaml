@@ -1,6 +1,12 @@
 packages:
+  - configs/*
   - examples/*
   - packages/*
-  - libs/*
 catalog:
   typescript: ^5.8.3
+catalogs:
+  astro:
+    astro: ^5.9.2
+  prettier:
+    prettier-plugin-astro: ^0.14.1
+    prettier-plugin-astro-organize-imports: ^0.4.11

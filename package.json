@@ -1,0 +1,30 @@
+{
+	"name": "root",
+	"version": "1.0.0",
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"url": "https://stephanrandle.netlify.app",
+		"email": "stephanrandle.dev@gmail.com"
+	},
+	"scripts": {
+		"test": "echo 'need to write tests'",
+		"prepare": "husky"
+	},
+	"devDependencies": {
+		"@changesets/cli": "^2.29.4",
+		"@commitlint/cli": "^19.8.1",
+		"@commitlint/config-conventional": "^19.8.1",
+		"@commitlint/types": "^19.8.1",
+		"@eslint/js": "^9.28.0",
+		"eslint": "^9.28.0",
+		"eslint-config-flat-gitignore": "^2.1.0",
+		"globals": "^16.2.0",
+		"husky": "^9.1.7",
+		"prettier": "^3.5.3",
+		"prettier-plugin-organize-imports": "^4.1.0",
+		"turbo": "^2.5.4",
+		"typescript": "catalog:"
+	},
+	"packageManager": "pnpm@10.11.0"
+}

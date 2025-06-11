@@ -1,0 +1,21 @@
+{
+	"extends": "@tsconfig/recommended/tsconfig.json",
+	"exclude": ["node_modules", "dist"],
+	"include": ["./**/*"],
+	"compilerOptions": {
+		"allowImportingTsExtensions": true,
+		"allowJs": true,
+		"baseUrl": ".",
+		"isolatedModules": true,
+		"lib": ["ESNext"],
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"noEmit": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "ESNext",
+		"useDefineForClassFields": true,
+		"verbatimModuleSyntax": true
+	}
+}

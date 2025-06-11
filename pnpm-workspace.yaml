@@ -1,0 +1,6 @@
+packages:
+  - examples/*
+  - packages/*
+  - libs/*
+catalog:
+  typescript: ^5.8.3

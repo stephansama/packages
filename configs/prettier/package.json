@@ -1,0 +1,37 @@
+{
+	"name": "@config/prettier",
+	"type": "module",
+	"version": "1.0.0",
+	"packageManager": "pnpm@10.11.0",
+	"exports": {
+		"./astro": {
+			"require": "./astro.config.js",
+			"import": "./astro.config.js",
+			"types": "./type.d.ts"
+		},
+		"./tailwind": {
+			"require": "./tailwind.config.js",
+			"import": "./tailwind.config.js",
+			"types": "./type.d.ts"
+		}
+	},
+	"devDependencies": {
+		"@config/tsconfig": "workspace:*",
+		"deepmerge": "^4.3.1",
+		"prettier-plugin-astro": "catalog:prettier",
+		"prettier-plugin-astro-organize-imports": "catalog:prettier",
+		"prettier-plugin-tailwindcss": "^0.6.12"
+	},
+	"peerDependencies": {
+		"prettier-plugin-astro": "catalog:prettier",
+		"prettier-plugin-astro-organize-imports": "catalog:prettier"
+	},
+	"peerDependenciesMeta": {
+		"prettier-plugin-astro": {
+			"optional": true
+		},
+		"prettier-plugin-astro-organize-imports": {
+			"optional": true
+		}
+	}
+}

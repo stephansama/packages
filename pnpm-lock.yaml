@@ -16,6 +16,9 @@ catalogs:
     typescript:
       specifier: ^5.8.3
       version: 5.8.3
+    zx:
+      specifier: ^8.5.5
+      version: 8.5.5
 
 importers:
 
@@ -181,6 +184,12 @@ importers:
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
+
+  scripts/ci:
+    dependencies:
+      zx:
+        specifier: 'catalog:'
+        version: 8.5.5
 
 packages:
 
@@ -4913,6 +4922,11 @@ packages:
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
+
+  zx@8.5.5:
+    resolution: {integrity: sha512-kzkjV3uqyEthw1IBDbA7Co2djji77vCP1DRvt58aYSMwiX4nyvAkFE8OBSEsOUbDJAst0Yo4asNvMTGG5HGPXA==}
+    engines: {node: '>= 12.17.0'}
+    hasBin: true
 
 snapshots:
 
@@ -10473,3 +10487,5 @@ snapshots:
   zod@3.25.58: {}
 
   zwitch@2.0.4: {}
+
+  zx@8.5.5: {}

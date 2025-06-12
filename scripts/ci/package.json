@@ -1,0 +1,12 @@
+{
+	"name": "ci",
+	"type": "module",
+	"version": "1.0.0",
+	"scripts": {
+		"publish": "zx ./src/publish.js"
+	},
+	"packageManager": "pnpm@10.11.0",
+	"dependencies": {
+		"zx": "catalog:"
+	}
+}

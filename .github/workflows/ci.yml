@@ -11,13 +11,18 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: 📖 Read .nvmrc
+        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+        id: nvm
+      - uses: ⬇️ actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{vars.NODE_VERSION}}
+          node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
           cache: "pnpm"
       - name: 📦 Installing dependencies
         run: pnpm install
+      - name: 📦 Publish packages
+        run: pnpm run publish

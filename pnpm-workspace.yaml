@@ -2,8 +2,10 @@ packages:
   - configs/*
   - examples/**
   - packages/*
+  - scripts/*
 catalog:
   typescript: ^5.8.3
+  zx: ^8.5.5
 catalogs:
   astro:
     "@astrojs/check": ^0.9.4

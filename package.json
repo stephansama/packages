@@ -2,8 +2,8 @@
 	"name": "root",
 	"type": "module",
 	"private": true,
-	"version": "1.0.0",
 	"license": "MIT",
+	"version": "1.0.0",
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
@@ -12,8 +12,10 @@
 	"scripts": {
 		"lint": "turbo lint",
 		"test": "turbo test",
-		"format": "prettier . --write",
-		"format:check": "prettier . --check",
+		"build": "turbo build",
+		"publish": "turbo publish",
+		"fmt:write": "prettier . --write",
+		"fmt:check": "prettier . --check",
 		"prepare": "husky"
 	},
 	"devDependencies": {

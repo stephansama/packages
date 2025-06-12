@@ -1,5 +1,6 @@
 .DS_Store
 .astro
+.env**
 .next
 .turbo
 dist

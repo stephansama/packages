@@ -10,5 +10,5 @@
 		"nvmrc",
 		"stephansama"
 	],
-	"ignorePaths": []
+	"ignorePaths": [".env"]
 }

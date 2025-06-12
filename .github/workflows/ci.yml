@@ -2,6 +2,7 @@ name: CI
 on:
   workflow_dispatch:
 env:
+  NODE_AUTH_TOKEN: ${{secrets.node_auth_token}}
   ZX_VERBOSE: true
 permissions:
   actions: read

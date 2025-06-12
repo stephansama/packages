@@ -1,7 +1,7 @@
 {
 	"$schema": "https://turborepo.com/schema.json",
 	"ui": "tui",
-	"globalEnv": ["ZX_VERBOSE"],
+	"globalEnv": ["NODE_AUTH_TOKEN", "ZX_VERBOSE"],
 	"tasks": {
 		"build": {
 			"dependsOn": ["^build"],

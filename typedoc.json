@@ -1,0 +1,31 @@
+{
+	"$schema": "https://typedoc.org/schema.json",
+	"out": "./dist",
+	"name": "@stephansama packages",
+	"readme": "./README.md",
+	"navigation": true,
+	"excludeExternals": true,
+	"skipErrorChecking": true,
+	"jsDocCompatibility": true,
+	"entryPoints": ["packages/*"],
+	"entryPointStrategy": "packages",
+	"navigationLinks": {
+		"Author": "https://stephanrandle.netlify.app",
+		"Blog": "https://madprofessorblog.org",
+		"GitHub": "https://github.com/stephansama/packages"
+	},
+	"highlightLanguages": [
+		"bash",
+		"console",
+		"css",
+		"html",
+		"javascript",
+		"json",
+		"jsonc",
+		"json5",
+		"yaml",
+		"tsx",
+		"typescript",
+		"markdown"
+	]
+}

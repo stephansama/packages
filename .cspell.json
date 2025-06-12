@@ -2,9 +2,11 @@
 	"ignoreWords": [
 		"Randle",
 		"Stephan",
+		"alfy",
 		"asciinema",
 		"astrojs",
 		"kaomoji",
+		"kaomojis",
 		"stephansama"
 	],
 	"ignorePaths": []

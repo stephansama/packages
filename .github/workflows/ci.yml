@@ -1,0 +1,23 @@
+name: CI
+on:
+  workflow_dispatch:
+env:
+  ZX_VERBOSE: true
+permissions:
+  actions: read
+  contents: read
+  pull-requests: write
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{vars.NODE_VERSION}}
+          cache: "pnpm"
+      - name: 📦 Installing dependencies
+        run: pnpm install

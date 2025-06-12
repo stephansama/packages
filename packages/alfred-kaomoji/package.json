@@ -1,9 +1,10 @@
 {
 	"name": "@stephansama/alfred-kaomoji",
+	"type": "module",
 	"main": "index.js",
 	"version": "1.0.0",
 	"license": "MIT",
-	"description": "",
+	"description": "Alfred Kaomoji Picker",
 	"keywords": [
 		"alfred",
 		"kaomoji",
@@ -18,10 +19,16 @@
 	"repository": {
 		"url": "https://github.com/stephansama/packages",
 		"type": "git",
-		"directory": "packages/remark-asciinema"
+		"directory": "packages/alfred-kaomoji"
 	},
 	"scripts": {
-		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+		"test": "echo 'tested (* ^ ω ^)'",
+		"postinstall": "alfy-init",
+		"preuninstall": "alfy-cleanup"
 	},
-	"packageManager": "pnpm@10.11.0"
+	"packageManager": "pnpm@10.11.0",
+	"dependencies": {
+		"alfy": "^2.1.0"
+	}
 }

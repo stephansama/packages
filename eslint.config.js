@@ -1,23 +1,28 @@
 import pluginJs from "@eslint/js";
 import gitignore from "eslint-config-flat-gitignore";
+import prettier from "eslint-config-prettier";
+import eslintPluginAstro from "eslint-plugin-astro";
+import perfectionist from "eslint-plugin-perfectionist";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
 /** @type {import('eslint').Linter.Config[]} */
 const configs = [
-	{ files: ["**/*.{js,mjs,cjs,ts}"] },
 	gitignore(),
-	{ languageOptions: { globals: { ...globals.browser, ...globals.node } } },
+	{ files: ["**/*.{js,mjs,cjs,ts}"] },
 	{
-		ignores: [
-			".config/*",
-			"**/static/*",
-			"**/sst.config.ts",
-			"**/worker-configuration.d.ts",
-		],
+		languageOptions: {
+			ecmaVersion: "latest",
+			globals: { ...globals.browser, ...globals.node },
+			sourceType: "module",
+		},
 	},
 	pluginJs.configs.recommended,
 	...tseslint.configs.recommended,
+	...eslintPluginAstro.configs.recommended,
+	...eslintPluginAstro.configs["jsx-a11y-strict"],
+	perfectionist.configs["recommended-natural"],
+	prettier,
 	{
 		rules: {
 			"@typescript-eslint/ban-ts-comment": "off",

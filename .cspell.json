@@ -1,4 +1,11 @@
 {
-	"ignoreWords": ["Stephan", "Randle", "asciinema", "kaomoji", "stephansama"],
+	"ignoreWords": [
+		"Randle",
+		"Stephan",
+		"asciinema",
+		"astrojs",
+		"kaomoji",
+		"stephansama"
+	],
 	"ignorePaths": []
 }

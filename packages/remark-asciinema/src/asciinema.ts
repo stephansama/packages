@@ -1,4 +1,5 @@
 import { visit, type Visitor } from "unist-util-visit";
+
 import {
 	constructAsciinemaImage,
 	constructAsciinemaScript,

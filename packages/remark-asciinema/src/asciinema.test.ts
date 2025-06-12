@@ -1,5 +1,6 @@
 import { remark } from "remark";
 import { describe, expect, it } from "vitest";
+
 import plugin from "../src/asciinema";
 
 const testFile = `

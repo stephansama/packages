@@ -1,3 +1,5 @@
-import config from "@config/prettier/astro";
+import astro from "@config/prettier/astro";
+import base from "@config/prettier/base";
+import { merge } from "@config/prettier/merge";
 
-export default config;
+export default merge(base, astro);

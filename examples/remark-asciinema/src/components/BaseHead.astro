@@ -2,65 +2,66 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import type { ImageMetadata } from "astro";
+
 import { SITE_TITLE } from "../consts";
 import "../styles/global.css";
 
 interface Props {
-	title: string;
 	description: string;
 	image?: ImageMetadata;
+	title: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description } = Astro.props;
+const { description, title } = Astro.props;
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="sitemap" href="/sitemap-index.xml" />
+<meta content="width=device-width,initial-scale=1" name="viewport" />
+<link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+<link href="/sitemap-index.xml" rel="sitemap" />
 <link
-	rel="alternate"
-	type="application/rss+xml"
-	title={SITE_TITLE}
 	href={new URL("rss.xml", Astro.site)}
+	rel="alternate"
+	title={SITE_TITLE}
+	type="application/rss+xml"
 />
-<meta name="generator" content={Astro.generator} />
+<meta content={Astro.generator} name="generator" />
 
 <!-- Font preloads -->
 <link
-	rel="preload"
-	href="/fonts/atkinson-regular.woff"
 	as="font"
-	type="font/woff"
 	crossorigin
+	href="/fonts/atkinson-regular.woff"
+	rel="preload"
+	type="font/woff"
 />
 <link
-	rel="preload"
-	href="/fonts/atkinson-bold.woff"
 	as="font"
-	type="font/woff"
 	crossorigin
+	href="/fonts/atkinson-bold.woff"
+	rel="preload"
+	type="font/woff"
 />
 
 <!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
+<link href={canonicalURL} rel="canonical" />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
+<meta content={title} name="title" />
+<meta content={description} name="description" />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
+<meta content="website" property="og:type" />
+<meta content={Astro.url} property="og:url" />
+<meta content={title} property="og:title" />
+<meta content={description} property="og:description" />
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
+<meta content="summary_large_image" property="twitter:card" />
+<meta content={Astro.url} property="twitter:url" />
+<meta content={title} property="twitter:title" />
+<meta content={description} property="twitter:description" />

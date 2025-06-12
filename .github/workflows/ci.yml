@@ -12,10 +12,13 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
+      - run: ls .
+      - run: echo $CI
       - name: 📖 Read .nvmrc
         run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_ENV
         id: nvm
       - run: echo "${{env.NODE_VERSION}}"
+      - run: echo $GITHUB_ENV
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0

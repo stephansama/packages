@@ -13,7 +13,8 @@
 		"nvmrc",
 		"pkgs",
 		"stephanrandle",
-		"stephansama"
+		"stephansama",
+		"tsup"
 	],
 	"ignorePaths": [".env"]
 }

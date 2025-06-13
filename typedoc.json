@@ -9,8 +9,8 @@
 	"jsDocCompatibility": true,
 	"darkHighlightTheme": "catppuccin-mocha",
 	"lightHighlightTheme": "catppuccin-latte",
-	"entryPoints": ["packages/*"],
 	"entryPointStrategy": "packages",
+	"entryPoints": ["packages/*"],
 	"navigationLinks": {
 		"Author": "https://stephanrandle.netlify.app",
 		"Blog": "https://madprofessorblog.org",

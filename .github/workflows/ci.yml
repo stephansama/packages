@@ -29,5 +29,7 @@ jobs:
         run: pnpm install
       - name: 📦 Publish packages
         run: pnpm run publish
+      - name: ⚙️ Build documentation site
+        run: pnpm run typedoc
       - name: 🚀 Deploy documentation site
         run: pnpm run deploy

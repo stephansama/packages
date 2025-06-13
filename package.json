@@ -15,6 +15,7 @@
 	},
 	"scripts": {
 		"with-env": "dotenv -e .env --",
+		"typedoc": "typedoc",
 		"lint": "turbo lint",
 		"test": "turbo test",
 		"build": "pnpm with-env turbo build",

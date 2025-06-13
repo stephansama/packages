@@ -13,6 +13,9 @@ catalogs:
       specifier: ^5.9.2
       version: 5.9.2
   default:
+    tsup:
+      specifier: ^8.3.6
+      version: 8.5.0
     typescript:
       specifier: ^5.8.3
       version: 5.8.3
@@ -207,7 +210,7 @@ importers:
         specifier: ^15.0.1
         version: 15.0.1
       tsup:
-        specifier: ^8.3.6
+        specifier: 'catalog:'
         version: 8.5.0(jiti@2.4.2)(postcss@8.5.4)(typescript@5.8.3)(yaml@2.8.0)
       unist-builder:
         specifier: ^4.0.0

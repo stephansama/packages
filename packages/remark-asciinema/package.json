@@ -48,7 +48,7 @@
 	"devDependencies": {
 		"@config/tsconfig": "workspace:*",
 		"remark": "^15.0.1",
-		"tsup": "^8.3.6",
+		"tsup": "catalog:",
 		"unist-builder": "^4.0.0",
 		"unist-util-is": "^6.0.0",
 		"unist-util-visit": "^5.0.0"

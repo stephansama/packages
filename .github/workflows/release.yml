@@ -31,5 +31,5 @@ jobs:
         with:
           commit: "chore: Update version for release"
           title: "chore: Update version for release"
-          publish: pnpm run publish
+          publish: pnpm run publish && pnpm run deploy
           createGithubReleases: true

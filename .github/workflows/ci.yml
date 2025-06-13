@@ -2,6 +2,8 @@ name: CI
 on:
   workflow_dispatch:
 env:
+  CLOUDFLARE_ACCOUNT_ID: ${{secrets.cloudflare_account_id}}
+  CLOUDFLARE_API_TOKEN: ${{secrets.cloudflare_api_token}}
   NODE_AUTH_TOKEN: ${{secrets.node_auth_token}}
   TURBO_TELEMETRY_DISABLED: 1
   ZX_VERBOSE: true
@@ -27,3 +29,5 @@ jobs:
         run: pnpm install
       - name: 📦 Publish packages
         run: pnpm run publish
+      - name: 🚀 Deploy documentation site
+        run: pnpm run deploy

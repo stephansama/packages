@@ -3,5 +3,6 @@
 .env**
 .next
 .turbo
+.wrangler
 dist
 node_modules

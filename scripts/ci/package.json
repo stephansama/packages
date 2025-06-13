@@ -3,10 +3,14 @@
 	"type": "module",
 	"version": "1.0.0",
 	"scripts": {
+		"deploy": "zx ./src/deploy.js",
 		"publish": "zx ./src/publish.js"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"dependencies": {
 		"zx": "catalog:"
+	},
+	"devDependencies": {
+		"wrangler": "^4.20.0"
 	}
 }

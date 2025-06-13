@@ -20,6 +20,7 @@
 			"cache": false,
 			"env": ["NODE_AUTH_TOKEN"]
 		},
+		"deploy": { "persistent": true, "cache": false },
 		"test": { "persistent": true, "cache": false },
 		"dev": { "persistent": true, "cache": false }
 	}

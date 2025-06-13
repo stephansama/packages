@@ -1,5 +1,11 @@
 # ci
 
+## 1.1.1
+
+### Patch Changes
+
+- 39019de: arbitrarily updated ci package to trigger changeset
+
 ## 1.1.0
 
 ### Minor Changes

@@ -9,4 +9,4 @@ catalog:
 catalogs:
   astro:
     "@astrojs/check": ^0.9.4
-    astro: ^5.9.2
+    astro: ^5.9.3

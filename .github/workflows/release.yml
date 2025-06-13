@@ -1,0 +1,27 @@
+name: Release
+on:
+  workflow_dispatch:
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+concurrency: ${{github.workflow}}-${{github.ref}}
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: "pnpm"
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+      - name: 📦 Installing dependencies
+        run: pnpm install
+      - name: 🦋 Create Changeset Release Pull Request
+        uses: changesets/action@v1
+        with:
+          commit: "chore: Update version for release"
+          title: "chore: Update version for release"
+          publish: pnpm run publish
+          createGithubReleases: true

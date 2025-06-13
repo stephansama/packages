@@ -7,6 +7,8 @@
 	"excludeExternals": true,
 	"skipErrorChecking": true,
 	"jsDocCompatibility": true,
+	"darkHighlightTheme": "catppuccin-mocha",
+	"lightHighlightTheme": "catppuccin-latte",
 	"entryPoints": ["packages/*"],
 	"entryPointStrategy": "packages",
 	"navigationLinks": {

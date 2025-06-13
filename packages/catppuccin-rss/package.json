@@ -1,0 +1,21 @@
+{
+	"name": "@stephansama/catppuccin-rss",
+	"readme": "./README.md",
+	"version": "1.0.0",
+	"license": "MIT",
+	"description": "Catppuccin x Pretty-feed-v3",
+	"author": {
+		"email": "stephanrandle.dev@gmail.com",
+		"name": "Stephan Randle",
+		"url": "https://stephanrandle.netlify.app/"
+	},
+	"files": [
+		"theme"
+	],
+	"keywords": [
+		"catppuccin",
+		"rss",
+		"pretty-feed"
+	],
+	"packageManager": "pnpm@10.11.0"
+}

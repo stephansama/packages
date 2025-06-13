@@ -1,13 +1,17 @@
 {
 	"ignoreWords": [
 		"Randle",
+		"Stackblitz",
 		"Stephan",
 		"alfy",
 		"asciinema",
 		"astrojs",
+		"catppuccin",
 		"kaomoji",
 		"kaomojis",
+		"nvim",
 		"nvmrc",
+		"stephanrandle",
 		"stephansama"
 	],
 	"ignorePaths": [".env"]

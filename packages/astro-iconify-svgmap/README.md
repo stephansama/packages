@@ -1,0 +1,1 @@
+# @stephansama/astro-iconify-svgmap

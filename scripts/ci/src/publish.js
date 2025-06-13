@@ -3,7 +3,7 @@
 import fs from "node:fs";
 import { $ as sh } from "zx";
 
-import root from "../../../package.json";
+import root from "../../../package.json" with { type: "json" };
 
 const { scope } = root.config;
 

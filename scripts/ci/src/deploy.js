@@ -1,6 +1,6 @@
 import { $ as sh } from "zx";
 
-import root from "../../../package.json";
+import root from "../../../package.json" with { type: "json" };
 
 await sh`../../node_modules/.bin/typedoc`;
 

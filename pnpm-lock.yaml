@@ -179,7 +179,11 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
 
-  packages/catppuccin-rss: {}
+  packages/catppuccin-rss:
+    devDependencies:
+      '@config/tsconfig':
+        specifier: workspace:*
+        version: link:../../configs/tsconfig
 
   packages/remark-asciinema:
     devDependencies:

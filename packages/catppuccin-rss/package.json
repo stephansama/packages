@@ -9,6 +9,11 @@
 		"name": "Stephan Randle",
 		"url": "https://stephanrandle.netlify.app/"
 	},
+	"repository": {
+		"url": "https://github.com/stephansama/packages",
+		"type": "git",
+		"directory": "packages/catppuccin-rss"
+	},
 	"files": [
 		"theme"
 	],
@@ -17,5 +22,12 @@
 		"rss",
 		"pretty-feed"
 	],
-	"packageManager": "pnpm@10.11.0"
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"packageManager": "pnpm@10.11.0",
+	"devDependencies": {
+		"@config/tsconfig": "workspace:*"
+	}
 }

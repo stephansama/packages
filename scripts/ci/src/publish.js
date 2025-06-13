@@ -12,7 +12,7 @@ for (const pkg of packages) {
 }
 
 const templates = examples
-	.map((example) => `--template './examples/${example}/*'`)
+	.map((example) => `--template '../../examples/${example}/*'`)
 	.join(" ");
 
-await sh`pnpx pkg-pr-new publish --pnpm './packages/*' ${templates}`;
+await sh`../../node_modules/.bin/pkg-pr-new publish --pnpm '../../packages/*' ${templates}`;

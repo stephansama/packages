@@ -4,9 +4,14 @@ on:
     branches: [main]
   workflow_dispatch:
 env:
+  CLOUDFLARE_ACCOUNT_ID: ${{secrets.cloudflare_account_id}}
+  CLOUDFLARE_API_TOKEN: ${{secrets.cloudflare_api_token}}
+  NODE_AUTH_TOKEN: ${{secrets.node_auth_token}}
+  TURBO_TELEMETRY_DISABLED: 1
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   # https://typicode.github.io/husky/how-to.html#ci-server-and-docker
   HUSKY: 0
+  ZX_VERBOSE: true
 permissions:
   id-token: write
   pull-requests: write

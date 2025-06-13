@@ -19,7 +19,7 @@
 		"lint": "turbo lint",
 		"test": "turbo test",
 		"build": "pnpm with-env turbo build",
-		"publish": "pnpm with-env turbo publish && pnpm with-env turbo deploy",
+		"publish": "pnpm with-env turbo publish && pnpm run typedoc && pnpm with-env turbo deploy",
 		"fmt:write": "prettier . --write",
 		"fmt:check": "prettier . --check",
 		"prepare": "husky"

@@ -1,8 +1,12 @@
 name: Release
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # https://typicode.github.io/husky/how-to.html#ci-server-and-docker
+  HUSKY: 0
 concurrency: ${{github.workflow}}-${{github.ref}}
 jobs:
   release:

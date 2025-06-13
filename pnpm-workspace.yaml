@@ -1,9 +1,9 @@
 packages:
-  - configs/*
+  - lib/*
   - examples/**
   - packages/*
-  - scripts/*
 catalog:
+  tsup: ^8.3.6
   typescript: ^5.8.3
   zx: ^8.5.5
 catalogs:

@@ -7,6 +7,10 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   # https://typicode.github.io/husky/how-to.html#ci-server-and-docker
   HUSKY: 0
+permissions:
+  id-token: write
+  pull-requests: write
+  contents: write
 concurrency: ${{github.workflow}}-${{github.ref}}
 jobs:
   release:

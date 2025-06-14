@@ -37,8 +37,9 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - name: 📦 Installing dependencies
         run: pnpm install
+      - run: pnpm run build
       - name: 🚀 Publish Stackblitz
-        run: pnpx pkg-pr-new publish --pnpm './packages/*' --template './examples/*'
+        run: pnpx pkg-pr-new publish --packageManager=pnpm --pnpm './packages/*' --template './examples/*'
       - name: 🦋 Create Changeset Release Pull Request
         uses: changesets/action@v1
         with:

@@ -15,9 +15,10 @@
 		"typedoc": "pnpm --filter=ci run typedoc && typedoc",
 		"lint": "turbo lint",
 		"test": "turbo test",
-		"build": "turbo build --filter=./packages/*",
+		"build": "turbo build",
+		"build:pkg": "turbo build --filter=./packages/*",
 		"version": "changeset version && pnpm install --lockfile-only",
-		"publish": "pnpm build && changeset publish",
+		"publish": "changeset publish",
 		"fmt:write": "prettier . --write",
 		"fmt:check": "prettier . --check",
 		"prepare": "husky"

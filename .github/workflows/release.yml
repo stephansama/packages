@@ -1,4 +1,4 @@
-name: Release
+name: 🦋 Changesets Release
 on:
   push:
     branches: [main]

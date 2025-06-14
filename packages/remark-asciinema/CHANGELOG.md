@@ -1,5 +1,11 @@
 # @stephansama/remark-asciinema
 
+## 1.0.7
+
+### Patch Changes
+
+- cf11d04: updated homepage, readme and favicon
+
 ## 1.0.6
 
 ### Patch Changes

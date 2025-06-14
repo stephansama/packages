@@ -1,5 +1,11 @@
 # @stephansama/astro-iconify-svgmap
 
+## 1.0.1
+
+### Patch Changes
+
+- cf11d04: updated homepage, readme and favicon
+
 ## 1.0.0
 
 ### Major Changes

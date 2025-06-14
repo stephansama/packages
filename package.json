@@ -1,9 +1,10 @@
 {
 	"name": "root",
 	"type": "module",
-	"private": true,
-	"license": "MIT",
+	"homepage": "https://packages.stephanrandle.workers.dev/",
 	"version": "1.0.0",
+	"license": "MIT",
+	"private": true,
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
@@ -20,7 +21,7 @@
 		"test": "turbo test",
 		"build": "turbo build --filter=./packages/*",
 		"version": "changeset version && pnpm install --lockfile-only",
-		"publish": "pnpm run typedoc && pnpm with-env turbo deploy && pnpm build && changeset publish",
+		"publish": "pnpm build && changeset publish",
 		"fmt:write": "prettier . --write",
 		"fmt:check": "prettier . --check",
 		"prepare": "husky"
@@ -50,6 +51,7 @@
 		"prettier-plugin-astro": "^0.14.1",
 		"prettier-plugin-astro-organize-imports": "^0.4.11",
 		"prettier-plugin-organize-imports": "^4.1.0",
+		"prettier-plugin-sort-package-json": "^1.1.0",
 		"prettier-plugin-tailwindcss": "^0.6.12",
 		"turbo": "^2.5.4",
 		"typedoc": "^0.28.5",

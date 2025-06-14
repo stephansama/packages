@@ -1,26 +1,20 @@
 {
 	"name": "@stephansama/alfred-kaomoji",
-	"type": "module",
-	"license": "MIT",
 	"version": "1.0.2",
-	"homepage": "https://stephansama-pkgs.pages.dev/modules/_stephansama_alfred-kaomoji",
 	"description": "Alfred Kaomoji Picker",
-	"keywords": [
-		"alfred",
-		"kaomoji",
-		"emoji",
-		"picker"
-	],
-	"author": {
-		"email": "stephanrandle.dev@gmail.com",
-		"name": "Stephan Randle",
-		"url": "https://stephanrandle.netlify.app/"
-	},
 	"repository": {
 		"url": "https://github.com/stephansama/packages",
 		"type": "git",
 		"directory": "packages/alfred-kaomoji"
 	},
+	"homepage": "https://packages.stephanrandle.workers.dev/modules/_stephansama_alfred-kaomoji",
+	"author": {
+		"email": "stephanrandle.dev@gmail.com",
+		"name": "Stephan Randle",
+		"url": "https://stephanrandle.netlify.app/"
+	},
+	"license": "MIT",
+	"type": "module",
 	"scripts": {
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
 		"test": "echo 'tested (* ^ ω ^)'",
@@ -28,11 +22,17 @@
 		"preuninstall": "[ \"$CI\" != \"true\" ] && alfy-cleanup || echo 'skipping alfred uninstall for ci'"
 	},
 	"packageManager": "pnpm@10.11.0",
+	"keywords": [
+		"alfred",
+		"kaomoji",
+		"emoji",
+		"picker"
+	],
+	"dependencies": {
+		"alfy": "^2.1.0"
+	},
 	"publishConfig": {
 		"access": "public",
 		"provenance": true
-	},
-	"dependencies": {
-		"alfy": "^2.1.0"
 	}
 }

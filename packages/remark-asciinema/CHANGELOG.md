@@ -1,5 +1,11 @@
 # @stephansama/remark-asciinema
 
+## 1.0.6
+
+### Patch Changes
+
+- 860a0ab: added homepage to remark-asciinema
+
 ## 1.0.5
 
 ### Patch Changes

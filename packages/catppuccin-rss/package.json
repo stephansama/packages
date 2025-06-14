@@ -1,33 +1,33 @@
 {
 	"name": "@stephansama/catppuccin-rss",
-	"readme": "./README.md",
 	"version": "1.0.0",
-	"license": "MIT",
 	"description": "Catppuccin x Pretty-feed-v3",
-	"author": {
-		"email": "stephanrandle.dev@gmail.com",
-		"name": "Stephan Randle",
-		"url": "https://stephanrandle.netlify.app/"
-	},
 	"repository": {
 		"url": "https://github.com/stephansama/packages",
 		"type": "git",
 		"directory": "packages/catppuccin-rss"
 	},
+	"author": {
+		"email": "stephanrandle.dev@gmail.com",
+		"name": "Stephan Randle",
+		"url": "https://stephanrandle.netlify.app/"
+	},
+	"license": "MIT",
 	"files": [
 		"theme"
 	],
+	"packageManager": "pnpm@10.11.0",
 	"keywords": [
 		"catppuccin",
 		"rss",
 		"pretty-feed"
 	],
+	"devDependencies": {
+		"@config/tsconfig": "workspace:*"
+	},
 	"publishConfig": {
 		"access": "public",
 		"provenance": true
 	},
-	"packageManager": "pnpm@10.11.0",
-	"devDependencies": {
-		"@config/tsconfig": "workspace:*"
-	}
+	"readme": "./README.md"
 }

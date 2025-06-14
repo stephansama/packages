@@ -1,8 +1,8 @@
 {
-	"name": "@example/remark-asciinema",
-	"type": "module",
 	"private": true,
+	"name": "@example/remark-asciinema",
 	"version": "0.0.2",
+	"type": "module",
 	"scripts": {
 		"dev": "astro dev",
 		"lint": "eslint ./src/ && astro check",

@@ -12,5 +12,5 @@ indent_style = tab
 insert_final_newline = true
 
 # Default
-[*.{*rc,astro,cjs,config.{ts,js,mjs},html,json,jsx,tsx,svelte}]
+[*.{*rc,astro,cjs,config.{ts,js,mjs},html,json,jsx,tsx,svelte,yml,yaml}]
 indent_size = 2

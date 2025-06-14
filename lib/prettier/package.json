@@ -1,9 +1,8 @@
 {
-	"name": "@config/prettier",
-	"type": "module",
 	"private": true,
+	"name": "@config/prettier",
 	"version": "1.1.1",
-	"packageManager": "pnpm@10.11.0",
+	"type": "module",
 	"exports": {
 		"./base": {
 			"require": "./src/base.config.js",
@@ -26,6 +25,7 @@
 			"types": "./types/config.d.ts"
 		}
 	},
+	"packageManager": "pnpm@10.11.0",
 	"devDependencies": {
 		"@config/tsconfig": "workspace:*",
 		"deepmerge": "^4.3.1"

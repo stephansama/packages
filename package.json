@@ -1,19 +1,15 @@
 {
-	"name": "root",
-	"type": "module",
-	"homepage": "https://packages.stephanrandle.workers.dev/",
-	"version": "1.0.0",
-	"license": "MIT",
 	"private": true,
+	"name": "root",
+	"version": "1.0.0",
+	"homepage": "https://packages.stephanrandle.workers.dev/",
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
 		"url": "https://stephanrandle.netlify.app"
 	},
-	"config": {
-		"scope": "@stephansama",
-		"site": "stephansama-pkgs"
-	},
+	"license": "MIT",
+	"type": "module",
 	"scripts": {
 		"with-env": "dotenv -e .env --",
 		"typedoc": "typedoc",
@@ -26,6 +22,11 @@
 		"fmt:check": "prettier . --check",
 		"prepare": "husky"
 	},
+	"config": {
+		"scope": "@stephansama",
+		"site": "stephansama-pkgs"
+	},
+	"packageManager": "pnpm@10.11.0",
 	"devDependencies": {
 		"@changesets/cli": "^2.29.4",
 		"@commitlint/cli": "^19.8.1",
@@ -59,6 +60,5 @@
 		"typescript-eslint": "^8.34.0",
 		"vitest": "^3.2.3",
 		"wrangler": "^4.20.0"
-	},
-	"packageManager": "pnpm@10.11.0"
+	}
 }

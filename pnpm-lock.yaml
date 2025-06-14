@@ -195,6 +195,15 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
 
+  packages/astro-iconify-svgmap:
+    devDependencies:
+      '@config/tsconfig':
+        specifier: workspace:*
+        version: link:../../lib/tsconfig
+      tsup:
+        specifier: 'catalog:'
+        version: 8.5.0(jiti@2.4.2)(postcss@8.5.4)(typescript@5.8.3)(yaml@2.8.0)
+
   packages/catppuccin-rss:
     devDependencies:
       '@config/tsconfig':

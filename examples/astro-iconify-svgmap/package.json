@@ -1,6 +1,7 @@
 {
 	"name": "@example/astro-iconify-svgmap",
 	"type": "module",
+	"private": true,
 	"version": "1.0.1",
 	"scripts": {
 		"dev": "astro dev",

@@ -1,6 +1,7 @@
 {
 	"name": "@config/prettier",
 	"type": "module",
+	"private": true,
 	"version": "1.1.0",
 	"packageManager": "pnpm@10.11.0",
 	"exports": {

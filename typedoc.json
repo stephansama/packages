@@ -3,6 +3,7 @@
 	"out": "./dist",
 	"name": "@stephansama packages",
 	"readme": "./README.md",
+	"favicon": "./lib/ci/theme/icon.svg",
 	"customCss": "./typedoc.css",
 	"navigation": true,
 	"excludeExternals": true,

@@ -20,7 +20,7 @@
 		"test": "turbo test",
 		"build": "pnpm with-env turbo build",
 		"version": "changeset version && pnpm install --lockfile-only",
-		"publish": "pnpm with-env turbo publish && pnpm run typedoc && pnpm with-env turbo deploy && changeset publish",
+		"publish": "pnpm run typedoc && pnpm with-env turbo deploy && pnpm build && changeset publish",
 		"fmt:write": "prettier . --write",
 		"fmt:check": "prettier . --check",
 		"prepare": "husky"

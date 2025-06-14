@@ -12,8 +12,17 @@ view examples here
 
 All packages are packaged underneath the @stephansama scope
 
-- [alfred-kaomoji](./packages/alfred-kaomoji/README.md)
+- [alfred-kaomoji](https://stephansama-pkgs.pages.dev/modules/_stephansama_alfred-kaomoji)
+  [![npm version](https://badge.fury.io/js/@stephansama%2Falfred-kaomoji.svg)](https://badge.fury.io/js/@stephansama%2Falfred-kaomoji)
+  [![npm downloads](https://img.shields.io/npm/dw/@stephansama/alfred-kaomoji)](https://www.npmjs.com/package/@stephansama/alfred-kaomoji)
+
+- [catppuccin-rss](https://stephansama-pkgs.pages.dev/modules/_stephansama_catppuccin-rss)
+  [![npm version](https://badge.fury.io/js/@stephansama%2Fcatppuccin-rss.svg)](https://badge.fury.io/js/@stephansama%2Fcatppuccin-rss)
+  [![npm downloads](https://img.shields.io/npm/dw/@stephansama/catppuccin-rss)](https://www.npmjs.com/package/@stephansama/catppuccin-rss)
+
 - [remark-asciinema](./packages/remark-asciinema/README.md)
+  [![npm version](https://badge.fury.io/js/@stephansama%2Fremark-asciinema.svg)](https://badge.fury.io/js/@stephansama%2Fremark-asciinema)
+  [![npm downloads](https://img.shields.io/npm/dw/@stephansama/remark-asciinema)](https://www.npmjs.com/package/@stephansama/remark-asciinema)
 
 ## Other published packages
 

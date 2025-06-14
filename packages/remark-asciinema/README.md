@@ -1,5 +1,6 @@
 # remark-asciinema
 
+[![Github](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/packages/remark-asciinema)
 ![GitHub License](https://img.shields.io/github/license/stephansama/packages)
 [![npm version](https://badge.fury.io/js/remark-asciinema.svg?icon=si%3Anpm)](https://badge.fury.io/js/remark-asciinema)
 [![npm downloads](https://img.shields.io/npm/dw/remark-asciinema)](https://www.npmjs.com/package/remark-asciinema)

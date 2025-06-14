@@ -16,7 +16,8 @@
 		"stephanrandle",
 		"stephansama",
 		"svgmap",
-		"tsup"
+		"tsup",
+		"typedoc"
 	],
 	"ignorePaths": [".env"]
 }

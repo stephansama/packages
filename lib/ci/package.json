@@ -5,7 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"deploy": "zx ./src/deploy.js",
-		"publish": "zx ./src/publish.js"
+		"publish": "zx ./src/publish.js",
+		"typedoc": "zx ./src/typedoc.js"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"dependencies": {

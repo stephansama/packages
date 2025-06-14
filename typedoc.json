@@ -3,6 +3,7 @@
 	"out": "./dist",
 	"name": "@stephansama packages",
 	"readme": "./README.md",
+	"customCss": "./typedoc.css",
 	"navigation": true,
 	"excludeExternals": true,
 	"skipErrorChecking": true,

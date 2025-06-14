@@ -7,7 +7,7 @@
 		"type": "git",
 		"directory": "packages/remark-asciinema"
 	},
-	"homepage": "https://stephansama-pkgs.pages.dev/modules/_stephansama_remark-asciinema",
+	"homepage": "https://packages.stephanrandle.workers.dev/modules/_stephansama_remark-asciinema",
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",

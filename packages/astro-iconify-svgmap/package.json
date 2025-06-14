@@ -4,7 +4,12 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"keywords": [
-		"astro-iconify-svgmap"
+		"vite",
+		"astro",
+		"astro-integration",
+		"vite-plugin",
+		"svgmap",
+		"iconify"
 	],
 	"description": "Astro integration for generating iconify svgmaps for ssg sites",
 	"author": {
@@ -17,14 +22,50 @@
 		"type": "git",
 		"directory": "packages/astro-iconify-svgmap"
 	},
-	"scripts": {
-		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-		"test": "echo 'tested (* ^ ω ^)'"
+	"files": [
+		"client.d.ts",
+		"dist",
+		"package.json"
+	],
+	"bin": {
+		"iconify-svgmap": "./dist/cli.js"
 	},
-	"dependencies": {},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./get": {
+			"types": "./dist/get.d.ts",
+			"import": "./dist/get.js",
+			"require": "./dist/get.cjs"
+		},
+		"./package.json": "./package.json",
+		"./client": {
+			"types": "./client.d.ts"
+		}
+	},
+	"scripts": {
+		"dev": "tsup --watch",
+		"lint": "eslint ./src/",
+		"build": "tsup",
+		"prepublishOnly": "tsup",
+		"test": "vitest run",
+		"test:ui": "vitest run --ui",
+		"test:ci": "vitest run --coverage"
+	},
 	"devDependencies": {
 		"@config/tsconfig": "workspace:*",
-		"tsup": "catalog:"
+		"@iconify/types": "^2.0.0",
+		"@iconify/utils": "^2.3.0",
+		"astro": "catalog:astro",
+		"tsup": "catalog:",
+		"vite": "catalog:"
+	},
+	"peerDependencies": {
+		"astro": "catalog:astro",
+		"vite": "catalog:"
 	},
 	"publishConfig": {
 		"access": "public",

@@ -1,4 +1,7 @@
 {
 	"extends": ["@config/tsconfig/tsconfig.base.json"],
+	"compilerOptions": {
+		"lib": ["DOM"]
+	},
 	"include": ["./src/**/*"]
 }

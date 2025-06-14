@@ -61,7 +61,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI) {
 			},
 			{
 				path: "{{ turbo.paths.root }}/packages/{{ dashCase name }}/src/index.ts",
-				templateFile: "templates/lib/index.ts",
+				templateFile: "templates/lib/BLANK",
 				type: "add",
 			},
 		],

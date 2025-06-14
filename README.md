@@ -1,14 +1,14 @@
-# Packages
-
-Collection of packages created by [@stephansama](https://github.com/stephansama)
-
 ![GitHub License](https://img.shields.io/github/license/stephansama/packages)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/stephansama/packages)
 ![GitHub repo file or directory count](https://img.shields.io/github/directory-file-count/stephansama/packages)
 
+Collection of packages created by [![stephansama](https://img.shields.io/github/followers/stephansama.svg?label=stephan%20Randle&logo=github)](https://github.com/stephansama/)
+
 view examples here 👉 [![packages](https://pkg.pr.new/badge/stephansama/packages?style=flat&color=000&logoSize=auto)](https://pkg.pr.new/~/stephansama/packages)
 
-All packages are packaged underneath the @stephansama scope
+## Packages
+
+All packages are packaged underneath the `@stephansama` scope (i.e. `@stephansama/remark-asciinema`)
 
 | Name                                                                                                         | Version                                                                                                                                          | Downloads                                                                                                                                            |
 | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -20,3 +20,7 @@ All packages are packaged underneath the @stephansama scope
 ## Other published packages
 
 - [stow.nvim](https://github.com/stephansama/stow.nvim)
+
+## Stargazers ⭐
+
+[![Stargazers repo roster for @stephansama/packages](https://reporoster.com/stars/stephansama/packages)](https://github.com/stephansama/packages/stargazers)

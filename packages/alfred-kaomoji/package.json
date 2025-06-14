@@ -3,6 +3,7 @@
 	"type": "module",
 	"license": "MIT",
 	"version": "1.0.1",
+	"homepage": "https://stephansama-pkgs.pages.dev/modules/_stephansama_alfred-kaomoji",
 	"description": "Alfred Kaomoji Picker",
 	"keywords": [
 		"alfred",

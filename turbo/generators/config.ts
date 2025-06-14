@@ -55,6 +55,11 @@ export default function generator(plop: PlopTypes.NodePlopAPI) {
 				type: "add",
 			},
 			{
+				path: "{{ turbo.paths.root }}/packages/{{ dashCase name }}/typedoc.json",
+				templateFile: "templates/lib/typedoc.json",
+				type: "add",
+			},
+			{
 				path: "{{ turbo.paths.root }}/packages/{{ dashCase name }}/src/index.ts",
 				templateFile: "templates/lib/index.ts",
 				type: "add",

@@ -2,7 +2,7 @@
 	"name": "ci",
 	"type": "module",
 	"private": true,
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"scripts": {
 		"deploy": "zx ./src/deploy.js",
 		"publish": "zx ./src/publish.js"

@@ -3,7 +3,7 @@
 	"type": "module",
 	"readme": "./README.md",
 	"license": "MIT",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "A remark plugin that transforms Asciinema links into embedded players or screenshots.",
 	"keywords": [
 		"asciinema",

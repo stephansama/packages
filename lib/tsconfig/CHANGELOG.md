@@ -1,5 +1,11 @@
 # @config/tsconfig
 
+## 1.1.2
+
+### Patch Changes
+
+- 56c7d76: added homepage to alfred kaomoji plugin
+
 ## 1.1.1
 
 ### Patch Changes

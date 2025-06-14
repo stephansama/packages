@@ -1,6 +1,6 @@
 ![GitHub License](https://img.shields.io/github/license/stephansama/packages)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/w/stephansama/packages)
-![GitHub repo file or directory count](https://img.shields.io/github/directory-file-count/stephansama/packages)
+[![🦋 Changesets Release](https://github.com/stephansama/packages/actions/workflows/release.yml/badge.svg)](https://github.com/stephansama/packages/actions/workflows/release.yml)
+[![CodeQL](https://github.com/stephansama/packages/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/stephansama/packages/actions/workflows/github-code-scanning/codeql)
 
 Collection of packages created by [![stephansama](https://img.shields.io/github/followers/stephansama.svg?label=stephan%20Randle&logo=github)](https://github.com/stephansama/)
 

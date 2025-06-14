@@ -23,7 +23,7 @@
 	"scripts": {
 		"build": "tsup",
 		"lint": "eslint ./src/",
-		"prepublish": "tsup",
+		"prepublishOnly": "tsup",
 		"dev": "tsup --watch",
 		"test": "vitest run",
 		"test:coverage": "vitest run --coverage",

@@ -1,0 +1,75 @@
+{
+	"name": "@stephansama/astro-iconify-svgmap",
+	"type": "module",
+	"version": "0.0.0",
+	"license": "MIT",
+	"keywords": [
+		"vite",
+		"astro",
+		"astro-integration",
+		"vite-plugin",
+		"svgmap",
+		"iconify"
+	],
+	"description": "Astro integration for generating iconify svgmaps for ssg sites",
+	"author": {
+		"email": "stephanrandle.dev@gmail.com",
+		"name": "Stephan Randle",
+		"url": "https://stephanrandle.netlify.app/"
+	},
+	"repository": {
+		"url": "https://github.com/stephansama/packages",
+		"type": "git",
+		"directory": "packages/astro-iconify-svgmap"
+	},
+	"files": [
+		"client.d.ts",
+		"dist",
+		"package.json"
+	],
+	"bin": {
+		"iconify-svgmap": "./dist/cli.js"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./get": {
+			"types": "./dist/get.d.ts",
+			"import": "./dist/get.js",
+			"require": "./dist/get.cjs"
+		},
+		"./package.json": "./package.json",
+		"./client": {
+			"types": "./client.d.ts"
+		}
+	},
+	"scripts": {
+		"dev": "tsup --watch",
+		"lint": "eslint ./src/",
+		"build": "tsup",
+		"prepublishOnly": "tsup",
+		"test": "vitest run",
+		"test:ui": "vitest run --ui",
+		"test:ci": "vitest run --coverage"
+	},
+	"devDependencies": {
+		"@config/tsconfig": "workspace:*",
+		"@iconify/types": "^2.0.0",
+		"@iconify/utils": "^2.3.0",
+		"astro": "catalog:astro",
+		"tsup": "catalog:",
+		"vite": "catalog:"
+	},
+	"peerDependencies": {
+		"astro": "catalog:astro",
+		"vite": "catalog:"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"packageManager": "pnpm@10.11.0"
+}

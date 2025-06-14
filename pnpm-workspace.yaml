@@ -5,8 +5,9 @@ packages:
 catalog:
   tsup: ^8.3.6
   typescript: ^5.8.3
+  vite: ^6.3.5
   zx: ^8.5.5
 catalogs:
   astro:
     "@astrojs/check": ^0.9.4
-    astro: ^5.9.2
+    astro: ^5.9.3

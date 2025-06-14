@@ -5,10 +5,10 @@ export default function generator(plop: PlopTypes.NodePlopAPI) {
 		description: "Generate a new package",
 		prompts: [
 			{
-				message: "What is the name of the new package",
+				message: "What is the name of the new package?",
 				name: "name",
 				type: "input",
-				validate(input) {
+				validate(input: string) {
 					if (input.includes(".")) {
 						return "library name cannot include an extension";
 					}
@@ -22,7 +22,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI) {
 				},
 			},
 			{
-				message: "What is the description of the new package",
+				message: "What is the description of the new package?",
 				name: "description",
 				type: "input",
 			},

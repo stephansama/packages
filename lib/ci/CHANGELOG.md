@@ -1,5 +1,11 @@
 # ci
 
+## 1.1.2
+
+### Patch Changes
+
+- 0725d0c: Migrated astro iconify svgmap integration
+
 ## 1.1.1
 
 ### Patch Changes

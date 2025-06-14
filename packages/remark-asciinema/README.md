@@ -1,10 +1,9 @@
 # remark-asciinema
 
 [![Source code](https://img.shields.io/badge/Source%20code-211F1F?style=flat&logo=github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/packages/remark-asciinema)
-[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephanrandle.workers.dev/modules/_stephansama_{{name}})
-![GitHub License](https://img.shields.io/github/license/stephansama/packages)
-[![npm version](https://badge.fury.io/js/remark-asciinema.svg?icon=si%3Anpm)](https://badge.fury.io/js/remark-asciinema)
-[![npm downloads](https://img.shields.io/npm/dw/remark-asciinema)](https://www.npmjs.com/package/remark-asciinema)
+[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephanrandle.workers.dev/modules/_stephansama_remark-asciinema)
+[![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Fremark-asciinema?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/remark-asciinema)
+[![npm downloads](https://img.shields.io/npm/dw/@stephansama/remark-asciinema?labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/remark-asciinema)
 
 A [remark](https://github.com/remarkjs/remark) plugin that transforms asciinema links into either an embedded [asciinema](https://docs.asciinema.org/manual/player/) player or screenshot that links to the recording.
 

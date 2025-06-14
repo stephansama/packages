@@ -11,6 +11,8 @@
 	"lightHighlightTheme": "catppuccin-latte",
 	"entryPointStrategy": "packages",
 	"entryPoints": ["packages/*"],
+	"projectDocuments": ["./.github/*"],
+	"exclude": ["**/ISSUE_TEMPLATE/**"],
 	"navigationLinks": {
 		"Author": "https://stephanrandle.netlify.app",
 		"Blog": "https://madprofessorblog.org",

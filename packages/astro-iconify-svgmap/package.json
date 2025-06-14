@@ -6,7 +6,7 @@
 	"keywords": [
 		"astro-iconify-svgmap"
 	],
-	"description": "astro-iconify-svgmap",
+	"description": "Astro integration for generating iconify svgmaps for ssg sites",
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",

@@ -1,0 +1,7 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "stephansama-pkgs",
+	"compatibility_date": "2025-06-14",
+	"observability": { "enabled": true },
+	"assets": { "directory": "./dist" }
+}

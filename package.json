@@ -18,7 +18,7 @@
 		"typedoc": "typedoc",
 		"lint": "turbo lint",
 		"test": "turbo test",
-		"build": "pnpm with-env turbo build",
+		"build": "turbo build --filter=./packages/*",
 		"version": "changeset version && pnpm install --lockfile-only",
 		"publish": "pnpm run typedoc && pnpm with-env turbo deploy && pnpm build && changeset publish",
 		"fmt:write": "prettier . --write",
@@ -55,7 +55,8 @@
 		"typedoc": "^0.28.5",
 		"typescript": "catalog:",
 		"typescript-eslint": "^8.34.0",
-		"vitest": "^3.2.3"
+		"vitest": "^3.2.3",
+		"wrangler": "^4.20.0"
 	},
 	"packageManager": "pnpm@10.11.0"
 }

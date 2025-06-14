@@ -120,6 +120,9 @@ importers:
       vitest:
         specifier: ^3.2.3
         version: 3.2.3(@types/debug@4.1.12)(@types/node@24.0.1)(@vitest/ui@3.2.3)(jiti@2.4.2)(yaml@2.8.0)
+      wrangler:
+        specifier: ^4.20.0
+        version: 4.20.0
 
   examples/astro-iconify-svgmap:
     dependencies:
@@ -185,10 +188,6 @@ importers:
       zx:
         specifier: 'catalog:'
         version: 8.5.5
-    devDependencies:
-      wrangler:
-        specifier: ^4.20.0
-        version: 4.20.0
 
   lib/prettier:
     devDependencies:

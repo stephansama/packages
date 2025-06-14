@@ -1,5 +1,9 @@
 # ![image](./assets/icon.png) Alfred Kaomoji Picker
 
+![GitHub License](https://img.shields.io/github/license/stephansama/packages)
+[![npm version](https://badge.fury.io/js/@stephansama%2Falfred-kaomoji.svg)](https://badge.fury.io/js/@stephansama%2Falfred-kaomoji)
+[![npm downloads](https://img.shields.io/npm/dw/@stephansama/alfred-kaomoji)](https://www.npmjs.com/package/@stephansama/alfred-kaomoji)
+
 An Alfred workflow for macOS, allowing you to quickly browse and select kaomojis right from your keyboard.
 
 ٩(◕‿◕｡)۶

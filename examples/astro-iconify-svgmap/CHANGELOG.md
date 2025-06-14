@@ -1,5 +1,11 @@
 # @example/astro-iconify-svgmap
 
+## 1.0.1
+
+### Patch Changes
+
+- 6b05549: updated readme
+
 ## 1.0.0
 
 ### Major Changes

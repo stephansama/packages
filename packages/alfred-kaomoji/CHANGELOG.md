@@ -1,5 +1,11 @@
 # @stephansama/alfred-kaomoji
 
+## 1.0.3
+
+### Patch Changes
+
+- cf11d04: updated homepage, readme and favicon
+
 ## 1.0.2
 
 ### Patch Changes

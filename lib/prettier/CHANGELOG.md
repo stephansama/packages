@@ -1,5 +1,11 @@
 # @config/prettier
 
+## 1.1.1
+
+### Patch Changes
+
+- 1bf00a3: patching alfred-kaomoji
+
 ## 1.1.0
 
 ### Minor Changes

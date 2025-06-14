@@ -9,7 +9,7 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"astro": "^5.9.3"
+		"astro": "catalog:astro"
 	},
 	"devDependencies": {
 		"@iconify-json/heroicons": "^1.2.2",
@@ -18,4 +18,3 @@
 		"@stephansama/astro-iconify-svgmap": "workspace:*"
 	}
 }
-

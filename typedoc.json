@@ -13,7 +13,7 @@
 	"lightHighlightTheme": "catppuccin-latte",
 	"entryPointStrategy": "packages",
 	"entryPoints": ["packages/*"],
-	"projectDocuments": ["./docs/*"],
+	"projectDocuments": ["./lib/docs/*"],
 	"exclude": ["**/ISSUE_TEMPLATE/**"],
 	"navigationLinks": {
 		"Author": "https://stephansama.info",

@@ -16,7 +16,7 @@
 	"projectDocuments": ["./.github/*"],
 	"exclude": ["**/ISSUE_TEMPLATE/**"],
 	"navigationLinks": {
-		"Author": "https://stephanrandle.netlify.app",
+		"Author": "https://stephansama.info",
 		"Blog": "https://madprofessorblog.org",
 		"GitHub": "https://github.com/stephansama/packages"
 	},

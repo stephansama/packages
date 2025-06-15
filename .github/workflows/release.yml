@@ -1,5 +1,7 @@
 name: 🦋 Changesets Release
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
   workflow_dispatch:
@@ -39,7 +41,7 @@ jobs:
         run: pnpm install
       - run: pnpm run build
       - name: 🚀 Publish Stackblitz
-        run: pnpx pkg-pr-new publish --packageManager=pnpm --pnpm './packages/*' --template './examples/*'
+        run: pnpx pkg-pr-new publish './packages/*' --pnpm --packageManager='pnpm' --template './examples/*'
       - name: 🦋 Create Changeset Release Pull Request
         uses: changesets/action@v1
         with:

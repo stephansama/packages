@@ -6,9 +6,6 @@ settings:
 
 catalogs:
   astro:
-    '@astrojs/check':
-      specifier: ^0.9.4
-      version: 0.9.4
     astro:
       specifier: ^5.9.3
       version: 5.9.3
@@ -130,7 +127,7 @@ importers:
   examples/astro-iconify-svgmap:
     dependencies:
       astro:
-        specifier: catalog:astro
+        specifier: ^5.9.3
         version: 5.9.3(@types/node@24.0.1)(jiti@2.4.2)(rollup@4.42.0)(typescript@5.8.3)(yaml@2.8.0)
     devDependencies:
       '@iconify-json/heroicons':
@@ -164,17 +161,14 @@ importers:
         specifier: ^3.4.1
         version: 3.4.1
       astro:
-        specifier: catalog:astro
+        specifier: ^5.9.3
         version: 5.9.3(@types/node@24.0.1)(jiti@2.4.2)(rollup@4.42.0)(typescript@5.8.3)(yaml@2.8.0)
       sharp:
         specifier: ^0.34.2
         version: 0.34.2
-      typescript:
-        specifier: 'catalog:'
-        version: 5.8.3
     devDependencies:
       '@astrojs/check':
-        specifier: catalog:astro
+        specifier: ^0.9.4
         version: 0.9.4(prettier-plugin-astro@0.14.1)(prettier@3.5.3)(typescript@5.8.3)
       '@config/prettier':
         specifier: workspace:*

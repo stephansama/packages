@@ -1,7 +1,7 @@
 # remark-asciinema
 
 [![Source code](https://img.shields.io/badge/Source%20code-211F1F?style=flat&logo=github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/packages/remark-asciinema)
-[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephanrandle.workers.dev/modules/_stephansama_remark-asciinema)
+[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/modules/_stephansama_remark-asciinema)
 [![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Fremark-asciinema?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/remark-asciinema)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/remark-asciinema?labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/remark-asciinema)
 

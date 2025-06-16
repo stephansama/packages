@@ -7,7 +7,7 @@
 		"type": "git",
 		"directory": "packages/astro-iconify-svgmap"
 	},
-	"homepage": "https://packages.stephanrandle.workers.dev/modules/_stephansama_astro-iconify-svgmap",
+	"homepage": "https://packages.stephansama.info/modules/_stephansama_astro-iconify-svgmap",
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",

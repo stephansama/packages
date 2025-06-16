@@ -1,5 +1,5 @@
 import { flavors } from "@catppuccin/palette";
-import { compile } from "handlebars";
+import Handlebars from "handlebars";
 import fs from "node:fs";
 
 import pkg from "../package.json" with { type: "json" };
@@ -14,9 +14,9 @@ const hbsXml = fs.readFileSync("./template/template.xml.hbs", opts);
 const hbsComment = fs.readFileSync("./template/comment.hbs", opts);
 const hbsStyleCss = fs.readFileSync("./template/style.css.hbs", opts);
 
-const templateXml = compile(hbsXml);
-const templateComment = compile(hbsComment);
-const templateStyleCss = compile(hbsStyleCss);
+const templateXml = Handlebars.compile(hbsXml);
+const templateComment = Handlebars.compile(hbsComment);
+const templateStyleCss = Handlebars.compile(hbsStyleCss);
 
 if (!fs.existsSync(outputFolder)) fs.mkdirSync(outputFolder);
 

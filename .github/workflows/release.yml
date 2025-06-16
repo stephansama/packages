@@ -12,6 +12,7 @@ env:
   NODE_AUTH_TOKEN: ${{secrets.node_auth_token}}
   NPM_AUTH_TOKEN: ${{secrets.node_auth_token}}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
   ZX_VERBOSE: true
   HUSKY: 0 # https://typicode.github.io/husky/how-to.html#ci-server-and-docker
 permissions:
@@ -42,7 +43,8 @@ jobs:
       - run: pnpm run build
       - name: 🚀 Publish Stackblitz
         run: pnpx pkg-pr-new publish './packages/*' --pnpm --packageManager='pnpm' --template './examples/*'
-      - name: 🦋 Create Changeset Release Pull Request
+      - if: github.ref_name == 'main'
+        name: 🦋 Create Changeset Release Pull Request
         uses: changesets/action@v1
         with:
           commit: "chore: Update version for release"

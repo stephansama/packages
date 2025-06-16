@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "@example/catppuccin-rss",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Example using catppuccin rss feed x pretty feed v3",
 	"type": "module",
 	"scripts": {

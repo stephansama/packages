@@ -4,6 +4,7 @@
 	"envMode": "loose",
 	"globalEnv": ["NODE_AUTH_TOKEN", "ZX_VERBOSE"],
 	"tasks": {
+		"typedoc": { "cache": false },
 		"build": {
 			"dependsOn": ["^build"],
 			"outputs": ["dist", "!.next/cache/**"]

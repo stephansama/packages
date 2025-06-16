@@ -16,6 +16,7 @@
 	"type": "module",
 	"scripts": {
 		"generate": "node ./scripts/generate.js",
+		"typedoc": "pnpm run generate",
 		"build": "pnpm run generate && tsup",
 		"dev": "pnpm run generate && tsup --watch",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",

@@ -183,12 +183,6 @@ importers:
         specifier: workspace:*
         version: link:../../packages/remark-asciinema
 
-  examples/test:
-    devDependencies:
-      create-stephansama-example:
-        specifier: workspace:*
-        version: link:../../packages/example
-
   lib/ci:
     dependencies:
       zx:

@@ -7,7 +7,7 @@
 		"type": "git",
 		"directory": "packages/alfred-kaomoji"
 	},
-	"homepage": "https://packages.stephanrandle.workers.dev/modules/_stephansama_alfred-kaomoji",
+	"homepage": "https://packages.stephansama.info/modules/_stephansama_alfred-kaomoji",
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",

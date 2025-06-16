@@ -8,3 +8,4 @@
 dist
 node_modules
 typedoc.css
+examples/catppuccin-rss/**/*.x*

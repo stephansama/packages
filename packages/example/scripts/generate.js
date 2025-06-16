@@ -13,11 +13,8 @@ const exampleData = examples.map((example) => {
 	const path = `../../${example}/package.json`;
 	const file = fs.readFileSync(path, { encoding: "utf-8" });
 	const pkg = JSON.parse(file);
-	return {
-		description: pkg.description,
-		name: pkg.name,
-		version: pkg.version,
-	};
+	const { description, name, version } = pkg;
+	return { description, name, version };
 });
 
 if (!fs.existsSync("./dist")) fs.mkdirSync("./dist");

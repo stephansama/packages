@@ -20,8 +20,6 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.4",
-		"@config/prettier": "workspace:*",
-		"@config/tsconfig": "workspace:*",
 		"@stephansama/remark-asciinema": "workspace:*"
 	}
 }

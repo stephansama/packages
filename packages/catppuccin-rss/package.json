@@ -14,8 +14,16 @@
 		"url": "https://stephanrandle.netlify.app/"
 	},
 	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"dev": "nodemon ./scripts/generate.js",
+		"build": "node ./scripts/generate.js"
+	},
+	"config": {
+		"outputFolder": "./dist"
+	},
 	"files": [
-		"theme"
+		"dist"
 	],
 	"packageManager": "pnpm@10.11.0",
 	"keywords": [
@@ -24,7 +32,11 @@
 		"pretty-feed"
 	],
 	"devDependencies": {
-		"@config/tsconfig": "workspace:*"
+		"@catppuccin/palette": "^1.7.1",
+		"@config/tsconfig": "workspace:*",
+		"handlebars": "^4.7.8",
+		"minify": "^14.0.0",
+		"nodemon": "catalog:"
 	},
 	"publishConfig": {
 		"access": "public",

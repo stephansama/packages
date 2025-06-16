@@ -1,0 +1,18 @@
+{
+	"semi": true,
+	"useTabs": true,
+	"quoteProps": "consistent",
+	"singleQuote": false,
+	"jsxSingleQuote": false,
+	"overrides": [
+		{ "files": ["*.md"], "options": { "tabWidth": 2, "useTabs": false } },
+		{ "files": "*.astro", "options": { "parser": "astro" } }
+	],
+	"plugins": [
+		"prettier-plugin-astro",
+		"prettier-plugin-astro-organize-imports",
+		"prettier-plugin-organize-imports",
+		"prettier-plugin-sort-package-json",
+		"prettier-plugin-tailwindcss"
+	]
+}

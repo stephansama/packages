@@ -2,6 +2,7 @@
 	"private": true,
 	"name": "@example/remark-asciinema",
 	"version": "0.0.3",
+	"description": "Example astro site demonstrating how to use remark-asciinema plugin",
 	"type": "module",
 	"scripts": {
 		"dev": "astro dev",

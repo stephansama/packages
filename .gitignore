@@ -9,3 +9,5 @@ dist
 node_modules
 typedoc.css
 examples/catppuccin-rss/**/*.x*
+
+packages/example/scripts/examples.json

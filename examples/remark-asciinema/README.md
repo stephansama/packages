@@ -1,4 +1,4 @@
-# Astro Starter Kit: Blog
+# Remark Asciinema Example
 
 ```sh
 pnpm create astro@latest -- --template blog

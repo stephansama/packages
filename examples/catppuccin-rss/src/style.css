@@ -36,10 +36,26 @@ h1 {
 }
 
 #app {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 2rem;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 	text-align: center;
+}
+
+iframe {
+	display: flex;
+	flex-grow: 1;
+	margin: 3rem;
+	width: 75%;
+	justify-self: center;
+	margin: 0 auto;
+}
+
+@media screen and (max-width: 1240px) {
+	iframe {
+		width: 95%;
+	}
 }
 
 .logo {
@@ -93,4 +109,11 @@ button:focus-visible {
 	button {
 		background-color: #f9f9f9;
 	}
+}
+
+.mainContainer {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+	height: 100%;
 }

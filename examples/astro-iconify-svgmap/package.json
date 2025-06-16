@@ -2,6 +2,7 @@
 	"private": true,
 	"name": "@example/astro-iconify-svgmap",
 	"version": "1.0.2",
+	"description": "Example astro site using iconify svgmap",
 	"type": "module",
 	"scripts": {
 		"dev": "astro dev",

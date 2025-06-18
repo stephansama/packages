@@ -11,5 +11,8 @@
 	"packageManager": "pnpm@10.11.0",
 	"dependencies": {
 		"zx": "catalog:"
+	},
+	"devDependencies": {
+		"@catppuccin/palette": "catalog:"
 	}
 }

@@ -10,6 +10,9 @@ catalogs:
       specifier: ^5.9.3
       version: 5.9.3
   default:
+    '@catppuccin/palette':
+      specifier: ^1.7.1
+      version: 1.7.1
     nodemon:
       specifier: ^3.1.10
       version: 3.1.10
@@ -188,6 +191,10 @@ importers:
       zx:
         specifier: 'catalog:'
         version: 8.5.5
+    devDependencies:
+      '@catppuccin/palette':
+        specifier: 'catalog:'
+        version: 1.7.1
 
   lib/tsconfig:
     devDependencies:
@@ -231,7 +238,7 @@ importers:
   packages/catppuccin-rss:
     devDependencies:
       '@catppuccin/palette':
-        specifier: ^1.7.1
+        specifier: 'catalog:'
         version: 1.7.1
       '@config/tsconfig':
         specifier: workspace:*

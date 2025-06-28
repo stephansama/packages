@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-rss
 
+## 1.1.1
+
+### Patch Changes
+
+- 9fa53a8: check export types for packages
+
 ## 1.1.0
 
 ### Minor Changes

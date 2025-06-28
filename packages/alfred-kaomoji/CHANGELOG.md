@@ -1,5 +1,11 @@
 # @stephansama/alfred-kaomoji
 
+## 1.0.4
+
+### Patch Changes
+
+- 9fa53a8: check export types for packages
+
 ## 1.0.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @stephansama/remark-asciinema
 
+## 1.0.8
+
+### Patch Changes
+
+- 9fa53a8: check export types for packages
+
 ## 1.0.7
 
 ### Patch Changes

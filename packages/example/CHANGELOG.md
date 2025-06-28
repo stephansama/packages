@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.1.0
+
+### Minor Changes
+
+- 9fa53a8: check export types for packages
+
 ## 1.0.0
 
 ### Major Changes

@@ -1,5 +1,11 @@
 # @stephansama/astro-iconify-svgmap
 
+## 1.0.2
+
+### Patch Changes
+
+- 9fa53a8: check export types for packages
+
 ## 1.0.1
 
 ### Patch Changes

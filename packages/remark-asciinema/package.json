@@ -16,7 +16,7 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"build": "tsup",
+		"build": "tsup && attw --pack",
 		"lint": "eslint ./src/",
 		"prepublishOnly": "tsup",
 		"dev": "tsup --watch",
@@ -24,9 +24,10 @@
 		"test:coverage": "vitest run --coverage",
 		"test:ui": "vitest run --ui"
 	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
-			"types": "./dist/index.d.ts",
 			"import": "./dist/index.js",
 			"require": "./dist/index.cjs"
 		},

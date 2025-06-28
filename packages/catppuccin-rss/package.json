@@ -17,7 +17,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "nodemon ./scripts/generate.js",
-		"build": "node ./scripts/generate.js"
+		"build": "node ./scripts/generate.js && attw --pack"
 	},
 	"config": {
 		"outputFolder": "./dist"

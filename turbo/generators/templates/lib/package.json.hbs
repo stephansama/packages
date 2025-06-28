@@ -7,14 +7,17 @@
 		"type": "git",
 		"directory": "packages/{{name}}"
 	},
+	"homepage": "https://packages.stephansama.info/modules/_stephansama_{{name}}",
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
-		"url": "https://stephanrandle.netlify.app/"
+		"url": "https://stephansama.info"
 	},
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
+		"build": "tsup && attw --pack",
+		"dev": "tsup --watch",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
 		"test": "echo 'tested (* ^ ω ^)'"
 	},

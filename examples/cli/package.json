@@ -1,0 +1,6 @@
+{
+	"name": "@example/cli-example",
+	"dependencies": {
+		"create-stephansama-example": "workspace:*"
+	}
+}

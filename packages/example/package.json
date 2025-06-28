@@ -7,28 +7,35 @@
 		"type": "git",
 		"directory": "packages/example"
 	},
+	"homepage": "https://packages.stephansama.info/modules/create-stephansama-example",
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
-		"url": "https://stephanrandle.netlify.app/"
+		"url": "https://stephansama.info"
 	},
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
 		"generate": "node ./scripts/generate.js",
 		"typedoc": "pnpm run generate",
-		"build": "pnpm run generate && tsup",
+		"build": "pnpm run generate && tsup && attw --pack",
 		"dev": "pnpm run generate && tsup --watch",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+		"prepare": "pnpm run generate && tsup",
+		"prepublishOnly": "pnpm run generate && tsup",
 		"test": "echo 'tested (* ^ ω ^)'"
 	},
-	"bin": "./cli.mjs",
+	"bin": "./dist/cli.js",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
-		".": "./cli.mjs"
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
 	},
 	"files": [
-		"./dist",
-		"./cli.mjs"
+		"./dist"
 	],
 	"packageManager": "pnpm@10.11.0",
 	"keywords": [

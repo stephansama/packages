@@ -11,37 +11,35 @@
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
-		"url": "https://stephanrandle.netlify.app/"
+		"url": "https://stephansama.info"
 	},
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
 		"dev": "tsup --watch",
 		"lint": "eslint ./src/",
-		"build": "tsup",
+		"build": "tsup && attw --pack --profile=node16",
 		"prepublishOnly": "tsup",
-		"test": "vitest run",
+		"prepare": "tsup",
+		"test:ci": "vitest run --coverage",
 		"test:ui": "vitest run --ui",
-		"test:ci": "vitest run --coverage"
+		"test": "vitest run"
 	},
 	"bin": {
 		"iconify-svgmap": "./dist/cli.js"
 	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
-			"types": "./dist/index.d.ts",
 			"import": "./dist/index.js",
 			"require": "./dist/index.cjs"
 		},
 		"./get": {
-			"types": "./dist/get.d.ts",
 			"import": "./dist/get.js",
 			"require": "./dist/get.cjs"
 		},
-		"./package.json": "./package.json",
-		"./client": {
-			"types": "./client.d.ts"
-		}
+		"./package.json": "./package.json"
 	},
 	"files": [
 		"client.d.ts",

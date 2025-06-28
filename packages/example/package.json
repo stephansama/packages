@@ -21,6 +21,8 @@
 		"build": "pnpm run generate && tsup && attw --pack",
 		"dev": "pnpm run generate && tsup --watch",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+		"prepare": "pnpm run generate && tsup",
+		"prepublishOnly": "pnpm run generate && tsup",
 		"test": "echo 'tested (* ^ ω ^)'"
 	},
 	"bin": "./dist/cli.js",

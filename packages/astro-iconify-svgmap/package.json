@@ -20,9 +20,10 @@
 		"lint": "eslint ./src/",
 		"build": "tsup && attw --pack --profile=node16",
 		"prepublishOnly": "tsup",
-		"test": "vitest run",
+		"prepare": "tsup",
+		"test:ci": "vitest run --coverage",
 		"test:ui": "vitest run --ui",
-		"test:ci": "vitest run --coverage"
+		"test": "vitest run"
 	},
 	"bin": {
 		"iconify-svgmap": "./dist/cli.js"

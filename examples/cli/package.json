@@ -1,6 +1,6 @@
 {
 	"private": true,
-	"name": "@example/cli-example",
+	"name": "@example/cli",
 	"version": "0.0.0",
 	"description": "Example using create-stephansama-example cli",
 	"dependencies": {

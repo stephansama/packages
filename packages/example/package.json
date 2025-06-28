@@ -17,12 +17,12 @@
 	"type": "module",
 	"scripts": {
 		"generate": "node ./scripts/generate.js",
-		"typedoc": "pnpm run generate",
 		"build": "pnpm run generate && tsup && attw --pack",
-		"dev": "pnpm run generate && tsup --watch",
-		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+		"typedoc": "pnpm run generate",
 		"prepare": "pnpm run generate && tsup",
 		"prepublishOnly": "pnpm run generate && tsup",
+		"dev": "pnpm run generate && tsup --watch",
+		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
 		"test": "echo 'tested (* ^ ω ^)'"
 	},
 	"bin": "./dist/cli.js",

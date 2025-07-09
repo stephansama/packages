@@ -10,4 +10,6 @@ node_modules
 typedoc.css
 examples/catppuccin-rss/**/*.x*
 
+**/coverage/
+
 packages/example/scripts/examples.json

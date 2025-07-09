@@ -19,9 +19,10 @@
 		"build": "tsup && attw --pack",
 		"lint": "eslint ./src/",
 		"prepublishOnly": "tsup",
+		"prepare": "tsup",
 		"dev": "tsup --watch",
 		"test": "vitest run",
-		"test:coverage": "vitest run --coverage",
+		"test:ci": "vitest run --coverage",
 		"test:ui": "vitest run --ui"
 	},
 	"main": "./dist/index.js",

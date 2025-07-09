@@ -15,6 +15,7 @@
 		"typedoc": "turbo typedoc && typedoc",
 		"lint": "turbo lint",
 		"test": "turbo test",
+		"test:ci": "turbo test:ci",
 		"build": "turbo build",
 		"build:pkg": "turbo build --filter=./packages/*",
 		"version": "changeset version && pnpm install --lockfile-only",

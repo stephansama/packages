@@ -24,7 +24,7 @@
 			"env": ["NODE_AUTH_TOKEN"]
 		},
 		"deploy": { "persistent": true, "cache": false },
-		"test:ci": { "persistent": true, "cache": true },
+		"test:ci": { "persistent": true, "cache": true, "outputs": ["coverage"] },
 		"test": { "persistent": true, "cache": true },
 		"dev": { "persistent": true, "cache": false }
 	}

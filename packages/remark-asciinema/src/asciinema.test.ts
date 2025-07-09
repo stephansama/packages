@@ -22,7 +22,6 @@ describe("remark asciinema", () => {
 	it("should replace link with embed script when no options are provided", async () => {
 		const result = await remark().use(plugin).process(testFile);
 
-		console.log(result);
 		expect(result).toBeTruthy();
 	});
 
@@ -31,7 +30,6 @@ describe("remark asciinema", () => {
 			.use(plugin, { embedType: "script" })
 			.process(testFile);
 
-		console.log(result);
 		expect(result).toBeTruthy();
 	});
 
@@ -40,7 +38,6 @@ describe("remark asciinema", () => {
 			.use(plugin, { embedType: "image" })
 			.process(testFile);
 
-		console.log(result);
 		expect(result).toBeTruthy();
 	});
 });

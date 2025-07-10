@@ -3,11 +3,14 @@ packages:
   - examples/**
   - packages/*
 catalog:
-  '@catppuccin/palette': "^1.7.1"
+  "@catppuccin/palette": "^1.7.1"
+  "@vitest/coverage-v8": ^3.2.4
+  "@vitest/ui": ^3.2.4
   nodemon: ^3.1.10
   tsup: ^8.3.6
   typescript: ^5.8.3
   vite: ^6.3.5
+  vitest: ^3.2.4
   zx: ^8.5.5
 catalogs:
   astro:

@@ -16,6 +16,7 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
+		"prepare": "pnpm run generate",
 		"generate": "node ./scripts/generate.js",
 		"build": "pnpm run generate && tsup && attw --pack",
 		"typedoc": "pnpm run generate",

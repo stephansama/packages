@@ -11,6 +11,8 @@
 		"iconify",
 		"kaomoji",
 		"kaomojis",
+		"macchiato",
+		"nodemon",
 		"nvim",
 		"nvmrc",
 		"pkgs",
@@ -19,7 +21,9 @@
 		"svgmap",
 		"svgmaps",
 		"tsup",
-		"typedoc"
+		"typedoc",
+		"vite",
+		"vitest"
 	],
 	"ignorePaths": [".env"]
 }

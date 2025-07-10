@@ -2,10 +2,25 @@
 import { downloadTemplate } from "@bluwy/giget-core";
 import { input, select } from "@inquirer/prompts";
 import latestVersion from "latest-version";
-import fs from "node:fs";
-import path from "node:path";
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 import examples from "../scripts/examples.json" with { type: "json" };
+
+export async function convertDependencies(
+	dependencies: null | Record<string, number | string> | undefined,
+) {
+	if (!dependencies) return {};
+	return (
+		await Promise.all(
+			Object.entries(dependencies).map(async ([pkg, ver]) => {
+				if (ver !== "workspace:*") return [pkg, ver];
+				const latest = await latestVersion(pkg);
+				return [pkg, latest];
+			}),
+		)
+	).reduce((prev, [pkg, ver]) => ({ ...prev, [pkg]: ver }), {});
+}
 
 export async function main() {
 	const example = (
@@ -55,19 +70,4 @@ export async function main() {
 	console.log(
 		"\n\nplease run (npm|yarn|pnpm|bun) install command to finish installation",
 	);
-}
-
-async function convertDependencies(
-	dependencies: Record<string, number | string>,
-) {
-	if (!dependencies) return {};
-	return (
-		await Promise.all(
-			Object.entries(dependencies).map(async ([pkg, ver]) => {
-				if (ver !== "workspace:*") return [pkg, ver];
-				const latest = await latestVersion(pkg);
-				return [pkg, latest];
-			}),
-		)
-	).reduce((prev, [pkg, ver]) => ({ ...prev, [pkg]: ver }), {});
 }

@@ -33,6 +33,7 @@
 	"devDependencies": {
 		"@arethetypeswrong/cli": "^0.18.2",
 		"@changesets/cli": "^2.29.4",
+		"@codecov/rollup-plugin": "catalog:",
 		"@codecov/vite-plugin": "^1.9.1",
 		"@commitlint/cli": "^19.8.1",
 		"@commitlint/config-conventional": "^19.8.1",

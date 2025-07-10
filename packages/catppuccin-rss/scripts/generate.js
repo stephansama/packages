@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { flavors } from "@catppuccin/palette";
 import Handlebars from "handlebars";
 import fs from "node:fs";

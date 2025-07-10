@@ -1,3 +1,4 @@
 *.yaml
+!pnpm-workspace.yaml
 *.hbs
 

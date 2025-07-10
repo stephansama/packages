@@ -39,7 +39,7 @@
 		"@commitlint/types": "^19.8.1",
 		"@eslint/js": "^9.28.0",
 		"@turbo/gen": "^2.5.4",
-		"@types/node": "^24.0.1",
+		"@types/node": "^24.0.12",
 		"@typescript-eslint/parser": "^8.34.0",
 		"@vitest/coverage-v8": "catalog:",
 		"@vitest/ui": "catalog:",

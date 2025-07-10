@@ -1,3 +1,4 @@
+import { codecovRollupPlugin } from "@codecov/rollup-plugin";
 import { defineConfig } from "tsup";
 
 export default defineConfig({

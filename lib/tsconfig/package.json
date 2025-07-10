@@ -5,7 +5,7 @@
 	"packageManager": "pnpm@10.11.0",
 	"devDependencies": {
 		"@astrojs/ts-plugin": "^1.10.4",
-		"@tsconfig/recommended": "^1.0.8",
+		"@tsconfig/recommended": "^1.0.10",
 		"astro": "catalog:astro"
 	}
 }

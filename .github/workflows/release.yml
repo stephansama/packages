@@ -52,6 +52,11 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
       - name: 🚀 Publish Stackblitz
         run: pnpx pkg-pr-new publish './packages/*' --pnpm --packageManager='pnpm' --template './examples/*'
       - if: github.ref_name == 'main'

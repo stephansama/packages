@@ -15,7 +15,7 @@
 		"typedoc": "turbo typedoc && typedoc",
 		"lint": "turbo lint",
 		"test": "turbo test",
-		"test:ci": "vitest --run --coverage",
+		"test:ci": "vitest --run --coverage --reporter=junit --outputFile=test-report.junit.xml",
 		"test:ui": "vitest --ui",
 		"build": "turbo build",
 		"build:pkg": "turbo build --filter=./packages/*",

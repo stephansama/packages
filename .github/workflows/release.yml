@@ -43,8 +43,10 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - name: 📦 Installing dependencies
         run: pnpm install
-      - name: Run lint and test
-        run: pnpm run lint test:ci
+      - name: Run lint
+        run: pnpm run lint
+      - name: Run test
+        run: pnpm run test:ci
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:

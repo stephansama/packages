@@ -47,11 +47,11 @@ jobs:
         run: pnpm run lint
       - name: Run test
         run: pnpm run test:ci
+      - run: pnpm run build
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-      - run: pnpm run build
       - name: 🚀 Publish Stackblitz
         run: pnpx pkg-pr-new publish './packages/*' --pnpm --packageManager='pnpm' --template './examples/*'
       - if: github.ref_name == 'main'

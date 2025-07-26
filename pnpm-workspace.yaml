@@ -1,7 +1,14 @@
+engineStrict: true
 packages:
-  - lib/*
+  - actions/*
   - examples/**
+  - lib/*
   - packages/*
+overrides:
+  "@stephansama/astro-iconify-svgmap": "workspace:*"
+  "@stephansama/catppuccin-rss": "workspace:*"
+  "@stephansama/remark-asciinema": "workspace:*"
+  "create-stephansama-example": "workspace:*"
 catalog:
   "@catppuccin/palette": "^1.7.1"
   "@codecov/rollup-plugin": ^1.9.1

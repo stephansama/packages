@@ -9,6 +9,7 @@ env:
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
   CLOUDFLARE_ACCOUNT_ID: ${{secrets.cloudflare_account_id}}
   CLOUDFLARE_API_TOKEN: ${{secrets.cloudflare_api_token}}
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   DO_NOT_TRACK: 1
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   HUSKY: 0 # https://typicode.github.io/husky/how-to.html#ci-server-and-docker

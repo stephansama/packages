@@ -12,7 +12,7 @@
 	"type": "module",
 	"scripts": {
 		"with-env": "dotenv -e .env --",
-		"typedoc": "typedoc",
+		"typedoc": "pnpm --filter=@stephansama/catppuccin-typedoc run build && typedoc",
 		"lint": "turbo lint",
 		"test": "turbo test",
 		"test:ci": "vitest --run --coverage --reporter=junit --outputFile=test-report.junit.xml",

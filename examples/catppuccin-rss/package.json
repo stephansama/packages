@@ -10,7 +10,7 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@stephansama/catppuccin-rss": "workspace:*",
+		"@stephansama/catppuccin-rss": "^1.1.1",
 		"rss": "^1.2.2",
 		"vite": "^6.3.5"
 	}

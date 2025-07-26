@@ -21,6 +21,6 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.4",
-		"@stephansama/remark-asciinema": "workspace:*"
+		"@stephansama/remark-asciinema": "^1.0.8"
 	}
 }

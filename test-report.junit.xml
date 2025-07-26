@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="5" failures="0" errors="0" time="0.041693368">
+    <testsuite name="packages/astro-iconify-svgmap/src/index.test.ts" timestamp="2025-07-26T17:22:39.908Z" hostname="pkrvmpptgkbjq6m" tests="1" failures="0" errors="0" skipped="0" time="0.004271952">
+        <testcase classname="packages/astro-iconify-svgmap/src/index.test.ts" name="astro iconify svgmap &gt; runs" time="0.002410333">
+        </testcase>
+    </testsuite>
+    <testsuite name="packages/example/src/index.test.ts" timestamp="2025-07-26T17:22:39.909Z" hostname="pkrvmpptgkbjq6m" tests="1" failures="0" errors="0" skipped="0" time="0.006942301">
+        <testcase classname="packages/example/src/index.test.ts" name="cli index &gt; should handle main" time="0.005254154">
+            <system-out>
+successfully downloaded template to ./example
+
+
+
+please run (npm|yarn|pnpm|bun) install command to finish installation
+
+            </system-out>
+        </testcase>
+    </testsuite>
+    <testsuite name="packages/remark-asciinema/src/asciinema.test.ts" timestamp="2025-07-26T17:22:39.910Z" hostname="pkrvmpptgkbjq6m" tests="3" failures="0" errors="0" skipped="0" time="0.030479115">
+        <testcase classname="packages/remark-asciinema/src/asciinema.test.ts" name="remark asciinema &gt; should replace link with embed script when no options are provided" time="0.021198976">
+        </testcase>
+        <testcase classname="packages/remark-asciinema/src/asciinema.test.ts" name="remark asciinema &gt; should replace link with embed script" time="0.004233662">
+        </testcase>
+        <testcase classname="packages/remark-asciinema/src/asciinema.test.ts" name="remark asciinema &gt; should replace link with image" time="0.003193984">
+        </testcase>
+    </testsuite>
+</testsuites>

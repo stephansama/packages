@@ -16,19 +16,20 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"build": "tsup && attw --pack",
-		"dev": "tsup --watch",
+		"build": "node ./src/generate.js",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
 		"test": "echo 'tested (* ^ ω ^)'"
 	},
+	"files": [
+		"dist"
+	],
 	"packageManager": "pnpm@10.11.0",
 	"keywords": [
 		"catppuccin-typedoc"
 	],
-	"dependencies": {},
 	"devDependencies": {
-		"@config/tsconfig": "workspace:*",
-		"tsup": "catalog:"
+		"@catppuccin/palette": "catalog:",
+		"@config/tsconfig": "workspace:*"
 	},
 	"publishConfig": {
 		"access": "public",

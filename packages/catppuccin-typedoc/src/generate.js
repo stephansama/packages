@@ -1,12 +1,10 @@
 import { flavors } from "@catppuccin/palette";
-import fs from "node:fs";
-import { $ as sh } from "zx";
-
-import config from "../../../typedoc.json" with { type: "json" };
+import * as fs from "node:fs";
+import path from "node:path";
 
 const css = String.raw;
 
-const outputFilename = `../.${config.customCss}`;
+const outputFilename = "./dist/catppuccin-typedoc.css";
 
 /** @typedef {typeof flavors.mocha.colors} Theme */
 
@@ -69,11 +67,15 @@ const file = css`
 	}
 `.trim();
 
-fs.writeFileSync(outputFilename, file);
+const dir = path.dirname(outputFilename);
 
-if (!process.env.CI) {
-	await sh`prettier ${outputFilename} --write --ignore-path ./.prettierignore`;
+if (!fs.existsSync(dir)) {
+	fs.mkdirSync(dir, { recursive: true });
 }
+
+fs.writeFileSync(outputFilename, file, {
+	flag: "as+",
+});
 
 /**
  * @param {VariableMap} inputMap

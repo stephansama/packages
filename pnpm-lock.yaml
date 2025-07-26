@@ -69,6 +69,9 @@ importers:
       '@eslint/js':
         specifier: ^9.28.0
         version: 9.29.0
+      '@stephansama/catppuccin-typedoc':
+        specifier: workspace:*
+        version: link:packages/catppuccin-typedoc
       '@turbo/gen':
         specifier: ^2.5.4
         version: 2.5.4(@swc/core@1.12.1(@swc/helpers@0.5.17))(@types/node@24.0.1)(typescript@5.8.3)
@@ -218,10 +221,6 @@ importers:
       zx:
         specifier: 'catalog:'
         version: 8.5.5
-    devDependencies:
-      '@catppuccin/palette':
-        specifier: 'catalog:'
-        version: 1.7.1
 
   lib/tsconfig:
     devDependencies:
@@ -279,6 +278,15 @@ importers:
       nodemon:
         specifier: 'catalog:'
         version: 3.1.10
+
+  packages/catppuccin-typedoc:
+    devDependencies:
+      '@catppuccin/palette':
+        specifier: 'catalog:'
+        version: 1.7.1
+      '@config/tsconfig':
+        specifier: workspace:*
+        version: link:../../lib/tsconfig
 
   packages/example:
     dependencies:

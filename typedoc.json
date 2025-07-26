@@ -4,7 +4,7 @@
 	"name": "@stephansama packages",
 	"readme": "./README.md",
 	"favicon": "./lib/ci/theme/icon.svg",
-	"customCss": "./typedoc.css",
+	"customCss": "./node_modules/@stephansama/catppuccin-typedoc/dist/catppuccin-typedoc.css",
 	"navigation": true,
 	"excludeExternals": true,
 	"skipErrorChecking": true,

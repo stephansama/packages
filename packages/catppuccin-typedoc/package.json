@@ -1,0 +1,38 @@
+{
+	"name": "@stephansama/catppuccin-typedoc",
+	"version": "0.0.0",
+	"description": "Catppuccin theme for typedoc",
+	"repository": {
+		"url": "https://github.com/stephansama/packages",
+		"type": "git",
+		"directory": "packages/catppuccin-typedoc"
+	},
+	"homepage": "https://packages.stephansama.info/modules/_stephansama_catppuccin-typedoc",
+	"author": {
+		"email": "stephanrandle.dev@gmail.com",
+		"name": "Stephan Randle",
+		"url": "https://stephansama.info"
+	},
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"build": "node ./src/generate.js",
+		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+		"test": "echo 'tested (* ^ ω ^)'"
+	},
+	"files": [
+		"dist"
+	],
+	"packageManager": "pnpm@10.11.0",
+	"keywords": [
+		"catppuccin-typedoc"
+	],
+	"devDependencies": {
+		"@catppuccin/palette": "catalog:",
+		"@config/tsconfig": "workspace:*"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	}
+}

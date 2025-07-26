@@ -73,9 +73,7 @@ if (!fs.existsSync(dir)) {
 	fs.mkdirSync(dir, { recursive: true });
 }
 
-fs.writeFileSync(outputFilename, file, {
-	flag: "as+",
-});
+fs.writeFileSync(outputFilename, file);
 
 /**
  * @param {VariableMap} inputMap

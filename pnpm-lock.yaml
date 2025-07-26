@@ -35,8 +35,8 @@ catalogs:
       specifier: ^3.2.4
       version: 3.2.4
     zx:
-      specifier: ^8.5.5
-      version: 8.5.5
+      specifier: ^8.7.1
+      version: 8.7.1
 
 overrides:
   '@stephansama/astro-iconify-svgmap': workspace:*
@@ -220,7 +220,7 @@ importers:
     dependencies:
       zx:
         specifier: 'catalog:'
-        version: 8.5.5
+        version: 8.7.1
 
   lib/tsconfig:
     devDependencies:
@@ -308,7 +308,7 @@ importers:
         version: 8.5.0(@swc/core@1.12.1(@swc/helpers@0.5.17))(jiti@2.4.2)(postcss@8.5.4)(typescript@5.8.3)(yaml@2.8.0)
       zx:
         specifier: 'catalog:'
-        version: 8.5.5
+        version: 8.7.1
 
   packages/remark-asciinema:
     devDependencies:
@@ -6682,8 +6682,8 @@ packages:
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
-  zx@8.5.5:
-    resolution: {integrity: sha512-kzkjV3uqyEthw1IBDbA7Co2djji77vCP1DRvt58aYSMwiX4nyvAkFE8OBSEsOUbDJAst0Yo4asNvMTGG5HGPXA==}
+  zx@8.7.1:
+    resolution: {integrity: sha512-28u1w2LlIfvyvJvYe6pmCipesk8oL5AFMVp+P/U445LcaPgzrU5lNDtAPd6nJvWmoCNyXZz37R/xKOGokccjsw==}
     engines: {node: '>= 12.17.0'}
     hasBin: true
 
@@ -13979,4 +13979,4 @@ snapshots:
 
   zwitch@2.0.4: {}
 
-  zx@8.5.5: {}
+  zx@8.7.1: {}

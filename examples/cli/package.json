@@ -4,6 +4,6 @@
 	"version": "0.0.0",
 	"description": "Example using create-stephansama-example cli",
 	"dependencies": {
-		"create-stephansama-example": "workspace:*"
+		"create-stephansama-example": "^0.0.0"
 	}
 }

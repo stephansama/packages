@@ -1,3 +1,4 @@
+[![codecov](https://codecov.io/github/stephansama/packages/graph/badge.svg)](https://codecov.io/github/stephansama/packages)
 [![🦋 Changesets Release](https://github.com/stephansama/packages/actions/workflows/release.yml/badge.svg)](https://github.com/stephansama/packages/actions/workflows/release.yml)
 [![CodeQL](https://github.com/stephansama/packages/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/stephansama/packages/actions/workflows/github-code-scanning/codeql)
 

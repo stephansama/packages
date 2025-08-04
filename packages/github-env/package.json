@@ -22,7 +22,14 @@
 	],
 	"packageManager": "pnpm@10.11.0",
 	"keywords": [
-		"github-env"
+		"actions",
+		"env",
+		"environment-variables",
+		"github",
+		"github-env",
+		"process",
+		"types",
+		"typescript"
 	],
 	"dependencies": {},
 	"devDependencies": {

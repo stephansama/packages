@@ -17,6 +17,9 @@
 	"type": "module",
 	"scripts": {},
 	"types": "./src/env.d.ts",
+	"files": [
+		"src"
+	],
 	"packageManager": "pnpm@10.11.0",
 	"keywords": [
 		"github-env"

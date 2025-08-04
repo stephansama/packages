@@ -9,6 +9,28 @@ Additional environment variable types for GitHub CI
 
 ## Installation
 
+To use these type definitions, add the package to your `devDependencies`:
+
 ```sh
-pnpm install @stephansama/github-env
+pnpm install --save-dev @stephansama/github-env
 ```
+
+## Usage
+
+In order to enable the github environment variables into your local scope you can either add the following to your `tsconfig.json`
+
+```json
+{
+  "compilerOptions": {
+    "types": ["@stephansama/github-env"]
+  }
+}
+```
+
+or add the following reference to any typescript file
+
+```ts
+/// <reference types="@stephansama/github-env" />
+```
+
+🎉 Now you have access to GitHub environment variables in your TypeScript files!

@@ -33,7 +33,7 @@ interface GitHubEnvironments {
 	 * to where the action is located and access other files in that same repository.
 	 * For example, /home/runner/work/_actions/repo-owner/name-of-action-repo/v1.
 	 */
-	readonly GITHUB_ACTION_PATH?: string;
+	readonly GITHUB_ACTION_PATH: string;
 
 	/**
 	 * @description
@@ -41,14 +41,14 @@ interface GitHubEnvironments {
 	 * this is the owner and repository name of the action.
 	 * For example, `actions/checkout`.
 	 */
-	readonly GITHUB_ACTION_REPOSITORY?: string;
+	readonly GITHUB_ACTION_REPOSITORY: string;
 
 	/**
 	 * @description
 	 * The name of the person or app that initiated the workflow.
 	 * For example, `stephansama`.
 	 */
-	readonly GITHUB_ACTOR?: string;
+	readonly GITHUB_ACTOR: string;
 
 	/**
 	 * @description
@@ -56,14 +56,14 @@ interface GitHubEnvironments {
 	 * For example, `1234567`.
 	 * Note that this is different from the actor username.
 	 */
-	readonly GITHUB_ACTOR_ID?: string;
+	readonly GITHUB_ACTOR_ID: string;
 
 	/**
 	 * @description
 	 * Returns the API URL.
 	 * For example: `https://api.github.com`.
 	 */
-	readonly GITHUB_API_URL?: string;
+	readonly GITHUB_API_URL: string;
 
 	/**
 	 * @description
@@ -78,11 +78,11 @@ interface GitHubEnvironments {
 	 * @description
 	 * The path on the runner to the file that sets variables from workflow commands.
 	 * The path to this file is unique to the current step and changes for each step in a job.
-	 * For example, `/home/\*\*\/_runner_file_commands/env-89345`.
+	 * For example, `/home/runner/work/_temp/_runner_file_commands/set_env_87406d6e-4979-4d42-98e1-3dab1f48b13a`.
 	 * For more information, see
 	 * [Workflow commands for GitHub Actions](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#setting-an-environment-variable).
 	 */
-	readonly GITHUB_ENV?: string;
+	readonly GITHUB_ENV: string;
 
 	/**
 	 * @description
@@ -292,7 +292,7 @@ interface GitHubEnvironments {
 	/**
 	 * @description
 	 * The ref path to the workflow.
-	 * For example, `stephansama/packages/.github/workflows/my-workflow.yml@refs\/heads\/my_branch`.
+	 * For example, `stephansama/packages/.github/workflows/my-workflow.yml@refs/heads/my_branch`.
 	 */
 	readonly GITHUB_WORKFLOW_REF: string;
 
@@ -360,7 +360,7 @@ interface GitHubEnvironments {
 	 * @description
 	 * The path to the directory containing preinstalled tools for GitHub-hosted runners.
 	 * For more information, see [GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-software).
-	 * For example, `C:\stephansama-bot\windows`
+	 * For example, `C:\hostedtoolcache\windows`
 	 */
 	readonly RUNNER_TOOL_CACHE: string;
 }

@@ -15,7 +15,10 @@
 	},
 	"license": "MIT",
 	"type": "module",
-	"scripts": {},
+	"scripts": {
+		"test": "tsc --noEmit",
+		"lint": "eslint ./src/"
+	},
 	"types": "./src/env.d.ts",
 	"files": [
 		"src"

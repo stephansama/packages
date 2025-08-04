@@ -310,6 +310,12 @@ importers:
         specifier: 'catalog:'
         version: 8.5.5
 
+  packages/github-env:
+    devDependencies:
+      '@config/tsconfig':
+        specifier: workspace:*
+        version: link:../../lib/tsconfig
+
   packages/remark-asciinema:
     devDependencies:
       '@config/tsconfig':

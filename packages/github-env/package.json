@@ -1,0 +1,45 @@
+{
+	"name": "@stephansama/github-env",
+	"version": "0.0.0",
+	"description": "Additional environment variable types for GitHub CI",
+	"repository": {
+		"url": "https://github.com/stephansama/packages",
+		"type": "git",
+		"directory": "packages/github-env"
+	},
+	"homepage": "https://packages.stephansama.info/modules/_stephansama_github-env",
+	"author": {
+		"email": "stephanrandle.dev@gmail.com",
+		"name": "Stephan Randle",
+		"url": "https://stephansama.info"
+	},
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"test": "tsc --noEmit",
+		"lint": "eslint ./src/"
+	},
+	"types": "./src/env.d.ts",
+	"files": [
+		"src"
+	],
+	"packageManager": "pnpm@10.11.0",
+	"keywords": [
+		"actions",
+		"env",
+		"environment-variables",
+		"github",
+		"github-env",
+		"process",
+		"types",
+		"typescript"
+	],
+	"dependencies": {},
+	"devDependencies": {
+		"@config/tsconfig": "workspace:*"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	}
+}

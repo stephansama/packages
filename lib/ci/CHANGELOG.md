@@ -1,5 +1,11 @@
 # ci
 
+## 1.2.0
+
+### Minor Changes
+
+- cdfe284: Updated markdown readme script. removed typedoc from types package
+
 ## 1.1.2
 
 ### Patch Changes

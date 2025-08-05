@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/github-env",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Additional environment variable types for GitHub CI",
 	"repository": {
 		"url": "https://github.com/stephansama/packages",

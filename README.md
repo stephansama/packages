@@ -7,14 +7,14 @@ Collection of packages created by [![stephansama](https://img.shields.io/github/
 view examples here 👉 [![packages](https://pkg.pr.new/badge/stephansama/packages?style=flat&color=000&logoSize=auto)](https://pkg.pr.new/~/stephansama/packages)
 
 or install an example with [`create-stephansama-example`](https://github.com/stephansama/packages/tree/main/packages/example)
-i.e. `pnpm create stephansama-example`
+via `pnpm create stephansama-example`
 
 ## Packages
 
-All packages are packaged underneath the `@stephansama` scope (i.e. `@stephansama/remark-asciinema`)
+All packages are packaged underneath the `@stephansama` scope (for example: `@stephansama/remark-asciinema`)
 
 <!-- PKG:START -->
-| NAME                                                                                                | VERSION                                                                                                                                                                                                     | DOWNLOADS                                                                                                                                                              |
+| 📦 NAME                                                                                             | 🏷️ VERSION                                                                                                                                                                                                 | 📥 DOWNLOADS                                                                                                                                                           |
 | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [alfred-kaomoji](https://packages.stephansama.info/modules/_stephansama_alfred-kaomoji)             | [![NPM VERSION](https://img.shields.io/npm/v/%40stephansama%2Falfred-kaomoji?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/alfred-kaomoji)             | [![NPM DOWNLOADS](https://img.shields.io/npm/dw/@stephansama/alfred-kaomoji?labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/alfred-kaomoji)             |
 | [astro-iconify-svgmap](https://packages.stephansama.info/modules/_stephansama_astro-iconify-svgmap) | [![NPM VERSION](https://img.shields.io/npm/v/%40stephansama%2Fastro-iconify-svgmap?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/astro-iconify-svgmap) | [![NPM DOWNLOADS](https://img.shields.io/npm/dw/@stephansama/astro-iconify-svgmap?labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/astro-iconify-svgmap) |

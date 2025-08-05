@@ -26,16 +26,11 @@ permissions:
   pull-requests: write
 concurrency: ${{github.workflow}}-${{github.ref}}
 jobs:
-  release:
-    name: Release
+  test:
+    name: Examples / Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: "TODO to Issue"
-        uses: alstr/todo-to-issue-action@v5
-        with:
-          AUTO_ASSIGN: true
-          CLOSE_ISSUES: true
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -44,11 +39,8 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - name: 📦 Installing dependencies
         run: pnpm install
-      - name: Run lint
-        run: pnpm run lint
-      - name: Run test
-        run: pnpm run test:ci
-      - run: pnpm run build
+      - run: pnpm run lint
+      - run: pnpm run test:ci
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
@@ -60,6 +52,20 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: 🚀 Publish Stackblitz
         run: pnpx pkg-pr-new publish './packages/*' --pnpm --packageManager='pnpm' --template './examples/*'
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: "pnpm"
+          node-version-file: ".nvmrc"
+          registry-url: "https://registry.npmjs.org"
+      - name: 📦 Installing dependencies
+        run: pnpm install
+      - run: pnpm run build
       - if: github.ref_name == 'main'
         name: 🦋 Create Changeset Release Pull Request
         uses: changesets/action@v1

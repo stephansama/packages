@@ -3,7 +3,7 @@
 	"out": "./dist",
 	"name": "@stephansama packages",
 	"readme": "./README.md",
-	"favicon": "./lib/ci/theme/icon.svg",
+	"favicon": "https://api.iconify.design/octicon:package.svg",
 	"customCss": "./node_modules/@stephansama/catppuccin-typedoc/dist/catppuccin-typedoc.css",
 	"navigation": true,
 	"excludeExternals": true,

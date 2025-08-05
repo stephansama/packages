@@ -40,7 +40,7 @@
 		"@eslint/js": "^9.28.0",
 		"@stephansama/catppuccin-typedoc": "workspace:*",
 		"@turbo/gen": "^2.5.4",
-		"@types/node": "^24.0.1",
+		"@types/node": "^24.1.0",
 		"@typescript-eslint/parser": "^8.34.0",
 		"@vitest/coverage-v8": "catalog:",
 		"@vitest/ui": "catalog:",

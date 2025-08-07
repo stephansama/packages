@@ -14,7 +14,7 @@ const args = {
 		description: "Path to readme",
 		type: "string",
 	},
-	...zodToYargs(),
+	...zodToYargs(configSchema.unwrap()),
 } satisfies Record<string, Options>;
 
 export async function parseArgs() {
@@ -22,26 +22,33 @@ export async function parseArgs() {
 		.options(args)
 		.help("h")
 		.alias("h", "help")
-		.epilogue("--> @stephansama open-source 2025");
+		.epilogue(`--> @stephansama open-source ${new Date().getFullYear()}`);
 	return yargsInstance.wrap(yargsInstance.terminalWidth()).parse();
 }
 
-export function zodToYargs(): Record<keyof typeof shape, Options> {
-	const { shape } = configSchema.unwrap();
+export function zodToYargs<T extends z.ZodObject>(
+	zod: T,
+): Record<keyof T["shape"], Options> {
+	const { shape } = zod;
 	const entries = Object.entries(shape).map(([key, value]) => {
+		const meta = value.meta();
 		const { innerType } = value.def;
 		const isBoolean = innerType instanceof z.ZodBoolean;
 		const isNumber = innerType instanceof z.ZodNumber;
+		const isArray = innerType instanceof z.ZodArray;
+		const isCount = isBoolean && meta.count;
 
 		const yargType: Options["type"] =
-			(isBoolean && "boolean") || (isNumber && "number") || "string";
+			(isBoolean && "boolean") ||
+			(isNumber && "number") ||
+			(isArray && "array") ||
+			(isCount && "count") ||
+			"string";
 
 		const options: Options = {
 			default: value.def.defaultValue,
 			type: yargType,
 		};
-
-		const meta = value.meta();
 
 		if (meta?.alias) options.alias = meta.alias as string;
 		if (meta?.description) options.description = meta.description;

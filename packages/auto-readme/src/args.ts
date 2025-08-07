@@ -39,10 +39,10 @@ export function zodToYargs<T extends z.ZodObject>(
 		const isCount = isBoolean && meta.count;
 
 		const yargType: Options["type"] =
-			(isBoolean && "boolean") ||
-			(isNumber && "number") ||
 			(isArray && "array") ||
 			(isCount && "count") ||
+			(isNumber && "number") ||
+			(isBoolean && "boolean") ||
 			"string";
 
 		const options: Options = {

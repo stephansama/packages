@@ -20,7 +20,6 @@
 		"lint": "eslint ./src/",
 		"build": "tsup && attw --pack --profile=node16",
 		"prepublishOnly": "tsup",
-		"prepare": "tsup",
 		"test:ci": "vitest run --coverage",
 		"test:ui": "vitest run --ui",
 		"test": "vitest run"
@@ -56,14 +55,14 @@
 		"iconify"
 	],
 	"peerDependencies": {
-		"astro": "catalog:astro",
+		"astro": "catalog:",
 		"vite": "catalog:"
 	},
 	"devDependencies": {
 		"@config/tsconfig": "workspace:*",
 		"@iconify/types": "^2.0.0",
 		"@iconify/utils": "^2.3.0",
-		"astro": "catalog:astro",
+		"astro": "catalog:",
 		"tsup": "catalog:",
 		"vite": "catalog:"
 	},

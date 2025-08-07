@@ -1,0 +1,70 @@
+{
+	"name": "@stephansama/auto-readme",
+	"version": "0.0.0",
+	"description": "Generate lists and tables for your README automagically based on your repository",
+	"repository": {
+		"url": "https://github.com/stephansama/packages",
+		"type": "git",
+		"directory": "packages/auto-readme"
+	},
+	"homepage": "https://packages.stephansama.info/modules/_stephansama_auto-readme",
+	"author": {
+		"email": "stephanrandle.dev@gmail.com",
+		"name": "Stephan Randle",
+		"url": "https://stephansama.info"
+	},
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"dev": "node --watch-path=./src/ build.mjs",
+		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+		"build": "node build.mjs && attw --pack"
+	},
+	"bin": "./cli.mjs",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"files": [
+		"./dist",
+		"./cli.mjs"
+	],
+	"packageManager": "pnpm@10.11.0",
+	"keywords": [
+		"auto",
+		"auto-readme",
+		"generate",
+		"generator",
+		"list",
+		"markdown",
+		"table"
+	],
+	"dependencies": {
+		"chalk": "^5.5.0",
+		"cosmiconfig": "^9.0.0",
+		"fast-glob": "^3.3.3",
+		"markdown-table": "^3.0.4",
+		"mdast-util-from-markdown": "^2.0.2",
+		"mdast-zone": "^6.1.0",
+		"remark": "^15.0.1",
+		"yaml": "^2.8.1",
+		"yargs": "^18.0.0"
+	},
+	"devDependencies": {
+		"@config/tsconfig": "workspace:*",
+		"@types/mdast": "^4.0.4",
+		"@types/yargs": "^17.0.33",
+		"mdast": "^3.0.0",
+		"tsup": "catalog:",
+		"unified": "^11.0.5",
+		"zod": "catalog:"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	}
+}

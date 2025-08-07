@@ -1,0 +1,1779 @@
+[
+  [
+    "/Users/stephanrandle/Code/packages/README.md",
+    {
+      "type": "root",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://codecov.io/github/stephansama/packages",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://codecov.io/github/stephansama/packages/graph/badge.svg",
+                  "alt": "codecov",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 2,
+                      "offset": 1
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 76,
+                      "offset": 75
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 125,
+                  "offset": 124
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "\n",
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 125,
+                  "offset": 124
+                },
+                "end": {
+                  "line": 2,
+                  "column": 1,
+                  "offset": 125
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://github.com/stephansama/packages/actions/workflows/release.yml",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://github.com/stephansama/packages/actions/workflows/release.yml/badge.svg",
+                  "alt": "🦋 Changesets Release",
+                  "position": {
+                    "start": {
+                      "line": 2,
+                      "column": 2,
+                      "offset": 126
+                    },
+                    "end": {
+                      "line": 2,
+                      "column": 107,
+                      "offset": 231
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 2,
+                  "column": 1,
+                  "offset": 125
+                },
+                "end": {
+                  "line": 2,
+                  "column": 179,
+                  "offset": 303
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "\n",
+              "position": {
+                "start": {
+                  "line": 2,
+                  "column": 179,
+                  "offset": 303
+                },
+                "end": {
+                  "line": 3,
+                  "column": 1,
+                  "offset": 304
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://github.com/stephansama/packages/actions/workflows/github-code-scanning/codeql",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://github.com/stephansama/packages/actions/workflows/github-code-scanning/codeql/badge.svg",
+                  "alt": "CodeQL",
+                  "position": {
+                    "start": {
+                      "line": 3,
+                      "column": 2,
+                      "offset": 305
+                    },
+                    "end": {
+                      "line": 3,
+                      "column": 108,
+                      "offset": 411
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 3,
+                  "column": 1,
+                  "offset": 304
+                },
+                "end": {
+                  "line": 3,
+                  "column": 196,
+                  "offset": 499
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 196,
+              "offset": 499
+            }
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "Collection of packages created by ",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 1,
+                  "offset": 501
+                },
+                "end": {
+                  "line": 5,
+                  "column": 35,
+                  "offset": 535
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://github.com/stephansama/",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://img.shields.io/github/followers/stephansama.svg?label=stephan%20Randle&logo=github",
+                  "alt": "stephansama",
+                  "position": {
+                    "start": {
+                      "line": 5,
+                      "column": 36,
+                      "offset": 536
+                    },
+                    "end": {
+                      "line": 5,
+                      "column": 142,
+                      "offset": 642
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 35,
+                  "offset": 535
+                },
+                "end": {
+                  "line": 5,
+                  "column": 176,
+                  "offset": 676
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 5,
+              "column": 1,
+              "offset": 501
+            },
+            "end": {
+              "line": 5,
+              "column": 176,
+              "offset": 676
+            }
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "view examples here 👉 ",
+              "position": {
+                "start": {
+                  "line": 7,
+                  "column": 1,
+                  "offset": 678
+                },
+                "end": {
+                  "line": 7,
+                  "column": 23,
+                  "offset": 700
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://pkg.pr.new/~/stephansama/packages",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://pkg.pr.new/badge/stephansama/packages?style=flat&color=000&logoSize=auto",
+                  "alt": "packages",
+                  "position": {
+                    "start": {
+                      "line": 7,
+                      "column": 24,
+                      "offset": 701
+                    },
+                    "end": {
+                      "line": 7,
+                      "column": 117,
+                      "offset": 794
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 7,
+                  "column": 23,
+                  "offset": 700
+                },
+                "end": {
+                  "line": 7,
+                  "column": 161,
+                  "offset": 838
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 7,
+              "column": 1,
+              "offset": 678
+            },
+            "end": {
+              "line": 7,
+              "column": 161,
+              "offset": 838
+            }
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "or install an example with ",
+              "position": {
+                "start": {
+                  "line": 9,
+                  "column": 1,
+                  "offset": 840
+                },
+                "end": {
+                  "line": 9,
+                  "column": 28,
+                  "offset": 867
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://github.com/stephansama/packages/tree/main/packages/example",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "create-stephansama-example",
+                  "position": {
+                    "start": {
+                      "line": 9,
+                      "column": 29,
+                      "offset": 868
+                    },
+                    "end": {
+                      "line": 9,
+                      "column": 57,
+                      "offset": 896
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 9,
+                  "column": 28,
+                  "offset": 867
+                },
+                "end": {
+                  "line": 9,
+                  "column": 126,
+                  "offset": 965
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "\nvia ",
+              "position": {
+                "start": {
+                  "line": 9,
+                  "column": 126,
+                  "offset": 965
+                },
+                "end": {
+                  "line": 10,
+                  "column": 5,
+                  "offset": 970
+                }
+              }
+            },
+            {
+              "type": "inlineCode",
+              "value": "pnpm create stephansama-example",
+              "position": {
+                "start": {
+                  "line": 10,
+                  "column": 5,
+                  "offset": 970
+                },
+                "end": {
+                  "line": 10,
+                  "column": 38,
+                  "offset": 1003
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 9,
+              "column": 1,
+              "offset": 840
+            },
+            "end": {
+              "line": 10,
+              "column": 38,
+              "offset": 1003
+            }
+          }
+        },
+        {
+          "type": "heading",
+          "depth": 2,
+          "children": [
+            {
+              "type": "text",
+              "value": "Packages",
+              "position": {
+                "start": {
+                  "line": 12,
+                  "column": 4,
+                  "offset": 1008
+                },
+                "end": {
+                  "line": 12,
+                  "column": 12,
+                  "offset": 1016
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 12,
+              "column": 1,
+              "offset": 1005
+            },
+            "end": {
+              "line": 12,
+              "column": 12,
+              "offset": 1016
+            }
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "All packages are packaged underneath the ",
+              "position": {
+                "start": {
+                  "line": 14,
+                  "column": 1,
+                  "offset": 1018
+                },
+                "end": {
+                  "line": 14,
+                  "column": 42,
+                  "offset": 1059
+                }
+              }
+            },
+            {
+              "type": "inlineCode",
+              "value": "@stephansama",
+              "position": {
+                "start": {
+                  "line": 14,
+                  "column": 42,
+                  "offset": 1059
+                },
+                "end": {
+                  "line": 14,
+                  "column": 56,
+                  "offset": 1073
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": " scope (for example: ",
+              "position": {
+                "start": {
+                  "line": 14,
+                  "column": 56,
+                  "offset": 1073
+                },
+                "end": {
+                  "line": 14,
+                  "column": 77,
+                  "offset": 1094
+                }
+              }
+            },
+            {
+              "type": "inlineCode",
+              "value": "@stephansama/remark-asciinema",
+              "position": {
+                "start": {
+                  "line": 14,
+                  "column": 77,
+                  "offset": 1094
+                },
+                "end": {
+                  "line": 14,
+                  "column": 108,
+                  "offset": 1125
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": ")",
+              "position": {
+                "start": {
+                  "line": 14,
+                  "column": 108,
+                  "offset": 1125
+                },
+                "end": {
+                  "line": 14,
+                  "column": 109,
+                  "offset": 1126
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 14,
+              "column": 1,
+              "offset": 1018
+            },
+            "end": {
+              "line": 14,
+              "column": 109,
+              "offset": 1126
+            }
+          }
+        },
+        {
+          "type": "html",
+          "value": "<!-- PKG start -->",
+          "position": {
+            "start": {
+              "line": 16,
+              "column": 1,
+              "offset": 1128
+            },
+            "end": {
+              "line": 16,
+              "column": 19,
+              "offset": 1146
+            }
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "| 📦 NAME                                                                                             | 🏷️ VERSION                                                                                                                                                                                                  | 📥 DOWNLOADS                                                                                                                                                           |\n| --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| ",
+              "position": {
+                "start": {
+                  "line": 18,
+                  "column": 1,
+                  "offset": 1148
+                },
+                "end": {
+                  "line": 20,
+                  "column": 3,
+                  "offset": 2109
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://packages.stephansama.info/modules/_stephansama_alfred-kaomoji",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "alfred-kaomoji",
+                  "position": {
+                    "start": {
+                      "line": 20,
+                      "column": 4,
+                      "offset": 2110
+                    },
+                    "end": {
+                      "line": 20,
+                      "column": 18,
+                      "offset": 2124
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 20,
+                  "column": 3,
+                  "offset": 2109
+                },
+                "end": {
+                  "line": 20,
+                  "column": 90,
+                  "offset": 2196
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "             | ",
+              "position": {
+                "start": {
+                  "line": 20,
+                  "column": 90,
+                  "offset": 2196
+                },
+                "end": {
+                  "line": 20,
+                  "column": 105,
+                  "offset": 2211
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://www.npmjs.com/package/@stephansama/alfred-kaomoji",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://img.shields.io/npm/v/%40stephansama%2Falfred-kaomoji?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F",
+                  "alt": "NPM VERSION",
+                  "position": {
+                    "start": {
+                      "line": 20,
+                      "column": 106,
+                      "offset": 2212
+                    },
+                    "end": {
+                      "line": 20,
+                      "column": 236,
+                      "offset": 2342
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 20,
+                  "column": 105,
+                  "offset": 2211
+                },
+                "end": {
+                  "line": 20,
+                  "column": 296,
+                  "offset": 2402
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "             | ",
+              "position": {
+                "start": {
+                  "line": 20,
+                  "column": 296,
+                  "offset": 2402
+                },
+                "end": {
+                  "line": 20,
+                  "column": 311,
+                  "offset": 2417
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://www.npmjs.com/package/@stephansama/alfred-kaomoji",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://img.shields.io/npm/dw/@stephansama/alfred-kaomoji?labelColor=211F1F",
+                  "alt": "NPM DOWNLOADS",
+                  "position": {
+                    "start": {
+                      "line": 20,
+                      "column": 312,
+                      "offset": 2418
+                    },
+                    "end": {
+                      "line": 20,
+                      "column": 405,
+                      "offset": 2511
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 20,
+                  "column": 311,
+                  "offset": 2417
+                },
+                "end": {
+                  "line": 20,
+                  "column": 465,
+                  "offset": 2571
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "             |\n| ",
+              "position": {
+                "start": {
+                  "line": 20,
+                  "column": 465,
+                  "offset": 2571
+                },
+                "end": {
+                  "line": 21,
+                  "column": 3,
+                  "offset": 2588
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://packages.stephansama.info/modules/_stephansama_astro-iconify-svgmap",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "astro-iconify-svgmap",
+                  "position": {
+                    "start": {
+                      "line": 21,
+                      "column": 4,
+                      "offset": 2589
+                    },
+                    "end": {
+                      "line": 21,
+                      "column": 24,
+                      "offset": 2609
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 21,
+                  "column": 3,
+                  "offset": 2588
+                },
+                "end": {
+                  "line": 21,
+                  "column": 102,
+                  "offset": 2687
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": " | ",
+              "position": {
+                "start": {
+                  "line": 21,
+                  "column": 102,
+                  "offset": 2687
+                },
+                "end": {
+                  "line": 21,
+                  "column": 105,
+                  "offset": 2690
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://www.npmjs.com/package/@stephansama/astro-iconify-svgmap",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://img.shields.io/npm/v/%40stephansama%2Fastro-iconify-svgmap?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F",
+                  "alt": "NPM VERSION",
+                  "position": {
+                    "start": {
+                      "line": 21,
+                      "column": 106,
+                      "offset": 2691
+                    },
+                    "end": {
+                      "line": 21,
+                      "column": 242,
+                      "offset": 2827
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 21,
+                  "column": 105,
+                  "offset": 2690
+                },
+                "end": {
+                  "line": 21,
+                  "column": 308,
+                  "offset": 2893
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": " | ",
+              "position": {
+                "start": {
+                  "line": 21,
+                  "column": 308,
+                  "offset": 2893
+                },
+                "end": {
+                  "line": 21,
+                  "column": 311,
+                  "offset": 2896
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://www.npmjs.com/package/@stephansama/astro-iconify-svgmap",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://img.shields.io/npm/dw/@stephansama/astro-iconify-svgmap?labelColor=211F1F",
+                  "alt": "NPM DOWNLOADS",
+                  "position": {
+                    "start": {
+                      "line": 21,
+                      "column": 312,
+                      "offset": 2897
+                    },
+                    "end": {
+                      "line": 21,
+                      "column": 411,
+                      "offset": 2996
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 21,
+                  "column": 311,
+                  "offset": 2896
+                },
+                "end": {
+                  "line": 21,
+                  "column": 477,
+                  "offset": 3062
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": " |\n| ",
+              "position": {
+                "start": {
+                  "line": 21,
+                  "column": 477,
+                  "offset": 3062
+                },
+                "end": {
+                  "line": 22,
+                  "column": 3,
+                  "offset": 3067
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://packages.stephansama.info/modules/_stephansama_catppuccin-rss",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "catppuccin-rss",
+                  "position": {
+                    "start": {
+                      "line": 22,
+                      "column": 4,
+                      "offset": 3068
+                    },
+                    "end": {
+                      "line": 22,
+                      "column": 18,
+                      "offset": 3082
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 22,
+                  "column": 3,
+                  "offset": 3067
+                },
+                "end": {
+                  "line": 22,
+                  "column": 90,
+                  "offset": 3154
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "             | ",
+              "position": {
+                "start": {
+                  "line": 22,
+                  "column": 90,
+                  "offset": 3154
+                },
+                "end": {
+                  "line": 22,
+                  "column": 105,
+                  "offset": 3169
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://www.npmjs.com/package/@stephansama/catppuccin-rss",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://img.shields.io/npm/v/%40stephansama%2Fcatppuccin-rss?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F",
+                  "alt": "NPM VERSION",
+                  "position": {
+                    "start": {
+                      "line": 22,
+                      "column": 106,
+                      "offset": 3170
+                    },
+                    "end": {
+                      "line": 22,
+                      "column": 236,
+                      "offset": 3300
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 22,
+                  "column": 105,
+                  "offset": 3169
+                },
+                "end": {
+                  "line": 22,
+                  "column": 296,
+                  "offset": 3360
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "             | ",
+              "position": {
+                "start": {
+                  "line": 22,
+                  "column": 296,
+                  "offset": 3360
+                },
+                "end": {
+                  "line": 22,
+                  "column": 311,
+                  "offset": 3375
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://www.npmjs.com/package/@stephansama/catppuccin-rss",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://img.shields.io/npm/dw/@stephansama/catppuccin-rss?labelColor=211F1F",
+                  "alt": "NPM DOWNLOADS",
+                  "position": {
+                    "start": {
+                      "line": 22,
+                      "column": 312,
+                      "offset": 3376
+                    },
+                    "end": {
+                      "line": 22,
+                      "column": 405,
+                      "offset": 3469
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 22,
+                  "column": 311,
+                  "offset": 3375
+                },
+                "end": {
+                  "line": 22,
+                  "column": 465,
+                  "offset": 3529
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "             |\n| ",
+              "position": {
+                "start": {
+                  "line": 22,
+                  "column": 465,
+                  "offset": 3529
+                },
+                "end": {
+                  "line": 23,
+                  "column": 3,
+                  "offset": 3546
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://packages.stephansama.info/modules/_stephansama_catppuccin-typedoc",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "catppuccin-typedoc",
+                  "position": {
+                    "start": {
+                      "line": 23,
+                      "column": 4,
+                      "offset": 3547
+                    },
+                    "end": {
+                      "line": 23,
+                      "column": 22,
+                      "offset": 3565
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 23,
+                  "column": 3,
+                  "offset": 3546
+                },
+                "end": {
+                  "line": 23,
+                  "column": 98,
+                  "offset": 3641
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "     | ",
+              "position": {
+                "start": {
+                  "line": 23,
+                  "column": 98,
+                  "offset": 3641
+                },
+                "end": {
+                  "line": 23,
+                  "column": 105,
+                  "offset": 3648
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://www.npmjs.com/package/@stephansama/catppuccin-typedoc",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://img.shields.io/npm/v/%40stephansama%2Fcatppuccin-typedoc?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F",
+                  "alt": "NPM VERSION",
+                  "position": {
+                    "start": {
+                      "line": 23,
+                      "column": 106,
+                      "offset": 3649
+                    },
+                    "end": {
+                      "line": 23,
+                      "column": 240,
+                      "offset": 3783
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 23,
+                  "column": 105,
+                  "offset": 3648
+                },
+                "end": {
+                  "line": 23,
+                  "column": 304,
+                  "offset": 3847
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "     | ",
+              "position": {
+                "start": {
+                  "line": 23,
+                  "column": 304,
+                  "offset": 3847
+                },
+                "end": {
+                  "line": 23,
+                  "column": 311,
+                  "offset": 3854
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://www.npmjs.com/package/@stephansama/catppuccin-typedoc",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://img.shields.io/npm/dw/@stephansama/catppuccin-typedoc?labelColor=211F1F",
+                  "alt": "NPM DOWNLOADS",
+                  "position": {
+                    "start": {
+                      "line": 23,
+                      "column": 312,
+                      "offset": 3855
+                    },
+                    "end": {
+                      "line": 23,
+                      "column": 409,
+                      "offset": 3952
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 23,
+                  "column": 311,
+                  "offset": 3854
+                },
+                "end": {
+                  "line": 23,
+                  "column": 473,
+                  "offset": 4016
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "     |\n| ",
+              "position": {
+                "start": {
+                  "line": 23,
+                  "column": 473,
+                  "offset": 4016
+                },
+                "end": {
+                  "line": 24,
+                  "column": 3,
+                  "offset": 4025
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://packages.stephansama.info/modules/_stephansama_github-env",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "github-env",
+                  "position": {
+                    "start": {
+                      "line": 24,
+                      "column": 4,
+                      "offset": 4026
+                    },
+                    "end": {
+                      "line": 24,
+                      "column": 14,
+                      "offset": 4036
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 24,
+                  "column": 3,
+                  "offset": 4025
+                },
+                "end": {
+                  "line": 24,
+                  "column": 82,
+                  "offset": 4104
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "                     | ",
+              "position": {
+                "start": {
+                  "line": 24,
+                  "column": 82,
+                  "offset": 4104
+                },
+                "end": {
+                  "line": 24,
+                  "column": 105,
+                  "offset": 4127
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://www.npmjs.com/package/@stephansama/github-env",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://img.shields.io/npm/v/%40stephansama%2Fgithub-env?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F",
+                  "alt": "NPM VERSION",
+                  "position": {
+                    "start": {
+                      "line": 24,
+                      "column": 106,
+                      "offset": 4128
+                    },
+                    "end": {
+                      "line": 24,
+                      "column": 232,
+                      "offset": 4254
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 24,
+                  "column": 105,
+                  "offset": 4127
+                },
+                "end": {
+                  "line": 24,
+                  "column": 288,
+                  "offset": 4310
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "                     | ",
+              "position": {
+                "start": {
+                  "line": 24,
+                  "column": 288,
+                  "offset": 4310
+                },
+                "end": {
+                  "line": 24,
+                  "column": 311,
+                  "offset": 4333
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://www.npmjs.com/package/@stephansama/github-env",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://img.shields.io/npm/dw/@stephansama/github-env?labelColor=211F1F",
+                  "alt": "NPM DOWNLOADS",
+                  "position": {
+                    "start": {
+                      "line": 24,
+                      "column": 312,
+                      "offset": 4334
+                    },
+                    "end": {
+                      "line": 24,
+                      "column": 401,
+                      "offset": 4423
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 24,
+                  "column": 311,
+                  "offset": 4333
+                },
+                "end": {
+                  "line": 24,
+                  "column": 457,
+                  "offset": 4479
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "                     |\n| ",
+              "position": {
+                "start": {
+                  "line": 24,
+                  "column": 457,
+                  "offset": 4479
+                },
+                "end": {
+                  "line": 25,
+                  "column": 3,
+                  "offset": 4504
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://packages.stephansama.info/modules/_stephansama_remark-asciinema",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "remark-asciinema",
+                  "position": {
+                    "start": {
+                      "line": 25,
+                      "column": 4,
+                      "offset": 4505
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 20,
+                      "offset": 4521
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 25,
+                  "column": 3,
+                  "offset": 4504
+                },
+                "end": {
+                  "line": 25,
+                  "column": 94,
+                  "offset": 4595
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "         | ",
+              "position": {
+                "start": {
+                  "line": 25,
+                  "column": 94,
+                  "offset": 4595
+                },
+                "end": {
+                  "line": 25,
+                  "column": 105,
+                  "offset": 4606
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://www.npmjs.com/package/@stephansama/remark-asciinema",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://img.shields.io/npm/v/%40stephansama%2Fremark-asciinema?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F",
+                  "alt": "NPM VERSION",
+                  "position": {
+                    "start": {
+                      "line": 25,
+                      "column": 106,
+                      "offset": 4607
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 238,
+                      "offset": 4739
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 25,
+                  "column": 105,
+                  "offset": 4606
+                },
+                "end": {
+                  "line": 25,
+                  "column": 300,
+                  "offset": 4801
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "         | ",
+              "position": {
+                "start": {
+                  "line": 25,
+                  "column": 300,
+                  "offset": 4801
+                },
+                "end": {
+                  "line": 25,
+                  "column": 311,
+                  "offset": 4812
+                }
+              }
+            },
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://www.npmjs.com/package/@stephansama/remark-asciinema",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://img.shields.io/npm/dw/@stephansama/remark-asciinema?labelColor=211F1F",
+                  "alt": "NPM DOWNLOADS",
+                  "position": {
+                    "start": {
+                      "line": 25,
+                      "column": 312,
+                      "offset": 4813
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 407,
+                      "offset": 4908
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 25,
+                  "column": 311,
+                  "offset": 4812
+                },
+                "end": {
+                  "line": 25,
+                  "column": 469,
+                  "offset": 4970
+                }
+              }
+            },
+            {
+              "type": "text",
+              "value": "         |",
+              "position": {
+                "start": {
+                  "line": 25,
+                  "column": 469,
+                  "offset": 4970
+                },
+                "end": {
+                  "line": 25,
+                  "column": 479,
+                  "offset": 4980
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 18,
+              "column": 1,
+              "offset": 1148
+            },
+            "end": {
+              "line": 25,
+              "column": 479,
+              "offset": 4980
+            }
+          }
+        },
+        {
+          "type": "html",
+          "value": "<!-- PKG end -->",
+          "position": {
+            "start": {
+              "line": 27,
+              "column": 1,
+              "offset": 4982
+            },
+            "end": {
+              "line": 27,
+              "column": 17,
+              "offset": 4998
+            }
+          }
+        },
+        {
+          "type": "heading",
+          "depth": 2,
+          "children": [
+            {
+              "type": "text",
+              "value": "Other published packages",
+              "position": {
+                "start": {
+                  "line": 29,
+                  "column": 4,
+                  "offset": 5003
+                },
+                "end": {
+                  "line": 29,
+                  "column": 28,
+                  "offset": 5027
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 29,
+              "column": 1,
+              "offset": 5000
+            },
+            "end": {
+              "line": 29,
+              "column": 28,
+              "offset": 5027
+            }
+          }
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "start": null,
+          "spread": false,
+          "children": [
+            {
+              "type": "listItem",
+              "spread": false,
+              "checked": null,
+              "children": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "type": "link",
+                      "title": null,
+                      "url": "https://github.com/stephansama/stow.nvim",
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "stow.nvim",
+                          "position": {
+                            "start": {
+                              "line": 31,
+                              "column": 4,
+                              "offset": 5032
+                            },
+                            "end": {
+                              "line": 31,
+                              "column": 13,
+                              "offset": 5041
+                            }
+                          }
+                        }
+                      ],
+                      "position": {
+                        "start": {
+                          "line": 31,
+                          "column": 3,
+                          "offset": 5031
+                        },
+                        "end": {
+                          "line": 31,
+                          "column": 56,
+                          "offset": 5084
+                        }
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 31,
+                      "column": 3,
+                      "offset": 5031
+                    },
+                    "end": {
+                      "line": 31,
+                      "column": 56,
+                      "offset": 5084
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 31,
+                  "column": 1,
+                  "offset": 5029
+                },
+                "end": {
+                  "line": 31,
+                  "column": 56,
+                  "offset": 5084
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 31,
+              "column": 1,
+              "offset": 5029
+            },
+            "end": {
+              "line": 31,
+              "column": 56,
+              "offset": 5084
+            }
+          }
+        },
+        {
+          "type": "heading",
+          "depth": 2,
+          "children": [
+            {
+              "type": "text",
+              "value": "Stargazers ⭐",
+              "position": {
+                "start": {
+                  "line": 33,
+                  "column": 4,
+                  "offset": 5089
+                },
+                "end": {
+                  "line": 33,
+                  "column": 16,
+                  "offset": 5101
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 33,
+              "column": 1,
+              "offset": 5086
+            },
+            "end": {
+              "line": 33,
+              "column": 16,
+              "offset": 5101
+            }
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://github.com/stephansama/packages/stargazers",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://reporoster.com/stars/stephansama/packages",
+                  "alt": "Stargazers repo roster for @stephansama/packages",
+                  "position": {
+                    "start": {
+                      "line": 35,
+                      "column": 2,
+                      "offset": 5104
+                    },
+                    "end": {
+                      "line": 35,
+                      "column": 104,
+                      "offset": 5206
+                    }
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 35,
+                  "column": 1,
+                  "offset": 5103
+                },
+                "end": {
+                  "line": 35,
+                  "column": 157,
+                  "offset": 5259
+                }
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 35,
+              "column": 1,
+              "offset": 5103
+            },
+            "end": {
+              "line": 35,
+              "column": 157,
+              "offset": 5259
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "offset": 0
+        },
+        "end": {
+          "line": 36,
+          "column": 1,
+          "offset": 5260
+        }
+      }
+    },
+    [
+      [
+        "PKG",
+        "TABLE"
+      ]
+    ]
+  ]
+]

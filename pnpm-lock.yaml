@@ -6,18 +6,50 @@ settings:
 
 catalogs:
   default:
+    '@catppuccin/palette':
+      specifier: ^1.7.1
+      version: 1.7.1
+    '@vitest/coverage-v8':
+      specifier: ^3.2.4
+      version: 3.2.4
+    '@vitest/ui':
+      specifier: ^3.2.4
+      version: 3.2.4
+    astro:
+      specifier: ^5.9.3
+      version: 5.9.3
+    nodemon:
+      specifier: ^3.1.10
+      version: 3.1.10
     tsup:
       specifier: ^8.3.6
       version: 8.5.0
+    typescript:
+      specifier: ^5.8.3
+      version: 5.8.3
+    vite:
+      specifier: ^6.3.5
+      version: 6.3.5
+    vitest:
+      specifier: ^3.2.4
+      version: 3.2.4
     zod:
       specifier: ^4.0.15
       version: 4.0.15
+    zx:
+      specifier: ^8.5.5
+      version: 8.5.5
 
 overrides:
   '@stephansama/astro-iconify-svgmap': workspace:*
   '@stephansama/catppuccin-rss': workspace:*
   '@stephansama/remark-asciinema': workspace:*
   create-stephansama-example: workspace:*
+
+patchedDependencies:
+  mdast-zone:
+    hash: 30cf9048b556a9074f3d9621cc5a4d80d7acd422804fce33363bfe6df8980983
+    path: patches/mdast-zone.patch
 
 importers:
 
@@ -257,9 +289,12 @@ importers:
       mdast-util-from-markdown:
         specifier: ^2.0.2
         version: 2.0.2
+      mdast-util-gfm:
+        specifier: ^3.1.0
+        version: 3.1.0
       mdast-zone:
         specifier: ^6.1.0
-        version: 6.1.0
+        version: 6.1.0(patch_hash=30cf9048b556a9074f3d9621cc5a4d80d7acd422804fce33363bfe6df8980983)
       remark:
         specifier: ^15.0.1
         version: 15.0.1
@@ -9416,10 +9451,6 @@ snapshots:
     dependencies:
       mimic-function: 5.0.1
 
-  debug@4.4.1:
-    dependencies:
-      ms: 2.1.3
-
   debug@4.4.1(supports-color@5.5.0):
     dependencies:
       ms: 2.1.3
@@ -11366,7 +11397,7 @@ snapshots:
     dependencies:
       '@types/mdast': 4.0.4
 
-  mdast-zone@6.1.0:
+  mdast-zone@6.1.0(patch_hash=30cf9048b556a9074f3d9621cc5a4d80d7acd422804fce33363bfe6df8980983):
     dependencies:
       '@types/mdast': 4.0.4
       '@types/unist': 3.0.3
@@ -11632,7 +11663,7 @@ snapshots:
   micromark@4.0.2:
     dependencies:
       '@types/debug': 4.1.12
-      debug: 4.4.1
+      debug: 4.4.1(supports-color@5.5.0)
       decode-named-character-reference: 1.1.0
       devlop: 1.1.0
       micromark-core-commonmark: 2.0.3
@@ -13327,7 +13358,7 @@ snapshots:
       cac: 6.7.14
       chokidar: 4.0.3
       consola: 3.4.2
-      debug: 4.4.1
+      debug: 4.4.1(supports-color@5.5.0)
       esbuild: 0.25.5
       fix-dts-default-cjs-exports: 1.0.1
       joycon: 3.1.1

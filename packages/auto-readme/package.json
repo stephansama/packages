@@ -18,16 +18,21 @@
 	"scripts": {
 		"dev": "node --watch-path=./src build.mjs",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-		"build": "node build.mjs && attw --pack"
+		"build": "node build.mjs && attw --pack . --exclude-entrypoints schema.yaml schema.json"
 	},
 	"bin": "./cli.mjs",
 	"main": "./config/schema.js",
 	"types": "./config/schema.d.ts",
 	"exports": {
 		".": {
-			"types": "./config/schema.d.ts",
-			"import": "./config/schema.js",
-			"require": "./config/schema.cjs"
+			"import": {
+				"types": "./config/schema.d.ts",
+				"default": "./config/schema.js"
+			},
+			"require": {
+				"types": "./config/schema.d.cts",
+				"default": "./config/schema.cjs"
+			}
 		},
 		"./schema.json": "./config/schema.json",
 		"./schema.yaml": "./config/schema.yaml"

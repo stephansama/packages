@@ -25,15 +25,6 @@ const workspaceCommands: Record<PackageManager, string> = {
 
 export type ActionData = Awaited<ReturnType<typeof loadActionData>>;
 
-type PnpmPackage = {
-	dependencies?: unknown;
-	devDependencies?: unknown;
-	name: string;
-	path: string;
-	private: boolean;
-	version: string;
-};
-
 export function determinePackageManager(root: string): PackageManager {
 	const found = Object.entries(packageManagerPaths).find(([, value]) => {
 		return fs.existsSync(path.resolve(root, value));
@@ -87,7 +78,7 @@ export async function loadWorkspace(manager: PackageManager) {
 
 	if (manager === "pnpm") {
 		const output = cp.execSync(workspaceCommands.pnpm, { encoding }).trim();
-		const json: PnpmPackage[] = JSON.parse(output);
+		const json: PackageJson[] = JSON.parse(output);
 		return json.map((o) => {
 			delete o.dependencies;
 			delete o.devDependencies;

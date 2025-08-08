@@ -18,11 +18,12 @@ export async function run() {
 			const file = await fsp.readFile(path, { encoding: "utf8" });
 			const ast = fromMarkdown(file);
 			const actions = loadAstComments(ast);
+
 			if (!actions.length) return;
+
 			const data = await loadActionData(actions, path, root);
-			console.log(actions, data);
 			const content = await parse(file, config, data);
-			await fsp.writeFile(path + ".bak", content);
+			await fsp.writeFile(path, content);
 		}),
 	);
 }

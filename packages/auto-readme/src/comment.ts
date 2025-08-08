@@ -25,7 +25,7 @@ export const SEPARATOR = "-" as const;
 export function loadAstComments(root: Root) {
 	return root.children
 		.map((child) => child.type === "html" && parseComment(child.value))
-		.filter(Boolean);
+		.filter((f): f is ReturnType<typeof parseComment> => f !== false);
 }
 
 export function parseComment(comment: string) {

@@ -1,7 +1,4 @@
 {
 	"extends": ["@config/tsconfig/tsconfig.base.json"],
-	"include": ["./src/**/*", "./types/reset.d.ts"],
-	"compilerOptions": {
-		"types": ["./types/reset.d.ts"]
-	}
+	"include": ["./src/**/*"]
 }

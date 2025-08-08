@@ -1,4 +1,5 @@
 import { fromMarkdown } from "mdast-util-from-markdown";
+import * as cp from "node:child_process";
 import * as fsp from "node:fs/promises";
 
 import { parseArgs } from "./args";
@@ -24,6 +25,7 @@ export async function run() {
 			const data = await loadActionData(actions, path, root);
 			const content = await parse(file, config, data);
 			await fsp.writeFile(path, content);
+			cp.execSync(`prettier ${path} --write`);
 		}),
 	);
 }

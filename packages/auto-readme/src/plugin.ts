@@ -14,7 +14,7 @@ const emojis = {
 	downloads: "📥",
 	name: "📦",
 	version: "🏷️",
-};
+} as const;
 
 export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> = (
 	config,
@@ -24,11 +24,10 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> = (
 		zone(tree, /.*WORKSPACE.*/gi, function (start, _, end) {
 			const value = start.type === "html" && start.value;
 			const comment = value && parseComment(value);
-			const first = data.at(0);
+			const first = data.find((d) => d?.action === "WORKSPACE");
 			const pkgNames = first?.workspace
 				?.map((pkg) => !pkg.private && pkg.name)
 				.filter(Boolean);
-			if (value) console.log({ comment, config });
 			const table = markdownTable([
 				["name", "version", "downloads"]
 					.map((m) =>
@@ -46,14 +45,10 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> = (
 					: []),
 				//
 			]);
-			const tableAst = fromMarkdown(
-				[
-					`### ${first?.manager} packages`,
-					"",
-					table,
-					//
-				].join("\n"),
-			);
+
+			const heading = `### ${first?.manager} packages`;
+			const body = [heading, "", table].join("\n");
+			const tableAst = fromMarkdown(body);
 			return [start, tableAst, end];
 		});
 		zone(tree, /.*PKG.*/gi, function (start, _, end) {

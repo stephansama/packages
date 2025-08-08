@@ -49,13 +49,12 @@ export async function loadActionData(
 	root: string,
 ) {
 	const startActions = actions.filter((action) => action.isStart);
-	console.log(startActions.length);
 	return await Promise.all(
 		startActions.map(async (action) => {
 			if (action.action === "WORKSPACE") {
 				const manager = determinePackageManager(root);
 				const workspace = await loadWorkspace(manager);
-				return { manager, workspace };
+				return { action: action.action, manager, workspace };
 			}
 		}),
 	);

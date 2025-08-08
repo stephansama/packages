@@ -1,0 +1,55 @@
+{
+	"version": "1.0.0",
+	"name": "@tuskdesign/source",
+	"dependencies": {
+		"@tuskdesign/animals": {
+			"version": "1.2.0",
+			"resolved": "file:../../packages/animals",
+			"overridden": false,
+			"dependencies": {
+				"@types/node": {
+					"version": "18.16.9",
+					"resolved": "https://registry.npmjs.org/@types/node/-/node-18.16.9.tgz",
+					"overridden": false
+				},
+				"typescript": {
+					"version": "5.5.4",
+					"resolved": "https://registry.npmjs.org/typescript/-/typescript-5.5.4.tgz",
+					"overridden": false
+				}
+			}
+		},
+		"@tuskdesign/names": {
+			"version": "1.2.0",
+			"resolved": "file:../../packages/names",
+			"overridden": false,
+			"dependencies": {
+				"@types/node": {
+					"version": "18.16.9"
+				},
+				"typescript": {
+					"version": "5.5.4"
+				}
+			}
+		},
+		"@tuskdesign/zoo": {
+			"version": "1.2.0",
+			"resolved": "file:../../packages/zoo",
+			"overridden": false,
+			"dependencies": {
+				"@tuskdesign/animals": {
+					"version": "1.2.0"
+				},
+				"@tuskdesign/names": {
+					"version": "1.2.0"
+				},
+				"@types/node": {
+					"version": "18.16.9"
+				},
+				"typescript": {
+					"version": "5.5.4"
+				}
+			}
+		}
+	}
+}

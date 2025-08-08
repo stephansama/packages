@@ -1,0 +1,92 @@
+[
+	{
+		"name": "root",
+		"version": "1.0.0",
+		"path": "/Users/stephanrandle/Code/packages",
+		"private": true
+	},
+	{
+		"name": "@example/astro-iconify-svgmap",
+		"version": "1.0.3",
+		"path": "/Users/stephanrandle/Code/packages/examples/astro-iconify-svgmap",
+		"private": true
+	},
+	{
+		"name": "@example/catppuccin-rss",
+		"version": "0.0.4",
+		"path": "/Users/stephanrandle/Code/packages/examples/catppuccin-rss",
+		"private": true
+	},
+	{
+		"name": "@example/cli",
+		"version": "0.0.0",
+		"path": "/Users/stephanrandle/Code/packages/examples/cli",
+		"private": true
+	},
+	{
+		"name": "@example/remark-asciinema",
+		"version": "0.0.4",
+		"path": "/Users/stephanrandle/Code/packages/examples/remark-asciinema",
+		"private": true
+	},
+	{
+		"name": "ci",
+		"version": "1.2.0",
+		"path": "/Users/stephanrandle/Code/packages/lib/ci",
+		"private": true
+	},
+	{
+		"name": "@config/tsconfig",
+		"version": "1.1.2",
+		"path": "/Users/stephanrandle/Code/packages/lib/tsconfig",
+		"private": true
+	},
+	{
+		"name": "@stephansama/alfred-kaomoji",
+		"version": "1.0.4",
+		"path": "/Users/stephanrandle/Code/packages/packages/alfred-kaomoji",
+		"private": false
+	},
+	{
+		"name": "@stephansama/astro-iconify-svgmap",
+		"version": "1.0.2",
+		"path": "/Users/stephanrandle/Code/packages/packages/astro-iconify-svgmap",
+		"private": false
+	},
+	{
+		"name": "@stephansama/auto-readme",
+		"version": "0.0.0",
+		"path": "/Users/stephanrandle/Code/packages/packages/auto-readme",
+		"private": false
+	},
+	{
+		"name": "@stephansama/catppuccin-rss",
+		"version": "1.1.1",
+		"path": "/Users/stephanrandle/Code/packages/packages/catppuccin-rss",
+		"private": false
+	},
+	{
+		"name": "@stephansama/catppuccin-typedoc",
+		"version": "1.0.0",
+		"path": "/Users/stephanrandle/Code/packages/packages/catppuccin-typedoc",
+		"private": false
+	},
+	{
+		"name": "create-stephansama-example",
+		"version": "1.1.0",
+		"path": "/Users/stephanrandle/Code/packages/packages/example",
+		"private": false
+	},
+	{
+		"name": "@stephansama/github-env",
+		"version": "0.1.1",
+		"path": "/Users/stephanrandle/Code/packages/packages/github-env",
+		"private": false
+	},
+	{
+		"name": "@stephansama/remark-asciinema",
+		"version": "1.0.8",
+		"path": "/Users/stephanrandle/Code/packages/packages/remark-asciinema",
+		"private": false
+	}
+]

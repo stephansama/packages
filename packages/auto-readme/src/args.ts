@@ -2,16 +2,21 @@ import yargs, { type Options } from "yargs";
 import { hideBin } from "yargs/helpers";
 import z from "zod";
 
-import { configSchema } from "./config-schema";
+import { configSchema } from "./schema";
 
 export type Args = Awaited<ReturnType<typeof parseArgs>>;
 
 const args = {
-	config: { alias: "c", description: "Path to config", type: "string" },
+	check: {
+		alias: "k",
+		description: "Do not write to files. Only check for changes",
+		type: "boolean",
+	},
+	config: { alias: "c", description: "Path to config file", type: "string" },
 	file: {
 		alias: "f",
 		default: "./README.md",
-		description: "Path to readme",
+		description: "Path to readme to alter",
 		type: "string",
 	},
 	...zodToYargs(configSchema.unwrap()),
@@ -20,6 +25,7 @@ const args = {
 export async function parseArgs() {
 	const yargsInstance = yargs(hideBin(process.argv))
 		.options(args)
+		.positional("file", { array: true })
 		.help("h")
 		.alias("h", "help")
 		.epilogue(`--> @stephansama open-source ${new Date().getFullYear()}`);

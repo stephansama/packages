@@ -16,3 +16,5 @@ const _configSchema = z.object({
 });
 
 export const configSchema = _configSchema.optional();
+
+/** @typedef {Partial<z.infer<typeof _configSchema>>} Config */

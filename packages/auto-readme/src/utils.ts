@@ -2,7 +2,7 @@ import glob from "fast-glob";
 import cp from "node:child_process";
 import * as path from "node:path";
 
-import type { Config } from "./config";
+import type { Config } from "./schema";
 
 const sh = String.raw;
 

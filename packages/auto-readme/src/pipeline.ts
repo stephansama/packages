@@ -1,9 +1,13 @@
 import { remark } from "remark";
 
-import type { Config } from "./config";
+import type { ActionData } from "./data";
+import type { Config } from "./schema";
 
-import { myPluginThatReplacesFoo } from "./plugin";
+import { autoReadmeRemarkPlugin } from "./plugin";
 
-export async function parse(file: string, context: Config) {
-	return await remark().use(myPluginThatReplacesFoo).process(file);
+export async function parse(file: string, config: Config, data: ActionData) {
+	const vfile = await remark()
+		.use(autoReadmeRemarkPlugin, config, data)
+		.process(file);
+	return vfile.toString();
 }

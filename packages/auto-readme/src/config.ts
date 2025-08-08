@@ -4,9 +4,7 @@ import * as path from "node:path";
 
 import type { Args } from "./args";
 
-import { configSchema } from "./config-schema";
-
-export type Config = Awaited<ReturnType<typeof loadConfig>>;
+import { configSchema } from "./schema";
 
 export async function loadConfig(args: Args) {
 	const opts: Partial<Options> = {};
@@ -19,7 +17,7 @@ export async function loadConfig(args: Args) {
 
 	if (!search) {
 		const prefix = chalk.red("no config file found.");
-		console.info(prefix, "returning default config");
+		console.info(prefix, "using default configuration");
 	} else {
 		const prefix = chalk.blue("loaded configuration file at:");
 		const file = path.relative(process.cwd(), search.filepath);

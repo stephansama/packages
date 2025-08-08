@@ -1,0 +1,46 @@
+import type { Root } from "mdast";
+
+import { z } from "zod";
+
+import { configSchema } from "./schema";
+
+export const mdActionsSchema = z.enum([
+	"ACTIONS-INPUT",
+	"PKG",
+	"WORKSPACE",
+	"ZOD",
+] as const);
+
+export const mdFormatsSchema = z
+	.enum(["LIST", "TABLE"] as const)
+	.default("TABLE")
+	.optional();
+
+export const mdLanguageSchema = configSchema
+	.unwrap()
+	.shape.defaultLanguage.optional();
+
+export const SEPARATOR = "-" as const;
+
+export function loadAstComments(root: Root) {
+	return root.children
+		.map((child) => child.type === "html" && parseComment(child.value))
+		.filter(Boolean);
+}
+
+export function parseComment(comment: string) {
+	const [first, second, third] = comment
+		.replace("<!--", "")
+		.replace("-->", "")
+		.replace(/start|end/, "")
+		.trim()
+		.split(SEPARATOR);
+	const languageInput = third ? first : undefined;
+	const actionInput = third ? second : first;
+	const formatInput = third ? third : second;
+	const language = mdLanguageSchema.parse(languageInput);
+	const action = mdActionsSchema.parse(actionInput);
+	const format = mdFormatsSchema.parse(formatInput);
+	const isStart = comment.includes("start");
+	return { action, format, isStart, language };
+}

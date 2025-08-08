@@ -70,6 +70,7 @@
 		"@types/yargs": "^17.0.33",
 		"mdast": "^3.0.0",
 		"tsup": "catalog:",
+		"type-fest": "^4.41.0",
 		"unified": "^11.0.5",
 		"zod": "catalog:"
 	},

@@ -1,5 +1,8 @@
+import type { PackageJson } from "type-fest";
+
 import * as cp from "node:child_process";
 import * as fs from "node:fs";
+import * as fsp from "node:fs/promises";
 import * as path from "node:path";
 
 import type { loadAstComments } from "./comment";
@@ -45,16 +48,31 @@ export function determinePackageManager(root: string): PackageManager {
 
 export async function loadActionData(
 	actions: ReturnType<typeof loadAstComments>,
-	path: string,
+	file: string,
 	root: string,
 ) {
 	const startActions = actions.filter((action) => action.isStart);
 	return await Promise.all(
 		startActions.map(async (action) => {
-			if (action.action === "WORKSPACE") {
-				const manager = determinePackageManager(root);
-				const workspace = await loadWorkspace(manager);
-				return { action: action.action, manager, workspace };
+			switch (action.action) {
+				case "PKG": {
+					const pkgJsonPath = path.resolve(
+						path.dirname(file),
+						"package.json",
+					);
+					const pkgJsonFile = await fsp.readFile(pkgJsonPath, {
+						encoding: "utf8",
+					});
+					const pkgJson = JSON.parse(pkgJsonFile) as PackageJson;
+					return { action: action.action, pkgJson };
+				}
+				case "WORKSPACE": {
+					const manager = determinePackageManager(root);
+					const workspace = await loadWorkspace(manager);
+					return { action: action.action, manager, workspace };
+				}
+				default:
+					throw new Error("feature not yet implemented");
 			}
 		}),
 	);

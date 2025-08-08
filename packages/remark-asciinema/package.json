@@ -19,7 +19,6 @@
 		"build": "tsup && attw --pack",
 		"lint": "eslint ./src/",
 		"prepublishOnly": "tsup",
-		"prepare": "tsup",
 		"dev": "tsup --watch",
 		"test": "vitest run",
 		"test:ci": "vitest run --coverage",

@@ -53,26 +53,26 @@
 		"table"
 	],
 	"dependencies": {
+		"@manypkg/get-packages": "^3.1.0",
 		"chalk": "^5.5.0",
-		"cli-progress": "^3.12.0",
 		"cosmiconfig": "^9.0.0",
 		"fast-glob": "^3.3.3",
 		"markdown-table": "^3.0.4",
 		"mdast-util-from-markdown": "^2.0.2",
 		"mdast-util-gfm": "^3.1.0",
 		"mdast-zone": "^6.1.0",
+		"ora": "^8.2.0",
+		"pkg-types": "^2.2.0",
 		"remark": "^15.0.1",
 		"yaml": "^2.8.1",
 		"yargs": "^18.0.0"
 	},
 	"devDependencies": {
 		"@config/tsconfig": "workspace:*",
-		"@types/cli-progress": "^3.11.6",
 		"@types/mdast": "^4.0.4",
 		"@types/yargs": "^17.0.33",
 		"mdast": "^3.0.0",
 		"tsup": "catalog:",
-		"type-fest": "^4.41.0",
 		"unified": "^11.0.5",
 		"zod": "catalog:"
 	},

@@ -16,7 +16,7 @@ const commonOpts = {
 
 await build({
 	...commonOpts,
-	entry: ["src/*.ts"],
+	entry: ["src/index.ts"],
 	external: ["yaml"],
 });
 

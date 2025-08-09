@@ -2,11 +2,13 @@ import yargs, { type Options } from "yargs";
 import { hideBin } from "yargs/helpers";
 import z from "zod";
 
+import { setVerbosity } from "./log";
 import { configSchema } from "./schema";
 
 export type Args = Awaited<ReturnType<typeof parseArgs>>;
 
 const args = {
+	...zodToYargs(),
 	changes: {
 		alias: "g",
 		default: false,
@@ -25,7 +27,6 @@ const args = {
 		description: "Path to readme to alter",
 		type: "string",
 	},
-	...zodToYargs(),
 } satisfies Record<string, Options>;
 
 export async function parseArgs() {
@@ -35,23 +36,28 @@ export async function parseArgs() {
 		.help("h")
 		.alias("h", "help")
 		.epilogue(`--> @stephansama open-source ${new Date().getFullYear()}`);
-	return yargsInstance.wrap(yargsInstance.terminalWidth()).parse();
+
+	const parsed = await yargsInstance
+		.wrap(yargsInstance.terminalWidth())
+		.parse();
+
+	if (parsed.verbose) setVerbosity(1);
+
+	return parsed;
 }
 
 export function zodToYargs(): Record<keyof typeof shape, Options> {
 	const { shape } = configSchema.unwrap();
 	const entries = Object.entries(shape).map(([key, value]) => {
-		if (value.def.innerType instanceof z.ZodObject) return false;
+		if (value.def.innerType instanceof z.ZodObject) return [];
 		const meta = value.meta();
 		const { innerType } = value.def;
 		const isBoolean = innerType instanceof z.ZodBoolean;
 		const isNumber = innerType instanceof z.ZodNumber;
 		const isArray = innerType instanceof z.ZodArray;
-		const isCount = (isBoolean && meta?.count) || false;
 
 		const yargType: Options["type"] =
 			(isArray && "array") ||
-			(isCount && "count") ||
 			(isNumber && "number") ||
 			(isBoolean && "boolean") ||
 			"string";
@@ -67,8 +73,5 @@ export function zodToYargs(): Record<keyof typeof shape, Options> {
 		return [key, options];
 	});
 
-	return Object.fromEntries(
-		entries.filter((e): e is (Options | string)[] => Boolean(e)),
-	);
-	// return Object.fromEntries(entries);
+	return Object.fromEntries(entries);
 }

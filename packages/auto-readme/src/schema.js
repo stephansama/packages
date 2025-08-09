@@ -8,6 +8,7 @@ export const headingsSchema = z
 	.enum([
 		"default",
 		"description",
+		"devDependency",
 		"downloads",
 		"name",
 		"private",
@@ -16,16 +17,36 @@ export const headingsSchema = z
 	])
 	.describe("Table heading options");
 
-const actionHeadingsSchema = z
-	.record(actionsSchema, headingsSchema.array().default([]).optional())
-	.describe("Table heading action configuration");
+export const actionHeadingsSchema = z
+	.record(actionsSchema, headingsSchema.array().optional())
+	.optional()
+	.describe("Table heading action configuration")
+	.default({
+		ACTION: ["name", "required", "default", "description"],
+		PKG: ["name", "version", "devDependency"],
+		WORKSPACE: ["name", "version", "downloads", "description"],
+		ZOD: [],
+	});
 
-const templatesSchema = z.object({
+export const templatesSchema = z.object({
 	downloadImage: z
 		.string()
 		.optional()
 		.default("https://img.shields.io/npm/dw/{{name}}?labelColor=211F1F"),
-	emojis: z.object({}).optional(),
+	emojis: z
+		.record(headingsSchema, z.string())
+		.optional()
+		.describe("Table heading emojis used when enabled")
+		.default({
+			default: "⚙️",
+			description: "📝",
+			devDependency: "💻",
+			downloads: "📥",
+			name: "🏷️",
+			private: "🔒",
+			required: "",
+			version: "🔢",
+		}),
 	registryUrl: z
 		.string()
 		.optional()
@@ -38,10 +59,11 @@ const templatesSchema = z.object({
 		),
 });
 
-const defaultTemplates = templatesSchema.parse({});
-const defaultActionHeadings = actionHeadingsSchema.parse({});
+export const defaultTemplates = templatesSchema.parse({});
+export const defaultActionHeadings = actionHeadingsSchema.parse(undefined);
 
 const _configSchema = z.object({
+	affectedRegexes: z.string().default([]).array().optional(),
 	defaultLanguage: z.enum(["JS", "RS"]).default("JS").meta({
 		alias: "l",
 		description: "Default language to infer projects from",
@@ -51,8 +73,8 @@ const _configSchema = z.object({
 		description: "Whether or not to use emojis in markdown table headings",
 	}),
 	headings: actionHeadingsSchema
-		.default(defaultActionHeadings)
 		.optional()
+		.default(defaultActionHeadings)
 		.describe("List of headings for different table outputs"),
 	onlyReadmes: z.boolean().default(true).meta({
 		alias: "r",

@@ -23,8 +23,13 @@ export async function loadConfig(args: Args) {
 		INFO("using default configuration");
 	} else {
 		const file = path.relative(process.cwd(), search.filepath);
-		INFO("loaded configuration file at: ", file);
+		INFO("found configuration file at: ", file);
+		INFO("loaded cosmiconfig", search);
 	}
 
-	return configSchema.parse(deepmerge(search?.config, args));
+	return configSchema.parse(
+		deepmerge(args, search?.config || {}, {
+			arrayMerge: (_, sourceArray) => sourceArray,
+		}),
+	);
 }

@@ -5,6 +5,8 @@ import * as path from "node:path";
 
 import type { Config } from "./schema";
 
+import { INFO } from "./log";
+
 const sh = String.raw;
 
 const opts: { encoding: BufferEncoding } = { encoding: "utf8" };
@@ -12,20 +14,32 @@ const opts: { encoding: BufferEncoding } = { encoding: "utf8" };
 const ignore = ["**/node_modules/**"];
 
 const matches = [
-	/.*action.ya?ml$/gi,
-	/.*package.json$/gi,
-	/.*pnpm-workspace.yaml$/gi,
+	/.*Cargo\.toml$/gi,
+	/.*action\.ya?ml$/gi,
+	/.*package\.json$/gi,
+	/.*pnpm-workspace\.yaml$/gi,
 ];
 
-export function findAffectedMarkdowns() {
+export function findAffectedMarkdowns(config: Config) {
 	const affected = cp
 		/* cspell:disable-next-line because of the filter */
 		.execSync(sh`git diff --cached --name-only --diff-filter=MACT`, opts)
 		.trim()
 		.split("\n");
 
+	if (config.affectedRegexes) {
+		INFO("adding the following expressions: ", config.affectedRegexes);
+	}
+
+	const allMatches = [
+		...matches,
+		...(config.affectedRegexes?.map((r) => new RegExp(r)) || []),
+	];
+
+	INFO("Checking affected files against regexes", affected, allMatches);
+
 	const eligible = affected
-		.filter((a) => matches.some((m) => a.match(m)))
+		.filter((a) => allMatches.some((m) => a.match(m)))
 		.map((file) => path.resolve(path.dirname(file), "README.md"))
 		.filter((readme) => fs.existsSync(readme));
 
@@ -33,7 +47,11 @@ export function findAffectedMarkdowns() {
 }
 
 export function getGitRoot() {
-	return cp.execSync(sh`git rev-parse --show-toplevel`, opts).trim();
+	const root = cp.execSync(sh`git rev-parse --show-toplevel`, opts).trim();
+
+	INFO("found git root at location: ", root);
+
+	return root;
 }
 
 export async function getMarkdownPaths(cwd: string, config: Config) {

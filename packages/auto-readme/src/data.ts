@@ -61,13 +61,12 @@ export async function loadActionData(
 						throw new Error(error);
 					}
 
-					const title =
-						parseParameter(action.parameters, "title") ||
-						"Zod Schema";
-
-					const entry = path.resolve(path.dirname(file), inputPath);
-
-					const body = await zod2md({ entry, title });
+					const body = await zod2md({
+						entry: path.resolve(path.dirname(file), inputPath),
+						title:
+							parseParameter(action.parameters, "title") ||
+							"Zod Schema",
+					});
 
 					return { action: action.action, body };
 				}

@@ -5,26 +5,22 @@ import Handlebars from "handlebars";
 import { markdownTable } from "markdown-table";
 import { fromMarkdown } from "mdast-util-from-markdown";
 import { zone } from "mdast-zone";
-import * as path from "node:path";
 
 import type { ActionData } from "./data";
 import type { Config } from "./schema";
 
 import { parseComment } from "./comment";
+import { defaultActionHeadings, defaultTemplates } from "./schema";
 
-const emojis = {
-	default: "⚙️",
-	description: "📝",
-	downloads: "📥",
-	name: "🏷️",
-	private: "🔒",
-	required: "",
-	version: "🔢",
-} as const;
+type TemplateContext = {
+	name: string;
+	uri_name: string;
+};
 
 function createHeading(
-	headings: (keyof typeof emojis)[],
+	headings: (keyof NonNullable<Config["templates"]>["emojis"])[],
 	disableEmojis: boolean,
+	emojis: NonNullable<Config["templates"]>["emojis"],
 ) {
 	return headings.map(
 		(h) =>
@@ -45,9 +41,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			if (!options) throw new Error("not able to parse comment");
 
 			const first = data.find((d) => d?.action === "ACTION");
-
 			const inputs = first?.actionYaml.inputs || {};
-
 			const heading = `### ${config.disableEmojis ? "" : "🧰"} actions`;
 
 			if (options.format === "LIST") {
@@ -63,10 +57,19 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				return [start, ast, end];
 			}
 
+			const headings = (config.headings?.ACTION?.length &&
+				config.headings.ACTION) || [
+				"name",
+				"required",
+				"default",
+				"description",
+			];
+
 			const table = markdownTable([
 				createHeading(
-					["name", "required", "default", "description"],
+					headings,
 					config.disableEmojis || false,
+					config.templates?.emojis || defaultTemplates.emojis,
 				),
 				...Object.entries(inputs).map(([k, v]) =>
 					[k, v.required, v.default, v.description].map(String),
@@ -82,14 +85,16 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			const options = value && parseComment(value);
 			const first = data.find((d) => d?.action === "WORKSPACE");
 
-			const versionImageTemplate = Handlebars.compile(
-				config.templates?.versionImage,
-			);
+			const templates = loadTemplates(config.templates);
+
+			const headings =
+				config.headings?.WORKSPACE || defaultActionHeadings.WORKSPACE!;
 
 			const table = markdownTable([
 				createHeading(
-					["name", "version", "downloads"],
+					headings,
 					config.disableEmojis || false,
+					config.templates?.emojis || defaultTemplates.emojis,
 				),
 				...(first?.workspaces.packages
 					.filter((pkg) =>
@@ -97,11 +102,30 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 							? !pkg.packageJson.private
 							: true,
 					)
-					.map((pkg) => [
-						`[${pkg.packageJson.name}](${path.resolve(pkg.dir, "README.md")})`,
-						`![npm version image](${versionImageTemplate({ uri_name: encodeURIComponent(pkg.packageJson.name) })})`,
-						`[![NPM DOWNLOADS](https://img.shields.io/npm/dw/${pkg.packageJson.name}?labelColor=211F1F)](https://www.npmjs.com/package/${pkg.packageJson.name})`,
-					]) || []),
+					.map((pkg) => {
+						const name = pkg.packageJson.name;
+						return headings.map((heading) => {
+							if (heading === "name") {
+								return `[${name}](${pkg.relativeDir})`;
+							}
+							if (heading === "version") {
+								return `![npm version image](${templates.versionImage(
+									{ uri_name: encodeURIComponent(name) },
+								)})`;
+							}
+							if (heading === "downloads") {
+								return `![npm downloads](${templates.downloadImage(
+									{ name },
+								)})`;
+							}
+							if (heading === "description") {
+								return (
+									pkg.packageJson as { description?: string }
+								)?.description;
+							}
+							return ``;
+						});
+					}) || []),
 			]);
 
 			const heading = `### ${config.disableEmojis ? "" : "🏭"} workspace`;
@@ -117,7 +141,6 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			}
 
 			const ast = fromMarkdown(first.body);
-
 			return [start, ast, end];
 		});
 
@@ -129,13 +152,26 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				...Object.entries(first?.pkgJson.dependencies || {}),
 				...Object.entries(first?.pkgJson.devDependencies || {}),
 			];
-			const pkgNames = entries.map(([k]) => k);
+			const templates = loadTemplates(config.templates);
 			const table = markdownTable([
 				createHeading(
-					["name", "version", "downloads"],
+					config.headings?.PKG || ["name", "version", "downloads"],
 					config.disableEmojis || false,
+					config.templates?.emojis || defaultTemplates.emojis,
 				),
-				...pkgNames.map(pkgTable),
+				...(entries?.map(([name, value]) => {
+					const url = templates.registryUrl({ name });
+					return (
+						config.headings?.PKG?.map((key) => {
+							if (key === "name") {
+								return `[${name}](${url})`;
+							}
+							if (key === "version") {
+								return `![npm version](${templates.versionImage({ name })})`;
+							}
+						}) || []
+					);
+				}) || []),
 			]);
 			const heading = `### ${config.disableEmojis ? "" : "📦"} packages`;
 			const body = [heading, "", table].join("\n");
@@ -144,10 +180,18 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 		});
 	};
 
-function pkgTable(name: string) {
-	return [
-		`[${name}](https://www.npmjs.com/package/${name})`,
-		`[![NPM VERSION](https://img.shields.io/npm/v/${encodeURIComponent(name)}?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmjs.com/package/${name})`,
-		`[![NPM DOWNLOADS](https://img.shields.io/npm/dw/${name}?labelColor=211F1F)](https://www.npmjs.com/package/${name})`,
-	];
+function loadTemplates(
+	templates: Config["templates"],
+): Record<
+	keyof NonNullable<Config["templates"]>,
+	(context: Partial<TemplateContext>) => string
+> {
+	if (!templates) throw new Error("failed to load templates");
+
+	return Object.fromEntries(
+		Object.entries(templates).map(([key, value]) => {
+			if (typeof value !== "string") return [];
+			return [key, Handlebars.compile(value)];
+		}),
+	);
 }

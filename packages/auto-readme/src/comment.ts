@@ -5,7 +5,7 @@ import { z } from "zod";
 import { configSchema } from "./schema";
 
 export const mdActionsSchema = z.enum([
-	"ACTIONS-INPUT",
+	"ACTION",
 	"PKG",
 	"WORKSPACE",
 	"ZOD",
@@ -16,9 +16,7 @@ export const mdFormatsSchema = z
 	.default("TABLE")
 	.optional();
 
-export const mdLanguageSchema = configSchema
-	.unwrap()
-	.shape.defaultLanguage.optional();
+export const mdLanguageSchema = configSchema.unwrap().shape.defaultLanguage;
 
 export const SEPARATOR = "-" as const;
 

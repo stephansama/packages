@@ -4,6 +4,7 @@ import type { Plugin } from "unified";
 import { markdownTable } from "markdown-table";
 import { fromMarkdown } from "mdast-util-from-markdown";
 import { zone } from "mdast-zone";
+import * as path from "node:path";
 
 import type { ActionData } from "./data";
 import type { Config } from "./schema";
@@ -11,36 +12,63 @@ import type { Config } from "./schema";
 import { parseComment } from "./comment";
 
 const emojis = {
+	default: "⚙️",
+	description: "📝",
 	downloads: "📥",
-	name: "📦",
-	version: "🏷️",
+	name: "🏷️",
+	private: "🔒",
+	required: "",
+	version: "🔢",
 } as const;
+
+function createHeading(headings: (keyof typeof emojis)[]) {
+	return headings.map(
+		(h) => emojis[h] + " " + h.at(0)?.toUpperCase() + h.slice(1),
+	);
+}
 
 export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 	(config, data) => (tree) => {
+		zone(tree, /.*ACTION.*/gi, function (start, _, end) {
+			const value = start.type === "html" && start.value;
+			const options = value && parseComment(value);
+			const first = data.find((d) => d?.action === "ACTION");
+			const table = markdownTable([
+				createHeading(["name", "required", "default", "description"]),
+				...Object.entries(first?.actionYaml.inputs || {}).map(
+					([k, v]) =>
+						[k, v.required, v.default, v.description].map(String),
+				),
+			]);
+			const heading = `### actions`;
+			const body = [heading, "", table].join("\n");
+			const ast = fromMarkdown(body);
+			return [start, ast, end];
+		});
+
 		zone(tree, /.*WORKSPACE.*/gi, function (start, _, end) {
 			const value = start.type === "html" && start.value;
-			const comment = value && parseComment(value);
+			const options = value && parseComment(value);
 			const first = data.find((d) => d?.action === "WORKSPACE");
-			const pkgNames = first?.workspace
-				?.map((pkg) => !pkg.private && pkg.name)
-				.filter(Boolean);
+			const pkgNames = first?.workspaces.packages
+				?.map((pkg) => !pkg.packageJson.private && pkg.packageJson.name)
+				.filter((f): f is string => Boolean(f));
 			const table = markdownTable([
-				["name", "version", "downloads"]
-					.map((m) =>
-						config.disableEmojis
-							? m
-							: emojis[m as keyof typeof emojis] + " " + m,
-					)
-					.map((m) => m.toUpperCase()),
-				...(pkgNames ? pkgNames.map(pkgTable) : []),
+				createHeading(["name", "version", "downloads"]),
+				...(first?.workspaces.packages.map((pkg) => [
+					`[${pkg.packageJson.name}](${path.resolve(pkg.dir, "README.md")})`,
+					`\`${pkg.packageJson.version}\``,
+					`[![NPM DOWNLOADS](https://img.shields.io/npm/dw/${pkg.packageJson.name}?labelColor=211F1F)](https://www.npmjs.com/package/${pkg.packageJson.name})`,
+				]) || []),
+				// ...(pkgNames ? pkgNames.map(pkgTable) : []),
 			]);
 
-			const heading = `### ${first?.manager} packages`;
+			const heading = `### packages`;
 			const body = [heading, "", table].join("\n");
 			const tableAst = fromMarkdown(body);
 			return [start, tableAst, end];
 		});
+
 		zone(tree, /.*PKG.*/gi, function (start, _, end) {
 			const value = start.type === "html" && start.value;
 			const comment = value && parseComment(value);
@@ -49,9 +77,9 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				...Object.entries(first?.pkgJson.dependencies || {}),
 				...Object.entries(first?.pkgJson.devDependencies || {}),
 			];
-			const pkgNames = entries.map(([k, v]) => k);
+			const pkgNames = entries.map(([k]) => k);
 			const table = markdownTable([
-				["name", "version", "test"],
+				createHeading(["name", "version", "downloads"]),
 				...pkgNames.map(pkgTable),
 			]);
 			const tableAst = fromMarkdown(table);

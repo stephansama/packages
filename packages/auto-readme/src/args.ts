@@ -7,19 +7,25 @@ import { configSchema } from "./schema";
 export type Args = Awaited<ReturnType<typeof parseArgs>>;
 
 const args = {
+	changes: {
+		alias: "g",
+		default: false,
+		description: "Check only changed git files",
+		type: "boolean",
+	},
 	check: {
 		alias: "k",
+		default: false,
 		description: "Do not write to files. Only check for changes",
 		type: "boolean",
 	},
 	config: { alias: "c", description: "Path to config file", type: "string" },
 	file: {
 		alias: "f",
-		default: "./README.md",
 		description: "Path to readme to alter",
 		type: "string",
 	},
-	...zodToYargs(configSchema.unwrap()),
+	...zodToYargs(),
 } satisfies Record<string, Options>;
 
 export async function parseArgs() {
@@ -32,17 +38,16 @@ export async function parseArgs() {
 	return yargsInstance.wrap(yargsInstance.terminalWidth()).parse();
 }
 
-export function zodToYargs<T extends z.ZodObject>(
-	zod: T,
-): Record<keyof T["shape"], Options> {
-	const { shape } = zod;
+export function zodToYargs(): Record<keyof typeof shape, Options> {
+	const { shape } = configSchema.unwrap();
 	const entries = Object.entries(shape).map(([key, value]) => {
+		if (value.def.innerType instanceof z.ZodObject) return false;
 		const meta = value.meta();
 		const { innerType } = value.def;
 		const isBoolean = innerType instanceof z.ZodBoolean;
 		const isNumber = innerType instanceof z.ZodNumber;
 		const isArray = innerType instanceof z.ZodArray;
-		const isCount = isBoolean && meta.count;
+		const isCount = (isBoolean && meta?.count) || false;
 
 		const yargType: Options["type"] =
 			(isArray && "array") ||
@@ -62,5 +67,8 @@ export function zodToYargs<T extends z.ZodObject>(
 		return [key, options];
 	});
 
-	return Object.fromEntries(entries);
+	return Object.fromEntries(
+		entries.filter((e): e is (Options | string)[] => Boolean(e)),
+	);
+	// return Object.fromEntries(entries);
 }

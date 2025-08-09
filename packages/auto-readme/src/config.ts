@@ -1,9 +1,9 @@
-import chalk from "chalk";
 import { cosmiconfig, type Options } from "cosmiconfig";
 import * as path from "node:path";
 
 import type { Args } from "./args";
 
+import { INFO, WARN } from "./log";
 import { configSchema } from "./schema";
 
 export async function loadConfig(args: Args) {
@@ -11,19 +11,18 @@ export async function loadConfig(args: Args) {
 
 	if (args.config) opts.searchPlaces = [args.config];
 
-	/* cspell:disable-next-line */
+	/* cspell:disable-next-line configuration filename */
 	const explorer = cosmiconfig("autoreadme", opts);
 
 	const search = await explorer.search();
 
 	if (!search) {
-		const location = args.config ? "at location: " + args.config : "";
-		const prefix = chalk.red(`no config file found ${location}.`);
-		console.info(prefix, "using default configuration");
+		const location = args.config ? " at location: " + args.config : "";
+		WARN(`no config file found`, location);
+		INFO("using default configuration");
 	} else {
-		const prefix = chalk.blue("loaded configuration file at:");
 		const file = path.relative(process.cwd(), search.filepath);
-		console.info(prefix, file);
+		INFO("loaded configuration file at: ", file);
 	}
 
 	return configSchema.parse(search?.config || args);

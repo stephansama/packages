@@ -55,8 +55,8 @@ export async function loadActionData(
 						throw new Error("cannot display zod in list format");
 					}
 
-					const entry = parseParameter(action.parameters, "path");
-					if (!entry) {
+					const inputPath = parseParameter(action.parameters, "path");
+					if (!inputPath) {
 						const error = `no path found for zod table at markdown file ${file}`;
 						throw new Error(error);
 					}
@@ -64,6 +64,8 @@ export async function loadActionData(
 					const title =
 						parseParameter(action.parameters, "title") ||
 						"Zod Schema";
+
+					const entry = path.resolve(path.dirname(file), inputPath);
 
 					const body = await zod2md({ entry, title });
 

@@ -2,21 +2,15 @@ import type { Root } from "mdast";
 
 import { z } from "zod";
 
-import { configSchema } from "./schema";
+import { INFO } from "./log";
+import { actionsSchema, configSchema } from "./schema";
 
-export const mdActionsSchema = z.enum([
-	"ACTION",
-	"PKG",
-	"WORKSPACE",
-	"ZOD",
-] as const);
-
-export const mdFormatsSchema = z
+export const formatsSchema = z
 	.enum(["LIST", "TABLE"] as const)
 	.default("TABLE")
 	.optional();
 
-export const mdLanguageSchema = configSchema.unwrap().shape.defaultLanguage;
+export const languageSchema = configSchema.unwrap().shape.defaultLanguage;
 
 export const SEPARATOR = "-" as const;
 
@@ -37,9 +31,11 @@ export function parseComment(comment: string) {
 	const languageInput = third ? first : undefined;
 	const actionInput = third ? second : first;
 	const formatInput = third ? third : second;
-	const language = mdLanguageSchema.parse(languageInput);
-	const action = mdActionsSchema.parse(actionInput);
-	const format = mdFormatsSchema.parse(formatInput);
+	const language = languageSchema.parse(languageInput);
+	const action = actionsSchema.parse(actionInput);
+	const format = formatsSchema.parse(formatInput);
 	const isStart = comment.includes("start");
-	return { action, format, isStart, language, parameters };
+	const parsed = { action, format, isStart, language, parameters };
+	INFO(`Parsed comment ${comment}`, parsed);
+	return parsed;
 }

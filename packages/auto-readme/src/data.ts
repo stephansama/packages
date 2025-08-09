@@ -4,6 +4,7 @@ import * as fsp from "node:fs/promises";
 import * as path from "node:path";
 import { readPackageJSON } from "pkg-types";
 import * as yaml from "yaml";
+import { zod2md } from "zod2md";
 
 import type { loadAstComments } from "./comment";
 
@@ -46,11 +47,27 @@ export async function loadActionData(
 						"pnpm-workspace.yaml",
 					);
 					const isPnpm = fs.existsSync(pnpmWorkspacePath);
-					return { action: action.action, isPnpm, workspaces };
+					return { action: action.action, isPnpm, root, workspaces };
 				}
 
 				case "ZOD": {
-					return { action: action.action };
+					if (action.format === "LIST") {
+						throw new Error("cannot display zod in list format");
+					}
+
+					const entry = parseParameter(action.parameters, "path");
+					if (!entry) {
+						const error = `no path found for zod table at markdown file ${file}`;
+						throw new Error(error);
+					}
+
+					const title =
+						parseParameter(action.parameters, "title") ||
+						"Zod Schema";
+
+					const body = await zod2md({ entry, title });
+
+					return { action: action.action, body };
 				}
 
 				default:
@@ -76,4 +93,12 @@ async function loadActionYaml(baseDir: string) {
 	const actionFile = await fsp.readFile(actualPath, { encoding: "utf8" });
 
 	return yaml.parse(actionFile) as ActionYaml;
+}
+
+function parseParameter(parameterList: string[], parameterName: string) {
+	return parameterList
+		.find((p) => p.startsWith(parameterName))
+		?.replace(parameterName + "=", "")
+		.replace(/"/gi, "")
+		.replace("_", " ");
 }

@@ -27,12 +27,13 @@ export function loadAstComments(root: Root) {
 }
 
 export function parseComment(comment: string) {
-	const [first, second, third] = comment
+	const input = comment
 		.replace("<!--", "")
 		.replace("-->", "")
 		.replace(/start|end/, "")
-		.trim()
-		.split(SEPARATOR);
+		.trim();
+	const [type, ...parameters] = input.split(" ");
+	const [first, second, third] = type.split(SEPARATOR);
 	const languageInput = third ? first : undefined;
 	const actionInput = third ? second : first;
 	const formatInput = third ? third : second;
@@ -40,5 +41,5 @@ export function parseComment(comment: string) {
 	const action = mdActionsSchema.parse(actionInput);
 	const format = mdFormatsSchema.parse(formatInput);
 	const isStart = comment.includes("start");
-	return { action, format, isStart, language };
+	return { action, format, isStart, language, parameters };
 }

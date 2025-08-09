@@ -6,6 +6,7 @@ import * as path from "node:path";
 import type { Config } from "./schema";
 
 const sh = String.raw;
+
 const opts: { encoding: BufferEncoding } = { encoding: "utf8" };
 
 const ignore = ["**/node_modules/**"];
@@ -18,15 +19,16 @@ const matches = [
 
 export function findAffectedMarkdowns() {
 	const affected = cp
-		/* cspell:disable-next-line */
+		/* cspell:disable-next-line because of the filter */
 		.execSync(sh`git diff --cached --name-only --diff-filter=MACT`, opts)
 		.trim()
 		.split("\n");
+
 	const eligible = affected
 		.filter((a) => matches.some((m) => a.match(m)))
 		.map((file) => path.resolve(path.dirname(file), "README.md"))
 		.filter((readme) => fs.existsSync(readme));
-	console.log({ eligible });
+
 	return eligible;
 }
 

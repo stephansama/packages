@@ -21,9 +21,13 @@ const emojis = {
 	version: "🔢",
 } as const;
 
-function createHeading(headings: (keyof typeof emojis)[]) {
+function createHeading(
+	headings: (keyof typeof emojis)[],
+	disableEmojis: boolean,
+) {
 	return headings.map(
-		(h) => emojis[h] + " " + h.at(0)?.toUpperCase() + h.slice(1),
+		(h) =>
+			`${disableEmojis ? "" : emojis[h] + " "}${h?.at(0) + h?.slice(1)}`,
 	);
 }
 
@@ -34,7 +38,10 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			const options = value && parseComment(value);
 			const first = data.find((d) => d?.action === "ACTION");
 			const table = markdownTable([
-				createHeading(["name", "required", "default", "description"]),
+				createHeading(
+					["name", "required", "default", "description"],
+					config.disableEmojis || false,
+				),
 				...Object.entries(first?.actionYaml.inputs || {}).map(
 					([k, v]) =>
 						[k, v.required, v.default, v.description].map(String),
@@ -50,17 +57,16 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			const value = start.type === "html" && start.value;
 			const options = value && parseComment(value);
 			const first = data.find((d) => d?.action === "WORKSPACE");
-			const pkgNames = first?.workspaces.packages
-				?.map((pkg) => !pkg.packageJson.private && pkg.packageJson.name)
-				.filter((f): f is string => Boolean(f));
 			const table = markdownTable([
-				createHeading(["name", "version", "downloads"]),
+				createHeading(
+					["name", "version", "downloads"],
+					config.disableEmojis || false,
+				),
 				...(first?.workspaces.packages.map((pkg) => [
 					`[${pkg.packageJson.name}](${path.resolve(pkg.dir, "README.md")})`,
-					`\`${pkg.packageJson.version}\``,
+					`\`${pkg.packageJson.version || ""}\``,
 					`[![NPM DOWNLOADS](https://img.shields.io/npm/dw/${pkg.packageJson.name}?labelColor=211F1F)](https://www.npmjs.com/package/${pkg.packageJson.name})`,
 				]) || []),
-				// ...(pkgNames ? pkgNames.map(pkgTable) : []),
 			]);
 
 			const heading = `### packages`;
@@ -79,7 +85,10 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			];
 			const pkgNames = entries.map(([k]) => k);
 			const table = markdownTable([
-				createHeading(["name", "version", "downloads"]),
+				createHeading(
+					["name", "version", "downloads"],
+					config.disableEmojis || false,
+				),
 				...pkgNames.map(pkgTable),
 			]);
 			const tableAst = fromMarkdown(table);

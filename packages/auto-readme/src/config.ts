@@ -1,4 +1,5 @@
 import { cosmiconfig, type Options } from "cosmiconfig";
+import deepmerge from "deepmerge";
 import * as path from "node:path";
 
 import type { Args } from "./args";
@@ -25,5 +26,5 @@ export async function loadConfig(args: Args) {
 		INFO("loaded configuration file at: ", file);
 	}
 
-	return configSchema.parse(search?.config || args);
+	return configSchema.parse(deepmerge(search?.config, args));
 }

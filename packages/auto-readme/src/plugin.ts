@@ -20,11 +20,11 @@ type TemplateContext = {
 function createHeading(
 	headings: (keyof NonNullable<Config["templates"]>["emojis"])[],
 	disableEmojis: boolean,
-	emojis: NonNullable<Config["templates"]>["emojis"],
+	emojis: typeof defaultTemplates.emojis = defaultTemplates.emojis,
 ) {
 	return headings.map(
 		(h) =>
-			`${disableEmojis ? "" : emojis[h] + " "}${h?.at(0) + h?.slice(1)}`,
+			`${disableEmojis ? "" : emojis[h] + " "}${h?.at(0)?.toUpperCase() + h?.slice(1)}`,
 	);
 }
 
@@ -57,19 +57,15 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				return [start, ast, end];
 			}
 
-			const headings = (config.headings?.ACTION?.length &&
-				config.headings.ACTION) || [
-				"name",
-				"required",
-				"default",
-				"description",
-			];
+			const headings =
+				(config.headings?.ACTION?.length && config.headings.ACTION) ||
+				defaultActionHeadings.ACTION!;
 
 			const table = markdownTable([
 				createHeading(
 					headings,
 					config.disableEmojis || false,
-					config.templates?.emojis || defaultTemplates.emojis,
+					config.templates?.emojis,
 				),
 				...Object.entries(inputs).map(([k, v]) =>
 					[k, v.required, v.default, v.description].map(String),
@@ -88,13 +84,15 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			const templates = loadTemplates(config.templates);
 
 			const headings =
-				config.headings?.WORKSPACE || defaultActionHeadings.WORKSPACE!;
+				(config.headings?.WORKSPACE?.length &&
+					config.headings?.WORKSPACE) ||
+				defaultActionHeadings.WORKSPACE!;
 
 			const table = markdownTable([
 				createHeading(
 					headings,
 					config.disableEmojis || false,
-					config.templates?.emojis || defaultTemplates.emojis,
+					config.templates?.emojis,
 				),
 				...(first?.workspaces.packages
 					.filter((pkg) =>
@@ -153,29 +151,56 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				...Object.entries(first?.pkgJson.devDependencies || {}),
 			];
 			const templates = loadTemplates(config.templates);
+			const headings =
+				(config.headings?.PKG?.length && config.headings?.PKG) ||
+				defaultActionHeadings.PKG!;
+
+			function mapDependencies(isDev: boolean) {
+				return function ([name, version]: [string, string]) {
+					const url = templates.registryUrl({ name });
+					return headings.map((key) => {
+						if (key === "devDependency") {
+							if (config.disableEmojis) {
+								return `\`${isDev}\``;
+							}
+							return `${isDev ? "⌨️" : "👥"}`;
+						}
+						if (key === "name") {
+							return `[${name}](${url})`;
+						}
+						if (key === "version") {
+							if (
+								["workspace", "catalog", "*"].some((type) =>
+									version.includes(type),
+								)
+							) {
+								return `\`${version}\``;
+							}
+
+							return `![npm version](${templates.versionImage({ uri_name: encodeURIComponent(name) })})`;
+						}
+					});
+				};
+			}
+
 			const table = markdownTable([
 				createHeading(
-					config.headings?.PKG || ["name", "version", "downloads"],
+					headings,
 					config.disableEmojis || false,
-					config.templates?.emojis || defaultTemplates.emojis,
+					config.templates?.emojis,
 				),
-				...(entries?.map(([name, value]) => {
-					const url = templates.registryUrl({ name });
-					return (
-						config.headings?.PKG?.map((key) => {
-							if (key === "name") {
-								return `[${name}](${url})`;
-							}
-							if (key === "version") {
-								return `![npm version](${templates.versionImage({ name })})`;
-							}
-						}) || []
-					);
-				}) || []),
+				...Object.entries(first?.pkgJson.devDependencies || {}).map(
+					mapDependencies(true),
+				),
+				...Object.entries(first?.pkgJson.dependencies || {}).map(
+					mapDependencies(false),
+				),
 			]);
+
 			const heading = `### ${config.disableEmojis ? "" : "📦"} packages`;
 			const body = [heading, "", table].join("\n");
 			const tableAst = fromMarkdown(body);
+
 			return [start, tableAst, end];
 		});
 	};

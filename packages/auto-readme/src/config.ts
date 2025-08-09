@@ -1,6 +1,5 @@
 import { cosmiconfig, type Options } from "cosmiconfig";
 import deepmerge from "deepmerge";
-import * as path from "node:path";
 
 import type { Args } from "./args";
 
@@ -22,9 +21,8 @@ export async function loadConfig(args: Args) {
 		WARN(`no config file found`, location);
 		INFO("using default configuration");
 	} else {
-		const file = path.relative(process.cwd(), search.filepath);
-		INFO("found configuration file at: ", file);
-		INFO("loaded cosmiconfig", search);
+		INFO("found configuration file at: ", search.filepath);
+		INFO("loaded cosmiconfig", search.config);
 	}
 
 	return configSchema.parse(

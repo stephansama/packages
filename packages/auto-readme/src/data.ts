@@ -36,7 +36,11 @@ export async function loadActionData(
 				}
 
 				case "PKG": {
-					const pkgJson = await readPackageJSON(path.dirname(file));
+					const inputPath = parseParameter(action.parameters, "path");
+					const filename = inputPath
+						? path.resolve(path.dirname(file), inputPath)
+						: path.dirname(file);
+					const pkgJson = await readPackageJSON(filename);
 					return { action: action.action, pkgJson };
 				}
 

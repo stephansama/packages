@@ -45,7 +45,7 @@ export const templatesSchema = z.object({
 			name: "🏷️",
 			private: "🔒",
 			required: "",
-			version: "🔢",
+			version: "",
 		}),
 	registryUrl: z
 		.string()

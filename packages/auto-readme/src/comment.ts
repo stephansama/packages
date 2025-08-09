@@ -26,6 +26,7 @@ export function parseComment(comment: string) {
 		.replace("-->", "")
 		.replace(/start|end/, "")
 		.trim();
+
 	const [type, ...parameters] = input.split(" ");
 	const [first, second, third] = type.split(SEPARATOR);
 	const languageInput = third ? first : undefined;
@@ -36,6 +37,8 @@ export function parseComment(comment: string) {
 	const format = formatsSchema.parse(formatInput);
 	const isStart = comment.includes("start");
 	const parsed = { action, format, isStart, language, parameters };
+
 	INFO(`Parsed comment ${comment}`, parsed);
+
 	return parsed;
 }

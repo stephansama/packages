@@ -13,6 +13,7 @@
 		"kaomoji",
 		"kaomojis",
 		"macchiato",
+		"manypkg",
 		"nodemon",
 		"nvim",
 		"nvmrc",
@@ -26,8 +27,8 @@
 		"tsup",
 		"typedoc",
 		"vite",
-		"yarg",
-		"vitest"
+		"vitest",
+		"yarg"
 	],
 	"ignorePaths": [".env"]
 }

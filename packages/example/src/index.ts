@@ -2,7 +2,7 @@ import { downloadTemplate } from "@bluwy/giget-core";
 import { input, select } from "@inquirer/prompts";
 import * as path from "node:path";
 
-import examples from "../scripts/examples.json" with { type: "json" };
+import examples from "../dist/examples.json" with { type: "json" };
 
 export async function main() {
 	const example = (

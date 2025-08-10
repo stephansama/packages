@@ -41,6 +41,32 @@ In order to run the script you need to do two things
 pnpx @stephansama/auto-readme [options]
 ```
 
+To turn on table of content enable the setting `enableToc` and add the following header
+
+```md
+## Table of contents
+```
+
+To turn on the usage generator enable the setting `enableUsage` and add the following header
+
+```md
+## Usage
+```
+
+To use the zod generator add the following comments
+
+```md
+<!-- ZOD path="./path/to/zod.js" start -->
+<!-- ZOD end -->
+```
+
+There are more [Actions](#actions) that you can use in conjunction with different [languages](#language) and [formats](#formats) like so:
+
+```md
+<!-- JS-WORKSPACE-TABLE start -->
+<!-- JS-WORKSPACE-TABLE end -->
+```
+
 You can run `auto-readme` as a pre-commit git hook to automatically keep your `README`s up to date. For example, you can use `husky` to add the following to your `.husky/pre-commit` file:
 
 ```sh

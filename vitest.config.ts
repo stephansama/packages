@@ -13,7 +13,7 @@ export default defineConfig({
 	],
 	test: {
 		coverage: {
-			include: ["packages/*/src/**/*.{js,jsx,ts,tsx}"],
+			include: ["core/*/src/**/*.{js,jsx,ts,tsx}"],
 			provider: "v8",
 			reporter: ["html", "json", "text"],
 		},

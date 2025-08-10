@@ -1,71 +1,18 @@
 diff --git a/lib/index.d.ts b/lib/index.d.ts
-index 4a57f68ebb657e0c96352a959fc0ea225e802af5..4b14831416edb8a5da84f46e7220f274169a9678 100644
+index 4a57f68ebb657e0c96352a959fc0ea225e802af5..307a20e7aa1fe1b210b4ee31cf2cc9840a5d6e23 100644
 --- a/lib/index.d.ts
 +++ b/lib/index.d.ts
-@@ -4,34 +4,43 @@
-  *
-  * @param {Nodes} node
-  *   Tree to search.
-- * @param {string} name
-+ * @param {string|RegExp} name
-  *   Comment name to look for.
-  * @param {Handler} handler
-  *   Handle a section.
+@@ -11,7 +11,7 @@
   * @returns {undefined}
   *   Nothing.
   */
 -export function zone(node: Nodes, name: string, handler: Handler): undefined;
--export type Nodes = import('mdast').Nodes;
--export type Parents = import('mdast').Parents;
-+export function zone(
-+  node: Nodes,
-+  name: string | RegExp,
-+  handler: Handler
-+): undefined
-+export type Nodes = import('mdast').Nodes
-+export type Parents = import('mdast').Parents
++export function zone(node: Nodes, name: string | RegExp, handler: Handler): undefined;
+ export type Nodes = import('mdast').Nodes;
+ export type Parents = import('mdast').Parents;
  /**
-  * Extra info.
-  */
- export type Info = {
--    /**
--     *   Parent of the section.
--     */
--    parent: Parents;
--    /**
--     *   Index of `start` in `parent`.
--     */
--    start: number;
--    /**
--     *   Index of `end` in `parent`.
--     */
--    end: number;
--};
-+  /**
-+   *   Parent of the section.
-+   */
-+  parent: Parents
-+  /**
-+   *   Index of `start` in `parent`.
-+   */
-+  start: number
-+  /**
-+   *   Index of `end` in `parent`.
-+   */
-+  end: number
-+}
- /**
-  * Callback called when a section is found.
-  */
--export type Handler = (start: Nodes, between: Array<Nodes>, end: Nodes, info: Info) => Array<Nodes | null | undefined> | null | undefined | void;
-+export type Handler = (
-+  start: Nodes,
-+  between: Array<Nodes>,
-+  end: Nodes,
-+  info: Info
-+) => Array<Nodes | null | undefined> | null | undefined | void
 diff --git a/lib/index.js b/lib/index.js
-index d9d977bdac9b30c3aba2b5c6ecc12a0b79a18568..a967b0cb24db91f0f6ef803c987fd17579373b9d 100644
+index d9d977bdac9b30c3aba2b5c6ecc12a0b79a18568..3ca025a3806f081fff331d64b653cd1b4f4caf07 100644
 --- a/lib/index.js
 +++ b/lib/index.js
 @@ -40,7 +40,7 @@ import {visit} from 'unist-util-visit'
@@ -77,13 +24,12 @@ index d9d977bdac9b30c3aba2b5c6ecc12a0b79a18568..a967b0cb24db91f0f6ef803c987fd175
   *   Comment name to look for.
   * @param {Handler} handler
   *   Handle a section.
-@@ -58,7 +58,8 @@ export function zone(node, name, handler) {
+@@ -58,7 +58,7 @@ export function zone(node, name, handler) {
    visit(node, function (node, index, parent) {
      const info = commentMarker(node)
      const match =
 -      info && info.name === name
-+      info &&
-+      (typeof name === 'string' ? info.name === name : info.name.match(name))
++		info && (typeof name === 'string' ? info.name === name : info.name.match(name))
          ? info.attributes.match(/(start|end)\b/)
          : undefined
      const type = match ? match[0] : undefined

@@ -46,7 +46,7 @@ npx @stephansama/auto-readme [options]
 | `--changes` | `-g`  | Check only changed git files                  | `boolean` | `false` |
 | `--check`   | `-k`  | Do not write to files. Only check for changes | `boolean` | `false` |
 | `--config`  | `-c`  | Path to config file                           | `string`  |         |
-| `--verbose` | -v    | whether or not to display verbose logging     | `boolean` | `false` |
+| `--verbose` | `-v`  | whether or not to display verbose logging     | `boolean` | `false` |
 
 All of the options in the [schema](#schema) below can also be used as command-line flags.
 
@@ -94,7 +94,8 @@ You can configure `auto-readme` by creating a configuration file (or object) in 
 
 ```json
 {
-  "$schema": "./node_modules/@stephansama/auto-readme/config/schema.json"
+  "$schema": "./node_modules/@stephansama/auto-readme/config/schema.json",
+  "disableEmojis": true
 }
 ```
 
@@ -102,7 +103,6 @@ You can configure `auto-readme` by creating a configuration file (or object) in 
 
 ```yaml
 # yaml-language-server: $schema=./node_modules/@stephansama/auto-readme/config/schema.yaml
-onlyReadmes: false
 disableEmojis: true
 ```
 
@@ -111,7 +111,6 @@ disableEmojis: true
 ```javascript
 /** @type {import('@stephansama/auto-readme').Config} */
 export default {
-  onlyReadmes: false,
   disableEmojis: true,
 };
 ```
@@ -122,7 +121,6 @@ export default {
 import type { Config } from "@stephansama/auto-readme";
 
 export default {
-  onlyReadmes: false,
   disableEmojis: true,
 } satisfies Config;
 ```

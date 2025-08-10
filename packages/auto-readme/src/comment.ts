@@ -9,14 +9,12 @@ export type AstComments = ReturnType<typeof loadAstComments>;
 
 export function loadAstComments(root: Root) {
 	return root.children
-		.map((child) => child.type === "html" && parseComment(child.value))
+		.map((child) => child.type === "html" && getComment(child.value))
 		.filter((f): f is ReturnType<typeof parseComment> => f !== false);
 }
 
 export function parseComment(comment: string) {
 	const input = trimComment(comment);
-	if (!input) return false;
-
 	const [type, ...parameters] = input.split(" ");
 	const [first, second, third] = type.split(SEPARATOR);
 
@@ -36,14 +34,21 @@ export function parseComment(comment: string) {
 	return parsed;
 }
 
+const startComment = "<!--";
+const endComment = "-->";
+
 export function trimComment(comment: string) {
-	const startComment = "<!--";
-	const endComment = "-->";
-	if (!comment.startsWith(startComment) || !comment.endsWith(endComment))
-		return false;
 	return comment
-		.replace("<!--", "")
-		.replace("-->", "")
+		.replace(startComment, "")
 		.replace(/start|end/, "")
+		.replace(endComment, "")
 		.trim();
+}
+
+function getComment(comment: string) {
+	return isComment(comment) && parseComment(comment);
+}
+
+function isComment(comment: string) {
+	return comment.startsWith(startComment) && comment.endsWith(endComment);
 }

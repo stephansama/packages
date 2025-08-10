@@ -5,6 +5,8 @@ import { actionsSchema, formatsSchema, languageSchema } from "./schema";
 
 export const SEPARATOR = "-" as const;
 
+export type AstComments = ReturnType<typeof loadAstComments>;
+
 export function loadAstComments(root: Root) {
 	return root.children
 		.map((child) => child.type === "html" && parseComment(child.value))

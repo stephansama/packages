@@ -1,6 +1,7 @@
 import glob from "fast-glob";
 import * as cp from "node:child_process";
 import * as fs from "node:fs";
+import * as fsp from "node:fs/promises";
 import * as path from "node:path";
 
 import type { Config } from "./schema";
@@ -20,6 +21,15 @@ const matches = [
 	/.*package\.json$/gi,
 	/.*pnpm-workspace\.yaml$/gi,
 ];
+
+export async function fileExists(file: string) {
+	try {
+		await fsp.access(file);
+		return true;
+	} catch {
+		return false;
+	}
+}
 
 export function findAffectedMarkdowns(config: Config) {
 	const affected = cp

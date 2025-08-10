@@ -8,7 +8,7 @@ import { parseArgs } from "./args";
 import { loadAstComments } from "./comment";
 import { loadConfig } from "./config";
 import { loadActionData } from "./data";
-import { ERROR, INFO } from "./log";
+import { ERROR, INFO, WARN } from "./log";
 import { parse } from "./pipeline";
 import { findAffectedMarkdowns, getGitRoot, getMarkdownPaths } from "./utils";
 
@@ -47,7 +47,9 @@ export async function run() {
 				return loadAstComments(ast);
 			})();
 
-			if (!actions.length) return;
+			if (!actions.length) {
+				return WARN(`no action comments found in ${path}`);
+			}
 
 			const data = await loadActionData(actions, path, root);
 

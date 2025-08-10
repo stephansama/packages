@@ -6,7 +6,9 @@ import { readPackageJSON } from "pkg-types";
 import * as yaml from "yaml";
 import { zod2md } from "zod2md";
 
-import type { loadAstComments } from "./comment";
+import type { AstComments } from "./comment";
+
+import { fileExists } from "./utils";
 
 export type ActionData = Awaited<ReturnType<typeof loadActionData>>;
 
@@ -21,7 +23,7 @@ type ActionInput = {
 };
 
 export async function loadActionData(
-	actions: ReturnType<typeof loadAstComments>,
+	actions: AstComments,
 	file: string,
 	root: string,
 ) {
@@ -92,8 +94,8 @@ async function loadActionYaml(baseDir: string) {
 	const actionYmlPath = path.resolve(baseDir, "action.yml");
 	const actionYamlPath = path.resolve(baseDir, "action.yaml");
 	const actualPath =
-		(fs.existsSync(actionYamlPath) && actionYamlPath) ||
-		(fs.existsSync(actionYmlPath) && actionYmlPath);
+		((await fileExists(actionYamlPath)) && actionYamlPath) ||
+		((await fileExists(actionYmlPath)) && actionYmlPath);
 
 	if (!actualPath) {
 		const locations = [actionYmlPath, actionYamlPath];

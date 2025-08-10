@@ -5,6 +5,7 @@ import Handlebars from "handlebars";
 import { markdownTable } from "markdown-table";
 import { fromMarkdown } from "mdast-util-from-markdown";
 import { zone } from "mdast-zone";
+import path from "node:path";
 
 import type { ActionData } from "./data";
 import type { Config } from "./schema";
@@ -77,9 +78,11 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 		});
 
 		zone(tree, /.*WORKSPACE.*/gi, function (start, _, end) {
-			const value = start.type === "html" && start.value;
-			const options = value && parseComment(value);
+			// const value = start.type === "html" && start.value;
+			// const options = value && parseComment(value);
 			const first = data.find((d) => d?.action === "WORKSPACE");
+
+			const packages = first?.workspaces.packages || [];
 
 			const templates = loadTemplates(config.templates);
 
@@ -94,7 +97,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 					config.disableEmojis || false,
 					config.templates?.emojis,
 				),
-				...(first?.workspaces.packages
+				...packages
 					.filter((pkg) =>
 						config.onlyShowPublicPackages
 							? !pkg.packageJson.private
@@ -104,7 +107,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 						const name = pkg.packageJson.name;
 						return headings.map((heading) => {
 							if (heading === "name") {
-								return `[${name}](${pkg.relativeDir})`;
+								return `[${name}](${path.resolve(pkg.relativeDir, "README.md")})`;
 							}
 							if (heading === "version") {
 								return `![npm version image](${templates.versionImage(
@@ -123,7 +126,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 							}
 							return ``;
 						});
-					}) || []),
+					}),
 			]);
 
 			const heading = `### ${config.disableEmojis ? "" : "🏭"} workspace`;
@@ -143,13 +146,9 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 		});
 
 		zone(tree, /.*PKG.*/gi, function (start, _, end) {
-			const value = start.type === "html" && start.value;
-			const comment = value && parseComment(value);
+			// const value = start.type === "html" && start.value;
+			// const comment = value && parseComment(value);
 			const first = data.find((d) => d?.action === "PKG");
-			const entries = [
-				...Object.entries(first?.pkgJson.dependencies || {}),
-				...Object.entries(first?.pkgJson.devDependencies || {}),
-			];
 			const templates = loadTemplates(config.templates);
 			const headings =
 				(config.headings?.PKG?.length && config.headings?.PKG) ||

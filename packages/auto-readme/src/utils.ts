@@ -23,12 +23,10 @@ const matches = [
 ];
 
 export async function fileExists(file: string) {
-	try {
-		await fsp.access(file);
-		return true;
-	} catch {
-		return false;
-	}
+	return await fsp
+		.access(file)
+		.then(() => true)
+		.catch(() => false);
 }
 
 export function findAffectedMarkdowns(root: string, config: Config) {

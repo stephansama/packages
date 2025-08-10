@@ -26,7 +26,7 @@ export async function loadConfig(args: Args) {
 	}
 
 	return configSchema.parse(
-		deepmerge(args, search?.config || {}, {
+		deepmerge(search?.config || {}, args, {
 			arrayMerge: (_, sourceArray) => sourceArray,
 		}),
 	);

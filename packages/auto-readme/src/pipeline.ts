@@ -1,4 +1,5 @@
 import { remark } from "remark";
+import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 
 import type { ActionData } from "./data";
@@ -12,7 +13,9 @@ export async function parse(file: string, config: Config, data: ActionData) {
 
 	if (config.useToc) {
 		INFO("generating table of contents");
-		pipeline.use(remarkToc, { heading: "contents" });
+		pipeline
+			.use(remarkToc, { heading: "contents" })
+			.use(remarkCollapse, { test: "contents" });
 	}
 
 	const vfile = await pipeline.process(file);

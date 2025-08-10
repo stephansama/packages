@@ -9,6 +9,8 @@ Generate lists and tables for your README automagically based on your repository
 
 ##### Contents
 
+<details><summary>Open Contents</summary>
+
 * [Installation](#installation)
 * [Usage](#usage)
   * [Options](#options)
@@ -20,6 +22,8 @@ Generate lists and tables for your README automagically based on your repository
     * [JavaScript Example](#javascript-example)
     * [TypeScript Example](#typescript-example)
   * [Schema](#schema)
+
+</details>
 
 ## Installation
 

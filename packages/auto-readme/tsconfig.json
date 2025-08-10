@@ -1,4 +1,7 @@
 {
 	"extends": ["@config/tsconfig/tsconfig.base.json"],
-	"include": ["./src/**/*"]
+	"include": ["./src/**/*"],
+	"compilerOptions": {
+		"types": ["./types/remark-collapse.d.ts"]
+	}
 }

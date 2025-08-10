@@ -1,9 +1,13 @@
 ##### Contents
 
+<details><summary>Open Contents</summary>
+
 * [Introduction](#introduction)
 * [📦 Packages](#-packages)
 * [Other published packages](#other-published-packages)
 * [Stargazers ⭐](#stargazers-)
+
+</details>
 
 ## Introduction
 

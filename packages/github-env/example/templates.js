@@ -1,5 +1,4 @@
 const json = String.raw;
-
 const ts = String.raw;
 
 export const tsComment = ts`/// <reference types="@stephansama/github-env" />`;

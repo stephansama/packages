@@ -16,7 +16,6 @@ env:
   NODE_AUTH_TOKEN: ${{secrets.node_auth_token}}
   NPM_AUTH_TOKEN: ${{secrets.node_auth_token}}
   TURBO_TEAM: ${{vars.TURBO_TEAM}}
-  TURBO_TELEMETRY_DISABLED: 1
   TURBO_TOKEN: ${{secrets.TURBO_TOKEN}}
   ZX_VERBOSE: true
 permissions:
@@ -30,6 +29,7 @@ jobs:
     name: Examples / Test
     runs-on: ubuntu-latest
     steps:
+      - uses: stephansama/actions/do-not-track-polyfill@v1
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
@@ -41,16 +41,15 @@ jobs:
         run: pnpm install
       - run: pnpm run build:packages
       - run: pnpm run lint
-      - run: pnpm run test:ci
-      - name: Upload coverage reports to Codecov
+      - name: 🧪 Create coverage reports
+        run: pnpm run test:ci
+      - name: 🧪 Upload coverage reports to Codecov 🔼
         uses: codecov/codecov-action@v5
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-      - name: Upload test results to Codecov
+          disable_telem: true
+      - name: 🧪 Upload test results to Codecov 🔼
         if: ${{ !cancelled() }}
         uses: codecov/test-results-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
       - name: 🚀 Publish Stackblitz
         run: pnpx pkg-pr-new publish './core/*' --pnpm --packageManager='pnpm' --template './examples/*'
   release:

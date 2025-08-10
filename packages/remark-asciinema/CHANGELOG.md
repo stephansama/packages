@@ -1,5 +1,11 @@
 # @stephansama/remark-asciinema
 
+## 1.0.9
+
+### Patch Changes
+
+- 70b013d: Created auto readme cli
+
 ## 1.0.8
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.1.1
+
+### Patch Changes
+
+- 70b013d: Created auto readme cli
+
 ## 1.1.0
 
 ### Minor Changes

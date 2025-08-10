@@ -1,5 +1,11 @@
 # @stephansama/astro-iconify-svgmap
 
+## 1.0.3
+
+### Patch Changes
+
+- 70b013d: Created auto readme cli
+
 ## 1.0.2
 
 ### Patch Changes

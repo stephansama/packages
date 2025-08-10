@@ -51,7 +51,7 @@ overrides:
 
 patchedDependencies:
   mdast-zone:
-    hash: a8d3e48dad190c2b028ffa970c1361f705bd54a626ef683531e3b42b7488c0e7
+    hash: 9a5deafdb99b221a548f0e040082893d23f44fae887e5dcf707e118ff8606913
     path: patches/mdast-zone.patch
 
 importers:
@@ -228,7 +228,7 @@ importers:
         version: 3.1.0
       mdast-zone:
         specifier: ^6.1.0
-        version: 6.1.0(patch_hash=a8d3e48dad190c2b028ffa970c1361f705bd54a626ef683531e3b42b7488c0e7)
+        version: 6.1.0(patch_hash=9a5deafdb99b221a548f0e040082893d23f44fae887e5dcf707e118ff8606913)
       ora:
         specifier: ^8.2.0
         version: 8.2.0
@@ -11807,7 +11807,7 @@ snapshots:
       unist-util-is: 6.0.0
       unist-util-visit: 5.0.0
 
-  mdast-zone@6.1.0(patch_hash=a8d3e48dad190c2b028ffa970c1361f705bd54a626ef683531e3b42b7488c0e7):
+  mdast-zone@6.1.0(patch_hash=9a5deafdb99b221a548f0e040082893d23f44fae887e5dcf707e118ff8606913):
     dependencies:
       '@types/mdast': 4.0.4
       '@types/unist': 3.0.3

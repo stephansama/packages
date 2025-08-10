@@ -1,4 +1,5 @@
 *.yaml
 !pnpm-workspace.yaml
 *.hbs
+!patches/*
 

@@ -64,7 +64,7 @@ There are more [Actions](#actions) that you can use in conjunction with differen
 
 ```md
 <!-- JS-WORKSPACE-TABLE start -->
-<!-- JS-WORKSPACE-TABLE start -->
+<!-- JS-WORKSPACE-TABLE end -->
 ```
 
 You can run `auto-readme` as a pre-commit git hook to automatically keep your `README`s up to date. For example, you can use `husky` to add the following to your `.husky/pre-commit` file:

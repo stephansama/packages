@@ -6,7 +6,11 @@ const jsLike = "{js,cjs,mjs,jsx,ts,mts,cts,tsx,astro,svelte,vue}";
  */
 const config = {
 	[`!(*.${jsLike})`]: "prettier --write",
-	[`*.${jsLike}`]: ["eslint --fix", "prettier --write", "vitest related"],
+	[`*.${jsLike}`]: [
+		"eslint --fix",
+		"prettier --write",
+		"vitest related --run",
+	],
 };
 
 export default config;

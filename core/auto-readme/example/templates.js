@@ -19,5 +19,5 @@ export const mdZodExample = md`
 
 export const mdLanguageFormatAction = md`
 <!-- JS-WORKSPACE-TABLE start -->
-<!-- JS-WORKSPACE-TABLE start -->
+<!-- JS-WORKSPACE-TABLE end -->
 `;

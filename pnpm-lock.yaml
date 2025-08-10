@@ -226,16 +226,6 @@ importers:
         specifier: workspace:*
         version: link:../../packages/remark-asciinema
 
-  lib/ci:
-    dependencies:
-      zx:
-        specifier: 'catalog:'
-        version: 8.5.5
-    devDependencies:
-      markdown-table:
-        specifier: ^3.0.4
-        version: 3.0.4
-
   lib/tsconfig:
     devDependencies:
       '@astrojs/ts-plugin':

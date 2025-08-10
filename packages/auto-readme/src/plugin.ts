@@ -37,12 +37,12 @@ function wrapRequired(required: boolean | undefined, input: string) {
 export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 	(config, data) => (tree) => {
 		zone(tree, /.*ZOD.*/gi, function (start, _, end) {
-			const first = data.find((d) => d?.action === "ZOD");
-			if (!first?.body) {
+			const zod = data.find((d) => d?.action === "ZOD");
+			if (!zod?.body) {
 				throw new Error("unable to load zod body");
 			}
 
-			const ast = fromMarkdown(first.body);
+			const ast = fromMarkdown(zod.body);
 			return [start, ast, end];
 		});
 
@@ -90,18 +90,19 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 		});
 
 		zone(tree, /.*WORKSPACE.*/gi, function (start, _, end) {
-			// const value = start.type === "html" && start.value;
-			// const options = value && parseComment(value);
-			const first = data.find((d) => d?.action === "WORKSPACE");
-
-			const packages = first?.workspaces.packages || [];
-
+			const value = start.type === "html" && start.value;
+			const comment = value && parseComment(value);
+			const workspace = data.find((d) => d?.action === "WORKSPACE");
 			const templates = loadTemplates(config.templates);
-
+			const packages = workspace?.workspaces.packages || [];
 			const headings =
 				(config.headings?.WORKSPACE?.length &&
 					config.headings?.WORKSPACE) ||
 				defaultTableHeadings.WORKSPACE!;
+
+			if (comment && comment.format === "LIST") {
+				// throw new Error("List is currently not su")
+			}
 
 			const tableHeadings = createHeading(
 				headings,
@@ -156,13 +157,18 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 		});
 
 		zone(tree, /.*PKG.*/gi, function (start, _, end) {
-			// const value = start.type === "html" && start.value;
-			// const comment = value && parseComment(value);
+			const value = start.type === "html" && start.value;
+			const comment = value && parseComment(value);
 			const first = data.find((d) => d?.action === "PKG");
 			const templates = loadTemplates(config.templates);
 			const headings =
 				(config.headings?.PKG?.length && config.headings?.PKG) ||
 				defaultTableHeadings.PKG!;
+
+			if (comment && comment.format === "LIST") {
+				const ast = fromMarkdown("");
+				return [start, ast, end];
+			}
 
 			function mapDependencies(isDev: boolean) {
 				return function ([name, version]: [string, string]) {

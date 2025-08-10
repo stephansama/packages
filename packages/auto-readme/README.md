@@ -42,7 +42,7 @@ npx @stephansama/auto-readme [options]
 | `--changes` | `-g`  | Check only changed git files                  | `boolean` | `false` |
 | `--check`   | `-k`  | Do not write to files. Only check for changes | `boolean` | `false` |
 | `--config`  | `-c`  | Path to config file                           | `string`  |         |
-| `--verbose` |       | whether or not to display verbose logging     | `boolean` | `false` |
+| `--verbose` | -v    | whether or not to display verbose logging     | `boolean` | `false` |
 
 All of the options in the [schema](#schema) below can also be used as command-line flags.
 

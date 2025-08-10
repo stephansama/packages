@@ -13,7 +13,7 @@
 		},
 		"lint:fix": { "cache": false },
 		"lint": {
-			"dependsOn": ["^lint"]
+			"dependsOn": ["^lint", "@stephansama/remark-asciinema#build"]
 		},
 		"check-types": {
 			"dependsOn": ["^check-types"]

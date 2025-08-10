@@ -48,7 +48,7 @@ export async function run() {
 			})();
 
 			if (!actions.length) {
-				return WARN(`no action comments found in ${path}`);
+				return WARN(`no action comments found in`, path);
 			}
 
 			const data = await loadActionData(actions, path, root);

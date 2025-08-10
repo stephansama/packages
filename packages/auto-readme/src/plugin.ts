@@ -20,7 +20,7 @@ type TemplateContext = {
 
 function createHeading(
 	headings: (keyof NonNullable<Config["templates"]>["emojis"])[],
-	disableEmojis: boolean,
+	disableEmojis = false,
 	emojis: typeof defaultTemplates.emojis = defaultTemplates.emojis,
 ) {
 	return headings.map(
@@ -36,6 +36,16 @@ function wrapRequired(required: boolean | undefined, input: string) {
 
 export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 	(config, data) => (tree) => {
+		zone(tree, /.*ZOD.*/gi, function (start, _, end) {
+			const first = data.find((d) => d?.action === "ZOD");
+			if (!first?.body) {
+				throw new Error("unable to load zod body");
+			}
+
+			const ast = fromMarkdown(first.body);
+			return [start, ast, end];
+		});
+
 		zone(tree, /.*ACTION.*/gi, function (start, _, end) {
 			const value = start.type === "html" && start.value;
 			const options = value && parseComment(value);
@@ -65,11 +75,13 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			const table = markdownTable([
 				createHeading(
 					headings,
-					config.disableEmojis || false,
+					config.disableEmojis,
 					config.templates?.emojis,
 				),
 				...Object.entries(inputs).map(([k, v]) =>
-					[k, v.required, v.default, v.description].map(String),
+					headings
+						.map((heading) => v[heading as keyof typeof v] || k)
+						.map(String),
 				),
 			]);
 			const body = [heading, "", table].join("\n");
@@ -91,12 +103,14 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 					config.headings?.WORKSPACE) ||
 				defaultTableHeadings.WORKSPACE!;
 
+			const tableHeadings = createHeading(
+				headings,
+				config.disableEmojis,
+				config.templates?.emojis,
+			);
+
 			const table = markdownTable([
-				createHeading(
-					headings,
-					config.disableEmojis || false,
-					config.templates?.emojis,
-				),
+				tableHeadings,
 				...packages
 					.filter((pkg) =>
 						config.onlyShowPublicPackages
@@ -104,10 +118,13 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 							: true,
 					)
 					.map((pkg) => {
-						const name = pkg.packageJson.name;
+						const { name } = pkg.packageJson;
 						return headings.map((heading) => {
 							if (heading === "name") {
-								return `[${name}](${path.resolve(pkg.relativeDir, "README.md")})`;
+								const scoped = config.removeScope
+									? name.replace(config.removeScope, "")
+									: name;
+								return `[${scoped}](${path.resolve(pkg.relativeDir, "README.md")})`;
 							}
 							if (heading === "version") {
 								return `![npm version image](${templates.versionImage(
@@ -131,17 +148,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 
 			const heading = `### ${config.disableEmojis ? "" : "🏭"} workspace`;
 			const body = [heading, "", table].join("\n");
-			const tableAst = fromMarkdown(body);
-			return [start, tableAst, end];
-		});
-
-		zone(tree, /.*ZOD.*/gi, function (start, _, end) {
-			const first = data.find((d) => d?.action === "ZOD");
-			if (!first?.body) {
-				throw new Error("unable to load zod body");
-			}
-
-			const ast = fromMarkdown(first.body);
+			const ast = fromMarkdown(body);
 			return [start, ast, end];
 		});
 
@@ -182,18 +189,17 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				};
 			}
 
+			const { dependencies = {}, devDependencies = {} } =
+				first?.pkgJson || {};
+
 			const table = markdownTable([
 				createHeading(
 					headings,
-					config.disableEmojis || false,
+					config.disableEmojis,
 					config.templates?.emojis,
 				),
-				...Object.entries(first?.pkgJson.devDependencies || {}).map(
-					mapDependencies(true),
-				),
-				...Object.entries(first?.pkgJson.dependencies || {}).map(
-					mapDependencies(false),
-				),
+				...Object.entries(devDependencies).map(mapDependencies(true)),
+				...Object.entries(dependencies).map(mapDependencies(false)),
 			]);
 
 			const heading = `### ${config.disableEmojis ? "" : "📦"} packages`;

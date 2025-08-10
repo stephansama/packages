@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+// TODO: test hook
+
 export const actionsSchema = z
 	.enum(["ACTION", "PKG", "WORKSPACE", "ZOD"])
 	.describe("Comment action options");

@@ -1,4 +1,5 @@
 import { fromMarkdown } from "mdast-util-from-markdown";
+import * as cp from "node:child_process";
 import * as fsp from "node:fs/promises";
 import ora from "ora";
 
@@ -59,6 +60,8 @@ export async function run() {
 			await fsp.writeFile(path, content);
 		}),
 	);
+
+	if (isAffected) cp.execSync(`git add ${paths.join(" ")}`);
 
 	spinner.stop();
 }

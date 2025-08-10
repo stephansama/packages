@@ -66,10 +66,11 @@
 		"ora": "^8.2.0",
 		"pkg-types": "^2.2.0",
 		"remark": "^15.0.1",
+		"remark-toc": "^9.0.0",
 		"yaml": "^2.8.1",
 		"yargs": "^18.0.0",
-		"zod2md": "^0.2.4",
-		"zod": "catalog:"
+		"zod": "catalog:",
+		"zod2md": "^0.2.4"
 	},
 	"devDependencies": {
 		"@config/tsconfig": "workspace:*",

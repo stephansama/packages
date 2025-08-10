@@ -31,7 +31,7 @@ export async function fileExists(file: string) {
 	}
 }
 
-export function findAffectedMarkdowns(config: Config) {
+export function findAffectedMarkdowns(root: string, config: Config) {
 	const affected = cp
 		/* cspell:disable-next-line because of the filter */
 		.execSync(sh`git diff --cached --name-only --diff-filter=MACT`, opts)
@@ -52,12 +52,41 @@ export function findAffectedMarkdowns(config: Config) {
 
 	INFO("Checking affected files against regexes", affected, allMatches);
 
-	const eligible = affected
-		.filter((a) => allMatches.some((m) => a.match(m)))
-		.map((file) => path.resolve(path.dirname(file), "README.md"))
-		.filter((readme) => fs.existsSync(readme));
+	const eligible = affected.filter((a) => allMatches.some((m) => a.match(m)));
 
-	return eligible;
+	INFO("Found the following eligible affected files", eligible);
+
+	const md = eligible.map((e) => findNearestReadme(root, path.resolve(e)));
+	const dedupe = [...new Set(md)].filter((s): s is string => Boolean(s));
+
+	INFO("Found the following readmes", dedupe);
+
+	return dedupe;
+}
+
+export function findNearestReadme(
+	gitRoot: string,
+	inputFile: string,
+	maxRotations = 15,
+) {
+	let dir = path.dirname(inputFile);
+	let rotations = 0;
+
+	while (true) {
+		const option = path.join(dir, "README.md");
+
+		if (fs.existsSync(option)) return option;
+
+		const parent = path.dirname(dir);
+
+		if (parent === dir || dir === gitRoot || ++rotations > maxRotations) {
+			break;
+		}
+
+		dir = parent;
+	}
+
+	return null;
 }
 
 export function getGitRoot() {

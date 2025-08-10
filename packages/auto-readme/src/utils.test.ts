@@ -4,23 +4,28 @@ import * as logger from "./log";
 import * as module from "./utils";
 
 const mocks = vi.hoisted(() => ({
-	dirname: vi.fn(),
+	access: vi.fn(),
 	execSync: vi.fn(),
 	existsSync: vi.fn(),
-	resolve: vi.fn(),
 }));
 
 vi.mock("node:child_process", () => ({ execSync: mocks.execSync }));
 vi.mock("node:fs", () => ({ existsSync: mocks.existsSync }));
-vi.mock("node:path", () => ({
-	dirname: mocks.dirname,
-	resolve: mocks.resolve,
-}));
+vi.mock("node:fs/promises", () => ({ access: mocks.access }));
 
 const mockGitRoot = "/Users/stephansama/Code/packages/";
 
-afterEach(() => {
-	vi.clearAllMocks();
+afterEach(vi.clearAllMocks);
+
+it("checks if a file exists", async () => {
+	const result = await module.fileExists(mockGitRoot + "README.md");
+	expect(result).toBeTruthy();
+});
+
+it("checks if a file does not exist exists", async () => {
+	mocks.access.mockRejectedValue("Does not exist");
+	const result = await module.fileExists(mockGitRoot + "README.md");
+	expect(result).toBeFalsy();
 });
 
 it("logs an error when no staged files are found", () => {
@@ -28,7 +33,7 @@ it("logs an error when no staged files are found", () => {
 
 	mocks.execSync.mockReturnValue("");
 
-	module.findAffectedMarkdowns({});
+	module.findAffectedMarkdowns(mockGitRoot, {});
 
 	expect(errorSpy).toHaveBeenCalled();
 });
@@ -40,11 +45,11 @@ it("logs additional affected regexes when supplied", () => {
 		["README.md", "package.json"].map((f) => mockGitRoot + f).join("\n"),
 	);
 
-	module.findAffectedMarkdowns({
+	module.findAffectedMarkdowns(mockGitRoot, {
 		affectedRegexes: [".*\\/schema\\.js"],
 	});
 
-	expect(infoSpy).toHaveBeenCalledTimes(2);
+	expect(infoSpy).toHaveBeenCalledTimes(4);
 });
 
 it("successfully returns git root", () => {

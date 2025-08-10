@@ -25,7 +25,9 @@ export async function loadConfig(args: Partial<Args>) {
 		INFO("loaded cosmiconfig", search.config);
 	}
 
+	// delete complex keys from args that cannot be passed
 	delete args.removeScope;
+	delete args.affectedRegexes;
 
 	return configSchema.parse(
 		deepmerge(search?.config || {}, args, {

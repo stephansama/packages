@@ -26,7 +26,7 @@ export async function run() {
 	INFO(`Loading ${!isAffected ? "all " : "affected "}files`);
 
 	const paths = isAffected
-		? findAffectedMarkdowns(config)
+		? findAffectedMarkdowns(root, config)
 		: await getMarkdownPaths(root, config);
 
 	INFO("Loaded the following files:", paths.join("\n"));

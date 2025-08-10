@@ -25,6 +25,8 @@ export async function loadConfig(args: Partial<Args>) {
 		INFO("loaded cosmiconfig", search.config);
 	}
 
+	delete args.removeScope;
+
 	return configSchema.parse(
 		deepmerge(search?.config || {}, args, {
 			arrayMerge: (_, sourceArray) => sourceArray,

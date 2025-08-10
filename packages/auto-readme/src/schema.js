@@ -91,12 +91,19 @@ const _configSchema = z.object({
 		alias: "p",
 		description: "Only show public packages in workspaces",
 	}),
+	removeScope: z.string().optional().default("").meta({
+		description: "Remove common workspace scope",
+	}),
 	templates: templatesSchema
 		.optional()
 		.default(defaultTemplates)
 		.describe(
 			"Handlebars templates used to fuel list and table generation",
 		),
+	useToc: z.boolean().default(false).meta({
+		alias: "t",
+		description: "generate table of contents for readmes",
+	}),
 	verbose: z.boolean().default(false).meta({
 		alias: "v",
 		description: "whether or not to display verbose logging",

@@ -109,7 +109,7 @@ const _configSchema = z.object({
 	tocHeading: z.string().optional().default("Table of contents").meta({
 		description: "Markdown heading used to generate table of contents",
 	}),
-	usageFile: z.string().optional().meta({
+	usageFile: z.string().optional().default("").meta({
 		description: "Workspace level usage file",
 	}),
 	usageHeading: z.string().optional().default("Usage").meta({

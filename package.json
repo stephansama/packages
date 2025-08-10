@@ -26,10 +26,6 @@
 		"fmt:check": "prettier . --check",
 		"prepare": "husky"
 	},
-	"config": {
-		"scope": "@stephansama",
-		"site": "stephansama-pkgs"
-	},
 	"packageManager": "pnpm@10.11.0",
 	"devDependencies": {
 		"@arethetypeswrong/cli": "^0.18.2",

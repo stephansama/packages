@@ -45,7 +45,11 @@ export async function loadActionData(
 				case "ACTION": {
 					const baseDir = path.dirname(file);
 					const actionYaml = await loadActionYaml(baseDir);
-					return { ...action, actionYaml };
+					return {
+						action: action.action,
+						actionYaml,
+						parameters: action.parameters,
+					};
 				}
 
 				case "PKG": {
@@ -54,18 +58,31 @@ export async function loadActionData(
 						? path.resolve(path.dirname(file), inputPath)
 						: path.dirname(file);
 					const pkgJson = await readPackageJSON(filename);
-					return { ...action, pkgJson };
+					return {
+						action: action.action,
+						parameters: action.parameters,
+						pkgJson,
+					};
 				}
 
 				case "USAGE": {
-					return { ...action };
+					return {
+						action: action.action,
+						parameters: action.parameters,
+					};
 				}
 
 				case "WORKSPACE": {
 					const workspaces = await getPackages(process.cwd());
 					const pnpmPath = path.resolve(root, "pnpm-workspace.yaml");
 					const isPnpm = fs.existsSync(pnpmPath);
-					return { ...action, isPnpm, root, workspaces };
+					return {
+						action: action.action,
+						isPnpm,
+						parameters: action.parameters,
+						root,
+						workspaces,
+					};
 				}
 
 				case "ZOD": {
@@ -84,7 +101,11 @@ export async function loadActionData(
 						title: find("title") || "Zod Schema",
 					});
 
-					return { ...action, body };
+					return {
+						action: action.action,
+						body,
+						parameters: action.parameters,
+					};
 				}
 
 				default:

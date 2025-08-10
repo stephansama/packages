@@ -319,6 +319,9 @@ importers:
       yargs:
         specifier: ^18.0.0
         version: 18.0.0
+      zod:
+        specifier: 'catalog:'
+        version: 4.0.15
       zod2md:
         specifier: ^0.2.4
         version: 0.2.4(zod@4.0.15)
@@ -341,9 +344,6 @@ importers:
       unified:
         specifier: ^11.0.5
         version: 11.0.5
-      zod:
-        specifier: 'catalog:'
-        version: 4.0.15
 
   packages/catppuccin-rss:
     devDependencies:

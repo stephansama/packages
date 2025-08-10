@@ -68,7 +68,8 @@
 		"remark": "^15.0.1",
 		"yaml": "^2.8.1",
 		"yargs": "^18.0.0",
-		"zod2md": "^0.2.4"
+		"zod2md": "^0.2.4",
+		"zod": "catalog:"
 	},
 	"devDependencies": {
 		"@config/tsconfig": "workspace:*",
@@ -76,8 +77,7 @@
 		"@types/yargs": "^17.0.33",
 		"mdast": "^3.0.0",
 		"tsup": "catalog:",
-		"unified": "^11.0.5",
-		"zod": "catalog:"
+		"unified": "^11.0.5"
 	},
 	"publishConfig": {
 		"access": "public",

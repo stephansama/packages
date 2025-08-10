@@ -52,7 +52,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: 🚀 Publish Stackblitz
-        run: pnpx pkg-pr-new publish './packages/*' --pnpm --packageManager='pnpm' --template './examples/*'
+        run: pnpx pkg-pr-new publish './core/*' --pnpm --packageManager='pnpm' --template './examples/*'
   release:
     name: Release
     runs-on: ubuntu-latest

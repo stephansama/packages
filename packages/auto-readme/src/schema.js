@@ -83,7 +83,7 @@ const _configSchema = z.object({
 		description: "Whether or not to display markdown headings",
 	}),
 	enableUsage: z.boolean().optional().default(false).meta({
-		description: "Wheter or not to enable usage plugin",
+		description: "Whether or not to enable usage plugin",
 	}),
 	headings: tableHeadingsSchema
 		.optional()

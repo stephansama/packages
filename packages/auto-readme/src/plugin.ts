@@ -124,7 +124,10 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 								const scoped = config.removeScope
 									? name.replace(config.removeScope, "")
 									: name;
-								return `[${scoped}](${path.resolve(pkg.relativeDir, "README.md")})`;
+								return `[${scoped}](${path.relative(
+									process.cwd(),
+									path.resolve(pkg.dir, "README.md"),
+								)})`;
 							}
 							if (heading === "version") {
 								return `![npm version image](${templates.versionImage(

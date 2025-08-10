@@ -1,5 +1,6 @@
 {
-	"$schema": "./packages/auto-readme/config/schema.json",
+	"$schema": "../packages/auto-readme/config/schema.json",
 	"useToc": true,
+	"affectedRegexes": [".*\\/schema.js"],
 	"removeScope": "@stephansama/"
 }

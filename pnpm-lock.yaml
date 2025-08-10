@@ -73,6 +73,9 @@ importers:
       '@eslint/js':
         specifier: ^9.28.0
         version: 9.29.0
+      '@stephansama/auto-readme':
+        specifier: workspace:*
+        version: link:packages/auto-readme
       '@stephansama/catppuccin-typedoc':
         specifier: workspace:*
         version: link:packages/catppuccin-typedoc

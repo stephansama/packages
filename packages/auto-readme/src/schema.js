@@ -79,6 +79,9 @@ const _configSchema = z.object({
 		alias: "e",
 		description: "Whether or not to use emojis in markdown table headings",
 	}),
+	disableMarkdownHeadings: z.boolean().default(false).meta({
+		description: "Whether or not to display markdown headings",
+	}),
 	headings: tableHeadingsSchema
 		.optional()
 		.default(defaultTableHeadings)

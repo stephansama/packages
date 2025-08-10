@@ -63,6 +63,7 @@ export function zodToYargs(): Record<keyof typeof shape, Options> {
 			"string";
 
 		const options: Options = {
+			// @ts-ignore does exist
 			default: value.def.defaultValue,
 			type: yargType,
 		};

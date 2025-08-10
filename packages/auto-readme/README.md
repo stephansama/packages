@@ -11,15 +11,15 @@ Generate lists and tables for your README automagically based on your repository
 
 - [Installation](#installation)
 - [Usage](#usage)
-    - [Options](#options)
-    - [Git Hook](#git-hook)
+  - [Options](#options)
+  - [Git Hook](#git-hook)
 - [Configuration](#configuration)
-    - [Configuration File](#configuration-file)
-        - [JSON Example](#json-example)
-        - [YAML Example](#yaml-example)
-        - [JavaScript Example](#javascript-example)
-        - [TypeScript Example](#typescript-example)
-    - [Schema](#schema)
+  - [Configuration File](#configuration-file)
+    - [JSON Example](#json-example)
+    - [YAML Example](#yaml-example)
+    - [JavaScript Example](#javascript-example)
+    - [TypeScript Example](#typescript-example)
+  - [Schema](#schema)
 
 ## Installation
 
@@ -90,7 +90,7 @@ You can configure `auto-readme` by creating a configuration file (or object) in 
 
 ```json
 {
-	"$schema": "./node_modules/@stephansama/auto-readme/config/schema.json"
+  "$schema": "./node_modules/@stephansama/auto-readme/config/schema.json"
 }
 ```
 
@@ -107,8 +107,8 @@ disableEmojis: true
 ```javascript
 /** @type {import('@stephansama/auto-readme').Config} */
 export default {
-	onlyReadmes: false,
-	disableEmojis: true,
+  onlyReadmes: false,
+  disableEmojis: true,
 };
 ```
 
@@ -118,8 +118,8 @@ export default {
 import type { Config } from "@stephansama/auto-readme";
 
 export default {
-	onlyReadmes: false,
-	disableEmojis: true,
+  onlyReadmes: false,
+  disableEmojis: true,
 } satisfies Config;
 ```
 

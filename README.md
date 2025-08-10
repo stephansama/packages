@@ -18,7 +18,7 @@ view examples here 👉 [![packages](https://pkg.pr.new/badge/stephansama/packag
 or install an example with [`create-stephansama-example`](https://github.com/stephansama/packages/tree/main/packages/example)
 via `pnpm create stephansama-example`
 
-## Packages
+## 📦 Packages
 
 All packages are packaged underneath the `@stephansama` scope (for example: `@stephansama/remark-asciinema`)
 

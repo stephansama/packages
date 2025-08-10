@@ -7,9 +7,9 @@
 
 Generate lists and tables for your README automagically based on your repository
 
-##### Contents
+##### Table of contents
 
-<details><summary>Open Contents</summary>
+<details><summary>Open Table of contents</summary>
 
 * [Installation](#installation)
 * [Usage](#usage)

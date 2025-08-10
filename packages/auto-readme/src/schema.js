@@ -1,6 +1,8 @@
 import { z } from "zod";
 
-// TODO: test hook
+export const stephanSchema = z.object({
+	spiderman: z.boolean().optional().default(true),
+});
 
 export const actionsSchema = z
 	.enum(["ACTION", "PKG", "WORKSPACE", "ZOD"])

@@ -7,6 +7,10 @@ import { configSchema } from "./schema";
 
 export type Args = Awaited<ReturnType<typeof parseArgs>>;
 
+const complexOptions = ["affectedRegexes", "templates", "headings"] as const;
+
+type ComplexOptions = (typeof complexOptions)[number];
+
 const args = {
 	...zodToYargs(),
 	changes: {
@@ -40,9 +44,13 @@ export async function parseArgs() {
 	return parsed;
 }
 
-export function zodToYargs(): Record<keyof typeof shape, Options> {
+export function zodToYargs(): Omit<
+	Record<keyof typeof shape, Options>,
+	ComplexOptions
+> {
 	const { shape } = configSchema.unwrap();
 	const entries = Object.entries(shape).map(([key, value]) => {
+		if (complexOptions.includes(key as ComplexOptions)) return [];
 		if (value.def.innerType instanceof z.ZodObject) return [];
 		const meta = value.meta();
 		const { innerType } = value.def;

@@ -1,9 +1,9 @@
 {
 	"$schema": "../packages/auto-readme/config/schema.json",
-	"useToc": true,
 	"usageFile": "./example/index.js",
+	"enableToc": true,
 	"enableUsage": true,
+	"removeScope": "@stephansama/",
 	"affectedRegexes": [".*\\/schema.js$", ".*\\/example/.*$"],
-	"onlyShowPublicPackages": true,
-	"removeScope": "@stephansama/"
+	"onlyShowPublicPackages": true
 }

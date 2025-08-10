@@ -82,6 +82,10 @@ const _configSchema = z.object({
 	disableMarkdownHeadings: z.boolean().default(false).meta({
 		description: "Whether or not to display markdown headings",
 	}),
+	enableToc: z.boolean().default(false).meta({
+		alias: "t",
+		description: "generate table of contents for readmes",
+	}),
 	enableUsage: z.boolean().optional().default(false).meta({
 		description: "Whether or not to enable usage plugin",
 	}),
@@ -114,10 +118,6 @@ const _configSchema = z.object({
 	}),
 	usageHeading: z.string().optional().default("Usage").meta({
 		description: "Markdown heading used to generate usage example",
-	}),
-	useToc: z.boolean().default(false).meta({
-		alias: "t",
-		description: "generate table of contents for readmes",
 	}),
 	verbose: z.boolean().default(false).meta({
 		alias: "v",

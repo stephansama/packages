@@ -28,7 +28,7 @@ export function createFindParameter(parameterList: string[]) {
 			?.find((p) => p.startsWith(parameterName))
 			?.replace(parameterName + "=", "")
 			?.replace(/"/gi, "")
-			?.replace("_", " ");
+			?.replace(/_/gi, " ");
 	};
 }
 

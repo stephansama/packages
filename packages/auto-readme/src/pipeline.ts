@@ -25,11 +25,14 @@ export async function parse(
 	if (usage?.action === "USAGE" || config.enableUsage) {
 		const find = createFindParameter(usage?.parameters || []);
 		const examplePath = find("path");
-		const resolvePath =
-			examplePath && path.resolve(path.dirname(filepath), examplePath);
+		const dirname = path.dirname(filepath);
+		const resolvePath = examplePath && path.resolve(dirname, examplePath);
+		const relativeProjectPath =
+			config.usageFile &&
+			path.relative(root, path.resolve(dirname, config.usageFile));
 		const example =
 			(examplePath && resolvePath && path.relative(root, resolvePath)) ||
-			config.usageFile ||
+			relativeProjectPath ||
 			undefined;
 
 		if (await fileExists(example || "")) {

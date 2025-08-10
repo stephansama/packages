@@ -5,7 +5,7 @@ import { huskyScript, shScript } from "./templates.js";
 
 // In order to run the script you need to do two things
 // 1. Create either a heading or a comment to enable the corresponding feature
-// 2. Run the following command: (please)
+// 2. Run the following command:
 
 console.log("sh", shScript);
 

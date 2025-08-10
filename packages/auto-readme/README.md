@@ -32,7 +32,10 @@ pnpm install @stephansama/auto-readme
 
 ## Usage
 
-In order to run the script just use
+In order to run the script you need to do two things
+
+1. Create either a heading or a comment to enable the corresponding feature
+2. Run the following command:
 
 ```sh
 pnpx @stephansama/auto-readme [options]

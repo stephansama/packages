@@ -1,9 +1,5 @@
 import { z } from "zod";
 
-export const stephanSchema = z.object({
-	spiderman: z.boolean().optional().default(true),
-});
-
 export const actionsSchema = z
 	.enum(["ACTION", "PKG", "WORKSPACE", "ZOD"])
 	.describe("Comment action options");
@@ -13,7 +9,10 @@ export const formatsSchema = z
 	.default("TABLE")
 	.optional();
 
-export const languageSchema = z.enum(["JS", "RS"]).optional().default("JS");
+export const languageSchema = z
+	.enum(["JS", "RS", "GO"])
+	.optional()
+	.default("JS");
 
 export const headingsSchema = z
 	.enum([

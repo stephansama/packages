@@ -1,16 +1,7 @@
 import type { Root } from "mdast";
 
-import { z } from "zod";
-
 import { INFO } from "./log";
-import { actionsSchema, configSchema } from "./schema";
-
-export const formatsSchema = z
-	.enum(["LIST", "TABLE"] as const)
-	.default("TABLE")
-	.optional();
-
-export const languageSchema = configSchema.unwrap().shape.defaultLanguage;
+import { actionsSchema, formatsSchema, languageSchema } from "./schema";
 
 export const SEPARATOR = "-" as const;
 
@@ -21,12 +12,7 @@ export function loadAstComments(root: Root) {
 }
 
 export function parseComment(comment: string) {
-	const input = comment
-		.replace("<!--", "")
-		.replace("-->", "")
-		.replace(/start|end/, "")
-		.trim();
-
+	const input = trimComment(comment);
 	const [type, ...parameters] = input.split(" ");
 	const [first, second, third] = type.split(SEPARATOR);
 	const languageInput = third ? first : undefined;
@@ -41,4 +27,12 @@ export function parseComment(comment: string) {
 	INFO(`Parsed comment ${comment}`, parsed);
 
 	return parsed;
+}
+
+export function trimComment(comment: string) {
+	return comment
+		.replace("<!--", "")
+		.replace("-->", "")
+		.replace(/start|end/, "")
+		.trim();
 }

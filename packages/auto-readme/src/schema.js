@@ -4,6 +4,13 @@ export const actionsSchema = z
 	.enum(["ACTION", "PKG", "WORKSPACE", "ZOD"])
 	.describe("Comment action options");
 
+export const formatsSchema = z
+	.enum(["LIST", "TABLE"])
+	.default("TABLE")
+	.optional();
+
+export const languageSchema = z.enum(["JS", "RS"]).optional().default("JS");
+
 export const headingsSchema = z
 	.enum([
 		"default",
@@ -17,7 +24,7 @@ export const headingsSchema = z
 	])
 	.describe("Table heading options");
 
-export const actionHeadingsSchema = z
+export const tableHeadingsSchema = z
 	.record(actionsSchema, headingsSchema.array().optional())
 	.optional()
 	.describe("Table heading action configuration")
@@ -60,11 +67,11 @@ export const templatesSchema = z.object({
 });
 
 export const defaultTemplates = templatesSchema.parse({});
-export const defaultActionHeadings = actionHeadingsSchema.parse(undefined);
+export const defaultTableHeadings = tableHeadingsSchema.parse(undefined);
 
 const _configSchema = z.object({
-	affectedRegexes: z.string().array().default([]).optional(),
-	defaultLanguage: z.enum(["JS", "RS"]).default("JS").meta({
+	affectedRegexes: z.string().array().optional().default([]),
+	defaultLanguage: languageSchema.meta({
 		alias: "l",
 		description: "Default language to infer projects from",
 	}),
@@ -72,9 +79,9 @@ const _configSchema = z.object({
 		alias: "e",
 		description: "Whether or not to use emojis in markdown table headings",
 	}),
-	headings: actionHeadingsSchema
+	headings: tableHeadingsSchema
 		.optional()
-		.default(defaultActionHeadings)
+		.default(defaultTableHeadings)
 		.describe("List of headings for different table outputs"),
 	onlyReadmes: z.boolean().default(true).meta({
 		alias: "r",
@@ -85,9 +92,11 @@ const _configSchema = z.object({
 		description: "Only show public packages in workspaces",
 	}),
 	templates: templatesSchema
+		.optional()
 		.default(defaultTemplates)
-		.describe("Handlebars templates used to fuel list and table generation")
-		.optional(),
+		.describe(
+			"Handlebars templates used to fuel list and table generation",
+		),
 	verbose: z.boolean().default(false).meta({
 		alias: "v",
 		description: "whether or not to display verbose logging",

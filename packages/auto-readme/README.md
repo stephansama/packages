@@ -17,18 +17,6 @@ pnpm install @stephansama/auto-readme
 
 # Zod Schema
 
-## ActionHeadings
-
-Table heading action configuration
-
-*Object record with dynamic keys:*
-
-* *keys of type* [Actions](#actions)
-* *values of type* *Array of [Headings](#headings) items* (*optional*)
-  (*optional*)
-
-*Default value:* `{"ACTION":["name","required","default","description"],"PKG":["name","version","devDependency"],"WORKSPACE":["name","version","downloads","description"],"ZOD":[]}`
-
 ## Actions
 
 Comment action options
@@ -46,8 +34,8 @@ Comment action options
 
 | Property                 | Description                                                 | Type                                                                                                                                                                                                                                                                                    | Default                                                                                                                                                                                                                                                                                                                                                                                          |
 | :----------------------- | :---------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `affectedRegexes`        |                                                             | `Array<string>`                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `defaultLanguage`        | Default language to infer projects from                     | `'JS' \| 'RS'`                                                                                                                                                                                                                                                                          | `'JS'`                                                                                                                                                                                                                                                                                                                                                                                           |
+| `affectedRegexes`        |                                                             | `Array<string>`                                                                                                                                                                                                                                                                         | `[]`                                                                                                                                                                                                                                                                                                                                                                                             |
+| `defaultLanguage`        | Default language to infer projects from                     | [Language](#language)                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `disableEmojis`          | Whether or not to use emojis in markdown table headings     | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                          |
 | `headings`               | List of headings for different table outputs                | *Object with dynamic keys of type* [Actions](#actions) *and values of type* *Array of [Headings](#headings) items* (*optional*)                                                                                                                                                         | `{"ACTION":["name","required","default","description"],"PKG":["name","version","devDependency"],"WORKSPACE":["name","version","downloads","description"],"ZOD":[]}`                                                                                                                                                                                                                              |
 | `onlyReadmes`            | Whether or not to only traverse readmes                     | `boolean`                                                                                                                                                                                                                                                                               | `true`                                                                                                                                                                                                                                                                                                                                                                                           |
@@ -56,6 +44,16 @@ Comment action options
 | `verbose`                | whether or not to display verbose logging                   | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                          |
 
 *All properties are optional.* (*optional*)
+
+## Formats
+
+*Enum, one of the following possible values:*
+
+* `'LIST'`
+* `'TABLE'`
+  (*optional*)
+
+*Default value:* `'TABLE'`
 
 ## Headings
 
@@ -71,6 +69,28 @@ Table heading options
 * `'private'`
 * `'required'`
 * `'version'`
+
+## Language
+
+*Enum, one of the following possible values:*
+
+* `'JS'`
+* `'RS'`
+  (*optional*)
+
+*Default value:* `'JS'`
+
+## TableHeadings
+
+Table heading action configuration
+
+*Object record with dynamic keys:*
+
+* *keys of type* [Actions](#actions)
+* *values of type* *Array of [Headings](#headings) items* (*optional*)
+  (*optional*)
+
+*Default value:* `{"ACTION":["name","required","default","description"],"PKG":["name","version","devDependency"],"WORKSPACE":["name","version","downloads","description"],"ZOD":[]}`
 
 ## Templates
 

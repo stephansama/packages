@@ -10,7 +10,7 @@ import type { ActionData } from "./data";
 import type { Config } from "./schema";
 
 import { parseComment } from "./comment";
-import { defaultActionHeadings, defaultTemplates } from "./schema";
+import { defaultTableHeadings, defaultTemplates } from "./schema";
 
 type TemplateContext = {
 	name: string;
@@ -59,7 +59,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 
 			const headings =
 				(config.headings?.ACTION?.length && config.headings.ACTION) ||
-				defaultActionHeadings.ACTION!;
+				defaultTableHeadings.ACTION!;
 
 			const table = markdownTable([
 				createHeading(
@@ -86,7 +86,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			const headings =
 				(config.headings?.WORKSPACE?.length &&
 					config.headings?.WORKSPACE) ||
-				defaultActionHeadings.WORKSPACE!;
+				defaultTableHeadings.WORKSPACE!;
 
 			const table = markdownTable([
 				createHeading(
@@ -153,7 +153,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			const templates = loadTemplates(config.templates);
 			const headings =
 				(config.headings?.PKG?.length && config.headings?.PKG) ||
-				defaultActionHeadings.PKG!;
+				defaultTableHeadings.PKG!;
 
 			function mapDependencies(isDev: boolean) {
 				return function ([name, version]: [string, string]) {

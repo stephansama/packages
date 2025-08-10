@@ -30,7 +30,7 @@ export async function run() {
 
 	INFO("Loaded the following files:", paths.join("\n"));
 
-	const type = args.onlyReadmes ? "readmes" : "markdown files";
+	const type = args.onlyReadmes ? "readmes" : "all markdown files";
 
 	if (!paths.length) {
 		return ERROR(`no ${isAffected} readmes found to update`);

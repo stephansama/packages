@@ -1,0 +1,5 @@
+{
+	"$schema": "./packages/auto-readme/config/schema.json",
+	"useToc": true,
+	"removeScope": "@stephansama/"
+}

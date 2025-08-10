@@ -8,8 +8,9 @@ import type { ActionData } from "./data";
 import type { Config } from "./schema";
 
 import { createFindParameter } from "./data";
-import { INFO } from "./log";
+import { INFO, WARN } from "./log";
 import { autoReadmeRemarkPlugin } from "./plugin";
+import { fileExists } from "./utils";
 
 export async function parse(
 	file: string,
@@ -31,8 +32,15 @@ export async function parse(
 			config.usageFile ||
 			undefined;
 
-		INFO("generating usage section");
-		pipeline.use(remarkUsage, { example, heading: config.usageHeading });
+		if (await fileExists(example || "")) {
+			INFO("generating usage section");
+			pipeline.use(remarkUsage, {
+				example,
+				heading: config.usageHeading,
+			});
+		} else {
+			WARN("not able to find example file for readme", filepath);
+		}
 	}
 
 	if (config.useToc) {

@@ -30,8 +30,6 @@ Generate lists and tables for your README automagically based on your repository
 pnpm install @stephansama/auto-readme
 ```
 
-<!-- USAGE path="./example/index.js" start -->
-
 ## Usage
 
 In order to run the script just use

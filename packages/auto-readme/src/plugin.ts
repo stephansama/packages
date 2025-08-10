@@ -52,7 +52,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			if (!options) throw new Error("not able to parse comment");
 
 			const first = data.find((d) => d?.action === "ACTION");
-			const inputs = first?.actionYaml.inputs || {};
+			const inputs = first?.actionYaml?.inputs || {};
 			const heading = `### ${config.disableEmojis ? "" : "🧰"} actions`;
 
 			if (options.format === "LIST") {
@@ -94,7 +94,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			const comment = value && parseComment(value);
 			const workspace = data.find((d) => d?.action === "WORKSPACE");
 			const templates = loadTemplates(config.templates);
-			const packages = workspace?.workspaces.packages || [];
+			const packages = workspace?.workspaces?.packages || [];
 			const headings =
 				(config.headings?.WORKSPACE?.length &&
 					config.headings?.WORKSPACE) ||

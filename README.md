@@ -1,6 +1,6 @@
-##### Contents
+##### Table of contents
 
-<details><summary>Open Contents</summary>
+<details><summary>Open Table of contents</summary>
 
 * [Introduction](#introduction)
 * [📦 Packages](#-packages)

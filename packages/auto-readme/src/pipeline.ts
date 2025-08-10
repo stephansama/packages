@@ -46,7 +46,7 @@ export async function parse(
 		}
 	}
 
-	if (config.useToc) {
+	if (config.enableToc) {
 		INFO("generating table of contents section");
 		pipeline
 			.use(remarkToc, { heading: config.tocHeading })

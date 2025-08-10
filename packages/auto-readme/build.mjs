@@ -1,13 +1,18 @@
 import * as fsp from "node:fs/promises";
+import * as path from "path";
 import { build } from "tsup";
 import yaml from "yaml";
 import { z } from "zod";
 
 import { configSchema } from "./src/schema.js";
 
+const outDir = path.resolve("./dist");
+const schemaDir = path.resolve("./config");
+
 /** @type {import('tsup').Options} */
 const commonOpts = {
 	format: ["esm", "cjs"],
+	outDir,
 	skipNodeModulesBundle: true,
 	sourcemap: true,
 	splitting: false,
@@ -24,7 +29,7 @@ await build({
 	...commonOpts,
 	dts: true,
 	entry: ["src/*.js"],
-	outDir: "./config/",
+	outDir: schemaDir,
 });
 
 const schema = z.toJSONSchema(configSchema);
@@ -32,5 +37,5 @@ const schema = z.toJSONSchema(configSchema);
 const jsonSchema = JSON.stringify(schema);
 const yamlSchema = yaml.stringify(schema);
 
-await fsp.writeFile("./config/schema.json", jsonSchema);
-await fsp.writeFile("./config/schema.yaml", yamlSchema);
+await fsp.writeFile(path.join(schemaDir, "schema.json"), jsonSchema);
+await fsp.writeFile(path.join(schemaDir, "schema.yaml"), yamlSchema);

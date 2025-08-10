@@ -1,10 +1,5 @@
 ##### Contents
 
-* [Introduction](#introduction)
-* [📦 Packages](#-packages)
-* [Other published packages](#other-published-packages)
-* [Stargazers ⭐](#stargazers-)
-
 ## Introduction
 
 [![codecov](https://codecov.io/github/stephansama/packages/graph/badge.svg)](https://codecov.io/github/stephansama/packages)

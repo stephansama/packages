@@ -63,7 +63,7 @@ export const defaultTemplates = templatesSchema.parse({});
 export const defaultActionHeadings = actionHeadingsSchema.parse(undefined);
 
 const _configSchema = z.object({
-	affectedRegexes: z.string().default([]).array().optional(),
+	affectedRegexes: z.string().array().default([]).optional(),
 	defaultLanguage: z.enum(["JS", "RS"]).default("JS").meta({
 		alias: "l",
 		description: "Default language to infer projects from",

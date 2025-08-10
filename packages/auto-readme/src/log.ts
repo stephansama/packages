@@ -20,5 +20,5 @@ export function setVerbosity(input: number) {
 export function WARN(...rest: unknown[]) {
 	if (verbosity < 1) return;
 	const [first, ...remaining] = rest;
-	console.info(chalk.yellow(first), ...remaining);
+	console.warn(chalk.yellow(first), ...remaining);
 }

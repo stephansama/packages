@@ -18,6 +18,9 @@ catalogs:
     astro:
       specifier: ^5.9.3
       version: 5.9.3
+    handlebars:
+      specifier: ^4.7.8
+      version: 4.7.8
     tsup:
       specifier: ^8.3.6
       version: 8.5.0
@@ -290,7 +293,7 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3
       handlebars:
-        specifier: ^4.7.8
+        specifier: 'catalog:'
         version: 4.7.8
       markdown-table:
         specifier: ^3.0.4
@@ -360,7 +363,7 @@ importers:
         specifier: workspace:*
         version: link:../../lib/tsconfig
       handlebars:
-        specifier: ^4.7.8
+        specifier: 'catalog:'
         version: 4.7.8
       minify:
         specifier: ^14.0.0

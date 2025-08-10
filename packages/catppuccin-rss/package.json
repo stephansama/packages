@@ -34,7 +34,7 @@
 	"devDependencies": {
 		"@catppuccin/palette": "catalog:",
 		"@config/tsconfig": "workspace:*",
-		"handlebars": "^4.7.8",
+		"handlebars": "catalog:",
 		"minify": "^14.0.0"
 	},
 	"publishConfig": {

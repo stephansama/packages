@@ -1,8 +1,8 @@
 packages:
   - actions/*
+  - core/*
   - examples/**
   - lib/*
-  - packages/*
 catalog:
   "@catppuccin/palette": ^1.7.1
   "@codecov/rollup-plugin": ^1.9.1

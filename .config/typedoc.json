@@ -12,7 +12,7 @@
 	"darkHighlightTheme": "catppuccin-mocha",
 	"lightHighlightTheme": "catppuccin-latte",
 	"entryPointStrategy": "packages",
-	"entryPoints": ["../packages/*"],
+	"entryPoints": ["../core/*"],
 	"projectDocuments": ["../.config/docs/*"],
 	"exclude": ["**/ISSUE_TEMPLATE/**"],
 	"navigationLinks": {

@@ -1,2 +1,2 @@
 auto-readme -gv
-pnpm turbo lint test
+lint-staged -v

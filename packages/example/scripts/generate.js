@@ -21,4 +21,4 @@ const exampleData = examples.map((example) => {
 
 if (!fs.existsSync("./dist")) fs.mkdirSync("./dist");
 
-fs.writeFileSync("./scripts/examples.json", JSON.stringify(exampleData));
+fs.writeFileSync("./dist/examples.json", JSON.stringify(exampleData));

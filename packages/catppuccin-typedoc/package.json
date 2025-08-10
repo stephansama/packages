@@ -1,7 +1,7 @@
 {
 	"name": "@stephansama/catppuccin-typedoc",
 	"version": "1.0.0",
-	"description": "Catppuccin theme for typedoc",
+	"description": "Catppuccin css variable theme for typedoc",
 	"repository": {
 		"url": "https://github.com/stephansama/packages",
 		"type": "git",
@@ -28,8 +28,7 @@
 		"catppuccin-typedoc"
 	],
 	"devDependencies": {
-		"@catppuccin/palette": "catalog:",
-		"@config/tsconfig": "workspace:*"
+		"@catppuccin/palette": "catalog:"
 	},
 	"publishConfig": {
 		"access": "public",

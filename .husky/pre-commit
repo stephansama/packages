@@ -1,1 +1,2 @@
+auto-readme -gv
 pnpm turbo lint test

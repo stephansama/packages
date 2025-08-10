@@ -39,6 +39,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - name: 📦 Installing dependencies
         run: pnpm install
+      - run: pnpm run build:packages
       - run: pnpm run lint
       - run: pnpm run test:ci
       - name: Upload coverage reports to Codecov
@@ -65,7 +66,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - name: 📦 Installing dependencies
         run: pnpm install
-      - run: pnpm run build
+      - run: pnpm run build:packages
       - if: github.ref_name == 'main'
         name: 🦋 Create Changeset Release Pull Request
         uses: changesets/action@v1

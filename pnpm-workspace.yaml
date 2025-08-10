@@ -1,27 +1,28 @@
-engineStrict: true
 packages:
   - actions/*
   - examples/**
   - lib/*
   - packages/*
-overrides:
-  "@stephansama/astro-iconify-svgmap": "workspace:*"
-  "@stephansama/catppuccin-rss": "workspace:*"
-  "@stephansama/remark-asciinema": "workspace:*"
-  "create-stephansama-example": "workspace:*"
 catalog:
-  "@catppuccin/palette": "^1.7.1"
+  "@catppuccin/palette": ^1.7.1
   "@codecov/rollup-plugin": ^1.9.1
   "@codecov/vite-plugin": ^1.9.1
   "@vitest/coverage-v8": ^3.2.4
   "@vitest/ui": ^3.2.4
-  nodemon: ^3.1.10
+  astro: ^5.9.3
+  handlebars: ^4.7.8
   tsup: ^8.3.6
   typescript: ^5.8.3
   vite: ^6.3.5
   vitest: ^3.2.4
+  zod: ^4.0.15
   zx: ^8.5.5
-catalogs:
-  astro:
-    "@astrojs/check": ^0.9.4
-    astro: ^5.9.3
+autoInstallPeers: true
+engineStrict: true
+overrides:
+  "@stephansama/astro-iconify-svgmap": workspace:*
+  "@stephansama/catppuccin-rss": workspace:*
+  "@stephansama/remark-asciinema": workspace:*
+  create-stephansama-example: workspace:*
+patchedDependencies:
+  mdast-zone: patches/mdast-zone.patch

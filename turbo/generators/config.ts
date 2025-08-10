@@ -50,11 +50,6 @@ export default function generator(plop: PlopTypes.NodePlopAPI) {
 				type: "add",
 			},
 			{
-				path: "{{ turbo.paths.root }}/packages/{{ dashCase name }}/vitest.config.ts",
-				templateFile: "templates/lib/vitest.config.ts",
-				type: "add",
-			},
-			{
 				path: "{{ turbo.paths.root }}/packages/{{ dashCase name }}/typedoc.json",
 				templateFile: "templates/lib/typedoc.json",
 				type: "add",

@@ -6,28 +6,25 @@
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
-		"url": "https://stephanrandle.netlify.app"
+		"url": "https://stephansama.info"
 	},
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
 		"with-env": "dotenv -e .env --",
-		"typedoc": "pnpm --filter=@stephansama/catppuccin-typedoc run build && typedoc",
 		"lint": "turbo lint",
 		"test": "turbo test",
 		"test:ci": "vitest --run --coverage --reporter=junit --outputFile=test-report.junit.xml",
 		"test:ui": "vitest --ui",
-		"build": "turbo build",
-		"build:pkg": "turbo build --filter=./packages/*",
-		"version": "changeset version && pnpm install --lockfile-only",
 		"publish": "changeset publish",
+		"version": "changeset version && pnpm install --lockfile-only",
+		"typedoc": "pnpm run build:packages && typedoc",
+		"build": "pnpm run --sequential \"/^build:.*/\"",
+		"build:packages": "turbo build --filter=./packages/*",
+		"build:examples": "turbo build --filter=./examples/*",
 		"fmt:write": "prettier . --write",
 		"fmt:check": "prettier . --check",
 		"prepare": "husky"
-	},
-	"config": {
-		"scope": "@stephansama",
-		"site": "stephansama-pkgs"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"devDependencies": {
@@ -38,7 +35,9 @@
 		"@commitlint/config-conventional": "^19.8.1",
 		"@commitlint/types": "^19.8.1",
 		"@eslint/js": "^9.28.0",
+		"@stephansama/auto-readme": "workspace:*",
 		"@stephansama/catppuccin-typedoc": "workspace:*",
+		"@tsconfig/recommended": "^1.0.8",
 		"@turbo/gen": "^2.5.4",
 		"@types/node": "^24.0.1",
 		"@typescript-eslint/parser": "^8.34.0",

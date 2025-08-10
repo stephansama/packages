@@ -1,0 +1,10 @@
+{
+	"$schema": "https://typedoc.org/schema.json",
+	"entryPoints": ["src/*"],
+	"tsconfig": "./tsconfig.json",
+	"exclude": [
+		"node_modules",
+		"**/{node_modules,test,book,doc,dist}/**/*",
+		"**/{pages,components}/**"
+	]
+}

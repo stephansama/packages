@@ -16,7 +16,7 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"dev": "nodemon ./scripts/generate.js",
+		"dev": "node --watch ./scripts/generate.js",
 		"build": "node ./scripts/generate.js && attw --pack"
 	},
 	"config": {
@@ -33,10 +33,8 @@
 	],
 	"devDependencies": {
 		"@catppuccin/palette": "catalog:",
-		"@config/tsconfig": "workspace:*",
-		"handlebars": "^4.7.8",
-		"minify": "^14.0.0",
-		"nodemon": "catalog:"
+		"handlebars": "catalog:",
+		"minify": "^14.0.0"
 	},
 	"publishConfig": {
 		"access": "public",

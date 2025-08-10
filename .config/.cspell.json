@@ -7,11 +7,15 @@
 		"asciinema",
 		"astrojs",
 		"attw",
+		"automagically",
+		"autoreadme",
+		"autoreadmerc",
 		"catppuccin",
 		"iconify",
 		"kaomoji",
 		"kaomojis",
 		"macchiato",
+		"manypkg",
 		"nodemon",
 		"nvim",
 		"nvmrc",
@@ -25,7 +29,8 @@
 		"tsup",
 		"typedoc",
 		"vite",
-		"vitest"
+		"vitest",
+		"yarg"
 	],
 	"ignorePaths": [".env"]
 }

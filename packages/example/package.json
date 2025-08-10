@@ -16,7 +16,6 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"prepare": "pnpm run generate",
 		"generate": "node ./scripts/generate.js",
 		"build": "pnpm run generate && tsup && attw --pack",
 		"typedoc": "pnpm run generate",
@@ -47,7 +46,6 @@
 		"latest-version": "^9.0.0"
 	},
 	"devDependencies": {
-		"@config/tsconfig": "workspace:*",
 		"tsup": "catalog:",
 		"zx": "catalog:"
 	},

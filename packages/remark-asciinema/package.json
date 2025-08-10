@@ -19,7 +19,6 @@
 		"build": "tsup && attw --pack",
 		"lint": "eslint ./src/",
 		"prepublishOnly": "tsup",
-		"prepare": "tsup",
 		"dev": "tsup --watch",
 		"test": "vitest run",
 		"test:ci": "vitest run --coverage",
@@ -44,7 +43,6 @@
 		"remark-plugin"
 	],
 	"devDependencies": {
-		"@config/tsconfig": "workspace:*",
 		"remark": "^15.0.1",
 		"tsup": "catalog:",
 		"unist-builder": "^4.0.0",

@@ -2,5 +2,6 @@
 	"$schema": "../packages/auto-readme/config/schema.json",
 	"useToc": true,
 	"affectedRegexes": [".*\\/schema.js$"],
+	"onlyShowPublicPackages": true,
 	"removeScope": "@stephansama/"
 }

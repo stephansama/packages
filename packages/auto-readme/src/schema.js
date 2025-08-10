@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const actionsSchema = z
-	.enum(["ACTION", "PKG", "WORKSPACE", "ZOD"])
+	.enum(["ACTION", "PKG", "USAGE", "WORKSPACE", "ZOD"])
 	.describe("Comment action options");
 
 export const formatsSchema = z
@@ -82,6 +82,9 @@ const _configSchema = z.object({
 	disableMarkdownHeadings: z.boolean().default(false).meta({
 		description: "Whether or not to display markdown headings",
 	}),
+	enableUsage: z.boolean().optional().default(false).meta({
+		description: "Wheter or not to enable usage plugin",
+	}),
 	headings: tableHeadingsSchema
 		.optional()
 		.default(defaultTableHeadings)
@@ -105,6 +108,12 @@ const _configSchema = z.object({
 		),
 	tocHeading: z.string().optional().default("Table of contents").meta({
 		description: "Markdown heading used to generate table of contents",
+	}),
+	usageFile: z.string().optional().meta({
+		description: "Workspace level usage file",
+	}),
+	usageHeading: z.string().optional().default("Usage").meta({
+		description: "Markdown heading used to generate usage example",
 	}),
 	useToc: z.boolean().default(false).meta({
 		alias: "t",

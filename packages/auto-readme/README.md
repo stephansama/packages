@@ -1,4 +1,4 @@
-# @stephansama/auto-readme
+# Auto Readme 🪄
 
 [![Source code](https://img.shields.io/badge/Source-666666?style=flat\&logo=github\&label=Github\&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/packages/auto-readme)
 [![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat\&logo=Wikibooks\&labelColor=211F1F)](https://packages.stephansama.info/modules/_stephansama_auto-readme)
@@ -13,8 +13,7 @@ Generate lists and tables for your README automagically based on your repository
 
 * [Installation](#installation)
 * [Usage](#usage)
-  * [Options](#options)
-  * [Git Hook](#git-hook)
+* [CLI Options](#cli-options)
 * [Configuration](#configuration)
   * [Configuration File](#configuration-file)
     * [JSON Example](#json-example)
@@ -31,15 +30,25 @@ Generate lists and tables for your README automagically based on your repository
 pnpm install @stephansama/auto-readme
 ```
 
+<!-- USAGE path="./example/index.js" start -->
+
 ## Usage
 
-You can use `auto-readme` by running the following command in your terminal:
+In order to run the script just use
 
 ```sh
-npx @stephansama/auto-readme [options]
+pnpx @stephansama/auto-readme [options]
 ```
 
-### Options
+You can run `auto-readme` as a pre-commit git hook to automatically keep your `README`s up to date. For example, you can use `husky` to add the following to your `.husky/pre-commit` file:
+
+```sh
+auto-readme -g
+```
+
+This will run `auto-readme` only when affected `README` files are changed
+
+## CLI Options
 
 | Option      | Alias | Description                                   | Type      | Default |
 | :---------- | :---- | :-------------------------------------------- | :-------- | :------ |
@@ -48,17 +57,7 @@ npx @stephansama/auto-readme [options]
 | `--config`  | `-c`  | Path to config file                           | `string`  |         |
 | `--verbose` | `-v`  | whether or not to display verbose logging     | `boolean` | `false` |
 
-All of the options in the [schema](#schema) below can also be used as command-line flags.
-
-### Git Hook
-
-You can run `auto-readme` as a pre-commit git hook to automatically keep your READMEs up to date. For example, you can use `husky` to add the following to your `.husky/pre-commit` file:
-
-```sh
-auto-readme -g
-```
-
-This will run `auto-readme` on only the files that have changed in git.
+Most of the options in the [schema](#schema) below can also be used as command-line flags.
 
 ## Configuration
 
@@ -139,6 +138,7 @@ Comment action options
 
 * `'ACTION'`
 * `'PKG'`
+* `'USAGE'`
 * `'WORKSPACE'`
 * `'ZOD'`
 
@@ -152,12 +152,15 @@ Comment action options
 | `defaultLanguage`         | Default language to infer projects from                     | [Language](#language)                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `disableEmojis`           | Whether or not to use emojis in markdown table headings     | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                          |
 | `disableMarkdownHeadings` | Whether or not to display markdown headings                 | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                          |
+| `enableUsage`             | Wheter or not to enable usage plugin                        | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                          |
 | `headings`                | List of headings for different table outputs                | *Object with dynamic keys of type* [Actions](#actions) *and values of type* *Array of [Headings](#headings) items* (*optional*)                                                                                                                                                         | `{"ACTION":["name","required","default","description"],"PKG":["name","version","devDependency"],"WORKSPACE":["name","version","downloads","description"],"ZOD":[]}`                                                                                                                                                                                                                              |
 | `onlyReadmes`             | Whether or not to only traverse readmes                     | `boolean`                                                                                                                                                                                                                                                                               | `true`                                                                                                                                                                                                                                                                                                                                                                                           |
 | `onlyShowPublicPackages`  | Only show public packages in workspaces                     | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                          |
 | `removeScope`             | Remove common workspace scope                               | `string`                                                                                                                                                                                                                                                                                | `''`                                                                                                                                                                                                                                                                                                                                                                                             |
 | `templates`               | Handlebars templates used to fuel list and table generation | *Object with properties:*<ul><li>`downloadImage`: `string`</li><li>`emojis`: *Object with dynamic keys of type* [Headings](#headings) *and values of type* `string` - Table heading emojis used when enabled</li><li>`registryUrl`: `string`</li><li>`versionImage`: `string`</li></ul> | `{"downloadImage":"https://img.shields.io/npm/dw/{{name}}?labelColor=211F1F","emojis":{"default":"⚙️","description":"📝","devDependency":"💻","downloads":"📥","name":"🏷️","private":"🔒","required":"","version":""},"registryUrl":"https://www.npmjs.com/package/{{name}}","versionImage":"https://img.shields.io/npm/v/{{uri_name}}?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F"}` |
 | `tocHeading`              | Markdown heading used to generate table of contents         | `string`                                                                                                                                                                                                                                                                                | `'Table of contents'`                                                                                                                                                                                                                                                                                                                                                                            |
+| `usageFile`               | Workspace level usage file                                  | `string`                                                                                                                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `usageHeading`            | Markdown heading used to generate usage example             | `string`                                                                                                                                                                                                                                                                                | `'Usage'`                                                                                                                                                                                                                                                                                                                                                                                        |
 | `useToc`                  | generate table of contents for readmes                      | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                          |
 | `verbose`                 | whether or not to display verbose logging                   | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                          |
 

@@ -37,7 +37,7 @@ export async function run() {
 		return ERROR(`no ${isAffected} readmes found to update`);
 	}
 
-	const spinner = ora(`Updating ${type}`).start();
+	const spinner = !args.verbose && ora(`Updating ${type}`).start();
 
 	await Promise.all(
 		paths.map(async (path) => {
@@ -56,12 +56,12 @@ export async function run() {
 
 			INFO("Loaded comment action data", data);
 
-			const content = await parse(file, config, data);
+			const content = await parse(file, path, root, config, data);
 			await fsp.writeFile(path, content);
 		}),
 	);
 
 	if (isAffected) cp.execFileSync("git", ["add", ...paths]);
 
-	spinner.stop();
+	if (spinner) spinner.stop();
 }

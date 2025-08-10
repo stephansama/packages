@@ -22,6 +22,16 @@ type ActionInput = {
 	required?: boolean;
 };
 
+export function createFindParameter(parameterList: string[]) {
+	return function (parameterName: string) {
+		return parameterList
+			?.find((p) => p.startsWith(parameterName))
+			?.replace(parameterName + "=", "")
+			?.replace(/"/gi, "")
+			?.replace("_", " ");
+	};
+}
+
 export async function loadActionData(
 	actions: AstComments,
 	file: string,
@@ -35,7 +45,7 @@ export async function loadActionData(
 				case "ACTION": {
 					const baseDir = path.dirname(file);
 					const actionYaml = await loadActionYaml(baseDir);
-					return { action: action.action, actionYaml };
+					return { ...action, actionYaml };
 				}
 
 				case "PKG": {
@@ -44,14 +54,18 @@ export async function loadActionData(
 						? path.resolve(path.dirname(file), inputPath)
 						: path.dirname(file);
 					const pkgJson = await readPackageJSON(filename);
-					return { action: action.action, pkgJson };
+					return { ...action, pkgJson };
+				}
+
+				case "USAGE": {
+					return { ...action };
 				}
 
 				case "WORKSPACE": {
 					const workspaces = await getPackages(process.cwd());
 					const pnpmPath = path.resolve(root, "pnpm-workspace.yaml");
 					const isPnpm = fs.existsSync(pnpmPath);
-					return { action: action.action, isPnpm, root, workspaces };
+					return { ...action, isPnpm, root, workspaces };
 				}
 
 				case "ZOD": {
@@ -70,7 +84,7 @@ export async function loadActionData(
 						title: find("title") || "Zod Schema",
 					});
 
-					return { action: action.action, body };
+					return { ...action, body };
 				}
 
 				default:
@@ -78,16 +92,6 @@ export async function loadActionData(
 			}
 		}),
 	);
-}
-
-function createFindParameter(parameterList: string[]) {
-	return function (parameterName: string) {
-		return parameterList
-			?.find((p) => p.startsWith(parameterName))
-			?.replace(parameterName + "=", "")
-			?.replace(/"/gi, "")
-			?.replace("_", " ");
-	};
 }
 
 async function loadActionYaml(baseDir: string) {

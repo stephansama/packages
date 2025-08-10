@@ -11,7 +11,6 @@ export async function loadConfig(args: Partial<Args>) {
 
 	if (args.config) opts.searchPlaces = [args.config];
 
-	/* cspell:disable-next-line configuration filename */
 	const explorer = cosmiconfig("autoreadme", opts);
 
 	const search = await explorer.search();
@@ -28,6 +27,7 @@ export async function loadConfig(args: Partial<Args>) {
 	// delete complex keys from args that cannot be passed
 	delete args.removeScope;
 	delete args.affectedRegexes;
+
 	args = removeFalsy(args);
 
 	INFO("merging config with args", args);

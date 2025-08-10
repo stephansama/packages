@@ -9,10 +9,7 @@ export const formatsSchema = z
 	.default("TABLE")
 	.optional();
 
-export const languageSchema = z
-	.enum(["JS", "RS", "GO"])
-	.optional()
-	.default("JS");
+export const languageSchema = z.enum(["JS", "RS"]).optional().default("JS");
 
 export const headingsSchema = z
 	.enum([

@@ -1,6 +1,6 @@
 {
 	"$schema": "https://typedoc.org/schema.json",
-	"out": "./dist",
+	"out": "../dist",
 	"name": "@stephansama packages",
 	"readme": "../README.md",
 	"favicon": "https://raw.githubusercontent.com/stephansama/static/refs/heads/main/favicon-packages.svg",

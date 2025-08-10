@@ -61,7 +61,7 @@ export async function run() {
 		}),
 	);
 
-	if (isAffected) cp.execSync(`git add ${paths.join(" ")}`);
+	if (isAffected) cp.execFileSync("git", ["add", ...paths]);
 
 	spinner.stop();
 }

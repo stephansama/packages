@@ -28,6 +28,7 @@ export async function loadActionData(
 	const startActions = actions.filter((action) => action.isStart);
 	return await Promise.all(
 		startActions.map(async (action) => {
+			const find = createFindParameter(action.parameters);
 			switch (action.action) {
 				case "ACTION": {
 					const baseDir = path.dirname(file);
@@ -36,7 +37,7 @@ export async function loadActionData(
 				}
 
 				case "PKG": {
-					const inputPath = parseParameter(action.parameters, "path");
+					const inputPath = find("path");
 					const filename = inputPath
 						? path.resolve(path.dirname(file), inputPath)
 						: path.dirname(file);
@@ -46,11 +47,8 @@ export async function loadActionData(
 
 				case "WORKSPACE": {
 					const workspaces = await getPackages(process.cwd());
-					const pnpmWorkspacePath = path.resolve(
-						root,
-						"pnpm-workspace.yaml",
-					);
-					const isPnpm = fs.existsSync(pnpmWorkspacePath);
+					const pnpmPath = path.resolve(root, "pnpm-workspace.yaml");
+					const isPnpm = fs.existsSync(pnpmPath);
 					return { action: action.action, isPnpm, root, workspaces };
 				}
 
@@ -59,7 +57,7 @@ export async function loadActionData(
 						throw new Error("cannot display zod in list format");
 					}
 
-					const inputPath = parseParameter(action.parameters, "path");
+					const inputPath = find("path");
 					if (!inputPath) {
 						const error = `no path found for zod table at markdown file ${file}`;
 						throw new Error(error);
@@ -67,9 +65,7 @@ export async function loadActionData(
 
 					const body = await zod2md({
 						entry: path.resolve(path.dirname(file), inputPath),
-						title:
-							parseParameter(action.parameters, "title") ||
-							"Zod Schema",
+						title: find("title") || "Zod Schema",
 					});
 
 					return { action: action.action, body };
@@ -80,6 +76,16 @@ export async function loadActionData(
 			}
 		}),
 	);
+}
+
+function createFindParameter(parameterList: string[]) {
+	return function (parameterName: string) {
+		return parameterList
+			?.find((p) => p.startsWith(parameterName))
+			?.replace(parameterName + "=", "")
+			?.replace(/"/gi, "")
+			?.replace("_", " ");
+	};
 }
 
 async function loadActionYaml(baseDir: string) {
@@ -98,12 +104,4 @@ async function loadActionYaml(baseDir: string) {
 	const actionFile = await fsp.readFile(actualPath, { encoding: "utf8" });
 
 	return yaml.parse(actionFile) as ActionYaml;
-}
-
-function parseParameter(parameterList: string[], parameterName: string) {
-	return parameterList
-		.find((p) => p.startsWith(parameterName))
-		?.replace(parameterName + "=", "")
-		.replace(/"/gi, "")
-		.replace("_", " ");
 }

@@ -1,11 +1,11 @@
 import glob from "fast-glob";
-import cp from "node:child_process";
+import * as cp from "node:child_process";
 import * as fs from "node:fs";
 import * as path from "node:path";
 
 import type { Config } from "./schema";
 
-import { INFO } from "./log";
+import { ERROR, INFO } from "./log";
 
 const sh = String.raw;
 
@@ -14,6 +14,7 @@ const opts: { encoding: BufferEncoding } = { encoding: "utf8" };
 const ignore = ["**/node_modules/**"];
 
 const matches = [
+	/.*README\.md$/gi,
 	/.*Cargo\.toml$/gi,
 	/.*action\.ya?ml$/gi,
 	/.*package\.json$/gi,
@@ -25,9 +26,12 @@ export function findAffectedMarkdowns(config: Config) {
 		/* cspell:disable-next-line because of the filter */
 		.execSync(sh`git diff --cached --name-only --diff-filter=MACT`, opts)
 		.trim()
-		.split("\n");
+		.split("\n")
+		.filter(Boolean);
 
-	if (config.affectedRegexes) {
+	if (!affected.length) ERROR("no staged files found");
+
+	if (config.affectedRegexes?.length) {
 		INFO("adding the following expressions: ", config.affectedRegexes);
 	}
 
@@ -48,6 +52,10 @@ export function findAffectedMarkdowns(config: Config) {
 
 export function getGitRoot() {
 	const root = cp.execSync(sh`git rev-parse --show-toplevel`, opts).trim();
+
+	if (!root) {
+		throw new Error("must be ran within a git directory.");
+	}
 
 	INFO("found git root at location: ", root);
 

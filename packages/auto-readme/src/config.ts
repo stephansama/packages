@@ -6,7 +6,7 @@ import type { Args } from "./args";
 import { INFO, WARN } from "./log";
 import { configSchema } from "./schema";
 
-export async function loadConfig(args: Args) {
+export async function loadConfig(args: Partial<Args>) {
 	const opts: Partial<Options> = {};
 
 	if (args.config) opts.searchPlaces = [args.config];

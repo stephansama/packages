@@ -1,7 +1,7 @@
 ##### Contents
 
 - [Introduction](#introduction)
-- [Packages](#packages)
+- [📦 Packages](#-packages)
 - [Other published packages](#other-published-packages)
 - [Stargazers ⭐](#stargazers-)
 

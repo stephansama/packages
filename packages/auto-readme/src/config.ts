@@ -28,10 +28,21 @@ export async function loadConfig(args: Partial<Args>) {
 	// delete complex keys from args that cannot be passed
 	delete args.removeScope;
 	delete args.affectedRegexes;
+	args = removeFalsy(args);
+
+	INFO("merging config with args", args);
 
 	return configSchema.parse(
 		deepmerge(search?.config || {}, args, {
 			arrayMerge: (_, sourceArray) => sourceArray,
 		}),
+	);
+}
+
+export function removeFalsy(obj: object) {
+	return Object.fromEntries(
+		Object.entries(obj)
+			.map(([k, v]) => (!v ? false : [k, v]))
+			.filter((e): e is [string, unknown] => Boolean(e)),
 	);
 }

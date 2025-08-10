@@ -22,17 +22,11 @@ const args = {
 		type: "boolean",
 	},
 	config: { alias: "c", description: "Path to config file", type: "string" },
-	file: {
-		alias: "f",
-		description: "Path to readme to alter",
-		type: "string",
-	},
 } satisfies Record<string, Options>;
 
 export async function parseArgs() {
 	const yargsInstance = yargs(hideBin(process.argv))
 		.options(args)
-		.positional("file", { array: true })
 		.help("h")
 		.alias("h", "help")
 		.epilogue(`--> @stephansama open-source ${new Date().getFullYear()}`);

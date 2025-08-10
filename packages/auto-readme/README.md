@@ -1,25 +1,25 @@
 # @stephansama/auto-readme
 
-[![Source code](https://img.shields.io/badge/Source-666666?style=flat\&logo=github\&label=Github\&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/packages/auto-readme)
-[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat\&logo=Wikibooks\&labelColor=211F1F)](https://packages.stephansama.info/modules/_stephansama_auto-readme)
-[![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Fauto-readme?logo=npm\&logoColor=red\&color=211F1F\&labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/auto-readme)
+[![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/packages/auto-readme)
+[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/modules/_stephansama_auto-readme)
+[![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Fauto-readme?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/auto-readme)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/auto-readme?labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/auto-readme)
 
 Generate lists and tables for your README automagically based on your repository
 
 ##### Contents
 
-* [Installation](#installation)
-* [Usage](#usage)
-  * [Options](#options)
-  * [Git Hook](#git-hook)
-* [Configuration](#configuration)
-  * [Configuration File](#configuration-file)
-    * [JSON Example](#json-example)
-    * [YAML Example](#yaml-example)
-    * [JavaScript Example](#javascript-example)
-    * [TypeScript Example](#typescript-example)
-  * [Schema](#schema)
+- [Installation](#installation)
+- [Usage](#usage)
+    - [Options](#options)
+    - [Git Hook](#git-hook)
+- [Configuration](#configuration)
+    - [Configuration File](#configuration-file)
+        - [JSON Example](#json-example)
+        - [YAML Example](#yaml-example)
+        - [JavaScript Example](#javascript-example)
+        - [TypeScript Example](#typescript-example)
+    - [Schema](#schema)
 
 ## Installation
 
@@ -42,7 +42,6 @@ npx @stephansama/auto-readme [options]
 | `--changes` | `-g`  | Check only changed git files                  | `boolean` | `false` |
 | `--check`   | `-k`  | Do not write to files. Only check for changes | `boolean` | `false` |
 | `--config`  | `-c`  | Path to config file                           | `string`  |         |
-| `--file`    | `-f`  | Path to readme to alter                       | `string`  |         |
 | `--verbose` |       | whether or not to display verbose logging     | `boolean` | `false` |
 
 All of the options in the [schema](#schema) below can also be used as command-line flags.
@@ -65,33 +64,33 @@ This will run `auto-readme` on only the files that have changed in git.
 
 You can configure `auto-readme` by creating a configuration file (or object) in the root of your project. The following file formats are supported:
 
-* `package.json`
-* `.autoreadmerc`
-* `.autoreadmerc.json`
-* `.autoreadmerc.yaml`
-* `.autoreadmerc.yml`
-* `.autoreadmerc.js`
-* `.autoreadmerc.ts`
-* `.autoreadmerc.mjs`
-* `.autoreadmerc.cjs`
-* `.config/autoreadmerc`
-* `.config/autoreadmerc.json`
-* `.config/autoreadmerc.yaml`
-* `.config/autoreadmerc.yml`
-* `.config/autoreadmerc.js`
-* `.config/autoreadmerc.ts`
-* `.config/autoreadmerc.mjs`
-* `.config/autoreadmerc.cjs`
-* `autoreadme.config.js`
-* `autoreadme.config.ts`
-* `autoreadme.config.mjs`
-* `autoreadme.config.cjs`
+- `package.json`
+- `.autoreadmerc`
+- `.autoreadmerc.json`
+- `.autoreadmerc.yaml`
+- `.autoreadmerc.yml`
+- `.autoreadmerc.js`
+- `.autoreadmerc.ts`
+- `.autoreadmerc.mjs`
+- `.autoreadmerc.cjs`
+- `.config/autoreadmerc`
+- `.config/autoreadmerc.json`
+- `.config/autoreadmerc.yaml`
+- `.config/autoreadmerc.yml`
+- `.config/autoreadmerc.js`
+- `.config/autoreadmerc.ts`
+- `.config/autoreadmerc.mjs`
+- `.config/autoreadmerc.cjs`
+- `autoreadme.config.js`
+- `autoreadme.config.ts`
+- `autoreadme.config.mjs`
+- `autoreadme.config.cjs`
 
 #### JSON Example
 
 ```json
 {
-  "$schema": "./node_modules/@stephansama/auto-readme/config/schema.json"
+	"$schema": "./node_modules/@stephansama/auto-readme/config/schema.json"
 }
 ```
 
@@ -108,8 +107,8 @@ disableEmojis: true
 ```javascript
 /** @type {import('@stephansama/auto-readme').Config} */
 export default {
-  onlyReadmes: false,
-  disableEmojis: true,
+	onlyReadmes: false,
+	disableEmojis: true,
 };
 ```
 
@@ -119,8 +118,8 @@ export default {
 import type { Config } from "@stephansama/auto-readme";
 
 export default {
-  onlyReadmes: false,
-  disableEmojis: true,
+	onlyReadmes: false,
+	disableEmojis: true,
 } satisfies Config;
 ```
 
@@ -134,90 +133,90 @@ export default {
 
 Comment action options
 
-*Enum, one of the following possible values:*
+_Enum, one of the following possible values:_
 
-* `'ACTION'`
-* `'PKG'`
-* `'WORKSPACE'`
-* `'ZOD'`
+- `'ACTION'`
+- `'PKG'`
+- `'WORKSPACE'`
+- `'ZOD'`
 
 ## Config
 
-*Object containing the following properties:*
+_Object containing the following properties:_
 
-| Property                 | Description                                                 | Type                                                                                                                                                                                                                                                                                    | Default                                                                                                                                                                                                                                                                                                                                                                                          |
-| :----------------------- | :---------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `affectedRegexes`        |                                                             | `Array<string>`                                                                                                                                                                                                                                                                         | `[]`                                                                                                                                                                                                                                                                                                                                                                                             |
-| `defaultLanguage`        | Default language to infer projects from                     | [Language](#language)                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `disableEmojis`          | Whether or not to use emojis in markdown table headings     | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                          |
-| `headings`               | List of headings for different table outputs                | *Object with dynamic keys of type* [Actions](#actions) *and values of type* *Array of [Headings](#headings) items* (*optional*)                                                                                                                                                         | `{"ACTION":["name","required","default","description"],"PKG":["name","version","devDependency"],"WORKSPACE":["name","version","downloads","description"],"ZOD":[]}`                                                                                                                                                                                                                              |
-| `onlyReadmes`            | Whether or not to only traverse readmes                     | `boolean`                                                                                                                                                                                                                                                                               | `true`                                                                                                                                                                                                                                                                                                                                                                                           |
-| `onlyShowPublicPackages` | Only show public packages in workspaces                     | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                          |
-| `removeScope`            | Remove common workspace scope                               | `string`                                                                                                                                                                                                                                                                                | `''`                                                                                                                                                                                                                                                                                                                                                                                             |
-| `templates`              | Handlebars templates used to fuel list and table generation | *Object with properties:*<ul><li>`downloadImage`: `string`</li><li>`emojis`: *Object with dynamic keys of type* [Headings](#headings) *and values of type* `string` - Table heading emojis used when enabled</li><li>`registryUrl`: `string`</li><li>`versionImage`: `string`</li></ul> | `{"downloadImage":"https://img.shields.io/npm/dw/{{name}}?labelColor=211F1F","emojis":{"default":"⚙️","description":"📝","devDependency":"💻","downloads":"📥","name":"🏷️","private":"🔒","required":"","version":""},"registryUrl":"https://www.npmjs.com/package/{{name}}","versionImage":"https://img.shields.io/npm/v/{{uri_name}}?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F"}` |
-| `useToc`                 | generate table of contents for readmes                      | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                          |
-| `verbose`                | whether or not to display verbose logging                   | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                          |
+| Property                 | Description                                                 | Type                                                                                                                                                                                                                                                                                    | Default                                                                                                                                                                                                                                                                                                                                                                                         |
+| :----------------------- | :---------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `affectedRegexes`        |                                                             | `Array<string>`                                                                                                                                                                                                                                                                         | `[]`                                                                                                                                                                                                                                                                                                                                                                                            |
+| `defaultLanguage`        | Default language to infer projects from                     | [Language](#language)                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `disableEmojis`          | Whether or not to use emojis in markdown table headings     | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                         |
+| `headings`               | List of headings for different table outputs                | _Object with dynamic keys of type_ [Actions](#actions) _and values of type_ _Array of [Headings](#headings) items_ (_optional_)                                                                                                                                                         | `{"ACTION":["name","required","default","description"],"PKG":["name","version","devDependency"],"WORKSPACE":["name","version","downloads","description"],"ZOD":[]}`                                                                                                                                                                                                                             |
+| `onlyReadmes`            | Whether or not to only traverse readmes                     | `boolean`                                                                                                                                                                                                                                                                               | `true`                                                                                                                                                                                                                                                                                                                                                                                          |
+| `onlyShowPublicPackages` | Only show public packages in workspaces                     | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                         |
+| `removeScope`            | Remove common workspace scope                               | `string`                                                                                                                                                                                                                                                                                | `''`                                                                                                                                                                                                                                                                                                                                                                                            |
+| `templates`              | Handlebars templates used to fuel list and table generation | _Object with properties:_<ul><li>`downloadImage`: `string`</li><li>`emojis`: _Object with dynamic keys of type_ [Headings](#headings) _and values of type_ `string` - Table heading emojis used when enabled</li><li>`registryUrl`: `string`</li><li>`versionImage`: `string`</li></ul> | `{"downloadImage":"https://img.shields.io/npm/dw/{{name}}?labelColor=211F1F","emojis":{"default":"⚙️","description":"📝","devDependency":"💻","downloads":"📥","name":"🏷️","private":"🔒","required":"","version":""},"registryUrl":"https://www.npmjs.com/package/{{name}}","versionImage":"https://img.shields.io/npm/v/{{uri_name}}?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F"}` |
+| `useToc`                 | generate table of contents for readmes                      | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                         |
+| `verbose`                | whether or not to display verbose logging                   | `boolean`                                                                                                                                                                                                                                                                               | `false`                                                                                                                                                                                                                                                                                                                                                                                         |
 
-*All properties are optional.* (*optional*)
+_All properties are optional._ (_optional_)
 
 ## Formats
 
-*Enum, one of the following possible values:*
+_Enum, one of the following possible values:_
 
-* `'LIST'`
-* `'TABLE'`
-  (*optional*)
+- `'LIST'`
+- `'TABLE'`
+  (_optional_)
 
-*Default value:* `'TABLE'`
+_Default value:_ `'TABLE'`
 
 ## Headings
 
 Table heading options
 
-*Enum, one of the following possible values:*
+_Enum, one of the following possible values:_
 
-* `'default'`
-* `'description'`
-* `'devDependency'`
-* `'downloads'`
-* `'name'`
-* `'private'`
-* `'required'`
-* `'version'`
+- `'default'`
+- `'description'`
+- `'devDependency'`
+- `'downloads'`
+- `'name'`
+- `'private'`
+- `'required'`
+- `'version'`
 
 ## Language
 
-*Enum, one of the following possible values:*
+_Enum, one of the following possible values:_
 
-* `'JS'`
-* `'RS'`
-  (*optional*)
+- `'JS'`
+- `'RS'`
+  (_optional_)
 
-*Default value:* `'JS'`
+_Default value:_ `'JS'`
 
 ## TableHeadings
 
 Table heading action configuration
 
-*Object record with dynamic keys:*
+_Object record with dynamic keys:_
 
-* *keys of type* [Actions](#actions)
-* *values of type* *Array of [Headings](#headings) items* (*optional*)
-  (*optional*)
+- _keys of type_ [Actions](#actions)
+- _values of type_ _Array of [Headings](#headings) items_ (_optional_)
+  (_optional_)
 
-*Default value:* `{"ACTION":["name","required","default","description"],"PKG":["name","version","devDependency"],"WORKSPACE":["name","version","downloads","description"],"ZOD":[]}`
+_Default value:_ `{"ACTION":["name","required","default","description"],"PKG":["name","version","devDependency"],"WORKSPACE":["name","version","downloads","description"],"ZOD":[]}`
 
 ## Templates
 
-*Object containing the following properties:*
+_Object containing the following properties:_
 
-| Property        | Description                            | Type                                                                                   | Default                                                                                                                            |
-| :-------------- | :------------------------------------- | :------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
-| `downloadImage` |                                        | `string`                                                                               | `'https://img.shields.io/npm/dw/{{name}}?labelColor=211F1F'`                                                                       |
-| `emojis`        | Table heading emojis used when enabled | *Object with dynamic keys of type* [Headings](#headings) *and values of type* `string` | `{"default":"⚙️","description":"📝","devDependency":"💻","downloads":"📥","name":"🏷️","private":"🔒","required":"","version":""}` |
-| `registryUrl`   |                                        | `string`                                                                               | `'https://www.npmjs.com/package/{{name}}'`                                                                                         |
-| `versionImage`  |                                        | `string`                                                                               | `'https://img.shields.io/npm/v/{{uri_name}}?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F'`                                |
+| Property        | Description                            | Type                                                                                   | Default                                                                                                                           |
+| :-------------- | :------------------------------------- | :------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| `downloadImage` |                                        | `string`                                                                               | `'https://img.shields.io/npm/dw/{{name}}?labelColor=211F1F'`                                                                      |
+| `emojis`        | Table heading emojis used when enabled | _Object with dynamic keys of type_ [Headings](#headings) _and values of type_ `string` | `{"default":"⚙️","description":"📝","devDependency":"💻","downloads":"📥","name":"🏷️","private":"🔒","required":"","version":""}` |
+| `registryUrl`   |                                        | `string`                                                                               | `'https://www.npmjs.com/package/{{name}}'`                                                                                        |
+| `versionImage`  |                                        | `string`                                                                               | `'https://img.shields.io/npm/v/{{uri_name}}?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F'`                               |
 
-*All properties are optional.*
+_All properties are optional._
 
 <!-- ZOD end -->

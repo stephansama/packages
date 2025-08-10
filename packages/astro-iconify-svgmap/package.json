@@ -59,7 +59,6 @@
 		"vite": "catalog:"
 	},
 	"devDependencies": {
-		"@config/tsconfig": "workspace:*",
 		"@iconify/types": "^2.0.0",
 		"@iconify/utils": "^2.3.0",
 		"astro": "catalog:",

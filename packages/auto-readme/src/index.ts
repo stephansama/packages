@@ -49,7 +49,12 @@ export async function run() {
 			})();
 
 			if (!actions.length) {
-				return WARN(`no action comments found in`, path);
+				WARN(`no action comments found in`, path);
+				if (!config.enableUsage || !config.enableToc) {
+					return ERROR("no action or plugins found");
+				} else {
+					INFO("plugins enabled. continuing parsing", path);
+				}
 			}
 
 			const data = await loadActionData(actions, path, root);

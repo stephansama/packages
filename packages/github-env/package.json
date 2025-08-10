@@ -35,9 +35,7 @@
 		"typescript"
 	],
 	"dependencies": {},
-	"devDependencies": {
-		"@config/tsconfig": "workspace:*"
-	},
+	"devDependencies": {},
 	"publishConfig": {
 		"access": "public",
 		"provenance": true

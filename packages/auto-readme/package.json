@@ -76,7 +76,6 @@
 		"zod2md": "^0.2.4"
 	},
 	"devDependencies": {
-		"@config/tsconfig": "workspace:*",
 		"@types/mdast": "^4.0.4",
 		"@types/yargs": "^17.0.33",
 		"mdast": "^3.0.0",

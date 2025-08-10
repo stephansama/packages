@@ -46,7 +46,6 @@
 		"latest-version": "^9.0.0"
 	},
 	"devDependencies": {
-		"@config/tsconfig": "workspace:*",
 		"tsup": "catalog:",
 		"zx": "catalog:"
 	},

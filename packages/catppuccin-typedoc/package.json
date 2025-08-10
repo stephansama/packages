@@ -28,8 +28,7 @@
 		"catppuccin-typedoc"
 	],
 	"devDependencies": {
-		"@catppuccin/palette": "catalog:",
-		"@config/tsconfig": "workspace:*"
+		"@catppuccin/palette": "catalog:"
 	},
 	"publishConfig": {
 		"access": "public",

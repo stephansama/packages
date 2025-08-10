@@ -43,7 +43,6 @@
 		"remark-plugin"
 	],
 	"devDependencies": {
-		"@config/tsconfig": "workspace:*",
 		"remark": "^15.0.1",
 		"tsup": "catalog:",
 		"unist-builder": "^4.0.0",

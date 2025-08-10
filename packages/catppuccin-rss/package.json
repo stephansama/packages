@@ -33,7 +33,6 @@
 	],
 	"devDependencies": {
 		"@catppuccin/palette": "catalog:",
-		"@config/tsconfig": "workspace:*",
 		"handlebars": "catalog:",
 		"minify": "^14.0.0"
 	},

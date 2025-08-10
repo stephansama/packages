@@ -103,6 +103,9 @@ const _configSchema = z.object({
 		.describe(
 			"Handlebars templates used to fuel list and table generation",
 		),
+	tocHeading: z.string().optional().default("Table of contents").meta({
+		description: "Markdown heading used to generate table of contents",
+	}),
 	useToc: z.boolean().default(false).meta({
 		alias: "t",
 		description: "generate table of contents for readmes",

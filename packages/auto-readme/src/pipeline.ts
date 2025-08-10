@@ -10,13 +10,12 @@ import { autoReadmeRemarkPlugin } from "./plugin";
 
 export async function parse(file: string, config: Config, data: ActionData) {
 	const pipeline = remark().use(autoReadmeRemarkPlugin, config, data);
-	const heading = "Table of contents";
 
 	if (config.useToc) {
 		INFO("generating table of contents");
 		pipeline
-			.use(remarkToc, { heading })
-			.use(remarkCollapse, { test: heading });
+			.use(remarkToc, { heading: config.tocHeading })
+			.use(remarkCollapse, { test: config.tocHeading });
 	}
 
 	const vfile = await pipeline.process(file);

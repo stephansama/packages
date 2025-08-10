@@ -4,7 +4,7 @@ import * as logger from "./log";
 import * as module from "./utils";
 
 const mocks = vi.hoisted(() => ({
-	access: vi.fn(),
+	access: vi.fn().mockResolvedValue(undefined),
 	execSync: vi.fn(),
 	existsSync: vi.fn(),
 }));

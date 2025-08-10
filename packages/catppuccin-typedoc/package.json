@@ -1,7 +1,7 @@
 {
 	"name": "@stephansama/catppuccin-typedoc",
 	"version": "1.0.0",
-	"description": "Catppuccin themes for typedoc",
+	"description": "Catppuccin css variable theme for typedoc",
 	"repository": {
 		"url": "https://github.com/stephansama/packages",
 		"type": "git",

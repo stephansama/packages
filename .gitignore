@@ -13,5 +13,5 @@ typedoc.css
 test-report.junit.xml
 
 examples/catppuccin-rss/**/*.x*
-packages/auto-readme/config
-packages/example/scripts/examples.json
+core/auto-readme/config
+core/example/scripts/examples.json

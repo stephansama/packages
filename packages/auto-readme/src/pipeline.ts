@@ -39,7 +39,7 @@ export async function parse(
 				heading: config.usageHeading,
 			});
 		} else {
-			WARN("not able to find example file for readme", filepath);
+			WARN("not able to find example file for readme", filepath, example);
 		}
 	}
 

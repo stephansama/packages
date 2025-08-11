@@ -1,9 +1,5 @@
 import { afterEach, expect, it, vi } from "vitest";
 
-const mocks = vi.hoisted(() => ({
-	//
-}));
-
 afterEach(() => {
 	vi.resetModules();
 	vi.clearAllMocks();

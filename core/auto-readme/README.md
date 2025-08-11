@@ -95,26 +95,33 @@ Most of the options in the [schema](#schema) below can also be used as command-l
 You can configure `auto-readme` by creating a configuration file (or object) in the root of your project. The following file formats are supported:
 
 - `package.json`
-- `.autoreadmerc`
+- `.autoreadmerc.cjs`
+- `.autoreadmerc.js`
 - `.autoreadmerc.json`
+- `.autoreadmerc.mjs`
+- `.autoreadmerc.toml`
+- `.autoreadmerc.ts`
 - `.autoreadmerc.yaml`
 - `.autoreadmerc.yml`
-- `.autoreadmerc.js`
-- `.autoreadmerc.ts`
-- `.autoreadmerc.mjs`
-- `.autoreadmerc.cjs`
-- `.config/autoreadmerc`
+- `.autoreadmerc`
+- `.config/.autoreadmerc.json`
+- `.config/.autoreadmerc.toml`
+- `.config/.autoreadmerc.yaml`
+- `.config/.autoreadmerc.yml`
+- `.config/.autoreadmerc`
+- `.config/autoreadmerc.cjs`
+- `.config/autoreadmerc.js`
 - `.config/autoreadmerc.json`
+- `.config/autoreadmerc.mjs`
+- `.config/autoreadmerc.toml`
+- `.config/autoreadmerc.ts`
 - `.config/autoreadmerc.yaml`
 - `.config/autoreadmerc.yml`
-- `.config/autoreadmerc.js`
-- `.config/autoreadmerc.ts`
-- `.config/autoreadmerc.mjs`
-- `.config/autoreadmerc.cjs`
-- `autoreadme.config.js`
-- `autoreadme.config.ts`
-- `autoreadme.config.mjs`
+- `.config/autoreadmerc`
 - `autoreadme.config.cjs`
+- `autoreadme.config.js`
+- `autoreadme.config.mjs`
+- `autoreadme.config.ts`
 
 #### JSON Example
 

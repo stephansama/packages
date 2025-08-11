@@ -18,7 +18,8 @@
 	"navigationLinks": {
 		"Author": "https://stephansama.info",
 		"Blog": "https://madprofessorblog.org",
-		"GitHub": "https://github.com/stephansama/packages"
+		"Actions": "https://github.com/stephansama/actions",
+		"Packages": "https://github.com/stephansama/packages"
 	},
 	"highlightLanguages": [
 		"bash",

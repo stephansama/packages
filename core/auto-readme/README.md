@@ -17,7 +17,6 @@ Generate lists and tables for your README automagically based on your repository
 - [Configuration](#configuration)
   - [Configuration File](#configuration-file)
     - [JSON Example](#json-example)
-    - [TOML Example](#toml-example)
     - [YAML Example](#yaml-example)
     - [JavaScript Example](#javascript-example)
     - [TypeScript Example](#typescript-example)
@@ -131,13 +130,6 @@ You can configure `auto-readme` by creating a configuration file (or object) in 
   "$schema": "./node_modules/@stephansama/auto-readme/config/schema.json",
   "disableEmojis": true
 }
-```
-
-#### TOML Example
-
-```toml
-'$schema' = "./node_modules/@stephansama/auto-readme/config/schema.json"
-disableEmojis = true
 ```
 
 #### YAML Example

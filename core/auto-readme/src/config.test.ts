@@ -4,27 +4,42 @@ import * as module from "./config";
 import * as logger from "./log";
 import { configSchema } from "./schema";
 
-const searchMock = vi.hoisted(() => ({
-	mock: vi.fn(),
-}));
+const searchMock = vi.hoisted(() => ({ mock: vi.fn() }));
 
 const mocks = vi.hoisted(() => ({
-	cosmiconfig: vi.fn().mockReturnValue({
-		search: searchMock.mock,
-	}),
+	cosmiconfig: vi.fn().mockReturnValue({ search: searchMock.mock }),
 	deepmerge: vi.fn(),
+	getDefaultSearchPlaces: vi.fn().mockReturnValue([]),
 }));
 
 vi.mock("cosmiconfig", () => ({
 	cosmiconfig: mocks.cosmiconfig,
+	getDefaultSearchPlaces: mocks.getDefaultSearchPlaces,
 }));
 
-vi.mock("deepmerge", () => ({
-	default: mocks.deepmerge,
-}));
+vi.mock("deepmerge", () => ({ default: mocks.deepmerge }));
 
-afterEach(() => {
-	vi.clearAllMocks();
+const toml = String.raw;
+const mockToml = toml`
+key = "value"
+
+[nested]
+key = "value"
+`;
+
+afterEach(vi.clearAllMocks);
+
+it("loadsToml properly", () => {
+	const obj = module.loadToml("", mockToml);
+	expect(obj).toBeTruthy();
+});
+
+it("throws an error when invalid toml is provided to loadsToml", () => {
+	const trim = mockToml.trim();
+	const size = trim.length;
+	const trimmed = trim.slice(0, size - 1); // remove the last character to invalidate the toml
+
+	expect(() => module.loadToml("", trimmed)).toThrowError();
 });
 
 it("loads the default config", async () => {

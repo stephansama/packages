@@ -42,12 +42,8 @@ export async function loadConfig(args: Partial<Args>) {
 	);
 }
 
-export function removeFalsy(obj: object) {
-	return Object.fromEntries(
-		Object.entries(obj)
-			.map(([k, v]) => (!v ? false : [k, v]))
-			.filter((e): e is [string, unknown] => Boolean(e)),
-	);
+export function loadToml(_filepath: string, content: string) {
+	return toml.parse(content);
 }
 
 function getSearchPlaces() {
@@ -63,6 +59,10 @@ function getSearchPlaces() {
 	];
 }
 
-function loadToml(_filepath: string, content: string) {
-	return toml.parse(content);
+function removeFalsy(obj: object) {
+	return Object.fromEntries(
+		Object.entries(obj)
+			.map(([k, v]) => (!v ? false : [k, v]))
+			.filter((e): e is [string, unknown] => Boolean(e)),
+	);
 }

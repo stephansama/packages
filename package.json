@@ -12,6 +12,7 @@
 	"type": "module",
 	"scripts": {
 		"with-env": "dotenv -e .env --",
+		"dev": "turbo dev",
 		"lint": "turbo lint",
 		"test": "turbo test",
 		"test:ci": "vitest --run --coverage --reporter=junit --outputFile=test-report.junit.xml",
@@ -30,7 +31,6 @@
 	"devDependencies": {
 		"@arethetypeswrong/cli": "^0.18.2",
 		"@changesets/cli": "^2.29.4",
-		"@codecov/vite-plugin": "catalog:",
 		"@commitlint/cli": "^19.8.1",
 		"@commitlint/config-conventional": "^19.8.1",
 		"@commitlint/types": "^19.8.1",
@@ -41,8 +41,8 @@
 		"@turbo/gen": "^2.5.4",
 		"@types/node": "^24.0.1",
 		"@typescript-eslint/parser": "^8.34.0",
-		"@vitest/coverage-v8": "catalog:",
-		"@vitest/ui": "catalog:",
+		"@vitest/coverage-v8": "^3.2.4",
+		"@vitest/ui": "^3.2.4",
 		"dotenv-cli": "^8.0.0",
 		"eslint": "^9.29.0",
 		"eslint-config-flat-gitignore": "^2.1.0",

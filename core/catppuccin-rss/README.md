@@ -8,3 +8,9 @@
 This repository combines the delightful themes of Catppuccin-Mocha
 with the functionality of Pretty Feed v3,
 creating a beautiful and feature-rich RSS reader experience.
+
+## Example
+
+you can view the examples here 👉 [![packages](https://pkg.pr.new/badge/stephansama/packages?style=flat&color=000&logoSize=auto)](https://pkg.pr.new/~/stephansama/packages) underneath the `@stephansama/catppuccin-rss` template
+
+![example](https://raw.githubusercontent.com/stephansama/static/refs/heads/main/packages/catppuccin.png)

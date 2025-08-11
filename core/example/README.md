@@ -12,3 +12,5 @@ Download an example from the @stephansama/packages examples
 ```sh
 pnpm create stephansama-example
 ```
+
+![example](https://raw.githubusercontent.com/stephansama/static/refs/heads/main/packages/example.gif)

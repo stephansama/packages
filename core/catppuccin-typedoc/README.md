@@ -12,3 +12,9 @@ Catppuccin theme for typedoc
 ```sh
 pnpm install @stephansama/catppuccin-typedoc
 ```
+
+## Examples
+
+an example typedoc site using this theme can be found [here](https://packages.stephansama.info/)
+
+![image](https://raw.githubusercontent.com/stephansama/static/refs/heads/main/packages/typedoc.png)

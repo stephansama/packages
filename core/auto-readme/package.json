@@ -54,6 +54,7 @@
 		"table"
 	],
 	"dependencies": {
+		"@iarna/toml": "^2.2.5",
 		"@manypkg/get-packages": "^3.1.0",
 		"chalk": "^5.5.0",
 		"cosmiconfig": "^9.0.0",

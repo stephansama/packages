@@ -38,13 +38,16 @@ jobs:
       - run: pnpm run lint
       - name: 🧪 Create coverage reports
         run: pnpm run test:ci
-      - name: 🧪 Upload coverage reports to Codecov 🔼
+      - name: 📤 Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
-          disable_telem: true
-      - name: 🧪 Upload test results to Codecov 🔼
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: 📤 Upload test results to Codecov
         if: ${{ !cancelled() }}
         uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: "./coverage/test-report.junit.xml"
       - name: 🚀 Publish Stackblitz
         run: pnpx pkg-pr-new publish './core/*' --pnpm --packageManager='pnpm' --template './examples/*'
   release:

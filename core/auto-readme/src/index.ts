@@ -68,15 +68,15 @@ export async function run() {
 
 	const opts: cp.CommonExecOptions = { stdio: "inherit" };
 
+	INFO("formatting with prettier");
+
+	cp.execFileSync("prettier", ["--write", ...paths], opts);
+
 	if (isAffected) {
 		INFO("adding affected files to git stage");
 
 		cp.execFileSync("git", ["add", ...paths], opts);
 	}
-
-	INFO("formatting with prettier");
-
-	cp.execFileSync("prettier", ["--write", ...paths], opts);
 
 	if (spinner) spinner.stop();
 }

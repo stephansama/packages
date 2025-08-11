@@ -120,8 +120,8 @@ You can configure `auto-readme` by creating a configuration file (or object) in 
 
 ```json
 {
-  "$schema": "./node_modules/@stephansama/auto-readme/config/schema.json",
-  "disableEmojis": true
+	"$schema": "./node_modules/@stephansama/auto-readme/config/schema.json",
+	"disableEmojis": true
 }
 ```
 
@@ -137,7 +137,7 @@ disableEmojis: true
 ```javascript
 /** @type {import('@stephansama/auto-readme').Config} */
 export default {
-  disableEmojis: true,
+	disableEmojis: true,
 };
 ```
 
@@ -147,7 +147,7 @@ export default {
 import type { Config } from "@stephansama/auto-readme";
 
 export default {
-  disableEmojis: true,
+	disableEmojis: true,
 } satisfies Config;
 ```
 

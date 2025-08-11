@@ -66,7 +66,17 @@ export async function run() {
 		}),
 	);
 
-	if (isAffected) cp.execFileSync("git", ["add", ...paths]);
+	const opts: cp.CommonExecOptions = { stdio: "inherit" };
+
+	if (isAffected) {
+		INFO("adding affected files to git stage");
+
+		cp.execFileSync("git", ["add", ...paths], opts);
+	}
+
+	INFO("formatting with prettier");
+
+	cp.execFileSync("prettier", ["--write", ...paths], opts);
 
 	if (spinner) spinner.stop();
 }

@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/auto-readme",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Generate lists and tables for your README automagically based on your repository and comments",
 	"repository": {
 		"url": "https://github.com/stephansama/packages",

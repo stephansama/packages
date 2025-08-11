@@ -1,2 +1,2 @@
 auto-readme -gv
-lint-staged -v
+lint-staged -dv

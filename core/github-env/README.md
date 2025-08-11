@@ -22,7 +22,7 @@ In order to enable the GitHub environment variables into your local scope you ca
 ```json
 {
   "compilerOptions": {
-	"types": ["@stephansama/github-env"]
+    "types": ["@stephansama/github-env"]
   }
 }
 ```

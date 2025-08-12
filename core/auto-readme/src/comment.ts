@@ -1,4 +1,6 @@
-import type { Root } from "mdast";
+import type { Html, Root } from "mdast";
+
+import { commentMarker } from "mdast-comment-marker";
 
 import { INFO } from "./log";
 import { actionsSchema, formatsSchema, languageSchema } from "./schema";
@@ -9,7 +11,7 @@ export type AstComments = ReturnType<typeof loadAstComments>;
 
 export function loadAstComments(root: Root) {
 	return root.children
-		.map((child) => child.type === "html" && getComment(child.value))
+		.map((child) => child.type === "html" && getComment(child))
 		.filter((f): f is ReturnType<typeof parseComment> => f !== false);
 }
 
@@ -45,8 +47,14 @@ export function trimComment(comment: string) {
 		.trim();
 }
 
-function getComment(comment: string) {
-	return isComment(comment) && parseComment(comment);
+function getComment(comment: Html) {
+	if (!isComment(comment.value)) return false;
+
+	const marker = commentMarker(comment);
+	if (!marker) return false;
+
+	//.TODO: update parseComment to use comment marker
+	return parseComment(comment.value);
 }
 
 function isComment(comment: string) {

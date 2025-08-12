@@ -1,13 +1,18 @@
+import debug from "debug";
 import yargs, { type Options } from "yargs";
 import { hideBin } from "yargs/helpers";
 import z from "zod";
 
-import { setVerbosity } from "./log";
 import { configSchema } from "./schema";
 
 export type Args = Awaited<ReturnType<typeof parseArgs>>;
 
-const complexOptions = ["affectedRegexes", "templates", "headings"] as const;
+const complexOptions = [
+	"affectedRegexes",
+	"collapseHeadings",
+	"headings",
+	"templates",
+] as const;
 
 type ComplexOptions = (typeof complexOptions)[number];
 
@@ -39,7 +44,7 @@ export async function parseArgs() {
 		.wrap(yargsInstance.terminalWidth())
 		.parse();
 
-	if (parsed.verbose) setVerbosity(1);
+	if (parsed.verbose) debug.enable("autoreadme*");
 
 	return parsed;
 }

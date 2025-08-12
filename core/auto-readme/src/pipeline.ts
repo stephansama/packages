@@ -1,8 +1,10 @@
 import * as path from "node:path";
 import { remark } from "remark";
+import remarkCodeImport from "remark-code-import";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import remarkUsage from "remark-usage";
+import { VFile } from "vfile";
 
 import type { ActionData } from "./data";
 import type { Config } from "./schema";
@@ -19,7 +21,10 @@ export async function parse(
 	config: Config,
 	data: ActionData,
 ) {
-	const pipeline = remark().use(autoReadmeRemarkPlugin, config, data);
+	const pipeline = remark()
+		.use(autoReadmeRemarkPlugin, config, data)
+		.use(remarkCodeImport, {});
+
 	const usage = data.find((d) => d.action === "USAGE");
 
 	if (usage?.action === "USAGE" || config.enableUsage) {
@@ -35,7 +40,7 @@ export async function parse(
 			relativeProjectPath ||
 			undefined;
 
-		if (await fileExists(example || "")) {
+		if (example && (await fileExists(example))) {
 			INFO("generating usage section");
 			pipeline.use(remarkUsage, {
 				example,
@@ -48,11 +53,25 @@ export async function parse(
 
 	if (config.enableToc) {
 		INFO("generating table of contents section");
-		pipeline
-			.use(remarkToc, { heading: config.tocHeading })
-			.use(remarkCollapse, { test: config.tocHeading });
+		pipeline.use(remarkToc, { heading: config.tocHeading });
 	}
 
-	const vfile = await pipeline.process(file);
-	return vfile.toString();
+	if (config.enableToc || config.collapseHeadings?.length) {
+		const additional = config.collapseHeadings?.length
+			? config.collapseHeadings
+			: [];
+		const headings = [...additional, config.tocHeading];
+		pipeline.use(remarkCollapse, {
+			test: {
+				ignoreFinalDefinitions: true,
+				test: (value, _) => {
+					return headings.some((i) => value.trim() === i?.trim());
+				},
+			},
+		});
+	}
+
+	const vfile = new VFile({ path: path.resolve(filepath), value: file });
+	const markdown = await pipeline.process(vfile);
+	return markdown.toString();
 }

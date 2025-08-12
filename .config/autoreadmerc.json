@@ -1,6 +1,7 @@
 {
-	"$schema": "../packages/auto-readme/config/schema.json",
+	"$schema": "../node_modules/@stephansama/auto-readme/config/schema.json",
 	"usageFile": "./example/index.js",
+	"collapseHeadings": ["Configuration File", "Schema"],
 	"enableToc": true,
 	"enableUsage": true,
 	"removeScope": "@stephansama/",

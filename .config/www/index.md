@@ -5,6 +5,9 @@ hero:
   name: "Packages"
   text: "created by @stephansama"
   tagline: Open Source. Well Built. Ready to Ship.
+  image:
+    src: https://www.github.com/stephansama.png
+    alt: Hero Image
   actions:
     - theme: brand
       text: API

@@ -7,15 +7,8 @@ export default defineConfig({
 	description:
 		"Documentation on how to use the mad professor suite of utilities",
 	head: [
-		[
-			"link",
-			{ href: "/icon/apple-touch-icon.png", rel: "apple-touch-icon" },
-		],
-		["link", { href: "/icon/android-chrome-512x512.png", rel: "icon" }],
-		["link", { href: "/icon/android-chrome-192x192.png", rel: "icon" }],
-		["link", { href: "/icon/favicon-32x32.png", rel: "icon" }],
-		["link", { href: "/icon/favicon-16x16.png", rel: "icon" }],
-		["link", { href: "/icon/favicon.ico", rel: "icon" }],
+		["link", { href: "/favicon.svg", rel: "icon" }],
+		// TODO: add opengraph images
 	],
 	ignoreDeadLinks: true,
 	lastUpdated: true,

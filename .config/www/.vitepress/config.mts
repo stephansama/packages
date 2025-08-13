@@ -23,7 +23,7 @@ export default defineConfig({
 		theme: { dark: "catppuccin-mocha", light: "catppuccin-latte" },
 	},
 	outDir: "../../dist",
-	sitemap: { hostname: "" },
+	sitemap: { hostname: "https://packages.stephansama.info" },
 	themeConfig: {
 		footer: {
 			copyright: `Copyright © ${new Date().getFullYear()} - @stephansama`,

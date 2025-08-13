@@ -22,7 +22,7 @@ export default defineConfig({
 	markdown: {
 		theme: { dark: "catppuccin-mocha", light: "catppuccin-latte" },
 	},
-	outDir: "dist",
+	outDir: "../../dist",
 	sitemap: { hostname: "" },
 	themeConfig: {
 		footer: {

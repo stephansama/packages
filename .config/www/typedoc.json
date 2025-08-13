@@ -5,7 +5,6 @@
 	"plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
 	"indexFormat": "htmlTable",
 	"useCodeBlocks": true,
-	"disableSources": true,
 	"excludeExternals": true,
 	"skipErrorChecking": true,
 	"jsDocCompatibility": true,

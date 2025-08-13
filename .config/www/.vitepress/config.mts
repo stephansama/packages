@@ -29,16 +29,8 @@ export default defineConfig({
 				text: "Blog",
 			},
 		],
-		search: {
-			options: { detailedView: true },
-			provider: "local",
-		},
-		sidebar: [
-			{
-				items: typedocSidebar,
-				text: "API",
-			},
-		],
+		search: { options: { detailedView: true }, provider: "local" },
+		sidebar: [{ items: typedocSidebar, link: "/api", text: "API" }],
 		socialLinks: [
 			{
 				icon: "bluesky",

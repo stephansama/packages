@@ -7,7 +7,7 @@
 		"type": "git",
 		"directory": "packages/catppuccin-typedoc"
 	},
-	"homepage": "https://packages.stephansama.info/modules/_stephansama_catppuccin-typedoc",
+	"homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-typedoc",
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",

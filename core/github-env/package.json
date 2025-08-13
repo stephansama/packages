@@ -7,7 +7,7 @@
 		"type": "git",
 		"directory": "packages/github-env"
 	},
-	"homepage": "https://packages.stephansama.info/modules/_stephansama_github-env",
+	"homepage": "https://packages.stephansama.info/api/@stephansama/github-env",
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",

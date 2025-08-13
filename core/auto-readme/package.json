@@ -7,7 +7,7 @@
 		"type": "git",
 		"directory": "packages/auto-readme"
 	},
-	"homepage": "https://packages.stephansama.info/modules/_stephansama_auto-readme",
+	"homepage": "https://packages.stephansama.info/api/@stephansama/auto-readme",
 	"author": {
 		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",

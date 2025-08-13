@@ -1,3 +1,4 @@
+**/.vitepress/cache
 **/coverage/
 *.bak
 .DS_Store
@@ -8,9 +9,8 @@
 .wrangler
 dist
 node_modules
-typedoc.css
 
-test-report.junit.xml
+.config/www/api
 
 examples/catppuccin-rss/**/*.x*
 core/auto-readme/config

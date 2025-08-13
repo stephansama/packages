@@ -30,6 +30,7 @@
 		"tsup",
 		"typedoc",
 		"vite",
+		"vitepress",
 		"vitest",
 		"yarg"
 	],

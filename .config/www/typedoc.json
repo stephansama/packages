@@ -1,0 +1,13 @@
+{
+	"$schema": "https://typedoc-plugin-markdown.org/schema.json",
+	"name": "@stephansama packages",
+	"readme": "../../README.md",
+	"plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
+	"useCodeBlocks": true,
+	"disableSources": true,
+	"excludeExternals": true,
+	"skipErrorChecking": true,
+	"jsDocCompatibility": true,
+	"entryPointStrategy": "packages",
+	"entryPoints": ["../../core/*"]
+}

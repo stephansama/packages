@@ -1,7 +1,6 @@
-import { expect, it, vi } from "vitest";
+import { afterEach, expect, it, vi } from "vitest";
 
 import * as module from "./args";
-import * as logger from "./log";
 
 const yargs = vi.hoisted(() => ({
 	alias: vi.fn(() => yargs),
@@ -14,20 +13,24 @@ const yargs = vi.hoisted(() => ({
 	wrap: vi.fn(() => yargs),
 }));
 
+const debug = vi.hoisted(() => ({ default: { enable: vi.fn() } }));
+
+vi.mock("debug", () => ({ default: debug.default }));
+
 vi.mock("yargs", () => ({ default: yargs.default }));
 
+afterEach(vi.clearAllMocks);
+
 it("loads sets verbose when added", async () => {
-	const setVerboseSpy = vi.spyOn(logger, "setVerbosity");
 	yargs.parse.mockResolvedValue({ verbose: true });
 	await module.parseArgs();
 
-	expect(setVerboseSpy).toHaveBeenCalled();
+	expect(debug.default.enable).toHaveBeenCalled();
 });
 
 it("does not set verbosity when not added", async () => {
-	const setVerboseSpy = vi.spyOn(logger, "setVerbosity");
 	yargs.parse.mockResolvedValue({ verbose: false });
 	await module.parseArgs();
 
-	expect(setVerboseSpy).not.toHaveBeenCalled();
+	expect(debug.default.enable).not.toHaveBeenCalled();
 });

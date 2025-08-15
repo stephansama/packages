@@ -2,7 +2,8 @@
 	"extends": ["//"],
 	"tasks": {
 		"build": {
-			"dependsOn": ["create-stephansama-example#build"]
+			"dependsOn": ["create-stephansama-example#build"],
+			"outputs": ["$TURBO_ROOT$/dist"]
 		}
 	}
 }

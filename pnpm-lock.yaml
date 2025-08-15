@@ -231,8 +231,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       mdast-zone:
-        specifier: github:stephansama/mdast-zone
-        version: https://codeload.github.com/stephansama/mdast-zone/tar.gz/62fabb19b3f245ecd6409813759e8ef11cfdd6d9
+        specifier: github:stephansama/mdast-zone#1c5b08cd97240debeed4c9c6afad49df5877a132
+        version: https://codeload.github.com/stephansama/mdast-zone/tar.gz/1c5b08cd97240debeed4c9c6afad49df5877a132
       ora:
         specifier: ^8.2.0
         version: 8.2.0
@@ -4973,8 +4973,8 @@ packages:
   mdast-util-toc@7.1.0:
     resolution: {integrity: sha512-2TVKotOQzqdY7THOdn2gGzS9d1Sdd66bvxUyw3aNpWfcPXCLYSJCCgfPy30sEtuzkDraJgqF35dzgmz6xlvH/w==}
 
-  mdast-zone@https://codeload.github.com/stephansama/mdast-zone/tar.gz/62fabb19b3f245ecd6409813759e8ef11cfdd6d9:
-    resolution: {tarball: https://codeload.github.com/stephansama/mdast-zone/tar.gz/62fabb19b3f245ecd6409813759e8ef11cfdd6d9}
+  mdast-zone@https://codeload.github.com/stephansama/mdast-zone/tar.gz/1c5b08cd97240debeed4c9c6afad49df5877a132:
+    resolution: {tarball: https://codeload.github.com/stephansama/mdast-zone/tar.gz/1c5b08cd97240debeed4c9c6afad49df5877a132}
     version: 6.1.0
 
   mdast@3.0.0:
@@ -12831,7 +12831,7 @@ snapshots:
       unist-util-is: 6.0.0
       unist-util-visit: 5.0.0
 
-  mdast-zone@https://codeload.github.com/stephansama/mdast-zone/tar.gz/62fabb19b3f245ecd6409813759e8ef11cfdd6d9:
+  mdast-zone@https://codeload.github.com/stephansama/mdast-zone/tar.gz/1c5b08cd97240debeed4c9c6afad49df5877a132:
     dependencies:
       '@types/mdast': 4.0.4
       '@types/unist': 3.0.3

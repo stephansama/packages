@@ -11,24 +11,16 @@ Generate lists and tables for your README automagically based on your repository
 
 <details><summary>Open Table of contents</summary>
 
-- - [Installation](#installation)
-  - [Usage](#usage)
-  - [CLI Options](#cli-options)
-  - [Configuration](#configuration)
-    - [Configuration File](#configuration-file)
-      - [JSON Example](#json-example)
-      - [YAML Example](#yaml-example)
-      - [JavaScript Example](#javascript-example)
-      - [TypeScript Example](#typescript-example)
-    - [Schema](#schema)
-- [Zod Schema](#zod-schema)
-  - [Actions](#actions)
-  - [Config](#config)
-  - [Formats](#formats)
-  - [Headings](#headings)
-  - [Language](#language)
-  - [TableHeadings](#tableheadings)
-  - [Templates](#templates)
+- [Installation](#installation)
+- [Usage](#usage)
+- [CLI Options](#cli-options)
+- [Configuration](#configuration)
+  - [Configuration File](#configuration-file)
+    - [JSON Example](#json-example)
+    - [YAML Example](#yaml-example)
+    - [JavaScript Example](#javascript-example)
+    - [TypeScript Example](#typescript-example)
+  - [Schema](#schema)
 
 </details>
 

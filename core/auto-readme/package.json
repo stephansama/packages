@@ -66,7 +66,7 @@
 		"mdast-comment-marker": "^3.0.0",
 		"mdast-util-from-markdown": "^2.0.2",
 		"mdast-util-gfm": "^3.1.0",
-		"mdast-zone": "github:stephansama/mdast-zone",
+		"mdast-zone": "github:stephansama/mdast-zone#1c5b08cd97240debeed4c9c6afad49df5877a132",
 		"ora": "^8.2.0",
 		"pkg-types": "^2.2.0",
 		"remark": "^15.0.1",

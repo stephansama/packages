@@ -53,7 +53,7 @@ function getComment(comment: Html) {
 	const marker = commentMarker(comment);
 	if (!marker) return false;
 
-	//.TODO: update parseComment to use comment marker
+	// TODO: update parseComment to use comment marker
 	return parseComment(comment.value);
 }
 

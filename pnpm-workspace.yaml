@@ -18,6 +18,4 @@ overrides:
   "@stephansama/astro-iconify-svgmap": workspace:*
   "@stephansama/catppuccin-rss": workspace:*
   "@stephansama/remark-asciinema": workspace:*
-  create-stephansama-example: workspace:*
-patchedDependencies:
-  mdast-zone: patches/mdast-zone.patch
+  "create-stephansama-example": workspace:*

@@ -4,6 +4,7 @@
 
 - [Introduction](#introduction)
 - [📦 Packages](#-packages)
+  - [🏭 workspace](#-workspace)
 - [Other published packages](#other-published-packages)
 - [Stargazers ⭐](#stargazers-)
 

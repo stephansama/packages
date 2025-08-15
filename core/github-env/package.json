@@ -5,7 +5,7 @@
 	"repository": {
 		"url": "https://github.com/stephansama/packages",
 		"type": "git",
-		"directory": "packages/github-env"
+		"directory": "core/github-env"
 	},
 	"homepage": "https://packages.stephansama.info/api/@stephansama/github-env",
 	"author": {

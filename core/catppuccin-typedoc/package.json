@@ -5,7 +5,7 @@
 	"repository": {
 		"url": "https://github.com/stephansama/packages",
 		"type": "git",
-		"directory": "packages/catppuccin-typedoc"
+		"directory": "core/catppuccin-typedoc"
 	},
 	"homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-typedoc",
 	"author": {

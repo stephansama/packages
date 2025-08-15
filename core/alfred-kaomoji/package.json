@@ -5,7 +5,7 @@
 	"repository": {
 		"url": "https://github.com/stephansama/packages",
 		"type": "git",
-		"directory": "packages/alfred-kaomoji"
+		"directory": "core/alfred-kaomoji"
 	},
 	"homepage": "https://packages.stephansama.info/api/@stephansama/alfred-kaomoji",
 	"author": {

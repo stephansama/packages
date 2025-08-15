@@ -1,24 +1,20 @@
-import chalk from "chalk";
+import debug from "debug";
 
-let verbosity = 0;
+const error = debug("autoreadme:error");
+const info = debug("autoreadme:info");
+const warn = debug("autoreadme:warn");
 
 export function ERROR(...rest: unknown[]) {
 	const [first, ...remaining] = rest;
-	console.error(chalk.red(first), ...remaining);
+	error(`${first} %O`, ...remaining);
 }
 
 export function INFO(...rest: unknown[]) {
-	if (verbosity < 1) return;
 	const [first, ...remaining] = rest;
-	console.info(chalk.blue(first), ...remaining);
-}
-
-export function setVerbosity(input: number) {
-	verbosity = input;
+	info(`${first} %O`, ...remaining);
 }
 
 export function WARN(...rest: unknown[]) {
-	if (verbosity < 1) return;
 	const [first, ...remaining] = rest;
-	console.warn(chalk.yellow(first), ...remaining);
+	warn(`${first} %O`, ...remaining);
 }

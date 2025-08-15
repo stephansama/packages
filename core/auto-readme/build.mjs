@@ -1,4 +1,3 @@
-import deepmerge from "deepmerge";
 import * as fsp from "node:fs/promises";
 import * as path from "path";
 import { build as tsup } from "tsup";
@@ -14,12 +13,7 @@ await build({ entry: ["./src/index.ts"] });
 
 await build({ dts: true, entry: ["./src/schema.js"], outDir: schemaDir });
 
-const schema = deepmerge(z.toJSONSchema(configSchema), {
-	$schema: {
-		default: `https://unpkg.com/@stephansama/auto-readme@0.1.0/config/schema.json`,
-		type: "string",
-	},
-});
+const schema = z.toJSONSchema(configSchema);
 
 const jsonSchema = JSON.stringify(schema);
 const yamlSchema = yaml.stringify(schema);

@@ -1,0 +1,19 @@
+{
+	"private": true,
+	"name": "www",
+	"type": "module",
+	"scripts": {
+		"predev": "typedoc",
+		"dev": "vitepress dev",
+		"prebuild": "typedoc",
+		"build": "vitepress build",
+		"preview": "vitepress preview"
+	},
+	"dependencies": {
+		"@catppuccin/vitepress": "^0.1.2",
+		"typedoc": "^0.28.10",
+		"typedoc-plugin-markdown": "^4.8.1",
+		"typedoc-vitepress-theme": "^1.1.2",
+		"vitepress": "^1.6.4"
+	}
+}

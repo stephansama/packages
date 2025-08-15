@@ -15,7 +15,7 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"strictNullChecks": true,
-		"target": "ES2024",
+		"target": "esnext",
 		"useDefineForClassFields": true,
 		"verbatimModuleSyntax": true
 	}

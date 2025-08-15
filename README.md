@@ -19,7 +19,7 @@ Collection of packages created by [![stephansama](https://img.shields.io/github/
 
 view examples here 👉 [![packages](https://pkg.pr.new/badge/stephansama/packages?style=flat&color=000&logoSize=auto)](https://pkg.pr.new/~/stephansama/packages)
 
-or install an example with [`create-stephansama-example`](https://github.com/stephansama/packages/tree/main/packages/example)
+or install an example with [`create-stephansama-example`](https://github.com/stephansama/packages/tree/main/core/example)
 via `pnpm create stephansama-example`
 
 ## 📦 Packages

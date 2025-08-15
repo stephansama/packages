@@ -1,8 +1,7 @@
 packages:
-  - actions/*
+  - ./.config/*
   - core/*
   - examples/**
-  - lib/*
 autoInstallPeers: true
 catalog:
   "@catppuccin/palette": ^1.7.1

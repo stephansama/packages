@@ -38,7 +38,7 @@
 		"@stephansama/auto-readme": "workspace:*",
 		"@tsconfig/recommended": "^1.0.8",
 		"@turbo/gen": "^2.5.4",
-		"@types/node": "^24.0.1",
+		"@types/node": "^24.3.0",
 		"@typescript-eslint/parser": "^8.34.0",
 		"@vitest/coverage-v8": "^3.2.4",
 		"@vitest/ui": "^3.2.4",

@@ -1,5 +1,13 @@
 # @stephansama/alfred-kaomoji
 
+## 1.0.5
+
+### Patch Changes
+
+- 74e34e3: Added more plugins to auto readme. Removed patch dependencies.
+
+  - updated package.jsons with new packages directory structure
+
 ## 1.0.4
 
 ### Patch Changes

@@ -40,11 +40,6 @@ overrides:
   '@stephansama/remark-asciinema': workspace:*
   create-stephansama-example: workspace:*
 
-patchedDependencies:
-  mdast-zone:
-    hash: 9a5deafdb99b221a548f0e040082893d23f44fae887e5dcf707e118ff8606913
-    path: patches/mdast-zone.patch
-
 importers:
 
   .:
@@ -236,8 +231,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       mdast-zone:
-        specifier: ^6.1.0
-        version: 6.1.0(patch_hash=9a5deafdb99b221a548f0e040082893d23f44fae887e5dcf707e118ff8606913)
+        specifier: github:stephansama/mdast-zone
+        version: https://codeload.github.com/stephansama/mdast-zone/tar.gz/62fabb19b3f245ecd6409813759e8ef11cfdd6d9
       ora:
         specifier: ^8.2.0
         version: 8.2.0
@@ -4978,8 +4973,9 @@ packages:
   mdast-util-toc@7.1.0:
     resolution: {integrity: sha512-2TVKotOQzqdY7THOdn2gGzS9d1Sdd66bvxUyw3aNpWfcPXCLYSJCCgfPy30sEtuzkDraJgqF35dzgmz6xlvH/w==}
 
-  mdast-zone@6.1.0:
-    resolution: {integrity: sha512-5SlLJ6Z+MwF1jPlSDm0WFPssgbHeaV0rS/SuyAUJc4Nhozzb1ua5HQvNP5lu667VCESGe2q2o9o93nrTJhUhfA==}
+  mdast-zone@https://codeload.github.com/stephansama/mdast-zone/tar.gz/62fabb19b3f245ecd6409813759e8ef11cfdd6d9:
+    resolution: {tarball: https://codeload.github.com/stephansama/mdast-zone/tar.gz/62fabb19b3f245ecd6409813759e8ef11cfdd6d9}
+    version: 6.1.0
 
   mdast@3.0.0:
     resolution: {integrity: sha512-xySmf8g4fPKMeC07jXGz971EkLbWAJ83s4US2Tj9lEdnZ142UP5grN73H1Xd3HzrdbU5o9GYYP/y8F9ZSwLE9g==}
@@ -12835,7 +12831,7 @@ snapshots:
       unist-util-is: 6.0.0
       unist-util-visit: 5.0.0
 
-  mdast-zone@6.1.0(patch_hash=9a5deafdb99b221a548f0e040082893d23f44fae887e5dcf707e118ff8606913):
+  mdast-zone@https://codeload.github.com/stephansama/mdast-zone/tar.gz/62fabb19b3f245ecd6409813759e8ef11cfdd6d9:
     dependencies:
       '@types/mdast': 4.0.4
       '@types/unist': 3.0.3

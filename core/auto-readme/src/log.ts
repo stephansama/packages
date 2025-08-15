@@ -11,10 +11,10 @@ export function ERROR(...rest: unknown[]) {
 
 export function INFO(...rest: unknown[]) {
 	const [first, ...remaining] = rest;
-	warn(`${first} %O`, ...remaining);
+	info(`${first} %O`, ...remaining);
 }
 
 export function WARN(...rest: unknown[]) {
 	const [first, ...remaining] = rest;
-	info(`${first} %O`, ...remaining);
+	warn(`${first} %O`, ...remaining);
 }

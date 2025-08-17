@@ -1,5 +1,13 @@
 # @stephansama/catppuccin-rss
 
+## 1.1.2
+
+### Patch Changes
+
+- 74e34e3: Added more plugins to auto readme. Removed patch dependencies.
+
+  - updated package.jsons with new packages directory structure
+
 ## 1.1.1
 
 ### Patch Changes

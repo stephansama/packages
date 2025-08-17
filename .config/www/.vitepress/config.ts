@@ -8,7 +8,13 @@ export default defineConfig({
 		"Documentation on how to use the mad professor suite of utilities",
 	head: [
 		["link", { href: "/favicon.svg", rel: "icon" }],
-		// TODO: add opengraph images
+		[
+			"meta",
+			{
+				content: "https://og.madprofessorblog.org/api/foss/actions.png",
+				property: "og:image",
+			},
+		],
 	],
 	ignoreDeadLinks: true,
 	lastUpdated: true,

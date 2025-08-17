@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.2.0
+
+### Minor Changes
+
+- 6613cb2: Switched to clack for example cli
+
 ## 1.1.2
 
 ### Patch Changes

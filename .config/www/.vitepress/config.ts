@@ -11,7 +11,8 @@ export default defineConfig({
 		[
 			"meta",
 			{
-				content: "https://og.madprofessorblog.org/api/foss/actions.png",
+				content:
+					"https://og.madprofessorblog.org/api/foss/packages.png",
 				property: "og:image",
 			},
 		],

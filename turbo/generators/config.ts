@@ -30,32 +30,32 @@ export default function generator(plop: PlopTypes.NodePlopAPI) {
 		// eslint-disable-next-line
 		actions: [
 			{
-				path: "{{ turbo.paths.root }}/packages/{{ dashCase name }}/package.json",
+				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/package.json",
 				templateFile: "templates/lib/package.json.hbs",
 				type: "add",
 			},
 			{
-				path: "{{ turbo.paths.root }}/packages/{{ dashCase name }}/README.md",
+				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/README.md",
 				templateFile: "templates/lib/README.md.hbs",
 				type: "add",
 			},
 			{
-				path: "{{ turbo.paths.root }}/packages/{{ dashCase name }}/tsup.config.ts",
+				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/tsup.config.ts",
 				templateFile: "templates/lib/tsup.config.ts",
 				type: "add",
 			},
 			{
-				path: "{{ turbo.paths.root }}/packages/{{ dashCase name }}/tsconfig.json",
+				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/tsconfig.json",
 				templateFile: "templates/lib/tsconfig.json",
 				type: "add",
 			},
 			{
-				path: "{{ turbo.paths.root }}/packages/{{ dashCase name }}/typedoc.json",
+				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/typedoc.json",
 				templateFile: "templates/lib/typedoc.json",
 				type: "add",
 			},
 			{
-				path: "{{ turbo.paths.root }}/packages/{{ dashCase name }}/src/index.ts",
+				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/src/index.ts",
 				templateFile: "templates/lib/BLANK",
 				type: "add",
 			},

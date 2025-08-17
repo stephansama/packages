@@ -1,5 +1,13 @@
 # @stephansama/auto-readme
 
+## 0.2.0
+
+### Minor Changes
+
+- 74e34e3: Added more plugins to auto readme. Removed patch dependencies.
+
+  - updated package.jsons with new packages directory structure
+
 ## 0.1.1
 
 ### Patch Changes

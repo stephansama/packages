@@ -19,10 +19,7 @@ export async function main() {
 		}),
 	});
 
-	if (clack.isCancel(example)) {
-		clack.cancel("Operation cancelled");
-		return process.exit(0);
-	}
+	if (clack.isCancel(example)) return cancel();
 
 	const defaultDir = `./${example.split("/").at(0)}`;
 
@@ -32,10 +29,7 @@ export async function main() {
 		placeholder: defaultDir,
 	});
 
-	if (clack.isCancel(dir)) {
-		clack.cancel("Operation cancelled");
-		return process.exit(0);
-	}
+	if (clack.isCancel(dir)) return cancel();
 
 	const spinner = clack.spinner();
 	spinner.start("Downloading template");
@@ -49,4 +43,9 @@ export async function main() {
 	spinner.stop("Downloaded example");
 
 	clack.outro(`successfully downloaded example template to ${dir}`);
+}
+
+function cancel() {
+	clack.cancel("Operation canceled");
+	process.exit(0);
 }

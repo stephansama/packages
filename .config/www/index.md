@@ -19,8 +19,8 @@ features:
   - title: Developer Experience First
     details: Clean APIs, thorough documentation, and thoughtful defaults mean you can start building right away.
     icon:
-      src: "https://api.iconify.design/vscode-icons:file-type-light-tmux.svg"
-      alt: Tmux developer
+      src: "https://api.iconify.design/emojione:sparkles.svg"
+      alt: Developer slay
   - title: Modular and Composable
     details: Use a single package or combine them—each is lightweight, independent, and plays well with others.
     icon:

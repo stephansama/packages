@@ -5,6 +5,7 @@
 - [Introduction](#introduction)
 - [📦 Packages](#-packages)
 - [Other published packages](#other-published-packages)
+  - [☂️ Codecov coverage graph](#️-codecov-coverage-graph)
 - [Stargazers ⭐](#stargazers-)
 
 </details>
@@ -46,6 +47,14 @@ All packages are packaged underneath the `@stephansama` scope (for example: `@st
 ## Other published packages
 
 - [stow.nvim](https://github.com/stephansama/stow.nvim)
+
+<div align="center">
+
+### ☂️ Codecov coverage graph
+
+![graph](https://codecov.io/github/stephansama/packages/graphs/tree.svg)
+
+</div>
 
 ## Stargazers ⭐
 

@@ -83,6 +83,9 @@ const _configSchema = z.object({
 	disableMarkdownHeadings: z.boolean().default(false).meta({
 		description: "Whether or not to display markdown headings",
 	}),
+	enablePrettier: z.boolean().default(true).meta({
+		description: "Whether or not to use prettier to format the files",
+	}),
 	enableToc: z.boolean().default(false).meta({
 		alias: "t",
 		description: "generate table of contents for readmes",

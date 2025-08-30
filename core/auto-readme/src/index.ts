@@ -11,7 +11,12 @@ import { loadConfig } from "./config";
 import { loadActionData } from "./data";
 import { ERROR, INFO, WARN } from "./log";
 import { parse } from "./pipeline";
-import { findAffectedMarkdowns, getGitRoot, getMarkdownPaths } from "./utils";
+import {
+	findAffectedMarkdowns,
+	getGitRoot,
+	getMarkdownPaths,
+	getPrettierPaths,
+} from "./utils";
 
 export async function run() {
 	const args = await parseArgs();
@@ -70,7 +75,10 @@ export async function run() {
 
 	INFO("formatting with prettier");
 
-	cp.execFileSync("prettier", ["--write", ...paths], opts);
+	if (config.enablePrettier) {
+		const prettierPaths = await getPrettierPaths(paths);
+		cp.execFileSync("prettier", ["--write", ...prettierPaths], opts);
+	}
 
 	if (isAffected) {
 		INFO("adding affected files to git stage");

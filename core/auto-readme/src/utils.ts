@@ -107,3 +107,15 @@ export async function getMarkdownPaths(cwd: string, config: Config) {
 	const readmes = await glob(pattern, { cwd, ignore });
 	return readmes.map((readme) => path.resolve(cwd, readme));
 }
+
+export async function getPrettierPaths(paths: string[]) {
+	return await Promise.all(
+		paths.map(async (file) => {
+			const stats = await fsp.lstat(file);
+			const isSymbolicLink = stats.isSymbolicLink();
+			if (!isSymbolicLink) return file;
+			const symlink = await fsp.readlink(file);
+			return path.join(path.dirname(file), symlink);
+		}),
+	);
+}

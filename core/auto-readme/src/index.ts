@@ -11,7 +11,12 @@ import { loadConfig } from "./config";
 import { loadActionData } from "./data";
 import { ERROR, INFO, WARN } from "./log";
 import { parse } from "./pipeline";
-import { findAffectedMarkdowns, getGitRoot, getMarkdownPaths } from "./utils";
+import {
+	findAffectedMarkdowns,
+	getGitRoot,
+	getMarkdownPaths,
+	getPrettierPaths,
+} from "./utils";
 
 export async function run() {
 	const args = await parseArgs();
@@ -21,7 +26,7 @@ export async function run() {
 
 	const root = getGitRoot();
 
-	const isAffected = args.changes ? "affected" : "";
+	const isAffected = args.changes && "affected";
 
 	INFO(`Loading ${!isAffected ? "all " : "affected "}files`);
 
@@ -68,9 +73,12 @@ export async function run() {
 
 	const opts: cp.CommonExecOptions = { stdio: "inherit" };
 
-	INFO("formatting with prettier");
+	if (config.enablePrettier) {
+		INFO("formatting with prettier");
 
-	cp.execFileSync("prettier", ["--write", ...paths], opts);
+		const prettierPaths = await getPrettierPaths(paths);
+		cp.execFileSync("prettier", ["--write", ...prettierPaths], opts);
+	}
 
 	if (isAffected) {
 		INFO("adding affected files to git stage");

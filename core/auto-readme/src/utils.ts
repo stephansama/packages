@@ -110,12 +110,12 @@ export async function getMarkdownPaths(cwd: string, config: Config) {
 
 export async function getPrettierPaths(paths: string[]) {
 	return await Promise.all(
-		paths.map(async (filepath) => {
-			const stats = await fsp.lstat(filepath);
+		paths.map(async (file) => {
+			const stats = await fsp.lstat(file);
 			const isSymbolicLink = stats.isSymbolicLink();
-			if (!isSymbolicLink) return filepath;
-			const symlink = await fsp.readlink(filepath);
-			return path.join(path.dirname(filepath), symlink);
+			if (!isSymbolicLink) return file;
+			const symlink = await fsp.readlink(file);
+			return path.join(path.dirname(file), symlink);
 		}),
 	);
 }

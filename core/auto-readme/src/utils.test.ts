@@ -3,17 +3,24 @@ import { afterEach, expect, it, vi } from "vitest";
 import * as logger from "./log";
 import * as module from "./utils";
 
+const mockGitRoot = "/Users/stephansama/Code/packages/";
+
 const mocks = vi.hoisted(() => ({
 	access: vi.fn().mockResolvedValue(undefined),
 	execSync: vi.fn(),
 	existsSync: vi.fn(),
+	isSymbolicLink: vi.fn(),
+	lstat: vi.fn(() => ({ isSymbolicLink: mocks.isSymbolicLink })),
+	readlink: vi.fn(),
 }));
 
 vi.mock("node:child_process", () => ({ execSync: mocks.execSync }));
 vi.mock("node:fs", () => ({ existsSync: mocks.existsSync }));
-vi.mock("node:fs/promises", () => ({ access: mocks.access }));
-
-const mockGitRoot = "/Users/stephansama/Code/packages/";
+vi.mock("node:fs/promises", () => ({
+	access: mocks.access,
+	lstat: mocks.lstat,
+	readlink: mocks.readlink,
+}));
 
 afterEach(vi.clearAllMocks);
 
@@ -64,4 +71,20 @@ it("successfully returns git root", () => {
 it("throws an error when no root is found", () => {
 	mocks.execSync.mockReturnValue("");
 	expect(module.getGitRoot).toThrowError();
+});
+
+it("successfully resolves symbolic links for prettier", async () => {
+	mocks.isSymbolicLink.mockReturnValueOnce(false);
+	mocks.isSymbolicLink.mockReturnValueOnce(true);
+	mocks.readlink.mockReturnValueOnce("../../docs/auto-readme.md");
+	const input = [
+		"/Users/stephansama/Code/packages/README.md",
+		"/Users/stephansama/Code/packages/core/auto-readme/README.md",
+	];
+	const response = await module.getPrettierPaths(input);
+	const expected = [
+		"/Users/stephansama/Code/packages/README.md",
+		"/Users/stephansama/Code/packages/docs/auto-readme.md",
+	];
+	expect(response).toStrictEqual(expected);
 });

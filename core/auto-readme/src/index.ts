@@ -26,7 +26,7 @@ export async function run() {
 
 	const root = getGitRoot();
 
-	const isAffected = args.changes ? "affected" : "";
+	const isAffected = args.changes && "affected";
 
 	INFO(`Loading ${!isAffected ? "all " : "affected "}files`);
 
@@ -73,9 +73,9 @@ export async function run() {
 
 	const opts: cp.CommonExecOptions = { stdio: "inherit" };
 
-	INFO("formatting with prettier");
-
 	if (config.enablePrettier) {
+		INFO("formatting with prettier");
+
 		const prettierPaths = await getPrettierPaths(paths);
 		cp.execFileSync("prettier", ["--write", ...prettierPaths], opts);
 	}

@@ -19,7 +19,7 @@ export async function main() {
 
 	if (!targets.length) {
 		console.info("no targets found for file: ", filename);
-		return process.exit(0);
+		return process.exit(1);
 	}
 
 	for (const target of targets) {

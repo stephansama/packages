@@ -5,7 +5,7 @@
 [![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Ffind-makefile-targets?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/find-makefile-targets)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/find-makefile-targets?labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/find-makefile-targets)
 
-Find makefile targets used to pipe into fzf
+Finds targets in a Makefile. The output is formatted to be easily piped into other tools like `fzf`
 
 ##### Table of contents
 

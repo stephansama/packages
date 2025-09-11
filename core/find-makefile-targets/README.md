@@ -25,5 +25,5 @@ pnpm install @stephansama/find-makefile-targets
 ## Usage
 
 ```sh
-fzf . | xargs find-makefile-targets
+fzf . | xargs -L 1 find-makefile-targets
 ```

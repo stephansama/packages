@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/find-makefile-targets",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"description": "Find makefile targets used to pipe into fzf",
 	"repository": {
 		"url": "https://github.com/stephansama/packages",

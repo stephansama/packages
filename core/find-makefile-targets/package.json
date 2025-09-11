@@ -1,0 +1,48 @@
+{
+	"name": "@stephansama/find-makefile-targets",
+	"version": "0.0.0",
+	"description": "Find makefile targets used to pipe into fzf",
+	"repository": {
+		"url": "https://github.com/stephansama/packages",
+		"type": "git",
+		"directory": "core/find-makefile-targets"
+	},
+	"homepage": "https://packages.stephansama.info/api/@stephansama/find-makefile-targets",
+	"author": {
+		"email": "stephanrandle.dev@gmail.com",
+		"name": "Stephan Randle",
+		"url": "https://stephansama.info"
+	},
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"build": "tsup && attw --pack",
+		"dev": "tsup --watch",
+		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+		"test": "echo 'tested (* ^ ω ^)'"
+	},
+	"bin": "./cli.mjs",
+	"main": "./dist/index.js",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"files": [
+		"./dist",
+		"./cli.mjs"
+	],
+	"packageManager": "pnpm@10.11.0",
+	"keywords": [
+		"find-makefile-targets"
+	],
+	"devDependencies": {
+		"@kba/makefile-parser": "^0.0.6",
+		"tsup": "catalog:"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	}
+}

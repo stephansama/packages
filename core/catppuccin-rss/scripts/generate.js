@@ -22,13 +22,36 @@ const templateStyleCss = Handlebars.compile(hbsStyleCss);
 
 if (!fs.existsSync(outputFolder)) fs.mkdirSync(outputFolder);
 
+const comboColors = {};
+
 for (const [theme, val] of Object.entries(flavors)) {
 	const filename = outputFolder + `/${theme}.xsl`;
 	const comment = getComment(theme);
 	const style = templateStyleCss(convertColors(val.colors));
+
+	if (["latte", "mocha"].includes(theme)) {
+		comboColors[theme] = style;
+	}
+
 	const xml = templateXml({ comment, style });
 	fs.writeFileSync(filename, xml);
 }
+
+const autoComment = getComment("auto");
+const css = String.raw;
+const autoStyle = css`
+	@media (prefers-color-scheme: dark) {
+		${comboColors["mocha"]}
+	}
+
+	@media (prefers-color-scheme: light) {
+		${comboColors["latte"]}
+	}
+`;
+
+const autoBody = templateXml({ comment: autoComment, style: autoStyle });
+
+fs.writeFileSync(outputFolder + "/auto.xsl", autoBody);
 
 /** @param {typeof flavors.mocha.colors} colors */
 function convertColors(colors) {

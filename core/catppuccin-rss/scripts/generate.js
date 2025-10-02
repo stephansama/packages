@@ -2,7 +2,8 @@
 
 import { flavors } from "@catppuccin/palette";
 import Handlebars from "handlebars";
-import fs from "node:fs";
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 import pkg from "../package.json" with { type: "json" };
 
@@ -22,13 +23,45 @@ const templateStyleCss = Handlebars.compile(hbsStyleCss);
 
 if (!fs.existsSync(outputFolder)) fs.mkdirSync(outputFolder);
 
+/** @satisfies {Record<string, keyof flavors>} */
+const AUTO_THEME_CONFIG = {
+	dark: "mocha",
+	light: "latte",
+};
+
+const autoThemes = Object.values(AUTO_THEME_CONFIG);
+
+/** @type {Record<keyof flavors, string>} */
+const autoThemeStyles = {};
+
 for (const [theme, val] of Object.entries(flavors)) {
-	const filename = outputFolder + `/${theme}.xsl`;
+	const filename = path.join(outputFolder, `${theme}.xsl`);
 	const comment = getComment(theme);
 	const style = templateStyleCss(convertColors(val.colors));
+
+	if (autoThemes.includes(theme)) {
+		autoThemeStyles[theme] = style;
+	}
+
 	const xml = templateXml({ comment, style });
 	fs.writeFileSync(filename, xml);
 }
+
+const autoComment = getComment("auto");
+const css = String.raw;
+const autoStyle = css`
+	@media (prefers-color-scheme: dark) {
+		${autoThemeStyles[AUTO_THEME_CONFIG.dark]}
+	}
+
+	@media (prefers-color-scheme: light) {
+		${autoThemeStyles[AUTO_THEME_CONFIG.light]}
+	}
+`;
+
+const autoBody = templateXml({ comment: autoComment, style: autoStyle });
+
+fs.writeFileSync(path.join(outputFolder, "auto.xsl"), autoBody);
 
 /** @param {typeof flavors.mocha.colors} colors */
 function convertColors(colors) {

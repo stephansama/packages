@@ -31,7 +31,7 @@ const AUTO_THEME_CONFIG = {
 
 const autoThemes = Object.values(AUTO_THEME_CONFIG);
 
-/** @type {Record<typeof AUTO_THEME_CONFIG[keyof AUTO_THEME_CONFIG], string>} */
+/** @type {Record<keyof flavors, string>} */
 const autoThemeStyles = {};
 
 for (const [theme, val] of Object.entries(flavors)) {
@@ -51,11 +51,11 @@ const autoComment = getComment("auto");
 const css = String.raw;
 const autoStyle = css`
 	@media (prefers-color-scheme: dark) {
-		${autoThemeStyles["mocha"]}
+		${autoThemeStyles[AUTO_THEME_CONFIG.dark]}
 	}
 
 	@media (prefers-color-scheme: light) {
-		${autoThemeStyles["latte"]}
+		${autoThemeStyles[AUTO_THEME_CONFIG.light]}
 	}
 `;
 

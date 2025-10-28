@@ -37,7 +37,7 @@ function convertColors(colors) {
 		.reduce((prev, [key, hex]) => ({ ...prev, [key]: hex }));
 }
 
-/** @param {keyof typeof flavors} theme */
+/** @param {keyof typeof flavors | `auto-${keyof typeof flavors}`} theme */
 function getComment(theme) {
 	return templateComment({
 		package_name,

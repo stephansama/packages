@@ -18,4 +18,5 @@ overrides:
   "@stephansama/astro-iconify-svgmap": workspace:*
   "@stephansama/catppuccin-rss": workspace:*
   "@stephansama/remark-asciinema": workspace:*
+  "@stephansama/typed-events": workspace:*
   "create-stephansama-example": workspace:*

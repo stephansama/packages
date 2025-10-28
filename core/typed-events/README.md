@@ -23,3 +23,9 @@ pnpm install @stephansama/typed-events
 ```
 
 ## Usage
+
+```js
+import { createEvent } from "@stephansama/typed-events";
+
+const event = createEvent("toggle", z.object({}));
+```

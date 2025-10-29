@@ -1,6 +1,5 @@
 import Handlebars from "handlebars";
 import { minify } from "minify";
-import * as fs from "node:fs";
 import * as fsp from "node:fs/promises";
 import * as path from "node:path";
 
@@ -16,8 +15,6 @@ const outputFile = markupTemplate({
 	style: await minify.css(stylesheetTemplate()),
 });
 
-if (!fs.existsSync("./dist")) {
-	await fsp.mkdir("./dist");
-}
+await fsp.mkdir("./dist", { recursive: true });
 
 await fsp.writeFile(path.join("./dist", "catppuccin-opml.xsl"), outputFile);

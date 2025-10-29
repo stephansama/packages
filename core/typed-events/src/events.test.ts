@@ -1,0 +1,41 @@
+import { expect, it, vi } from "vitest";
+import * as z from "zod";
+
+import * as module from "./events";
+
+it("dispatches an event with a valid event", () => {
+	const event = module.createEvent("test", z.object({ shape: z.number() }));
+
+	const dispatchEventSpy = vi.spyOn(document, "dispatchEvent");
+
+	expect(() => event.dispatch({ shape: 0 })).not.toThrowError();
+
+	expect(dispatchEventSpy).toHaveBeenCalled();
+});
+
+it("prevents an event from being dispatched with an invalid event", () => {
+	const event = module.createEvent("test", z.object({ shape: z.number() }));
+
+	// @ts-expect-error
+	expect(() => event.dispatch({})).toThrowError();
+});
+
+it("listens for an event when the detail is valid", () => {
+	const eventName = "test";
+	const event = module.createEvent(
+		eventName,
+		z.object({ shape: z.number() }),
+	);
+
+	const addEventListenerSpy = vi.spyOn(document, "addEventListener");
+	const consoleInfoSpy = vi.spyOn(console, "info");
+
+	event.listen((event) => {
+		console.info(event);
+	});
+
+	event.dispatch({ shape: 0 });
+
+	expect(addEventListenerSpy).toHaveBeenCalled();
+	expect(consoleInfoSpy).toHaveBeenCalled();
+});

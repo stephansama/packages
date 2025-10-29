@@ -8,6 +8,7 @@ export default defineConfig({
 			reporter: ["html", "json", "text"],
 		},
 		outputFile: { junit: "./coverage/test-report.junit.xml" },
+		projects: ["./core/*"],
 		reporters: ["default", "junit"],
 	},
 });

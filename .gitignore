@@ -12,6 +12,7 @@ node_modules
 
 .config/www/api
 
+examples/catppuccin-opml/vanilla/public/**/*
 examples/catppuccin-rss/**/*.x*
 core/auto-readme/config
 core/example/scripts/examples.json

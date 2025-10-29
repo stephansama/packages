@@ -25,7 +25,6 @@
 	"scripts": {
 		"build": "node ./scripts/generate.js",
 		"dev": "node --watch ./scripts/generate.js",
-		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
 		"test": "echo 'tested (* ^ ω ^)'"
 	},
 	"devDependencies": {

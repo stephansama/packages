@@ -1,33 +1,32 @@
 {
-	"private": true,
 	"name": "root",
 	"version": "1.0.0",
+	"private": true,
 	"homepage": "https://packages.stephansama.info/",
+	"license": "MIT",
 	"author": {
-		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
 		"url": "https://stephansama.info"
 	},
-	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"with-env": "dotenv -e .env --",
+		"build": "pnpm run --sequential \"/^build:.*/\"",
+		"build:examples": "turbo build --filter=./examples/*",
+		"build:packages": "turbo build --filter=./core/*",
+		"build:www": "turbo build --filter=www",
 		"dev": "turbo dev",
+		"fmt:check": "prettier . --check",
+		"fmt:write": "prettier . --write",
 		"lint": "turbo lint",
+		"prepare": "husky",
+		"publish": "changeset publish",
 		"test": "turbo test",
 		"test:ci": "vitest --run --coverage --reporter=junit --outputFile=test-report.junit.xml",
 		"test:ui": "vitest --ui",
-		"publish": "changeset publish",
 		"version": "changeset version && pnpm install --lockfile-only",
-		"build": "pnpm run --sequential \"/^build:.*/\"",
-		"build:packages": "turbo build --filter=./core/*",
-		"build:examples": "turbo build --filter=./examples/*",
-		"build:www": "turbo build --filter=www",
-		"fmt:check": "prettier . --check",
-		"fmt:write": "prettier . --write",
-		"prepare": "husky"
+		"with-env": "dotenv -e .env --"
 	},
-	"packageManager": "pnpm@10.11.0",
 	"devDependencies": {
 		"@arethetypeswrong/cli": "^0.18.2",
 		"@changesets/cli": "^2.29.4",
@@ -58,12 +57,13 @@
 		"prettier-plugin-astro": "^0.14.1",
 		"prettier-plugin-astro-organize-imports": "^0.4.11",
 		"prettier-plugin-organize-imports": "^4.1.0",
-		"prettier-plugin-sort-package-json": "^1.1.0",
+		"prettier-plugin-packagejson": "^2.5.19",
 		"prettier-plugin-tailwindcss": "^0.6.12",
 		"turbo": "^2.5.4",
 		"typescript": "catalog:",
 		"typescript-eslint": "^8.34.0",
 		"vitest": "catalog:",
 		"wrangler": "^4.20.0"
-	}
+	},
+	"packageManager": "pnpm@10.11.0"
 }

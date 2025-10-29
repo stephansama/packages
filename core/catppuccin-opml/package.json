@@ -1,0 +1,41 @@
+{
+	"name": "@stephansama/catppuccin-opml",
+	"version": "0.0.0",
+	"description": "Catppuccin styled opml stylesheet",
+	"keywords": [
+		"catppuccin-opml",
+		"catppuccin",
+		"opml",
+		"xsl",
+		"stylesheet"
+	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-opml",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/stephansama/packages",
+		"directory": "core/catppuccin-opml"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephansama.info"
+	},
+	"type": "module",
+	"scripts": {
+		"build": "node ./scripts/generate.js",
+		"dev": "node --watch ./scripts/generate.js",
+		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+		"test": "echo 'tested (* ^ ω ^)'"
+	},
+	"devDependencies": {
+		"@catppuccin/palette": "catalog:",
+		"handlebars": "catalog:",
+		"minify": "catalog:"
+	},
+	"packageManager": "pnpm@10.11.0",
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	}
+}

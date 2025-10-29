@@ -12,7 +12,7 @@
 		"prettier-plugin-astro",
 		"prettier-plugin-astro-organize-imports",
 		"prettier-plugin-organize-imports",
-		"prettier-plugin-sort-package-json",
+		"prettier-plugin-packagejson",
 		"prettier-plugin-tailwindcss"
 	]
 }

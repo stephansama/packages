@@ -1,6 +1,6 @@
 {
 	"private": true,
-	"name": "vanilla",
+	"name": "@example/typed-events/vanilla",
 	"version": "1.0.0",
 	"type": "module",
 	"scripts": {

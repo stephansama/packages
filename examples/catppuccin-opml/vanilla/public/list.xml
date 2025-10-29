@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/opml/linked-opml.xsl" title="Catppuccin OPML feed"?>
+<opml version="2.0">
+  <head>
+    <title>Demo for OPML</title>
+    <dateCreated>Sun, 19 Jan 2025 23:50:24 GMT</dateCreated>
+    <dateModified>Sun, 19 Jan 2025 23:50:24 GMT</dateModified>
+  </head>
+  <body>
+    <outline text="Bloggers">
+      <outline text="Simon Willison" type="rss" xmlUrl="https://fedi.simonwillison.net/@simon.rss" htmlUrl="https://fedi.simonwillison.net/@simon" title="Simon Willison" version="RSS"/>
+      <outline text="Jacques Mattheij" type="rss" xmlUrl="https://jacquesmattheij.com/rss.xml" htmlUrl="https://jacquesmattheij.com/" title="Jacques Mattheij" version="RSS"/>
+      <outline text="Dare Obasanjo's weblog" type="rss" xmlUrl="http://feeds.feedburner.com/Carnage4Life" htmlUrl="http://www.25hoursaday.com/weblog/" title="Dare Obasanjo's weblog" version="RSS"/>
+      <outline text="mark nottingham" type="rss" xmlUrl="https://www.mnot.net/blog/index.atom" htmlUrl="https://www.mnot.net/blog/" title="mark nottingham" version="RSS"/>
+      <outline text="Scripting News" type="rss" xmlUrl="http://scripting.com/rss.xml" htmlUrl="http://scripting.com/" title="Scripting News" version="RSS"/>
+      <outline text="Doc Searls Weblog" type="rss" xmlUrl="https://doc.searls.com/feed/" htmlUrl="https://doc.searls.com" title="Doc Searls Weblog" version="RSS"/>
+      <outline text="Gwern.net Newsletter" type="rss" xmlUrl="https://gwern.substack.com/feed" htmlUrl="https://gwern.substack.com" title="Gwern.net Newsletter" version="RSS"/>
+      <outline text="The Old New Thing" type="rss" xmlUrl="https://devblogs.microsoft.com/oldnewthing/feed" htmlUrl="https://devblogs.microsoft.com/oldnewthing" title="The Old New Thing" version="RSS"/>
+      <outline text="Geshan's Blog" type="rss" xmlUrl="https://geshan.com.np/atom.xml" htmlUrl="https://geshan.com.np/" title="Geshan's Blog" version="RSS"/>
+      <outline text="John D. Cook" type="rss" xmlUrl="https://www.johndcook.com/blog/feed/" htmlUrl="https://www.johndcook.com/blog" title="John D. Cook" version="RSS"/>
+      <outline text="Waxy.org" type="rss" xmlUrl="https://waxy.org/feed/" htmlUrl="https://waxy.org/" title="Waxy.org" version="RSS"/>
+      <outline text="kottke.org" type="rss" xmlUrl="http://feeds.kottke.org/main" htmlUrl="https://kottke.org/" title="kottke.org" version="RSS"/>
+      <outline text="Ian Betteridge" type="rss" xmlUrl="https://www.ianbetteridge.com/rss/" htmlUrl="https://www.ianbetteridge.com/" title="Ian Betteridge" version="RSS"/>
+      <outline text="Astral Codex Ten" type="rss" xmlUrl="https://www.astralcodexten.com/feed" htmlUrl="https://www.astralcodexten.com" title="Astral Codex Ten" version="RSS"/>
+      <outline text="Bartosz Milewski's Programming Cafe" type="rss" xmlUrl="https://bartoszmilewski.com/feed/" htmlUrl="https://bartoszmilewski.com" title="Bartosz Milewski's Programming Cafe" version="RSS"/>
+    </outline>
+    <outline text="Tech News">
+      <outline text="Slashdot" type="rss" xmlUrl="http://rss.slashdot.org/Slashdot/slashdotMain" htmlUrl="https://slashdot.org/" title="Slashdot" version="RSS"/>
+      <outline text="Hacker News: Newest" type="rss" xmlUrl="https://hnrss.org/newest?points=50" htmlUrl="https://news.ycombinator.com/newest" title="Hacker News: Newest" version="RSS"/>
+      <outline text="Lobste.rs" type="rss" xmlUrl="https://lobste.rs/rss" htmlUrl="https://lobste.rs/" version="RSS"/>
+    </outline>
+    <outline text="Fintech">
+      <outline text="Due Retirement Central - Due Blog" type="rss" xmlUrl="https://due.com/blog/feed/atom/" htmlUrl="https://due.com/blog/" title="Due Retirement Central - Due Blog" version="RSS"/>
+      <outline text="The Payments Engineer Playbook" type="rss" xmlUrl="https://news.alvaroduran.com/feed" htmlUrl="https://news.alvaroduran.com" title="The Payments Engineer Playbook" version="RSS"/>
+    </outline>
+    <outline text="Maps">
+      <outline text="Maps Mania" type="rss" xmlUrl="https://feeds.feedburner.com/GoogleMapsMania" htmlUrl="http://googlemapsmania.blogspot.com/" title="Maps Mania" version="RSS"/>
+      <outline text="Making Maps: DIY Cartography" type="rss" xmlUrl="https://makingmaps.net/feed/" htmlUrl="https://makingmaps.net" title="Making Maps: DIY Cartography" version="RSS"/>
+      <outline text="Maps that Matter" type="rss" xmlUrl="http://mapsthatmatter.blogspot.com/feeds/posts/default" htmlUrl="http://mapsthatmatter.blogspot.com/" title="Maps that Matter" version="RSS"/>
+      <outline text="The Map Room" type="rss" xmlUrl="https://feeds.feedburner.com/maproom-partial" htmlUrl="https://www.maproomblog.com" title="The Map Room" version="RSS"/>
+      <outline text="Goldwag's Journal on Civilization" type="rss" xmlUrl="https://nathangoldwag.wordpress.com/feed/" htmlUrl="https://nathangoldwag.wordpress.com" title="Goldwag's Journal on Civilization" version="RSS"/>
+    </outline>
+    <outline text="Politics">
+      <outline text="Deeplinks" type="rss" xmlUrl="https://www.eff.org/rss/updates.xml" htmlUrl="https://www.eff.org/rss/updates.xml" title="Deeplinks" version="RSS"/>
+      <outline text="Paul Krugman" type="rss" xmlUrl="https://archive.nytimes.com/krugman.blogs.nytimes.com/feed/atom/" htmlUrl="https://krugman.blogs.nytimes.com" title="Paul Krugman" version="RSS"/>
+      <outline text="John Pavlovitz" type="rss" xmlUrl="https://johnpavlovitz.com/feed/" htmlUrl="https://johnpavlovitz.com/" title="John Pavlovitz" version="RSS"/>
+      <outline text="Free Society" type="rss" xmlUrl="https://peacefulrevolutionary.substack.com/feed" htmlUrl="https://peacefulrevolutionary.substack.com" title="Free Society" version="RSS"/>
+      <outline text="Asterisk" type="rss" xmlUrl="https://asteriskmag.com/feed" htmlUrl="https://asteriskmag.com" title="Asterisk" version="RSS"/>
+      <outline text="Noahpinion" type="rss" xmlUrl="https://www.noahpinion.blog/feed" htmlUrl="https://www.noahpinion.blog" title="Noahpinion" version="RSS"/>
+      <outline text="Citation Needed" type="rss" xmlUrl="https://www.citationneeded.news/rss/" htmlUrl="https://www.citationneeded.news/" title="Citation Needed" version="RSS"/>
+    </outline>
+    <outline text="Shopping">
+      <outline text="Cool Tools" type="rss" xmlUrl="https://feedpress.me/CoolTools" htmlUrl="https://kk.org/cooltools" title="Cool Tools" version="RSS"/>
+      <outline text="Articles: Digital Photography Review (dpreview.com)" type="rss" xmlUrl="https://www.dpreview.com/feeds/news/latest" htmlUrl="https://www.dpreview.com/" title="Articles: Digital Photography Review (dpreview.com)" version="RSS"/>
+      <outline text="Slickdeals Frontpage RSS Feed" type="rss" xmlUrl="https://feeds.feedburner.com/SlickdealsnetFP" htmlUrl="https://slickdeals.net/" title="Slickdeals Frontpage RSS Feed" version="RSS"/>
+    </outline>
+    <outline text="Travel">
+      <outline text="AFAR Travel" type="rss" xmlUrl="https://www.afar.com/feeds/article.rss" htmlUrl="https://www.afar.com/" title="AFAR Travel" version="RSS"/>
+      <outline text="Rest of World - Latest Stories" type="rss" xmlUrl="https://restofworld.org/feed/latest" htmlUrl="https://restofworld.org" title="Rest of World - Latest Stories" version="RSS"/>
+    </outline>
+    <outline text="Vendors">
+      <outline text="Facebook Developers" type="rss" xmlUrl="https://developers.facebook.com/blog/feed" htmlUrl="https://developers.facebook.com/blog/" title="Facebook Developers" version="RSS"/>
+      <outline text="ClickHouse Blog" type="rss" xmlUrl="https://clickhouse.com/rss.xml" htmlUrl="https://clickhouse.com/blog" title="ClickHouse Blog" version="RSS"/>
+      <outline text="Google">
+        <outline text="Google Developers Blog" type="rss" xmlUrl="http://feeds.feedburner.com/GDBcode" htmlUrl="https://developers.googleblog.com/rss/" title="Google Developers Blog" version="RSS"/>
+        <outline text="Google Maps Platform" type="rss" xmlUrl="http://feeds.feedburner.com/GoogleGeoDevelopersBlog" htmlUrl="http://mapsplatform.googleblog.com/" title="Google Maps Platform" version="RSS"/>
+        <outline text="Google Open Source Blog" type="rss" xmlUrl="http://feeds.feedburner.com/GoogleOpenSourceBlog" htmlUrl="http://opensource.googleblog.com/" title="Google Open Source Blog" version="RSS"/>
+        <outline text="Google Search Central Blog" type="rss" xmlUrl="https://feeds.feedburner.com/blogspot/amDG" htmlUrl="https://developers.google.com/search/blog/" title="Google Search Central Blog" version="RSS"/>
+      </outline>
+    </outline>
+  </body>
+</opml>

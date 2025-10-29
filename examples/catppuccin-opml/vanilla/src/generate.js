@@ -5,7 +5,7 @@ const res = await fetch("https://www.xml.style/demo/opml.xml");
 const text = await res.text();
 
 await fs.writeFile(
-	"./public/list.opml",
+	"./public/list.xml",
 	generateOpml(parseOpml(text), {
 		stylesheets: [
 			{

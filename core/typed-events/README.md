@@ -13,6 +13,7 @@ Typed events store using standard schema
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [References](#references)
 
 </details>
 
@@ -29,3 +30,7 @@ import { createEvent } from "@stephansama/typed-events";
 
 const event = createEvent("toggle", z.object({}));
 ```
+
+## References
+
+- [standardschema](https://standardschema.dev/)

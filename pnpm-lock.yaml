@@ -34,8 +34,8 @@ catalogs:
       specifier: ^4.0.15
       version: 4.0.15
     zx:
-      specifier: ^8.8.0
-      version: 8.8.0
+      specifier: ^8.8.5
+      version: 8.8.5
 
 overrides:
   '@stephansama/astro-iconify-svgmap': workspace:*
@@ -343,7 +343,7 @@ importers:
         version: 8.5.0(@swc/core@1.12.1(@swc/helpers@0.5.17))(jiti@2.4.2)(postcss@8.5.6)(tsx@4.20.4)(typescript@5.8.3)(yaml@2.8.1)
       zx:
         specifier: 'catalog:'
-        version: 8.8.0
+        version: 8.8.5
 
   core/find-makefile-targets:
     devDependencies:
@@ -7999,8 +7999,8 @@ packages:
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
-  zx@8.8.0:
-    resolution: {integrity: sha512-v0VZXgSHusDvTtZROno3Ws8xkE1uNSSwH/yF8Fm+ZwBrYhr+bRNNpsnTJ32eR/t6umc7lAz5WqdP800ugW9zFA==}
+  zx@8.8.5:
+    resolution: {integrity: sha512-SNgDF5L0gfN7FwVOdEFguY3orU5AkfFZm9B5YSHog/UDHv+lvmd82ZAsOenOkQixigwH2+yyH198AwNdKhj+RA==}
     engines: {node: '>= 12.17.0'}
     hasBin: true
 
@@ -16514,4 +16514,4 @@ snapshots:
 
   zwitch@2.0.4: {}
 
-  zx@8.8.0: {}
+  zx@8.8.5: {}

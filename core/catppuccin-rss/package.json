@@ -34,7 +34,7 @@
 	"devDependencies": {
 		"@catppuccin/palette": "catalog:",
 		"handlebars": "catalog:",
-		"minify": "^14.0.0"
+		"minify": "catalog:"
 	},
 	"publishConfig": {
 		"access": "public",

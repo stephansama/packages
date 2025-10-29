@@ -1,0 +1,11 @@
+{
+	"extends": ["//"],
+	"tasks": {
+		"dev": {
+			"dependsOn": ["@stephansama/catppuccin-opml#build"]
+		},
+		"build": {
+			"dependsOn": ["@stephansama/catppuccin-opml#build"]
+		}
+	}
+}

@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/typed-events",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"description": "Typed events store using standard schema",
 	"repository": {
 		"url": "https://github.com/stephansama/packages",

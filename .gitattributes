@@ -1,2 +1,3 @@
 # https://github.com/github-linguist/linguist/blob/main/docs/overrides.md
 **/*/catppuccin-rss/template/*.hbs linguist-detectable=false
+**/*/catppuccin-opml/template/*.hbs linguist-detectable=false

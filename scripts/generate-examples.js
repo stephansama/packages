@@ -12,7 +12,7 @@ fs.mkdirSync(outputDir, { recursive: true });
 
 const examples = packages
 	.filter((pkg) => {
-		if (pkg.packageJson.relativeDir.startsWith("examples")) {
+		if (pkg.relativeDir.startsWith("examples")) {
 			const isNamedProperly = pkg.packageJson.name.includes("@example");
 			if (!isNamedProperly) throw new Error("");
 			return true;

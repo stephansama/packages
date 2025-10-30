@@ -99,6 +99,7 @@ export class TypedEvent<
 		result
 			.then((data) => this.#validateCallback(data, callback))
 			.catch((error) => {
+				console.error(error);
 				throw error;
 			});
 	}

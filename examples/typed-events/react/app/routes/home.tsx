@@ -14,13 +14,21 @@ export function meta() {
 }
 
 function EventComponent() {
-	const event = new TypedEvent("typed:event", yup.object({}));
 	const [count, setCount] = React.useState(0);
 
+	const event = React.useMemo(
+		() =>
+			new TypedEvent(
+				"typed:event",
+				yup.object({ current: yup.number().required() }),
+			),
+		[],
+	);
+
 	React.useEffect(() => {
-		const cleanup = event.listen(() => {
+		const cleanup = event.listen((event) => {
 			console.info("hello from typed event");
-			setCount((prev) => ++prev);
+			setCount(event.detail.current);
 		});
 
 		return () => {
@@ -32,11 +40,18 @@ function EventComponent() {
 		<div className="flex grow items-center justify-center gap-4">
 			<button
 				onClick={() => {
-					event.dispatch({});
+					const input = document.getElementById(
+						"number",
+					) as HTMLInputElement | null;
+
+					event.dispatch({
+						current: input?.value ? input?.valueAsNumber : count + 1,
+					});
 				}}
 			>
 				test event
 			</button>
+			<input id="number" placeholder="number to override" type="number" />
 			<span>{count}</span>
 		</div>
 	);

@@ -27,7 +27,7 @@ export class TypedEvent<
 		this.#target = target;
 	}
 
-	#showWarning: boolean;
+	#silenceWarning: boolean;
 	#target?: EventTarget;
 
 	constructor(
@@ -38,7 +38,7 @@ export class TypedEvent<
 		this.name = name;
 		this.schema = schema;
 
-		this.#showWarning = opts.silenceAsyncWarning || true;
+		this.#silenceWarning = !!opts.silenceAsyncWarning;
 
 		if (opts.target) this.#target = opts.target;
 	}
@@ -90,7 +90,7 @@ export class TypedEvent<
 			return this.#validateCallback(result, callback);
 		}
 
-		if (this.#showWarning && process.env.NODE_ENV !== "production") {
+		if (!this.#silenceWarning && process.env.NODE_ENV !== "production") {
 			console.warn(
 				`using async validation during TypedEvent ${step.toString()} (however this is not recommended)`,
 			);
@@ -98,8 +98,8 @@ export class TypedEvent<
 
 		result
 			.then((data) => this.#validateCallback(data, callback))
-			.catch((e) => {
-				throw new TypedEventError(e);
+			.catch((error) => {
+				throw error;
 			});
 	}
 
@@ -117,8 +117,7 @@ export class TypedEvent<
 
 export class TypedEventError extends Error {
 	constructor(issues: readonly StandardSchemaV1.Issue[]) {
-		super();
+		super(JSON.stringify(issues, undefined, 2));
 		this.name = "TypedEvent";
-		this.message = JSON.stringify(issues);
 	}
 }

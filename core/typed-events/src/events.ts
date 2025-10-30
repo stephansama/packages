@@ -92,7 +92,7 @@ export class TypedEvent<
 
 		if (!this.#silenceWarning && process.env.NODE_ENV !== "production") {
 			console.warn(
-				`using async validation during TypedEvent ${step} (however this is not recommended)`,
+				`using async validation during TypedEvent ${step} (however this is not recommended. please use a synchronous validator)`,
 			);
 		}
 
@@ -109,7 +109,7 @@ export class TypedEvent<
 		callback: () => void,
 	) {
 		if (result.issues) {
-			throw new TypedEventError(result.issues);
+			throw new TypedEventError(this.name, result.issues);
 		} else {
 			callback();
 		}
@@ -117,8 +117,14 @@ export class TypedEvent<
 }
 
 export class TypedEventError extends Error {
-	constructor(issues: readonly StandardSchemaV1.Issue[]) {
-		super(JSON.stringify(issues, undefined, 2));
-		this.name = "TypedEvent";
+	constructor(eventName: string, issues: readonly StandardSchemaV1.Issue[]) {
+		const messages = [
+			"TypedEventError - " + eventName,
+			JSON.stringify(issues, undefined, 2),
+		];
+
+		super(messages.join("\n"));
+
+		this.name = "TypedEventError";
 	}
 }

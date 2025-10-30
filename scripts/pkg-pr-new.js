@@ -2,9 +2,9 @@
 
 import * as cp from "node:child_process";
 
-import examples from "./dist/examples.json";
+import { generate } from "./generate-examples";
 
-const templateStr = examples
+const templateStr = generate({ writeToFile: false })
 	.map((example) => `--template ${example.relativeDir}`)
 	.join(" ");
 

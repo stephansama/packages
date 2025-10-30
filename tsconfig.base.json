@@ -3,6 +3,9 @@
 	"exclude": ["node_modules", "dist"],
 	"include": ["./**/*"],
 	"compilerOptions": {
+		"paths": {
+			"~/*": ["./*"]
+		},
 		"allowImportingTsExtensions": true,
 		"allowJs": true,
 		"baseUrl": ".",

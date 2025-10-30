@@ -1,7 +1,7 @@
-import { createEvent } from "@stephansama/typed-events";
+import { TypedEvent } from "@stephansama/typed-events";
 import * as z from "zod/v4/mini";
 
-const event = createEvent(
+const event = new TypedEvent(
 	"update-counter",
 	z.object({
 		current: z.number(),

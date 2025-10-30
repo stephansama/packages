@@ -2,21 +2,18 @@ import { downloadTemplate } from "@bluwy/giget-core";
 import * as clack from "@clack/prompts";
 import * as path from "node:path";
 
-import examples from "../dist/examples.json" with { type: "json" };
+import examples from "~/scripts/dist/examples.json" with { type: "json" };
 
 export async function main() {
 	clack.intro("create @stephansama example projects");
 
 	const example = await clack.select({
 		message: "Select an example:",
-		options: examples.map((example) => {
-			const name = example.name.replace("@example/", "");
-			return {
-				description: example.description,
-				label: `${name} (v${example.version})`,
-				value: name,
-			};
-		}),
+		options: examples.map((example) => ({
+			description: example.description,
+			label: `${example.name.replace("@example/", "")} (v${example.version})`,
+			value: example.name,
+		})),
 	});
 
 	if (clack.isCancel(example)) return cancel();
@@ -31,14 +28,19 @@ export async function main() {
 
 	if (clack.isCancel(dir)) return cancel();
 
+	const exampleData = examples.find((e) => e.name === example);
+
 	const spinner = clack.spinner();
 	spinner.start("Downloading template");
 
-	await downloadTemplate(`github:stephansama/packages/examples/${example}`, {
-		cwd: path.resolve(),
-		dir,
-		force: true,
-	}).catch((e) => console.error(e));
+	await downloadTemplate(
+		`github:stephansama/packages/${exampleData?.relativeDir}`,
+		{
+			cwd: path.resolve(),
+			dir,
+			force: true,
+		},
+	).catch((e) => console.error(e));
 
 	spinner.stop("Downloaded example");
 

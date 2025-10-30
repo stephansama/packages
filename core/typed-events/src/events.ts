@@ -82,7 +82,7 @@ export class TypedEvent<
 	}: {
 		callback: () => void;
 		detail: Detail<Schema>;
-		step: keyof InstanceType<typeof TypedEvent>;
+		step: keyof Pick<TypedEvent<Name, Schema>, "dispatch" | "listen">;
 	}) {
 		const result = this.schema["~standard"].validate(detail);
 
@@ -92,7 +92,7 @@ export class TypedEvent<
 
 		if (!this.#silenceWarning && process.env.NODE_ENV !== "production") {
 			console.warn(
-				`using async validation during TypedEvent ${step.toString()} (however this is not recommended)`,
+				`using async validation during TypedEvent ${step} (however this is not recommended)`,
 			);
 		}
 

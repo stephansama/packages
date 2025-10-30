@@ -15,6 +15,7 @@ export function meta() {
 
 function EventComponent() {
 	const [count, setCount] = React.useState(0);
+	const inputRef = React.useRef<HTMLInputElement>(null);
 
 	const event = React.useMemo(
 		() =>
@@ -31,27 +32,26 @@ function EventComponent() {
 			setCount(event.detail.current);
 		});
 
-		return () => {
-			cleanup();
-		};
-	}, []);
+		return cleanup;
+	}, [event]);
+
+	function handleClick() {
+		const current = inputRef?.current?.value
+			? inputRef.current.valueAsNumber
+			: count + 1;
+
+		event.dispatch({ current });
+	}
 
 	return (
 		<div className="flex grow items-center justify-center gap-4">
-			<button
-				onClick={() => {
-					const input = document.getElementById(
-						"number",
-					) as HTMLInputElement | null;
-
-					event.dispatch({
-						current: input?.value ? input?.valueAsNumber : count + 1,
-					});
-				}}
-			>
-				test event
-			</button>
-			<input id="number" placeholder="number to override" type="number" />
+			<button onClick={handleClick}>test {event.name} event</button>
+			<input
+				id="number"
+				placeholder="number to override"
+				ref={inputRef}
+				type="number"
+			/>
 			<span>{count}</span>
 		</div>
 	);

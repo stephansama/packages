@@ -18,7 +18,11 @@ export async function main() {
 
 	if (clack.isCancel(example)) return cancel();
 
-	const defaultDir = `./${example.split("/").at(0)}`;
+	const exampleData = examples.find((e) => e.name === example);
+
+	if (!exampleData) throw new Error("unable to find example data");
+
+	const defaultDir = `./${exampleData.name}`;
 
 	const dir = await clack.text({
 		defaultValue: defaultDir,
@@ -28,13 +32,11 @@ export async function main() {
 
 	if (clack.isCancel(dir)) return cancel();
 
-	const exampleData = examples.find((e) => e.name === example);
-
 	const spinner = clack.spinner();
 	spinner.start("Downloading template");
 
 	await downloadTemplate(
-		`github:stephansama/packages/${exampleData?.relativeDir}`,
+		`github:stephansama/packages/${exampleData.relativeDir}`,
 		{
 			cwd: path.resolve(),
 			dir,

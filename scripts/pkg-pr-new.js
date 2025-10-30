@@ -4,7 +4,7 @@ import * as cp from "node:child_process";
 
 import { generate } from "./generate-examples.js";
 
-const templateStr = generate({ writeToFile: false })
+const templateStr = (await generate({ writeToFile: false }))
 	.map((example) => `--template ${example.relativeDir}`)
 	.join(" ");
 

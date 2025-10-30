@@ -1,5 +1,7 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
+import { logOnce } from "./utils";
+
 type Detail<T extends StandardSchemaV1> = StandardSchemaV1.InferInput<T>;
 
 type Restrict<T extends string, Forbidden> = T extends Forbidden ? never : T;
@@ -91,7 +93,7 @@ export class TypedEvent<
 		}
 
 		if (!this.#silenceWarning && process.env.NODE_ENV !== "production") {
-			console.warn(
+			logOnce(
 				`using async validation during TypedEvent ${step} (however this is not recommended. please use a synchronous validator)`,
 			);
 		}

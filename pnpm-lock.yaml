@@ -6,12 +6,36 @@ settings:
 
 catalogs:
   default:
+    '@catppuccin/palette':
+      specifier: ^1.7.1
+      version: 1.7.1
+    astro:
+      specifier: ^5.9.3
+      version: 5.13.2
+    handlebars:
+      specifier: ^4.7.8
+      version: 4.7.8
+    minify:
+      specifier: ^14.0.0
+      version: 14.0.0
+    tsup:
+      specifier: ^8.3.6
+      version: 8.5.0
     typescript:
       specifier: ^5.8.3
       version: 5.9.3
+    vite:
+      specifier: ^6.3.5
+      version: 6.3.5
     vitest:
       specifier: ^3.2.4
       version: 3.2.4
+    zod:
+      specifier: ^4.0.15
+      version: 4.0.15
+    zx:
+      specifier: ^8.8.0
+      version: 8.8.5
 
 overrides:
   '@stephansama/astro-iconify-svgmap': workspace:*
@@ -135,6 +159,9 @@ importers:
       wrangler:
         specifier: ^4.20.0
         version: 4.30.0
+      zx:
+        specifier: 'catalog:'
+        version: 8.8.5
 
   .config/www:
     dependencies:
@@ -8681,6 +8708,11 @@ packages:
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
+  zx@8.8.5:
+    resolution: {integrity: sha512-SNgDF5L0gfN7FwVOdEFguY3orU5AkfFZm9B5YSHog/UDHv+lvmd82ZAsOenOkQixigwH2+yyH198AwNdKhj+RA==}
+    engines: {node: '>= 12.17.0'}
+    hasBin: true
+
 snapshots:
 
   '@algolia/abtesting@1.1.0':
@@ -13158,7 +13190,7 @@ snapshots:
 
   fix-dts-default-cjs-exports@1.0.1:
     dependencies:
-      magic-string: 0.30.17
+      magic-string: 0.30.21
       mlly: 1.7.4
       rollup: 4.52.5
 
@@ -17938,3 +17970,5 @@ snapshots:
   zod@4.0.15: {}
 
   zwitch@2.0.4: {}
+
+  zx@8.8.5: {}

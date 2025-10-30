@@ -67,7 +67,8 @@
 		"typescript": "catalog:",
 		"typescript-eslint": "^8.34.0",
 		"vitest": "catalog:",
-		"wrangler": "^4.20.0"
+		"wrangler": "^4.20.0",
+		"zx": "catalog:"
 	},
 	"packageManager": "pnpm@10.11.0"
 }

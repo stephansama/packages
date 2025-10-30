@@ -12,9 +12,6 @@ catalogs:
     vitest:
       specifier: ^3.2.4
       version: 3.2.4
-    zx:
-      specifier: ^8.8.0
-      version: 8.8.5
 
 overrides:
   '@stephansama/astro-iconify-svgmap': workspace:*
@@ -135,9 +132,6 @@ importers:
       wrangler:
         specifier: ^4.20.0
         version: 4.30.0
-      zx:
-        specifier: 'catalog:'
-        version: 8.8.5
 
   .config/www:
     dependencies:
@@ -8714,11 +8708,6 @@ packages:
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
-
-  zx@8.8.5:
-    resolution: {integrity: sha512-SNgDF5L0gfN7FwVOdEFguY3orU5AkfFZm9B5YSHog/UDHv+lvmd82ZAsOenOkQixigwH2+yyH198AwNdKhj+RA==}
-    engines: {node: '>= 12.17.0'}
-    hasBin: true
 
 snapshots:
 
@@ -17961,5 +17950,3 @@ snapshots:
   zod@4.0.15: {}
 
   zwitch@2.0.4: {}
-
-  zx@8.8.5: {}

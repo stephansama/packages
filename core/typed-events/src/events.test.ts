@@ -56,3 +56,24 @@ it("warns when using an async validator", () => {
 	expect(addEventListenerSpy).toHaveBeenCalled();
 	expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
 });
+
+it("does not warn when using an async validator when silenceAsyncWarning is true", () => {
+	const eventName = "test";
+	const event = new TypedEvent(
+		eventName,
+		z.promise(z.object({ shape: z.number() })),
+		{ silenceAsyncWarning: true },
+	);
+
+	const addEventListenerSpy = vi.spyOn(document, "addEventListener");
+	const consoleWarnSpy = vi.spyOn(console, "warn");
+
+	event.listen((event) => {
+		console.info(event);
+	});
+
+	event.dispatch({ shape: 0 });
+
+	expect(addEventListenerSpy).toHaveBeenCalled();
+	expect(consoleWarnSpy).toHaveBeenCalledTimes(0);
+});

@@ -16,8 +16,8 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"build": "tsup && attw --pack",
-		"dev": "tsup --watch",
+		"build": "tsdown",
+		"dev": "tsdown --watch",
 		"lint": "eslint ./src/"
 	},
 	"bin": "./cli.mjs",
@@ -38,7 +38,7 @@
 	],
 	"devDependencies": {
 		"@kba/makefile-parser": "^0.0.6",
-		"tsup": "catalog:"
+		"tsdown": "catalog:"
 	},
 	"publishConfig": {
 		"access": "public",

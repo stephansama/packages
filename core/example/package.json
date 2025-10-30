@@ -32,8 +32,8 @@
 		"./cli.mjs"
 	],
 	"scripts": {
-		"build": "pnpm --workspace-root run scripts:generate-examples && tsup && attw --pack",
-		"dev": "pnpm --workspace-root run scripts:generate-examples && tsup --watch",
+		"build": "pnpm --workspace-root run scripts:generate-examples && tsdown",
+		"dev": "pnpm --workspace-root run scripts:generate-examples && tsdown --watch",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
 		"typedoc": "pnpm run generate"
 	},
@@ -42,7 +42,7 @@
 		"@clack/prompts": "^0.11.0"
 	},
 	"devDependencies": {
-		"tsup": "catalog:"
+		"tsdown": "catalog:"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {

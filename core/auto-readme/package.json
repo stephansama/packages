@@ -18,7 +18,7 @@
 	"scripts": {
 		"dev": "node --watch-path=./src build.mjs",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-		"build": "node build.mjs && attw --pack . --exclude-entrypoints schema.yaml schema.json"
+		"build": "node build.mjs . --exclude-entrypoints schema.yaml schema.json"
 	},
 	"bin": "./cli.mjs",
 	"main": "./config/schema.js",
@@ -86,7 +86,7 @@
 		"@types/vfile": "^4.0.0",
 		"@types/yargs": "^17.0.33",
 		"mdast": "^3.0.0",
-		"tsup": "catalog:",
+		"tsdown": "catalog:",
 		"unified": "^11.0.5"
 	},
 	"publishConfig": {

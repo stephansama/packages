@@ -17,7 +17,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "node --watch ./scripts/generate.js",
-		"build": "node ./scripts/generate.js && attw --pack"
+		"build": "node ./scripts/generate.js"
 	},
 	"config": {
 		"outputFolder": "./dist"

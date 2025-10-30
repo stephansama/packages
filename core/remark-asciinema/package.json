@@ -16,10 +16,10 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"build": "tsup && attw --pack",
+		"build": "tsdown",
 		"lint": "eslint ./src/",
-		"prepublishOnly": "tsup",
-		"dev": "tsup --watch",
+		"prepublishOnly": "tsdown",
+		"dev": "tsdown --watch",
 		"test": "vitest run",
 		"test:ci": "vitest run --coverage",
 		"test:ui": "vitest run --ui"
@@ -44,7 +44,7 @@
 	],
 	"devDependencies": {
 		"remark": "^15.0.1",
-		"tsup": "catalog:",
+		"tsdown": "catalog:",
 		"unist-builder": "^4.0.0",
 		"unist-util-is": "^6.0.0",
 		"unist-util-visit": "^5.0.0"

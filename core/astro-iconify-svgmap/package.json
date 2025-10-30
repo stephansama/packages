@@ -16,10 +16,10 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"dev": "tsup --watch",
+		"dev": "tsdown --watch",
 		"lint": "eslint ./src/",
-		"build": "tsup && attw --pack --profile=node16",
-		"prepublishOnly": "tsup",
+		"build": "tsdown --profile=node16",
+		"prepublishOnly": "tsdown",
 		"test:ci": "vitest run --coverage",
 		"test:ui": "vitest run --ui",
 		"test": "vitest run"
@@ -62,7 +62,7 @@
 		"@iconify/types": "^2.0.0",
 		"@iconify/utils": "^2.3.0",
 		"astro": "catalog:",
-		"tsup": "catalog:",
+		"tsdown": "catalog:",
 		"vite": "catalog:"
 	},
 	"publishConfig": {

@@ -24,6 +24,7 @@ await fsp.writeFile(path.join(schemaDir, "schema.yaml"), yamlSchema);
 /** @param {import('tsdown').Options} opts */
 function build(opts) {
 	return tsdown({
+		attw: { excludeEntrypoints: ["schema.json", "schema.yaml"] },
 		format: ["esm", "cjs"],
 		outDir,
 		skipNodeModulesBundle: true,

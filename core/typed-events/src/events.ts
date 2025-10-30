@@ -93,7 +93,7 @@ export class TypedEvent<
 		}
 
 		warnOnce(
-			!this.#silenceWarning && process.env.NODE_ENV !== "production",
+			this.#silenceWarning || process.env.NODE_ENV === "production",
 			`using async validation during TypedEvent ${step} (however this is not recommended. please use a synchronous validator)`,
 		);
 

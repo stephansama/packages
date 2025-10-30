@@ -36,3 +36,23 @@ it("listens for an event when the detail is valid", () => {
 	expect(addEventListenerSpy).toHaveBeenCalled();
 	expect(consoleInfoSpy).toHaveBeenCalled();
 });
+
+it("warns when using an async validator", () => {
+	const eventName = "test";
+	const event = new TypedEvent(
+		eventName,
+		z.promise(z.object({ shape: z.number() })),
+	);
+
+	const addEventListenerSpy = vi.spyOn(document, "addEventListener");
+	const consoleWarnSpy = vi.spyOn(console, "warn");
+
+	event.listen((event) => {
+		console.info(event);
+	});
+
+	event.dispatch({ shape: 0 });
+
+	expect(addEventListenerSpy).toHaveBeenCalled();
+	expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
+});

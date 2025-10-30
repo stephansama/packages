@@ -1,52 +1,124 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
-export type InferEventDetail<E> =
-	E extends ReturnType<typeof createEvent>
-		? StandardSchemaV1.InferInput<E["schema"]>
-		: never;
+type Detail<T extends StandardSchemaV1> = StandardSchemaV1.InferInput<T>;
 
-export function createEvent<S extends string, T extends StandardSchemaV1>(
-	name: S,
-	schema: T,
-	target: EventTarget = document,
-) {
-	type Detail = StandardSchemaV1.InferInput<T>;
+type Restrict<T extends string, Forbidden> = T extends Forbidden ? never : T;
 
-	return {
-		dispatch(detail: Detail) {
-			this.validate(detail);
+type StandardEvent<T extends StandardSchemaV1> = CustomEvent<Detail<T>>;
 
-			const event = new CustomEvent<Detail>(name, { detail });
+export class TypedEvent<
+	Name extends string,
+	Schema extends StandardSchemaV1,
+	ForbiddenEvents = keyof DocumentEventMap,
+> {
+	name: Name;
+	schema: Schema;
 
-			target.dispatchEvent(event);
-		},
-		listen(callback: (event: CustomEvent<Detail>) => void) {
-			const validate = this.validate;
+	get target() {
+		return this.#target || document;
+	}
 
-			function listener(e: Event) {
-				if (e instanceof CustomEvent && e.type === name) {
-					validate(e.detail);
+	set target(target: EventTarget) {
+		if (!target) {
+			console.error("tried to set TypedEvent target to invalid target");
+			return;
+		}
 
-					callback(e);
-				}
+		this.#target = target;
+	}
+
+	#showWarning: boolean;
+	#target?: EventTarget;
+
+	constructor(
+		name: Restrict<Name, ForbiddenEvents>,
+		schema: Schema,
+		opts: { silenceAsyncWarning?: boolean; target?: EventTarget } = {},
+	) {
+		this.name = name;
+		this.schema = schema;
+
+		this.#showWarning = opts.silenceAsyncWarning || true;
+
+		if (opts.target) this.#target = opts.target;
+	}
+
+	dispatch(detail: Detail<Schema>) {
+		const callback = () => {
+			const event = new CustomEvent<Detail<Schema>>(this.name, {
+				detail,
+			});
+
+			this.target.dispatchEvent(event);
+		};
+
+		this.#validate({
+			callback,
+			detail,
+			step: "dispatch",
+		});
+	}
+
+	listen(callback: (event: StandardEvent<Schema>) => void) {
+		const listener = (e: Event) => {
+			if (e instanceof CustomEvent && e.type === this.name) {
+				this.#validate({
+					callback: () => callback(e),
+					detail: e.detail,
+					step: "listen",
+				});
 			}
+		};
 
-			target.addEventListener(name, listener);
+		this.target.addEventListener(this.name, listener);
 
-			return () => target.removeEventListener(name, listener);
-		},
-		name,
-		schema,
-		validate(detail: Detail) {
-			const result = schema["~standard"].validate(detail);
+		return () => this.target.removeEventListener(this.name, listener);
+	}
 
-			if (result instanceof Promise) {
-				throw new Error("async validation not supported");
-			}
+	#validate({
+		callback,
+		detail,
+		step,
+	}: {
+		callback: () => void;
+		detail: Detail<Schema>;
+		step: keyof InstanceType<typeof TypedEvent>;
+	}) {
+		const result = this.schema["~standard"].validate(detail);
 
-			if (result.issues) {
-				throw new Error(JSON.stringify(result.issues, null, 2));
-			}
-		},
-	};
+		if (!(result instanceof Promise)) {
+			return this.#validateCallback(result, callback);
+		}
+
+		if (this.#showWarning && process.env.NODE_ENV !== "production") {
+			console.warn(
+				`using async validation during TypedEvent ${step.toString()} (however this is not recommended)`,
+			);
+		}
+
+		result
+			.then((data) => this.#validateCallback(data, callback))
+			.catch((e) => {
+				throw new TypedEventError(e);
+			});
+	}
+
+	#validateCallback(
+		result: StandardSchemaV1.Result<unknown>,
+		callback: () => void,
+	) {
+		if (result.issues) {
+			throw new TypedEventError(result.issues);
+		} else {
+			callback();
+		}
+	}
+}
+
+export class TypedEventError extends Error {
+	constructor(issues: readonly StandardSchemaV1.Issue[]) {
+		super();
+		this.name = "TypedEvent";
+		this.message = JSON.stringify(issues);
+	}
 }

@@ -3,6 +3,7 @@
 *.bak
 .DS_Store
 .astro
+.react-router
 .env**
 .next
 .turbo

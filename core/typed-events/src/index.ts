@@ -1,3 +1,1 @@
-export type { InferEventDetail } from "./events";
-
-export { createEvent } from "./events";
+export { TypedEvent, TypedEventError } from "./events";

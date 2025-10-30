@@ -2,7 +2,7 @@ import { downloadTemplate } from "@bluwy/giget-core";
 import * as clack from "@clack/prompts";
 import * as path from "node:path";
 
-import examples from "~/scripts/dist/examples.json" with { type: "json" };
+import examples from "../../../scripts/dist/examples.json" with { type: "json" };
 
 export async function main() {
 	clack.intro("create @stephansama example projects");

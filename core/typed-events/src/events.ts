@@ -92,10 +92,10 @@ export class TypedEvent<
 			return this.#validateCallback(result, callback);
 		}
 
-		warnOnce(
-			this.#silenceWarning || process.env.NODE_ENV === "production",
-			`using async validation during TypedEvent ${step} (however this is not recommended. please use a synchronous validator)`,
-		);
+		warnOnce({
+			if: this.#silenceWarning || process.env.NODE_ENV === "production",
+			message: `using async validation during TypedEvent ${step} (however this is not recommended. please use a synchronous validator)`,
+		});
 
 		result
 			.then((data) => this.#validateCallback(data, callback))

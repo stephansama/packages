@@ -1,8 +1,8 @@
-export const messages = new Map<string, string>();
+const alreadyWarned: { [message: string]: boolean } = {};
 
-export function logOnce(message: string) {
-	if (!messages.has(message)) {
-		console.warn(message);
-		messages.set(message, message);
-	}
+export function warnOnce(condition: boolean, message: string): void {
+  if (!condition && !alreadyWarned[message]) {
+    alreadyWarned[message] = true;
+    console.warn(message);
+  }
 }

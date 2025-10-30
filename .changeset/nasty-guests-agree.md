@@ -2,4 +2,4 @@
 "@stephansama/typed-events": patch
 ---
 
-chore: add logOnce utility to prevent duplicate warnings
+chore: add warnOnce utility to prevent duplicate warnings

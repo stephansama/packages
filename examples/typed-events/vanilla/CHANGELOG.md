@@ -1,5 +1,11 @@
 # vanilla
 
+## 1.0.2
+
+### Patch Changes
+
+- 94f7e77: Updated example implementation to handle nested templates
+
 ## 1.0.1
 
 ### Patch Changes

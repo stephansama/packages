@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 2.0.2
+
+### Patch Changes
+
+- 3d57973: chore: add warnOnce utility to prevent duplicate warnings
+
 ## 2.0.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 2.0.1
+
+### Patch Changes
+
+- 06e0cd9: updated typed-events react example package name
+
 ## 2.0.0
 
 ### Major Changes

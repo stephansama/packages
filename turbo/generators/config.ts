@@ -41,12 +41,12 @@ export default function generator(plop: PlopTypes.NodePlopAPI) {
 			},
 			{
 				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/tsup.config.ts",
-				templateFile: "templates/lib/tsup.config.ts",
+				templateFile: "templates/lib/tsup.config.ts.hbs",
 				type: "add",
 			},
 			{
 				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/tsconfig.json",
-				templateFile: "templates/lib/tsconfig.json",
+				templateFile: "templates/lib/tsconfig.json.hbs",
 				type: "add",
 			},
 			{

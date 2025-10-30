@@ -21,7 +21,10 @@
 		"lint": "turbo lint",
 		"prepare": "husky",
 		"publish": "changeset publish",
+		"scripts:generate-examples": "node ./scripts/generate-examples.js",
+		"scripts:pkg-pr-new": "node ./scripts/pkg-pr-new.js",
 		"test": "turbo test",
+		"pretest:ci": "pnpm run scripts:generate-examples",
 		"test:ci": "vitest --run --coverage --reporter=junit --outputFile=test-report.junit.xml",
 		"test:ui": "vitest --ui",
 		"version": "changeset version && pnpm install --lockfile-only",
@@ -34,6 +37,7 @@
 		"@commitlint/config-conventional": "^19.8.1",
 		"@commitlint/types": "^19.8.1",
 		"@eslint/js": "^9.28.0",
+		"@manypkg/get-packages": "^3.1.0",
 		"@stephansama/auto-readme": "workspace:*",
 		"@tsconfig/recommended": "^1.0.8",
 		"@turbo/gen": "^2.5.4",
@@ -63,7 +67,8 @@
 		"typescript": "catalog:",
 		"typescript-eslint": "^8.34.0",
 		"vitest": "catalog:",
-		"wrangler": "^4.20.0"
+		"wrangler": "^4.20.0",
+		"zx": "catalog:"
 	},
 	"packageManager": "pnpm@10.11.0"
 }

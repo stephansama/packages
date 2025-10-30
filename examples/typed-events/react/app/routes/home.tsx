@@ -13,20 +13,16 @@ export function meta() {
 	];
 }
 
+const event = new TypedEvent(
+	"typed:event",
+	yup.object({
+		current: yup.number().required(),
+	}),
+);
+
 function EventComponent() {
 	const [count, setCount] = React.useState(0);
 	const inputRef = React.useRef<HTMLInputElement>(null);
-
-	const event = React.useMemo(
-		() =>
-			new TypedEvent(
-				"typed:event",
-				yup.object({
-					current: yup.number().required(),
-				}),
-			),
-		[],
-	);
 
 	React.useEffect(() => {
 		const cleanup = event.listen((event) => {
@@ -35,7 +31,7 @@ function EventComponent() {
 		});
 
 		return cleanup;
-	}, [event]);
+	}, []);
 
 	function handleClick() {
 		const current = inputRef?.current?.value

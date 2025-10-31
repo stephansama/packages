@@ -1,5 +1,11 @@
 # vanilla
 
+## 1.0.3
+
+### Patch Changes
+
+- 59750e2: migrated to tsdown
+
 ## 1.0.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @example/astro-iconify-svgmap
 
+## 1.0.4
+
+### Patch Changes
+
+- 59750e2: migrated to tsdown
+
 ## 1.0.3
 
 ### Patch Changes

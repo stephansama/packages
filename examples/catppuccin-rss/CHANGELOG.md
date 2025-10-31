@@ -1,5 +1,11 @@
 # @example/catppuccin-rss
 
+## 0.0.5
+
+### Patch Changes
+
+- 59750e2: migrated to tsdown
+
 ## 0.0.4
 
 ### Patch Changes

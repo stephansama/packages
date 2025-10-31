@@ -1,5 +1,11 @@
 # @stephansama/remark-asciinema
 
+## 1.0.11
+
+### Patch Changes
+
+- 59750e2: migrated to tsdown
+
 ## 1.0.10
 
 ### Patch Changes

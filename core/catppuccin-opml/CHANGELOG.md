@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-opml
 
+## 0.1.1
+
+### Patch Changes
+
+- 59750e2: migrated to tsdown
+
 ## 0.1.0
 
 ### Minor Changes

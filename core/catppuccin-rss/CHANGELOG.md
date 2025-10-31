@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-rss
 
+## 1.2.1
+
+### Patch Changes
+
+- 59750e2: migrated to tsdown
+
 ## 1.2.0
 
 ### Minor Changes

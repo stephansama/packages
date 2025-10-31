@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-typedoc
 
+## 1.0.2
+
+### Patch Changes
+
+- 59750e2: migrated to tsdown
+
 ## 1.0.1
 
 ### Patch Changes

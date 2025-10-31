@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/typed-events",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"description": "Typed events store using standard schema",
 	"keywords": [
 		"typed-events",

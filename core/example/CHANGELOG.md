@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.3.1
+
+### Patch Changes
+
+- 59750e2: migrated to tsdown
+
 ## 1.3.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @stephansama/auto-readme
 
+## 0.2.2
+
+### Patch Changes
+
+- 59750e2: migrated to tsdown
+
 ## 0.2.1
 
 ### Patch Changes

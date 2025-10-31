@@ -1,5 +1,11 @@
 # @example/typed-events/react
 
+## 0.0.3
+
+### Patch Changes
+
+- 59750e2: migrated to tsdown
+
 ## 0.0.2
 
 ### Patch Changes

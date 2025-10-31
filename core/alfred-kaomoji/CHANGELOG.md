@@ -1,5 +1,11 @@
 # @stephansama/alfred-kaomoji
 
+## 1.0.6
+
+### Patch Changes
+
+- 59750e2: migrated to tsdown
+
 ## 1.0.5
 
 ### Patch Changes

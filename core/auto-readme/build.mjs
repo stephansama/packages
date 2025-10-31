@@ -28,7 +28,6 @@ function build(opts) {
 		format: ["esm", "cjs"],
 		outDir,
 		skipNodeModulesBundle: true,
-		sourcemap: true,
 		splitting: false,
 		target: "esnext",
 		...opts,

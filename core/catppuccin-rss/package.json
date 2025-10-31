@@ -2,40 +2,40 @@
 	"name": "@stephansama/catppuccin-rss",
 	"version": "1.2.0",
 	"description": "Catppuccin x Pretty-feed-v3",
-	"repository": {
-		"url": "https://github.com/stephansama/packages",
-		"type": "git",
-		"directory": "core/catppuccin-rss"
-	},
-	"homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-rss",
-	"author": {
-		"email": "stephanrandle.dev@gmail.com",
-		"name": "Stephan Randle",
-		"url": "https://stephanrandle.netlify.app/"
-	},
-	"license": "MIT",
-	"type": "module",
-	"scripts": {
-		"dev": "node --watch ./scripts/generate.js",
-		"build": "node ./scripts/generate.js"
-	},
-	"config": {
-		"outputFolder": "./dist"
-	},
-	"files": [
-		"dist"
-	],
-	"packageManager": "pnpm@10.11.0",
 	"keywords": [
 		"catppuccin",
 		"rss",
 		"pretty-feed"
 	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-rss",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/stephansama/packages",
+		"directory": "core/catppuccin-rss"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephanrandle.netlify.app/"
+	},
+	"type": "module",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "node ./scripts/generate.js && attw --pack",
+		"dev": "node --watch ./scripts/generate.js"
+	},
+	"config": {
+		"outputFolder": "./dist"
+	},
 	"devDependencies": {
 		"@catppuccin/palette": "catalog:",
 		"handlebars": "catalog:",
 		"minify": "catalog:"
 	},
+	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true

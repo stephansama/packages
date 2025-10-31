@@ -2,34 +2,33 @@
 	"name": "@stephansama/catppuccin-typedoc",
 	"version": "1.0.1",
 	"description": "Catppuccin css variable theme for typedoc",
-	"repository": {
-		"url": "https://github.com/stephansama/packages",
-		"type": "git",
-		"directory": "core/catppuccin-typedoc"
-	},
-	"homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-typedoc",
-	"author": {
-		"email": "stephanrandle.dev@gmail.com",
-		"name": "Stephan Randle",
-		"url": "https://stephansama.info"
-	},
-	"license": "MIT",
-	"type": "module",
-	"scripts": {
-		"build": "node ./src/generate.js",
-		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-		"test": "echo 'tested (* ^ ω ^)'"
-	},
-	"files": [
-		"dist"
-	],
-	"packageManager": "pnpm@10.11.0",
 	"keywords": [
 		"catppuccin-typedoc"
 	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-typedoc",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/stephansama/packages",
+		"directory": "core/catppuccin-typedoc"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephansama.info"
+	},
+	"type": "module",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "node ./src/generate.js && attw --pack",
+		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+	},
 	"devDependencies": {
 		"@catppuccin/palette": "catalog:"
 	},
+	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true

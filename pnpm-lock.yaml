@@ -33,6 +33,9 @@ catalogs:
     zod:
       specifier: ^4.0.15
       version: 4.0.15
+    zshy:
+      specifier: ^0.4.4
+      version: 0.4.4
 
 overrides:
   '@stephansama/astro-iconify-svgmap': workspace:*
@@ -338,11 +341,8 @@ importers:
         specifier: ^0.11.0
         version: 0.11.0
     devDependencies:
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.15.12(@arethetypeswrong/core@0.18.2)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3))
       zshy:
-        specifier: ^0.4.4
+        specifier: 'catalog:'
         version: 0.4.4(typescript@5.9.3)
 
   core/find-makefile-targets:

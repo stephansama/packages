@@ -37,21 +37,26 @@ Check out this demo:
 ## Installation
 
 ```bash
-pnpm install remark-asciinema
+pnpm install @stephansama/remark-asciinema
 ```
 
 ## Usage
 
-```js
+```javascript
 import { remark } from "remark";
-import asciinema from "remark-asciinema";
 
-const file = await remark()
-  .use(asciinema)
-  .process("Check out: https://asciinema.org/a/abc123");
+import asciinema from "@stephansama/remark-asciinema";
 
-console.log(String(file));
+export async function pipeline() {
+  const file = await remark
+    .use(asciinema, { embedType: "script" })
+    .process("Check out: https://asciinema.org/a/abc123");
+
+  console.info(String(file));
+}
 ```
+
+## Additional notes
 
 **Note**: After integrating the Remark plugin, ensure you include the necessary asciinema JavaScript and CSS files to enable proper playback and styling. You can load them via [UNPKG](https://unpkg.com/):
 

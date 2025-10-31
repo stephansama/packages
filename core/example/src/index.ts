@@ -2,7 +2,7 @@ import { downloadTemplate } from "@bluwy/giget-core";
 import * as clack from "@clack/prompts";
 import * as path from "node:path";
 
-import examples from "../../../scripts/dist/examples.json" with { type: "json" };
+import examples from "../../../scripts/dist/examples.json";
 
 export async function main() {
 	clack.intro("create @stephansama example projects");
@@ -22,7 +22,10 @@ export async function main() {
 
 	if (!exampleData) throw new Error("unable to find example data");
 
-	const defaultDir = `./${exampleData.name}`;
+	const defaultDir = `./${exampleData.relativeDir
+		.split("/")
+		.filter((f) => f !== "examples")
+		.join("-")}`;
 
 	const dir = await clack.text({
 		defaultValue: defaultDir,

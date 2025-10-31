@@ -17,14 +17,15 @@
 		"email": "stephanrandle.dev@gmail.com",
 		"url": "https://stephansama.info"
 	},
-	"type": "module",
 	"exports": {
 		".": {
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs"
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js"
 		}
 	},
 	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
 	"bin": "./cli.mjs",
 	"files": [
@@ -32,8 +33,11 @@
 		"./cli.mjs"
 	],
 	"scripts": {
-		"build": "pnpm --workspace-root run scripts:generate-examples && tsdown",
-		"dev": "pnpm --workspace-root run scripts:generate-examples && tsdown --watch",
+		"prebuild": "pnpm run generate",
+		"build": "zshy",
+		"predev": "pnpm run generate",
+		"dev": "zshy --watch",
+		"generate": "pnpm --workspace-root run scripts:generate-examples",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
 		"typedoc": "pnpm run generate"
 	},
@@ -42,11 +46,13 @@
 		"@clack/prompts": "^0.11.0"
 	},
 	"devDependencies": {
-		"tsdown": "catalog:"
+		"tsdown": "catalog:",
+		"zshy": "^0.4.4"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true
-	}
+	},
+	"zshy": "./src/index.ts"
 }

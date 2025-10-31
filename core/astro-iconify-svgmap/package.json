@@ -48,9 +48,7 @@
 		"build": "tsdown --profile=node16",
 		"dev": "tsdown --watch",
 		"lint": "eslint ./src/",
-		"prepublishOnly": "tsdown",
-		"test:ci": "vitest run --coverage",
-		"test:ui": "vitest run --ui"
+		"prepublishOnly": "tsdown"
 	},
 	"devDependencies": {
 		"@iconify/types": "^2.0.0",

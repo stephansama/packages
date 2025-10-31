@@ -37,9 +37,7 @@
 		"build": "tsdown",
 		"dev": "tsdown --watch",
 		"lint": "eslint ./src/",
-		"prepublishOnly": "tsdown",
-		"test:ci": "vitest run --coverage",
-		"test:ui": "vitest run --ui"
+		"prepublishOnly": "tsdown"
 	},
 	"devDependencies": {
 		"remark": "^15.0.1",

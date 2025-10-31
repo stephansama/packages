@@ -32,8 +32,6 @@
 	"scripts": {
 		"lint": "eslint ./src/"
 	},
-	"dependencies": {},
-	"devDependencies": {},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {
 		"access": "public",

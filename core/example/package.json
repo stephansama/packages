@@ -46,8 +46,7 @@
 		"@clack/prompts": "^0.11.0"
 	},
 	"devDependencies": {
-		"tsdown": "catalog:",
-		"zshy": "^0.4.4"
+		"zshy": "catalog:"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {

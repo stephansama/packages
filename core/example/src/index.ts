@@ -22,10 +22,9 @@ export async function main() {
 
 	if (!exampleData) throw new Error("unable to find example data");
 
-	const defaultDir = `./${exampleData.relativeDir
-		.split("/")
-		.filter((f) => f !== "examples")
-		.join("-")}`;
+	const [, ...relativeDir] = exampleData.relativeDir.split("/");
+
+	const defaultDir = "./" + relativeDir.join("-");
 
 	const dir = await clack.text({
 		defaultValue: defaultDir,

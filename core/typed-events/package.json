@@ -21,6 +21,7 @@
 		"email": "stephanrandle.dev@gmail.com",
 		"url": "https://stephansama.info"
 	},
+	"sideEffects": false,
 	"type": "module",
 	"exports": {
 		".": {

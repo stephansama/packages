@@ -13,7 +13,6 @@ catalog:
   vite: ^6.3.5
   vitest: ^3.2.4
   zod: ^4.0.15
-  zshy: ^0.4.4
   zx: ^8.8.0
 engineStrict: true
 overrides:

@@ -18,25 +18,20 @@
 		"url": "https://stephansama.info"
 	},
 	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js"
-		}
+		".": "./dist/cli.js",
+		"./package.json": "./package.json"
 	},
-	"main": "./dist/index.js",
-	"module": "./dist/index.mjs",
-	"types": "./dist/index.d.ts",
-	"bin": "./cli.mjs",
+	"main": "./dist/cli.js",
+	"types": "./dist/cli.d.ts",
+	"bin": "./dist/cli.js",
 	"files": [
-		"./dist",
-		"./cli.mjs"
+		"./dist"
 	],
 	"scripts": {
 		"prebuild": "pnpm run generate",
-		"build": "zshy",
+		"build": "tsdown",
 		"predev": "pnpm run generate",
-		"dev": "zshy --watch",
+		"dev": "tsdown --watch",
 		"generate": "pnpm --workspace-root run scripts:generate-examples",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
 		"typedoc": "pnpm run generate"
@@ -46,12 +41,11 @@
 		"@clack/prompts": "^0.11.0"
 	},
 	"devDependencies": {
-		"zshy": "catalog:"
+		"tsdown": "catalog:"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true
-	},
-	"zshy": "./src/index.ts"
+	}
 }

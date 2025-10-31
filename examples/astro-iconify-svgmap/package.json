@@ -1,14 +1,14 @@
 {
-	"private": true,
 	"name": "@example/astro-iconify-svgmap",
 	"version": "1.0.3",
+	"private": true,
 	"description": "Example astro site using iconify svgmap",
 	"type": "module",
 	"scripts": {
-		"dev": "astro dev",
+		"astro": "astro",
 		"build": "astro build",
-		"preview": "astro preview",
-		"astro": "astro"
+		"dev": "astro dev",
+		"preview": "astro preview"
 	},
 	"dependencies": {
 		"astro": "^5.9.3"

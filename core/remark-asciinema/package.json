@@ -2,30 +2,24 @@
 	"name": "@stephansama/remark-asciinema",
 	"version": "1.0.10",
 	"description": "A remark plugin that transforms Asciinema links into embedded players or screenshots.",
+	"keywords": [
+		"asciinema",
+		"remark",
+		"remark-plugin"
+	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/remark-asciinema",
 	"repository": {
-		"url": "https://github.com/stephansama/packages",
 		"type": "git",
+		"url": "https://github.com/stephansama/packages",
 		"directory": "core/remark-asciinema"
 	},
-	"homepage": "https://packages.stephansama.info/api/@stephansama/remark-asciinema",
+	"license": "MIT",
 	"author": {
-		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
 		"url": "https://stephanrandle.netlify.app/"
 	},
-	"license": "MIT",
 	"type": "module",
-	"scripts": {
-		"build": "tsup && attw --pack",
-		"lint": "eslint ./src/",
-		"prepublishOnly": "tsup",
-		"dev": "tsup --watch",
-		"test": "vitest run",
-		"test:ci": "vitest run --coverage",
-		"test:ui": "vitest run --ui"
-	},
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
@@ -33,18 +27,21 @@
 		},
 		"./package.json": "./package.json"
 	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"files": [
 		"dist",
 		"package.json"
 	],
-	"keywords": [
-		"asciinema",
-		"remark",
-		"remark-plugin"
-	],
+	"scripts": {
+		"build": "tsdown",
+		"dev": "tsdown --watch",
+		"lint": "eslint ./src/",
+		"prepublishOnly": "tsdown"
+	},
 	"devDependencies": {
 		"remark": "^15.0.1",
-		"tsup": "catalog:",
+		"tsdown": "catalog:",
 		"unist-builder": "^4.0.0",
 		"unist-util-is": "^6.0.0",
 		"unist-util-visit": "^5.0.0"

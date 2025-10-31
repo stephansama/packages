@@ -1,11 +1,11 @@
 {
-	"private": true,
 	"name": "@example/typed-events/vanilla",
 	"version": "1.0.2",
+	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
 		"build": "vite build",
+		"dev": "vite",
 		"preview": "vite preview"
 	},
 	"devDependencies": {

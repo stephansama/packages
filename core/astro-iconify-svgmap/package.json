@@ -2,33 +2,27 @@
 	"name": "@stephansama/astro-iconify-svgmap",
 	"version": "1.0.4",
 	"description": "Astro integration for generating iconify svgmaps for ssg sites",
+	"keywords": [
+		"vite",
+		"astro",
+		"astro-integration",
+		"vite-plugin",
+		"svgmap",
+		"iconify"
+	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/astro-iconify-svgmap",
 	"repository": {
-		"url": "https://github.com/stephansama/packages",
 		"type": "git",
+		"url": "https://github.com/stephansama/packages",
 		"directory": "core/astro-iconify-svgmap"
 	},
-	"homepage": "https://packages.stephansama.info/api/@stephansama/astro-iconify-svgmap",
+	"license": "MIT",
 	"author": {
-		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
 		"url": "https://stephansama.info"
 	},
-	"license": "MIT",
 	"type": "module",
-	"scripts": {
-		"dev": "tsup --watch",
-		"lint": "eslint ./src/",
-		"build": "tsup && attw --pack --profile=node16",
-		"prepublishOnly": "tsup",
-		"test:ci": "vitest run --coverage",
-		"test:ui": "vitest run --ui",
-		"test": "vitest run"
-	},
-	"bin": {
-		"iconify-svgmap": "./dist/cli.js"
-	},
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
@@ -40,31 +34,34 @@
 		},
 		"./package.json": "./package.json"
 	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"bin": {
+		"iconify-svgmap": "./dist/cli.js"
+	},
 	"files": [
 		"client.d.ts",
 		"dist",
 		"package.json"
 	],
-	"packageManager": "pnpm@10.11.0",
-	"keywords": [
-		"vite",
-		"astro",
-		"astro-integration",
-		"vite-plugin",
-		"svgmap",
-		"iconify"
-	],
-	"peerDependencies": {
-		"astro": "catalog:",
-		"vite": "catalog:"
+	"scripts": {
+		"build": "tsdown --profile=node16",
+		"dev": "tsdown --watch",
+		"lint": "eslint ./src/",
+		"prepublishOnly": "tsdown"
 	},
 	"devDependencies": {
 		"@iconify/types": "^2.0.0",
 		"@iconify/utils": "^2.3.0",
 		"astro": "catalog:",
-		"tsup": "catalog:",
+		"tsdown": "catalog:",
 		"vite": "catalog:"
 	},
+	"peerDependencies": {
+		"astro": "catalog:",
+		"vite": "catalog:"
+	},
+	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true

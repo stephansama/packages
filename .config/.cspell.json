@@ -32,12 +32,13 @@
 		"stephansama",
 		"svgmap",
 		"svgmaps",
-		"tsup",
+		"tsdown",
 		"typedoc",
 		"vite",
 		"vitepress",
 		"vitest",
-		"yarg"
+		"yarg",
+		"zshy"
 	],
 	"ignorePaths": [".env"]
 }

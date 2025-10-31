@@ -1,6 +1,6 @@
 import * as fsp from "node:fs/promises";
 import * as path from "path";
-import { build as tsup } from "tsup";
+import { build as tsdown } from "tsdown";
 import yaml from "yaml";
 import { z } from "zod";
 
@@ -21,9 +21,10 @@ const yamlSchema = yaml.stringify(schema);
 await fsp.writeFile(path.join(schemaDir, "schema.json"), jsonSchema);
 await fsp.writeFile(path.join(schemaDir, "schema.yaml"), yamlSchema);
 
-/** @param {import('tsup').Options} opts */
+/** @param {import('tsdown').Options} opts */
 function build(opts) {
-	return tsup({
+	return tsdown({
+		attw: { excludeEntrypoints: ["schema.json", "schema.yaml"] },
 		format: ["esm", "cjs"],
 		outDir,
 		skipNodeModulesBundle: true,

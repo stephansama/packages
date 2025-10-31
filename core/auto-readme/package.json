@@ -2,27 +2,29 @@
 	"name": "@stephansama/auto-readme",
 	"version": "0.2.1",
 	"description": "Generate lists and tables for your README automagically based on your repository and comments",
+	"keywords": [
+		"auto",
+		"auto-readme",
+		"cli",
+		"generate",
+		"generator",
+		"list",
+		"markdown",
+		"table"
+	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/auto-readme",
 	"repository": {
-		"url": "https://github.com/stephansama/packages",
 		"type": "git",
+		"url": "https://github.com/stephansama/packages",
 		"directory": "core/auto-readme"
 	},
-	"homepage": "https://packages.stephansama.info/api/@stephansama/auto-readme",
+	"license": "MIT",
 	"author": {
-		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
 		"url": "https://stephansama.info"
 	},
-	"license": "MIT",
 	"type": "module",
-	"scripts": {
-		"dev": "node --watch-path=./src build.mjs",
-		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-		"build": "node build.mjs && attw --pack . --exclude-entrypoints schema.yaml schema.json"
-	},
-	"bin": "./cli.mjs",
-	"main": "./config/schema.js",
-	"types": "./config/schema.d.ts",
 	"exports": {
 		".": {
 			"import": {
@@ -37,22 +39,19 @@
 		"./schema.json": "./config/schema.json",
 		"./schema.yaml": "./config/schema.yaml"
 	},
+	"main": "./config/schema.js",
+	"types": "./config/schema.d.ts",
+	"bin": "./cli.mjs",
 	"files": [
 		"./dist",
 		"./config",
 		"./cli.mjs"
 	],
-	"packageManager": "pnpm@10.11.0",
-	"keywords": [
-		"auto",
-		"auto-readme",
-		"cli",
-		"generate",
-		"generator",
-		"list",
-		"markdown",
-		"table"
-	],
+	"scripts": {
+		"build": "node build.mjs",
+		"dev": "node --watch-path=./src build.mjs",
+		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+	},
 	"dependencies": {
 		"@iarna/toml": "^2.2.5",
 		"@manypkg/get-packages": "^3.1.0",
@@ -86,9 +85,10 @@
 		"@types/vfile": "^4.0.0",
 		"@types/yargs": "^17.0.33",
 		"mdast": "^3.0.0",
-		"tsup": "catalog:",
+		"tsdown": "catalog:",
 		"unified": "^11.0.5"
 	},
+	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true

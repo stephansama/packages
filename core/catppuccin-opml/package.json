@@ -23,9 +23,8 @@
 	},
 	"type": "module",
 	"scripts": {
-		"build": "node ./scripts/generate.js",
-		"dev": "node --watch ./scripts/generate.js",
-		"test": "echo 'tested (* ^ ω ^)'"
+		"build": "node ./scripts/generate.js && attw --pack",
+		"dev": "node --watch ./scripts/generate.js"
 	},
 	"devDependencies": {
 		"@catppuccin/palette": "catalog:",

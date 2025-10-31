@@ -2,34 +2,6 @@
 	"name": "@stephansama/typed-events",
 	"version": "2.0.2",
 	"description": "Typed events store using standard schema",
-	"repository": {
-		"url": "https://github.com/stephansama/packages",
-		"type": "git",
-		"directory": "core/typed-events"
-	},
-	"homepage": "https://packages.stephansama.info/api/@stephansama/typed-events",
-	"author": {
-		"email": "stephanrandle.dev@gmail.com",
-		"name": "Stephan Randle",
-		"url": "https://stephansama.info"
-	},
-	"license": "MIT",
-	"type": "module",
-	"scripts": {
-		"build": "tsup && attw --pack",
-		"dev": "tsup --watch",
-		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-		"test": "echo 'tested (* ^ ω ^)'"
-	},
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"exports": {
-		".": {
-			"require": "./dist/index.cjs",
-			"default": "./dist/index.js"
-		}
-	},
-	"packageManager": "pnpm@10.11.0",
 	"keywords": [
 		"typed-events",
 		"standard-schema",
@@ -37,11 +9,42 @@
 		"events",
 		"strict"
 	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/typed-events",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/stephansama/packages",
+		"directory": "core/typed-events"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephansama.info"
+	},
+	"sideEffects": false,
+	"type": "module",
+	"exports": {
+		".": {
+			"require": "./dist/index.cjs",
+			"default": "./dist/index.js"
+		}
+	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"./dist/"
+	],
+	"scripts": {
+		"build": "tsdown",
+		"dev": "tsdown --watch",
+		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+	},
 	"devDependencies": {
 		"@standard-schema/spec": "^1.0.0",
-		"tsup": "catalog:",
+		"tsdown": "catalog:",
 		"zod": "catalog:"
 	},
+	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true

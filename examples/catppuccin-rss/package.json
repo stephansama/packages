@@ -1,12 +1,12 @@
 {
-	"private": true,
 	"name": "@example/catppuccin-rss",
 	"version": "0.0.4",
+	"private": true,
 	"description": "Example using catppuccin rss feed x pretty feed v3",
 	"type": "module",
 	"scripts": {
-		"dev": "node ./scripts/generate.js && vite",
 		"build": "node ./scripts/generate.js && vite build",
+		"dev": "node ./scripts/generate.js && vite",
 		"preview": "vite preview"
 	},
 	"devDependencies": {

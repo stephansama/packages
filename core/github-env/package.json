@@ -2,28 +2,6 @@
 	"name": "@stephansama/github-env",
 	"version": "0.1.2",
 	"description": "Additional environment variable types for GitHub CI",
-	"repository": {
-		"url": "https://github.com/stephansama/packages",
-		"type": "git",
-		"directory": "core/github-env"
-	},
-	"homepage": "https://packages.stephansama.info/api/@stephansama/github-env",
-	"author": {
-		"email": "stephanrandle.dev@gmail.com",
-		"name": "Stephan Randle",
-		"url": "https://stephansama.info"
-	},
-	"license": "MIT",
-	"type": "module",
-	"scripts": {
-		"test": "tsc --noEmit",
-		"lint": "eslint ./src/"
-	},
-	"types": "./src/env.d.ts",
-	"files": [
-		"src"
-	],
-	"packageManager": "pnpm@10.11.0",
 	"keywords": [
 		"actions",
 		"env",
@@ -34,8 +12,28 @@
 		"types",
 		"typescript"
 	],
-	"dependencies": {},
-	"devDependencies": {},
+	"homepage": "https://packages.stephansama.info/api/@stephansama/github-env",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/stephansama/packages",
+		"directory": "core/github-env"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephansama.info"
+	},
+	"type": "module",
+	"types": "./src/env.d.ts",
+	"files": [
+		"src"
+	],
+	"scripts": {
+		"lint": "eslint ./src/",
+		"type-check": "tsc --noEmit"
+	},
+	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true

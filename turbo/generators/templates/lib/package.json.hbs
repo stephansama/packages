@@ -16,10 +16,9 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"build": "tsup && attw --pack",
-		"dev": "tsup --watch",
-		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-		"test": "echo 'tested (* ^ ω ^)'"
+		"build": "tsdown",
+		"dev": "tsdown --watch",
+		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"keywords": [
@@ -27,7 +26,7 @@
 	],
 	"dependencies": {},
 	"devDependencies": {
-		"tsup": "catalog:"
+		"tsdown": "catalog:"
 	},
 	"publishConfig": {
 		"access": "public",

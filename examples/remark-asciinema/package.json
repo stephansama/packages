@@ -1,16 +1,16 @@
 {
-	"private": true,
 	"name": "@example/remark-asciinema",
 	"version": "0.0.4",
+	"private": true,
 	"description": "Example astro site demonstrating how to use remark-asciinema plugin",
 	"type": "module",
 	"scripts": {
+		"astro": "astro",
+		"build": "astro build",
 		"dev": "astro dev",
 		"lint": "eslint ./src/ && astro check",
 		"lint:fix": "eslint ./src/ --fix",
-		"build": "astro build",
-		"preview": "astro preview",
-		"astro": "astro"
+		"preview": "astro preview"
 	},
 	"dependencies": {
 		"@astrojs/mdx": "^4.3.0",

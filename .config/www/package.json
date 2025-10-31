@@ -1,12 +1,12 @@
 {
-	"private": true,
 	"name": "www",
+	"private": true,
 	"type": "module",
 	"scripts": {
-		"predev": "typedoc",
-		"dev": "vitepress dev",
 		"prebuild": "typedoc",
 		"build": "vitepress build",
+		"predev": "typedoc",
+		"dev": "vitepress dev",
 		"preview": "vitepress preview"
 	},
 	"dependencies": {

@@ -2,44 +2,44 @@
 	"name": "@stephansama/find-makefile-targets",
 	"version": "1.0.0",
 	"description": "Find makefile targets used to pipe into fzf",
+	"keywords": [
+		"find-makefile-targets"
+	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/find-makefile-targets",
 	"repository": {
-		"url": "https://github.com/stephansama/packages",
 		"type": "git",
+		"url": "https://github.com/stephansama/packages",
 		"directory": "core/find-makefile-targets"
 	},
-	"homepage": "https://packages.stephansama.info/api/@stephansama/find-makefile-targets",
+	"license": "MIT",
 	"author": {
-		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
 		"url": "https://stephansama.info"
 	},
-	"license": "MIT",
 	"type": "module",
-	"scripts": {
-		"build": "tsdown",
-		"dev": "tsdown --watch",
-		"lint": "eslint ./src/"
-	},
-	"bin": "./cli.mjs",
-	"main": "./dist/index.js",
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
 			"require": "./dist/index.cjs"
 		}
 	},
+	"main": "./dist/index.js",
+	"bin": "./cli.mjs",
 	"files": [
 		"./dist",
 		"./cli.mjs"
 	],
-	"packageManager": "pnpm@10.11.0",
-	"keywords": [
-		"find-makefile-targets"
-	],
+	"scripts": {
+		"build": "tsdown",
+		"dev": "tsdown --watch",
+		"lint": "eslint ./src/"
+	},
 	"devDependencies": {
 		"@kba/makefile-parser": "^0.0.6",
 		"tsdown": "catalog:"
 	},
+	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true

@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 2.0.4
+
+### Patch Changes
+
+- 17e55fe: Updated developer experience and readmes
+
 ## 2.0.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @stephansama/astro-iconify-svgmap
 
+## 1.0.6
+
+### Patch Changes
+
+- 17e55fe: Updated developer experience and readmes
+
 ## 1.0.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @example/typed-events/react
 
+## 0.0.4
+
+### Patch Changes
+
+- 17e55fe: Updated developer experience and readmes
+
 ## 0.0.3
 
 ### Patch Changes

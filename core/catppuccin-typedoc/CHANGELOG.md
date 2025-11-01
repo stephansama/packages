@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-typedoc
 
+## 1.0.3
+
+### Patch Changes
+
+- 17e55fe: Updated developer experience and readmes
+
 ## 1.0.2
 
 ### Patch Changes

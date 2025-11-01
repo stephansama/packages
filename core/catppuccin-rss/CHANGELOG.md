@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-rss
 
+## 1.2.2
+
+### Patch Changes
+
+- 17e55fe: Updated developer experience and readmes
+
 ## 1.2.1
 
 ### Patch Changes

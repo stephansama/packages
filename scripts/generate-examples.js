@@ -36,8 +36,8 @@ export async function generate({ writeToFile = true } = {}) {
 
 	if (writeToFile) {
 		fs.writeFileSync(
-			path.join(outputDir, "examples.json"),
-			JSON.stringify(examples, undefined, 2),
+			path.join(outputDir, "examples.js"),
+			`export default ${JSON.stringify(examples, undefined, 2)}`,
 		);
 	}
 

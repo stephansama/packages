@@ -1,6 +1,6 @@
 {
 	"name": "@example/remark-asciinema",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"private": true,
 	"description": "Example astro site demonstrating how to use remark-asciinema plugin",
 	"type": "module",
@@ -19,6 +19,6 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.4",
-		"@stephansama/remark-asciinema": "^1.0.11"
+		"@stephansama/remark-asciinema": "^1.0.12"
 	}
 }

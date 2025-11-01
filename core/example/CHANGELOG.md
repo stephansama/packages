@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.3.2
+
+### Patch Changes
+
+- 17e55fe: Updated developer experience and readmes
+
 ## 1.3.1
 
 ### Patch Changes

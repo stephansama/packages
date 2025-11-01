@@ -1,5 +1,11 @@
 # @example/remark-asciinema
 
+## 0.0.6
+
+### Patch Changes
+
+- 17e55fe: Updated developer experience and readmes
+
 ## 0.0.5
 
 ### Patch Changes

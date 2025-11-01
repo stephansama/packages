@@ -1,5 +1,11 @@
 # @stephansama/remark-asciinema
 
+## 1.0.12
+
+### Patch Changes
+
+- 17e55fe: Updated developer experience and readmes
+
 ## 1.0.11
 
 ### Patch Changes

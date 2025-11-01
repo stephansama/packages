@@ -17,6 +17,7 @@
 		"email": "stephanrandle.dev@gmail.com",
 		"url": "https://stephansama.info"
 	},
+	"type": "commonjs",
 	"exports": {
 		".": "./dist/cli.js",
 		"./package.json": "./package.json"

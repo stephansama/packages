@@ -2,7 +2,7 @@
 
 import { flavors } from "@catppuccin/palette";
 import Handlebars from "handlebars";
-import minify from "minify";
+import { minify } from "minify";
 import * as fs from "node:fs";
 import * as path from "node:path";
 

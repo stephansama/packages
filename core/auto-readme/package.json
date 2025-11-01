@@ -60,7 +60,7 @@
 		"debug": "^4.4.3",
 		"deepmerge": "^4.3.1",
 		"fast-glob": "^3.3.3",
-		"handlebars": "4.7.8",
+		"handlebars": "catalog:",
 		"markdown-table": "^3.0.4",
 		"mdast-comment-marker": "^3.0.0",
 		"mdast-util-from-markdown": "^2.0.2",
@@ -75,7 +75,7 @@
 		"vfile": "^6.0.3",
 		"yaml": "^2.8.1",
 		"yargs": "^18.0.0",
-		"zod": "4.0.15",
+		"zod": "catalog:",
 		"zod2md": "^0.2.4"
 	},
 	"devDependencies": {

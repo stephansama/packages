@@ -10,7 +10,7 @@
 	"homepage": "https://packages.stephansama.info/api/@stephansama/remark-asciinema",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/stephansama/packages",
+		"url": "git+https://github.com/stephansama/packages.git",
 		"directory": "core/remark-asciinema"
 	},
 	"license": "MIT",
@@ -35,6 +35,7 @@
 	],
 	"scripts": {
 		"build": "tsdown",
+		"postbuild": "publint",
 		"dev": "tsdown --watch",
 		"lint": "eslint ./src/",
 		"prepublishOnly": "tsdown"

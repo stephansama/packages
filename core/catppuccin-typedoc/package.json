@@ -8,7 +8,7 @@
 	"homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-typedoc",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/stephansama/packages",
+		"url": "git+https://github.com/stephansama/packages.git",
 		"directory": "core/catppuccin-typedoc"
 	},
 	"license": "MIT",
@@ -18,11 +18,15 @@
 		"url": "https://stephansama.info"
 	},
 	"type": "module",
+	"exports": {
+		"./stylesheet.css": "./dist/catppuccin-typedoc.css"
+	},
 	"files": [
 		"dist"
 	],
 	"scripts": {
-		"build": "node ./src/generate.js && attw --pack",
+		"build": "node ./src/generate.js",
+		"postbuild": "publint",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
 	},
 	"devDependencies": {

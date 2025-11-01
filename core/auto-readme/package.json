@@ -15,7 +15,7 @@
 	"homepage": "https://packages.stephansama.info/api/@stephansama/auto-readme",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/stephansama/packages",
+		"url": "git+https://github.com/stephansama/packages.git",
 		"directory": "core/auto-readme"
 	},
 	"license": "MIT",
@@ -49,6 +49,7 @@
 	],
 	"scripts": {
 		"build": "node build.mjs",
+		"postbuild": "publint",
 		"dev": "node --watch-path=./src build.mjs",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
 	},

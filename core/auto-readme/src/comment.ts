@@ -5,7 +5,7 @@ import { commentMarker } from "mdast-comment-marker";
 import { INFO } from "./log";
 import { actionsSchema, formatsSchema, languageSchema } from "./schema";
 
-export const SEPARATOR = "-" as const;
+const SEPARATOR = "-" as const;
 
 export type AstComments = ReturnType<typeof loadAstComments>;
 

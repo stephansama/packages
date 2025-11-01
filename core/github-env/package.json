@@ -15,7 +15,7 @@
 	"homepage": "https://packages.stephansama.info/api/@stephansama/github-env",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/stephansama/packages",
+		"url": "git+https://github.com/stephansama/packages.git",
 		"directory": "core/github-env"
 	},
 	"license": "MIT",

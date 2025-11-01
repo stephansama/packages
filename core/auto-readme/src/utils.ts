@@ -65,31 +65,6 @@ export function findAffectedMarkdowns(root: string, config: Config) {
 	return dedupe;
 }
 
-export function findNearestReadme(
-	gitRoot: string,
-	inputFile: string,
-	maxRotations = 15,
-) {
-	let dir = path.dirname(inputFile);
-	let rotations = 0;
-
-	while (true) {
-		const option = path.join(dir, "README.md");
-
-		if (fs.existsSync(option)) return option;
-
-		const parent = path.dirname(dir);
-
-		if (parent === dir || dir === gitRoot || ++rotations > maxRotations) {
-			break;
-		}
-
-		dir = parent;
-	}
-
-	return null;
-}
-
 export function getGitRoot() {
 	const root = cp.execSync(sh`git rev-parse --show-toplevel`, opts).trim();
 
@@ -118,4 +93,29 @@ export async function getPrettierPaths(paths: string[]) {
 			return path.join(path.dirname(file), symlink);
 		}),
 	);
+}
+
+function findNearestReadme(
+	gitRoot: string,
+	inputFile: string,
+	maxRotations = 15,
+) {
+	let dir = path.dirname(inputFile);
+	let rotations = 0;
+
+	while (true) {
+		const option = path.join(dir, "README.md");
+
+		if (fs.existsSync(option)) return option;
+
+		const parent = path.dirname(dir);
+
+		if (parent === dir || dir === gitRoot || ++rotations > maxRotations) {
+			break;
+		}
+
+		dir = parent;
+	}
+
+	return null;
 }

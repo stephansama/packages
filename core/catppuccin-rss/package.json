@@ -10,7 +10,7 @@
 	"homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-rss",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/stephansama/packages",
+		"url": "git+https://github.com/stephansama/packages.git",
 		"directory": "core/catppuccin-rss"
 	},
 	"license": "MIT",
@@ -20,11 +20,18 @@
 		"url": "https://stephanrandle.netlify.app/"
 	},
 	"type": "module",
+	"exports": {
+		"./auto.xsl": "./dist/auto.xsl",
+		"./frappe.xsl": "./dist/frappe.xsl",
+		"./latte.xsl": "./dist/latte.xsl",
+		"./mocha.xsl": "./dist/mocha.xsl"
+	},
 	"files": [
 		"dist"
 	],
 	"scripts": {
-		"build": "node ./scripts/generate.js && attw --pack",
+		"build": "node ./scripts/generate.js",
+		"postbuild": "publint",
 		"dev": "node --watch ./scripts/generate.js"
 	},
 	"config": {
@@ -32,6 +39,7 @@
 	},
 	"devDependencies": {
 		"@catppuccin/palette": "catalog:",
+		"@types/minify": "catalog:",
 		"handlebars": "catalog:",
 		"minify": "catalog:"
 	},

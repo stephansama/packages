@@ -46,8 +46,6 @@ export function generateSprite(packIcons: IconifyJSON, loaded: string[]) {
 	return str;
 }
 
-export function loadConfig(filename: string) {}
-
 export async function loadIcons(options: Options) {
 	const text = fs.readFileSync(
 		new URL("./package.json", options?.iconifyRootDirectory),

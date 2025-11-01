@@ -13,7 +13,7 @@
 	"homepage": "https://packages.stephansama.info/api/@stephansama/astro-iconify-svgmap",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/stephansama/packages",
+		"url": "git+https://github.com/stephansama/packages.git",
 		"directory": "core/astro-iconify-svgmap"
 	},
 	"license": "MIT",
@@ -46,6 +46,7 @@
 	],
 	"scripts": {
 		"build": "tsdown --profile=node16",
+		"postbuild": "publint",
 		"dev": "tsdown --watch",
 		"lint": "eslint ./src/",
 		"prepublishOnly": "tsdown"

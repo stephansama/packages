@@ -43,8 +43,6 @@
 	"devDependencies": {
 		"remark": "^15.0.1",
 		"tsdown": "catalog:",
-		"unist-builder": "^4.0.0",
-		"unist-util-is": "^6.0.0",
 		"unist-util-visit": "^5.0.0"
 	},
 	"publishConfig": {

@@ -11,7 +11,7 @@ export const formatsSchema = z
 
 export const languageSchema = z.enum(["JS", "RS"]).optional().default("JS");
 
-export const headingsSchema = z
+const headingsSchema = z
 	.enum([
 		"default",
 		"description",
@@ -24,18 +24,19 @@ export const headingsSchema = z
 	])
 	.describe("Table heading options");
 
-export const tableHeadingsSchema = z
+const tableHeadingsSchema = z
 	.record(actionsSchema, headingsSchema.array().optional())
 	.optional()
 	.describe("Table heading action configuration")
 	.default({
 		ACTION: ["name", "required", "default", "description"],
 		PKG: ["name", "version", "devDependency"],
+		USAGE: [],
 		WORKSPACE: ["name", "version", "downloads", "description"],
 		ZOD: [],
 	});
 
-export const templatesSchema = z.object({
+const templatesSchema = z.object({
 	downloadImage: z
 		.string()
 		.optional()
@@ -131,4 +132,4 @@ const _configSchema = z.object({
 
 export const configSchema = _configSchema.optional();
 
-/** @typedef {Partial<z.infer<typeof _configSchema>>} Config */
+export type Config = Partial<z.infer<typeof _configSchema>>;

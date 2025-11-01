@@ -1,15 +1,16 @@
 {
 	"extends": ["//"],
 	"tasks": {
-		"prebuild": {
+		"setup": {
 			"outputs": [
+				"./api/",
 				"./public/healthcheck.json",
 				"./public/node_modules",
 				"./public/eslint"
 			]
 		},
 		"build": {
-			"dependsOn": ["create-stephansama-example#build"],
+			"dependsOn": ["create-stephansama-example#build", "www#setup"],
 			"outputs": ["$TURBO_ROOT$/dist"]
 		}
 	}

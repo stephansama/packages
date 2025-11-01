@@ -8,7 +8,7 @@
 	"homepage": "https://packages.stephansama.info/api/@stephansama/find-makefile-targets",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/stephansama/packages",
+		"url": "git+https://github.com/stephansama/packages.git",
 		"directory": "core/find-makefile-targets"
 	},
 	"license": "MIT",

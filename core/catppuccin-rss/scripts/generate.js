@@ -2,6 +2,7 @@
 
 import { flavors } from "@catppuccin/palette";
 import Handlebars from "handlebars";
+import { minify } from "minify";
 import * as fs from "node:fs";
 import * as path from "node:path";
 
@@ -43,11 +44,12 @@ for (const [theme, val] of Object.entries(flavors)) {
 		autoThemeStyles[theme] = style;
 	}
 
-	const xml = templateXml({ comment, style });
+	const xml = templateXml({ comment, style: await minify.css(style) });
 	fs.writeFileSync(filename, xml);
 }
 
 const autoComment = getComment("auto");
+
 const css = String.raw;
 const autoStyle = css`
 	@media (prefers-color-scheme: dark) {
@@ -59,7 +61,10 @@ const autoStyle = css`
 	}
 `;
 
-const autoBody = templateXml({ comment: autoComment, style: autoStyle });
+const autoBody = templateXml({
+	comment: autoComment,
+	style: await minify.css(autoStyle),
+});
 
 fs.writeFileSync(path.join(outputFolder, "auto.xsl"), autoBody);
 
@@ -67,7 +72,10 @@ fs.writeFileSync(path.join(outputFolder, "auto.xsl"), autoBody);
 function convertColors(colors) {
 	return Object.entries(colors)
 		.map(([key, val]) => [key, val.hex])
-		.reduce((prev, [key, hex]) => ({ ...prev, [key]: hex }));
+		.reduce((acc, [key, hex]) => {
+			acc[key] = hex;
+			return acc;
+		}, {});
 }
 
 /** @param {keyof typeof flavors | `auto-${keyof typeof flavors}`} theme */

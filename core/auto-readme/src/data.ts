@@ -12,15 +12,13 @@ import { fileExists } from "./utils";
 
 export type ActionData = Awaited<ReturnType<typeof loadActionData>>;
 
-export type ActionTableHeading = "name" | keyof ActionInput;
-
-export type ActionYaml = { inputs?: Record<string, ActionInput> };
-
 type ActionInput = {
 	default?: string;
 	description?: string;
 	required?: boolean;
 };
+
+type ActionYaml = { inputs?: Record<string, ActionInput> };
 
 export function createFindParameter(parameterList: string[]) {
 	return function (parameterName: string) {

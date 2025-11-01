@@ -15,7 +15,7 @@
 	"homepage": "https://packages.stephansama.info/api/@stephansama/auto-readme",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/stephansama/packages",
+		"url": "git+https://github.com/stephansama/packages.git",
 		"directory": "core/auto-readme"
 	},
 	"license": "MIT",
@@ -49,26 +49,25 @@
 	],
 	"scripts": {
 		"build": "node build.mjs",
+		"postbuild": "publint",
 		"dev": "node --watch-path=./src build.mjs",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
 	},
 	"dependencies": {
 		"@iarna/toml": "^2.2.5",
 		"@manypkg/get-packages": "^3.1.0",
-		"chalk": "^5.5.0",
 		"cosmiconfig": "^9.0.0",
-		"debug": "^4.4.1",
+		"debug": "^4.4.3",
 		"deepmerge": "^4.3.1",
 		"fast-glob": "^3.3.3",
 		"handlebars": "catalog:",
 		"markdown-table": "^3.0.4",
 		"mdast-comment-marker": "^3.0.0",
 		"mdast-util-from-markdown": "^2.0.2",
-		"mdast-util-gfm": "^3.1.0",
 		"mdast-zone": "github:stephansama/mdast-zone#1c5b08cd97240debeed4c9c6afad49df5877a132",
 		"ora": "^8.2.0",
 		"pkg-types": "^2.2.0",
-		"remark": "^15.0.1",
+		"remark": "15.0.1",
 		"remark-code-import": "^1.2.0",
 		"remark-collapse": "^0.1.2",
 		"remark-toc": "^9.0.0",

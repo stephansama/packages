@@ -12,7 +12,7 @@
 	"homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-opml",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/stephansama/packages",
+		"url": "git+https://github.com/stephansama/packages.git",
 		"directory": "core/catppuccin-opml"
 	},
 	"license": "MIT",
@@ -22,12 +22,20 @@
 		"url": "https://stephansama.info"
 	},
 	"type": "module",
+	"exports": {
+		"./stylesheet.xsl": "./dist/catppuccin-opml.xsl"
+	},
+	"files": [
+		"dist"
+	],
 	"scripts": {
-		"build": "node ./scripts/generate.js && attw --pack",
+		"build": "node ./scripts/generate.js",
+		"postbuild": "publint",
 		"dev": "node --watch ./scripts/generate.js"
 	},
 	"devDependencies": {
 		"@catppuccin/palette": "catalog:",
+		"@types/minify": "catalog:",
 		"handlebars": "catalog:",
 		"minify": "catalog:"
 	},

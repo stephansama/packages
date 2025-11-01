@@ -49,7 +49,7 @@ export async function parseArgs() {
 	return parsed;
 }
 
-export function zodToYargs(): Omit<
+function zodToYargs(): Omit<
 	Record<keyof typeof shape, Options>,
 	ComplexOptions
 > {

@@ -4,14 +4,14 @@ import { build as tsdown } from "tsdown";
 import yaml from "yaml";
 import { z } from "zod";
 
-import { configSchema } from "./src/schema.js";
-
 const outDir = path.resolve("./dist");
 const schemaDir = path.resolve("./config");
 
-await build({ entry: ["./src/index.ts"] });
+await build({ attw: false, entry: ["./src/index.ts"] });
 
-await build({ dts: true, entry: ["./src/schema.js"], outDir: schemaDir });
+await build({ dts: true, entry: ["./src/schema.ts"], outDir: schemaDir });
+
+const { configSchema } = await import("./config/schema.js");
 
 const schema = z.toJSONSchema(configSchema);
 
@@ -28,8 +28,6 @@ function build(opts) {
 		format: ["esm", "cjs"],
 		outDir,
 		skipNodeModulesBundle: true,
-		sourcemap: true,
-		splitting: false,
 		target: "esnext",
 		...opts,
 	});

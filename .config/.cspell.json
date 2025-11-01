@@ -38,8 +38,7 @@
 		"vite",
 		"vitepress",
 		"vitest",
-		"yarg",
-		"zshy"
+		"yarg"
 	],
 	"ignorePaths": [".env"]
 }

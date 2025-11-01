@@ -7,32 +7,32 @@ settings:
 catalogs:
   default:
     '@catppuccin/palette':
-      specifier: 1.7.1
+      specifier: ^1.7.1
       version: 1.7.1
     '@types/minify':
       specifier: 9.1.4
       version: 9.1.4
     astro:
-      specifier: 5.9.3
+      specifier: ^5.9.3
       version: 5.9.3
     handlebars:
-      specifier: 4.7.8
+      specifier: ^4.7.8
       version: 4.7.8
     minify:
-      specifier: 14.0.0
+      specifier: ^14.0.0
       version: 14.0.0
     tsdown:
-      specifier: 0.15.12
+      specifier: ^0.15.12
       version: 0.15.12
     typescript:
-      specifier: 5.9.3
+      specifier: ^5.8.3
       version: 5.9.3
     vite:
-      specifier: 6.3.5
+      specifier: ^6.3.5
       version: 6.3.5
     zod:
-      specifier: 4.0.15
-      version: 4.0.15
+      specifier: ^4.0.15
+      version: 4.1.12
 
 overrides:
   '@stephansama/astro-iconify-svgmap': workspace:*
@@ -275,10 +275,10 @@ importers:
         version: 18.0.0
       zod:
         specifier: 'catalog:'
-        version: 4.0.15
+        version: 4.1.12
       zod2md:
         specifier: ^0.2.4
-        version: 0.2.4(zod@4.0.15)
+        version: 0.2.4(zod@4.1.12)
     devDependencies:
       '@types/debug':
         specifier: ^4.1.12
@@ -349,7 +349,7 @@ importers:
     devDependencies:
       tsdown:
         specifier: 'catalog:'
-        version: 0.15.12(@arethetypeswrong/core@0.18.2)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3))
+        version: 0.15.12(@arethetypeswrong/core@0.18.2)(oxc-resolver@11.12.0)(publint@0.3.15)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3))
 
   core/find-makefile-targets:
     devDependencies:
@@ -384,7 +384,7 @@ importers:
         version: 0.15.12(@arethetypeswrong/core@0.18.2)(oxc-resolver@11.12.0)(publint@0.3.15)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3))
       zod:
         specifier: 'catalog:'
-        version: 4.0.15
+        version: 4.1.12
 
   examples/astro-iconify-svgmap:
     dependencies:
@@ -513,7 +513,7 @@ importers:
         version: 7.1.12(@types/node@24.3.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.42.0)(tsx@4.20.6)(yaml@2.8.1)
       zod:
         specifier: 'catalog:'
-        version: 4.0.15
+        version: 4.1.12
 
 packages:
 
@@ -8876,8 +8876,8 @@ packages:
   zod@3.25.58:
     resolution: {integrity: sha512-DVLmMQzSZwNYzQoMaM3MQWnxr2eq+AtM9Hx3w1/Yl0pH8sLTSjN4jGP7w6f7uand6Hw44tsnSu1hz1AOA6qI2Q==}
 
-  zod@4.0.15:
-    resolution: {integrity: sha512-2IVHb9h4Mt6+UXkyMs0XbfICUh1eUrlJJAOupBHUhLRnKkruawyDddYRCs0Eizt900ntIMk9/4RksYl+FgSpcQ==}
+  zod@4.1.12:
+    resolution: {integrity: sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -9211,8 +9211,8 @@ snapshots:
 
   '@babel/generator@7.28.0':
     dependencies:
-      '@babel/parser': 7.28.5
-      '@babel/types': 7.28.5
+      '@babel/parser': 7.28.0
+      '@babel/types': 7.28.2
       '@jridgewell/gen-mapping': 0.3.12
       '@jridgewell/trace-mapping': 0.3.29
       jsesc: 3.1.0
@@ -9308,11 +9308,11 @@ snapshots:
   '@babel/helpers@7.28.2':
     dependencies:
       '@babel/template': 7.27.2
-      '@babel/types': 7.28.5
+      '@babel/types': 7.28.2
 
   '@babel/parser@7.28.0':
     dependencies:
-      '@babel/types': 7.28.5
+      '@babel/types': 7.28.2
 
   '@babel/parser@7.28.5':
     dependencies:
@@ -9367,17 +9367,17 @@ snapshots:
   '@babel/template@7.27.2':
     dependencies:
       '@babel/code-frame': 7.27.1
-      '@babel/parser': 7.28.5
-      '@babel/types': 7.28.5
+      '@babel/parser': 7.28.0
+      '@babel/types': 7.28.2
 
   '@babel/traverse@7.28.0':
     dependencies:
       '@babel/code-frame': 7.27.1
-      '@babel/generator': 7.28.5
+      '@babel/generator': 7.28.0
       '@babel/helper-globals': 7.28.0
-      '@babel/parser': 7.28.5
+      '@babel/parser': 7.28.0
       '@babel/template': 7.27.2
-      '@babel/types': 7.28.5
+      '@babel/types': 7.28.2
       debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
@@ -11419,7 +11419,7 @@ snapshots:
       fast-glob: 3.3.3
       is-glob: 4.0.3
       minimatch: 9.0.5
-      semver: 7.7.3
+      semver: 7.7.2
       ts-api-utils: 2.1.0(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
@@ -11475,14 +11475,13 @@ snapshots:
       chai: 5.2.0
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.2.4(vite@7.1.12(@types/node@24.3.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.42.0)(tsx@4.20.4)(yaml@2.8.1))':
+  '@vitest/mocker@3.2.4(vite@7.1.12(@types/node@24.3.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.42.0)(tsx@4.20.6)(yaml@2.8.1))':
     dependencies:
       '@vitest/spy': 3.2.4
       estree-walker: 3.0.3
       magic-string: 0.30.21
-      magic-string: 0.30.21
     optionalDependencies:
-      vite: 7.1.12(@types/node@24.3.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.42.0)(tsx@4.20.4)(yaml@2.8.1)
+      vite: 7.1.12(@types/node@24.3.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.42.0)(tsx@4.20.6)(yaml@2.8.1)
 
   '@vitest/pretty-format@3.2.4':
     dependencies:
@@ -11497,7 +11496,6 @@ snapshots:
   '@vitest/snapshot@3.2.4':
     dependencies:
       '@vitest/pretty-format': 3.2.4
-      magic-string: 0.30.21
       magic-string: 0.30.21
       pathe: 2.0.3
 
@@ -11602,7 +11600,7 @@ snapshots:
 
   '@vue/compiler-sfc@3.5.18':
     dependencies:
-      '@babel/parser': 7.28.5
+      '@babel/parser': 7.28.0
       '@vue/compiler-core': 3.5.18
       '@vue/compiler-dom': 3.5.18
       '@vue/compiler-ssr': 3.5.18
@@ -11630,7 +11628,6 @@ snapshots:
   '@vue/devtools-kit@7.7.7':
     dependencies:
       '@vue/devtools-shared': 7.7.7
-      birpc: 2.6.1
       birpc: 2.6.1
       hookable: 5.5.3
       mitt: 3.0.1
@@ -11966,7 +11963,7 @@ snapshots:
       espree: 10.4.0
       fast-glob: 3.3.3
       is-glob: 4.0.3
-      semver: 7.7.3
+      semver: 7.7.2
     transitivePeerDependencies:
       - supports-color
 
@@ -12093,9 +12090,9 @@ snapshots:
   babel-dead-code-elimination@1.0.10:
     dependencies:
       '@babel/core': 7.28.0
-      '@babel/parser': 7.28.5
+      '@babel/parser': 7.28.0
       '@babel/traverse': 7.28.0
-      '@babel/types': 7.28.5
+      '@babel/types': 7.28.2
     transitivePeerDependencies:
       - supports-color
 
@@ -13118,7 +13115,7 @@ snapshots:
   eslint-compat-utils@0.6.5(eslint@9.33.0(jiti@2.6.1)):
     dependencies:
       eslint: 9.33.0(jiti@2.6.1)
-      semver: 7.7.3
+      semver: 7.7.2
 
   eslint-config-flat-gitignore@2.1.0(eslint@9.33.0(jiti@2.6.1)):
     dependencies:
@@ -16930,7 +16927,7 @@ snapshots:
       detect-newline: 4.0.1
       git-hooks-list: 4.1.1
       is-plain-obj: 4.1.0
-      semver: 7.7.3
+      semver: 7.7.2
       sort-object-keys: 1.1.3
       tinyglobby: 0.2.15
 
@@ -17878,7 +17875,7 @@ snapshots:
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
-      '@vitest/mocker': 3.2.4(vite@7.1.12(@types/node@24.3.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.42.0)(tsx@4.20.4)(yaml@2.8.1))
+      '@vitest/mocker': 3.2.4(vite@7.1.12(@types/node@24.3.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.42.0)(tsx@4.20.6)(yaml@2.8.1))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4
@@ -17886,22 +17883,18 @@ snapshots:
       '@vitest/utils': 3.2.4
       chai: 5.2.0
       debug: 4.4.3
-      debug: 4.4.3
       expect-type: 1.2.1
       magic-string: 0.30.21
-      magic-string: 0.30.21
       pathe: 2.0.3
-      picomatch: 4.0.3
       picomatch: 4.0.3
       std-env: 3.9.0
       tinybench: 2.9.0
       tinyexec: 0.3.2
       tinyglobby: 0.2.15
-      tinyglobby: 0.2.15
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
-      vite: 7.1.12(@types/node@24.3.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.42.0)(tsx@4.20.4)(yaml@2.8.1)
-      vite-node: 3.2.4(@types/node@24.3.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.42.0)(tsx@4.20.4)(yaml@2.8.1)
+      vite: 7.1.12(@types/node@24.3.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.42.0)(tsx@4.20.6)(yaml@2.8.1)
+      vite-node: 3.2.4(@types/node@24.3.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.42.0)(tsx@4.20.6)(yaml@2.8.1)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/debug': 4.1.12
@@ -18324,18 +18317,18 @@ snapshots:
       typescript: 5.9.3
       zod: 3.25.58
 
-  zod2md@0.2.4(zod@4.0.15):
+  zod2md@0.2.4(zod@4.1.12):
     dependencies:
       '@commander-js/extra-typings': 12.1.0(commander@12.1.0)
       bundle-require: 5.1.0(esbuild@0.25.5)
       commander: 12.1.0
       esbuild: 0.25.5
-      zod: 4.0.15
+      zod: 4.1.12
 
   zod@3.22.3: {}
 
   zod@3.25.58: {}
 
-  zod@4.0.15: {}
+  zod@4.1.12: {}
 
   zwitch@2.0.4: {}

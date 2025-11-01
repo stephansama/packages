@@ -1,6 +1,6 @@
 {
 	"name": "@example/catppuccin-rss",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"private": true,
 	"description": "Example using catppuccin rss feed x pretty feed v3",
 	"type": "module",
@@ -10,7 +10,7 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@stephansama/catppuccin-rss": "^1.2.1",
+		"@stephansama/catppuccin-rss": "^1.2.2",
 		"rss": "^1.2.2",
 		"vite": "^6.3.5"
 	}

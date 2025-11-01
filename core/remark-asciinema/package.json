@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/remark-asciinema",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"description": "A remark plugin that transforms Asciinema links into embedded players or screenshots.",
 	"keywords": [
 		"asciinema",

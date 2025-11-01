@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.3.3
+
+### Patch Changes
+
+- a8def42: updated example import for create-stephansama-example
+
 ## 1.3.2
 
 ### Patch Changes

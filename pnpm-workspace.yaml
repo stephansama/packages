@@ -1,6 +1,6 @@
 packages:
   - ./.config/*
-  - core/*
+  - core/**
   - examples/**
 autoInstallPeers: true
 catalog:
@@ -21,3 +21,5 @@ overrides:
   "@stephansama/remark-asciinema": workspace:*
   "@stephansama/typed-events": workspace:*
   "create-stephansama-example": workspace:*
+onlyBuiltDependencies:
+  - esbuild

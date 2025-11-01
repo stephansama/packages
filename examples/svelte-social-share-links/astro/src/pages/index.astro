@@ -1,0 +1,53 @@
+---
+import Example from "../component/Example.svelte";
+
+const url = Astro.url.href;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width" name="viewport" />
+		<meta content={Astro.generator} name="generator" />
+		<title>@stephansama/svelte-social-share-links</title>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+			body {
+				font-family: Roboto;
+				background-color: #eff1f5;
+				color: #4c4f69;
+			}
+
+			@media (prefers-color-scheme: dark) {
+				body {
+					background-color: #1e1e2e;
+					color: #cdd6f4;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Astro</h1>
+		<ul
+			style="list-style: none; display: flex; flex-direction: column; gap:16px"
+		>
+			<li>
+				<span>Unstyled</span>
+				<div id="unstyled">
+					<social-share-link network="bluesky" url={url}></social-share-link>
+				</div>
+			</li>
+			<li>
+				<span>Styled</span>
+				<social-share-link network="bluesky" styled url={url}
+				></social-share-link>
+			</li>
+			<li>
+				<span>Svelte</span>
+				<Example client:only="svelte" url={url} />
+			</li>
+		</ul>
+		<script src="@stephansama/svelte-social-share-links/wc"></script>
+	</body>
+</html>

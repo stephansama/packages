@@ -9,10 +9,11 @@
 		{ "files": "*.astro", "options": { "parser": "astro" } }
 	],
 	"plugins": [
+		"prettier-plugin-jsdoc",
 		"prettier-plugin-astro",
-		"prettier-plugin-astro-organize-imports",
-		"prettier-plugin-organize-imports",
+		"prettier-plugin-svelte",
 		"prettier-plugin-packagejson",
-		"prettier-plugin-tailwindcss"
+		"prettier-plugin-astro-organize-imports",
+		"prettier-plugin-organize-imports"
 	]
 }

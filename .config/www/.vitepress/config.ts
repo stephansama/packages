@@ -2,6 +2,8 @@ import { defineConfig } from "vitepress";
 
 import typedocSidebar from "../api/typedoc-sidebar.json" with { type: "json" };
 
+const html = String.raw;
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
 	description:
@@ -31,6 +33,22 @@ export default defineConfig({
 		},
 		nav: [
 			{
+				link: "/eslint",
+				target: "_self",
+				text: iconLink({
+					icon: { name: "eslint", pack: "logos" },
+					title: "Eslint",
+				}),
+			},
+			{
+				link: "/node_modules",
+				target: "_self",
+				text: iconLink({
+					icon: { name: "nodejs-icon-alt", pack: "logos" },
+					title: "Node Modules",
+				}),
+			},
+			{
 				link: "https://madprofessorblog.org",
 				target: "_self",
 				text: "Blog",
@@ -59,3 +77,16 @@ export default defineConfig({
 	},
 	title: "@stephansama packages",
 });
+
+function iconLink({
+	icon,
+	title,
+}: {
+	icon: { name: string; pack: string };
+	title: string;
+}) {
+	return html`<div style="display:flex;gap:4px;">
+		<img src="https://api.iconify.design/${icon.pack}:${icon.name}.svg" />
+		${title}
+	</div>`;
+}

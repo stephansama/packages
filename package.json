@@ -3,6 +3,10 @@
 	"version": "1.0.0",
 	"private": true,
 	"homepage": "https://packages.stephansama.info/",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/stephansama/packages.git"
+	},
 	"license": "MIT",
 	"author": {
 		"name": "Stephan Randle",
@@ -65,11 +69,10 @@
 		"prettier-plugin-packagejson": "^2.5.19",
 		"prettier-plugin-tailwindcss": "^0.6.12",
 		"publint": "^0.3.15",
-		"syncpack": "14.0.0-alpha.23",
 		"turbo": "^2.5.4",
 		"typescript": "catalog:",
 		"typescript-eslint": "^8.34.0",
-		"vitest": "catalog:",
+		"vitest": "^3.2.4",
 		"wrangler": "^4.20.0"
 	},
 	"packageManager": "pnpm@10.11.0"

@@ -1,6 +1,13 @@
 {
 	"extends": ["//"],
 	"tasks": {
+		"prebuild": {
+			"outputs": [
+				"./public/healthcheck.json",
+				"./public/node_modules",
+				"./public/eslint"
+			]
+		},
 		"build": {
 			"dependsOn": ["create-stephansama-example#build"],
 			"outputs": ["$TURBO_ROOT$/dist"]

@@ -7,7 +7,7 @@ import { z } from "zod";
 const outDir = path.resolve("./dist");
 const schemaDir = path.resolve("./config");
 
-await build({ entry: ["./src/index.ts"] });
+await build({ attw: false, entry: ["./src/index.ts"] });
 
 await build({ dts: true, entry: ["./src/schema.ts"], outDir: schemaDir });
 
@@ -28,7 +28,6 @@ function build(opts) {
 		format: ["esm", "cjs"],
 		outDir,
 		skipNodeModulesBundle: true,
-		splitting: false,
 		target: "esnext",
 		...opts,
 	});

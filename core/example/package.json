@@ -19,14 +19,15 @@
 	},
 	"type": "commonjs",
 	"exports": {
-		".": "./dist/cli.js",
+		".": "./dist/index.js",
 		"./package.json": "./package.json"
 	},
-	"main": "./dist/cli.js",
-	"types": "./dist/cli.d.ts",
-	"bin": "./dist/cli.js",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"bin": "./cli.mjs",
 	"files": [
-		"./dist"
+		"./dist",
+		"./cli.mjs"
 	],
 	"scripts": {
 		"prebuild": "pnpm run generate",

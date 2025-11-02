@@ -1,0 +1,21 @@
+{
+	"name": "@example/svelte-social-share-links/astro",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"astro": "astro",
+		"build": "astro build",
+		"dev": "astro dev",
+		"preview": "astro preview"
+	},
+	"dependencies": {
+		"@astrojs/svelte": "^7.2.1",
+		"astro": "^5.15.3",
+		"svelte": "^5.43.2",
+		"typescript": "^5.9.3"
+	},
+	"devDependencies": {
+		"@stephansama/svelte-social-share-links": "workspace:*"
+	}
+}

@@ -3,6 +3,7 @@ import gitignore from "eslint-config-flat-gitignore";
 import prettier from "eslint-config-prettier";
 import eslintPluginAstro from "eslint-plugin-astro";
 import perfectionist from "eslint-plugin-perfectionist";
+import storybook from "eslint-plugin-storybook";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -33,6 +34,7 @@ const configs = [
 			"no-console": ["warn", { allow: ["warn", "error", "info"] }],
 		},
 	},
+	...storybook.configs["flat/recommended"],
 ];
 
 export default configs;

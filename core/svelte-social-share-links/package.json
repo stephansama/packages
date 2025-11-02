@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/svelte-social-share-links",
-	"version": "1.0.0",
+	"version": "0.0.0",
 	"private": false,
 	"type": "module",
 	"exports": {
@@ -45,5 +45,10 @@
 	},
 	"peerDependencies": {
 		"svelte": "^5.0.0"
-	}
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"readme": "./README.md"
 }

@@ -20,7 +20,20 @@ export async function generate({ writeToFile = true } = {}) {
 			if (pkg.relativeDir.startsWith("examples")) {
 				const isNamedProperly =
 					pkg.packageJson.name.includes("@example");
-				if (!isNamedProperly) throw new Error("");
+				const isPrivate = pkg.packageJson.private;
+
+				if (!isNamedProperly) {
+					throw new Error(
+						`project ${pkg.packageJson.name} is not named properly please include @example prefix`,
+					);
+				}
+
+				if (!isPrivate) {
+					throw new Error(
+						`project ${pkg.packageJson.name} is not private. please make the example private`,
+					);
+				}
+
 				return true;
 			}
 

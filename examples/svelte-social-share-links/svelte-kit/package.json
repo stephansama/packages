@@ -1,5 +1,5 @@
 {
-	"name": "@examples/svelte-social-share-links/svelte-kit",
+	"name": "@example/svelte-social-share-links/svelte-kit",
 	"version": "0.0.1",
 	"private": true,
 	"type": "module",

@@ -93,11 +93,6 @@
 	<span class="social-share-button__label">{label}</span>
 </a>
 
-<!-- 1. svelte: "props" must be a statically analyzable object literal of the form "{ [key: string]: { attribute?: string; reflect?: boolean; type?: "String" | "Boolean" | "Number" | "Array" | "Object" }" -->
-<!--    https://svelte.dev/e/svelte_options_invalid_customelement_props [svelte_options_invalid_customelement_props] -->
-<!-- 2. ts: "props" must be a statically analyzable object literal of the form "{ [key: string]: { attribute?: string; reflect?: boolean; type?: "String" | "Boolean" | "Number" | "Array" | "Object" }" -->
-<!--    https://svelte.dev/e/svelte_options_invalid_customelement_props [-1] -->
-
 <style>
 	@layer components {
 		.social-share-button {

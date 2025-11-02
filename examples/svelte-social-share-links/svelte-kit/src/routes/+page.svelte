@@ -11,10 +11,5 @@
 	documentation
 </p>
 
-<SocialShareLink currentUrl={page.url.href} label="test" network="bluesky" />
-<SocialShareLink
-	currentUrl={page.url.href}
-	label="test"
-	styled
-	network="bluesky"
-/>
+<SocialShareLink url={page.url.href} label="test" network="bluesky" />
+<SocialShareLink url={page.url.href} label="test" styled network="bluesky" />

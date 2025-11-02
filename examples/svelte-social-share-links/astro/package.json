@@ -1,6 +1,7 @@
 {
-	"name": "mechanical-main",
+	"name": "@example/svelte-social-share-links/astro",
 	"version": "0.0.1",
+	"private": true,
 	"type": "module",
 	"scripts": {
 		"astro": "astro",

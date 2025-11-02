@@ -18,6 +18,6 @@ it.each<[module.Network, module.UrlProps, string]>([
 		},
 		"https://www.reddit.com/submit?url=https%3A%2F%2Fstephansama.info",
 	],
-])("first", (key, props, expected) => {
+])("should build the correct share URL for %s", (key, props, expected) => {
 	expect(module.buildUrl(networks[key], props)).toBe(expected);
 });

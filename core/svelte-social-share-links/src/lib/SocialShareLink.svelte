@@ -30,6 +30,8 @@
 
 	const props: SocialShareLinkProps = $props();
 
+	const defaultLabel = "Share";
+
 	const selectedNetwork: NetworkSchema | undefined = networks[props.network];
 
 	if (!selectedNetwork) {
@@ -41,11 +43,13 @@
 
 {#if selectedNetwork}
 	<a
-		href={buildUrl(selectedNetwork, props)}
-		class={`social-share-button ${props.styled ? "social-share-button--styled" : ""}`}
-		target="_blank"
-		style={`--color-brand:${selectedNetwork.color}`}
 		aria-label={`Share with ${selectedNetwork.name}`}
+		class:social-share-button--styled={props.styled}
+		class="social-share-button"
+		href={buildUrl(selectedNetwork, props)}
+		rel="noreferrer noopener"
+		style={`--color-brand:${selectedNetwork.color}`}
+		target="_blank"
 	>
 		<svg
 			class="social-share-button__icon"
@@ -62,7 +66,8 @@
 				d={selectedNetwork.icon.path}
 			/>
 		</svg>
-		<span class="social-share-button__label">{props.label}</span>
+		<span class="social-share-button__label">{props.label || defaultLabel}</span
+		>
 	</a>
 {/if}
 

@@ -40,9 +40,10 @@
 		user?: string;
 	} = $props();
 
-	const selectedNetwork: NetworkSchema = networks[network];
+	const selectedNetwork: NetworkSchema | undefined = networks[network];
 
-	function buildUrl() {
+	/** @see {https://github.com/stefanobartoletti/nuxt-social-share/blob/311b65871627736f0db8120ecc7e32def78a3b3d/src/runtime/useSocialShare.ts#L45-L64} */
+	function buildUrl(selectedNetwork: NetworkSchema) {
 		const shareUrl = selectedNetwork.shareUrl;
 		const argTitle =
 			selectedNetwork.args?.title && title ? selectedNetwork.args?.title : "";
@@ -68,30 +69,32 @@
 	}
 </script>
 
-<a
-	href={buildUrl()}
-	class={`social-share-button ${styled ? "social-share-button--styled" : ""}`}
-	target="_blank"
-	style={`--color-brand:${selectedNetwork.color}`}
-	aria-label={`Share with ${selectedNetwork.name}`}
->
-	<svg
-		class="social-share-button__icon"
-		xmlns="http://www.w3.org/2000/svg"
-		aria-hidden="true"
-		role="img"
-		width="1em"
-		height="1em"
-		viewBox={selectedNetwork.icon.viewBox}
+{#if selectedNetwork}
+	<a
+		href={buildUrl(selectedNetwork)}
+		class={`social-share-button ${styled ? "social-share-button--styled" : ""}`}
+		target="_blank"
+		style={`--color-brand:${selectedNetwork.color}`}
+		aria-label={`Share with ${selectedNetwork.name}`}
 	>
-		<path
-			fill="currentColor"
-			fill-rule="evenodd"
-			d={selectedNetwork.icon.path}
-		/>
-	</svg>
-	<span class="social-share-button__label">{label}</span>
-</a>
+		<svg
+			class="social-share-button__icon"
+			xmlns="http://www.w3.org/2000/svg"
+			aria-hidden="true"
+			role="img"
+			width="1em"
+			height="1em"
+			viewBox={selectedNetwork.icon.viewBox}
+		>
+			<path
+				fill="currentColor"
+				fill-rule="evenodd"
+				d={selectedNetwork.icon.path}
+			/>
+		</svg>
+		<span class="social-share-button__label">{label}</span>
+	</a>
+{/if}
 
 <style>
 	@layer components {

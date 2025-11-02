@@ -5,11 +5,11 @@
 		"target": "ES2022",
 		"useDefineForClassFields": true,
 		"module": "ESNext",
+		"noEmit": true,
 		"types": ["svelte", "vite/client"],
 		"allowJs": true,
 		"checkJs": true,
-		"moduleDetection": "force",
-		"composite": true
+		"moduleDetection": "force"
 	},
 	"include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]
 }

@@ -24,7 +24,6 @@
 		"postbuild": "publint",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"dev": "svelte-package --watch",
-		"dev:vite": "vite dev",
 		"storybook": "storybook dev -p 6006",
 		"storybook:build": "storybook build"
 	},

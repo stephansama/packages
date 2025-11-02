@@ -18,61 +18,31 @@
 <script lang="ts">
 	import * as networks from "./networks.json" with { type: "json" };
 
-	import type { Network, NetworkSchema } from "./networks";
+	import type { Network, NetworkSchema, UrlProps } from "./networks";
 
-	const {
-		url: currentUrl,
-		hashtags,
-		image,
-		label = "Share",
-		network,
-		styled,
-		title,
-		user,
-	}: {
-		url: string;
-		hashtags?: string;
-		image?: string;
+	import { buildUrl } from "./networks";
+
+	export interface SocialShareLinkProps extends UrlProps {
 		label?: string;
 		network: Network;
 		styled?: boolean;
-		title?: string;
-		user?: string;
-	} = $props();
+	}
 
-	const selectedNetwork: NetworkSchema | undefined = networks[network];
+	const props: SocialShareLinkProps = $props();
 
-	/** @see {https://github.com/stefanobartoletti/nuxt-social-share/blob/311b65871627736f0db8120ecc7e32def78a3b3d/src/runtime/useSocialShare.ts#L45-L64} */
-	function buildUrl(selectedNetwork: NetworkSchema) {
-		const shareUrl = selectedNetwork.shareUrl;
-		const argTitle =
-			selectedNetwork.args?.title && title ? selectedNetwork.args?.title : "";
-		const argUser =
-			selectedNetwork.args?.user && user ? selectedNetwork.args?.user : "";
-		const argHashtags =
-			selectedNetwork.args?.hashtags && hashtags
-				? selectedNetwork.args?.hashtags
-				: "";
-		const argImage =
-			selectedNetwork.args?.image && image ? selectedNetwork.args?.image : "";
+	const selectedNetwork: NetworkSchema | undefined = networks[props.network];
 
-		// Replace placeholders with actual values (encode all parameters for URL safety)
-		const template = shareUrl + argTitle + argUser + argHashtags + argImage;
-		const fullUrl = template
-			.replace(/\[u\]/i, encodeURIComponent(currentUrl))
-			.replace(/\[t\]/i, encodeURIComponent(title || ""))
-			.replace(/\[uid\]/i, encodeURIComponent(user || ""))
-			.replace(/\[h\]/i, encodeURIComponent(hashtags || ""))
-			.replace(/\[i\]/i, encodeURIComponent(image || ""));
-
-		return new URL(fullUrl).href;
+	if (!selectedNetwork) {
+		throw new Error(
+			`unable to find social network with key of ${props.network}`,
+		);
 	}
 </script>
 
 {#if selectedNetwork}
 	<a
-		href={buildUrl(selectedNetwork)}
-		class={`social-share-button ${styled ? "social-share-button--styled" : ""}`}
+		href={buildUrl(selectedNetwork, props)}
+		class={`social-share-button ${props.styled ? "social-share-button--styled" : ""}`}
 		target="_blank"
 		style={`--color-brand:${selectedNetwork.color}`}
 		aria-label={`Share with ${selectedNetwork.name}`}
@@ -92,7 +62,7 @@
 				d={selectedNetwork.icon.path}
 			/>
 		</svg>
-		<span class="social-share-button__label">{label}</span>
+		<span class="social-share-button__label">{props.label}</span>
 	</a>
 {/if}
 

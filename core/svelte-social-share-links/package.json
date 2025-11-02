@@ -2,9 +2,6 @@
 	"name": "@stephansama/svelte-social-share-links",
 	"version": "0.0.0",
 	"private": true,
-	"sideEffects": [
-		"**/*.css"
-	],
 	"type": "module",
 	"exports": {
 		".": {
@@ -36,15 +33,10 @@
 		"@storybook/addon-a11y": "^10.0.2",
 		"@storybook/addon-docs": "^10.0.2",
 		"@storybook/addon-svelte-csf": "^5.0.10",
-		"@storybook/addon-vitest": "^10.0.2",
 		"@storybook/svelte-vite": "^10.0.2",
 		"@sveltejs/package": "^2.5.4",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
 		"@tsconfig/svelte": "^5.0.5",
-		"@vitest/browser": "^3.2.4",
-		"@vitest/browser-playwright": "^4.0.6",
-		"@vitest/coverage-v8": "^4.0.6",
-		"playwright": "^1.56.1",
 		"storybook": "^10.0.2",
 		"svelte": "^5.39.6",
 		"svelte-check": "^4.3.2",

@@ -5,7 +5,6 @@ const preview: Preview = {
 		a11y: {
 			test: "todo",
 		},
-
 		controls: {
 			matchers: {
 				color: /(background|color)$/i,

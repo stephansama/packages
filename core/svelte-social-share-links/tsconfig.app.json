@@ -6,10 +6,10 @@
 		"useDefineForClassFields": true,
 		"module": "ESNext",
 		"types": ["svelte", "vite/client"],
-		"noEmit": true,
 		"allowJs": true,
 		"checkJs": true,
-		"moduleDetection": "force"
+		"moduleDetection": "force",
+		"composite": true
 	},
 	"include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]
 }

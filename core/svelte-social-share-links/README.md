@@ -7,4 +7,28 @@
 
 Simple social sharing for the web
 
-Web component built using svelte
+Web component built using svelte that allows end users to share the current url to social media
+
+![screenshot](./screenshot.png)
+
+## Available Social Media Networks
+
+- bluesky
+- email
+- facebook
+- instapaper
+- line
+- linkedin
+- pinterest
+- pocket
+- raindrop
+- reddit
+- skype
+- telegram
+- threads
+- viber
+- whatsapp
+- x
+- xing
+
+Based on [`stefanobartoletti/nuxt-social-share`](https://github.com/stefanobartoletti/nuxt-social-share) component

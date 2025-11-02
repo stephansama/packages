@@ -8,7 +8,8 @@
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
 		},
-		"./wc": "./dist-js/components.iife.js"
+		"./wc": "./dist-js/components.iife.js",
+		"./networks": "./dist/networks.json"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",

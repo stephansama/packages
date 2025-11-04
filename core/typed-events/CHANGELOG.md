@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 2.0.5
+
+### Patch Changes
+
+- bf3a9b1: Updated various aspects of the monorepo (fixed typed-events dependency)
+
 ## 2.0.4
 
 ### Patch Changes

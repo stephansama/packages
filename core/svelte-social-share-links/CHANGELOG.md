@@ -1,5 +1,11 @@
 # @stephansama/svelte-social-share-links
 
+## 1.0.1
+
+### Patch Changes
+
+- bf3a9b1: Updated various aspects of the monorepo (fixed typed-events dependency)
+
 ## 1.0.0
 
 ### Major Changes

@@ -1,5 +1,11 @@
 # @example/svelte-social-share-links/astro
 
+## 0.1.1
+
+### Patch Changes
+
+- bf3a9b1: Updated various aspects of the monorepo (fixed typed-events dependency)
+
 ## 0.1.0
 
 ### Minor Changes

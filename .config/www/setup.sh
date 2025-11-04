@@ -8,4 +8,4 @@
 
 node -e "console.log(JSON.stringify({message: Date.now()}))" >public/healthcheck.json
 
-pnpm --workspace-root run scripts:meta | tail -n +5 >public/meta.json
+pnpm --workspace-root run --silent scripts:meta >public/meta.json

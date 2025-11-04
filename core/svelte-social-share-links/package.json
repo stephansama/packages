@@ -2,6 +2,7 @@
 	"name": "@stephansama/svelte-social-share-links",
 	"version": "1.0.0",
 	"private": false,
+	"description": "Svelte/Web component to share the current url with various social media providers",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/stephansama/packages.git",

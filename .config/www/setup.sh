@@ -7,3 +7,5 @@
 ./node_modules/.bin/node-modules-inspector build --base /node_modules --outDir public/node_modules
 
 node -e "console.log(JSON.stringify({message: Date.now()}))" >public/healthcheck.json
+
+pnpm --workspace-root run scripts:meta | tail -n +5 >public/meta.json

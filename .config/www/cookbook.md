@@ -14,32 +14,29 @@ curl https://packages.stephansama.info/meta.json --silent |
 ## Get `package.json` of a specific package
 
 ```sh
-tmp=$(curl https://packages.stephansama.info/meta.json --silent) &&
+(tmp=$(curl https://packages.stephansama.info/meta.json --silent) &&
  selected=$(echo "$tmp" | jq -r 'map(select(.name | test("@stephansama"))) | map(.name) | .[]' | fzf) &&
  echo "$selected" &&
- echo "$tmp" | jq -r ".[] | select(.name == \"$selected\")" &&
- unset selected && unset tmp
+ echo "$tmp" | jq -r ".[] | select(.name == \"$selected\")")
 ```
 
-## Get scripts of a specific
+## Get scripts of a specific package
 
 ```sh
-tmp=$(curl https://packages.stephansama.info/meta.json --silent) &&
+(tmp=$(curl https://packages.stephansama.info/meta.json --silent) &&
  selected=$(echo "$tmp" | jq -r 'map(select(.name | test("@stephansama"))) | map(.name) | .[]' | fzf) &&
  echo "$selected" &&
- echo "$tmp" | jq -r ".[] | select(.name == \"$selected\") | .scripts" &&
- unset selected && unset tmp
+ echo "$tmp" | jq -r ".[] | select(.name == \"$selected\") | .scripts")
 
 ```
 
 ## Get dependencies of a specific package
 
 ```sh
-tmp=$(curl https://packages.stephansama.info/meta.json --silent) &&
+(tmp=$(curl https://packages.stephansama.info/meta.json --silent) &&
  selected=$(echo "$tmp" | jq -r 'map(select(.name | test("@stephansama"))) | map(.name) | .[]' | fzf) &&
  echo "$selected" &&
- echo "$tmp" | jq -r ".[] | select(.name == \"$selected\") | {dependencies, devDependencies,peerDependencies}" &&
- unset selected && unset tmp
+ echo "$tmp" | jq -r ".[] | select(.name == \"$selected\") | {dependencies, devDependencies,peerDependencies}")
 ```
 
 ## View all example versions

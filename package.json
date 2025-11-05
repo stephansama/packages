@@ -27,6 +27,7 @@
 		"prepare": "husky",
 		"publish": "changeset publish",
 		"scripts:generate-examples": "node ./scripts/generate-examples.js",
+		"scripts:meta": "node ./scripts/meta.js",
 		"scripts:pkg-pr-new": "node ./scripts/pkg-pr-new.js",
 		"test": "turbo test",
 		"pretest:ci": "pnpm run scripts:generate-examples",

@@ -10,11 +10,7 @@
 			]
 		},
 		"build": {
-			"dependsOn": [
-				"root#scripts:generate-examples",
-				"create-stephansama-example#build",
-				"www#setup"
-			],
+			"dependsOn": ["create-stephansama-example#build", "www#setup"],
 			"outputs": ["$TURBO_ROOT$/dist"]
 		}
 	}

@@ -1,0 +1,6 @@
+{
+	"rewrites": [
+		{ "source": "/eslint/**", "destination": "/eslint/index.html" },
+		{ "source": "/node_modules/**", "destination": "/node_modules/index.html" }
+	]
+}

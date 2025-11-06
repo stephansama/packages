@@ -165,7 +165,7 @@
 		},
 		"color": "#000000"
 	},
-	"tumbler": {
+	"tumblr": {
 		"name": "Tumblr",
 		"shareUrl": "http://tumblr.com/widgets/share/tool?canonicalUrl=[u]",
 		"args": {

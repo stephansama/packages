@@ -15,7 +15,11 @@
 			"svelte": "./dist/index.js"
 		},
 		"./wc": "./dist-js/components.iife.js",
-		"./networks": "./dist/networks.json"
+		"./networks": {
+			"types": "./dist/networks.d.ts",
+			"require": "./dist/networks.js"
+		},
+		"./networks.json": "./dist/networks.json"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",

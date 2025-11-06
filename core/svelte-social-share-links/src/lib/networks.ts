@@ -26,8 +26,15 @@ export type UrlProps = {
 	user?: string;
 };
 
+export function buildUrl(network: Network, props: UrlProps) {
+	return buildUrlFromSchema(networks[network], props);
+}
+
 /** @see {https://github.com/stefanobartoletti/nuxt-social-share/blob/311b65871627736f0db8120ecc7e32def78a3b3d/src/runtime/useSocialShare.ts#L45-L64} */
-export function buildUrl({ args, shareUrl }: NetworkSchema, props: UrlProps) {
+export function buildUrlFromSchema(
+	{ args, shareUrl }: NetworkSchema,
+	props: UrlProps,
+) {
 	const argTitle = args?.title && props.title ? args?.title : "";
 	const argUser = args?.user && props.user ? args?.user : "";
 	const argHashtags = args?.hashtags && props.hashtags ? args?.hashtags : "";

@@ -33,7 +33,7 @@ export default defineConfig({
 		},
 		nav: [
 			{
-				link: "/eslint",
+				link: "/eslint/",
 				target: "_self",
 				text: iconLink({
 					icon: { name: "eslint", pack: "logos" },
@@ -41,7 +41,7 @@ export default defineConfig({
 				}),
 			},
 			{
-				link: "/node_modules",
+				link: "/node_modules/",
 				target: "_self",
 				text: iconLink({
 					icon: { name: "nodejs-icon-alt", pack: "logos" },

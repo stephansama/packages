@@ -1,7 +1,0 @@
-{
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "packages",
-	"compatibility_date": "2025-06-14",
-	"observability": { "enabled": true },
-	"assets": { "directory": "./dist" }
-}

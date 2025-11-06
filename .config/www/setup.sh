@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+pnpm --workspace-root run scripts:generate-examples
+
 ./node_modules/.bin/typedoc
 
 ./node_modules/.bin/eslint-config-inspector build --base /eslint --outDir public/eslint

@@ -19,11 +19,11 @@
 	},
 	"type": "module",
 	"exports": {
-		".": "./dist/index.js",
+		".": "./dist/index.cjs",
 		"./package.json": "./package.json"
 	},
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
+	"main": "./dist/index.cjs",
+	"types": "./dist/index.d.cts",
 	"bin": "./cli.mjs",
 	"files": [
 		"./dist",

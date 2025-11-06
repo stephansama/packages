@@ -20,7 +20,7 @@
 
 	import type { Network, NetworkSchema, UrlProps } from "./networks";
 
-	import { buildUrl } from "./networks";
+	import { buildUrlFromSchema } from "./networks";
 
 	export interface SocialShareLinkProps extends UrlProps {
 		label?: string;
@@ -30,15 +30,10 @@
 
 	const props: SocialShareLinkProps = $props();
 
-	const defaultLabel = "Share";
-
 	const selectedNetwork: NetworkSchema | undefined = networks[props.network];
 
-	if (!selectedNetwork) {
-		throw new Error(
-			`unable to find social network with key of ${props.network}`,
-		);
-	}
+	const label = props.label === undefined ? "Share" : props.label;
+	const hasLabel = !!label;
 </script>
 
 {#if selectedNetwork}
@@ -46,7 +41,7 @@
 		aria-label={`Share with ${selectedNetwork.name}`}
 		class:social-share-button--styled={props.styled}
 		class="social-share-button"
-		href={buildUrl(selectedNetwork, props)}
+		href={buildUrlFromSchema(selectedNetwork, props)}
 		rel="noreferrer noopener"
 		style={`--color-brand:${selectedNetwork.color}`}
 		target="_blank"
@@ -66,8 +61,9 @@
 				d={selectedNetwork.icon.path}
 			/>
 		</svg>
-		<span class="social-share-button__label">{props.label || defaultLabel}</span
-		>
+		{#if hasLabel}
+			<span class="social-share-button__label">{label}</span>
+		{/if}
 	</a>
 {/if}
 

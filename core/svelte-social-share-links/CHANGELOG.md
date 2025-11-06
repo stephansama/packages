@@ -1,5 +1,11 @@
 # @stephansama/svelte-social-share-links
 
+## 1.1.0
+
+### Minor Changes
+
+- 018f7d2: Allowed label to be turned off completely with an empty string
+
 ## 1.0.1
 
 ### Patch Changes

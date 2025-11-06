@@ -1,5 +1,11 @@
 # @example/svelte-social-share-links/astro
 
+## 0.1.2
+
+### Patch Changes
+
+- 018f7d2: Allowed label to be turned off completely with an empty string
+
 ## 0.1.1
 
 ### Patch Changes

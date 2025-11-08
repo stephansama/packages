@@ -29,11 +29,7 @@
 	"files": [
 		"dist"
 	],
-	"scripts": {
-		"build": "node ./scripts/generate.js",
-		"postbuild": "publint",
-		"dev": "node --watch ./scripts/generate.js"
-	},
+	"scripts": {},
 	"config": {
 		"outputFolder": "./dist"
 	},

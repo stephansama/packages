@@ -28,11 +28,7 @@
 	"files": [
 		"dist"
 	],
-	"scripts": {
-		"build": "node ./scripts/generate.js",
-		"postbuild": "publint",
-		"dev": "node --watch ./scripts/generate.js"
-	},
+	"scripts": {},
 	"devDependencies": {},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {

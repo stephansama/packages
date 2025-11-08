@@ -5,7 +5,7 @@
 [![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Fcatppuccin-opml?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/catppuccin-opml)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/catppuccin-opml?labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/catppuccin-opml)
 
-> \[!WARN]
+> \[!CAUTION]
 > this package is deprecated please use `@stephansama/catppuccin-xsl` instead
 
 Catppuccin styled opml stylesheet

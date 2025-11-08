@@ -1,16 +1,17 @@
 {
-	"name": "@example/catppuccin-opml/vanilla",
+	"name": "@example/catppuccin-xsl/vanilla",
 	"version": "1.0.0",
 	"private": true,
 	"type": "module",
 	"scripts": {
 		"prebuild": "node ./src/generate.js",
 		"build": "vite build",
+		"predev": "node ./src/generate.js",
 		"dev": "vite",
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@stephansama/catppuccin-opml": "workspace:*",
+		"@stephansama/catppuccin-xsl": "workspace:*",
 		"feedsmith": "^2.2.1",
 		"vite": "^7.1.7"
 	}

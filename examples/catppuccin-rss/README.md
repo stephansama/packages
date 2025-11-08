@@ -1,1 +1,0 @@
-# Catppuccin-RSS example

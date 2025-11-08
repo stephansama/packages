@@ -17,7 +17,6 @@ core/auto-readme/config
 core/example/scripts/examples.json
 dist
 dist-js
-examples/catppuccin-opml/vanilla/public/**/*
-examples/catppuccin-rss/**/*.x*
+examples/catppuccin-xsl/vanilla/public/**/*
 node_modules
 storybook-static

@@ -19,14 +19,16 @@ const [markup, comment, stylesheet] = await utils.loadTemplates(
 );
 
 const lightStyle = stylesheet(utils.convertColors(flavors.latte.colors));
-const darkThemes = Object.entries(flavors).filter((theme) => theme !== "latte");
+const darkThemes = Object.entries(flavors).filter(
+	([theme]) => theme !== "latte",
+);
 
 const css = String.raw;
 
 await fsp.mkdir(outputFolder, { recursive: true });
 
 for (const [theme, val] of darkThemes) {
-	const currentStyle = style(utils.convertColors(val.colors));
+	const currentStyle = stylesheet(utils.convertColors(val.colors));
 	const currentComment = comment({ package_name, theme, version, year });
 	const style = await minify.css(css`
 		@media (prefers-color-scheme: dark) {

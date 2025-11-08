@@ -15,7 +15,9 @@ const [markup, stylesheet] = await utils.loadTemplates(
 await fsp.mkdir("./dist", { recursive: true });
 
 const lightStyle = stylesheet(utils.convertColors(flavors.latte.colors));
-const darkThemes = Object.entries(flavors).filter((theme) => theme !== "latte");
+const darkThemes = Object.entries(flavors).filter(
+	([theme]) => theme !== "latte",
+);
 
 const css = String.raw;
 

@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-opml
 
+## 1.0.0
+
+### Major Changes
+
+- 7bd975f: Consolidated multiple xsl stylesheets into one package
+
 ## 0.1.2
 
 ### Patch Changes

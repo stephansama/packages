@@ -1,0 +1,61 @@
+{
+	"name": "@stephansama/catppuccin-xsl",
+	"version": "0.0.0",
+	"description": "Catppuccin styles for various xsl formats",
+	"keywords": [
+		"catppuccin-xsl"
+	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-xsl",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/stephansama/packages.git",
+		"directory": "core/catppuccin-xsl"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephansama.info"
+	},
+	"type": "module",
+	"exports": {
+		"./sitemap-frappe.xsl": "./dist/sitemap-frappe.xsl",
+		"./sitemap-macchiato.xsl": "./dist/sitemap-macchiato.xsl",
+		"./sitemap-mocha.xsl": "./dist/sitemap-mocha.xsl",
+		"./opml-frappe.xsl": "./dist/opml-frappe.xsl",
+		"./opml-macchiato.xsl": "./dist/opml-macchiato.xsl",
+		"./opml-mocha.xsl": "./dist/opml-mocha.xsl",
+		"./rss-frappe.xsl": "./dist/rss-frappe.xsl",
+		"./rss-macchiato.xsl": "./dist/rss-macchiato.xsl",
+		"./rss-mocha.xsl": "./dist/rss-mocha.xsl"
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "pnpm run --sequential \"/^build:.*/\"",
+		"postbuild": "publint",
+		"build:opml": "node ./scripts/opml.js",
+		"build:rss": "node ./scripts/rss.js",
+		"build:sitemap": "node ./scripts/sitemap.js",
+		"dev": "pnpm run --parallel \"/^dev:.*/\"",
+		"dev:opml": "node --watch ./scripts/opml.js",
+		"dev:rss": "node --watch ./scripts/rss.js",
+		"dev:sitemap": "node --watch ./scripts/sitemap.js"
+	},
+	"config": {
+		"outputFolder": "./dist"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@catppuccin/palette": "catalog:",
+		"@types/minify": "catalog:",
+		"handlebars": "catalog:",
+		"minify": "catalog:"
+	},
+	"packageManager": "pnpm@10.11.0",
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	}
+}

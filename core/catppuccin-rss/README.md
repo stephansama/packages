@@ -5,6 +5,9 @@
 [![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Fremark-asciinema?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/remark-asciinema)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/catppuccin-rss?labelColor=211F1F)](https://www.npmjs.com/package/@stephansama/catppuccin-rss)
 
+> \[!CAUTION]
+> this package is deprecated please use `@stephansama/catppuccin-xsl` instead
+
 This repository combines the delightful themes of Catppuccin-Mocha
 with the functionality of Pretty Feed v3,
 creating a beautiful and feature-rich RSS reader experience.

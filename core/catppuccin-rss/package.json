@@ -29,20 +29,11 @@
 	"files": [
 		"dist"
 	],
-	"scripts": {
-		"build": "node ./scripts/generate.js",
-		"postbuild": "publint",
-		"dev": "node --watch ./scripts/generate.js"
-	},
+	"scripts": {},
 	"config": {
 		"outputFolder": "./dist"
 	},
-	"devDependencies": {
-		"@catppuccin/palette": "catalog:",
-		"@types/minify": "catalog:",
-		"handlebars": "catalog:",
-		"minify": "catalog:"
-	},
+	"devDependencies": {},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {
 		"access": "public",

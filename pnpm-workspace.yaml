@@ -17,7 +17,7 @@ catalog:
 engineStrict: true
 overrides:
   "@stephansama/astro-iconify-svgmap": workspace:*
-  "@stephansama/catppuccin-rss": workspace:*
+  "@stephansama/catppuccin-xsl": workspace:*
   "@stephansama/remark-asciinema": workspace:*
   "@stephansama/svelte-social-share-links": workspace:*
   "@stephansama/typed-events": workspace:*

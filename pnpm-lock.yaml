@@ -309,35 +309,9 @@ importers:
         specifier: ^11.0.5
         version: 11.0.5
 
-  core/catppuccin-opml:
-    devDependencies:
-      '@catppuccin/palette':
-        specifier: 'catalog:'
-        version: 1.7.1
-      '@types/minify':
-        specifier: 'catalog:'
-        version: 9.1.4
-      handlebars:
-        specifier: 'catalog:'
-        version: 4.7.8
-      minify:
-        specifier: 'catalog:'
-        version: 14.0.0(@swc/helpers@0.5.17)
+  core/catppuccin-opml: {}
 
-  core/catppuccin-rss:
-    devDependencies:
-      '@catppuccin/palette':
-        specifier: 'catalog:'
-        version: 1.7.1
-      '@types/minify':
-        specifier: 'catalog:'
-        version: 9.1.4
-      handlebars:
-        specifier: 'catalog:'
-        version: 4.7.8
-      minify:
-        specifier: 'catalog:'
-        version: 14.0.0(@swc/helpers@0.5.17)
+  core/catppuccin-rss: {}
 
   core/catppuccin-typedoc:
     devDependencies:

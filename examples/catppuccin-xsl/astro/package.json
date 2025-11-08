@@ -1,5 +1,5 @@
 {
-	"name": "astro",
+	"name": "@example/catppuccin-xsl/astro",
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
@@ -17,4 +17,3 @@
 		"@stephansama/catppuccin-xsl": "workspace:*"
 	}
 }
-

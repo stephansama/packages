@@ -36,7 +36,6 @@
 	],
 	"scripts": {
 		"build": "tsdown",
-		"postbuild": "publint",
 		"dev": "tsdown --watch",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
 	},

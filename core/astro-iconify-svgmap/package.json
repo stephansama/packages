@@ -46,7 +46,6 @@
 	],
 	"scripts": {
 		"build": "tsdown --profile=node16",
-		"postbuild": "publint",
 		"dev": "tsdown --watch",
 		"lint": "eslint ./src/",
 		"prepublishOnly": "tsdown"

@@ -4,8 +4,8 @@ packages:
   - examples/**
 autoInstallPeers: true
 catalog:
-  '@catppuccin/palette': 1.7.1
-  '@types/minify': 9.1.4
+  "@catppuccin/palette": 1.7.1
+  "@types/minify": 9.1.4
   astro: 5.9.3
   handlebars: 4.7.8
   minify: 14.0.0
@@ -16,16 +16,16 @@ catalog:
   zx: 8.8.0
 engineStrict: true
 ignoredBuiltDependencies:
-  - '@swc/core'
+  - "@swc/core"
   - core-js-pure
   - sharp
   - workerd
 onlyBuiltDependencies:
   - esbuild
 overrides:
-  '@stephansama/astro-iconify-svgmap': workspace:*
-  '@stephansama/catppuccin-xsl': workspace:*
-  '@stephansama/remark-asciinema': workspace:*
-  '@stephansama/svelte-social-share-links': workspace:*
-  '@stephansama/typed-events': workspace:*
+  "@stephansama/astro-iconify-svgmap": workspace:*
+  "@stephansama/catppuccin-xsl": workspace:*
+  "@stephansama/remark-asciinema": workspace:*
+  "@stephansama/svelte-social-share-links": workspace:*
+  "@stephansama/typed-events": workspace:*
   create-stephansama-example: workspace:*

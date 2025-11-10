@@ -6,6 +6,7 @@ export default defineConfig({
 	entry: ["src/cli.ts", "src/index.ts", "src/get.ts"],
 	external: ["virtual:iconify-svgmap"],
 	format: ["esm", "cjs"],
+	publint: true,
 	target: "esnext",
 	tsconfig: "tsconfig.json",
 });

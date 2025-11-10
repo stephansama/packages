@@ -30,7 +30,8 @@
 		"src"
 	],
 	"scripts": {
-		"lint": "eslint ./src/",
+		"prelint": "eslint ./src/",
+		"lint": "publint",
 		"type-check": "tsc --noEmit"
 	},
 	"packageManager": "pnpm@10.11.0",

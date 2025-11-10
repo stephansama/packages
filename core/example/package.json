@@ -32,7 +32,6 @@
 	"scripts": {
 		"prebuild": "pnpm run generate",
 		"build": "tsdown",
-		"postbuild": "publint",
 		"predev": "pnpm run generate",
 		"dev": "tsdown --watch",
 		"generate": "pnpm --workspace-root run scripts:generate-examples",

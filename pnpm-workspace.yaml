@@ -6,7 +6,7 @@ autoInstallPeers: true
 catalog:
   "@catppuccin/palette": 1.7.1
   "@types/minify": 9.1.4
-  astro: 5.9.3
+  astro: 5.15.4
   handlebars: 4.7.8
   minify: 14.0.0
   tsdown: 0.15.12

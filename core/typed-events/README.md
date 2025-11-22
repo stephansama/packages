@@ -13,6 +13,8 @@ Typed events store using standard schema
 
 - [Installation](#installation)
 - [Usage](#usage)
+  - [TypedEvent](#typedevent)
+  - [TypedBroadcastChannel](#typedbroadcastchannel)
 - [References](#references)
 
 </details>
@@ -26,8 +28,13 @@ pnpm install @stephansama/typed-events
 ## Usage
 
 ```javascript
+/* eslint perfectionist/sort-imports: ["off"] */
 import * as z from "zod";
+```
 
+### TypedEvent
+
+```javascript
 import { TypedEvent } from "@stephansama/typed-events";
 
 export const customAnimationEvent = new TypedEvent(
@@ -67,6 +74,47 @@ export function dispatchEvent() {
     customAnimationEvent.dispatch({
       x: +x.innerText,
       y: +y.innerText,
+    });
+  });
+}
+```
+
+### TypedBroadcastChannel
+
+```javascript
+import { TypedBroadcastChannel } from "../dist/index.cjs";
+
+export const channel = new TypedBroadcastChannel("broadcaster", {
+  reset: z.object({}),
+  update: z.object({ value: z.number() }),
+});
+```
+
+somewhere in your codebase
+
+```javascript
+export function listenForChannelMessage() {
+  const value = document.getElementById("value");
+
+  const cleanup = channel.listen("update", (message) => {
+    value.textContent = message.data.value;
+  });
+
+  return () => cleanup();
+}
+```
+
+somewhere else in your codebase
+
+```javascript
+export function dispatchChannelMessage() {
+  const button = document.getElementById("button");
+
+  const value = document.getElementById("value");
+
+  button.addEventListener("click", () => {
+    channel.dispatch("update", {
+      value,
     });
   });
 }

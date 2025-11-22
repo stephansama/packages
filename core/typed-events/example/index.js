@@ -1,6 +1,9 @@
 // remark-usage-ignore-next
 /* eslint perfectionist/sort-modules: ["off"] */
+/* eslint perfectionist/sort-imports: ["off"] */
 import * as z from "zod";
+
+// ### TypedEvent
 
 import { TypedEvent } from "../dist/index.js";
 
@@ -35,6 +38,39 @@ export function dispatchEvent() {
 		customAnimationEvent.dispatch({
 			x: +x.innerText,
 			y: +y.innerText,
+		});
+	});
+}
+
+// ### TypedBroadcastChannel
+//
+import { TypedBroadcastChannel } from "../dist/index.cjs";
+
+export const channel = new TypedBroadcastChannel("broadcaster", {
+	reset: z.object({}),
+	update: z.object({ value: z.number() }),
+});
+
+// somewhere in your codebase
+export function listenForChannelMessage() {
+	const value = document.getElementById("value");
+
+	const cleanup = channel.listen("update", (message) => {
+		value.textContent = message.data.value;
+	});
+
+	return () => cleanup();
+}
+
+// somewhere else in your codebase
+export function dispatchChannelMessage() {
+	const button = document.getElementById("button");
+
+	const value = document.getElementById("value");
+
+	button.addEventListener("click", () => {
+		channel.dispatch("update", {
+			value,
 		});
 	});
 }

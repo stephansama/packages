@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 2.1.0
+
+### Minor Changes
+
+- 8386170: added typed broadcast controller
+
 ## 2.0.5
 
 ### Patch Changes

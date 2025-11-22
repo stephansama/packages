@@ -1,5 +1,11 @@
 # vanilla
 
+## 1.0.4
+
+### Patch Changes
+
+- 8386170: added typed broadcast controller
+
 ## 1.0.3
 
 ### Patch Changes

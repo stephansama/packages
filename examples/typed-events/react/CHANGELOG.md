@@ -1,5 +1,11 @@
 # @example/typed-events/react
 
+## 0.0.5
+
+### Patch Changes
+
+- 8386170: added typed broadcast controller
+
 ## 0.0.4
 
 ### Patch Changes

@@ -1,4 +1,4 @@
-import type { BuiltInParsers, Config, Plugin } from "prettier";
+import type { BuiltInParserName, Config, Plugin } from "prettier";
 
 /** @see https://prettier.io/docs/plugins/#developing-plugins */
 
@@ -16,7 +16,7 @@ const parserMap = {
 	tsx: "typescript",
 	vue: "vue",
 	yaml: "yaml",
-} satisfies Record<string, keyof BuiltInParsers>;
+} satisfies Record<string, BuiltInParserName>;
 
 const languages: Plugin["languages"] = Object.entries(parserMap).map(
 	([extension, parser]) => ({

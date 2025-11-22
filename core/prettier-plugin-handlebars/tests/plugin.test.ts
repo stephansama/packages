@@ -34,7 +34,7 @@ it.each(cases)(
 	async ({ filepath, input, output }) => {
 		const formatted = await prettier.format(input, {
 			filepath,
-			plugins: [new URL("../dist/plugin.js", import.meta.url).href],
+			plugins: [new URL("../dist/index.js", import.meta.url).href],
 		});
 
 		expect(formatted).not.toEqual(input);

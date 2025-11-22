@@ -1,4 +1,4 @@
 !patches/*
 !pnpm-workspace.yaml
-# **/tests/fixtures/**
+**/tests/fixtures/**
 *.yaml

@@ -67,6 +67,9 @@ importers:
       '@stephansama/auto-readme':
         specifier: workspace:*
         version: link:core/auto-readme
+      '@stephansama/prettier-plugin-handlebars':
+        specifier: workspace:*
+        version: link:core/prettier-plugin-handlebars
       '@tsconfig/recommended':
         specifier: ^1.0.8
         version: 1.0.10

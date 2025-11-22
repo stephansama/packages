@@ -9,6 +9,7 @@
 		{ "files": "*.astro", "options": { "parser": "astro" } }
 	],
 	"plugins": [
+		"@stephansama/prettier-plugin-handlebars",
 		"prettier-plugin-jsdoc",
 		"prettier-plugin-astro",
 		"prettier-plugin-svelte",

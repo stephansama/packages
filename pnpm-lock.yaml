@@ -21,6 +21,9 @@ catalogs:
     minify:
       specifier: 14.0.0
       version: 14.0.0
+    prettier:
+      specifier: ^3.6.2
+      version: 3.6.2
     tsdown:
       specifier: 0.15.12
       version: 0.15.12
@@ -67,6 +70,9 @@ importers:
       '@stephansama/auto-readme':
         specifier: workspace:*
         version: link:core/auto-readme
+      '@stephansama/prettier-plugin-handlebars':
+        specifier: workspace:*
+        version: link:core/prettier-plugin-handlebars
       '@tsconfig/recommended':
         specifier: ^1.0.8
         version: 1.0.10
@@ -128,7 +134,7 @@ importers:
         specifier: ^0.0.51
         version: 0.0.51
       prettier:
-        specifier: ^3.5.3
+        specifier: 'catalog:'
         version: 3.6.2
       prettier-plugin-astro:
         specifier: ^0.14.1
@@ -354,6 +360,15 @@ importers:
         version: 0.15.12(@arethetypeswrong/core@0.18.2)(oxc-resolver@11.12.0)(publint@0.3.15)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3))
 
   core/github-env: {}
+
+  core/prettier-plugin-handlebars:
+    devDependencies:
+      prettier:
+        specifier: 'catalog:'
+        version: 3.6.2
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.12(@arethetypeswrong/core@0.18.2)(oxc-resolver@11.12.0)(publint@0.3.15)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3))
 
   core/remark-asciinema:
     devDependencies:

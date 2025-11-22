@@ -3,18 +3,22 @@ packages:
   - core/**
   - examples/**
 autoInstallPeers: true
+catalogMode: strict
+cleanupUnusedCatalogs: true
+engineStrict: true
+shellEmulator: true
 catalog:
   "@catppuccin/palette": 1.7.1
   "@types/minify": 9.1.4
   astro: 5.9.3
   handlebars: 4.7.8
   minify: 14.0.0
+  prettier: ^3.6.2
   tsdown: 0.15.12
   typescript: 5.9.3
   vite: 6.3.5
   zod: 4.0.15
   zx: 8.8.0
-engineStrict: true
 ignoredBuiltDependencies:
   - "@swc/core"
   - core-js-pure

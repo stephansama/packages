@@ -1,5 +1,11 @@
-import { TypedEvent } from "@stephansama/typed-events";
+import { TypedBroadcastChannel, TypedEvent } from "@stephansama/typed-events";
 import * as z from "zod/v4/mini";
+
+const broadcast = new TypedBroadcastChannel("update-controller", {
+	update: z.object({
+		current: z.number(),
+	}),
+});
 
 const event = new TypedEvent(
 	"update-counter",
@@ -16,12 +22,18 @@ export function setupCounter(element) {
 		element.innerHTML = `count is ${counter}`;
 	}
 
+	broadcast.listen("update", (message) => {
+		setCounter(message.data.current);
+	});
+
 	event.listen((e) => {
 		setCounter(e.detail.current);
 	});
 
 	element.addEventListener("click", () => {
-		event.dispatch({ current: counter + 1 });
+		const next = counter + 1;
+		event.dispatch({ current: next });
+		broadcast.dispatch("update", { current: next });
 	});
 
 	setCounter(0);

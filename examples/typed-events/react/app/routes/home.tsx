@@ -1,4 +1,4 @@
-import { TypedEvent } from "@stephansama/typed-events";
+import { TypedBroadcastChannel, TypedEvent } from "@stephansama/typed-events";
 import * as React from "react";
 import * as yup from "yup";
 
@@ -13,6 +13,12 @@ export function meta() {
 	];
 }
 
+const channel = new TypedBroadcastChannel("typed:controller", {
+	update: yup.object({
+		current: yup.number().required(),
+	}),
+});
+
 const event = new TypedEvent(
 	"typed:event",
 	yup.object({
@@ -25,12 +31,20 @@ function EventComponent() {
 	const inputRef = React.useRef<HTMLInputElement>(null);
 
 	React.useEffect(() => {
-		const cleanup = event.listen((event) => {
+		const cleanupChannel = channel.listen("update", (event) => {
+			console.info("hello from typed broadcast channel");
+			setCount(event.data.current);
+		});
+
+		const cleanupEvent = event.listen((event) => {
 			console.info("hello from typed event");
 			setCount(event.detail.current);
 		});
 
-		return cleanup;
+		return () => {
+			cleanupEvent();
+			cleanupChannel();
+		};
 	}, []);
 
 	function handleClick() {
@@ -39,6 +53,7 @@ function EventComponent() {
 			: count + 1;
 
 		event.dispatch({ current });
+		channel.dispatch("update", { current });
 	}
 
 	function resetValues() {

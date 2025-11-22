@@ -1,11 +1,9 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
-import { warnOnce } from "./utils";
+import { validate, ValidatorError } from "./utils";
 
 type Detail<T extends StandardSchemaV1> = StandardSchemaV1.InferInput<T>;
-
 type Restrict<T extends string, Forbidden> = T extends Forbidden ? never : T;
-
 type StandardEvent<T extends StandardSchemaV1> = CustomEvent<Detail<T>>;
 
 export class TypedEvent<
@@ -57,7 +55,6 @@ export class TypedEvent<
 		this.#validate({
 			callback,
 			detail,
-			step: "dispatch",
 		});
 	}
 
@@ -67,7 +64,6 @@ export class TypedEvent<
 				this.#validate({
 					callback: () => callback(e),
 					detail: e.detail,
-					step: "listen",
 				});
 			}
 		};
@@ -80,52 +76,25 @@ export class TypedEvent<
 	#validate({
 		callback,
 		detail,
-		step,
 	}: {
 		callback: () => void;
 		detail: Detail<Schema>;
-		step: keyof Pick<TypedEvent<Name, Schema>, "dispatch" | "listen">;
 	}) {
-		const result = this.schema["~standard"].validate(detail);
-
-		if (!(result instanceof Promise)) {
-			return this.#validateCallback(result, callback);
-		}
-
-		warnOnce({
-			if: this.#silenceWarning || process.env.NODE_ENV === "production",
-			message: `using async validation during TypedEvent ${step} (however this is not recommended. please use a synchronous validator)`,
+		validate({
+			callback,
+			data: detail,
+			onerror: (issues) => {
+				throw new TypedEventError(this.name, issues);
+			},
+			schema: this.schema,
+			source: "TypedEvent",
+			warnOnceCondition: this.#silenceWarning,
 		});
-
-		result
-			.then((data) => this.#validateCallback(data, callback))
-			.catch((error) => {
-				console.error(error);
-				throw error;
-			});
-	}
-
-	#validateCallback(
-		result: StandardSchemaV1.Result<unknown>,
-		callback: () => void,
-	) {
-		if (result.issues) {
-			throw new TypedEventError(this.name, result.issues);
-		} else {
-			callback();
-		}
 	}
 }
 
-export class TypedEventError extends Error {
+export class TypedEventError extends ValidatorError {
 	constructor(eventName: string, issues: readonly StandardSchemaV1.Issue[]) {
-		const messages = [
-			"TypedEventError - " + eventName,
-			JSON.stringify(issues, undefined, 2),
-		];
-
-		super(messages.join("\n"));
-
-		this.name = "TypedEventError";
+		super("TypedEvent", eventName, issues);
 	}
 }

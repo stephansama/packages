@@ -34,6 +34,9 @@ import * as z from "zod";
 
 ### TypedEvent
 
+create a typed [`CustomEvent`](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent)
+using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
+
 ```javascript
 import { TypedEvent } from "@stephansama/typed-events";
 
@@ -81,8 +84,11 @@ export function dispatchEvent() {
 
 ### TypedBroadcastChannel
 
+create a typed [`BroadcastChannel`](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/BroadcastChannel)
+using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
+
 ```javascript
-import { TypedBroadcastChannel } from "../dist/index.cjs";
+import { TypedBroadcastChannel } from "@stephansama/typed-events";
 
 export const channel = new TypedBroadcastChannel("broadcaster", {
   reset: z.object({}),
@@ -110,11 +116,9 @@ somewhere else in your codebase
 export function dispatchChannelMessage() {
   const button = document.getElementById("button");
 
-  const value = document.getElementById("value");
-
   button.addEventListener("click", () => {
     channel.dispatch("update", {
-      value,
+      value: Math.floor(Math.random() * 100),
     });
   });
 }

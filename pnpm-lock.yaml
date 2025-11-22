@@ -21,6 +21,9 @@ catalogs:
     minify:
       specifier: 14.0.0
       version: 14.0.0
+    prettier:
+      specifier: ^3.6.2
+      version: 3.6.2
     tsdown:
       specifier: 0.15.12
       version: 0.15.12
@@ -131,7 +134,7 @@ importers:
         specifier: ^0.0.51
         version: 0.0.51
       prettier:
-        specifier: ^3.5.3
+        specifier: 'catalog:'
         version: 3.6.2
       prettier-plugin-astro:
         specifier: ^0.14.1
@@ -361,7 +364,7 @@ importers:
   core/prettier-plugin-handlebars:
     devDependencies:
       prettier:
-        specifier: ^3.6.2
+        specifier: 'catalog:'
         version: 3.6.2
       tsdown:
         specifier: 'catalog:'

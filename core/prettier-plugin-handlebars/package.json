@@ -34,7 +34,7 @@
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
 	},
 	"devDependencies": {
-		"prettier": "^3.6.2",
+		"prettier": "catalog:",
 		"tsdown": "catalog:"
 	},
 	"packageManager": "pnpm@10.11.0",

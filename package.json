@@ -18,7 +18,7 @@
 		"build": "pnpm run --sequential \"/^build:.*/\"",
 		"build:examples": "turbo build --filter='./examples/*'",
 		"build:packages": "turbo build --filter='./core/*'",
-		"build:www": "turbo build --filter='www'",
+		"build:www": "node ./scripts/build-www.js",
 		"dev": "turbo dev",
 		"fmt:check": "prettier . --check",
 		"fmt:write": "prettier . --write",

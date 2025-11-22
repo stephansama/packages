@@ -31,9 +31,8 @@ function EventComponent() {
 	const inputRef = React.useRef<HTMLInputElement>(null);
 
 	React.useEffect(() => {
-		console.log(channel);
 		const cleanupChannel = channel.listen("update", (event) => {
-			console.info("hello from typed broadcast controller");
+			console.info("hello from typed broadcast channel");
 			setCount(event.data.current);
 		});
 

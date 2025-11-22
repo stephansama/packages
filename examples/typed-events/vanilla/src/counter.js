@@ -33,7 +33,7 @@ export function setupCounter(element) {
 	element.addEventListener("click", () => {
 		const next = counter + 1;
 		event.dispatch({ current: next });
-		broadcast.dispatch("update", { current: next, extra: "test" });
+		broadcast.dispatch("update", { current: next });
 	});
 
 	setCounter(0);

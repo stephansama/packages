@@ -29,12 +29,14 @@ export function validate({
 	data,
 	onerror,
 	schema,
+	source,
 	warnOnceCondition = process.env.NODE_ENV === "production",
 }: {
 	callback: () => void;
 	data: unknown;
 	onerror: (issues: Issues) => void;
 	schema: StandardSchemaV1;
+	source: string;
 	warnOnceCondition?: boolean;
 }) {
 	const result = schema["~standard"].validate(data);
@@ -45,7 +47,7 @@ export function validate({
 
 	warnOnce({
 		if: warnOnceCondition,
-		message: `using async validation during TypedBroadcastChannel (however this is not recommended. please use a synchronous validator)`,
+		message: `using async validation during ${source} (however this is not recommended. please use a synchronous validator)`,
 	});
 
 	result

@@ -73,6 +73,7 @@ export class TypedBroadcastChannel<
 				throw new TypedBroadcastChannelError(this.id, issues);
 			},
 			schema: this.events[event],
+			source: "TypedBroadcastChannel",
 		});
 	}
 }

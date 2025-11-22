@@ -87,6 +87,7 @@ export class TypedEvent<
 				throw new TypedEventError(this.name, issues);
 			},
 			schema: this.schema,
+			source: "TypedEvent",
 			warnOnceCondition: this.#silenceWarning,
 		});
 	}

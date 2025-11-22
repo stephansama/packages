@@ -2,6 +2,7 @@ import * as fs from "node:fs/promises";
 import * as url from "node:url";
 import prettier from "prettier";
 import { expect, it } from "vitest";
+import plugin from "../src/index";
 
 const tests = await fs.readdir(
 	url.fileURLToPath(new URL("./fixtures/", import.meta.url)),
@@ -28,6 +29,10 @@ const cases = await Promise.all(
 		};
 	}),
 );
+
+it("exports the plugin module", () => {
+	expect(plugin).toBeTruthy();
+});
 
 it.each(cases)(
 	"formats $extension extensions properly",

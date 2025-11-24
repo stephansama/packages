@@ -48,19 +48,14 @@ export class TypedBroadcastEvent<
 	dispatch<
 		EventName extends keyof EventMap & string,
 		Input extends StandardSchemaV1.InferInput<EventMap[EventName]>,
-	>(name: EventName, payload: Input & object) {
-		this.#validate(name, payload, () => {
-			this.channel.postMessage({
-				...payload,
-				id: this.id,
-				name,
+	>(name: EventName, input: Input & object) {
+		this.#validate(name, input, () => {
+			const payload = { ...input, id: this.id, name };
+			const event = new CustomEvent<Input>(this.#scopeEvent(name), {
+				detail: payload,
 			});
-
-			this.target.dispatchEvent(
-				new CustomEvent<Input>(this.#scopeEvent(name), {
-					detail: payload,
-				}),
-			);
+			this.target.dispatchEvent(event);
+			this.channel.postMessage(payload);
 		});
 	}
 

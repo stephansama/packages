@@ -25,7 +25,7 @@ const broadcastEvent = new TypedBroadcastEvent("theme", {
 
 export function setupCounter(element) {
 	let counter = 0;
-
+	const theme = document.getElementById("theme");
 	const [light, dark, toggle] = ["light", "dark", "toggle"].map((id) =>
 		document.getElementById(id),
 	);
@@ -45,12 +45,10 @@ export function setupCounter(element) {
 
 	broadcastEvent.listen("set", (e) => {
 		const payload = broadcastEvent.getPayload(e);
-		const theme = document.getElementById("theme");
 		theme.textContent = payload.theme;
 	});
 
 	broadcastEvent.listen("toggle", () => {
-		const theme = document.getElementById("theme");
 		theme.textContent = theme.textContent === "dark" ? "light" : "dark";
 	});
 

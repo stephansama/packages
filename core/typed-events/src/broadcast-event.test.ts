@@ -8,11 +8,14 @@ it("dispatches the channel message properly", () => {
 		reset: z.object({}),
 		update: z.object({ value: z.number() }),
 	});
+
 	const postMessageSpy = vi.spyOn(broadcast.channel, "postMessage");
+	const dispatchEventSpy = vi.spyOn(broadcast.target, "dispatchEvent");
 
 	broadcast.dispatch("reset", {});
 
 	expect(postMessageSpy).toHaveBeenCalled();
+	expect(dispatchEventSpy).toHaveBeenCalled();
 });
 
 it("receives the message on the sender and receiver channels", async () => {
@@ -22,9 +25,12 @@ it("receives the message on the sender and receiver channels", async () => {
 	};
 
 	const channelName = "broadcast-channel";
+
 	const firstChannel = new TypedBroadcastEvent(channelName, schema);
 	const secondChannel = new TypedBroadcastEvent(channelName, schema);
+
 	const postMessageSpy = vi.spyOn(firstChannel.channel, "postMessage");
+
 	const firstCallback = vi.fn();
 	const secondCallback = vi.fn();
 

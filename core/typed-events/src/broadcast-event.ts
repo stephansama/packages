@@ -29,8 +29,9 @@ export class TypedBroadcastEvent<
 
 	set target(target: EventTarget) {
 		if (!target) {
-			console.error("tried to set TypedEvent target to invalid target");
-			return;
+			throw new Error(
+				"tried to set TypedBroadcastEvent target to invalid target",
+			);
 		}
 
 		this.#target = target;

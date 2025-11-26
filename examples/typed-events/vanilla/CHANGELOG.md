@@ -1,5 +1,11 @@
 # vanilla
 
+## 1.1.0
+
+### Minor Changes
+
+- e6413a4: created typed-broadcast-events class for sending and receiving on the same channel
+
 ## 1.0.4
 
 ### Patch Changes

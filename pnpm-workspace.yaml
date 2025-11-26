@@ -10,7 +10,7 @@ shellEmulator: true
 catalog:
   "@catppuccin/palette": 1.7.1
   "@types/minify": 9.1.4
-  astro: 5.9.3
+  astro: 5.16.0
   handlebars: 4.7.8
   minify: 14.0.0
   prettier: ^3.6.2

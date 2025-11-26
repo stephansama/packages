@@ -51,7 +51,6 @@ export class TypedBroadcastChannel<
 		}) => void,
 	) {
 		const listener = (message: MessageEvent<Input>) => {
-			console.log(message);
 			if (message.data.name !== event) return;
 
 			this.#validate(event, message.data, () => {
@@ -63,11 +62,10 @@ export class TypedBroadcastChannel<
 		return () => this.channel.removeEventListener("message", listener);
 	}
 
-	#validate<Event extends keyof EventMap>(
-		event: Event,
-		message: StandardSchemaV1.InferInput<EventMap[Event]>,
-		callback: () => void,
-	) {
+	#validate<
+		Event extends keyof EventMap,
+		Input extends StandardSchemaV1.InferInput<EventMap[Event]>,
+	>(event: Event, message: Input, callback: () => void) {
 		validate({
 			callback,
 			data: message,

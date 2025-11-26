@@ -14,6 +14,12 @@ document.querySelector("#app").innerHTML = html`
 		<div class="card">
 			<button id="counter" type="button"></button>
 		</div>
+		<div style="display:flex; gap:8px;align-items:center;">
+			<div id="theme">dark</div>
+			<button id="light">set light</button>
+			<button id="toggle">toggle</button>
+			<button id="dark">set dark</button>
+		</div>
 		<button id="current">Current</button>
 	</div>
 `;

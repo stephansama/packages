@@ -1,4 +1,8 @@
-import { TypedBroadcastChannel, TypedEvent } from "@stephansama/typed-events";
+import {
+	TypedBroadcastChannel,
+	TypedBroadcastEvent,
+	TypedEvent,
+} from "@stephansama/typed-events";
 import * as z from "zod/v4/mini";
 
 const broadcast = new TypedBroadcastChannel("update-controller", {
@@ -14,8 +18,17 @@ const event = new TypedEvent(
 	}),
 );
 
+const broadcastEvent = new TypedBroadcastEvent("theme", {
+	set: z.object({ theme: z.enum(["light", "dark"]) }),
+	toggle: z.object({}),
+});
+
 export function setupCounter(element) {
 	let counter = 0;
+	const theme = document.getElementById("theme");
+	const [light, dark, toggle] = ["light", "dark", "toggle"].map((id) =>
+		document.getElementById(id),
+	);
 
 	function setCounter(count) {
 		counter = count;
@@ -28,6 +41,27 @@ export function setupCounter(element) {
 
 	event.listen((e) => {
 		setCounter(e.detail.current);
+	});
+
+	broadcastEvent.listen("set", (e) => {
+		const payload = broadcastEvent.getPayload(e);
+		theme.textContent = payload.theme;
+	});
+
+	broadcastEvent.listen("toggle", () => {
+		theme.textContent = theme.textContent === "dark" ? "light" : "dark";
+	});
+
+	toggle.addEventListener("click", () => {
+		broadcastEvent.dispatch("toggle", {});
+	});
+
+	dark.addEventListener("click", () => {
+		broadcastEvent.dispatch("set", { theme: "dark" });
+	});
+
+	light.addEventListener("click", () => {
+		broadcastEvent.dispatch("set", { theme: "light" });
 	});
 
 	element.addEventListener("click", () => {

@@ -43,7 +43,7 @@ export class TypedMessage<
 			const data: TypedMessageEvent = { ...message, id };
 
 			if (!target) {
-				return this.window.postMessage(data);
+				return this.window.postMessage(data, this.window.origin);
 			}
 
 			target.window.postMessage(data, target.origin);

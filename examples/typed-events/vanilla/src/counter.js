@@ -1,5 +1,6 @@
 import {
 	TypedBroadcastChannel,
+	TypedBroadcastEvent,
 	TypedEvent,
 	TypedMessage,
 } from "@stephansama/typed-events";
@@ -23,16 +24,12 @@ const broadcastEvent = new TypedBroadcastEvent("theme", {
 	toggle: z.object({}),
 });
 
-const message = new TypedMessage(
-	"crossorigin",
-	{
-		toggle: z.object({}),
-		update: z.object({
-			value: z.number(),
-		}),
-	},
-	["http://localhost:5174", "http://localhost:5173"],
-);
+const message = new TypedMessage("crossorigin", {
+	toggle: z.object({}),
+	update: z.object({
+		value: z.number(),
+	}),
+});
 
 export function setupCounter(element) {
 	let counter = 0;
@@ -103,11 +100,11 @@ export function setupCounter(element) {
 		const next = counter + 1;
 		event.dispatch({ current: next });
 		broadcast.dispatch("update", { current: next });
-		// message.dispatch(
-		// 	"toggle",
-		// 	{},
-		// 	{ origin: "http://localhost:5173", window: window.parent },
-		// );
+		message.dispatch(
+			"toggle",
+			{},
+			{ origin: "http://localhost:5173", window: window.parent },
+		);
 	});
 
 	setCounter(0);

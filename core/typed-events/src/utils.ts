@@ -2,7 +2,7 @@ import type { StandardSchemaV1 } from "@standard-schema/spec";
 
 const alreadyWarned: { [message: string]: boolean } = {};
 
-type Issues = NonNullable<StandardSchemaV1.Result<unknown>["issues"]>;
+type Issues = Readonly<StandardSchemaV1.Issue[]>;
 
 export class ValidatorError extends Error {
 	constructor(

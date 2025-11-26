@@ -1,4 +1,8 @@
-import { TypedBroadcastChannel, TypedEvent } from "@stephansama/typed-events";
+import {
+	TypedBroadcastChannel,
+	TypedEvent,
+	TypedMessage,
+} from "@stephansama/typed-events";
 import * as React from "react";
 import * as yup from "yup";
 
@@ -26,6 +30,13 @@ const event = new TypedEvent(
 	}),
 );
 
+const message = new TypedMessage("crossorigin", {
+	toggle: yup.object({}),
+	update: yup.object({
+		value: yup.number().required(),
+	}),
+});
+
 function EventComponent() {
 	const [count, setCount] = React.useState(0);
 	const inputRef = React.useRef<HTMLInputElement>(null);
@@ -41,9 +52,19 @@ function EventComponent() {
 			setCount(event.detail.current);
 		});
 
+		const cleanupMessage = message.listen("update", ({ data }) => {
+			setCount(data.value);
+		});
+
+		const cleanupCrossOrigin = message.listen("toggle", ({ message }) => {
+			console.info(message.origin);
+		});
+
 		return () => {
 			cleanupEvent();
 			cleanupChannel();
+			cleanupMessage();
+			cleanupCrossOrigin();
 		};
 	}, []);
 
@@ -86,6 +107,28 @@ function EventComponent() {
 			>
 				test {event.name} event
 			</button>
+			<button
+				onClick={function () {
+					message.dispatch("update", {
+						value: count + 1,
+					});
+				}}
+			>
+				test message event
+			</button>
+			<button
+				onClick={function () {
+					const iframe = document.querySelector("iframe");
+
+					message.dispatch(
+						"toggle",
+						{},
+						{ origin: iframe!.src, window: iframe!.contentWindow! },
+					);
+				}}
+			>
+				test crossorigin message event
+			</button>
 			<div className="flex gap-2">
 				<input
 					className="rounded p-2 ring-1 ring-white/10"
@@ -102,6 +145,7 @@ function EventComponent() {
 				</button>
 			</div>
 			<span>current count: {count}</span>
+			<iframe height={500} src="http://localhost:5174" width={500} />
 		</div>
 	);
 }

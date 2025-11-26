@@ -2,8 +2,6 @@ import type { StandardSchemaV1 } from "@standard-schema/spec";
 
 import { validate, ValidatorError } from "./utils";
 
-type ReservedProperties = "id" | "name";
-
 export class TypedBroadcastChannel<
 	Name extends string,
 	EventMap extends Record<string, StandardSchemaV1> & { name?: never },
@@ -19,43 +17,47 @@ export class TypedBroadcastChannel<
 	}
 
 	get id() {
-		if (!this.#id) this.#id = getUuid();
+		if (!this.#id) this.#id = crypto.randomUUID();
 		return this.#id;
 	}
 
 	#channel?: BroadcastChannel;
-	#id?: ReturnType<typeof getUuid>;
+	#id?: ReturnType<typeof crypto.randomUUID>;
 
 	constructor(name: Name, events: EventMap) {
 		this.name = name;
 		this.events = events;
 	}
 
-	dispatch(
-		event: keyof EventMap,
-		message: object & StandardSchemaV1.InferInput<EventMap[typeof event]>,
+	dispatch<Event extends keyof EventMap>(
+		name: Event,
+		message: object & StandardSchemaV1.InferInput<EventMap[Event]>,
 	) {
-		this.#validate(event, message, () => {
-			this.channel.postMessage({
-				...message,
-				id: this.id,
-				name: event,
-			});
+		this.#validate(name, message, () => {
+			this.channel.postMessage({ ...message, id: this.id, name });
 		});
 	}
 
 	listen<
 		Event extends keyof EventMap,
-		Input extends StandardSchemaV1.InferInput<EventMap[Event]>,
-	>(event: Event, callback: (message: MessageEvent<Input>) => void) {
-		const listener = (
-			message: MessageEvent<Input & Record<ReservedProperties, string>>,
-		) => {
-			if (message.data.name === event && message.data.id !== this.id) {
-				this.#validate(event, message.data, () => {
-					callback(message);
-				});
-			}
+		Input extends Record<"id" | "name", string> &
+			StandardSchemaV1.InferInput<EventMap[Event]>,
+	>(
+		event: Event,
+		callback: (payload: {
+			data: Input;
+			isSelf: boolean;
+			message: MessageEvent<Input>;
+		}) => void,
+	) {
+		const listener = (message: MessageEvent<Input>) => {
+			console.log(message);
+			if (message.data.name !== event) return;
+
+			this.#validate(event, message.data, () => {
+				const isSelf = message.data.id === this.id;
+				callback({ data: message.data, isSelf, message });
+			});
 		};
 		this.channel.addEventListener("message", listener);
 		return () => this.channel.removeEventListener("message", listener);
@@ -82,8 +84,4 @@ export class TypedBroadcastChannelError extends ValidatorError {
 	constructor(id: string, issues: readonly StandardSchemaV1.Issue[]) {
 		super("TypedBroadcastChannel", id, issues);
 	}
-}
-
-function getUuid() {
-	return globalThis.crypto.randomUUID();
 }

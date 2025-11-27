@@ -1,10 +1,10 @@
 import { expect, it, vi } from "vitest";
 import * as z from "zod";
 
-import { TypedBroadcastEvent } from "./broadcast-event";
+import { createTypedBroadcastEvent } from "./broadcast-event";
 
 it("dispatches the channel message properly", () => {
-	const broadcast = new TypedBroadcastEvent("broadcast-channel", {
+	const broadcast = createTypedBroadcastEvent("broadcast-channel", {
 		reset: z.object({}),
 		update: z.object({ value: z.number() }),
 	});
@@ -26,8 +26,8 @@ it("receives the message on the sender and receiver channels", async () => {
 
 	const channelName = "broadcast-channel";
 
-	const firstChannel = new TypedBroadcastEvent(channelName, schema);
-	const secondChannel = new TypedBroadcastEvent(channelName, schema);
+	const firstChannel = createTypedBroadcastEvent(channelName, schema);
+	const secondChannel = createTypedBroadcastEvent(channelName, schema);
 
 	const postMessageSpy = vi.spyOn(firstChannel.channel, "postMessage");
 

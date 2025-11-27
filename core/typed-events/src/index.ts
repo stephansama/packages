@@ -1,7 +1,13 @@
-export { TypedBroadcastChannel, TypedBroadcastChannelError } from "./broadcast";
 export {
-	TypedBroadcastEvent,
+	createTypedBroadcastChannel as TypedBroadcastChannel,
+	TypedBroadcastChannelError,
+} from "./broadcast";
+export {
+	createTypedBroadcastEvent as TypedBroadcastEvent,
 	TypedBroadcastEventError,
 } from "./broadcast-event";
 export { TypedEvent, TypedEventError } from "./events";
-export { TypedMessage, TypedMessageError } from "./message";
+export {
+	createTypedMessage as TypedMessage,
+	TypedMessageError,
+} from "./message";

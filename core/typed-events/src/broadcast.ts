@@ -1,85 +1,64 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
-import { validate, ValidatorError } from "./utils";
-
-export class TypedBroadcastChannel<
-	Name extends string,
-	EventMap extends Record<string, StandardSchemaV1> & { name?: never },
-> {
-	events: EventMap;
-	name: Name;
-
-	get channel() {
-		if (!this.#channel) {
-			this.#channel = new BroadcastChannel(this.name);
-		}
-		return this.#channel;
-	}
-
-	get id() {
-		if (!this.#id) this.#id = crypto.randomUUID();
-		return this.#id;
-	}
-
-	#channel?: BroadcastChannel;
-	#id?: ReturnType<typeof crypto.randomUUID>;
-
-	constructor(name: Name, events: EventMap) {
-		this.name = name;
-		this.events = events;
-	}
-
-	dispatch<Event extends keyof EventMap>(
-		name: Event,
-		message: object & StandardSchemaV1.InferInput<EventMap[Event]>,
-	) {
-		this.#validate(name, message, () => {
-			this.channel.postMessage({ ...message, id: this.id, name });
-		});
-	}
-
-	listen<
-		Event extends keyof EventMap,
-		Input extends Record<"id" | "name", string> &
-			StandardSchemaV1.InferInput<EventMap[Event]>,
-	>(
-		event: Event,
-		callback: (payload: {
-			data: Input;
-			isSelf: boolean;
-			message: MessageEvent<Input>;
-		}) => void,
-	) {
-		const listener = (message: MessageEvent<Input>) => {
-			if (message.data.name !== event) return;
-
-			this.#validate(event, message.data, () => {
-				const isSelf = message.data.id === this.id;
-				callback({ data: message.data, isSelf, message });
-			});
-		};
-		this.channel.addEventListener("message", listener);
-		return () => this.channel.removeEventListener("message", listener);
-	}
-
-	#validate<
-		Event extends keyof EventMap,
-		Input extends StandardSchemaV1.InferInput<EventMap[Event]>,
-	>(event: Event, message: Input, callback: () => void) {
-		validate({
-			callback,
-			data: message,
-			onerror: (issues) => {
-				throw new TypedBroadcastChannelError(this.id, issues);
-			},
-			schema: this.events[event],
-			source: "TypedBroadcastChannel",
-		});
-	}
-}
+import { Id, validate, ValidatorError, ValidatorMap } from "./utils";
 
 export class TypedBroadcastChannelError extends ValidatorError {
 	constructor(id: string, issues: readonly StandardSchemaV1.Issue[]) {
 		super("TypedBroadcastChannel", id, issues);
 	}
+}
+
+export function createTypedBroadcastChannel<
+	Map extends Record<string, StandardSchemaV1>,
+>(name: string, map: Map) {
+	let _id: Id | null = null;
+	let _channel: BroadcastChannel | null = null;
+
+	function _validate<
+		Event extends keyof Map,
+		Input extends StandardSchemaV1.InferInput<Map[Event]>,
+	>(event: Event, message: Input, callback: () => void) {
+		validate({
+			callback,
+			data: message,
+			onerror: (issues) => {
+				throw new TypedBroadcastChannelError(String(_id), issues);
+			},
+			schema: map[event],
+			source: "TypedBroadcastChannel",
+		});
+	}
+
+	return {
+		get channel() {
+			if (!_channel) _channel = new BroadcastChannel(name);
+			return _channel;
+		},
+		dispatch(name, input) {
+			_validate(name, input, () => {
+				this.channel.postMessage({ ...input, id: this.id, name });
+			});
+		},
+		get id() {
+			if (!_id) _id = crypto.randomUUID();
+			return _id;
+		},
+		listen(name, callback) {
+			const listener = (message: MessageEvent) => {
+				if (message.data.name !== name) return;
+
+				_validate(name, message.data, () => {
+					callback({
+						data: message.data,
+						raw: message,
+						type: "message",
+					});
+				});
+			};
+			this.channel.addEventListener("message", listener);
+			return () => this.channel.removeEventListener("message", listener);
+		},
+		map,
+		name,
+	} satisfies ValidatorMap<Map> & { channel: BroadcastChannel; id: Id };
 }

@@ -30,7 +30,7 @@ export function useListener<
 	React.useEffect(() => {
 		const cleanup = event.listen(listener);
 		return () => cleanup();
-	}, []);
+	}, [event, listener]);
 }
 
 /**
@@ -69,5 +69,5 @@ export function useListeners<
 		return () => {
 			for (const cleanup of cleanups) cleanup();
 		};
-	}, []);
+	}, [map, listeners]);
 }

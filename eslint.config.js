@@ -3,7 +3,9 @@ import gitignore from "eslint-config-flat-gitignore";
 import prettier from "eslint-config-prettier";
 import eslintPluginAstro from "eslint-plugin-astro";
 import perfectionist from "eslint-plugin-perfectionist";
+import eslintPluginReactHooks from "eslint-plugin-react-hooks";
 import storybook from "eslint-plugin-storybook";
+import testingLibrary from "eslint-plugin-testing-library";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -22,8 +24,13 @@ const configs = [
 	...tseslint.configs.recommended,
 	...eslintPluginAstro.configs.recommended,
 	...eslintPluginAstro.configs["jsx-a11y-strict"],
+	eslintPluginReactHooks.configs.flat.recommended,
 	perfectionist.configs["recommended-natural"],
 	prettier,
+	{
+		files: ["**/*.test.tsx", "**/*.test.jsx"],
+		...testingLibrary.configs["flat/react"],
+	},
 	{
 		rules: {
 			"@typescript-eslint/ban-ts-comment": "off",

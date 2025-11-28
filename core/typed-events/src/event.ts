@@ -8,16 +8,12 @@ export class TypedEventError extends ValidatorError {
 	}
 }
 
-export function createEvent<
-	Name extends Restrict<string, ForbiddenEvents>,
-	Schema extends StandardSchemaV1,
-	ForbiddenEvents = keyof DocumentEventMap,
-	Detail = StandardSchemaV1.InferInput<Schema>,
->(
-	name: Name,
+export function createEvent<Schema extends StandardSchemaV1>(
+	name: Restrict<string, keyof DocumentEventMap>,
 	schema: Schema,
 	opts: { silenceAsyncWarning?: boolean; target?: EventTarget } = {},
 ) {
+	type Detail = StandardSchemaV1.InferInput<Schema>;
 	let _target: EventTarget | null = null;
 
 	function _validate(callback: () => void, detail: Detail) {

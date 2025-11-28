@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 3.0.0
+
+### Major Changes
+
+- f7c84a6: updated broadcast api and added message class
+
 ## 2.1.1
 
 ### Patch Changes

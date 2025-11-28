@@ -50,7 +50,7 @@ function EventComponent() {
 	});
 
 	useListeners(message, {
-		toggle({ raw: message, type }) {
+		toggle({ raw: message }) {
 			console.info(message.origin);
 		},
 		update(payload) {

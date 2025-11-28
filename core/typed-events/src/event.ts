@@ -24,7 +24,7 @@ export function createEvent<Schema extends StandardSchemaV1>(
 				throw new TypedEventError(name, issues);
 			},
 			schema,
-			source: "TypedMessage",
+			source: "TypedEvent",
 			warnOnceCondition: !!opts.silenceAsyncWarning,
 		});
 	}

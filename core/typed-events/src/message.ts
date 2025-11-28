@@ -4,7 +4,7 @@ import { validate, ValidatorError, type ValidatorMap } from "@/utils";
 
 export class TypedMessageError extends ValidatorError {
 	constructor(scope: string, issues: readonly StandardSchemaV1.Issue[]) {
-		super("TypedMessageError", scope, issues);
+		super("TypedMessage", scope, issues);
 	}
 }
 
@@ -37,7 +37,7 @@ export function createMessage<Map extends Record<string, StandardSchemaV1>>(
 				const id = _scopeName(name);
 				const data = { ...input, id };
 
-				return this.window.postMessage(data, this.window.origin);
+				this.window.postMessage(data, this.window.origin);
 			});
 		},
 		listen(name, callback) {

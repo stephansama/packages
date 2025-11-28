@@ -16,6 +16,8 @@ export function createBroadcastChannel<
 	let _id: Id | null = null;
 	let _channel: BroadcastChannel | null = null;
 
+	const getId = () => (_id ??= crypto.randomUUID());
+
 	function _validate<
 		Event extends keyof Map,
 		Input extends StandardSchemaV1.InferInput<Map[Event]>,
@@ -24,7 +26,7 @@ export function createBroadcastChannel<
 			callback,
 			data: message,
 			onerror: (issues) => {
-				throw new TypedBroadcastChannelError(String(_id), issues);
+				throw new TypedBroadcastChannelError(String(getId()), issues);
 			},
 			schema: map[event],
 			source: "TypedBroadcastChannel",
@@ -41,7 +43,7 @@ export function createBroadcastChannel<
 			});
 		},
 		get id() {
-			return (_id ??= crypto.randomUUID());
+			return getId();
 		},
 		listen(name, callback) {
 			const listener = (message: MessageEvent) => {

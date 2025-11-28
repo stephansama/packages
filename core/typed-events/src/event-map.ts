@@ -27,7 +27,7 @@ export function createEventMap<Map extends Record<string, StandardSchemaV1>>(
 				throw new TypedEventMapError(_scopeEvent(event), issues);
 			},
 			schema: map[event],
-			source: "TypedBroadcastChannel",
+			source: "TypedEventMap",
 		});
 	}
 

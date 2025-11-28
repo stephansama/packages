@@ -18,6 +18,7 @@ export function createBroadcastEvent<
 	let _target: EventTarget | null = null;
 
 	const _scopeEvent = (event: string) => [name, event].join(":");
+	const getId = () => (_id ??= crypto.randomUUID());
 
 	function _validate<
 		Event extends keyof Map,
@@ -27,7 +28,7 @@ export function createBroadcastEvent<
 			callback,
 			data: payload,
 			onerror: (issues) => {
-				throw new TypedBroadcastEventError(String(_id), issues);
+				throw new TypedBroadcastEventError(String(getId()), issues);
 			},
 			schema: map[event],
 			source: "TypedBroadcastEvent",
@@ -50,7 +51,7 @@ export function createBroadcastEvent<
 			});
 		},
 		get id() {
-			return (_id ??= crypto.randomUUID());
+			return getId();
 		},
 		listen(name, callback) {
 			const eventName = _scopeEvent(name);

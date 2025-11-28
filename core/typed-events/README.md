@@ -56,8 +56,8 @@ export function listenForAnimationEvent() {
   const item = document.getElementById("item");
 
   const cleanup = customAnimationEvent.listen((event) => {
-    item.style.x = event.detail.x;
-    item.style.y = event.detail.y;
+    item.style.x = event.data.x;
+    item.style.y = event.data.y;
   });
 
   return () => cleanup();

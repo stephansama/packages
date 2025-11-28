@@ -50,6 +50,7 @@ export function createBroadcastChannel<
 			const listener = (message: MessageEvent) => {
 				const { data } = message;
 				if (data.name !== name) return;
+				if (data.id === this.id) return;
 
 				_validate(name, data, () => {
 					callback({ data, raw: message, type: "message" });

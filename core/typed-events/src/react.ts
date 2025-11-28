@@ -5,15 +5,28 @@ import * as React from "react";
 import type {
 	ListenerCallback,
 	RawEventMap,
+	Validator,
 	ValidatorMap,
 } from "@/utils/types";
 
-import { createEvent } from "./event";
-
-export function useListener<Event extends ReturnType<typeof createEvent>>(
-	event: Event,
-	listener: Parameters<Event["listen"]>[0],
-) {
+export function useListener<
+	Name extends string,
+	Input extends Validator<Name, Schema, Keys>,
+	Schema extends StandardSchemaV1 = Input extends Validator<
+		Name,
+		infer S,
+		any
+	>
+		? S
+		: never,
+	Keys extends keyof RawEventMap = Input extends Validator<
+		Name,
+		Schema,
+		infer K
+	>
+		? K
+		: never,
+>(event: Input, listener: Parameters<Input["listen"]>[0]) {
 	React.useEffect(() => {
 		const cleanup = event.listen(listener);
 		return () => cleanup();

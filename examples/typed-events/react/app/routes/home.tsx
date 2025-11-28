@@ -60,7 +60,7 @@ function EventComponent() {
 
 	useListener(event, (e) => {
 		console.info("hello from typed event");
-		setCount(e.detail.current);
+		setCount(e.data.current);
 	});
 
 	function handleClick() {

@@ -15,6 +15,25 @@ export type Restrict<T extends string, Forbidden> = T extends Forbidden
 	? never
 	: T;
 
+export interface Validator<
+	Name extends string,
+	Schema extends StandardSchemaV1,
+	EventTypeKeys extends keyof RawEventMap,
+	DispatchOpts = {},
+> {
+	dispatch<Input extends object & StandardSchemaV1.InferInput<Schema>>(
+		input: Input,
+		opts?: DispatchOpts,
+	): void;
+
+	listen<Input extends object & StandardSchemaV1.InferInput<Schema>>(
+		callback: ListenerCallback<Input, EventTypeKeys>,
+	): () => void;
+
+	name: Name;
+	schema: Schema;
+}
+
 export interface ValidatorMap<
 	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,

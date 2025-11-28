@@ -38,9 +38,9 @@ create a typed [`CustomEvent`](https://developer.mozilla.org/en-US/docs/Web/API/
 using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
 
 ```javascript
-import { TypedEvent } from "@stephansama/typed-events";
+import { createEvent } from "@stephansama/typed-events";
 
-export const customAnimationEvent = new TypedEvent(
+export const customAnimationEvent = createEvent(
   "custom-animation-event",
   z.object({
     x: z.number(),
@@ -88,9 +88,9 @@ create a typed [`BroadcastChannel`](https://developer.mozilla.org/en-US/docs/Web
 using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
 
 ```javascript
-import { createTypedBroadcastChannel } from "@stephansama/typed-events";
+import { createBroadcastChannel } from "@stephansama/typed-events";
 
-export const channel = createTypedBroadcastChannel("broadcaster", {
+export const channel = createBroadcastChannel("broadcaster", {
   reset: z.object({}),
   update: z.object({ value: z.number() }),
 });

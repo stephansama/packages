@@ -52,6 +52,7 @@ export function createEvent<
 			this.target.addEventListener(name, listener);
 			return () => this.target.removeEventListener(name, listener);
 		},
+		name,
 		get target() {
 			return (_target ??= document);
 		},

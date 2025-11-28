@@ -32,6 +32,10 @@
 			"import": "./dist/errors.js",
 			"require": "./dist/errors.cjs"
 		},
+		"./react": {
+			"import": "./dist/react.js",
+			"require": "./dist/react.cjs"
+		},
 		"./package.json": "./package.json"
 	},
 	"main": "./dist/index.cjs",
@@ -49,9 +53,18 @@
 		"@standard-schema/spec": "^1.0.0"
 	},
 	"devDependencies": {
+		"@types/react": "catalog:",
+		"react": "catalog:",
 		"tsdown": "catalog:",
 		"vite-tsconfig-paths": "catalog:",
 		"zod": "catalog:"
+	},
+	"peerDependencies": {
+		"@types/react": "catalog:",
+		"react": "catalog:"
+	},
+	"optionalDependencies": {
+		"react": "catalog:"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {

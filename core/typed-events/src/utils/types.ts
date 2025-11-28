@@ -12,10 +12,10 @@ export interface ValidatorMap<
 	EventMap extends Record<string, StandardSchemaV1>,
 > {
 	dispatch<
-		EventName extends keyof EventMap & string,
-		Input extends object & StandardSchemaV1.InferInput<EventMap[EventName]>,
+		Name extends keyof EventMap & string,
+		Input extends object & StandardSchemaV1.InferInput<EventMap[Name]>,
 	>(
-		name: EventName,
+		name: Name,
 		input: Input,
 	): void;
 
@@ -25,7 +25,7 @@ export interface ValidatorMap<
 	>(
 		name: Event,
 		callback: ListenerCallback<Input>,
-	): void;
+	): () => void;
 
 	map: EventMap;
 	name: string;

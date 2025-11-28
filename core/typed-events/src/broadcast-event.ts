@@ -76,7 +76,6 @@ export function createBroadcastEvent<
 
 			this.target.addEventListener(eventName, eventListener);
 			this.channel.addEventListener("message", channelListener);
-
 			return () => {
 				this.target.removeEventListener(eventName, eventListener);
 				this.channel.removeEventListener("message", channelListener);

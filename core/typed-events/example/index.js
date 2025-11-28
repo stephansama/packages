@@ -6,9 +6,9 @@ import * as z from "zod";
 // ### TypedEvent
 // create a typed [`CustomEvent`](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent)
 // using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
-import { TypedEvent } from "../dist/index.cjs";
+import { createEvent } from "../dist/index.cjs";
 
-export const customAnimationEvent = new TypedEvent(
+export const customAnimationEvent = createEvent(
 	"custom-animation-event",
 	z.object({
 		x: z.number(),
@@ -46,9 +46,9 @@ export function dispatchEvent() {
 // ### TypedBroadcastChannel
 // create a typed [`BroadcastChannel`](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/BroadcastChannel)
 // using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
-import { createTypedBroadcastChannel } from "../dist/index.cjs";
+import { createBroadcastChannel } from "../dist/index.cjs";
 
-export const channel = createTypedBroadcastChannel("broadcaster", {
+export const channel = createBroadcastChannel("broadcaster", {
 	reset: z.object({}),
 	update: z.object({ value: z.number() }),
 });

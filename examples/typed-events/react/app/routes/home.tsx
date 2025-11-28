@@ -1,8 +1,12 @@
 import {
 	createBroadcastChannel,
+	createEvent,
 	createMessage,
-	TypedEvent,
 } from "@stephansama/typed-events";
+import {
+	useEventListener,
+	useListenerMap,
+} from "@stephansama/typed-events/react";
 import * as React from "react";
 import * as yup from "yup";
 
@@ -23,7 +27,7 @@ const channel = createBroadcastChannel("typed:controller", {
 	}),
 });
 
-const event = new TypedEvent(
+const event = createEvent(
 	"typed:event",
 	yup.object({
 		current: yup.number().required(),
@@ -41,34 +45,28 @@ function EventComponent() {
 	const [count, setCount] = React.useState(0);
 	const inputRef = React.useRef<HTMLInputElement>(null);
 
-	React.useEffect(() => {
-		const cleanupChannel = channel.listen("update", (event) => {
+	useListenerMap(channel, {
+		update(payload) {
 			console.info("hello from typed broadcast channel");
-			setCount(event.data.current);
-		});
+			setCount(payload.data.current);
+		},
+	});
 
-		const cleanupEvent = event.listen((event) => {
-			console.info("hello from typed event");
-			setCount(event.detail.current);
-		});
-
-		const cleanupMessage = message.listen("update", ({ data }) => {
-			setCount(data.value);
-		});
-
-		const cleanupCrossOrigin = message.listen("toggle", ({ raw: message }) => {
+	useListenerMap(message, {
+		toggle({ raw: message }) {
 			if (message instanceof MessageEvent) {
 				console.info(message.origin);
 			}
-		});
+		},
+		update(payload) {
+			setCount(payload.data.value);
+		},
+	});
 
-		return () => {
-			cleanupEvent();
-			cleanupChannel();
-			cleanupMessage();
-			cleanupCrossOrigin();
-		};
-	}, []);
+	useEventListener(event, (e) => {
+		console.info("hello from typed event");
+		setCount(e.detail.current);
+	});
 
 	function handleClick() {
 		const current = inputRef?.current?.value

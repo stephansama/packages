@@ -1,8 +1,8 @@
 import {
 	createBroadcastChannel,
 	createBroadcastEvent,
+	createEvent,
 	createMessage,
-	TypedEvent,
 } from "@stephansama/typed-events";
 import * as z from "zod/v4/mini";
 
@@ -12,7 +12,7 @@ const broadcast = createBroadcastChannel("update-controller", {
 	}),
 });
 
-const event = new TypedEvent(
+const event = createEvent(
 	"update-counter",
 	z.object({
 		current: z.number(),
@@ -52,7 +52,7 @@ export function setupCounter(element) {
 		setCounter(e.detail.current);
 	});
 
-	broadcastEvent.listen("set", ({ data, type }) => {
+	broadcastEvent.listen("set", ({ data, raw, type }) => {
 		console.log("setting ", type);
 		theme.textContent = data.theme;
 	});

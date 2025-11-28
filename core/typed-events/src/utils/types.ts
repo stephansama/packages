@@ -2,10 +2,11 @@ import type { StandardSchemaV1 } from "@standard-schema/spec";
 
 export type { Id } from "./id";
 
-export type ListenerCallback<Input> = _ListenerCallback<
-	Input,
-	keyof RawEventMap<Input>
->;
+export type ListenerCallback<Input> = (payload: AnyPayload<Input>) => void;
+
+export type Restrict<T extends string, Forbidden> = T extends Forbidden
+	? never
+	: T;
 
 export interface ValidatorMap<
 	EventMap extends Record<string, StandardSchemaV1>,
@@ -30,11 +31,15 @@ export interface ValidatorMap<
 	name: string;
 }
 
-type _ListenerCallback<
-	Input,
-	Type extends keyof RawEventMap<Input>,
-	Payload = { data: Input; raw: RawEvent<Type, Input>; type: Type },
-> = (payload: Payload) => void;
+type AnyPayload<T> = {
+	[K in keyof RawEventMap<T>]: Payload<T, K>;
+}[keyof RawEventMap<T>];
+
+type Payload<Input, E extends keyof RawEventMap<Input>> = {
+	data: Input;
+	raw: RawEvent<E, Input>;
+	type: E;
+};
 
 type RawEvent<
 	Type extends keyof RawEventMap<Shape>,

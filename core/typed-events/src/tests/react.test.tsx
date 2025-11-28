@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { expect, it, vi } from "vitest";
 import * as z from "zod";
 
@@ -25,9 +25,9 @@ it("sets up and listens for the event listener", () => {
 	const addEventListenerSpy = vi.spyOn(event.target, "addEventListener");
 	const dispatchEventSpy = vi.spyOn(event.target, "dispatchEvent");
 	const infoSpy = vi.spyOn(console, "info");
-	const result = render(<ExampleEventInteraction />);
+	render(<ExampleEventInteraction />);
 
-	const button = result.getByRole("button");
+	const button = screen.getByRole("button");
 
 	expect(addEventListenerSpy).toHaveBeenCalled();
 	expect(dispatchEventSpy).not.toHaveBeenCalled();
@@ -77,17 +77,17 @@ it("sets up the event listener map", () => {
 	const addEventListenerSpy = vi.spyOn(eventMap.target, "addEventListener");
 	const dispatchEventSpy = vi.spyOn(eventMap.target, "dispatchEvent");
 	const infoSpy = vi.spyOn(console, "info");
-	const result = render(<ExampleEventMapInteraction />);
+	render(<ExampleEventMapInteraction />);
 
-	const setDarkButton = result.getByRole("button", {
+	const setDarkButton = screen.getByRole("button", {
 		name: /set dark/i,
 	});
 
-	const setLightButton = result.getByRole("button", {
+	const setLightButton = screen.getByRole("button", {
 		name: /set light/i,
 	});
 
-	const toggleButton = result.getByRole("button", {
+	const toggleButton = screen.getByRole("button", {
 		name: /toggle/i,
 	});
 

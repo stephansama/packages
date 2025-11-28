@@ -1,136 +1,105 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
-import { validate, ValidatorError } from "./utils";
+import type { Id, ValidatorMap } from "@/utils/types";
 
-type ReservedProperties = "id" | "name";
-
-export class TypedBroadcastEvent<
-	Scope extends string,
-	EventMap extends Record<string, StandardSchemaV1> & { name?: never },
-> {
-	events: EventMap;
-	scope: Scope;
-
-	get channel() {
-		if (!this.#channel) {
-			this.#channel = new BroadcastChannel(this.scope);
-		}
-		return this.#channel;
-	}
-
-	get id() {
-		if (!this.#id) this.#id = crypto.randomUUID();
-		return this.#id;
-	}
-
-	get target() {
-		return this.#target || document;
-	}
-
-	set target(target: EventTarget) {
-		if (!target) {
-			throw new Error(
-				"tried to set TypedBroadcastEvent target to invalid target",
-			);
-		}
-
-		this.#target = target;
-	}
-
-	#channel?: BroadcastChannel;
-	#id?: ReturnType<typeof crypto.randomUUID>;
-	#target?: EventTarget;
-
-	constructor(scope: Scope, events: EventMap) {
-		this.scope = scope;
-		this.events = events;
-	}
-
-	dispatch<
-		EventName extends keyof EventMap & string,
-		Input extends StandardSchemaV1.InferInput<EventMap[EventName]>,
-	>(name: EventName, input: Input & object) {
-		this.#validate(name, input, () => {
-			const payload = { ...input, id: this.id, name };
-			const event = new CustomEvent<Input>(this.#scopeEvent(name), {
-				detail: payload,
-			});
-			this.target.dispatchEvent(event);
-			this.channel.postMessage(payload);
-		});
-	}
-
-	getPayload<
-		EventName extends keyof EventMap & string,
-		Input extends Record<ReservedProperties, string> &
-			StandardSchemaV1.InferInput<EventMap[EventName]>,
-	>(event: CustomEvent<Input> | MessageEvent<Input>) {
-		if (event instanceof CustomEvent) {
-			return event.detail;
-		}
-
-		if (event instanceof MessageEvent) {
-			return event.data;
-		}
-
-		throw new Error("failed to parse payload");
-	}
-
-	listen<
-		EventName extends keyof EventMap & string,
-		Input extends Record<ReservedProperties, string> &
-			StandardSchemaV1.InferInput<EventMap[EventName]>,
-	>(
-		name: EventName,
-		callback: (event: CustomEvent<Input> | MessageEvent<Input>) => void,
-	) {
-		const eventName = this.#scopeEvent(name);
-
-		const eventListener = (event: Event) => {
-			if (event instanceof CustomEvent && event.type === eventName) {
-				const validateCallback = () => callback(event);
-				this.#validate(name, event.detail, validateCallback);
-			}
-		};
-
-		const channelListener = (message: MessageEvent<Input>) => {
-			if (message.data.name === name && message.data.id !== this.id) {
-				const validateCallback = () => callback(message);
-				this.#validate(name, message.data, validateCallback);
-			}
-		};
-
-		this.target.addEventListener(eventName, eventListener);
-		this.channel.addEventListener("message", channelListener);
-
-		return () => {
-			this.target.removeEventListener(eventName, eventListener);
-			this.channel.removeEventListener("message", channelListener);
-		};
-	}
-
-	#scopeEvent(event: string) {
-		return [this.scope, event].join(":");
-	}
-
-	#validate<
-		Event extends keyof EventMap,
-		Input extends StandardSchemaV1.InferInput<EventMap[Event]>,
-	>(event: Event, payload: Input, callback: () => void) {
-		validate({
-			callback,
-			data: payload,
-			onerror: (issues) => {
-				throw new TypedBroadcastEventError(this.id, issues);
-			},
-			schema: this.events[event],
-			source: "TypedBroadcastEvent",
-		});
-	}
-}
+import { validate, ValidatorError } from "@/utils";
 
 export class TypedBroadcastEventError extends ValidatorError {
 	constructor(id: string, issues: readonly StandardSchemaV1.Issue[]) {
 		super("TypedBroadcastEvent", id, issues);
 	}
+}
+
+export function createBroadcastEvent<
+	Name extends string,
+	Map extends Record<string, StandardSchemaV1>,
+>(name: Name, map: Map) {
+	let _channel: BroadcastChannel | null = null;
+	let _id: Id | null = null;
+	let _target: EventTarget | null = null;
+
+	const _scopeEvent = (event: string) => [name, event].join(":");
+	const getId = () => (_id ??= crypto.randomUUID());
+
+	function _validate<
+		Event extends keyof Map,
+		Input extends StandardSchemaV1.InferInput<Map[Event]>,
+	>(event: Event, payload: Input, callback: () => void) {
+		validate({
+			callback,
+			data: payload,
+			onerror: (issues) => {
+				throw new TypedBroadcastEventError(String(getId()), issues);
+			},
+			schema: map[event],
+			source: "TypedBroadcastEvent",
+		});
+	}
+
+	return {
+		get channel() {
+			return (_channel ??= new BroadcastChannel(name));
+		},
+		dispatch(name, input) {
+			_validate(name, input, () => {
+				const payload = { ...input, id: this.id, name };
+				const eventName = _scopeEvent(name);
+				const event = new CustomEvent(eventName, {
+					detail: payload,
+				});
+				this.target.dispatchEvent(event);
+				this.channel.postMessage(payload);
+			});
+		},
+		get id() {
+			return getId();
+		},
+		listen(name, callback) {
+			const eventName = _scopeEvent(name);
+
+			const eventListener = (event: Event) => {
+				if (!(event instanceof CustomEvent)) return;
+				if (event.type !== eventName) return;
+
+				const validateCallback = () =>
+					callback({ data: event.detail, raw: event, type: "event" });
+				_validate(name, event.detail, validateCallback);
+			};
+
+			const channelListener = (message: MessageEvent) => {
+				const { data } = message;
+				if (data.name !== name) return;
+				if (data.id === this.id) return;
+
+				const validateCallback = () =>
+					callback({ data, raw: message, type: "message" });
+				_validate(name, message.data, validateCallback);
+			};
+
+			this.target.addEventListener(eventName, eventListener);
+			this.channel.addEventListener("message", channelListener);
+			return () => {
+				this.target.removeEventListener(eventName, eventListener);
+				this.channel.removeEventListener("message", channelListener);
+			};
+		},
+		map,
+		name,
+		get target() {
+			return (_target ??= document);
+		},
+		set target(target: EventTarget) {
+			if (!target) {
+				throw new Error(
+					"tried to set TypedBroadcastEvent target to invalid target",
+				);
+			}
+
+			_target = target;
+		},
+	} satisfies ValidatorMap<Name, Map, "event" | "message"> & {
+		channel: BroadcastChannel;
+		id: Id;
+		target: EventTarget;
+	};
 }

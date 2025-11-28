@@ -1,6 +1,5 @@
-export { TypedBroadcastChannel, TypedBroadcastChannelError } from "./broadcast";
-export {
-	TypedBroadcastEvent,
-	TypedBroadcastEventError,
-} from "./broadcast-event";
-export { TypedEvent, TypedEventError } from "./events";
+export { createBroadcastChannel } from "./broadcast";
+export { createBroadcastEvent } from "./broadcast-event";
+export { createEvent } from "./event";
+export { createEventMap } from "./event-map";
+export { createMessage } from "./message";

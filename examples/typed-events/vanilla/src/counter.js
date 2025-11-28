@@ -1,26 +1,34 @@
 import {
-	TypedBroadcastChannel,
-	TypedBroadcastEvent,
-	TypedEvent,
+	createBroadcastChannel,
+	createBroadcastEvent,
+	createEvent,
+	createMessage,
 } from "@stephansama/typed-events";
 import * as z from "zod/v4/mini";
 
-const broadcast = new TypedBroadcastChannel("update-controller", {
+const broadcast = createBroadcastChannel("update-controller", {
 	update: z.object({
 		current: z.number(),
 	}),
 });
 
-const event = new TypedEvent(
+const event = createEvent(
 	"update-counter",
 	z.object({
 		current: z.number(),
 	}),
 );
 
-const broadcastEvent = new TypedBroadcastEvent("theme", {
+const broadcastEvent = createBroadcastEvent("theme", {
 	set: z.object({ theme: z.enum(["light", "dark"]) }),
 	toggle: z.object({}),
+});
+
+const message = createMessage("crossorigin", {
+	toggle: z.object({}),
+	update: z.object({
+		value: z.number(),
+	}),
 });
 
 export function setupCounter(element) {
@@ -35,17 +43,18 @@ export function setupCounter(element) {
 		element.innerHTML = `count is ${counter}`;
 	}
 
-	broadcast.listen("update", (message) => {
-		setCounter(message.data.current);
+	broadcast.listen("update", ({ data, type }) => {
+		console.log("setting ", type);
+		setCounter(data.current);
 	});
 
 	event.listen((e) => {
 		setCounter(e.detail.current);
 	});
 
-	broadcastEvent.listen("set", (e) => {
-		const payload = broadcastEvent.getPayload(e);
-		theme.textContent = payload.theme;
+	broadcastEvent.listen("set", ({ data, raw, type }) => {
+		console.log("setting ", type);
+		theme.textContent = data.theme;
 	});
 
 	broadcastEvent.listen("toggle", () => {
@@ -64,10 +73,38 @@ export function setupCounter(element) {
 		broadcastEvent.dispatch("set", { theme: "light" });
 	});
 
+	message.listen("toggle", () => {
+		const img = document.querySelector("img");
+
+		img.src =
+			img.src !== "https://api.iconify.design/logos:neovim.svg"
+				? "https://api.iconify.design/logos:neovim.svg"
+				: "https://api.iconify.design/logos:vitejs.svg";
+	});
+
+	message.window = window.parent;
+
+	const img = document.querySelector("img");
+
+	img.addEventListener("click", () => {
+		message.dispatch(
+			"update",
+			{
+				value: 67,
+			},
+			{ origin: "http://localhost:5173", window: window.parent },
+		);
+	});
+
 	element.addEventListener("click", () => {
 		const next = counter + 1;
 		event.dispatch({ current: next });
 		broadcast.dispatch("update", { current: next });
+		message.dispatch(
+			"toggle",
+			{},
+			{ origin: "http://localhost:5173", window: window.parent },
+		);
 	});
 
 	setCounter(0);

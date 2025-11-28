@@ -1,4 +1,9 @@
-import { TypedBroadcastChannel, TypedEvent } from "@stephansama/typed-events";
+import {
+	createBroadcastChannel,
+	createEvent,
+	createMessage,
+} from "@stephansama/typed-events";
+import { useListener, useListeners } from "@stephansama/typed-events/react";
 import * as React from "react";
 import * as yup from "yup";
 
@@ -13,39 +18,50 @@ export function meta() {
 	];
 }
 
-const channel = new TypedBroadcastChannel("typed:controller", {
+const channel = createBroadcastChannel("typed:controller", {
 	update: yup.object({
 		current: yup.number().required(),
 	}),
 });
 
-const event = new TypedEvent(
+const event = createEvent(
 	"typed:event",
 	yup.object({
 		current: yup.number().required(),
 	}),
 );
 
+const message = createMessage("crossorigin", {
+	toggle: yup.object({}),
+	update: yup.object({
+		value: yup.number().required(),
+	}),
+});
+
 function EventComponent() {
 	const [count, setCount] = React.useState(0);
 	const inputRef = React.useRef<HTMLInputElement>(null);
 
-	React.useEffect(() => {
-		const cleanupChannel = channel.listen("update", (event) => {
+	useListeners(channel, {
+		update(payload) {
 			console.info("hello from typed broadcast channel");
-			setCount(event.data.current);
-		});
+			setCount(payload.data.current);
+		},
+	});
 
-		const cleanupEvent = event.listen((event) => {
-			console.info("hello from typed event");
-			setCount(event.detail.current);
-		});
+	useListeners(message, {
+		toggle({ raw: message }) {
+			console.info(message.origin);
+		},
+		update(payload) {
+			setCount(payload.data.value);
+		},
+	});
 
-		return () => {
-			cleanupEvent();
-			cleanupChannel();
-		};
-	}, []);
+	useListener(event, (e) => {
+		console.info("hello from typed event");
+		setCount(e.data.current);
+	});
 
 	function handleClick() {
 		const current = inputRef?.current?.value
@@ -86,6 +102,22 @@ function EventComponent() {
 			>
 				test {event.name} event
 			</button>
+			<button onClick={() => message.dispatch("update", { value: count + 1 })}>
+				test message event
+			</button>
+			<button
+				onClick={function () {
+					const iframe = document.querySelector("iframe");
+
+					message.dispatch(
+						"toggle",
+						{},
+						{ origin: iframe!.src, window: iframe!.contentWindow! },
+					);
+				}}
+			>
+				test crossorigin message event
+			</button>
 			<div className="flex gap-2">
 				<input
 					className="rounded p-2 ring-1 ring-white/10"
@@ -102,6 +134,7 @@ function EventComponent() {
 				</button>
 			</div>
 			<span>current count: {count}</span>
+			<iframe height={500} src="http://localhost:5174" width={500} />
 		</div>
 	);
 }

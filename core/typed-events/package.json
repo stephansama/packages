@@ -25,12 +25,22 @@
 	"type": "module",
 	"exports": {
 		".": {
-			"require": "./dist/index.cjs",
-			"default": "./dist/index.js"
-		}
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./errors": {
+			"import": "./dist/errors.js",
+			"require": "./dist/errors.cjs"
+		},
+		"./react": {
+			"import": "./dist/react.js",
+			"require": "./dist/react.cjs"
+		},
+		"./package.json": "./package.json"
 	},
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.cts",
 	"files": [
 		"./dist/"
 	],
@@ -43,8 +53,20 @@
 		"@standard-schema/spec": "^1.0.0"
 	},
 	"devDependencies": {
+		"@testing-library/jest-dom": "catalog:",
+		"@testing-library/react": "catalog:",
+		"@types/react": "catalog:",
+		"happy-dom": "catalog:",
+		"react": "catalog:",
 		"tsdown": "catalog:",
+		"vite-tsconfig-paths": "catalog:",
 		"zod": "catalog:"
+	},
+	"peerDependencies": {
+		"react": ">=18"
+	},
+	"optionalDependencies": {
+		"react": ">=18"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {

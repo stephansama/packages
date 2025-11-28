@@ -1,10 +1,10 @@
 import { expect, it, vi } from "vitest";
 import * as z from "zod";
 
-import { TypedEvent } from "./events";
+import { createEvent } from "@/event";
 
 it("dispatches an event with a valid event", () => {
-	const event = new TypedEvent("test", z.object({ shape: z.number() }));
+	const event = createEvent("test", z.object({ shape: z.number() }));
 
 	const dispatchEventSpy = vi.spyOn(document, "dispatchEvent");
 
@@ -14,7 +14,7 @@ it("dispatches an event with a valid event", () => {
 });
 
 it("prevents an event from being dispatched with an invalid event", () => {
-	const event = new TypedEvent("test", z.object({ shape: z.number() }));
+	const event = createEvent("test", z.object({ shape: z.number() }));
 
 	// @ts-expect-error
 	expect(() => event.dispatch({})).toThrowError();
@@ -22,7 +22,7 @@ it("prevents an event from being dispatched with an invalid event", () => {
 
 it("listens for an event when the detail is valid", () => {
 	const eventName = "test";
-	const event = new TypedEvent(eventName, z.object({ shape: z.number() }));
+	const event = createEvent(eventName, z.object({ shape: z.number() }));
 
 	const addEventListenerSpy = vi.spyOn(document, "addEventListener");
 	const consoleInfoSpy = vi.spyOn(console, "info");
@@ -39,7 +39,7 @@ it("listens for an event when the detail is valid", () => {
 
 it("warns when using an async validator", () => {
 	const eventName = "test";
-	const event = new TypedEvent(
+	const event = createEvent(
 		eventName,
 		z.promise(z.object({ shape: z.number() })),
 	);
@@ -59,7 +59,7 @@ it("warns when using an async validator", () => {
 
 it("does not warn when using an async validator when silenceAsyncWarning is true", () => {
 	const eventName = "test";
-	const event = new TypedEvent(
+	const event = createEvent(
 		eventName,
 		z.promise(z.object({ shape: z.number() })),
 		{ silenceAsyncWarning: true },

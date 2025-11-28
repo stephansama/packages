@@ -1,24 +1,22 @@
 import { expect, it, vi } from "vitest";
 import * as z from "zod";
 
-import { TypedBroadcastEvent } from "./broadcast-event";
+import { createEventMap } from "@/event-map";
 
-it("dispatches the channel message properly", () => {
-	const broadcast = new TypedBroadcastEvent("broadcast-channel", {
+it("dispatches the event map message properly", () => {
+	const broadcast = createEventMap("broadcast-channel", {
 		reset: z.object({}),
 		update: z.object({ value: z.number() }),
 	});
 
-	const postMessageSpy = vi.spyOn(broadcast.channel, "postMessage");
 	const dispatchEventSpy = vi.spyOn(broadcast.target, "dispatchEvent");
 
 	broadcast.dispatch("reset", {});
 
-	expect(postMessageSpy).toHaveBeenCalled();
 	expect(dispatchEventSpy).toHaveBeenCalled();
 });
 
-it("receives the message on the sender and receiver channels", async () => {
+it("receives the message", async () => {
 	const schema = {
 		reset: z.object({}),
 		update: z.object({ value: z.number() }),
@@ -26,10 +24,10 @@ it("receives the message on the sender and receiver channels", async () => {
 
 	const channelName = "broadcast-channel";
 
-	const firstChannel = new TypedBroadcastEvent(channelName, schema);
-	const secondChannel = new TypedBroadcastEvent(channelName, schema);
+	const firstChannel = createEventMap(channelName, schema);
+	const secondChannel = createEventMap(channelName, schema);
 
-	const postMessageSpy = vi.spyOn(firstChannel.channel, "postMessage");
+	const dispatchEventSpy = vi.spyOn(firstChannel.target, "dispatchEvent");
 
 	const firstCallback = vi.fn();
 	const secondCallback = vi.fn();
@@ -42,7 +40,7 @@ it("receives the message on the sender and receiver channels", async () => {
 	// wait for message delivery in mock
 	await new Promise((r) => setTimeout(r, 0));
 
-	expect(postMessageSpy).toHaveBeenCalled();
+	expect(dispatchEventSpy).toHaveBeenCalled();
 	expect(secondCallback).toHaveBeenCalled();
 	expect(firstCallback).toHaveBeenCalled();
 });

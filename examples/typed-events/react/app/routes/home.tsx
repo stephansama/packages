@@ -1,7 +1,7 @@
 import {
-	TypedBroadcastChannel,
+	createBroadcastChannel,
+	createMessage,
 	TypedEvent,
-	TypedMessage,
 } from "@stephansama/typed-events";
 import * as React from "react";
 import * as yup from "yup";
@@ -17,7 +17,7 @@ export function meta() {
 	];
 }
 
-const channel = new TypedBroadcastChannel("typed:controller", {
+const channel = createBroadcastChannel("typed:controller", {
 	update: yup.object({
 		current: yup.number().required(),
 	}),
@@ -30,7 +30,7 @@ const event = new TypedEvent(
 	}),
 );
 
-const message = new TypedMessage("crossorigin", {
+const message = createMessage("crossorigin", {
 	toggle: yup.object({}),
 	update: yup.object({
 		value: yup.number().required(),
@@ -56,8 +56,10 @@ function EventComponent() {
 			setCount(data.value);
 		});
 
-		const cleanupCrossOrigin = message.listen("toggle", ({ message }) => {
-			console.info(message.origin);
+		const cleanupCrossOrigin = message.listen("toggle", ({ raw: message }) => {
+			if (message instanceof MessageEvent) {
+				console.info(message.origin);
+			}
 		});
 
 		return () => {
@@ -118,12 +120,12 @@ function EventComponent() {
 			</button>
 			<button
 				onClick={function () {
-					const iframe = document.querySelector("iframe");
+					// const iframe = document.querySelector("iframe");
 
 					message.dispatch(
 						"toggle",
 						{},
-						{ origin: iframe!.src, window: iframe!.contentWindow! },
+						// { origin: iframe!.src, window: iframe!.contentWindow! },
 					);
 				}}
 			>

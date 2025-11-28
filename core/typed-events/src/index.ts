@@ -1,4 +1,4 @@
-export { createTypedBroadcastChannel } from "./broadcast";
-export { createTypedBroadcastEvent } from "./broadcast-event";
+export { createBroadcastChannel } from "./broadcast";
+export { createBroadcastEvent } from "./broadcast-event";
 export { TypedEvent } from "./event";
-export { createTypedMessage } from "./message";
+export { createMessage } from "./message";

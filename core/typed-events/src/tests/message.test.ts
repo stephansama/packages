@@ -1,10 +1,10 @@
 import { expect, it, vi } from "vitest";
 import * as z from "zod";
 
-import { createTypedMessage } from "@/message";
+import { createMessage } from "@/message";
 
 it("dispatches the message correctly", () => {
-	const message = createTypedMessage("test-message", {
+	const message = createMessage("test-message", {
 		toggle: z.object({}),
 		update: z.object({
 			value: z.number(),
@@ -22,7 +22,7 @@ it("dispatches the message correctly", () => {
 });
 
 it("receives the message correctly", async () => {
-	const message = createTypedMessage("test-message", {
+	const message = createMessage("test-message", {
 		toggle: z.object({}),
 		update: z.object({
 			value: z.number(),

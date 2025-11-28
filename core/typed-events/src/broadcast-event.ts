@@ -10,7 +10,7 @@ export class TypedBroadcastEventError extends ValidatorError {
 	}
 }
 
-export function createTypedBroadcastEvent<
+export function createBroadcastEvent<
 	Map extends Record<string, StandardSchemaV1>,
 >(name: string, map: Map) {
 	let _channel: BroadcastChannel | null = null;
@@ -59,9 +59,8 @@ export function createTypedBroadcastEvent<
 				if (!(event instanceof CustomEvent)) return;
 				if (event.type !== eventName) return;
 
-				const validateCallback = () => {
+				const validateCallback = () =>
 					callback({ data: event.detail, raw: event, type: "event" });
-				};
 				_validate(name, event.detail, validateCallback);
 			};
 
@@ -70,9 +69,8 @@ export function createTypedBroadcastEvent<
 				if (data.name !== name) return;
 				if (data.id === this.id) return;
 
-				const validateCallback = () => {
+				const validateCallback = () =>
 					callback({ data, raw: message, type: "message" });
-				};
 				_validate(name, message.data, validateCallback);
 			};
 

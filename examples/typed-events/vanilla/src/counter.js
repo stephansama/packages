@@ -1,12 +1,12 @@
 import {
-	createTypedBroadcastChannel,
-	createTypedBroadcastEvent,
-	createTypedMessage,
+	createBroadcastChannel,
+	createBroadcastEvent,
+	createMessage,
 	TypedEvent,
 } from "@stephansama/typed-events";
 import * as z from "zod/v4/mini";
 
-const broadcast = createTypedBroadcastChannel("update-controller", {
+const broadcast = createBroadcastChannel("update-controller", {
 	update: z.object({
 		current: z.number(),
 	}),
@@ -19,12 +19,12 @@ const event = new TypedEvent(
 	}),
 );
 
-const broadcastEvent = createTypedBroadcastEvent("theme", {
+const broadcastEvent = createBroadcastEvent("theme", {
 	set: z.object({ theme: z.enum(["light", "dark"]) }),
 	toggle: z.object({}),
 });
 
-const message = createTypedMessage("crossorigin", {
+const message = createMessage("crossorigin", {
 	toggle: z.object({}),
 	update: z.object({
 		value: z.number(),

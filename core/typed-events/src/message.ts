@@ -8,9 +8,10 @@ export class TypedMessageError extends ValidatorError {
 	}
 }
 
-export function createTypedMessage<
-	Map extends Record<string, StandardSchemaV1>,
->(name: string, map: Map) {
+export function createMessage<Map extends Record<string, StandardSchemaV1>>(
+	name: string,
+	map: Map,
+) {
 	let _window: null | Window = null;
 	const _scopeName = (input: string) => [name, input].join(":");
 
@@ -40,11 +41,11 @@ export function createTypedMessage<
 			});
 		},
 		listen(name, callback) {
-			const listener = (message: MessageEvent) => {
-				const data = message.data;
+			const listener = (raw: MessageEvent) => {
+				const { data } = raw;
 				if (data.id !== _scopeName(name)) return;
 				_validate(name, data, () => {
-					callback({ data, raw: message, type: "message" });
+					callback({ data, raw, type: "message" });
 				});
 			};
 			this.window.addEventListener("message", listener);

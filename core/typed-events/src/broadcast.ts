@@ -10,7 +10,7 @@ export class TypedBroadcastChannelError extends ValidatorError {
 	}
 }
 
-export function createTypedBroadcastChannel<
+export function createBroadcastChannel<
 	Map extends Record<string, StandardSchemaV1>,
 >(name: string, map: Map) {
 	let _id: Id | null = null;

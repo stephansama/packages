@@ -35,12 +35,12 @@ export function useListenerMap<
 	},
 ) {
 	React.useEffect(() => {
-		const cleaners = Object.entries(listeners).map(([event, callback]) => {
+		const cleanups = Object.entries(listeners).map(([event, callback]) => {
 			return map.listen(event, callback);
 		});
 
 		return () => {
-			for (const cleanup of cleaners) cleanup();
+			for (const cleanup of cleanups) cleanup();
 		};
 	}, []);
 }

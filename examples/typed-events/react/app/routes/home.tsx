@@ -53,8 +53,8 @@ function EventComponent() {
 	});
 
 	useListenerMap(message, {
-		toggle({ raw: message }) {
-			if (message instanceof MessageEvent) {
+		toggle({ raw: message, type }) {
+			if (type === "message") {
 				console.info(message.origin);
 			}
 		},

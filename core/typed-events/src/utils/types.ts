@@ -20,15 +20,10 @@ export interface Validator<
 	Schema extends StandardSchemaV1,
 	EventTypeKeys extends keyof RawEventMap,
 	DispatchOpts = {},
+	Input = object & StandardSchemaV1.InferInput<Schema>,
 > {
-	dispatch<Input extends object & StandardSchemaV1.InferInput<Schema>>(
-		input: Input,
-		opts?: DispatchOpts,
-	): void;
-
-	listen<Input extends object & StandardSchemaV1.InferInput<Schema>>(
-		callback: ListenerCallback<Input, EventTypeKeys>,
-	): () => void;
+	dispatch(input: Input, opts?: DispatchOpts): void;
+	listen(callback: ListenerCallback<Input, EventTypeKeys>): () => void;
 
 	name: Name;
 	schema: Schema;

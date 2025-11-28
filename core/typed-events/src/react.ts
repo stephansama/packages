@@ -14,7 +14,7 @@ export function useListener<
 	Input extends Validator<Name, Schema, Keys>,
 	Schema extends StandardSchemaV1 = Input extends Validator<
 		Name,
-		infer S,
+		infer S extends StandardSchemaV1,
 		any
 	>
 		? S

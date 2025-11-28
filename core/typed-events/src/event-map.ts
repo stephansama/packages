@@ -34,7 +34,10 @@ export function createEventMap<Map extends Record<string, StandardSchemaV1>>(
 	return {
 		dispatch(name, detail) {
 			const callback = () => {
-				const event = new CustomEvent<typeof detail>(name, { detail });
+				const scopedName = _scopeEvent(name);
+				const event = new CustomEvent<typeof detail>(scopedName, {
+					detail,
+				});
 				this.target.dispatchEvent(event);
 			};
 
@@ -50,8 +53,8 @@ export function createEventMap<Map extends Record<string, StandardSchemaV1>>(
 				}
 			};
 
-			this.target.addEventListener(name, listener);
-			return () => this.target.removeEventListener(name, listener);
+			this.target.addEventListener(scopedName, listener);
+			return () => this.target.removeEventListener(scopedName, listener);
 		},
 		map,
 		name,

@@ -10,6 +10,7 @@ export type Restrict<T extends string, Forbidden> = T extends Forbidden
 
 export interface ValidatorMap<
 	EventMap extends Record<string, StandardSchemaV1>,
+	DispatchOpts = {},
 > {
 	dispatch<
 		Name extends keyof EventMap & string,
@@ -17,6 +18,7 @@ export interface ValidatorMap<
 	>(
 		name: Name,
 		input: Input,
+		opts?: DispatchOpts,
 	): void;
 
 	listen<

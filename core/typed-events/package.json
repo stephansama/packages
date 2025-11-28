@@ -63,10 +63,10 @@
 		"zod": "catalog:"
 	},
 	"peerDependencies": {
-		"react": "catalog:"
+		"react": ">=18"
 	},
 	"optionalDependencies": {
-		"react": "catalog:"
+		"react": ">=18"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {

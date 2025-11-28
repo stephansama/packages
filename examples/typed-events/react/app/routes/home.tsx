@@ -3,10 +3,7 @@ import {
 	createEvent,
 	createMessage,
 } from "@stephansama/typed-events";
-import {
-	useEventListener,
-	useListenerMap,
-} from "@stephansama/typed-events/react";
+import { useListener, useListeners } from "@stephansama/typed-events/react";
 import * as React from "react";
 import * as yup from "yup";
 
@@ -45,14 +42,14 @@ function EventComponent() {
 	const [count, setCount] = React.useState(0);
 	const inputRef = React.useRef<HTMLInputElement>(null);
 
-	useListenerMap(channel, {
+	useListeners(channel, {
 		update(payload) {
 			console.info("hello from typed broadcast channel");
 			setCount(payload.data.current);
 		},
 	});
 
-	useListenerMap(message, {
+	useListeners(message, {
 		toggle({ raw: message, type }) {
 			if (type === "message") {
 				console.info(message.origin);
@@ -63,7 +60,7 @@ function EventComponent() {
 		},
 	});
 
-	useEventListener(event, (e) => {
+	useListener(event, (e) => {
 		console.info("hello from typed event");
 		setCount(e.detail.current);
 	});
@@ -107,23 +104,17 @@ function EventComponent() {
 			>
 				test {event.name} event
 			</button>
-			<button
-				onClick={function () {
-					message.dispatch("update", {
-						value: count + 1,
-					});
-				}}
-			>
+			<button onClick={() => message.dispatch("update", { value: count + 1 })}>
 				test message event
 			</button>
 			<button
 				onClick={function () {
-					// const iframe = document.querySelector("iframe");
+					const iframe = document.querySelector("iframe");
 
 					message.dispatch(
 						"toggle",
 						{},
-						// { origin: iframe!.src, window: iframe!.contentWindow! },
+						{ origin: iframe!.src, window: iframe!.contentWindow! },
 					);
 				}}
 			>

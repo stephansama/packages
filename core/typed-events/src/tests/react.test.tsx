@@ -4,12 +4,12 @@ import * as z from "zod";
 
 import { createEvent } from "@/event";
 import { createEventMap } from "@/event-map";
-import { useEventListener, useListenerMap } from "@/react";
+import { useListener, useListeners } from "@/react";
 
 const event = createEvent("test-event", z.object({ payload: z.number() }));
 
 function ExampleEventInteraction() {
-	useEventListener(event, () => {
+	useListener(event, () => {
 		console.info("called");
 	});
 	return (
@@ -47,7 +47,7 @@ const eventMap = createEventMap("test-event-map", {
 });
 
 function ExampleEventMapInteraction() {
-	useListenerMap(eventMap, {
+	useListeners(eventMap, {
 		set: (payload) => console.info(payload.data.value),
 		toggle: (_) => console.info("toggle"),
 	});
@@ -96,7 +96,6 @@ it("sets up the event listener map", () => {
 	expect(infoSpy).not.toHaveBeenCalled();
 
 	fireEvent.click(toggleButton);
-
 	expect(infoSpy).toHaveBeenCalledWith("toggle");
 
 	fireEvent.click(setDarkButton);

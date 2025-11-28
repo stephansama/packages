@@ -13,8 +13,9 @@ Typed events store using standard schema
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - [TypedEvent](#typedevent)
-  - [TypedBroadcastChannel](#typedbroadcastchannel)
+  - [createEvent](#createevent)
+  - [createBroadcastChannel](#createbroadcastchannel)
+  - [React](#react)
 - [References](#references)
 
 </details>
@@ -28,11 +29,10 @@ pnpm install @stephansama/typed-events
 ## Usage
 
 ```javascript
-/* eslint perfectionist/sort-imports: ["off"] */
 import * as z from "zod";
 ```
 
-### TypedEvent
+### createEvent
 
 create a typed [`CustomEvent`](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent)
 using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
@@ -82,7 +82,7 @@ export function dispatchEvent() {
 }
 ```
 
-### TypedBroadcastChannel
+### createBroadcastChannel
 
 create a typed [`BroadcastChannel`](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/BroadcastChannel)
 using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
@@ -121,6 +121,29 @@ export function dispatchChannelMessage() {
       value: Math.floor(Math.random() * 100),
     });
   });
+}
+```
+
+### React
+
+you can use `useListener` or `useListeners` to automatically register and cleanup typed event listeners
+
+```javascript
+import { createBroadcastEvent } from "@stephansama/typed-events";
+import { useListeners } from "../dist/react.cjs";
+
+const broadcastEvent = createBroadcastEvent("react-example", {
+  first: z.object({}),
+  second: z.object({ payload: z.number() }),
+});
+
+export function ExampleComponent() {
+  useListeners(broadcastEvent, {
+    first: () => console.info("first event happened"),
+    second: ({ data }) => console.info(data.payload),
+  });
+
+  return; // more jsx...
 }
 ```
 

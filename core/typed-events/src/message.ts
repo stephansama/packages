@@ -32,12 +32,16 @@ export function createMessage<Map extends Record<string, StandardSchemaV1>>(
 	}
 
 	return {
-		dispatch(name, input) {
+		dispatch(name, input, opts = undefined) {
 			_validate(name, input, () => {
 				const id = _scopeName(name);
 				const data = { ...input, id };
 
-				this.window.postMessage(data, this.window.origin);
+				if (!opts) {
+					this.window.postMessage(data, this.window.origin);
+				} else {
+					opts.window.postMessage(data, opts.origin);
+				}
 			});
 		},
 		listen(name, callback) {
@@ -54,11 +58,12 @@ export function createMessage<Map extends Record<string, StandardSchemaV1>>(
 		map,
 		name,
 		get window() {
-			if (!_window) _window = window;
-			return _window;
+			return (_window ??= window);
 		},
 		set window(input: Window) {
 			_window = input;
 		},
-	} satisfies ValidatorMap<Map> & { window: Window };
+	} satisfies ValidatorMap<Map, { origin: string; window: Window }> & {
+		window: Window;
+	};
 }

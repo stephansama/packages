@@ -1,7 +1,7 @@
 import { expect, it, vi } from "vitest";
 import * as z from "zod";
 
-import { TypedEvent } from "./events";
+import { TypedEvent } from "@/event";
 
 it("dispatches an event with a valid event", () => {
 	const event = new TypedEvent("test", z.object({ shape: z.number() }));

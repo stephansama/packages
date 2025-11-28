@@ -46,9 +46,9 @@ export function dispatchEvent() {
 // ### TypedBroadcastChannel
 // create a typed [`BroadcastChannel`](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/BroadcastChannel)
 // using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
-import { TypedBroadcastChannel } from "../dist/index.cjs";
+import { createTypedBroadcastChannel } from "../dist/index.cjs";
 
-export const channel = new TypedBroadcastChannel("broadcaster", {
+export const channel = createTypedBroadcastChannel("broadcaster", {
 	reset: z.object({}),
 	update: z.object({ value: z.number() }),
 });

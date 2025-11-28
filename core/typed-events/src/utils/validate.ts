@@ -27,11 +27,13 @@ export function validate<T>(props: ValidateProps<T>) {
 		return validateIssues({ ...issueProps, issues: result.issues });
 	}
 
+	const warnOnceCondition =
+		props.warnOnceCondition === undefined
+			? process.env.NODE_ENV !== "development"
+			: props.warnOnceCondition;
+
 	warnOnce({
-		if:
-			props.warnOnceCondition === undefined
-				? process.env.NODE_ENV !== "development"
-				: props.warnOnceCondition,
+		if: warnOnceCondition,
 		message: `using async validation during ${props.source} (however this is not recommended. please use a synchronous validator)`,
 	});
 

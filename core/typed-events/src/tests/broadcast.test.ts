@@ -1,36 +1,30 @@
 import { expect, it, vi } from "vitest";
 import * as z from "zod";
 
-import { createTypedBroadcastEvent } from "./broadcast-event";
+import { createTypedBroadcastChannel } from "@/broadcast";
 
 it("dispatches the channel message properly", () => {
-	const broadcast = createTypedBroadcastEvent("broadcast-channel", {
+	const broadcast = createTypedBroadcastChannel("broadcast-channel", {
 		reset: z.object({}),
 		update: z.object({ value: z.number() }),
 	});
-
 	const postMessageSpy = vi.spyOn(broadcast.channel, "postMessage");
-	const dispatchEventSpy = vi.spyOn(broadcast.target, "dispatchEvent");
 
 	broadcast.dispatch("reset", {});
 
 	expect(postMessageSpy).toHaveBeenCalled();
-	expect(dispatchEventSpy).toHaveBeenCalled();
 });
 
-it("receives the message on the sender and receiver channels", async () => {
+it("receives the channel message only on other channels", async () => {
 	const schema = {
 		reset: z.object({}),
 		update: z.object({ value: z.number() }),
 	};
 
 	const channelName = "broadcast-channel";
-
-	const firstChannel = createTypedBroadcastEvent(channelName, schema);
-	const secondChannel = createTypedBroadcastEvent(channelName, schema);
-
+	const firstChannel = createTypedBroadcastChannel(channelName, schema);
+	const secondChannel = createTypedBroadcastChannel(channelName, schema);
 	const postMessageSpy = vi.spyOn(firstChannel.channel, "postMessage");
-
 	const firstCallback = vi.fn();
 	const secondCallback = vi.fn();
 
@@ -44,5 +38,5 @@ it("receives the message on the sender and receiver channels", async () => {
 
 	expect(postMessageSpy).toHaveBeenCalled();
 	expect(secondCallback).toHaveBeenCalled();
-	expect(firstCallback).toHaveBeenCalled();
+	expect(firstCallback).not.toHaveBeenCalled();
 });

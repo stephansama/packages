@@ -1,12 +1,12 @@
 import {
-	TypedBroadcastChannel,
-	TypedBroadcastEvent,
+	createTypedBroadcastChannel,
+	createTypedBroadcastEvent,
+	createTypedMessage,
 	TypedEvent,
-	TypedMessage,
 } from "@stephansama/typed-events";
 import * as z from "zod/v4/mini";
 
-const broadcast = new TypedBroadcastChannel("update-controller", {
+const broadcast = createTypedBroadcastChannel("update-controller", {
 	update: z.object({
 		current: z.number(),
 	}),
@@ -19,12 +19,12 @@ const event = new TypedEvent(
 	}),
 );
 
-const broadcastEvent = new TypedBroadcastEvent("theme", {
+const broadcastEvent = createTypedBroadcastEvent("theme", {
 	set: z.object({ theme: z.enum(["light", "dark"]) }),
 	toggle: z.object({}),
 });
 
-const message = new TypedMessage("crossorigin", {
+const message = createTypedMessage("crossorigin", {
 	toggle: z.object({}),
 	update: z.object({
 		value: z.number(),
@@ -43,18 +43,18 @@ export function setupCounter(element) {
 		element.innerHTML = `count is ${counter}`;
 	}
 
-	broadcast.listen("update", ({ isSelf, message }) => {
-		setCounter(message.data.current);
-		console.info({ isSelf, message });
+	broadcast.listen("update", ({ data, type }) => {
+		console.log("setting ", type);
+		setCounter(data.current);
 	});
 
 	event.listen((e) => {
 		setCounter(e.detail.current);
 	});
 
-	broadcastEvent.listen("set", (e) => {
-		const payload = broadcastEvent.getPayload(e);
-		theme.textContent = payload.theme;
+	broadcastEvent.listen("set", ({ data, type }) => {
+		console.log("setting ", type);
+		theme.textContent = data.theme;
 	});
 
 	broadcastEvent.listen("toggle", () => {

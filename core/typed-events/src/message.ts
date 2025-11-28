@@ -1,6 +1,6 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
-import { validate, ValidatorError, ValidatorMap } from "./utils";
+import { validate, ValidatorError, type ValidatorMap } from "@/utils";
 
 export class TypedMessageError extends ValidatorError {
 	constructor(scope: string, issues: readonly StandardSchemaV1.Issue[]) {
@@ -11,6 +11,7 @@ export class TypedMessageError extends ValidatorError {
 export function createTypedMessage<
 	Map extends Record<string, StandardSchemaV1>,
 >(name: string, map: Map) {
+	let _window: null | Window = null;
 	const _scopeName = (input: string) => [name, input].join(":");
 
 	function _validate<Name extends keyof Map>(
@@ -52,10 +53,11 @@ export function createTypedMessage<
 		map,
 		name,
 		get window() {
-			return window;
+			if (!_window) _window = window;
+			return _window;
 		},
 		set window(input: Window) {
-			this.window = input;
+			_window = input;
 		},
 	} satisfies ValidatorMap<Map> & { window: Window };
 }

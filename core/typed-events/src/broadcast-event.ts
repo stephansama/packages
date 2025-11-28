@@ -1,8 +1,8 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
-import type { Id, ValidatorMap } from "./utils/types";
+import type { Id, ValidatorMap } from "@/utils/types";
 
-import { validate, ValidatorError } from "./utils";
+import { validate, ValidatorError } from "@/utils";
 
 export class TypedBroadcastEventError extends ValidatorError {
 	constructor(id: string, issues: readonly StandardSchemaV1.Issue[]) {
@@ -36,10 +36,7 @@ export function createTypedBroadcastEvent<
 
 	return {
 		get channel() {
-			if (!_channel) {
-				_channel = new BroadcastChannel(name);
-			}
-			return _channel;
+			return (_channel ??= new BroadcastChannel(name));
 		},
 		dispatch(name, input) {
 			_validate(name, input, () => {
@@ -53,8 +50,7 @@ export function createTypedBroadcastEvent<
 			});
 		},
 		get id() {
-			if (!_id) _id = crypto.randomUUID();
-			return _id;
+			return (_id ??= crypto.randomUUID());
 		},
 		listen(name, callback) {
 			const eventName = _scopeEvent(name);
@@ -70,9 +66,9 @@ export function createTypedBroadcastEvent<
 			};
 
 			const channelListener = (message: MessageEvent) => {
-				const data = message.data;
+				const { data } = message;
 				if (data.name !== name) return;
-				if (data.id !== this.id) return;
+				if (data.id === this.id) return;
 
 				const validateCallback = () => {
 					callback({ data, raw: message, type: "message" });
@@ -91,7 +87,7 @@ export function createTypedBroadcastEvent<
 		map,
 		name,
 		get target() {
-			return _target || document;
+			return (_target ??= document);
 		},
 		set target(target: EventTarget) {
 			if (!target) {

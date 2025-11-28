@@ -3,6 +3,9 @@
 	"include": ["./src/**/*"],
 	"compilerOptions": {
 		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		},
 		"moduleResolution": "bundler",
 		"lib": ["DOM", "ESNext"]
 	}

@@ -1,6 +1,6 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
-import { validate, ValidatorError } from "./utils";
+import { validate, ValidatorError } from "@/utils";
 
 type Detail<T extends StandardSchemaV1> = StandardSchemaV1.InferInput<T>;
 type Restrict<T extends string, Forbidden> = T extends Forbidden ? never : T;
@@ -69,7 +69,6 @@ export class TypedEvent<
 		};
 
 		this.target.addEventListener(this.name, listener);
-
 		return () => this.target.removeEventListener(this.name, listener);
 	}
 

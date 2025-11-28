@@ -28,6 +28,10 @@
 			"import": "./dist/index.js",
 			"require": "./dist/index.cjs"
 		},
+		"./errors": {
+			"import": "./dist/errors.js",
+			"require": "./dist/errors.cjs"
+		},
 		"./package.json": "./package.json"
 	},
 	"main": "./dist/index.cjs",

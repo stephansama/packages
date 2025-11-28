@@ -2,6 +2,11 @@ import type { StandardSchemaV1 } from "@standard-schema/spec";
 
 export type { Id } from "./id";
 
+export type ListenerCallback<Input> = _ListenerCallback<
+	Input,
+	keyof RawEventMap<Input>
+>;
+
 export interface ValidatorMap<
 	EventMap extends Record<string, StandardSchemaV1>,
 > {
@@ -18,19 +23,25 @@ export interface ValidatorMap<
 		Input extends object & StandardSchemaV1.InferInput<EventMap[Event]>,
 	>(
 		name: Event,
-		callback: <Type extends EventType>(payload: {
-			data: Input;
-			raw: RawEvent<Type, Input>;
-			type: Type;
-		}) => void,
+		callback: ListenerCallback<Input>,
 	): void;
 
 	map: EventMap;
 	name: string;
 }
 
-type EventType = "event" | "message";
+type _ListenerCallback<
+	Input,
+	Type extends keyof RawEventMap<Input>,
+	Payload = { data: Input; raw: RawEvent<Type, Input>; type: Type },
+> = (payload: Payload) => void;
 
-type RawEvent<Type extends EventType, Shape> = Type extends "event"
-	? CustomEvent<Shape>
-	: MessageEvent<Shape>;
+type RawEvent<
+	Type extends keyof RawEventMap<Shape>,
+	Shape,
+> = RawEventMap<Shape>[Type];
+
+type RawEventMap<Shape> = {
+	event: CustomEvent<Shape>;
+	message: MessageEvent<Shape>;
+};

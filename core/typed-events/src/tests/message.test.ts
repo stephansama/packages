@@ -1,7 +1,7 @@
 import { expect, it, vi } from "vitest";
 import * as z from "zod";
 
-import { createTypedMessage } from "./message";
+import { createTypedMessage } from "@/message";
 
 it("dispatches the message correctly", () => {
 	const message = createTypedMessage("test-message", {

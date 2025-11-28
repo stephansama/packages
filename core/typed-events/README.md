@@ -88,9 +88,9 @@ create a typed [`BroadcastChannel`](https://developer.mozilla.org/en-US/docs/Web
 using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
 
 ```javascript
-import { TypedBroadcastChannel } from "@stephansama/typed-events";
+import { createTypedBroadcastChannel } from "@stephansama/typed-events";
 
-export const channel = new TypedBroadcastChannel("broadcaster", {
+export const channel = createTypedBroadcastChannel("broadcaster", {
   reset: z.object({}),
   update: z.object({ value: z.number() }),
 });

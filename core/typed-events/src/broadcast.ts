@@ -1,6 +1,8 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
-import { Id, validate, ValidatorError, ValidatorMap } from "./utils";
+import type { Id, ValidatorMap } from "@/utils";
+
+import { validate, ValidatorError } from "@/utils";
 
 export class TypedBroadcastChannelError extends ValidatorError {
 	constructor(id: string, issues: readonly StandardSchemaV1.Issue[]) {
@@ -31,8 +33,7 @@ export function createTypedBroadcastChannel<
 
 	return {
 		get channel() {
-			if (!_channel) _channel = new BroadcastChannel(name);
-			return _channel;
+			return (_channel ??= new BroadcastChannel(name));
 		},
 		dispatch(name, input) {
 			_validate(name, input, () => {
@@ -40,19 +41,15 @@ export function createTypedBroadcastChannel<
 			});
 		},
 		get id() {
-			if (!_id) _id = crypto.randomUUID();
-			return _id;
+			return (_id ??= crypto.randomUUID());
 		},
 		listen(name, callback) {
 			const listener = (message: MessageEvent) => {
-				if (message.data.name !== name) return;
+				const { data } = message;
+				if (data.name !== name) return;
 
-				_validate(name, message.data, () => {
-					callback({
-						data: message.data,
-						raw: message,
-						type: "message",
-					});
+				_validate(name, data, () => {
+					callback({ data, raw: message, type: "message" });
 				});
 			};
 			this.channel.addEventListener("message", listener);

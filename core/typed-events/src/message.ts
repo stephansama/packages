@@ -13,6 +13,7 @@ export function createMessage<
 	Map extends Record<string, StandardSchemaV1>,
 >(name: Name, map: Map) {
 	let _window: null | Window = null;
+	const getWindow = () => (_window ??= window);
 	const _scopeName = (input: string) => [name, input].join(":");
 
 	function _validate<Name extends keyof Map>(
@@ -32,16 +33,16 @@ export function createMessage<
 	}
 
 	return {
-		dispatch(name, input, opts = undefined) {
+		dispatch(
+			name,
+			input,
+			opts = { origin: getWindow().origin, window: getWindow() },
+		) {
 			_validate(name, input, () => {
 				const id = _scopeName(name);
 				const data = { ...input, id };
 
-				if (!opts) {
-					this.window.postMessage(data, this.window.origin);
-				} else {
-					opts.window.postMessage(data, opts.origin);
-				}
+				opts.window.postMessage(data, opts.origin);
 			});
 		},
 		listen(name, callback) {
@@ -58,9 +59,10 @@ export function createMessage<
 		map,
 		name,
 		get window() {
-			return (_window ??= window);
+			return getWindow();
 		},
 		set window(input: Window) {
+			if (!input) throw new Error(`unable to use input for window`);
 			_window = input;
 		},
 	} satisfies ValidatorMap<Name, Map, { origin: string; window: Window }> & {

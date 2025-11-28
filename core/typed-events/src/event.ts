@@ -14,7 +14,7 @@ export function createEvent<Schema extends StandardSchemaV1>(
 	opts: { silenceAsyncWarning?: boolean; target?: EventTarget } = {},
 ) {
 	type Detail = StandardSchemaV1.InferInput<Schema>;
-	let _target: EventTarget | null = null;
+	let _target: EventTarget | null = opts?.target || null;
 
 	function _validate(callback: () => void, detail: Detail) {
 		validate({

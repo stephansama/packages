@@ -21,11 +21,12 @@ export function useListener<Event extends ReturnType<typeof createEvent>>(
  * @param listeners - map of listeners to add
  */
 export function useListeners<
-	Map extends ValidatorMap<EventMap>,
+	Name extends string,
+	Map extends ValidatorMap<Name, EventMap>,
 	EventMap extends Record<
 		string,
 		StandardSchemaV1
-	> = Map extends ValidatorMap<infer EM> ? EM : never,
+	> = Map extends ValidatorMap<Name, infer EM> ? EM : never,
 >(
 	map: Map,
 	listeners: {

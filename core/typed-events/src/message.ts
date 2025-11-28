@@ -8,10 +8,10 @@ export class TypedMessageError extends ValidatorError {
 	}
 }
 
-export function createMessage<Map extends Record<string, StandardSchemaV1>>(
-	name: string,
-	map: Map,
-) {
+export function createMessage<
+	Name extends string,
+	Map extends Record<string, StandardSchemaV1>,
+>(name: Name, map: Map) {
 	let _window: null | Window = null;
 	const _scopeName = (input: string) => [name, input].join(":");
 
@@ -63,7 +63,7 @@ export function createMessage<Map extends Record<string, StandardSchemaV1>>(
 		set window(input: Window) {
 			_window = input;
 		},
-	} satisfies ValidatorMap<Map, { origin: string; window: Window }> & {
+	} satisfies ValidatorMap<Name, Map, { origin: string; window: Window }> & {
 		window: Window;
 	};
 }

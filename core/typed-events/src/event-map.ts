@@ -8,10 +8,10 @@ export class TypedEventMapError extends ValidatorError {
 	}
 }
 
-export function createEventMap<Map extends Record<string, StandardSchemaV1>>(
-	name: string,
-	map: Map,
-) {
+export function createEventMap<
+	Name extends string,
+	Map extends Record<string, StandardSchemaV1>,
+>(name: Name, map: Map) {
 	let _target: EventTarget | null = null;
 
 	const _scopeEvent = (event: string) => [name, event].join(":");
@@ -67,5 +67,5 @@ export function createEventMap<Map extends Record<string, StandardSchemaV1>>(
 			}
 			_target = target;
 		},
-	} satisfies ValidatorMap<Map> & { target: EventTarget };
+	} satisfies ValidatorMap<Name, Map> & { target: EventTarget };
 }

@@ -11,8 +11,9 @@ export class TypedBroadcastEventError extends ValidatorError {
 }
 
 export function createBroadcastEvent<
+	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,
->(name: string, map: Map) {
+>(name: Name, map: Map) {
 	let _channel: BroadcastChannel | null = null;
 	let _id: Id | null = null;
 	let _target: EventTarget | null = null;
@@ -96,7 +97,7 @@ export function createBroadcastEvent<
 
 			_target = target;
 		},
-	} satisfies ValidatorMap<Map> & {
+	} satisfies ValidatorMap<Name, Map> & {
 		channel: BroadcastChannel;
 		id: Id;
 		target: EventTarget;

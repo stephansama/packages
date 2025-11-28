@@ -9,28 +9,29 @@ export type Restrict<T extends string, Forbidden> = T extends Forbidden
 	: T;
 
 export interface ValidatorMap<
-	EventMap extends Record<string, StandardSchemaV1>,
+	Name extends string,
+	Map extends Record<string, StandardSchemaV1>,
 	DispatchOpts = {},
 > {
 	dispatch<
-		Name extends keyof EventMap & string,
-		Input extends object & StandardSchemaV1.InferInput<EventMap[Name]>,
+		Event extends keyof Map & string,
+		Input extends object & StandardSchemaV1.InferInput<Map[Event]>,
 	>(
-		name: Name,
+		name: Event,
 		input: Input,
 		opts?: DispatchOpts,
 	): void;
 
 	listen<
-		Event extends keyof EventMap & string,
-		Input extends object & StandardSchemaV1.InferInput<EventMap[Event]>,
+		Event extends keyof Map & string,
+		Input extends object & StandardSchemaV1.InferInput<Map[Event]>,
 	>(
 		name: Event,
 		callback: ListenerCallback<Input>,
 	): () => void;
 
-	map: EventMap;
-	name: string;
+	map: Map;
+	name: Name;
 }
 
 type AnyPayload<T> = {

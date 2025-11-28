@@ -1,4 +1,4 @@
-const alreadyWarned: { [message: string]: boolean } = {};
+const alreadyWarned: Record<string, boolean> = {};
 
 export function warnOnce({
 	if: condition,
@@ -6,7 +6,7 @@ export function warnOnce({
 }: {
 	if: boolean;
 	message: string;
-}): void {
+}) {
 	if (!condition && !alreadyWarned[message]) {
 		alreadyWarned[message] = true;
 		console.warn(message);

@@ -51,9 +51,7 @@ function EventComponent() {
 
 	useListeners(message, {
 		toggle({ raw: message, type }) {
-			if (type === "message") {
-				console.info(message.origin);
-			}
+			console.info(message.origin);
 		},
 		update(payload) {
 			setCount(payload.data.value);

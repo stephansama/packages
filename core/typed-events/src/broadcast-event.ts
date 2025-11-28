@@ -97,7 +97,7 @@ export function createBroadcastEvent<
 
 			_target = target;
 		},
-	} satisfies ValidatorMap<Name, Map> & {
+	} satisfies ValidatorMap<Name, Map, "event" | "message"> & {
 		channel: BroadcastChannel;
 		id: Id;
 		target: EventTarget;

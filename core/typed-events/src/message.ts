@@ -65,7 +65,10 @@ export function createMessage<
 			if (!input) throw new Error(`unable to use input for window`);
 			_window = input;
 		},
-	} satisfies ValidatorMap<Name, Map, { origin: string; window: Window }> & {
-		window: Window;
-	};
+	} satisfies ValidatorMap<
+		Name,
+		Map,
+		"message",
+		{ origin: string; window: Window }
+	> & { window: Window };
 }

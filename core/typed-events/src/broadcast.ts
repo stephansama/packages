@@ -60,5 +60,8 @@ export function createBroadcastChannel<
 		},
 		map,
 		name,
-	} satisfies ValidatorMap<Name, Map> & { channel: BroadcastChannel; id: Id };
+	} satisfies ValidatorMap<Name, Map, "message"> & {
+		channel: BroadcastChannel;
+		id: Id;
+	};
 }

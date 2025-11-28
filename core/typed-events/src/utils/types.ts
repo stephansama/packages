@@ -2,7 +2,14 @@ import type { StandardSchemaV1 } from "@standard-schema/spec";
 
 export type { Id } from "./id";
 
-export type ListenerCallback<Input> = (payload: AnyPayload<Input>) => void;
+export type ListenerCallback<Input, Keys extends keyof RawEventMap> = (
+	payload: AnyPayload<Input, Keys>,
+) => void;
+
+export type RawEventMap<Shape = any> = {
+	event: CustomEvent<Shape>;
+	message: MessageEvent<Shape>;
+};
 
 export type Restrict<T extends string, Forbidden> = T extends Forbidden
 	? never
@@ -11,6 +18,7 @@ export type Restrict<T extends string, Forbidden> = T extends Forbidden
 export interface ValidatorMap<
 	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,
+	EventTypeKeys extends keyof RawEventMap,
 	DispatchOpts = {},
 > {
 	dispatch<
@@ -27,16 +35,16 @@ export interface ValidatorMap<
 		Input extends object & StandardSchemaV1.InferInput<Map[Event]>,
 	>(
 		name: Event,
-		callback: ListenerCallback<Input>,
+		callback: ListenerCallback<Input, EventTypeKeys>,
 	): () => void;
 
 	map: Map;
 	name: Name;
 }
 
-type AnyPayload<T> = {
-	[K in keyof RawEventMap<T>]: Payload<T, K>;
-}[keyof RawEventMap<T>];
+type AnyPayload<T, Keys extends keyof RawEventMap> = {
+	[K in Keys]: Payload<T, K>;
+}[Keys];
 
 type Payload<Input, E extends keyof RawEventMap<Input>> = {
 	data: Input;
@@ -48,8 +56,3 @@ type RawEvent<
 	Type extends keyof RawEventMap<Shape>,
 	Shape,
 > = RawEventMap<Shape>[Type];
-
-type RawEventMap<Shape> = {
-	event: CustomEvent<Shape>;
-	message: MessageEvent<Shape>;
-};

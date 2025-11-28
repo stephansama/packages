@@ -149,4 +149,9 @@ export function ExampleComponent() {
 
 ## References
 
+- [BroadcastChannel message event](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel/message_event)
+- [BroadcastChannel](https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel)
+- [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent)
+- [MessageEvent](https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent)
+- [Window message event](https://developer.mozilla.org/en-US/docs/Web/API/Window/message_event)
 - [standardschema](https://standardschema.dev/)

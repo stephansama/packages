@@ -67,5 +67,5 @@ export function createEventMap<
 			}
 			_target = target;
 		},
-	} satisfies ValidatorMap<Name, Map> & { target: EventTarget };
+	} satisfies ValidatorMap<Name, Map, "event"> & { target: EventTarget };
 }

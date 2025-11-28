@@ -50,6 +50,7 @@
 	},
 	"devDependencies": {
 		"tsdown": "catalog:",
+		"vite-tsconfig-paths": "catalog:",
 		"zod": "catalog:"
 	},
 	"packageManager": "pnpm@10.11.0",

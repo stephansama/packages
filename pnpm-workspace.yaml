@@ -17,6 +17,7 @@ catalog:
   tsdown: 0.15.12
   typescript: 5.9.3
   vite: 6.3.5
+  vite-tsconfig-paths: ^5.1.4
   zod: 4.0.15
   zx: 8.8.0
 ignoredBuiltDependencies:

@@ -1,5 +1,11 @@
 # @stephansama/alfred-kaomoji
 
+## 1.1.0
+
+### Minor Changes
+
+- 3f67a2d: Updated alfred icon
+
 ## 1.0.6
 
 ### Patch Changes

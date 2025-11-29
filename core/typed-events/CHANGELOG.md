@@ -1,5 +1,12 @@
 # @stephansama/typed-events
 
+## 3.0.1
+
+### Patch Changes
+
+- a105647: Updated type implementation for `typed-events` package
+  - re-exported standard schema types
+
 ## 3.0.0
 
 ### Major Changes

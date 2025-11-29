@@ -4,7 +4,7 @@ import type { Id, ValidatorMap } from "@/utils/types";
 
 import { validate, ValidatorError } from "@/utils";
 
-export interface BroadcastEvent<
+export interface TypedBroadcastEvent<
 	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,
 > extends ValidatorMap<Name, Map, "event" | "message"> {
@@ -107,5 +107,5 @@ export function createBroadcastEvent<
 
 			_target = target;
 		},
-	} satisfies BroadcastEvent<Name, Map>;
+	} satisfies TypedBroadcastEvent<Name, Map>;
 }

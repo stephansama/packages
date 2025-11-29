@@ -9,7 +9,7 @@ Simple social sharing for the web
 
 Web component built using svelte that allows end users to share the current url to social media
 
-![screenshot](./screenshot.png)
+![screenshot](https://raw.githubusercontent.com/stephansama/static/refs/heads/main/packages/svelte-social-share-links.png)
 
 ## Available Social Media Networks
 

@@ -15,7 +15,7 @@ A [remark](https://github.com/remarkjs/remark) plugin that transforms asciinema 
 
 ## Example
 
-![Example](./demo.gif)
+![Example](https://raw.githubusercontent.com/stephansama/static/refs/heads/main/packages/remark-asciinema.gif)
 
 Before:
 

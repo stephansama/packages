@@ -22,9 +22,9 @@
 	},
 	"type": "module",
 	"scripts": {
-		"postinstall": "[ \"$CI\" != \"true\" ] && alfy-init || echo 'skipping alfred install for ci'",
+		"postinstall": "if [ -n \"$CI\" ]; then echo 'skipping alfred install for ci'; else alfy-init; fi",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-		"preuninstall": "[ \"$CI\" != \"true\" ] && alfy-cleanup || echo 'skipping alfred uninstall for ci'"
+		"preuninstall": "if [ -n \"$CI\" ]; then echo 'skipping alfred uninstall for ci'; else alfy-cleanup; fi"
 	},
 	"dependencies": {
 		"alfy": "^2.1.0"

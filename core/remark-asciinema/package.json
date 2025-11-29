@@ -27,8 +27,8 @@
 		},
 		"./package.json": "./package.json"
 	},
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
+	"main": "./dist/index.cjs",
+	"types": "./dist/index.d.cts",
 	"files": [
 		"dist",
 		"package.json"
@@ -48,5 +48,6 @@
 		"access": "public",
 		"provenance": true
 	},
-	"readme": "./README.md"
+	"readme": "./README.md",
+	"module": "./dist/index.js"
 }

@@ -22,9 +22,10 @@
 		".": {
 			"import": "./dist/index.js",
 			"require": "./dist/index.cjs"
-		}
+		},
+		"./package.json": "./package.json"
 	},
-	"main": "./dist/index.js",
+	"main": "./dist/index.cjs",
 	"bin": "./cli.mjs",
 	"files": [
 		"./dist",
@@ -43,5 +44,6 @@
 	"publishConfig": {
 		"access": "public",
 		"provenance": true
-	}
+	},
+	"module": "./dist/index.js"
 }

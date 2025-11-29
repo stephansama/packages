@@ -104,7 +104,7 @@ somewhere in your codebase
 export function listenForEventMap() {
   const value = document.getElementById("value");
 
-  const cleanup = broadcastEvent.listen("update", (message) => {
+  const cleanup = eventMap.listen("update", (message) => {
     value.textContent = message.data.value;
   });
 
@@ -119,7 +119,7 @@ export function dispatchEventMap() {
   const button = document.getElementById("button");
 
   button.addEventListener("click", () => {
-    broadcastEvent.dispatch("update", {
+    eventMap.dispatch("update", {
       value: Math.floor(Math.random() * 100),
     });
   });
@@ -243,7 +243,7 @@ somewhere in your codebase
 export function listenForMessage() {
   const value = document.getElementById("value");
 
-  const cleanup = broadcastEvent.listen("update", (message) => {
+  const cleanup = message.listen("update", (message) => {
     value.textContent = message.data.value;
   });
 
@@ -258,7 +258,7 @@ export function dispatchMessage() {
   const button = document.getElementById("button");
 
   button.addEventListener("click", () => {
-    broadcastEvent.dispatch("update", {
+    message.dispatch("update", {
       value: Math.floor(Math.random() * 100),
     });
   });

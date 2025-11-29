@@ -1,6 +1,13 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
+export type { StandardSchemaV1 };
+
 export type { Id } from "./id";
+
+export type { TypedBroadcastChannel } from "@/broadcast";
+export type { TypedBroadcastEvent } from "@/broadcast-event";
+export type { TypedEvent } from "@/event";
+export type { TypedEventMap } from "@/event-map";
 
 export type ListenerCallback<Input, Keys extends keyof RawEventMap> = (
 	payload: AnyPayload<Input, Keys>,

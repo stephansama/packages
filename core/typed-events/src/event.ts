@@ -4,6 +4,13 @@ import { type Restrict, validate, ValidatorError } from "@/utils";
 
 import type { Validator } from "./utils/types";
 
+export interface TypedEvent<
+	Name extends string,
+	Schema extends StandardSchemaV1,
+> extends Validator<Name, Schema, "event"> {
+	target: EventTarget;
+}
+
 export class TypedEventError extends ValidatorError {
 	constructor(eventName: string, issues: readonly StandardSchemaV1.Issue[]) {
 		super("TypedEvent", eventName, issues);
@@ -69,7 +76,5 @@ export function createEvent<
 
 			_target = target;
 		},
-	} satisfies Validator<Name, Schema, "event"> & {
-		target: EventTarget;
-	};
+	} satisfies TypedEvent<Name, Schema>;
 }

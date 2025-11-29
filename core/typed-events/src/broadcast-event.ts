@@ -4,6 +4,15 @@ import type { Id, ValidatorMap } from "@/utils/types";
 
 import { validate, ValidatorError } from "@/utils";
 
+export interface TypedBroadcastEvent<
+	Name extends string,
+	Map extends Record<string, StandardSchemaV1>,
+> extends ValidatorMap<Name, Map, "event" | "message"> {
+	readonly channel: BroadcastChannel;
+	readonly id: Id;
+	target: EventTarget;
+}
+
 export class TypedBroadcastEventError extends ValidatorError {
 	constructor(id: string, issues: readonly StandardSchemaV1.Issue[]) {
 		super("TypedBroadcastEvent", id, issues);
@@ -18,8 +27,9 @@ export function createBroadcastEvent<
 	let _id: Id | null = null;
 	let _target: EventTarget | null = null;
 
-	const _scopeEvent = (event: string) => [name, event].join(":");
 	const getId = () => (_id ??= crypto.randomUUID());
+
+	const _scopeEvent = (event: string) => [name, event].join(":");
 
 	function _validate<
 		Event extends keyof Map,
@@ -97,9 +107,5 @@ export function createBroadcastEvent<
 
 			_target = target;
 		},
-	} satisfies ValidatorMap<Name, Map, "event" | "message"> & {
-		channel: BroadcastChannel;
-		id: Id;
-		target: EventTarget;
-	};
+	} satisfies TypedBroadcastEvent<Name, Map>;
 }

@@ -1,4 +1,4 @@
-# ![image](./assets/icon.png) Alfred Kaomoji Picker
+# ![image](./icon.png) Alfred Kaomoji Picker
 
 [![Source code](https://img.shields.io/badge/Source%20code-211F1F?style=flat&logo=github)](https://github.com/stephansama/packages/tree/main/core/alfred-kaomoji)
 [![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/alfred-kaomoji)
@@ -21,7 +21,7 @@ Add expressive text to your messages with ease!
 - [Powerpack](https://www.alfredapp.com/powerpack/)
 
 ```sh
-npm i -g alfred-kaomoji
+npm i -g @stephansama/alfred-kaomoji
 ```
 
 ## Built with 💖 +

@@ -45,7 +45,7 @@ pnpm install @stephansama/remark-asciinema
 ```javascript
 import { remark } from "remark";
 
-import asciinema from "@stephansama/remark-asciinema";
+import asciinema from "../dist/index.js";
 
 export async function pipeline() {
   const file = await remark()

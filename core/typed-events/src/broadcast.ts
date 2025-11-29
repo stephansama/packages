@@ -4,6 +4,14 @@ import type { Id, ValidatorMap } from "@/utils";
 
 import { validate, ValidatorError } from "@/utils";
 
+export interface TypedBroadcastChannel<
+	Name extends string,
+	Map extends Record<string, StandardSchemaV1>,
+> extends ValidatorMap<Name, Map, "message"> {
+	readonly channel: BroadcastChannel;
+	readonly id: Id;
+}
+
 export class TypedBroadcastChannelError extends ValidatorError {
 	constructor(id: string, issues: readonly StandardSchemaV1.Issue[]) {
 		super("TypedBroadcastChannel", id, issues);

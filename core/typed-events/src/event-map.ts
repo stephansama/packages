@@ -2,6 +2,13 @@ import type { StandardSchemaV1 } from "@standard-schema/spec";
 
 import { validate, ValidatorError, type ValidatorMap } from "@/utils";
 
+export interface TypedEventMap<
+	Name extends string,
+	Map extends Record<string, StandardSchemaV1>,
+> extends ValidatorMap<Name, Map, "event"> {
+	target: EventTarget;
+}
+
 export class TypedEventMapError extends ValidatorError {
 	constructor(id: string, issues: readonly StandardSchemaV1.Issue[]) {
 		super("TypedEventMap", id, issues);
@@ -62,10 +69,8 @@ export function createEventMap<
 			return (_target ??= document);
 		},
 		set target(target: EventTarget) {
-			if (!target) {
-				throw new Error("not a valid event target");
-			}
+			if (!target) throw new Error("not a valid event target");
 			_target = target;
 		},
-	} satisfies ValidatorMap<Name, Map, "event"> & { target: EventTarget };
+	} satisfies TypedEventMap<Name, Map>;
 }

@@ -2,6 +2,18 @@ import type { StandardSchemaV1 } from "@standard-schema/spec";
 
 import { validate, ValidatorError, type ValidatorMap } from "@/utils";
 
+export interface TypedMessage<
+	Name extends string,
+	Map extends Record<string, StandardSchemaV1>,
+> extends ValidatorMap<
+		Name,
+		Map,
+		"message",
+		{ origin: string; window: Window }
+	> {
+	window: Window;
+}
+
 export class TypedMessageError extends ValidatorError {
 	constructor(scope: string, issues: readonly StandardSchemaV1.Issue[]) {
 		super("TypedMessage", scope, issues);
@@ -65,10 +77,5 @@ export function createMessage<
 			if (!input) throw new Error(`unable to use input for window`);
 			_window = input;
 		},
-	} satisfies ValidatorMap<
-		Name,
-		Map,
-		"message",
-		{ origin: string; window: Window }
-	> & { window: Window };
+	} satisfies TypedMessage<Name, Map>;
 }

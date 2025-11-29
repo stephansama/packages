@@ -1,5 +1,7 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
+export type { StandardSchemaV1 };
+
 export type { Id } from "./id";
 
 export type ListenerCallback<Input, Keys extends keyof RawEventMap> = (

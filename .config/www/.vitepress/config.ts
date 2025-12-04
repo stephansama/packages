@@ -13,8 +13,7 @@ export default defineConfig({
 		[
 			"meta",
 			{
-				content:
-					"https://og.madprofessorblog.org/api/foss/packages.png",
+				content: "https://og.stephansama.info/api/packages/og.png",
 				property: "og:image",
 			},
 		],
@@ -49,7 +48,7 @@ export default defineConfig({
 				}),
 			},
 			{
-				link: "https://madprofessorblog.org",
+				link: "https://blog.stephansama.info",
 				target: "_self",
 				text: "Blog",
 			},

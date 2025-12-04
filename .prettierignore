@@ -1,4 +1,3 @@
 !patches/*
-!pnpm-workspace.yaml
 **/tests/fixtures/**
-*.yaml
+pnpm-lock.yaml

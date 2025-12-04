@@ -39,6 +39,7 @@
 		"./package.json": "./package.json"
 	},
 	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
 	"types": "./dist/index.d.cts",
 	"bin": {
 		"iconify-svgmap": "./dist/cli.js"
@@ -55,8 +56,8 @@
 		"prepublishOnly": "tsdown"
 	},
 	"devDependencies": {
-		"@iconify/types": "^2.0.0",
-		"@iconify/utils": "^2.3.0",
+		"@iconify/types": "catalog:",
+		"@iconify/utils": "catalog:",
 		"astro": "catalog:",
 		"tsdown": "catalog:",
 		"vite": "catalog:"
@@ -69,6 +70,5 @@
 	"publishConfig": {
 		"access": "public",
 		"provenance": true
-	},
-	"module": "./dist/index.js"
+	}
 }

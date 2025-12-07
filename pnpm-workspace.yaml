@@ -1,12 +1,14 @@
-packages:
-  - ./.config/*
-  - core/**
-  - examples/**
 autoInstallPeers: true
 catalogMode: strict
 cleanupUnusedCatalogs: true
 engineStrict: true
 shellEmulator: true
+
+packages:
+  - ./.config/*
+  - core/**
+  - examples/**
+
 catalogs:
   storybook:
     "@chromatic-com/storybook": ^4.1.2
@@ -38,16 +40,19 @@ catalog:
   react: 19.2.0
   tsdown: 0.15.12
   typescript: 5.9.3
-  vite: 6.3.5
+  vite: 7.2.6
   vite-tsconfig-paths: ^5.1.4
   zod: 4.0.15
+
 ignoredBuiltDependencies:
   - "@swc/core"
   - core-js-pure
   - sharp
   - workerd
+
 onlyBuiltDependencies:
   - esbuild
+
 overrides:
   "@stephansama/astro-iconify-svgmap": workspace:*
   "@stephansama/catppuccin-xsl": workspace:*

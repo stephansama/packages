@@ -1,7 +1,9 @@
-import { expect, it, vi } from "vitest";
+import { afterEach, expect, it, vi } from "vitest";
 import * as z from "zod";
 
 import { createEvent } from "@/event";
+
+afterEach(vi.restoreAllMocks);
 
 it("dispatches an event with a valid event", () => {
 	const event = createEvent("test", z.object({ shape: z.number() }));

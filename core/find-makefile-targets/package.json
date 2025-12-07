@@ -26,6 +26,7 @@
 		"./package.json": "./package.json"
 	},
 	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
 	"bin": "./cli.mjs",
 	"files": [
 		"./dist",
@@ -34,16 +35,17 @@
 	"scripts": {
 		"build": "tsdown",
 		"dev": "tsdown --watch",
-		"lint": "eslint ./src/"
+		"lint": "eslint ./"
+	},
+	"dependencies": {
+		"@kba/makefile-parser": "^0.0.6"
 	},
 	"devDependencies": {
-		"@kba/makefile-parser": "^0.0.6",
 		"tsdown": "catalog:"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true
-	},
-	"module": "./dist/index.js"
+	}
 }

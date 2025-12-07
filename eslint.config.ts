@@ -3,6 +3,7 @@ import json from "@eslint/json";
 import gitignore from "eslint-config-flat-gitignore";
 import prettier from "eslint-config-prettier";
 import eslintPluginAstro from "eslint-plugin-astro";
+import baselineJs from "eslint-plugin-baseline-js";
 import perfectionist from "eslint-plugin-perfectionist";
 import pluginPnpm from "eslint-plugin-pnpm";
 import eslintPluginReactHooks from "eslint-plugin-react-hooks";
@@ -14,7 +15,7 @@ import * as jsoncParser from "jsonc-eslint-parser";
 import tseslint from "typescript-eslint";
 import * as yamlParser from "yaml-eslint-parser";
 
-const configs = defineConfig([
+const configs = defineConfig(
 	gitignore(),
 	{ files: ["**/*.{js,mjs,cjs,ts}"] },
 	{
@@ -23,12 +24,6 @@ const configs = defineConfig([
 			globals: { ...globals.browser, ...globals.node },
 			sourceType: "module",
 		},
-	},
-	{
-		extends: ["json/recommended"],
-		files: ["**/*.json"],
-		language: "json/json",
-		plugins: { json },
 	},
 	{
 		extends: ["json/recommended"],
@@ -42,6 +37,9 @@ const configs = defineConfig([
 		language: "json/json5",
 		plugins: { json },
 	},
+	// @ts-expect-error unexpected plugin key but its ok
+	{ plugins: { ["baseline-js"]: baselineJs } },
+	baselineJs.configs["recommended-ts"]({ available: "widely", level: "error" }),
 	pluginJs.configs.recommended,
 	tseslint.configs.recommended,
 	eslintPluginAstro.configs.recommended,
@@ -56,11 +54,12 @@ const configs = defineConfig([
 	},
 	{
 		files: ["package.json", "**/package.json"],
+		ignores: ["**/examples/**/package.json"],
 		languageOptions: { parser: jsoncParser },
 		name: "pnpm/package.json",
 		plugins: { pnpm: pluginPnpm },
 		rules: {
-			"pnpm/json-enforce-catalog": "error",
+			"pnpm/json-enforce-catalog": ["error", { fields: ["devDependencies"] }],
 			"pnpm/json-prefer-workspace-settings": "error",
 			"pnpm/json-valid-catalog": "error",
 		},
@@ -86,6 +85,6 @@ const configs = defineConfig([
 			"no-console": ["warn", { allow: ["warn", "error", "info"] }],
 		},
 	},
-]);
+);
 
 export default configs;

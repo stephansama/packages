@@ -1,12 +1,29 @@
-packages:
-  - ./.config/*
-  - core/**
-  - examples/**
 autoInstallPeers: true
 catalogMode: strict
 cleanupUnusedCatalogs: true
 engineStrict: true
 shellEmulator: true
+
+packages:
+  - ./.config/*
+  - core/**
+  - examples/**
+
+catalogs:
+  storybook:
+    "@chromatic-com/storybook": ^4.1.2
+    "@storybook/addon-a11y": ^10.0.2
+    "@storybook/addon-docs": ^10.0.2
+    "@storybook/addon-svelte-csf": ^5.0.10
+    "@storybook/svelte-vite": ^10.0.2
+    storybook: ^10.0.2
+  svelte:
+    "@sveltejs/package": ^2.5.4
+    "@sveltejs/vite-plugin-svelte": ^6.2.1
+    "@tsconfig/svelte": ^5.0.5
+    svelte: ^5.39.6
+    svelte-check: ^4.3.2
+
 catalog:
   "@catppuccin/palette": 1.7.1
   "@iconify/types": ^2.0.0
@@ -21,18 +38,23 @@ catalog:
   minify: 14.0.0
   prettier: ^3.6.2
   react: 19.2.0
+  remark: ^15.0.1
   tsdown: 0.15.12
   typescript: 5.9.3
+  unist-util-visit: ^5.0.0
   vite: 6.3.5
   vite-tsconfig-paths: ^5.1.4
   zod: 4.0.15
+
 ignoredBuiltDependencies:
   - "@swc/core"
   - core-js-pure
   - sharp
   - workerd
+
 onlyBuiltDependencies:
   - esbuild
+
 overrides:
   "@stephansama/astro-iconify-svgmap": workspace:*
   "@stephansama/catppuccin-xsl": workspace:*

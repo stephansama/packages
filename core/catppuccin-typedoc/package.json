@@ -27,7 +27,7 @@
 	"scripts": {
 		"build": "node ./src/generate.js",
 		"postbuild": "publint",
-		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern"
 	},
 	"devDependencies": {
 		"@catppuccin/palette": "catalog:"

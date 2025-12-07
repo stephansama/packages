@@ -107,6 +107,4 @@ it("sets up the event listener map", () => {
 	expect(infoSpy).toHaveBeenCalledWith("light");
 
 	expect(dispatchEventSpy).toHaveBeenCalledTimes(3);
-
-	dispatchEventSpy.mockReset();
 });

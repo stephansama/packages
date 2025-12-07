@@ -7,6 +7,21 @@ catalogMode: strict
 cleanupUnusedCatalogs: true
 engineStrict: true
 shellEmulator: true
+catalogs:
+  storybook:
+    "@chromatic-com/storybook": ^4.1.2
+    "@storybook/addon-a11y": ^10.0.2
+    "@storybook/addon-docs": ^10.0.2
+    "@storybook/addon-svelte-csf": ^5.0.10
+    "@storybook/svelte-vite": ^10.0.2
+    storybook: ^10.0.2
+  svelte:
+    "@sveltejs/package": ^2.5.4
+    "@sveltejs/vite-plugin-svelte": ^6.2.1
+    "@tsconfig/svelte": ^5.0.5
+    svelte: ^5.39.6
+    svelte-check: ^4.3.2
+
 catalog:
   "@catppuccin/palette": 1.7.1
   "@iconify/types": ^2.0.0

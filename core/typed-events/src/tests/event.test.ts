@@ -3,7 +3,7 @@ import * as z from "zod";
 
 import { createEvent } from "@/event";
 
-afterEach(vi.clearAllMocks);
+afterEach(vi.restoreAllMocks);
 
 it("dispatches an event with a valid event", () => {
 	const event = createEvent("test", z.object({ shape: z.number() }));

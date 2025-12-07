@@ -8,7 +8,7 @@ import { useListener, useListeners } from "@/react";
 
 const event = createEvent("test-event", z.object({ payload: z.number() }));
 
-afterEach(vi.clearAllMocks);
+afterEach(vi.restoreAllMocks);
 
 function ExampleEventInteraction() {
 	useListener(event, () => {

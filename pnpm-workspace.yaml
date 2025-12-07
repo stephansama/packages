@@ -23,6 +23,10 @@ catalogs:
     "@tsconfig/svelte": ^5.0.5
     svelte: ^5.39.6
     svelte-check: ^4.3.2
+  vitest:
+    "@vitest/coverage-v8": "^4.0.15"
+    "@vitest/ui": "^4.0.15"
+    vitest: "^4.0.15"
 
 catalog:
   "@catppuccin/palette": 1.7.1

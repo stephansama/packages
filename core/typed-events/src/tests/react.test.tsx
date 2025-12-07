@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { expect, it, vi } from "vitest";
+import { afterEach, expect, it, vi } from "vitest";
 import * as z from "zod";
 
 import { createEvent } from "@/event";
@@ -7,6 +7,8 @@ import { createEventMap } from "@/event-map";
 import { useListener, useListeners } from "@/react";
 
 const event = createEvent("test-event", z.object({ payload: z.number() }));
+
+afterEach(vi.clearAllMocks);
 
 function ExampleEventInteraction() {
 	useListener(event, () => {
@@ -105,4 +107,6 @@ it("sets up the event listener map", () => {
 	expect(infoSpy).toHaveBeenCalledWith("light");
 
 	expect(dispatchEventSpy).toHaveBeenCalledTimes(3);
+
+	dispatchEventSpy.mockReset();
 });

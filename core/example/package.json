@@ -43,7 +43,8 @@
 		"@clack/prompts": "^0.11.0"
 	},
 	"devDependencies": {
-		"tsdown": "catalog:"
+		"tsdown": "catalog:",
+		"undici": "catalog:"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {

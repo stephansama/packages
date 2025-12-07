@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.4.0
+
+### Minor Changes
+
+- 16930ac: Updated examples cli to use online meta file
+
 ## 1.3.3
 
 ### Patch Changes

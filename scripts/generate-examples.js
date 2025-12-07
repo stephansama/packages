@@ -17,31 +17,27 @@ export async function generate({ writeToFile = true } = {}) {
 
 	const examples = packages
 		.filter((pkg) => {
-			if (pkg.relativeDir.startsWith("examples")) {
-				const isNamedProperly =
-					pkg.packageJson.name.includes("@example");
-				const isPrivate = pkg.packageJson.private;
+			if (!pkg.relativeDir.startsWith("examples")) return false;
 
-				if (!isNamedProperly) {
-					throw new Error(
-						`project ${pkg.packageJson.name} is not named properly please include @example prefix`,
-					);
-				}
+			const isNamedProperly = pkg.packageJson.name.includes("@example");
+			const isPrivate = pkg.packageJson.private;
 
-				if (!isPrivate) {
-					throw new Error(
-						`project ${pkg.packageJson.name} is not private. please make the example private`,
-					);
-				}
-
-				return true;
+			if (!isNamedProperly) {
+				throw new Error(
+					`project ${pkg.packageJson.name} is not named properly please include @example prefix`,
+				);
 			}
 
-			return false;
+			if (!isPrivate) {
+				throw new Error(
+					`project ${pkg.packageJson.name} is not private. please make the example private`,
+				);
+			}
+
+			return true;
 		})
 		.map((pkg) => ({
 			description: pkg.packageJson.description,
-			dir: pkg.dir,
 			name: pkg.packageJson.name,
 			relativeDir: pkg.relativeDir,
 			version: pkg.packageJson.version,

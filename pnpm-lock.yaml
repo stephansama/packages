@@ -51,6 +51,9 @@ catalogs:
     typescript:
       specifier: 5.9.3
       version: 5.9.3
+    undici:
+      specifier: ^7.16.0
+      version: 7.16.0
     unist-util-visit:
       specifier: ^5.0.0
       version: 5.0.0
@@ -442,6 +445,9 @@ importers:
       tsdown:
         specifier: 'catalog:'
         version: 0.15.12(@arethetypeswrong/core@0.18.2)(oxc-resolver@11.14.2)(publint@0.3.15)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3))
+      undici:
+        specifier: 'catalog:'
+        version: 7.16.0
 
   core/find-makefile-targets:
     dependencies:
@@ -19955,8 +19961,7 @@ snapshots:
 
   undici@6.21.3: {}
 
-  undici@7.16.0:
-    optional: true
+  undici@7.16.0: {}
 
   unenv@2.0.0-rc.19:
     dependencies:

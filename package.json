@@ -2,7 +2,7 @@
 	"name": "root",
 	"version": "1.0.0",
 	"private": true,
-	"homepage": "https://packages.stephansama.info/",
+	"homepage": "https://packages.stephansama.info",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/stephansama/packages.git"

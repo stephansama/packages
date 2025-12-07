@@ -1,11 +1,41 @@
+import type { Package } from "@manypkg/get-packages";
+
 import { downloadTemplate } from "@bluwy/giget-core";
 import * as clack from "@clack/prompts";
 import * as path from "node:path";
 
-import examples from "../../../scripts/dist/examples";
+import rootPkgJson from "../../../package.json";
+import fallbackExamples from "../../../scripts/dist/examples";
+
+type RelativePackageJSON = Package["packageJson"] & {
+	description: string;
+	relativeDir: string;
+};
+
+export async function fetchExamples() {
+	const url = new URL("meta.json", rootPkgJson.homepage).href;
+	try {
+		const res = await fetch(url);
+		const json = await res.json();
+		const examples = (json as RelativePackageJSON[]).filter(({ name }) =>
+			name.startsWith("@example"),
+		);
+
+		if (!examples.length) {
+			throw new Error("no examples found from remote");
+		}
+
+		return examples;
+	} catch {
+		console.error(`failed to load remote examples, using local fallback`);
+		return fallbackExamples;
+	}
+}
 
 export async function main() {
 	clack.intro("create @stephansama example projects");
+
+	const examples = await fetchExamples();
 
 	const example = await clack.select({
 		message: "Select an example:",

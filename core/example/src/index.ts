@@ -13,12 +13,12 @@ type RelativePackageJSON = Package["packageJson"] & {
 };
 
 export async function fetchExamples() {
-	const url = [rootPkgJson.homepage, "meta.json"].join("/");
+	const url = new URL("meta.json", rootPkgJson.homepage).href;
 	try {
 		const res = await fetch(url);
 		const json = await res.json();
-		const examples = (json as RelativePackageJSON[]).filter((pkg) =>
-			pkg.relativeDir.startsWith("example"),
+		const examples = (json as RelativePackageJSON[]).filter(({ name }) =>
+			name.startsWith("@example"),
 		);
 
 		if (!examples.length) {
@@ -26,8 +26,8 @@ export async function fetchExamples() {
 		}
 
 		return examples;
-	} catch (e) {
-		console.error(`failed to load remote packages ${e}`);
+	} catch {
+		console.error(`failed to load remote examples, using local fallback`);
 		return fallbackExamples;
 	}
 }

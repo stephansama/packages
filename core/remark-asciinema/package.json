@@ -37,13 +37,13 @@
 	"scripts": {
 		"build": "tsdown",
 		"dev": "tsdown --watch",
-		"lint": "eslint ./src/",
+		"lint": "eslint ./",
 		"prepublishOnly": "tsdown"
 	},
 	"devDependencies": {
-		"remark": "^15.0.1",
+		"remark": "catalog:",
 		"tsdown": "catalog:",
-		"unist-util-visit": "^5.0.0"
+		"unist-util-visit": "catalog:"
 	},
 	"publishConfig": {
 		"access": "public",

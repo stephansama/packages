@@ -30,7 +30,7 @@
 		"src"
 	],
 	"scripts": {
-		"prelint": "eslint ./src/",
+		"prelint": "eslint ./",
 		"lint": "publint",
 		"type-check": "tsc --noEmit"
 	},

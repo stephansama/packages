@@ -52,7 +52,7 @@
 	"scripts": {
 		"build": "tsdown --profile=node16",
 		"dev": "tsdown --watch",
-		"lint": "eslint ./src/",
+		"lint": "eslint ./",
 		"prepublishOnly": "tsdown"
 	},
 	"devDependencies": {

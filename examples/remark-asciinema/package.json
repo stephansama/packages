@@ -8,7 +8,7 @@
 		"astro": "astro",
 		"build": "astro build",
 		"dev": "astro dev",
-		"lint": "eslint ./src/ && astro check",
+		"lint": "eslint ./ && astro check",
 		"lint:fix": "eslint ./src/ --fix",
 		"preview": "astro preview"
 	},

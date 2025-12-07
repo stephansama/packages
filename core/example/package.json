@@ -35,7 +35,7 @@
 		"predev": "pnpm run generate",
 		"dev": "tsdown --watch",
 		"generate": "pnpm --workspace-root run scripts:generate-examples",
-		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
 		"typedoc": "pnpm run generate"
 	},
 	"dependencies": {

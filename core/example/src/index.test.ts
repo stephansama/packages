@@ -22,7 +22,7 @@ vi.mock("@clack/prompts", () => ({
 	intro: vi.fn(),
 	isCancel: vi.fn().mockReturnValue(false),
 	outro: vi.fn(),
-	select: vi.fn().mockReturnValue("@example/remark-asciinema"),
+	select: vi.fn().mockReturnValue("@example/astro-iconify-svgmap"),
 	spinner: vi.fn().mockReturnValue({ start: vi.fn(), stop: vi.fn() }),
 	text: vi.fn().mockReturnValue("./example"),
 }));

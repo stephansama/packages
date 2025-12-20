@@ -2,7 +2,7 @@ import * as fsp from "node:fs/promises";
 import * as path from "path";
 import { build as tsdown } from "tsdown";
 import yaml from "yaml";
-import { z } from "zod";
+import * as z from "zod";
 
 const outDir = path.resolve("./dist");
 const schemaDir = path.resolve("./config");

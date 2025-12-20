@@ -9,6 +9,7 @@ import pluginPnpm from "eslint-plugin-pnpm";
 import eslintPluginReactHooks from "eslint-plugin-react-hooks";
 import storybook from "eslint-plugin-storybook";
 import testingLibrary from "eslint-plugin-testing-library";
+import eslintPluginZodX from "eslint-plugin-zod-x";
 import { defineConfig } from "eslint/config";
 import globals from "globals";
 import * as jsoncParser from "jsonc-eslint-parser";
@@ -45,6 +46,7 @@ const configs = defineConfig(
 	eslintPluginAstro.configs.recommended,
 	eslintPluginAstro.configs["jsx-a11y-strict"],
 	eslintPluginReactHooks.configs.flat.recommended,
+	eslintPluginZodX.configs.recommended,
 	perfectionist.configs["recommended-natural"],
 	storybook.configs["flat/recommended"],
 	prettier,

@@ -75,7 +75,7 @@
 		"vfile": "^6.0.3",
 		"yaml": "^2.8.1",
 		"yargs": "^18.0.0",
-		"zod": "catalog:",
+		"zod": "catalog:schema",
 		"zod2md": "^0.2.4"
 	},
 	"devDependencies": {

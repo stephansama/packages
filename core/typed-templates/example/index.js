@@ -1,3 +1,5 @@
+// create a map of different handlebar schemas
+//
 import * as z from "zod";
 
 import {
@@ -7,8 +9,6 @@ import {
 } from "../dist/index.cjs";
 
 const { isLinting, templateDirectory } = getFileContext(import.meta.url);
-
-// create a map of different handlebar schemas
 
 export const schemaMap = createHandlebarSchemaMap(
 	{

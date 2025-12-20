@@ -24,6 +24,8 @@ pnpm install @stephansama/typed-templates
 
 ## Usage
 
+create a map of different handlebar schemas
+
 ```javascript
 import * as z from "zod";
 
@@ -34,11 +36,7 @@ import {
 } from "@stephansama/typed-templates";
 
 const { isLinting, templateDirectory } = getFileContext(import.meta.url);
-```
 
-create a map of different handlebar schemas
-
-```javascript
 export const schemaMap = createHandlebarSchemaMap(
   {
     constList: {

@@ -175,8 +175,6 @@ function normalizeValibotSchema(schema: any): NormalizedSchema {
 function normalizeZodSchema(node: any): NormalizedSchema {
 	const def = node.def;
 
-	console.log(def.type);
-	console.log(def);
 	switch (def.type) {
 		case "array":
 			return {

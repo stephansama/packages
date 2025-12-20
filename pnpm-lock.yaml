@@ -455,6 +455,9 @@ importers:
       minify:
         specifier: 'catalog:'
         version: 14.0.0(@swc/helpers@0.5.17)
+      vite-tsconfig-paths:
+        specifier: 'catalog:'
+        version: 5.1.4(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.2))
       zod:
         specifier: catalog:schema
         version: 4.0.15

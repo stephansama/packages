@@ -50,6 +50,7 @@
 		"@types/minify": "catalog:",
 		"handlebars": "catalog:",
 		"minify": "catalog:",
+		"vite-tsconfig-paths": "catalog:",
 		"zod": "catalog:schema"
 	},
 	"packageManager": "pnpm@10.11.0",

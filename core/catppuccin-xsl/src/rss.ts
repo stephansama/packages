@@ -9,28 +9,22 @@ import * as path from "node:path";
 import pkg from "../package.json" with { type: "json" };
 import { convertColors } from "./utils";
 
-const year = new Date().getFullYear();
-const { config, name: package_name, version } = pkg;
-const { outputFolder } = config;
-
-const lightStyle = await rssSchema.compile(
-	"style",
-	convertColors(flavors.latte.colors),
-);
+const lightColors = convertColors(flavors.latte.colors);
+const lightStyle = await rssSchema.compile("style", lightColors);
 const darkThemes = Object.entries(flavors).filter(
 	([theme]) => theme !== "latte",
 );
 
-await fsp.mkdir(outputFolder, { recursive: true });
+await fsp.mkdir("./dist", { recursive: true });
 
 for (const [theme, val] of darkThemes) {
 	const colors = convertColors(val.colors);
 	const currentStyle = await rssSchema.compile("style", colors);
 	const currentComment = await rssSchema.compile("comment", {
-		package_name,
+		package_name: pkg.name,
 		theme,
-		version,
-		year,
+		version: pkg.version,
+		year: new Date().getFullYear(),
 	});
 
 	const style = await minify.css(
@@ -45,5 +39,5 @@ for (const [theme, val] of darkThemes) {
 		style,
 	});
 
-	await fsp.writeFile(path.join(outputFolder, `rss-${theme}.xsl`), xml);
+	await fsp.writeFile(path.join("./dist", `rss-${theme}.xsl`), xml);
 }

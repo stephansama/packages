@@ -40,12 +40,9 @@
 		"build:rss": "tsx ./src/rss.ts",
 		"build:sitemap": "tsx ./src/sitemap.ts",
 		"dev": "pnpm run --parallel \"/^dev:.*/\"",
-		"dev:opml": "node --watch ./src/opml.js",
-		"dev:rss": "node --watch ./src/rss.js",
-		"dev:sitemap": "node --watch ./src/sitemap.js"
-	},
-	"config": {
-		"outputFolder": "./dist"
+		"dev:opml": "node --watch ./src/opml.ts",
+		"dev:rss": "node --watch ./src/rss.ts",
+		"dev:sitemap": "node --watch ./src/sitemap.ts"
 	},
 	"devDependencies": {
 		"@catppuccin/palette": "catalog:",

@@ -6,12 +6,12 @@ import { minify } from "minify";
 import * as fsp from "node:fs/promises";
 import * as path from "node:path";
 
-import * as utils from "./utils";
+import { convertColors } from "./utils";
 
 await fsp.mkdir("./dist", { recursive: true });
 
 for (const [theme, val] of Object.entries(flavors)) {
-	const colors = utils.convertColors(val.colors);
+	const colors = convertColors(val.colors);
 	const styleTemplate = await opmlSchema.compile("style", colors);
 	const style = await minify.css(styleTemplate);
 	const outputFile = await opmlSchema.compile("markup", { style });

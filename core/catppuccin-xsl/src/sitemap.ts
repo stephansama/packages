@@ -6,21 +6,18 @@ import { minify } from "minify";
 import * as fsp from "node:fs/promises";
 import * as path from "node:path";
 
-import * as utils from "./utils.js";
+import { convertColors } from "./utils";
 
 await fsp.mkdir("./dist", { recursive: true });
 
-const lightStyle = await sitemapSchema.compile(
-	"style",
-	utils.convertColors(flavors.latte.colors),
-);
-
+const lightColors = convertColors(flavors.latte.colors);
+const lightStyle = await sitemapSchema.compile("style", lightColors);
 const darkThemes = Object.entries(flavors).filter(
 	([theme]) => theme !== "latte",
 );
 
 for (const [theme, val] of darkThemes) {
-	const colors = utils.convertColors(val.colors);
+	const colors = convertColors(val.colors);
 	const currentStyle = await sitemapSchema.compile("style", colors);
 	const themeStylesheet = await sitemapSchema.compile("themeStylesheet", {
 		darkStyle: currentStyle,

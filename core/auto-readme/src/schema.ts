@@ -1,15 +1,14 @@
-import { z } from "zod";
+import * as z from "zod";
 
 export const actionsSchema = z
 	.enum(["ACTION", "PKG", "USAGE", "WORKSPACE", "ZOD"])
-	.describe("Comment action options");
+	.meta({
+		description: "Comment action options",
+	});
 
-export const formatsSchema = z
-	.enum(["LIST", "TABLE"])
-	.default("TABLE")
-	.optional();
+export const formatsSchema = z.enum(["LIST", "TABLE"]).default("TABLE");
 
-export const languageSchema = z.enum(["JS", "RS"]).optional().default("JS");
+export const languageSchema = z.enum(["JS", "RS"]).default("JS");
 
 const headingsSchema = z
 	.enum([
@@ -22,29 +21,27 @@ const headingsSchema = z
 		"required",
 		"version",
 	])
-	.describe("Table heading options");
+	.meta({
+		description: "Table heading options",
+	});
 
 const tableHeadingsSchema = z
 	.record(actionsSchema, headingsSchema.array().optional())
-	.optional()
-	.describe("Table heading action configuration")
 	.default({
 		ACTION: ["name", "required", "default", "description"],
 		PKG: ["name", "version", "devDependency"],
 		USAGE: [],
 		WORKSPACE: ["name", "version", "downloads", "description"],
 		ZOD: [],
-	});
+	})
+	.meta({ description: "Table heading action configuration" });
 
 const templatesSchema = z.object({
 	downloadImage: z
 		.string()
-		.optional()
 		.default("https://img.shields.io/npm/dw/{{name}}?labelColor=211F1F"),
 	emojis: z
 		.record(headingsSchema, z.string())
-		.optional()
-		.describe("Table heading emojis used when enabled")
 		.default({
 			default: "⚙️",
 			description: "📝",
@@ -54,14 +51,11 @@ const templatesSchema = z.object({
 			private: "🔒",
 			required: "",
 			version: "",
-		}),
-	registryUrl: z
-		.string()
-		.optional()
-		.default("https://www.npmjs.com/package/{{name}}"),
+		})
+		.meta({ description: "Table heading emojis used when enabled" }),
+	registryUrl: z.string().default("https://www.npmjs.com/package/{{name}}"),
 	versionImage: z
 		.string()
-		.optional()
 		.default(
 			"https://img.shields.io/npm/v/{{uri_name}}?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F",
 		),
@@ -71,8 +65,8 @@ export const defaultTemplates = templatesSchema.parse({});
 export const defaultTableHeadings = tableHeadingsSchema.parse(undefined);
 
 const _configSchema = z.object({
-	affectedRegexes: z.string().array().optional().default([]),
-	collapseHeadings: z.string().array().optional().default([]),
+	affectedRegexes: z.string().array().default([]),
+	collapseHeadings: z.string().array().default([]),
 	defaultLanguage: languageSchema.meta({
 		alias: "l",
 		description: "Default language to infer projects from",
@@ -91,7 +85,7 @@ const _configSchema = z.object({
 		alias: "t",
 		description: "generate table of contents for readmes",
 	}),
-	enableUsage: z.boolean().optional().default(false).meta({
+	enableUsage: z.boolean().default(false).meta({
 		description: "Whether or not to enable usage plugin",
 	}),
 	headings: tableHeadingsSchema
@@ -106,7 +100,7 @@ const _configSchema = z.object({
 		alias: "p",
 		description: "Only show public packages in workspaces",
 	}),
-	removeScope: z.string().optional().default("").meta({
+	removeScope: z.string().default("").meta({
 		description: "Remove common workspace scope",
 	}),
 	templates: templatesSchema
@@ -115,13 +109,13 @@ const _configSchema = z.object({
 		.describe(
 			"Handlebars templates used to fuel list and table generation",
 		),
-	tocHeading: z.string().optional().default("Table of contents").meta({
+	tocHeading: z.string().default("Table of contents").meta({
 		description: "Markdown heading used to generate table of contents",
 	}),
-	usageFile: z.string().optional().default("").meta({
+	usageFile: z.string().default("").meta({
 		description: "Workspace level usage file",
 	}),
-	usageHeading: z.string().optional().default("Usage").meta({
+	usageHeading: z.string().default("Usage").meta({
 		description: "Markdown heading used to generate usage example",
 	}),
 	verbose: z.boolean().default(false).meta({

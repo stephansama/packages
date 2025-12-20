@@ -1,7 +1,7 @@
 import debug from "debug";
 import yargs, { type Options } from "yargs";
 import { hideBin } from "yargs/helpers";
-import z from "zod";
+import * as z from "zod";
 
 import { configSchema } from "./schema";
 

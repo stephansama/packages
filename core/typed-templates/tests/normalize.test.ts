@@ -6,7 +6,7 @@ import * as normalize from "@/normalize";
 import { arkUser } from "./fixtures/schemas/arktype";
 import { handlebarsUser } from "./fixtures/schemas/handlebars";
 import { valibotUser } from "./fixtures/schemas/valibot";
-import { zodUser } from "./fixtures/schemas/zod";
+import { zodUserSchema } from "./fixtures/schemas/zod";
 
 describe("schema normalization (real libraries)", () => {
 	it("normalizes arktype schema", () => {
@@ -42,7 +42,7 @@ describe("schema normalization (real libraries)", () => {
 	});
 
 	it("normalizes zod schema", () => {
-		const normalized = normalize.standardSchema(zodUser as any);
+		const normalized = normalize.standardSchema(zodUserSchema);
 
 		expect(normalized).toEqual({
 			kind: "object",
@@ -81,7 +81,7 @@ describe("schema normalization (real libraries)", () => {
 describe("schema comparison", () => {
 	it("arktype and zod schemas are compatible", () => {
 		const ark = normalize.standardSchema(arkUser);
-		const zod = normalize.standardSchema(zodUser);
+		const zod = normalize.standardSchema(zodUserSchema);
 
 		const errors = normalize.compareSchemas(ark, zod, "user");
 

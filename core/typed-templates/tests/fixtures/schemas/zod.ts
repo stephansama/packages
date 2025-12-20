@@ -1,6 +1,6 @@
-import { z } from "zod";
+import * as z from "zod";
 
-export const zodUser = z.object({
+export const zodUserSchema = z.object({
 	age: z.number().optional(),
 	name: z.string(),
 	tags: z.array(z.string()),

@@ -50,6 +50,7 @@
 		"@types/minify": "catalog:",
 		"handlebars": "catalog:",
 		"minify": "catalog:",
+		"tsx": "catalog:",
 		"vite-tsconfig-paths": "catalog:",
 		"zod": "catalog:schema"
 	},

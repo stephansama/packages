@@ -3,18 +3,14 @@
 import { flavors } from "@catppuccin/palette";
 import { opmlSchema } from "@templates/schema";
 import { minify } from "minify";
-import * as fsp from "node:fs/promises";
-import * as path from "node:path";
 
-import { convertColors } from "./utils";
-
-await fsp.mkdir("./dist", { recursive: true });
+import * as utils from "./utils";
 
 for (const [theme, val] of Object.entries(flavors)) {
-	const colors = convertColors(val.colors);
+	const colors = utils.convertColors(val.colors);
 	const styleTemplate = await opmlSchema.compile("style", colors);
 	const style = await minify.css(styleTemplate);
 	const outputFile = await opmlSchema.compile("markup", { style });
 
-	await fsp.writeFile(path.join("./dist", `opml-${theme}.xsl`), outputFile);
+	await utils.writeFile(`opml-${theme}.xsl`, outputFile);
 }

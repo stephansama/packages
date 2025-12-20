@@ -74,7 +74,9 @@ export const sitemapSchema = createHandlebarSchemaMap(
 );
 
 if (isLinting()) {
-	await rssSchema.audit();
-	await opmlSchema.audit();
-	await sitemapSchema.audit();
+	await Promise.all([
+		rssSchema.audit(),
+		opmlSchema.audit(),
+		sitemapSchema.audit(),
+	]);
 }

@@ -1,19 +1,15 @@
 {
-	"name": "@stephansama/typed-events",
-	"version": "3.0.1",
-	"description": "Typed events store using standard schema",
+	"name": "@stephansama/typed-templates",
+	"version": "0.0.0",
+	"description": "Use standard schema to validate and use handlebar template directories",
 	"keywords": [
-		"typed-events",
-		"standard-schema",
-		"validation",
-		"events",
-		"strict"
+		"typed-templates"
 	],
-	"homepage": "https://packages.stephansama.info/api/@stephansama/typed-events",
+	"homepage": "https://packages.stephansama.info/api/@stephansama/typed-templates",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/stephansama/packages.git",
-		"directory": "core/typed-events"
+		"directory": "core/typed-templates"
 	},
 	"license": "MIT",
 	"author": {
@@ -21,20 +17,11 @@
 		"email": "stephanrandle.dev@gmail.com",
 		"url": "https://stephansama.info"
 	},
-	"sideEffects": false,
 	"type": "module",
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
 			"require": "./dist/index.cjs"
-		},
-		"./errors": {
-			"import": "./dist/errors.js",
-			"require": "./dist/errors.cjs"
-		},
-		"./react": {
-			"import": "./dist/react.js",
-			"require": "./dist/react.cjs"
 		},
 		"./package.json": "./package.json"
 	},
@@ -42,7 +29,7 @@
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.cts",
 	"files": [
-		"./dist/"
+		"dist"
 	],
 	"scripts": {
 		"build": "tsdown",
@@ -50,23 +37,23 @@
 		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern"
 	},
 	"dependencies": {
-		"@standard-schema/spec": "catalog:schema"
+		"@standard-schema/spec": "catalog:schema",
+		"barhandles": "^0.5.4"
 	},
 	"devDependencies": {
-		"@testing-library/jest-dom": "catalog:",
-		"@testing-library/react": "catalog:",
-		"@types/react": "catalog:",
-		"happy-dom": "catalog:",
-		"react": "catalog:",
+		"arktype": "catalog:schema",
+		"handlebars": "catalog:",
 		"tsdown": "catalog:",
+		"tsx": "catalog:",
+		"valibot": "catalog:schema",
 		"vite-tsconfig-paths": "catalog:",
 		"zod": "catalog:schema"
 	},
 	"peerDependencies": {
-		"react": ">=18"
-	},
-	"optionalDependencies": {
-		"react": ">=18"
+		"arktype": ">=2",
+		"handlebars": ">=4",
+		"valibot": ">=1",
+		"zod": ">=4"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {

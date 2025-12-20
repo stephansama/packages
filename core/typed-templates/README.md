@@ -87,3 +87,13 @@ if (isLinting()) await singleSchema.audit();
 ```
 
 then later on in the code in another file:
+
+```javascript
+export async function useTemplate() {
+  return await schemaMap.compile("constList", {
+    body: "body",
+    name: "Name",
+    plural_name: "Plural",
+  });
+}
+```

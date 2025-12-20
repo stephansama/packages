@@ -33,25 +33,26 @@
 		"dist"
 	],
 	"scripts": {
+		"audit": "tsx ./templates/schema.ts",
 		"build": "pnpm run --sequential \"/^build:.*/\"",
 		"postbuild": "publint",
-		"build:opml": "node ./scripts/opml.js",
-		"build:rss": "node ./scripts/rss.js",
-		"build:sitemap": "node ./scripts/sitemap.js",
+		"build:opml": "tsx ./src/opml.ts",
+		"build:rss": "tsx ./src/rss.ts",
+		"build:sitemap": "tsx ./src/sitemap.ts",
 		"dev": "pnpm run --parallel \"/^dev:.*/\"",
-		"dev:opml": "node --watch ./scripts/opml.js",
-		"dev:rss": "node --watch ./scripts/rss.js",
-		"dev:sitemap": "node --watch ./scripts/sitemap.js"
+		"dev:opml": "node --watch ./src/opml.ts",
+		"dev:rss": "node --watch ./src/rss.ts",
+		"dev:sitemap": "node --watch ./src/sitemap.ts"
 	},
-	"config": {
-		"outputFolder": "./dist"
-	},
-	"dependencies": {},
 	"devDependencies": {
 		"@catppuccin/palette": "catalog:",
+		"@stephansama/typed-templates": "workspace:*",
 		"@types/minify": "catalog:",
 		"handlebars": "catalog:",
-		"minify": "catalog:"
+		"minify": "catalog:",
+		"tsx": "catalog:",
+		"vite-tsconfig-paths": "catalog:",
+		"zod": "catalog:schema"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {

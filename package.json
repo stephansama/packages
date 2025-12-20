@@ -43,13 +43,12 @@
 		"@commitlint/config-conventional": "^19.8.1",
 		"@commitlint/types": "^19.8.1",
 		"@eslint/js": "^9.39.1",
-		"eslint-plugin-zod-x": "^1.13.2",
 		"@eslint/json": "^0.14.0",
 		"@manypkg/get-packages": "^3.1.0",
 		"@stephansama/auto-readme": "workspace:*",
 		"@stephansama/prettier-plugin-handlebars": "workspace:*",
 		"@tsconfig/recommended": "^1.0.13",
-		"@turbo/gen": "^2.6.2",
+		"@turbo/gen": "^2.7.0",
 		"@types/node": "^24.10.1",
 		"@typescript-eslint/parser": "^8.48.1",
 		"@vitest/coverage-v8": "catalog:vitest",
@@ -66,6 +65,7 @@
 		"eslint-plugin-react-hooks": "^7.0.1",
 		"eslint-plugin-storybook": "^10.1.4",
 		"eslint-plugin-testing-library": "^7.13.5",
+		"eslint-plugin-zod-x": "^1.13.2",
 		"globals": "^16.5.0",
 		"husky": "^9.1.7",
 		"jsdom": "^27.2.0",
@@ -81,11 +81,14 @@
 		"prettier-plugin-packagejson": "^2.5.20",
 		"prettier-plugin-svelte": "^3.4.0",
 		"publint": "^0.3.15",
-		"turbo": "^2.6.2",
+		"turbo": "^2.7.0",
 		"typescript": "catalog:",
 		"typescript-eslint": "^8.48.1",
 		"vitest": "catalog:vitest",
 		"yaml-eslint-parser": "^1.3.2"
 	},
-	"packageManager": "pnpm@10.11.0"
+	"packageManager": "pnpm@10.11.0",
+	"devDependencies": {
+		"tsx": "catalog:"
+	}
 }

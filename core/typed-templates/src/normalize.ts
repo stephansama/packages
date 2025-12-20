@@ -109,8 +109,8 @@ function normalizeHandlebarsSchema(node: any): NormalizedSchema {
 
 	switch (node._type) {
 		case "any":
+		case undefined:
 			return { kind: "any", optional };
-
 		case "array":
 			return {
 				element: normalizeHandlebarsSchema(node["#"]),

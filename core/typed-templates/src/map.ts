@@ -1,10 +1,5 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
-export type HandlebarSchemaMapOptions = {
-	path: string;
-	schema: StandardSchemaV1;
-};
-
 import barhandles from "barhandles";
 import Handlebars from "handlebars";
 import * as fsp from "node:fs/promises";
@@ -12,6 +7,11 @@ import * as path from "node:path";
 
 import * as normalize from "./normalize";
 import { validate } from "./utils";
+
+export type HandlebarSchemaMapOptions = {
+	path: string;
+	schema: StandardSchemaV1;
+};
 
 export function createHandlebarSchemaMap<
 	Map extends Record<string, HandlebarSchemaMapOptions>,

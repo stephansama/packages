@@ -1,10 +1,16 @@
 import * as z from "zod";
 
-import { createHandlebarSchemaMap, getFileContext } from "../dist/index.js";
+import {
+	createHandlebarSchemaMap,
+	createHandlebarSchemaSingleton,
+	getFileContext,
+} from "../dist/index.cjs";
 
 const { isLinting, templateDirectory } = getFileContext(import.meta.url);
 
-export const schema = createHandlebarSchemaMap(
+// create a map of different handlebar schemas
+
+export const schemaMap = createHandlebarSchemaMap(
 	{
 		constList: {
 			path: "../tests/fixtures/map/const-list.ts.hbs",
@@ -31,6 +37,23 @@ export const schema = createHandlebarSchemaMap(
 	{ templateDirectory },
 );
 
-if (isLinting()) await schema.audit();
+if (isLinting()) await schemaMap.audit();
+
+// or create a singleton schema used to validate multiple templates
+
+export const singleSchema = createHandlebarSchemaSingleton(
+	[
+		"../tests/fixtures/singleton/valid.hbs",
+		"../tests/fixtures/singleton/valid2.hbs",
+	],
+	z.object({
+		items: z.array(z.object({ key: z.string(), value: z.string() })),
+		map_type: z.string(),
+		name: z.string(),
+	}),
+	{ templateDirectory },
+);
+
+if (isLinting()) await singleSchema.audit();
 
 // then later on in the code in another file:

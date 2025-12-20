@@ -135,7 +135,7 @@ function normalizeHandlebarsSchema(node: any): NormalizedSchema {
 }
 
 function normalizeValibotSchema(schema: any): NormalizedSchema {
-	switch (schema.kind) {
+	switch (schema.type) {
 		case "array":
 			return {
 				element: normalizeValibotSchema(schema.item),
@@ -175,6 +175,8 @@ function normalizeValibotSchema(schema: any): NormalizedSchema {
 function normalizeZodSchema(node: any): NormalizedSchema {
 	const def = node.def;
 
+	console.log(def.type);
+	console.log(def);
 	switch (def.type) {
 		case "array":
 			return {
@@ -192,6 +194,9 @@ function normalizeZodSchema(node: any): NormalizedSchema {
 
 			return { kind: "object", optional: false, shape };
 		}
+
+		case "optional":
+			return { kind: def.innerType.def.type, optional: true };
 
 		case "string":
 			return { kind: "string", optional: false };

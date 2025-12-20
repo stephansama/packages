@@ -83,7 +83,7 @@ describe("compile", () => {
 		expect(validSchema.compile("constList", {})).rejects.toThrow();
 	});
 
-	it("prevents compiling bad input", async () => {
+	it("compiles with valid input", async () => {
 		const output = await validSchema.compile("constList", {
 			body: "body",
 			name: "name",

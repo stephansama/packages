@@ -1,41 +1,119 @@
-import barhandles from "barhandles";
-import { expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import * as z from "zod";
 
 import * as normalize from "@/normalize";
 
-it("doesn't find issues when there aren't any", () => {
-	const handlebarsTemplate = ` {{name}} `;
+import { arkUser } from "./fixtures/schemas/arktype";
+import { handlebarsUser } from "./fixtures/schemas/handlebars";
+import { valibotUser } from "./fixtures/schemas/valibot";
+import { zodUser } from "./fixtures/schemas/zod";
 
-	const ast = barhandles.extractSchema(handlebarsTemplate);
+describe("schema normalization (real libraries)", () => {
+	it("normalizes arktype schema", () => {
+		const normalized = normalize.standardSchema(arkUser as any);
 
-	const schema = z.object({ name: z.string() });
+		expect(normalized).toMatchInlineSnapshot(
+			{},
+			`
+			{
+			  "kind": "any",
+			  "optional": false,
+			}
+		`,
+		);
+	});
 
-	const normalizedHandlebarsSchema = normalize.handlebarSchema(ast);
+	it("normalizes valibot schema", () => {
+		const normalized = normalize.standardSchema(valibotUser as any);
 
-	const normalizedStandardSchema = normalize.standardSchema(schema);
-	const errors = normalize.compareSchemas(
-		normalizedHandlebarsSchema,
-		normalizedStandardSchema,
-	);
+		expect(normalized).toEqual({
+			kind: "object",
+			optional: false,
+			shape: {
+				age: { kind: "number", optional: true },
+				name: { kind: "string", optional: false },
+				tags: {
+					element: { kind: "string", optional: false },
+					kind: "array",
+					optional: false,
+				},
+			},
+		});
+	});
 
-	expect(errors.length).toBe(0);
+	it("normalizes zod schema", () => {
+		const normalized = normalize.standardSchema(zodUser as any);
+
+		expect(normalized).toEqual({
+			kind: "object",
+			optional: false,
+			shape: {
+				age: { kind: "number", optional: true },
+				name: { kind: "string", optional: false },
+				tags: {
+					element: { kind: "string", optional: false },
+					kind: "array",
+					optional: false,
+				},
+			},
+		});
+	});
+
+	it("normalizes handlebars schema via barhandles", () => {
+		const normalized = normalize.handlebarSchema(handlebarsUser);
+
+		expect(normalized).toEqual({
+			kind: "object",
+			optional: false,
+			shape: {
+				age: { kind: "any", optional: false },
+				name: { kind: "any", optional: false },
+				tags: {
+					element: { kind: "any", optional: false },
+					kind: "array",
+					optional: false,
+				},
+			},
+		});
+	});
 });
 
-it("finds errors when missing properties from handlebars schema", () => {
-	const handlebarsTemplate = ` {{name}} `;
+describe("schema comparison", () => {
+	it("arktype and zod schemas are compatible", () => {
+		const ark = normalize.standardSchema(arkUser);
+		const zod = normalize.standardSchema(zodUser);
 
-	const ast = barhandles.extractSchema(handlebarsTemplate);
+		const errors = normalize.compareSchemas(ark, zod, "user");
 
-	const schema = z.object({ different: z.string() });
+		expect(errors).toEqual([]);
+	});
 
-	const normalizedHandlebarsSchema = normalize.handlebarSchema(ast);
+	it("valibot and handlebars schemas are compatible", () => {
+		const valibot = normalize.standardSchema(valibotUser);
+		const handlebars = normalize.handlebarSchema(handlebarsUser);
 
-	const normalizedStandardSchema = normalize.standardSchema(schema);
-	const errors = normalize.compareSchemas(
-		normalizedHandlebarsSchema,
-		normalizedStandardSchema,
-	);
+		const errors = normalize.compareSchemas(valibot, handlebars);
 
-	expect(errors.length).toBe(1);
+		expect(errors).toEqual([]);
+	});
+
+	it("detects incompatible schemas", () => {
+		const handlebars = normalize.handlebarSchema(handlebarsUser);
+		const incompatibleZod = normalize.standardSchema(
+			z.object({
+				name: z.string(),
+				tags: z.array(z.string()),
+			}),
+		);
+
+		const errors = normalize.compareSchemas(
+			handlebars,
+			incompatibleZod,
+			"user",
+		);
+
+		expect(errors.length).toBeGreaterThan(0);
+		expect(errors[0]).toMatch(/Missing key/);
+		expect(errors[0]).toContain("age");
+	});
 });

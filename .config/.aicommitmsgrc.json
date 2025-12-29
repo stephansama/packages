@@ -1,5 +1,5 @@
 {
 	"$schema": "../node_modules/@stephansama/ai-commit-msg/config/schema.json",
-	"provider": "google",
-	"model": "gemini-2.5-flash"
+	"provider": "ollama",
+	"model": "qwen3:8b"
 }

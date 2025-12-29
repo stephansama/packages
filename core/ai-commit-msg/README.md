@@ -13,6 +13,7 @@ generate commit messages using ai
 
 - [Installation](#installation)
 - [Usage](#usage)
+  - [Husky](#husky)
 
 </details>
 
@@ -23,3 +24,20 @@ pnpm install @stephansama/ai-commit-msg
 ```
 
 ## Usage
+
+### Husky
+
+1. Install and initialize husky
+
+   ```sh
+   npm install --save-dev husky && npx husky init
+   ```
+
+2. create the `prepare-commit-msg` hook by creating a file located at
+   `.husky/prepare-commit-msg`
+
+   ```sh
+   #!/bin/sh
+
+   ai-commit-msg -o "$1"
+   ```

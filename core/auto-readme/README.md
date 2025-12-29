@@ -208,7 +208,6 @@ _Enum, one of the following possible values:_
 
 - `'LIST'`
 - `'TABLE'`
-  (_optional_)
 
 _Default value:_ `'TABLE'`
 
@@ -218,7 +217,6 @@ _Enum, one of the following possible values:_
 
 - `'JS'`
 - `'RS'`
-  (_optional_)
 
 _Default value:_ `'JS'`
 

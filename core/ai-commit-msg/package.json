@@ -1,0 +1,73 @@
+{
+	"name": "@stephansama/ai-commit-msg",
+	"version": "0.0.0",
+	"description": "generate commit messages using ai",
+	"keywords": [
+		"ai-commit-msg"
+	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/ai-commit-msg",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/stephansama/packages",
+		"directory": "core/ai-commit-msg"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephansama.info"
+	},
+	"type": "module",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./config/schema.d.ts",
+				"default": "./config/schema.js"
+			},
+			"require": {
+				"types": "./config/schema.d.cts",
+				"default": "./config/schema.cjs"
+			}
+		},
+		"./schema.json": "./config/schema.json",
+		"./package.json": "./package.json"
+	},
+	"main": "./config/schema.js",
+	"module": "./config/schema.js",
+	"types": "./config/schema.d.ts",
+	"bin": "./cli.mjs",
+	"files": [
+		"./dist",
+		"./config",
+		"./cli.mjs"
+	],
+	"scripts": {
+		"build": "node build.mjs",
+		"dev": "tsdown --watch",
+		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+	},
+	"dependencies": {
+		"@ai-sdk/google": "^3.0.1",
+		"@ai-sdk/openai": "^3.0.1",
+		"@commitlint/config-conventional": "^19.8.1",
+		"@dotenvx/dotenvx": "^1.51.2",
+		"ai": "^6.0.3",
+		"cosmiconfig": "catalog:cli",
+		"deepmerge": "catalog:",
+		"es-toolkit": "catalog:",
+		"neverthrow": "^8.2.0",
+		"obug": "catalog:cli",
+		"ollama-ai-provider-v2": "^1.5.5",
+		"yargs": "catalog:cli",
+		"zod": "catalog:schema"
+	},
+	"devDependencies": {
+		"@types/yargs": "catalog:",
+		"tsdown": "catalog:"
+	},
+	"packageManager": "pnpm@10.11.0",
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	}
+}

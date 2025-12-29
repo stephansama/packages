@@ -1,7 +1,6 @@
 import * as fsp from "node:fs/promises";
 import * as path from "path";
 import { build as tsdown } from "tsdown";
-import yaml from "yaml";
 import * as z from "zod";
 
 const outDir = path.resolve("./dist");
@@ -13,13 +12,11 @@ await build({ dts: true, entry: ["./src/schema.ts"], outDir: schemaDir });
 
 const { configSchema } = await import("./config/schema.js");
 
-const schema = z.toJSONSchema(configSchema);
+const jsonSchema = z.toJSONSchema(configSchema);
 
-const jsonSchema = JSON.stringify(schema);
-const yamlSchema = yaml.stringify(schema);
+const jsonString = JSON.stringify(jsonSchema);
 
-await fsp.writeFile(path.join(schemaDir, "schema.json"), jsonSchema);
-await fsp.writeFile(path.join(schemaDir, "schema.yaml"), yamlSchema);
+await fsp.writeFile(path.join(schemaDir, "schema.json"), jsonString);
 
 /** @param {import('tsdown').Options} opts */
 function build(opts) {
@@ -27,7 +24,6 @@ function build(opts) {
 		attw: { excludeEntrypoints: ["schema.json", "schema.yaml"] },
 		format: ["esm", "cjs"],
 		outDir,
-		publint: true,
 		skipNodeModulesBundle: true,
 		target: "esnext",
 		...opts,

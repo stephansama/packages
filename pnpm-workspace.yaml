@@ -10,11 +10,15 @@ packages:
   - examples/**
 
 catalogs:
+  cli:
+    cosmiconfig: 9.0.0
+    obug: 2.1.1
+    yargs: 18.0.0
   schema:
     "@standard-schema/spec": ^1.0.0
     arktype: 2.1.29
     valibot: 1.2.0
-    zod: 4.0.15
+    zod: 4.2.1
   storybook:
     "@chromatic-com/storybook": ^4.1.2
     "@storybook/addon-a11y": ^10.0.2
@@ -45,6 +49,8 @@ catalog:
   "@types/react": ^19.2.2
   "@types/vfile": ^4.0.0
   "@types/yargs": ^17.0.33
+  deepmerge: "^4.3.1"
+  es-toolkit: 1.43.0
   astro: 5.9.3
   handlebars: 4.7.8
   happy-dom: ^20.0.11

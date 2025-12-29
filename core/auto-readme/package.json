@@ -56,9 +56,9 @@
 	"dependencies": {
 		"@iarna/toml": "^2.2.5",
 		"@manypkg/get-packages": "^3.1.0",
-		"cosmiconfig": "^9.0.0",
+		"cosmiconfig": "catalog:cli",
 		"debug": "^4.4.3",
-		"deepmerge": "^4.3.1",
+		"deepmerge": "catalog:",
 		"fast-glob": "^3.3.3",
 		"handlebars": "catalog:",
 		"markdown-table": "^3.0.4",
@@ -74,7 +74,7 @@
 		"remark-usage": "^11.0.1",
 		"vfile": "^6.0.3",
 		"yaml": "^2.8.1",
-		"yargs": "^18.0.0",
+		"yargs": "catalog:cli",
 		"zod": "catalog:schema",
 		"zod2md": "^0.2.4"
 	},

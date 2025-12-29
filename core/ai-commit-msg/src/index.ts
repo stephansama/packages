@@ -22,7 +22,7 @@ export async function run() {
 
 	const { text } = await generateText({
 		model,
-		prompt: `generate a conventional commit message based on the following diff. the subject should be all lowecase. and lines should not exceed 100 characters \n\n${getDiff()}`,
+		prompt: `generate a conventional commit message based on the following diff. the subject should be all lowercase. and lines should not exceed 100 characters \n\n${getDiff()}`,
 	});
 
 	await fsp.writeFile(args.output, text);

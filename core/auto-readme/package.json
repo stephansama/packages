@@ -37,7 +37,7 @@
 			}
 		},
 		"./schema.json": "./config/schema.json",
-		"./schema.yaml": "./config/schema.yaml"
+		"./package.json": "./package.json"
 	},
 	"main": "./config/schema.js",
 	"types": "./config/schema.d.ts",

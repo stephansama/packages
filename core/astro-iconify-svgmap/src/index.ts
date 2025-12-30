@@ -91,7 +91,6 @@ export default function createPlugin(options?: Options): Plugin {
 				return next();
 			});
 		},
-		async hotUpdate(options) {},
 
 		async load(id) {
 			if (id !== resolvedVirtualModuleId) return;

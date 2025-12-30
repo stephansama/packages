@@ -18,7 +18,14 @@ export async function run() {
 
 	const config = await loadConfig();
 
-	const model = getProvider(config.provider, config.model).unwrapOr("ollama");
+	const providerResult = getProvider(config.provider, config.model);
+
+	if (providerResult.isErr()) {
+		console.error(providerResult.error.message);
+		process.exit(1);
+	}
+
+	const model = providerResult.value;
 
 	const { text } = await generateText({
 		model,

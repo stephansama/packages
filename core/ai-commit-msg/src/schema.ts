@@ -1,5 +1,7 @@
 import * as z from "zod";
 
+export const defaultPrompt = `generate a conventional commit message based on the following diff. the subject should be all lowercase. and lines should not exceed 100 characters \n\n{{diff}}`;
+
 export const models = ["gemini-2.5-flash"] as const;
 export type Model = (typeof models)[number];
 
@@ -20,15 +22,12 @@ export const configSchema = z.object({
 	model: z.string().meta({
 		description: "model to use from provider",
 	}),
+	prompt: z.string().default(defaultPrompt).meta({
+		description: "prompt used to fuel generated commit",
+	}),
 	provider: providerSchema,
 	useConventionalCommits: z.boolean().default(true),
 	verbose: z.literal([0, 1, 2, 3]).default(0),
 });
-
-export const defaultConfig = {
-	model: "llama2",
-	provider: "ollama",
-	useConventionalCommits: true,
-} satisfies Config;
 
 export type Config = Partial<z.infer<typeof configSchema>>;

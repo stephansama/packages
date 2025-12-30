@@ -11,6 +11,11 @@ const args = {
 		description: "Output file for commit-msg",
 		type: "string",
 	},
+	verbose: {
+		alias: "v",
+		description: "Enable verbose logging",
+		type: "boolean",
+	},
 } satisfies Record<string, Options>;
 
 export async function parseArgs() {

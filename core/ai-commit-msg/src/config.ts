@@ -1,10 +1,15 @@
 import { cosmiconfig, getDefaultSearchPlaces, type Options } from "cosmiconfig";
-import { merge } from "es-toolkit/compat";
 
-import { configSchema, defaultConfig } from "./schema";
+import { type Config, configSchema } from "./schema";
 import { moduleName } from "./util";
 
 const searchPlaces = getSearchPlaces();
+
+const defaultConfig = {
+	model: "llama2",
+	provider: "ollama",
+	useConventionalCommits: true,
+} satisfies Config;
 
 export async function loadConfig() {
 	const opts: Partial<Options> = { searchPlaces };
@@ -13,7 +18,7 @@ export async function loadConfig() {
 
 	const result = await explorer.search();
 
-	return configSchema.parse(merge(result?.config || defaultConfig, {}));
+	return configSchema.parse(result?.config || defaultConfig);
 }
 
 function getSearchPlaces() {

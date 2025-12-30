@@ -53,7 +53,6 @@
 		"@dotenvx/dotenvx": "^1.51.2",
 		"ai": "^6.0.3",
 		"cosmiconfig": "catalog:cli",
-		"deepmerge": "catalog:",
 		"es-toolkit": "catalog:",
 		"neverthrow": "^8.2.0",
 		"obug": "catalog:cli",

@@ -79,13 +79,13 @@
 		"zod2md": "^0.2.4"
 	},
 	"devDependencies": {
-		"@types/debug": "^4.1.12",
-		"@types/mdast": "^4.0.4",
-		"@types/vfile": "^4.0.0",
-		"@types/yargs": "^17.0.33",
-		"mdast": "^3.0.0",
+		"@types/debug": "catalog:",
+		"@types/mdast": "catalog:",
+		"@types/vfile": "catalog:",
+		"@types/yargs": "catalog:",
+		"mdast": "catalog:",
 		"tsdown": "catalog:",
-		"unified": "^11.0.5"
+		"unified": "catalog:"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {

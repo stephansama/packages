@@ -27,7 +27,9 @@ export const configSchema = z.object({
 	}),
 	provider: providerSchema,
 	useConventionalCommits: z.boolean().default(true),
-	verbose: z.literal([0, 1, 2, 3]).default(0),
+	verbose: z
+		.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)])
+		.default(0),
 });
 
 export type Config = Partial<z.infer<typeof configSchema>>;

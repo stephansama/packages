@@ -14,7 +14,7 @@ export async function run() {
 
 	const args = await parseArgs();
 
-	if (!args.output) throw new Error("need to supply output path");
+	if (!args.output) args.output = getCommitEditMsg();
 
 	const config = await loadConfig();
 
@@ -35,8 +35,22 @@ export async function run() {
 	await fsp.writeFile(args.output, text);
 }
 
+const sh = String.raw;
+
+function getCommitEditMsg() {
+	const output = cp.execSync(sh`git rev-parse --git-path COMMIT_EDIT_MSG`, {
+		encoding: "utf8",
+	});
+
+	if (output) return output.substring(0, 8000).trim();
+
+	throw new Error(
+		"unable to find commit edit msg. please use within a git directory or provide the output flag -o",
+	);
+}
+
 function getDiff() {
-	const output = cp.execSync(`git --no-pager diff --staged`, {
+	const output = cp.execSync(sh`git --no-pager diff --staged`, {
 		encoding: "utf8",
 	});
 

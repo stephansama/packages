@@ -48,6 +48,7 @@ describe("index run", () => {
 		(parseArgs as any).mockResolvedValue({ output: "COMMIT_EDITMSG" });
 		(loadConfig as any).mockResolvedValue({
 			model: "gemini",
+			prompt: "example prompt {{diff}}",
 			provider: "google",
 		});
 		(getProvider as any).mockReturnValue(ok({ type: "mock-model" }));
@@ -87,7 +88,7 @@ describe("index run", () => {
 		(parseArgs as any).mockResolvedValue({}); // No output
 		(cp.execSync as any).mockImplementation((cmd: string) => {
 			if (cmd.includes("git rev-parse")) return "git/COMMIT_EDITMSG\n";
-			if (cmd.includes("git diff")) return "diff";
+			if (cmd.includes("diff")) return "diff";
 			return "";
 		});
 

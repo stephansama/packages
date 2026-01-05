@@ -8,6 +8,7 @@ import * as fsp from "node:fs/promises";
 import { getProvider } from "./ai";
 import { parseArgs } from "./args";
 import { loadConfig } from "./config";
+import { defaultPrompt } from "./schema";
 
 export async function run() {
 	dotenvx.config();
@@ -36,9 +37,11 @@ export async function run() {
 
 	if (!diff) throw new Error("unable to get git diff");
 
+	const prompt = config.prompt || defaultPrompt;
+
 	const { text } = await generateText({
 		model,
-		prompt: config.prompt.replace("{{diff}}", diff),
+		prompt: prompt.replace("{{diff}}", diff),
 	});
 
 	await fsp.writeFile(args.output, text);

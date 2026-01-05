@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-export const defaultPrompt = `generate a conventional commit message based on the following diff. the subject should be all lowercase. and lines should not exceed 100 characters \n\n{{diff}}`;
+export const defaultPrompt = `generate a conventional commit message based on the following diff. the subject should be all lowercase, and lines should not exceed 100 characters \n\n{{diff}}`;
 
 export const models = ["gemini-2.5-flash"] as const;
 export type Model = (typeof models)[number];

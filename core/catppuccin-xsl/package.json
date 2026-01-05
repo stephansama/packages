@@ -40,9 +40,9 @@
 		"build:rss": "tsx ./src/rss.ts",
 		"build:sitemap": "tsx ./src/sitemap.ts",
 		"dev": "pnpm run --parallel \"/^dev:.*/\"",
-		"dev:opml": "node --watch ./src/opml.ts",
-		"dev:rss": "node --watch ./src/rss.ts",
-		"dev:sitemap": "node --watch ./src/sitemap.ts"
+		"dev:opml": "tsx watch ./src/opml.ts",
+		"dev:rss": "tsx watch ./src/rss.ts",
+		"dev:sitemap": "tsx watch ./src/sitemap.ts"
 	},
 	"devDependencies": {
 		"@catppuccin/palette": "catalog:",

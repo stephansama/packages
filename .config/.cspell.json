@@ -1,5 +1,6 @@
 {
 	"ignoreWords": [
+		"COMMIT_EDITMSG",
 		"alfy",
 		"arktype",
 		"asciinema",
@@ -12,6 +13,7 @@
 		"barhandles",
 		"bluwy",
 		"catppuccin",
+		"dotenvx",
 		"esbuild",
 		"feedsmith",
 		"giget",
@@ -26,6 +28,8 @@
 		"nodemon",
 		"nvim",
 		"nvmrc",
+		"obug",
+		"ollama",
 		"pkgs",
 		"pnpx",
 		"pomodoro",

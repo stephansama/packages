@@ -45,6 +45,7 @@
 		"@eslint/js": "^9.39.1",
 		"@eslint/json": "^0.14.0",
 		"@manypkg/get-packages": "^3.1.0",
+		"@stephansama/ai-commit-msg": "workspace:*",
 		"@stephansama/auto-readme": "workspace:*",
 		"@stephansama/prettier-plugin-handlebars": "workspace:*",
 		"@tsconfig/recommended": "^1.0.13",

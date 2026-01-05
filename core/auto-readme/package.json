@@ -37,7 +37,7 @@
 			}
 		},
 		"./schema.json": "./config/schema.json",
-		"./schema.yaml": "./config/schema.yaml"
+		"./package.json": "./package.json"
 	},
 	"main": "./config/schema.js",
 	"types": "./config/schema.d.ts",
@@ -56,9 +56,9 @@
 	"dependencies": {
 		"@iarna/toml": "^2.2.5",
 		"@manypkg/get-packages": "^3.1.0",
-		"cosmiconfig": "^9.0.0",
+		"cosmiconfig": "catalog:cli",
 		"debug": "^4.4.3",
-		"deepmerge": "^4.3.1",
+		"deepmerge": "catalog:",
 		"fast-glob": "^3.3.3",
 		"handlebars": "catalog:",
 		"markdown-table": "^3.0.4",
@@ -74,18 +74,18 @@
 		"remark-usage": "^11.0.1",
 		"vfile": "^6.0.3",
 		"yaml": "^2.8.1",
-		"yargs": "^18.0.0",
+		"yargs": "catalog:cli",
 		"zod": "catalog:schema",
 		"zod2md": "^0.2.4"
 	},
 	"devDependencies": {
-		"@types/debug": "^4.1.12",
-		"@types/mdast": "^4.0.4",
-		"@types/vfile": "^4.0.0",
-		"@types/yargs": "^17.0.33",
-		"mdast": "^3.0.0",
+		"@types/debug": "catalog:",
+		"@types/mdast": "catalog:",
+		"@types/vfile": "catalog:",
+		"@types/yargs": "catalog:",
+		"mdast": "catalog:",
 		"tsdown": "catalog:",
-		"unified": "^11.0.5"
+		"unified": "catalog:"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {

@@ -45,7 +45,12 @@ export function createIntegration(opts: Options = {}): AstroIntegration {
 				buildEnd(icons, usage, options);
 			},
 			"astro:config:setup"({ config, logger, updateConfig }) {
-				updateConfig({ vite: { plugins: [createPlugin(opts)] } });
+				updateConfig({
+					vite: {
+						// @ts-expect-error correctly typed
+						plugins: [createPlugin(opts)],
+					},
+				});
 			},
 		},
 	};
@@ -61,7 +66,6 @@ export default function createPlugin(options?: Options): Plugin {
 		configResolved(resolvedConfig) {
 			config = resolvedConfig;
 		},
-
 		configureServer(server) {
 			server.middlewares.use(async (req, res, next) => {
 				for (const pack of Object.keys(inMemoryCollections)) {

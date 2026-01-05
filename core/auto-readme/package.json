@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/auto-readme",
-	"version": "0.2.3",
+	"version": "0.2.4",
 	"description": "Generate lists and tables for your README automagically based on your repository and comments",
 	"keywords": [
 		"auto",

@@ -38,7 +38,7 @@ export async function run() {
 const sh = String.raw;
 
 function getCommitEditMsg() {
-	const output = cp.execSync(sh`git rev-parse --git-path COMMIT_EDIT_MSG`, {
+	const output = cp.execSync(sh`git rev-parse --git-path COMMIT_EDITMSG`, {
 		encoding: "utf8",
 	});
 

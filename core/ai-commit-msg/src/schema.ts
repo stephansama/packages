@@ -26,6 +26,13 @@ export const configSchema = z.object({
 		description: "prompt used to fuel generated commit",
 	}),
 	provider: providerSchema,
+	skipNextRun: z
+		.boolean()
+		.optional()
+		.meta({
+			description:
+				"skip the next git hook invocation (usually used when manually running cli)",
+		}),
 	useConventionalCommits: z.boolean().default(true),
 	verbose: z
 		.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)])

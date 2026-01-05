@@ -18,6 +18,11 @@ export async function run() {
 
 	const config = await loadConfig();
 
+	if (config.skipNextRun) {
+		console.warn("skipNextRun flag supplied skipping current run");
+		process.exit(0);
+	}
+
 	const providerResult = getProvider(config.provider, config.model);
 
 	if (providerResult.isErr()) {

@@ -14,7 +14,7 @@ export async function run() {
 
 	const args = await parseArgs();
 
-	if (!args.output) args.output = getCommitEditMsg();
+	if (!args.output) args.output = getCommitEditMsgFile();
 
 	const config = await loadConfig();
 
@@ -32,22 +32,24 @@ export async function run() {
 
 	const model = providerResult.value;
 
+	const diff = getDiff();
+
+	if (!diff) throw new Error("unable to get git diff");
+
 	const { text } = await generateText({
 		model,
-		prompt: `generate a conventional commit message based on the following diff. the subject should be all lowercase. and lines should not exceed 100 characters \n\n${getDiff()}`,
+		prompt: config.prompt.replace("{{diff}}", diff),
 	});
 
 	await fsp.writeFile(args.output, text);
 }
 
-const sh = String.raw;
-
-function getCommitEditMsg() {
-	const output = cp.execSync(sh`git rev-parse --git-path COMMIT_EDITMSG`, {
+function getCommitEditMsgFile() {
+	const output = cp.execSync(`git rev-parse --git-path COMMIT_EDITMSG`, {
 		encoding: "utf8",
 	});
 
-	if (output) return output.substring(0, 8000).trim();
+	if (output) return output.trim();
 
 	throw new Error(
 		"unable to find commit edit msg. please use within a git directory or provide the output flag -o",
@@ -55,7 +57,7 @@ function getCommitEditMsg() {
 }
 
 function getDiff() {
-	const output = cp.execSync(sh`git --no-pager diff --staged`, {
+	const output = cp.execSync(`git --no-pager diff --staged`, {
 		encoding: "utf8",
 	});
 

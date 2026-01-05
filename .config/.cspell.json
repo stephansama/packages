@@ -1,5 +1,6 @@
 {
 	"ignoreWords": [
+		"COMMIT_EDITMSG",
 		"alfy",
 		"arktype",
 		"asciinema",

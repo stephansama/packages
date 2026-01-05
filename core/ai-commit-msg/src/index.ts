@@ -20,14 +20,14 @@ export async function run() {
 
 	if (config.skipNextRun) {
 		console.warn("skipNextRun flag supplied skipping current run");
-		process.exit(0);
+		return process.exit(0);
 	}
 
 	const providerResult = getProvider(config.provider, config.model);
 
 	if (providerResult.isErr()) {
 		console.error(providerResult.error.message);
-		process.exit(1);
+		return process.exit(1);
 	}
 
 	const model = providerResult.value;

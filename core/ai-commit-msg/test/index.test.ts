@@ -40,6 +40,9 @@ describe("index run", () => {
 	const mockConsoleError = vi
 		.spyOn(console, "error")
 		.mockImplementation(() => {});
+	const mockConsoleWarn = vi
+		.spyOn(console, "warn")
+		.mockImplementation(() => {});
 
 	beforeEach(() => {
 		(parseArgs as any).mockResolvedValue({ output: "COMMIT_EDITMSG" });
@@ -55,6 +58,7 @@ describe("index run", () => {
 
 		mockExit.mockClear();
 		mockConsoleError.mockClear();
+		mockConsoleWarn.mockClear();
 	});
 
 	afterEach(() => {
@@ -106,5 +110,19 @@ describe("index run", () => {
 
 		expect(mockConsoleError).toHaveBeenCalledWith("Provider error");
 		expect(mockExit).toHaveBeenCalledWith(1);
+	});
+
+	it("should skip run if skipNextRun is true", async () => {
+		(loadConfig as any).mockResolvedValue({
+			skipNextRun: true,
+		});
+
+		await run();
+
+		expect(mockConsoleWarn).toHaveBeenCalledWith(
+			"skipNextRun flag supplied skipping current run",
+		);
+		expect(mockExit).toHaveBeenCalledWith(0);
+		expect(ai.generateText).not.toHaveBeenCalled();
 	});
 });

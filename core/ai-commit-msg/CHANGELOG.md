@@ -1,8 +1,8 @@
-# @stephansama/astro-iconify-svgmap
+# @stephansama/ai-commit-msg
 
-## 1.0.7
+## 1.0.0
 
-### Patch Changes
+### Major Changes
 
 - 0b3df19: created ai-commit-msg package and integrated it with husky to generate commit messages using AI. This includes:
   - New `ai-commit-msg` package for generating commit messages using AI.
@@ -21,46 +21,3 @@
   - `catppuccin-xsl/package.json` updated dev scripts to use `tsx watch`.
   - Root `package.json` and `pnpm-lock.yaml` updated for new package and dependencies.
   - `pnpm-workspace.yaml` updated with new `cli` catalog and `zod`, `deepmerge`, `es-toolkit` in catalogs.
-
-## 1.0.6
-
-### Patch Changes
-
-- 17e55fe: Updated developer experience and readmes
-
-## 1.0.5
-
-### Patch Changes
-
-- 59750e2: migrated to tsdown
-
-## 1.0.4
-
-### Patch Changes
-
-- 74e34e3: Added more plugins to auto readme. Removed patch dependencies.
-  - updated package.jsons with new packages directory structure
-
-## 1.0.3
-
-### Patch Changes
-
-- 70b013d: Created auto readme cli
-
-## 1.0.2
-
-### Patch Changes
-
-- 9fa53a8: check export types for packages
-
-## 1.0.1
-
-### Patch Changes
-
-- cf11d04: updated homepage, readme and favicon
-
-## 1.0.0
-
-### Major Changes
-
-- 0725d0c: Migrated astro iconify svgmap integration

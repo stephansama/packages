@@ -34,8 +34,7 @@
 		"pretest:ci": "pnpm run scripts:generate-examples",
 		"test:ci": "vitest --run --coverage --reporter=junit --outputFile=test-report.junit.xml",
 		"test:ui": "vitest --ui",
-		"version": "changeset version && pnpm install --lockfile-only",
-		"with-env": "dotenv -e .env --"
+		"version": "changeset version && pnpm install --lockfile-only"
 	},
 	"dependencies": {
 		"@changesets/cli": "^2.29.8",
@@ -54,7 +53,6 @@
 		"@typescript-eslint/parser": "^8.48.1",
 		"@vitest/coverage-v8": "catalog:vitest",
 		"@vitest/ui": "catalog:vitest",
-		"dotenv-cli": "^8.0.0",
 		"eslint": "^9.39.1",
 		"eslint-config-flat-gitignore": "^2.1.0",
 		"eslint-config-prettier": "^10.1.5",

@@ -38,7 +38,7 @@
 		"build": "node build.mjs",
 		"detect": "node ./test.js",
 		"dev": "node --watch build.mjs",
-		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
 	},
 	"dependencies": {
 		"@manypkg/find-root": "catalog:",

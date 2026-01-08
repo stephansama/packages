@@ -28,10 +28,12 @@ export const jsrTransformer = packageJsonSchema.transform((schema) => ({
 
 export type JsrSchema = z.infer<typeof jsrSchema>;
 export const jsrSchema = z.object({
+	exclude: z.array(z.string()).optional(),
 	exports: z
 		.string()
 		.or(z.array(z.string()))
 		.or(z.record(z.string(), z.string())),
+	include: z.array(z.string()).optional(),
 	license: z.string().optional(),
 	name: z.string().min(1),
 	version: z.string(),

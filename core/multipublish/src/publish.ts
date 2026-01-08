@@ -61,6 +61,18 @@ export async function publishPlatform(
 				throw new Error("failed to load jsr config filename");
 			}
 
+			jsr.config.include ??= [];
+			jsr.config.include = [
+				...jsr.config.include,
+				...(config.defaultInclude ? config.defaultInclude : []),
+			];
+
+			jsr.config.exclude ??= [];
+			jsr.config.exclude = [
+				...jsr.config.exclude,
+				...(config.defaultExclude ? config.defaultExclude : []),
+			];
+
 			jsr.config.version = pkg.newVersion;
 			await fsp.writeFile(jsr.filename, JSON.stringify(jsr.config));
 
@@ -128,7 +140,7 @@ export async function publishPlatform(
 			await util.chdir(pkg.dir, () => {
 				const command = npmPublishCommand[packageManager];
 				cp.execSync(
-					[command, isDryRun && "--dry-run"]
+					[command, "--no-git-checks", isDryRun && "--dry-run"]
 						.filter((x) => x)
 						.join(" "),
 					{ stdio: "inherit" },

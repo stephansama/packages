@@ -45,6 +45,7 @@
 		"@manypkg/get-packages": "catalog:",
 		"cosmiconfig": "catalog:cli",
 		"dedent": "^1.7.1",
+		"fast-glob": "^3.3.3",
 		"obug": "catalog:cli",
 		"package-manager-detector": "^1.6.0",
 		"yaml": "^2.8.2",
@@ -62,6 +63,6 @@
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {
 		"access": "public",
-		"registry": "http://localhost:487"
+		"provenance": true
 	}
 }

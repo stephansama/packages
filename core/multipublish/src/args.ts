@@ -4,8 +4,13 @@ import { hideBin } from "yargs/helpers";
 
 import { MODULE_NAME } from "./util";
 
+export type Args = Awaited<ReturnType<typeof parseArgs>>;
+
+let _args: Args | null = null;
+
 const args = {
 	config: { alias: "c", description: "Path to config file", type: "string" },
+	dry: { alias: "d", description: "Perform a dry run", type: "string" },
 	output: { alias: "s", description: "use changesets", type: "boolean" },
 	verbose: {
 		alias: "v",
@@ -13,6 +18,10 @@ const args = {
 		type: "boolean",
 	},
 } satisfies Record<string, Options>;
+
+export async function getArgs() {
+	return (_args ??= await parseArgs());
+}
 
 export async function parseArgs() {
 	const yargsInstance = yargs(hideBin(process.argv))

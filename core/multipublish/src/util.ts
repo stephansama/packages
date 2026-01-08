@@ -1,7 +1,7 @@
 import type { Package } from "@manypkg/get-packages";
 
+import fg from "fast-glob";
 import * as cp from "node:child_process";
-import * as fs from "node:fs";
 import * as fsp from "node:fs/promises";
 import * as path from "node:path";
 
@@ -37,13 +37,15 @@ export async function getTmpFile(filename: string) {
 }
 
 export function gitClean(filename: string) {
-	cp.execSync(`git clean -f ${filename}`, { stdio: "inherit" });
+	cp.execFileSync("git", ["clean", "-f", "--", filename], {
+		stdio: "inherit",
+	});
 }
 
 export async function loadJsrConfigFile(
 	basePath: string,
 ): Promise<{ config: JsrSchema | null; filename?: string }> {
-	const files = fs.globSync(basePath + "/{deno,jsr}.json{,c}");
+	const files = await fg(basePath + "/{deno,jsr}.json{,c}");
 	if (files.length > 1) {
 		throw new Error("please only have one deno or jsr configuration file");
 	}
@@ -58,9 +60,6 @@ export async function loadJsrConfigFile(
 	return { config: JSON.parse(file), filename: configFile };
 }
 
-export async function transformPkgJsonForJsr(pkg: Package): Promise<JsrSchema> {
-	const parsed = jsrTransformer.parse(pkg.packageJson);
-	const filename = path.join(pkg.dir, JSR_CONFIG_FILENAME);
-	await fsp.writeFile(filename, JSON.stringify(parsed));
-	return parsed;
+export function transformPkgJsonForJsr(pkg: Package): JsrSchema {
+	return jsrTransformer.parse(pkg.packageJson);
 }

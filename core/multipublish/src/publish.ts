@@ -9,6 +9,7 @@ import * as path from "node:path";
 
 import type { Config } from "./schema";
 
+import { getArgs } from "./args";
 import { type AgentName, detectPackageManager } from "./detect";
 import { jsrPlatformOptionsSchema, npmPlatformOptionsSchema } from "./schema";
 import * as util from "./util";
@@ -38,11 +39,12 @@ export async function publishPlatform(
 	pkg: Package & { newVersion: string; oldVersion: string },
 	platform: Config["platforms"][number],
 ) {
+	const packageManager = await detectPackageManager();
 	const isString = typeof platform === "string";
 	const key = isString ? platform : platform[0];
 	const rawConfig = isString ? {} : platform[1];
-
-	const packageManager = await detectPackageManager();
+	const args = await getArgs();
+	const isDryRun = !!args.dry;
 
 	switch (key) {
 		case "jsr": {
@@ -51,7 +53,7 @@ export async function publishPlatform(
 			const jsr = await util.loadJsrConfigFile(pkgRoot);
 
 			if (config.experimentalGenerateJSR) {
-				jsr.config = await util.transformPkgJsonForJsr(pkg);
+				jsr.config = util.transformPkgJsonForJsr(pkg);
 				jsr.filename = path.join(pkgRoot, util.JSR_CONFIG_FILENAME);
 			}
 
@@ -67,9 +69,12 @@ export async function publishPlatform(
 
 			await util.chdir(pkgRoot, () => {
 				const command = jsrPublishCommand[packageManager];
-				cp.execSync(command + " --allow-dirty --dry-run", {
-					stdio: "inherit",
-				});
+				cp.execSync(
+					[command, "--allow-dirty", isDryRun && "--dry-run"]
+						.filter((x) => x)
+						.join(" "),
+					{ stdio: "inherit" },
+				);
 			});
 
 			util.gitClean(jsr.filename);
@@ -125,7 +130,12 @@ export async function publishPlatform(
 
 			await util.chdir(pkg.dir, () => {
 				const command = npmPublishCommand[packageManager];
-				cp.execSync(command, { stdio: "inherit" });
+				cp.execSync(
+					[command, isDryRun && "--dry-run"]
+						.filter((x) => x)
+						.join(" "),
+					{ stdio: "inherit" },
+				);
 			});
 
 			if (config.strategy === ".npmrc") util.gitClean(".npmrc");

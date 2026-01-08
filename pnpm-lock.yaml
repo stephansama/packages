@@ -592,6 +592,9 @@ importers:
       dedent:
         specifier: ^1.7.1
         version: 1.7.1
+      fast-glob:
+        specifier: ^3.3.3
+        version: 3.3.3
       obug:
         specifier: catalog:cli
         version: 2.1.1

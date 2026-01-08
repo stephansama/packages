@@ -2,6 +2,7 @@ import * as z from "zod";
 
 export type JsrPlatformOptionsSchema = z.infer<typeof jsrPlatformOptionsSchema>;
 export const jsrPlatformOptionsSchema = z.object({
+	allowSlowTypes: z.boolean().default(true),
 	defaultExclude: z.array(z.string()).optional(),
 	defaultInclude: z.array(z.string()).optional(),
 	experimentalGenerateJSR: z.boolean().default(false),

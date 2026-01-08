@@ -81,7 +81,12 @@ export async function publishPlatform(
 			await util.chdir(pkg.dir, () => {
 				const command = jsrPublishCommand[packageManager];
 				cp.execSync(
-					[command, "--allow-dirty", isDryRun && "--dry-run"]
+					[
+						command,
+						"--allow-dirty",
+						isDryRun && "--dry-run",
+						config.allowSlowTypes && "--allow-slow-types",
+					]
 						.filter((x) => x)
 						.join(" "),
 					{ stdio: "inherit" },

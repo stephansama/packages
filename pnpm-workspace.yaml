@@ -41,6 +41,8 @@ catalog:
   "@catppuccin/palette": 1.7.1
   "@iconify/types": ^2.0.0
   "@iconify/utils": ^2.3.0
+  "@manypkg/find-root": "^3.1.0"
+  "@manypkg/get-packages": ^3.1.0
   "@testing-library/react": ^16.3.0
   "@testing-library/jest-dom": ^6.9.1
   "@types/debug": ^4.1.12
@@ -54,6 +56,7 @@ catalog:
   astro: 5.9.3
   handlebars: 4.7.8
   happy-dom: ^20.0.11
+  jsr: ^0.13.5
   mdast: ^3.0.0
   minify: 14.0.0
   prettier: ^3.7.4

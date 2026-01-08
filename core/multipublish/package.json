@@ -44,6 +44,7 @@
 		"@manypkg/find-root": "catalog:",
 		"@manypkg/get-packages": "catalog:",
 		"cosmiconfig": "catalog:cli",
+		"dedent": "^1.7.1",
 		"obug": "catalog:cli",
 		"package-manager-detector": "^1.6.0",
 		"yaml": "^2.8.2",

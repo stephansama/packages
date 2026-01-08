@@ -12,7 +12,10 @@ import { type JsrSchema, jsrTransformer } from "./jsr";
 export const MODULE_NAME = "multipublish" as const;
 export const JSR_CONFIG_FILENAME = "jsr.json" as const;
 
-export async function chdir(newDir: string, callback: () => Promise<void>) {
+export async function chdir(
+	newDir: string,
+	callback: () => Promise<void> | void,
+) {
 	const cwd = process.cwd();
 	process.chdir(newDir);
 	await callback();

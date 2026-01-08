@@ -1,7 +1,6 @@
 import * as z from "zod";
 
-export type Config = z.input<typeof configSchema>;
-
+export type JsrPlatformOptionsSchema = z.infer<typeof jsrPlatformOptionsSchema>;
 export const jsrPlatformOptionsSchema = z.object({
 	defaultExclude: z.array(z.string()).optional(),
 	defaultInclude: z.array(z.string()).optional(),
@@ -10,11 +9,14 @@ export const jsrPlatformOptionsSchema = z.object({
 	experimentalUpdatePnpmCatalogs: z.boolean().default(false),
 });
 
+export type NpmPlatformOptionsSchema = z.infer<typeof npmPlatformOptionsSchema>;
 export const npmPlatformOptionsSchema = z.object({
 	registry: z.string().default("https://registry.npmjs.org/"),
+	strategy: z.enum([".npmrc", "package.json"]).default(".npmrc"),
 	tokenEnvironmentKey: z.string().default("NODE_AUTH_TOKEN"),
 });
 
+export type Config = z.input<typeof configSchema>;
 export const configSchema = z.object({
 	platforms: z.array(
 		z

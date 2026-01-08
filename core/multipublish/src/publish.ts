@@ -1,6 +1,10 @@
 import type { Package } from "@manypkg/get-packages";
 
+import { findRoot } from "@manypkg/find-root";
+import dedent from "dedent";
 import * as cp from "node:child_process";
+import * as fs from "node:fs";
+import * as fsp from "node:fs/promises";
 import * as path from "node:path";
 
 import type { Config } from "./schema";
@@ -9,13 +13,26 @@ import { type AgentName, detectPackageManager } from "./detect";
 import { jsrPlatformOptionsSchema, npmPlatformOptionsSchema } from "./schema";
 import * as util from "./util";
 
+export const npmrcTemplate = dedent`
+{{SCOPE}}:registry={{REGISTRY}}
+//{{REGISTRY_DOMAIN}}/:_authToken={{AUTH_TOKEN}}
+`;
+
+export const npmPublishCommand = {
+	bun: "",
+	deno: "",
+	npm: "npm publish",
+	pnpm: "pnpm publish",
+	yarn: "yarn publish",
+} satisfies Record<AgentName, string>;
+
 export const jsrPublishCommand = {
 	bun: "",
 	deno: "deno publish",
 	npm: "npx jsr publish",
 	pnpm: "pnpm dlx jsr publish",
 	yarn: "yarn dlx jsr publish",
-} satisfies Partial<Record<AgentName, string>>;
+} satisfies Record<AgentName, string>;
 
 export async function publishPlatform(
 	pkg: Package & { newVersion: string; oldVersion: string },
@@ -24,6 +41,8 @@ export async function publishPlatform(
 	const isString = typeof platform === "string";
 	const key = isString ? platform : platform[0];
 	const rawConfig = isString ? {} : platform[1];
+
+	const packageManager = await detectPackageManager();
 
 	switch (key) {
 		case "jsr": {
@@ -41,11 +60,12 @@ export async function publishPlatform(
 				throw new Error("failed to load jsr config filename");
 			}
 
-			// TODO: update jsr.json file
+			jsr.config.version = pkg.newVersion;
+			await fsp.writeFile(jsr.filename, JSON.stringify(jsr.config));
+
 			// TODO: update package json with actual catalog: versions
 
-			await util.chdir(pkgRoot, async () => {
-				const packageManager = await detectPackageManager();
+			await util.chdir(pkgRoot, () => {
 				const command = jsrPublishCommand[packageManager];
 				cp.execSync(command + " --allow-dirty --dry-run", {
 					stdio: "inherit",
@@ -57,11 +77,60 @@ export async function publishPlatform(
 		}
 		case "npm": {
 			const config = npmPlatformOptionsSchema.parse(rawConfig);
-			// TODO: create root .npmrc
-			// TODO: update package.json with registry if not npm
-			// TODO: update package.json version with next version
-			// TODO: publish npm package
-			// TODO: delete changed files
+
+			switch (config.strategy) {
+				case ".npmrc": {
+					const authToken = process.env[config.tokenEnvironmentKey];
+					if (!authToken) {
+						throw new Error(
+							"no auth token provided. please use an auth token with npmrc strategy",
+						);
+					}
+
+					const { rootDir } = await findRoot(process.cwd());
+					const npmrcFile = path.join(rootDir, ".npmrc");
+					let existingNpmrcFile = fs.existsSync(npmrcFile)
+						? await fsp.readFile(npmrcFile, { encoding: "utf8" })
+						: "";
+
+					const scope = pkg.packageJson.name.split("/").at(0);
+
+					if (!scope?.startsWith("@")) {
+						throw new Error("scope must start with `@` symbol");
+					}
+
+					const { host } = new URL(config.registry);
+
+					existingNpmrcFile += npmrcTemplate
+						.replace("{{AUTH_TOKEN}}", authToken)
+						.replace("{{REGISTRY}}", config.registry)
+						.replace("{{REGISTRY_DOMAIN}}", host)
+						.replace("{{SCOPE}}", scope);
+
+					await fsp.writeFile(npmrcFile, existingNpmrcFile);
+
+					break;
+				}
+				case "package.json": {
+					pkg.packageJson.publishConfig ??= {};
+					pkg.packageJson.publishConfig.registry = config.registry;
+					break;
+				}
+			}
+
+			pkg.packageJson.version = pkg.newVersion;
+			const file = JSON.stringify(pkg.packageJson);
+			const packageJsonPath = path.join(pkg.dir, "package.json");
+			await fsp.writeFile(packageJsonPath, file);
+
+			await util.chdir(pkg.dir, () => {
+				const command = npmPublishCommand[packageManager];
+				cp.execSync(command, { stdio: "inherit" });
+			});
+
+			if (config.strategy === ".npmrc") util.gitClean(".npmrc");
+			util.gitClean(packageJsonPath);
+
 			break;
 		}
 		default:

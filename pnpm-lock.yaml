@@ -589,6 +589,9 @@ importers:
       cosmiconfig:
         specifier: catalog:cli
         version: 9.0.0(typescript@5.9.3)
+      dedent:
+        specifier: ^1.7.1
+        version: 1.7.1
       obug:
         specifier: catalog:cli
         version: 2.1.1
@@ -5345,6 +5348,14 @@ packages:
 
   dedent@1.7.0:
     resolution: {integrity: sha512-HGFtf8yhuhGhqO07SV79tRp+br4MnbdjeVxotpn1QBl30pcLLCQjX5b2295ll0fv8RKDKsmWYrl05usHM9CewQ==}
+    peerDependencies:
+      babel-plugin-macros: ^3.1.0
+    peerDependenciesMeta:
+      babel-plugin-macros:
+        optional: true
+
+  dedent@1.7.1:
+    resolution: {integrity: sha512-9JmrhGZpOlEgOLdQgSm0zxFaYoQon408V1v49aqTWuXENVlnCuY9JBZcXZiCsZQWDjTm5Qf/nIvAy77mXDAjEg==}
     peerDependencies:
       babel-plugin-macros: ^3.1.0
     peerDependenciesMeta:
@@ -15087,6 +15098,8 @@ snapshots:
   dedent-js@1.0.1: {}
 
   dedent@1.7.0: {}
+
+  dedent@1.7.1: {}
 
   deep-eql@5.0.2: {}
 

@@ -5,9 +5,22 @@ import * as cp from "node:child_process";
 import * as fsp from "node:fs/promises";
 import * as path from "node:path";
 
-import type { Changeset } from "./types";
-
 import { type JsrSchema, jsrTransformer } from "./jsr";
+
+export type Changeset = {
+	changesets: {
+		id: string;
+		releases: { name: string; type: string }[];
+		summary: string;
+	}[];
+	releases: {
+		changesets: string[];
+		name: string;
+		newVersion: string;
+		oldVersion: string;
+		type: "major" | "minor" | "patch";
+	}[];
+};
 
 export const MODULE_NAME = "multipublish" as const;
 export const JSR_CONFIG_FILENAME = "jsr.json" as const;

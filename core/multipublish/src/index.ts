@@ -3,13 +3,13 @@
 import { findRoot } from "@manypkg/find-root";
 import { getPackages } from "@manypkg/get-packages";
 
-import { parseArgs } from "./args";
+import { getArgs } from "./args";
 import { loadConfig } from "./config";
 import { publishPlatform } from "./publish";
 import * as util from "./util";
 
 export async function run() {
-	await parseArgs();
+	await getArgs();
 	const config = await loadConfig();
 
 	const root = await findRoot(process.cwd());

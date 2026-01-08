@@ -36,7 +36,6 @@
 	],
 	"scripts": {
 		"build": "node build.mjs",
-		"detect": "node ./test.js",
 		"dev": "node --watch build.mjs",
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
 	},
@@ -49,16 +48,16 @@
 		"obug": "catalog:cli",
 		"package-manager-detector": "^1.6.0",
 		"yaml": "^2.8.2",
-		"yargs": "catalog:cli"
+		"yargs": "catalog:cli",
+		"zod": "catalog:schema"
 	},
 	"devDependencies": {
 		"@types/yargs": "catalog:",
 		"jsr": "catalog:",
-		"tsdown": "catalog:",
-		"zod": "catalog:schema"
+		"tsdown": "catalog:"
 	},
 	"peerDependencies": {
-		"jsr": ">=0"
+		"jsr": ">=0.10"
 	},
 	"packageManager": "pnpm@10.11.0",
 	"publishConfig": {

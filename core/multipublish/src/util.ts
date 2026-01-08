@@ -30,9 +30,14 @@ export async function chdir(
 	callback: () => Promise<void> | void,
 ) {
 	const cwd = process.cwd();
-	process.chdir(newDir);
-	await callback();
-	process.chdir(cwd);
+	try {
+		process.chdir(newDir);
+		await callback();
+	} catch (e) {
+		console.error(e);
+	} finally {
+		process.chdir(cwd);
+	}
 }
 
 export async function getChangesetReleases(): Promise<Changeset> {
@@ -66,7 +71,7 @@ export async function loadJsrConfigFile(
 	const configFile = files.at(0);
 	if (!configFile) {
 		console.info("no jsr config file found");
-		return { config: null, filename: configFile };
+		return { config: null, filename: undefined };
 	}
 
 	const file = await fsp.readFile(configFile, { encoding: "utf8" });

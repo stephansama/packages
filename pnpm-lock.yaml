@@ -607,6 +607,9 @@ importers:
       yargs:
         specifier: catalog:cli
         version: 18.0.0
+      zod:
+        specifier: catalog:schema
+        version: 4.2.1
     devDependencies:
       '@types/yargs':
         specifier: 'catalog:'
@@ -617,9 +620,6 @@ importers:
       tsdown:
         specifier: 'catalog:'
         version: 0.15.12(@arethetypeswrong/core@0.18.2)(oxc-resolver@11.14.2)(publint@0.3.15)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3))
-      zod:
-        specifier: catalog:schema
-        version: 4.2.1
 
   core/prettier-plugin-handlebars:
     devDependencies:

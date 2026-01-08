@@ -49,12 +49,11 @@ export async function publishPlatform(
 	switch (key) {
 		case "jsr": {
 			const config = jsrPlatformOptionsSchema.parse(rawConfig);
-			const pkgRoot = path.dirname(pkg.dir);
-			const jsr = await util.loadJsrConfigFile(pkgRoot);
+			const jsr = await util.loadJsrConfigFile(pkg.dir);
 
 			if (config.experimentalGenerateJSR) {
 				jsr.config = util.transformPkgJsonForJsr(pkg);
-				jsr.filename = path.join(pkgRoot, util.JSR_CONFIG_FILENAME);
+				jsr.filename = path.join(pkg.dir, util.JSR_CONFIG_FILENAME);
 			}
 
 			if (!jsr.config) throw new Error("failed to load jsr config file");
@@ -67,7 +66,7 @@ export async function publishPlatform(
 
 			// TODO: update package json with actual catalog: versions
 
-			await util.chdir(pkgRoot, () => {
+			await util.chdir(pkg.dir, () => {
 				const command = jsrPublishCommand[packageManager];
 				cp.execSync(
 					[command, "--allow-dirty", isDryRun && "--dry-run"]
@@ -81,6 +80,7 @@ export async function publishPlatform(
 			break;
 		}
 		case "npm": {
+			const { rootDir } = await findRoot(process.cwd());
 			const config = npmPlatformOptionsSchema.parse(rawConfig);
 
 			switch (config.strategy) {
@@ -92,14 +92,12 @@ export async function publishPlatform(
 						);
 					}
 
-					const { rootDir } = await findRoot(process.cwd());
 					const npmrcFile = path.join(rootDir, ".npmrc");
 					let existingNpmrcFile = fs.existsSync(npmrcFile)
 						? await fsp.readFile(npmrcFile, { encoding: "utf8" })
 						: "";
 
 					const scope = pkg.packageJson.name.split("/").at(0);
-
 					if (!scope?.startsWith("@")) {
 						throw new Error("scope must start with `@` symbol");
 					}
@@ -113,7 +111,6 @@ export async function publishPlatform(
 						.replace("{{SCOPE}}", scope);
 
 					await fsp.writeFile(npmrcFile, existingNpmrcFile);
-
 					break;
 				}
 				case "package.json": {
@@ -124,7 +121,7 @@ export async function publishPlatform(
 			}
 
 			pkg.packageJson.version = pkg.newVersion;
-			const file = JSON.stringify(pkg.packageJson);
+			const file = JSON.stringify(pkg.packageJson, undefined, 2);
 			const packageJsonPath = path.join(pkg.dir, "package.json");
 			await fsp.writeFile(packageJsonPath, file);
 
@@ -138,9 +135,10 @@ export async function publishPlatform(
 				);
 			});
 
-			if (config.strategy === ".npmrc") util.gitClean(".npmrc");
 			util.gitClean(packageJsonPath);
-
+			if (config.strategy === ".npmrc") {
+				util.gitClean(path.join(rootDir, ".npmrc"));
+			}
 			break;
 		}
 		default:

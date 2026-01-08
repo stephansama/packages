@@ -9,7 +9,7 @@ import { publishPlatform } from "./publish";
 import * as util from "./util";
 
 export async function run() {
-	const args = await parseArgs();
+	await parseArgs();
 	const config = await loadConfig();
 
 	const root = await findRoot(process.cwd());

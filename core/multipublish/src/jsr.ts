@@ -87,12 +87,6 @@ export async function updateJsrConfigVersion(
 		throw new Error("unable to load user provided deno/jsr config file");
 	}
 
-	if (!pkg.version) {
-		throw new Error(
-			`no new version supplied for package ${pkg.packageJson.name}`,
-		);
-	}
-
 	userJsr.config.version = pkg.version;
 
 	await fsp.writeFile(

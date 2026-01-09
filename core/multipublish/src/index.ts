@@ -26,7 +26,7 @@ export async function run() {
 			);
 		}
 
-		return { ...pkg, version: release.version };
+		return { ...pkg, version: release.version || pkg.packageJson.version };
 	});
 
 	for (const pkg of releasedPackages) {

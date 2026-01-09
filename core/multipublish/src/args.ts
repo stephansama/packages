@@ -10,7 +10,7 @@ let _args: Args | null = null;
 
 const args = {
 	config: { alias: "c", description: "Path to config file", type: "string" },
-	dry: { alias: "d", description: "Perform a dry run", type: "string" },
+	dry: { alias: "d", description: "Perform a dry run", type: "boolean" },
 	released: {
 		alias: "r",
 		description: "packages that have been updated and require a publish",

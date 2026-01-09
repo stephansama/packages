@@ -13,6 +13,10 @@ Publish packages to multiple providers easily
 
 - [Installation](#installation)
 - [Usage](#usage)
+  - [Configuration](#configuration)
+  - [GitHub NPM Registry](#github-npm-registry)
+  - [JSR](#jsr)
+  - [Changesets](#changesets)
 
 </details>
 
@@ -24,8 +28,76 @@ pnpm install @stephansama/multipublish
 
 ## Usage
 
-```sh
-multipublish
+### Configuration
+
+You can configure `multipublish` by creating a configuration file (or object) in the root of your project. The following file formats are supported:
+
+- `package.json`
+- `.multipublishrc.cjs`
+- `.multipublishrc.js`
+- `.multipublishrc.json`
+- `.multipublishrc.mjs`
+- `.multipublishrc.ts`
+- `.multipublishrc.yaml`
+- `.multipublishrc.yml`
+- `.multipublishrc`
+- `.config/.multipublishrc.json`
+- `.config/.multipublishrc.yaml`
+- `.config/.multipublishrc.yml`
+- `.config/.multipublishrc`
+- `.config/multipublishrc.cjs`
+- `.config/multipublishrc.js`
+- `.config/multipublishrc.json`
+- `.config/multipublishrc.mjs`
+- `.config/multipublishrc.ts`
+- `.config/multipublishrc.yaml`
+- `.config/multipublishrc.yml`
+- `.config/multipublishrc`
+- `multipublish.config.cjs`
+- `multipublish.config.js`
+- `multipublish.config.mjs`
+- `multipublish.config.ts`
+
+```json
+{
+  "$schema": "./node_modules/@stephansama/multipublish/config/schema.json",
+  "platforms": [
+    ["jsr", { "experimentalGenerateJSR": true, "defaultExclude": ["!dist"] }],
+    [
+      "npm",
+      {
+        "registry": "https://npm.pkg.github.com",
+        "tokenEnvironmentKey": "GITHUB_TOKEN"
+      }
+    ]
+  ]
+}
+```
+
+### GitHub NPM Registry
+
+If publishing to the GitHub NPM registry, you must add `packages` to permissions when using a GitHub token. And allow `write` and `read` permissions for workflows (located in repo settings > actions > general).
+
+```yaml
+permissions:
+  packages: write
+```
+
+### JSR
+
+When publishing to JSR, you must either have a valid `jsr.json` or `deno.json`, or allow `experimentalGenerateJSR` using the config option.
+
+### Changesets
+
+In order to use this with changesets, please update your version script with a preversion script that calls the `multipublish` CLI.
+
+```json
+{
+  "scripts": {
+    "preversion": "multipublish",
+    "version": "changeset version"
+  }
+}
 ```
 
 <!-- ZOD path="./src/schema.ts" start -->

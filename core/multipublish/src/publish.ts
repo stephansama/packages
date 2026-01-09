@@ -118,6 +118,10 @@ export async function publishPlatform(
 			});
 
 			util.gitClean(jsr.filename);
+			if (config.experimentalUpdateCatalogs) {
+				util.gitClean(path.join(pkg.dir, "package.json"));
+			}
+
 			break;
 		}
 		case "npm": {

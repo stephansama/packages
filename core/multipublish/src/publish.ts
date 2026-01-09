@@ -10,25 +10,41 @@ import * as path from "node:path";
 import type { Config } from "./schema";
 
 import { getArgs } from "./args";
+import { updatePackageJsonWithCatalog } from "./catalog";
 import { type AgentName, detectPackageManager } from "./detect";
 import { jsrPlatformOptionsSchema, npmPlatformOptionsSchema } from "./schema";
 import * as util from "./util";
 
-export const npmrcTemplate = dedent`
-{{SCOPE}}:registry={{REGISTRY}}
-//{{REGISTRY_DOMAIN}}/:_authToken={{AUTH_TOKEN}}
-`;
+export function npmrcTemplate({
+	authToken: AUTH_TOKEN,
+	registry: REGISTRY,
+	registryDomain: REGISTRY_DOMAIN,
+	scope: SCOPE,
+}: {
+	authToken: string;
+	registry: string;
+	registryDomain: string;
+	scope: string;
+}) {
+	return dedent`
+	{{SCOPE}}:registry={{REGISTRY}}
+	//{{REGISTRY_DOMAIN}}/:_authToken={{AUTH_TOKEN}}
+	`
+		.replace("{{AUTH_TOKEN}}", AUTH_TOKEN)
+		.replace("{{REGISTRY}}", REGISTRY)
+		.replace("{{REGISTRY_DOMAIN}}", REGISTRY_DOMAIN)
+		.replace("{{SCOPE}}", SCOPE);
+}
 
 export const npmPublishCommand = {
-	bun: "",
-	deno: "",
+	bun: "bun publish",
 	npm: "npm publish",
 	pnpm: "pnpm publish",
 	yarn: "yarn publish",
-} satisfies Record<AgentName, string>;
+} satisfies Record<Exclude<AgentName, "deno">, string>;
 
 export const jsrPublishCommand = {
-	bun: "",
+	bun: "bunx publish",
 	deno: "deno publish",
 	npm: "npx jsr publish",
 	pnpm: "pnpm dlx jsr publish",
@@ -76,7 +92,15 @@ export async function publishPlatform(
 			jsr.config.version = pkg.newVersion;
 			await fsp.writeFile(jsr.filename, JSON.stringify(jsr.config));
 
-			// TODO: update package json with actual catalog: versions
+			if (config.experimentalUpdateCatalogs) {
+				if (packageManager === "pnpm" || packageManager === "bun") {
+					await updatePackageJsonWithCatalog(pkg, packageManager);
+				} else {
+					console.error(
+						`attempted to update catalogs with an unsupported package manager ${packageManager}`,
+					);
+				}
+			}
 
 			await util.chdir(pkg.dir, () => {
 				const command = jsrPublishCommand[packageManager];
@@ -100,6 +124,10 @@ export async function publishPlatform(
 			const { rootDir } = await findRoot(process.cwd());
 			const config = npmPlatformOptionsSchema.parse(rawConfig);
 
+			if (packageManager === "deno") {
+				throw new Error("deno is not supported for npm publish");
+			}
+
 			switch (config.strategy) {
 				case ".npmrc": {
 					const authToken = process.env[config.tokenEnvironmentKey];
@@ -109,9 +137,9 @@ export async function publishPlatform(
 						);
 					}
 
-					const npmrcFile = path.join(rootDir, ".npmrc");
-					let existingNpmrcFile = fs.existsSync(npmrcFile)
-						? await fsp.readFile(npmrcFile, { encoding: "utf8" })
+					const npmrcPath = path.join(rootDir, ".npmrc");
+					const npmrcPrefix = fs.existsSync(npmrcPath)
+						? await fsp.readFile(npmrcPath, { encoding: "utf8" })
 						: "";
 
 					const scope = pkg.packageJson.name.split("/").at(0);
@@ -119,15 +147,17 @@ export async function publishPlatform(
 						throw new Error("scope must start with `@` symbol");
 					}
 
-					const { host } = new URL(config.registry);
+					const npmrcFile =
+						npmrcPrefix +
+						"\n" +
+						npmrcTemplate({
+							authToken,
+							registry: config.registry,
+							registryDomain: new URL(config.registry).host,
+							scope,
+						});
 
-					existingNpmrcFile += npmrcTemplate
-						.replace("{{AUTH_TOKEN}}", authToken)
-						.replace("{{REGISTRY}}", config.registry)
-						.replace("{{REGISTRY_DOMAIN}}", host)
-						.replace("{{SCOPE}}", scope);
-
-					await fsp.writeFile(npmrcFile, existingNpmrcFile);
+					await fsp.writeFile(npmrcPath, npmrcFile);
 					break;
 				}
 				case "package.json": {

@@ -23,3 +23,55 @@ pnpm install @stephansama/multipublish
 ```
 
 ## Usage
+
+```sh
+multipublish
+```
+
+<!-- ZOD path="./src/schema.ts" start -->
+
+# Zod Schema
+
+## Config
+
+_Object containing the following properties:_
+
+| Property             | Type                    | Default      |
+| :------------------- | :---------------------- | :----------- |
+| **`platforms`** (\*) | [Platforms](#platforms) |              |
+| `tmpDirectory`       | `string`                | `'.release'` |
+| `useChangesets`      | `boolean`               | `true`       |
+
+_(\*) Required._
+
+## JsrPlatformOptions
+
+_Object containing the following properties:_
+
+| Property                     | Type            | Default |
+| :--------------------------- | :-------------- | :------ |
+| `allowSlowTypes`             | `boolean`       | `true`  |
+| `defaultExclude`             | `Array<string>` |         |
+| `defaultInclude`             | `Array<string>` |         |
+| `experimentalGenerateJSR`    | `boolean`       | `false` |
+| `experimentalUpdateCatalogs` | `boolean`       | `false` |
+
+_All properties are optional._
+
+## NpmPlatformOptions
+
+_Object containing the following properties:_
+
+| Property              | Type                         | Default                         |
+| :-------------------- | :--------------------------- | :------------------------------ |
+| `registry`            | `string`                     | `'https://registry.npmjs.org/'` |
+| `strategy`            | `'.npmrc' \| 'package.json'` | `'.npmrc'`                      |
+| `tokenEnvironmentKey` | `string`                     | `'NODE_AUTH_TOKEN'`             |
+
+_All properties are optional._
+
+## Platforms
+
+*Array of `'jsr' | 'npm'` *or\* _Tuple:_<ol><li>`'jsr'`</li><li>[JsrPlatformOptions](#jsrplatformoptions)</li></ol> _or_ _Tuple:_<ol><li>`'npm'`</li><li>[NpmPlatformOptions](#npmplatformoptions)</li></ol> items.\*
+
+<!-- ZOD end -->

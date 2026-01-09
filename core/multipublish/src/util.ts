@@ -5,7 +5,7 @@ import * as cp from "node:child_process";
 import * as fsp from "node:fs/promises";
 import * as path from "node:path";
 
-import { type JsrSchema, jsrTransformer } from "./jsr";
+import { jsrTransformer } from "./jsr";
 
 export type Changeset = {
 	changesets: {
@@ -60,9 +60,7 @@ export function gitClean(filename: string) {
 	});
 }
 
-export async function loadJsrConfigFile(
-	basePath: string,
-): Promise<{ config: JsrSchema | null; filename?: string }> {
+export async function loadJsrConfigFile(basePath: string) {
 	const files = await fg(basePath + "/{deno,jsr}.json{,c}");
 	if (files.length > 1) {
 		throw new Error("please only have one deno or jsr configuration file");
@@ -78,6 +76,6 @@ export async function loadJsrConfigFile(
 	return { config: JSON.parse(file), filename: configFile };
 }
 
-export function transformPkgJsonForJsr(pkg: Package): JsrSchema {
+export function transformPkgJsonForJsr(pkg: Package) {
 	return jsrTransformer.parse(pkg.packageJson);
 }

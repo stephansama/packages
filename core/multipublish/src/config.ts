@@ -1,5 +1,7 @@
 import { cosmiconfig, getDefaultSearchPlaces, type Options } from "cosmiconfig";
 
+import type { Args } from "./args";
+
 import { type Config, configSchema } from "./schema";
 import { MODULE_NAME } from "./util";
 
@@ -9,8 +11,10 @@ const defaultConfig = {
 	platforms: [["jsr", { experimentalGenerateJSR: true }]],
 } satisfies Config;
 
-export async function loadConfig() {
+export async function loadConfig(args: Args) {
 	const opts: Partial<Options> = { searchPlaces };
+
+	if (args.config) opts.searchPlaces = [args.config];
 
 	const explorer = cosmiconfig(MODULE_NAME, opts);
 

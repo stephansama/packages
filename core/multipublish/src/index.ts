@@ -9,13 +9,11 @@ import { publishPlatform } from "./publish";
 import * as util from "./util";
 
 export async function run() {
-	await getArgs();
-	const config = await loadConfig();
-
+	const args = await getArgs();
+	const config = await loadConfig(args);
 	const root = await findRoot(process.cwd());
 	const { packages } = await getPackages(root.rootDir);
 	const { releases } = await util.getChangesetReleases();
-
 	const releasedPackages = releases.map((release) => {
 		const packageJson = packages.find(
 			(pkg) => pkg.packageJson.name === release.name,

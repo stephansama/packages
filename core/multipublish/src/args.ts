@@ -11,7 +11,6 @@ let _args: Args | null = null;
 const args = {
 	config: { alias: "c", description: "Path to config file", type: "string" },
 	dry: { alias: "d", description: "Perform a dry run", type: "string" },
-	output: { alias: "s", description: "use changesets", type: "boolean" },
 	verbose: {
 		alias: "v",
 		description: "Enable verbose logging",

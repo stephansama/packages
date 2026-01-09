@@ -1,5 +1,6 @@
 import * as z from "zod";
 
+type ExportsSchema = z.infer<typeof exportSchema>;
 export const exportSchema = z.string().or(
 	z.record(
 		z.string(),
@@ -39,7 +40,7 @@ export const jsrSchema = z.object({
 	version: z.string(),
 });
 
-function convertPkgJsonExportsToJsr(exports: z.infer<typeof exportSchema>) {
+export function convertPkgJsonExportsToJsr(exports: ExportsSchema) {
 	if (typeof exports === "string") return exports;
 	return Object.fromEntries(
 		Object.entries(exports).map(([key, value]) => [

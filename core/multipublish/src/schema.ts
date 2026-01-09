@@ -6,8 +6,7 @@ export const jsrPlatformOptionsSchema = z.object({
 	defaultExclude: z.array(z.string()).optional(),
 	defaultInclude: z.array(z.string()).optional(),
 	experimentalGenerateJSR: z.boolean().default(false),
-	experimentalUpdateBunCatalogs: z.boolean().default(false),
-	experimentalUpdatePnpmCatalogs: z.boolean().default(false),
+	experimentalUpdateCatalogs: z.boolean().default(false),
 });
 
 export type NpmPlatformOptionsSchema = z.infer<typeof npmPlatformOptionsSchema>;
@@ -17,15 +16,18 @@ export const npmPlatformOptionsSchema = z.object({
 	tokenEnvironmentKey: z.string().default("NODE_AUTH_TOKEN"),
 });
 
+export type PlatformsSchema = z.input<typeof platformsSchema>;
+export const platformsSchema = z.array(
+	z
+		.literal("jsr")
+		.or(z.literal("npm"))
+		.or(z.tuple([z.literal("jsr"), jsrPlatformOptionsSchema]))
+		.or(z.tuple([z.literal("npm"), npmPlatformOptionsSchema])),
+);
+
 export type Config = z.input<typeof configSchema>;
 export const configSchema = z.object({
-	platforms: z.array(
-		z
-			.literal("jsr")
-			.or(z.literal("npm"))
-			.or(z.tuple([z.literal("jsr"), jsrPlatformOptionsSchema]))
-			.or(z.tuple([z.literal("npm"), npmPlatformOptionsSchema])),
-	),
+	platforms: platformsSchema,
 	tmpDirectory: z.string().default(".release"),
 	useChangesets: z.boolean().default(true),
 });

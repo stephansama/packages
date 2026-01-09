@@ -11,9 +11,29 @@ let _args: Args | null = null;
 const args = {
 	config: { alias: "c", description: "Path to config file", type: "string" },
 	dry: { alias: "d", description: "Perform a dry run", type: "string" },
+	released: {
+		alias: "r",
+		description: "packages that have been updated and require a publish",
+		type: "array",
+	},
+	releasedFile: {
+		alias: "f",
+		description: "file denoting which packages have been updated",
+		type: "string",
+	},
+	useChangesetStatus: {
+		alias: "s",
+		description: "path to changeset status file used to version release",
+		type: "string",
+	},
 	verbose: {
 		alias: "v",
 		description: "Enable verbose logging",
+		type: "boolean",
+	},
+	versionJsr: {
+		alias: "j",
+		description: "update version jsr configuration files",
 		type: "boolean",
 	},
 } satisfies Record<string, Options>;

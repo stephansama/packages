@@ -69,26 +69,17 @@ export async function updatePackageJsonWithCatalog(
 	const catalogStrategy = catalogLoadMap[agent];
 	const catalogs = await catalogStrategy();
 
-	for (const [dependency, version] of Object.entries(
-		pkg.packageJson.dependencies || {},
-	)) {
-		pkg.packageJson.dependencies ??= {};
-		pkg.packageJson.dependencies[dependency] = loadVersion({
-			catalogs,
-			dependency,
-			version,
-		});
-	}
-
-	for (const [dependency, version] of Object.entries(
-		pkg.packageJson.devDependencies || {},
-	)) {
-		pkg.packageJson.devDependencies ??= {};
-		pkg.packageJson.devDependencies[dependency] = loadVersion({
-			catalogs,
-			dependency,
-			version,
-		});
+	for (const dependencyType of ["dependencies", "devDependencies"] as const) {
+		for (const [dependency, version] of Object.entries(
+			pkg.packageJson[dependencyType] || {},
+		)) {
+			pkg.packageJson[dependencyType] ??= {};
+			pkg.packageJson[dependencyType][dependency] = loadVersion({
+				catalogs,
+				dependency,
+				version,
+			});
+		}
 	}
 
 	const packageJsonPath = path.join(pkg.dir, "package.json");

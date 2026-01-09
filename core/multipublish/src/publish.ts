@@ -1,7 +1,6 @@
 import type { Package } from "@manypkg/get-packages";
 
 import { findRoot } from "@manypkg/find-root";
-import dedent from "dedent";
 import * as cp from "node:child_process";
 import * as fs from "node:fs";
 import * as fsp from "node:fs/promises";
@@ -12,29 +11,9 @@ import type { Config } from "./schema";
 import { getArgs } from "./args";
 import { updatePackageJsonWithCatalog } from "./catalog";
 import { type AgentName, detectPackageManager } from "./detect";
+import * as jsr from "./jsr";
 import { jsrPlatformOptionsSchema, npmPlatformOptionsSchema } from "./schema";
 import * as util from "./util";
-
-export function npmrcTemplate({
-	authToken: AUTH_TOKEN,
-	registry: REGISTRY,
-	registryDomain: REGISTRY_DOMAIN,
-	scope: SCOPE,
-}: {
-	authToken: string;
-	registry: string;
-	registryDomain: string;
-	scope: string;
-}) {
-	return dedent`
-	{{SCOPE}}:registry={{REGISTRY}}
-	//{{REGISTRY_DOMAIN}}/:_authToken={{AUTH_TOKEN}}
-	`
-		.replace("{{AUTH_TOKEN}}", AUTH_TOKEN)
-		.replace("{{REGISTRY}}", REGISTRY)
-		.replace("{{REGISTRY_DOMAIN}}", REGISTRY_DOMAIN)
-		.replace("{{SCOPE}}", SCOPE);
-}
 
 export const npmPublishCommand = {
 	bun: "bun publish",
@@ -52,7 +31,7 @@ export const jsrPublishCommand = {
 } satisfies Record<AgentName, string>;
 
 export async function publishPlatform(
-	pkg: Package & { newVersion: string; oldVersion: string },
+	pkg: Package,
 	platform: Config["platforms"][number],
 ) {
 	const packageManager = await detectPackageManager();
@@ -61,36 +40,30 @@ export async function publishPlatform(
 	const rawConfig = isString ? {} : platform[1];
 	const args = await getArgs();
 	const isDryRun = !!args.dry;
+	const packageJsonPath = path.join(pkg.dir, "package.json");
 
 	switch (key) {
 		case "jsr": {
 			const config = jsrPlatformOptionsSchema.parse(rawConfig);
-			const jsr = await util.loadJsrConfigFile(pkg.dir);
+			const userJsr = await jsr.loadConfig(pkg.dir);
 
 			if (config.experimentalGenerateJSR) {
-				jsr.config = util.transformPkgJsonForJsr(pkg);
-				jsr.filename = path.join(pkg.dir, util.JSR_CONFIG_FILENAME);
+				userJsr.config = jsr.transformer.parse(pkg.packageJson);
+				userJsr.filename = path.join(pkg.dir, util.JSR_CONFIG_FILENAME);
 			}
 
-			if (!jsr.config) throw new Error("failed to load jsr config file");
-			if (!jsr.filename) {
-				throw new Error("failed to load jsr config filename");
+			if (!userJsr.config) {
+				throw new Error("failed to load userJsr config file");
 			}
 
-			jsr.config.include ??= [];
-			jsr.config.include = [
-				...jsr.config.include,
-				...(config.defaultInclude ? config.defaultInclude : []),
-			];
+			if (!userJsr.filename) {
+				throw new Error("failed to load userJsr config filename");
+			}
 
-			jsr.config.exclude ??= [];
-			jsr.config.exclude = [
-				...jsr.config.exclude,
-				...(config.defaultExclude ? config.defaultExclude : []),
-			];
+			jsr.updateIncludeExcludeList(userJsr.config, config);
 
-			jsr.config.version = pkg.newVersion;
-			await fsp.writeFile(jsr.filename, JSON.stringify(jsr.config));
+			const jsrFile = JSON.stringify(userJsr.config, undefined, 2);
+			await fsp.writeFile(userJsr.filename, jsrFile);
 
 			if (config.experimentalUpdateCatalogs) {
 				if (packageManager === "pnpm" || packageManager === "bun") {
@@ -103,10 +76,9 @@ export async function publishPlatform(
 			}
 
 			await util.chdir(pkg.dir, () => {
-				const command = jsrPublishCommand[packageManager];
 				cp.execSync(
 					[
-						command,
+						jsrPublishCommand[packageManager],
 						"--allow-dirty",
 						isDryRun && "--dry-run",
 						config.allowSlowTypes && "--allow-slow-types",
@@ -117,15 +89,16 @@ export async function publishPlatform(
 				);
 			});
 
-			util.gitClean(jsr.filename);
+			util.gitClean(userJsr.filename);
 			if (config.experimentalUpdateCatalogs) {
-				util.gitClean(path.join(pkg.dir, "package.json"));
+				util.gitClean(packageJsonPath);
 			}
 
 			break;
 		}
 		case "npm": {
 			const { rootDir } = await findRoot(process.cwd());
+			const npmrcPath = path.join(rootDir, ".npmrc");
 			const config = npmPlatformOptionsSchema.parse(rawConfig);
 
 			if (packageManager === "deno") {
@@ -141,9 +114,8 @@ export async function publishPlatform(
 						);
 					}
 
-					const npmrcPath = path.join(rootDir, ".npmrc");
 					const npmrcPrefix = fs.existsSync(npmrcPath)
-						? await fsp.readFile(npmrcPath, { encoding: "utf8" })
+						? await fsp.readFile(npmrcPath, "utf8")
 						: "";
 
 					const scope = pkg.packageJson.name.split("/").at(0);
@@ -154,7 +126,7 @@ export async function publishPlatform(
 					const npmrcFile =
 						npmrcPrefix +
 						"\n" +
-						npmrcTemplate({
+						util.npmrcTemplate({
 							authToken,
 							registry: config.registry,
 							registryDomain: new URL(config.registry).host,
@@ -167,19 +139,19 @@ export async function publishPlatform(
 				case "package.json": {
 					pkg.packageJson.publishConfig ??= {};
 					pkg.packageJson.publishConfig.registry = config.registry;
+					const file = JSON.stringify(pkg.packageJson, undefined, 2);
+					await fsp.writeFile(packageJsonPath, file);
 					break;
 				}
 			}
 
-			pkg.packageJson.version = pkg.newVersion;
-			const file = JSON.stringify(pkg.packageJson, undefined, 2);
-			const packageJsonPath = path.join(pkg.dir, "package.json");
-			await fsp.writeFile(packageJsonPath, file);
-
 			await util.chdir(pkg.dir, () => {
-				const command = npmPublishCommand[packageManager];
 				cp.execSync(
-					[command, "--no-git-checks", isDryRun && "--dry-run"]
+					[
+						npmPublishCommand[packageManager],
+						packageManager === "pnpm" && "--no-git-checks",
+						isDryRun && "--dry-run",
+					]
 						.filter((x) => x)
 						.join(" "),
 					{ stdio: "inherit" },
@@ -187,9 +159,7 @@ export async function publishPlatform(
 			});
 
 			util.gitClean(packageJsonPath);
-			if (config.strategy === ".npmrc") {
-				util.gitClean(path.join(rootDir, ".npmrc"));
-			}
+			if (config.strategy === ".npmrc") util.gitClean(npmrcPath);
 			break;
 		}
 		default:

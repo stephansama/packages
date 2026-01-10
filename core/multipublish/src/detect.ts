@@ -11,7 +11,6 @@ export async function detectPackageManager() {
 	if (!detected) throw new Error("unable to detect package manager");
 
 	_detected = detected.name;
-	if (_detected === "bun") throw new Error("bun is not supported");
 
 	return _detected;
 }

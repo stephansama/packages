@@ -70,9 +70,8 @@ export async function updatePackageJsonWithCatalog(
 	const catalogs = await catalogStrategy();
 
 	for (const dependencyType of ["dependencies", "devDependencies"] as const) {
-		for (const [dependency, version] of Object.entries(
-			pkg.packageJson[dependencyType] || {},
-		)) {
+		const entries = Object.entries(pkg.packageJson[dependencyType] || {});
+		for (const [dependency, version] of entries) {
 			pkg.packageJson[dependencyType] ??= {};
 			pkg.packageJson[dependencyType][dependency] = loadVersion({
 				catalogs,

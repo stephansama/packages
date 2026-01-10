@@ -1,5 +1,5 @@
+import * as cp from "node:child_process";
 import * as fsp from "node:fs/promises";
-import path from "node:path";
 import * as z from "zod";
 
 import type { Args } from "./args";
@@ -15,11 +15,7 @@ export const releaseSchema = z.object({
 export type ReleasesSchema = z.infer<typeof releasesSchema>;
 export const releasesSchema = z.array(releaseSchema);
 
-export type ChangesetStatusSchemaInput = z.input<typeof changesetStatusSchema>;
-export type ChangesetStatusSchemaOutput = z.output<
-	typeof changesetStatusSchema
->;
-
+export type ChangesetStatusSchema = z.input<typeof changesetStatusSchema>;
 export const changesetStatusSchema = z
 	.object({
 		releases: z.array(
@@ -45,14 +41,12 @@ export async function loadReleases(args: Args) {
 	}
 
 	if (args.useChangesetStatus) {
-		const changesetStatusPath = path.join(
-			process.cwd(),
-			args.useChangesetStatus,
-		);
+		const changesetOutput = ".multipublish.status.json";
+		cp.execFileSync("changeset", ["status", `--output=${changesetOutput}`]);
 
-		const file = await fsp.readFile(changesetStatusPath, "utf8");
+		const file = await fsp.readFile(changesetOutput, "utf8");
 
-		gitClean(args.useChangesetStatus);
+		gitClean(changesetOutput);
 
 		return changesetStatusSchema.parse(JSON.parse(file));
 	}

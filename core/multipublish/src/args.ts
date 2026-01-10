@@ -24,7 +24,7 @@ const args = {
 	useChangesetStatus: {
 		alias: "s",
 		description: "path to changeset status file used to version release",
-		type: "string",
+		type: "boolean",
 	},
 	verbose: {
 		alias: "v",

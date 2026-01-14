@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { findRoot } from "@manypkg/find-root";
 import { getPackages } from "@manypkg/get-packages";
 

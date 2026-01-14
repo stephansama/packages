@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import type { JsrSchema } from "./jsr.ts";
-import type { JsrPlatformOptionsSchema } from "./schema.ts";
+import type { JsrSchema } from "./jsr";
+import type { JsrPlatformOptionsSchema } from "./schema";
 
-import { jsrTransformer, updateIncludeExcludeList } from "./jsr.ts";
+import { jsrTransformer, updateIncludeExcludeList } from "./jsr";
 
 describe("jsr", () => {
 	describe("jsrTransformer", () => {

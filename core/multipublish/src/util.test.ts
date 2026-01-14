@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { npmrcTemplate } from "./util.ts";
+import { npmrcTemplate } from "./util";
 
 describe("npmrcTemplate", () => {
 	it("should generate correct .npmrc content", () => {

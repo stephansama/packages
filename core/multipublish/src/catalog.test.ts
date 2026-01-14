@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 
-import type { CatalogSchema } from "./catalog.ts";
+import type { CatalogSchema } from "./catalog";
 
-import { catalogSchema, loadVersion } from "./catalog.ts";
+import { catalogSchema, loadVersion } from "./catalog";
 
 describe("catalog", () => {
 	describe("catalogSchema", () => {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { changesetStatusSchema } from "./release.ts";
+import { changesetStatusSchema } from "./release";
 
 describe("release", () => {
 	describe("changesetStatusSchema", () => {

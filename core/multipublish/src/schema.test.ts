@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { configSchema, platformsSchema } from "./schema.ts";
+import { configSchema, platformsSchema } from "./schema";
 
 describe("schema", () => {
 	describe("platformsSchema", () => {

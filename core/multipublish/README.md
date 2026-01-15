@@ -15,8 +15,10 @@ Publish packages to multiple providers easily
 - [Usage](#usage)
   - [Configuration](#configuration)
   - [GitHub NPM Registry](#github-npm-registry)
-  - [JSR](#jsr)
+  - [JSR Configuration](#jsr-configuration)
   - [Changesets](#changesets)
+    - [JSR](#jsr)
+    - [Published packages](#published-packages)
 
 </details>
 
@@ -83,21 +85,43 @@ permissions:
   packages: write
 ```
 
-### JSR
+### JSR Configuration
 
 When publishing to JSR, you must either have a valid `jsr.json` or `deno.json`, or allow `experimentalGenerateJSR` using the config option.
 
 ### Changesets
 
-In order to use this with changesets, please update your version script with a preversion script that calls the `multipublish` CLI.
+If you are using jsr this with changesets, please update your version script with a preversion script that calls the `multipublish` CLI in order to update your existing jsr configurations.
+
+#### JSR
 
 ```json
 {
   "scripts": {
-    "preversion": "multipublish --versionJsr",
+    "preversion": "multipublish --useChangesetStatus --versionJsr",
     "version": "changeset version"
   }
 }
+```
+
+#### Published packages
+
+you can run multipublish after a changeset publish like so
+
+```yaml
+- if: github.ref_name == 'main'
+  name: 🦋 Create Changeset Release
+  uses: changesets/action@v1
+  id: changesets
+  with:
+    commit: "chore: Update version for release"
+    title: "chore: Update version for release"
+    publish: pnpm run publish
+    createGithubReleases: true
+- name: publish to other registries
+  if: steps.changesets.outputs.published == 'true'
+  run: |
+    echo "${{ steps.changesets.outputs.publishedPackages }}" | multipublish
 ```
 
 <!-- ZOD path="./src/schema.ts" start -->

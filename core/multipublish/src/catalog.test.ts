@@ -1,4 +1,13 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+vi.mock("node:fs/promises", async (importOriginal) => {
+	const mod = await importOriginal<typeof import("node:fs/promises")>();
+	return {
+		...mod,
+		writeFile: vi.fn(),
+	};
+});
+
 
 import type { CatalogSchema } from "./catalog";
 
@@ -85,6 +94,45 @@ describe("catalog", () => {
 					version: "catalog:missing",
 				});
 			}).toThrow();
+		});
+	});
+
+	describe("updatePackageJsonWithCatalog", () => {
+		it("should update package.json for pnpm", async () => {
+			const fsp = await import("node:fs/promises");
+			const { updatePackageJsonWithCatalog, catalogLoadMap } = await import(
+				"./catalog"
+			);
+
+			vi.spyOn(catalogLoadMap, "pnpm").mockResolvedValue({
+				catalog: {
+					foo: "1.0.0",
+				},
+			});
+
+			const pkg = {
+				dir: "/path/to/pkg",
+				packageJson: {
+					dependencies: {
+						foo: "catalog:",
+					},
+				},
+			} as any;
+
+			await updatePackageJsonWithCatalog(pkg, "pnpm");
+
+			expect(fsp.writeFile).toHaveBeenCalledWith(
+				"/path/to/pkg/package.json",
+				JSON.stringify(
+					{
+						dependencies: {
+							foo: "1.0.0",
+						},
+					},
+					undefined,
+					2,
+				),
+			);
 		});
 	});
 });

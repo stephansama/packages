@@ -12,8 +12,8 @@ export const exportSchema = z.string().or(
 		z.string(),
 		z.string().or(
 			z.object({
-				import: z.object({ default: z.string() }),
-				require: z.object({ default: z.string() }),
+				import: z.object({ default: z.string() }).or(z.string()),
+				require: z.object({ default: z.string() }).or(z.string()),
 			}),
 		),
 	),
@@ -101,7 +101,11 @@ function convertPkgJsonExportsToJsr(exports: ExportsSchema) {
 	return Object.fromEntries(
 		Object.entries(exports).map(([key, value]) => [
 			key,
-			typeof value === "string" ? value : value.import.default,
+			typeof value === "string"
+				? value
+				: typeof value.import === "string"
+					? value.import
+					: value.import.default,
 		]),
 	);
 }

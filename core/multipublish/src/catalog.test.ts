@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from "vitest";
 import * as catalog from "./catalog";
 
 const mocks = vi.hoisted(() => ({
-	catalogLoadMap: vi.fn(),
+	catalogLoadMap: { bun: vi.fn(), pnpm: vi.fn() },
 	writeFile: vi.fn(),
 }));
 
@@ -109,7 +109,9 @@ describe("catalog", () => {
 				foo: "1.0.0",
 			};
 
-			mocks.catalogLoadMap.mockResolvedValue({
+			const packageManager = "pnpm" as const;
+
+			mocks.catalogLoadMap[packageManager].mockResolvedValue({
 				catalog: mockDefaultCatalog,
 			});
 
@@ -131,7 +133,7 @@ describe("catalog", () => {
 				},
 			});
 
-			await catalog.updatePackageJsonWithCatalog(pkg, "pnpm");
+			await catalog.updatePackageJsonWithCatalog(pkg, packageManager);
 
 			expect(mocks.writeFile).toHaveBeenCalledWith(
 				path.join(pkg.dir, "package.json"),

@@ -1,0 +1,19 @@
+{
+	"$schema": "../node_modules/@stephansama/multipublish/config/schema.json",
+	"platforms": [
+		[
+			"jsr",
+			{
+				"experimentalUpdateCatalogs": true,
+				"experimentalGenerateJSR": true
+			}
+		],
+		[
+			"npm",
+			{
+				"registry": "https://registry.npmjs.org/",
+				"tokenEnvironmentKey": "GITHUB_TOKEN"
+			}
+		]
+	]
+}

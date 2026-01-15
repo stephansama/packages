@@ -16,6 +16,7 @@ env:
   TURBO_TEAM: ${{vars.TURBO_TEAM}}
 permissions:
   contents: write
+  packages: write
   id-token: write
   issues: write
   pull-requests: write
@@ -67,8 +68,13 @@ jobs:
       - if: github.ref_name == 'main'
         name: 🦋 Create Changeset Release Pull Request
         uses: changesets/action@v1
+        id: changesets
         with:
           commit: "chore: Update version for release"
           title: "chore: Update version for release"
           publish: pnpm run publish
           createGithubReleases: true
+      - name: f
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          echo "${{ steps.changesets.outputs.publishedPackages }}" | multipublish

@@ -46,6 +46,7 @@
 		"@manypkg/get-packages": "catalog:",
 		"@stephansama/ai-commit-msg": "workspace:*",
 		"@stephansama/auto-readme": "workspace:*",
+		"@stephansama/multipublish": "workspace:*",
 		"@stephansama/prettier-plugin-handlebars": "workspace:*",
 		"@tsconfig/recommended": "^1.0.13",
 		"@turbo/gen": "^2.7.0",

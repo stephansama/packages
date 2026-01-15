@@ -1,0 +1,68 @@
+{
+	"name": "@stephansama/multipublish",
+	"version": "0.0.0",
+	"description": "Publish packages to multiple providers easily",
+	"keywords": [
+		"multipublish"
+	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/multipublish",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/stephansama/packages.git",
+		"directory": "core/multipublish"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephansama.info"
+	},
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./config/schema.js",
+			"require": "./config/schema.cjs"
+		},
+		"./package.json": "./package.json"
+	},
+	"main": "./config/schema.cjs",
+	"module": "./config/schema.js",
+	"types": "./config/schema.d.cts",
+	"bin": "./cli.mjs",
+	"files": [
+		"./dist",
+		"./config",
+		"./cli.mjs"
+	],
+	"scripts": {
+		"build": "node build.mjs",
+		"dev": "node --watch build.mjs",
+		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+	},
+	"dependencies": {
+		"@manypkg/find-root": "catalog:",
+		"@manypkg/get-packages": "catalog:",
+		"cosmiconfig": "catalog:cli",
+		"dedent": "^1.7.1",
+		"fast-glob": "^3.3.3",
+		"obug": "catalog:cli",
+		"package-manager-detector": "^1.6.0",
+		"yaml": "^2.8.2",
+		"yargs": "catalog:cli",
+		"zod": "catalog:schema"
+	},
+	"devDependencies": {
+		"@types/yargs": "catalog:",
+		"es-toolkit": "catalog:",
+		"jsr": "catalog:",
+		"tsdown": "catalog:"
+	},
+	"peerDependencies": {
+		"jsr": ">=0.10"
+	},
+	"packageManager": "pnpm@10.11.0",
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	}
+}

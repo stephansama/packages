@@ -10,12 +10,14 @@
 .env**
 .next
 .react-router
+.publish
 .svelte-kit
 .turbo
 .wrangler
 core/ai-commit-msg/config
 core/auto-readme/config
 core/example/scripts/examples.json
+core/multipublish/config
 dist
 dist-js
 examples/catppuccin-xsl/vanilla/public/**/*

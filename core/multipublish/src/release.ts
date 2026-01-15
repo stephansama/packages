@@ -52,5 +52,5 @@ export async function loadReleases(args: Args) {
 	}
 
 	const input = await readStdin();
-	return releasesSchema.parse(input);
+	return releasesSchema.parse(JSON.parse(input));
 }

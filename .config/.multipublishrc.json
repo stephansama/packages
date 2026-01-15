@@ -11,7 +11,7 @@
 		[
 			"npm",
 			{
-				"registry": "https://registry.npmjs.org/",
+				"registry": "npm.pkg.github.com",
 				"tokenEnvironmentKey": "GITHUB_TOKEN"
 			}
 		]

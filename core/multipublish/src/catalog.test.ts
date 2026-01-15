@@ -1,5 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 
+import type { CatalogSchema } from "./catalog";
+
+import { catalogSchema, loadVersion } from "./catalog";
+
 vi.mock("node:fs/promises", async (importOriginal) => {
 	const mod = await importOriginal<typeof import("node:fs/promises")>();
 	return {
@@ -7,11 +11,6 @@ vi.mock("node:fs/promises", async (importOriginal) => {
 		writeFile: vi.fn(),
 	};
 });
-
-
-import type { CatalogSchema } from "./catalog";
-
-import { catalogSchema, loadVersion } from "./catalog";
 
 describe("catalog", () => {
 	describe("catalogSchema", () => {
@@ -100,9 +99,8 @@ describe("catalog", () => {
 	describe("updatePackageJsonWithCatalog", () => {
 		it("should update package.json for pnpm", async () => {
 			const fsp = await import("node:fs/promises");
-			const { updatePackageJsonWithCatalog, catalogLoadMap } = await import(
-				"./catalog"
-			);
+			const { catalogLoadMap, updatePackageJsonWithCatalog } =
+				await import("./catalog");
 
 			vi.spyOn(catalogLoadMap, "pnpm").mockResolvedValue({
 				catalog: {

@@ -1,5 +1,11 @@
 # @stephansama/multipublish
 
+## 1.0.4
+
+### Patch Changes
+
+- a4521b3: update multipublish configuration
+
 ## 1.0.3
 
 ### Patch Changes

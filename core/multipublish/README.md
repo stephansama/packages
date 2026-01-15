@@ -123,6 +123,7 @@ _Object containing the following properties:_
 | Property                     | Type            | Default |
 | :--------------------------- | :-------------- | :------ |
 | `allowSlowTypes`             | `boolean`       | `true`  |
+| `commitJsrVersionUpdate`     | `boolean`       | `false` |
 | `defaultExclude`             | `Array<string>` |         |
 | `defaultInclude`             | `Array<string>` |         |
 | `experimentalGenerateJSR`    | `boolean`       | `false` |

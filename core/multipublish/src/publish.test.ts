@@ -1,43 +1,49 @@
-import * as findRoot from "@manypkg/find-root";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { getArgs } from "./args";
-import { detectPackageManager } from "./detect";
-import * as jsr from "./jsr";
 import { publishPlatform } from "./publish";
 
-vi.mock("@manypkg/find-root", () => ({
+const mocks = vi.hoisted(() => ({
+	detectPackageManager: vi.fn(),
+	execFileSync: vi.fn(),
+	execSync: vi.fn(),
+	existsSync: vi.fn(),
 	findRoot: vi.fn(),
+	getArgs: vi.fn(),
+	loadConfig: vi.fn(),
+	readFile: vi.fn(),
+	writeFile: vi.fn(),
+}));
+
+vi.mock("@manypkg/find-root", () => ({
+	findRoot: mocks.findRoot,
 }));
 
 vi.mock("node:fs", async (importOriginal) => {
 	const mod = await importOriginal<typeof import("node:fs")>();
 	return {
 		...mod,
-		existsSync: vi.fn(),
+		existsSync: mocks.existsSync,
 	};
 });
 
 vi.mock("node:child_process", () => ({
-	execFileSync: vi.fn(),
-	execSync: vi.fn(),
+	execFileSync: mocks.execFileSync,
+	execSync: mocks.execSync,
 }));
 
 vi.mock("node:fs/promises", async (importOriginal) => {
 	const mod = await importOriginal<typeof import("node:fs/promises")>();
 	return {
 		...mod,
-		readFile: vi.fn(),
-		writeFile: vi.fn(),
+		readFile: mocks.readFile,
+		writeFile: mocks.writeFile,
 	};
 });
 
-vi.mock("./args", () => ({
-	getArgs: vi.fn(),
-}));
+vi.mock("./args", () => ({ getArgs: mocks.getArgs }));
 
 vi.mock("./detect", () => ({
-	detectPackageManager: vi.fn(),
+	detectPackageManager: mocks.detectPackageManager,
 }));
 
 vi.mock("./util", async (importOriginal) => {
@@ -55,33 +61,33 @@ vi.mock("./jsr", async (importOriginal) => {
 	const mod = await importOriginal<typeof import("./jsr")>();
 	return {
 		...mod,
-		loadConfig: vi.fn(),
+		loadConfig: mocks.loadConfig,
 		updateIncludeExcludeList: vi.fn(),
 	};
 });
 
 describe("publish", () => {
 	beforeEach(() => {
+		mocks.getArgs.mockResolvedValue({ dry: false });
+		mocks.detectPackageManager.mockResolvedValue("pnpm");
+		mocks.findRoot.mockResolvedValue({ rootDir: "/fake/root" });
+	});
+
+	afterEach(() => {
 		vi.resetAllMocks();
-		vi.mocked(getArgs).mockResolvedValue({ dry: false });
-		vi.mocked(detectPackageManager).mockResolvedValue("pnpm");
-		vi.mocked(findRoot.findRoot).mockResolvedValue({
-			rootDir: "/fake/root",
-		} as any);
+		vi.unstubAllEnvs();
 	});
 
 	describe("publishPlatform", () => {
 		it("should publish to npm with package.json strategy", async () => {
-			const fsp = await import("node:fs/promises");
-			const cp = await import("node:child_process");
-
 			const pkg = {
 				dir: "/path/to/pkg",
 				packageJson: {
 					name: "test-pkg",
 					version: "1.0.0",
 				},
-			} as any;
+				relativeDir: "./pkg",
+			};
 
 			await publishPlatform(pkg, [
 				"npm",
@@ -91,7 +97,7 @@ describe("publish", () => {
 				},
 			]);
 
-			expect(fsp.writeFile).toHaveBeenCalledWith(
+			expect(mocks.writeFile).toHaveBeenCalledWith(
 				"/path/to/pkg/package.json",
 				JSON.stringify(
 					{
@@ -105,19 +111,15 @@ describe("publish", () => {
 				),
 			);
 
-			expect(cp.execSync).toHaveBeenCalledWith(
+			expect(mocks.execSync).toHaveBeenCalledWith(
 				"pnpm publish --no-git-checks",
 				{ stdio: "inherit" },
 			);
 		});
 
 		it("should publish to npm with .npmrc strategy", async () => {
-			const fsp = await import("node:fs/promises");
-			const cp = await import("node:child_process");
-			const fs = await import("node:fs");
-
-			vi.spyOn(fs, "existsSync").mockReturnValue(false);
-			process.env.NPM_TOKEN = "test-token";
+			mocks.existsSync.mockReturnValue(false);
+			vi.stubEnv("NPM_TOKEN", "test-token");
 
 			const pkg = {
 				dir: "/path/to/pkg",
@@ -125,7 +127,8 @@ describe("publish", () => {
 					name: "@scope/test-pkg",
 					version: "1.0.0",
 				},
-			} as any;
+				relativeDir: "./pkg",
+			} as const;
 
 			await publishPlatform(pkg, [
 				"npm",
@@ -136,24 +139,19 @@ describe("publish", () => {
 				},
 			]);
 
-			expect(fsp.writeFile).toHaveBeenCalledWith(
+			expect(mocks.writeFile).toHaveBeenCalledWith(
 				"/fake/root/.npmrc",
 				expect.stringContaining("test-token"),
 			);
 
-			expect(cp.execSync).toHaveBeenCalledWith(
+			expect(mocks.execSync).toHaveBeenCalledWith(
 				"pnpm publish --no-git-checks",
 				{ stdio: "inherit" },
 			);
-
-			delete process.env.NPM_TOKEN;
 		});
 
 		it("should publish to jsr", async () => {
-			const fsp = await import("node:fs/promises");
-			const cp = await import("node:child_process");
-
-			vi.mocked(jsr.loadConfig).mockResolvedValue({
+			vi.mocked(mocks.loadConfig).mockResolvedValue({
 				config: {
 					exports: "index.ts",
 					name: "@scope/pkg",
@@ -168,17 +166,19 @@ describe("publish", () => {
 					name: "@scope/pkg",
 					version: "1.0.0",
 				},
-			} as any;
+				relativeDir: "./pkg",
+			};
+
 			const platform = "jsr";
 
 			await publishPlatform(pkg, platform);
 
-			expect(fsp.writeFile).toHaveBeenCalledWith(
+			expect(mocks.writeFile).toHaveBeenCalledWith(
 				"/path/to/pkg/jsr.json",
 				expect.any(String),
 			);
 
-			expect(cp.execSync).toHaveBeenCalledWith(
+			expect(mocks.execSync).toHaveBeenCalledWith(
 				"pnpm dlx jsr publish --allow-dirty --allow-slow-types",
 				{ stdio: "inherit" },
 			);

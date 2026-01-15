@@ -1,15 +1,22 @@
+import { merge } from "es-toolkit/compat";
+import * as path from "node:path";
 import { describe, expect, it, vi } from "vitest";
 
-import type { CatalogSchema } from "./catalog";
+import * as catalog from "./catalog";
 
-import { catalogSchema, loadVersion } from "./catalog";
+const mocks = vi.hoisted(() => ({
+	catalogLoadMap: vi.fn(),
+	writeFile: vi.fn(),
+}));
+
+vi.mock("./catalog", async (importOriginal) => {
+	const mod = await importOriginal<typeof import("./catalog")>();
+	return { ...mod, catalogLoadMap: mocks.catalogLoadMap };
+});
 
 vi.mock("node:fs/promises", async (importOriginal) => {
 	const mod = await importOriginal<typeof import("node:fs/promises")>();
-	return {
-		...mod,
-		writeFile: vi.fn(),
-	};
+	return { ...mod, writeFile: mocks.writeFile };
 });
 
 describe("catalog", () => {
@@ -20,7 +27,7 @@ describe("catalog", () => {
 					react: "^18.0.0",
 				},
 			};
-			const result = catalogSchema.parse(input);
+			const result = catalog.catalogSchema.parse(input);
 			expect(result.catalog).toEqual(input.catalog);
 		});
 
@@ -31,13 +38,13 @@ describe("catalog", () => {
 					react19: { react: "^19.0.0" },
 				},
 			};
-			const result = catalogSchema.parse(input);
+			const result = catalog.catalogSchema.parse(input);
 			expect(result.catalogs).toEqual(input.catalogs);
 		});
 	});
 
 	describe("loadVersion", () => {
-		const catalogs: CatalogSchema = {
+		const catalogs: catalog.CatalogSchema = {
 			catalog: {
 				foo: "1.0.0",
 			},
@@ -49,7 +56,7 @@ describe("catalog", () => {
 		};
 
 		it("should return version if not using catalog", () => {
-			const result = loadVersion({
+			const result = catalog.loadVersion({
 				catalogs,
 				dependency: "foo",
 				version: "^2.0.0",
@@ -58,7 +65,7 @@ describe("catalog", () => {
 		});
 
 		it("should resolve default catalog", () => {
-			const result = loadVersion({
+			const result = catalog.loadVersion({
 				catalogs,
 				dependency: "foo",
 				version: "catalog:",
@@ -67,7 +74,7 @@ describe("catalog", () => {
 		});
 
 		it("should resolve named catalog", () => {
-			const result = loadVersion({
+			const result = catalog.loadVersion({
 				catalogs,
 				dependency: "foo",
 				version: "catalog:legacy",
@@ -77,7 +84,7 @@ describe("catalog", () => {
 
 		it("should throw if catalog dependency not found", () => {
 			expect(() => {
-				loadVersion({
+				catalog.loadVersion({
 					catalogs,
 					dependency: "bar",
 					version: "catalog:",
@@ -87,7 +94,7 @@ describe("catalog", () => {
 
 		it("should throw if named catalog not found", () => {
 			expect(() => {
-				loadVersion({
+				catalog.loadVersion({
 					catalogs,
 					dependency: "foo",
 					version: "catalog:missing",
@@ -98,14 +105,12 @@ describe("catalog", () => {
 
 	describe("updatePackageJsonWithCatalog", () => {
 		it("should update package.json for pnpm", async () => {
-			const fsp = await import("node:fs/promises");
-			const { catalogLoadMap, updatePackageJsonWithCatalog } =
-				await import("./catalog");
+			const mockDefaultCatalog = {
+				foo: "1.0.0",
+			};
 
-			vi.spyOn(catalogLoadMap, "pnpm").mockResolvedValue({
-				catalog: {
-					foo: "1.0.0",
-				},
+			mocks.catalogLoadMap.mockResolvedValue({
+				catalog: mockDefaultCatalog,
 			});
 
 			const pkg = {
@@ -114,22 +119,23 @@ describe("catalog", () => {
 					dependencies: {
 						foo: "catalog:",
 					},
+					name: "example",
+					version: "0.0.0",
 				},
-			} as any;
+				relativeDir: "./pkg",
+			};
 
-			await updatePackageJsonWithCatalog(pkg, "pnpm");
+			const output = merge(pkg.packageJson, {
+				dependencies: {
+					foo: mockDefaultCatalog.foo,
+				},
+			});
 
-			expect(fsp.writeFile).toHaveBeenCalledWith(
-				"/path/to/pkg/package.json",
-				JSON.stringify(
-					{
-						dependencies: {
-							foo: "1.0.0",
-						},
-					},
-					undefined,
-					2,
-				),
+			await catalog.updatePackageJsonWithCatalog(pkg, "pnpm");
+
+			expect(mocks.writeFile).toHaveBeenCalledWith(
+				path.join(pkg.dir, "package.json"),
+				JSON.stringify(output, undefined, 2),
 			);
 		});
 	});

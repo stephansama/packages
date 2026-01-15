@@ -53,6 +53,7 @@
 	},
 	"devDependencies": {
 		"@types/yargs": "catalog:",
+		"es-toolkit": "catalog:",
 		"jsr": "catalog:",
 		"tsdown": "catalog:"
 	},

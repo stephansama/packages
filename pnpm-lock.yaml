@@ -614,6 +614,9 @@ importers:
       '@types/yargs':
         specifier: 'catalog:'
         version: 17.0.35
+      es-toolkit:
+        specifier: 'catalog:'
+        version: 1.43.0
       jsr:
         specifier: 'catalog:'
         version: 0.13.5
@@ -5806,6 +5809,7 @@ packages:
   eslint-plugin-zod-x@1.13.2:
     resolution: {integrity: sha512-Zw3PkNvKDp2H3wfrSwh+ydbf6WtkKlMqFEzyAN+cxxueiZRj/AtJkdjmll2IFYnOSi+2VBVV9quqDUfZItcNLQ==}
     engines: {node: ^20 || ^22 || >=24}
+    deprecated: eslint-plugin-zod-x is deprecated. Use eslint-plugin-zod >=3. See https://github.com/marcalexiei/eslint-plugin-zod/releases/tag/v3.0.0
     peerDependencies:
       eslint: ^9
       zod: ^4

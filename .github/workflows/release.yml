@@ -77,4 +77,4 @@ jobs:
       - name: publish to other registries
         if: steps.changesets.outputs.published == 'true'
         run: |
-          echo "${{ steps.changesets.outputs.publishedPackages }}" | multipublish
+          echo "${{ steps.changesets.outputs.publishedPackages }}" | pnpm multipublish

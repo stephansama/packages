@@ -1,5 +1,11 @@
 # @stephansama/multipublish
 
+## 1.0.2
+
+### Patch Changes
+
+- 40108ca: fix: update json parse for stdin
+
 ## 1.0.1
 
 ### Patch Changes

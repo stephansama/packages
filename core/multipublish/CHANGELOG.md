@@ -1,5 +1,11 @@
 # @stephansama/multipublish
 
+## 1.0.1
+
+### Patch Changes
+
+- 8f18a95: arbitrary bump to trigger publish
+
 ## 1.0.0
 
 ### Major Changes

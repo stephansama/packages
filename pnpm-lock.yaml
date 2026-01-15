@@ -207,6 +207,9 @@ importers:
       '@stephansama/auto-readme':
         specifier: workspace:*
         version: link:core/auto-readme
+      '@stephansama/multipublish':
+        specifier: workspace:*
+        version: link:core/multipublish
       '@stephansama/prettier-plugin-handlebars':
         specifier: workspace:*
         version: link:core/prettier-plugin-handlebars
@@ -324,10 +327,6 @@ importers:
       yaml-eslint-parser:
         specifier: ^1.3.2
         version: 1.3.2
-    devDependencies:
-      '@stephansama/multipublish':
-        specifier: workspace:*
-        version: link:core/multipublish
 
   .config/www:
     dependencies:

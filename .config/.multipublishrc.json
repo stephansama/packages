@@ -5,13 +5,14 @@
 			"jsr",
 			{
 				"experimentalUpdateCatalogs": true,
-				"experimentalGenerateJSR": true
+				"experimentalGenerateJSR": true,
+				"defaultExclude": ["!config"]
 			}
 		],
 		[
 			"npm",
 			{
-				"registry": "npm.pkg.github.com",
+				"registry": "https://npm.pkg.github.com/",
 				"tokenEnvironmentKey": "GITHUB_TOKEN"
 			}
 		]

@@ -53,7 +53,7 @@ catalog:
   "@types/yargs": ^17.0.33
   deepmerge: "^4.3.1"
   es-toolkit: 1.43.0
-  astro: 5.9.3
+  astro: 5.16.9
   handlebars: 4.7.8
   happy-dom: ^20.0.11
   jsr: ^0.13.5

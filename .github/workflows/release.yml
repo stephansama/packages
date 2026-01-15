@@ -74,7 +74,7 @@ jobs:
           title: "chore: Update version for release"
           publish: pnpm run publish
           createGithubReleases: true
-      - name: f
+      - name: publish to other registries
         if: steps.changesets.outputs.published == 'true'
         run: |
           echo "${{ steps.changesets.outputs.publishedPackages }}" | multipublish

@@ -94,7 +94,7 @@ In order to use this with changesets, please update your version script with a p
 ```json
 {
   "scripts": {
-    "preversion": "multipublish",
+    "preversion": "multipublish --versionJsr",
     "version": "changeset version"
   }
 }
@@ -123,7 +123,6 @@ _Object containing the following properties:_
 | Property                     | Type            | Default |
 | :--------------------------- | :-------------- | :------ |
 | `allowSlowTypes`             | `boolean`       | `true`  |
-| `commitJsrVersionUpdate`     | `boolean`       | `false` |
 | `defaultExclude`             | `Array<string>` |         |
 | `defaultInclude`             | `Array<string>` |         |
 | `experimentalGenerateJSR`    | `boolean`       | `false` |

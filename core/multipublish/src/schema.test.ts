@@ -28,7 +28,6 @@ describe("schema", () => {
 					"jsr",
 					{
 						allowSlowTypes: false,
-						commitJsrVersionUpdate: false,
 						experimentalGenerateJSR: false,
 						experimentalUpdateCatalogs: false,
 					},

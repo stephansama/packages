@@ -46,7 +46,6 @@ describe("jsr", () => {
 			};
 			const appConfig: JsrPlatformOptionsSchema = {
 				allowSlowTypes: true,
-				commitJsrVersionUpdate: false,
 				defaultExclude: ["test"],
 				defaultInclude: ["src"],
 				experimentalGenerateJSR: false,
@@ -69,7 +68,6 @@ describe("jsr", () => {
 			};
 			const appConfig: JsrPlatformOptionsSchema = {
 				allowSlowTypes: true,
-				commitJsrVersionUpdate: false,
 				defaultExclude: ["new-exclude"],
 				defaultInclude: ["new-include"],
 				experimentalGenerateJSR: false,

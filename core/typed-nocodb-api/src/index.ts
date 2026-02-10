@@ -93,10 +93,10 @@ export function createApi<Schema extends z.ZodObject>({
 
 	type FetchOptions = {
 		[A in ACTION]: ("inputSchema" extends keyof API[A]
-			? { body: z.infer<API[A]["inputSchema"]> }
+			? { body: z.input<API[A]["inputSchema"]> }
 			: {}) &
 			("querySchema" extends keyof API[A]
-				? { query?: z.infer<API[A]["querySchema"]> }
+				? { query?: z.input<API[A]["querySchema"]> }
 				: {}) & {
 				action: A;
 				token?: string;

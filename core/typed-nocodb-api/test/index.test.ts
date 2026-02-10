@@ -117,7 +117,7 @@ describe("typed-nocodb-api", () => {
 	it("should perform CREATE action", async () => {
 		const newRecord = { completed: false, title: "New Task" };
 		const mockResponse = {
-			records: [{ fields: newRecord, id: "123" }],
+			records: [{ fields: newRecord, id: 123 }],
 		};
 
 		mockFetch.mockResolvedValue({

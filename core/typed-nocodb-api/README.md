@@ -25,6 +25,10 @@ pnpm install @stephansama/typed-nocodb-api
 ## Usage
 
 ```javascript
+/* eslint perfectionist/sort-imports: ["off"] */
+```
+
+```javascript
 import { createApi } from "@stephansama/typed-nocodb-api";
 
 const api = createApi({

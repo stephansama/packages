@@ -1,6 +1,3 @@
-// remark-usage-ignore-next
-/* eslint perfectionist/sort-modules: ["off"] */
-// remark-usage-ignore-next
 /* eslint perfectionist/sort-imports: ["off"] */
 // remark-usage-ignore-next
 import * as z from "zod";

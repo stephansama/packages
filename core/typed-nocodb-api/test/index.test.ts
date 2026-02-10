@@ -169,7 +169,7 @@ describe("typed-nocodb-api", () => {
 	it("should perform UPDATE action", async () => {
 		const updateData = {
 			fields: { completed: true, title: "Updated" },
-			id: "123",
+			id: 123,
 		};
 		mockFetch.mockResolvedValue({
 			json: async () => ({}),

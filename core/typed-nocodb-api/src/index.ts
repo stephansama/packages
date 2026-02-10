@@ -73,7 +73,7 @@ export function createApi<Schema extends z.ZodObject>({
 			url: `/api/v3/data/${baseId}/${tableId}/records/{recordId}`,
 		},
 		UPDATE: {
-			inputSchema: z.object({ fields: schema, id: z.string() }),
+			inputSchema: z.object({ fields: schema, id: z.number() }),
 			method: "patch",
 			responseSchema: z.object(),
 			url: `/api/v3/data/${baseId}/${tableId}/records`,

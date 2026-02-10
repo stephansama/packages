@@ -1,5 +1,3 @@
-/* eslint perfectionist/sort-imports: ["off"] */
-// remark-usage-ignore-next
 import * as z from "zod";
 
 import { createApi } from "../dist/index.cjs";

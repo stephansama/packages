@@ -65,8 +65,8 @@ export const defaultTemplates = templatesSchema.parse({});
 export const defaultTableHeadings = tableHeadingsSchema.parse(undefined);
 
 const _configSchema = z.object({
-	affectedRegexes: z.string().array().default([]),
-	collapseHeadings: z.string().array().default([]),
+	affectedRegexes: z.array(z.string()),
+	collapseHeadings: z.array(z.string()),
 	defaultLanguage: languageSchema.meta({
 		alias: "l",
 		description: "Default language to infer projects from",

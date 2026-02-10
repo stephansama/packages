@@ -31,7 +31,7 @@ export function createApi<
 	let _token: string | undefined = token;
 
 	const referenceSchema =
-		references?.length === 0
+		references && references.length !== 0
 			? z.record(z.enum(references), z.number())
 			: z.object({});
 

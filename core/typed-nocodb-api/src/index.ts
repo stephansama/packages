@@ -23,14 +23,17 @@ export function createApi<
 }: {
 	baseId: string;
 	origin: string;
-	references: References;
+	references?: References;
 	schema: Schema;
 	tableId: string;
 	token?: string;
 }) {
 	let _token: string | undefined = token;
 
-	const referenceSchema = z.record(z.enum(references), z.number());
+	const referenceSchema =
+		references?.length === 0
+			? z.record(z.enum(references), z.number())
+			: z.object({});
 
 	const api = {
 		COUNT: {
@@ -46,7 +49,7 @@ export function createApi<
 			responseSchema: z.object({
 				records: z.array(
 					z.object({
-						fields: schema.extend(referenceSchema),
+						fields: schema.and(referenceSchema),
 						id: z.number(),
 					}),
 				),
@@ -77,7 +80,7 @@ export function createApi<
 				prev: z.string().optional().nullable(),
 				records: z.array(
 					z.object({
-						fields: schema.extend(referenceSchema),
+						fields: schema.and(referenceSchema),
 						id: z.number(),
 					}),
 				),
@@ -95,8 +98,8 @@ export function createApi<
 			responseSchema: z.object({
 				records: z.array(
 					z.object({
-						fields: schema.extend(referenceSchema),
-						id: z.string(),
+						fields: schema.and(referenceSchema),
+						id: z.number(),
 					}),
 				),
 			}),

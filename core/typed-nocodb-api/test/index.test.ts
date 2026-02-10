@@ -171,8 +171,13 @@ describe("typed-nocodb-api", () => {
 			fields: { completed: true, title: "Updated" },
 			id: 123,
 		};
+
+		const newRecord = { completed: false, title: "New Task" };
+		const mockResponse = {
+			records: [{ fields: newRecord, id: 123 }],
+		};
 		mockFetch.mockResolvedValue({
-			json: async () => ({}),
+			json: async () => mockResponse,
 			ok: true,
 			statusText: "OK",
 		});

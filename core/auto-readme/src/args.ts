@@ -56,8 +56,10 @@ function zodToYargs(): Omit<
 	const { shape } = configSchema.unwrap();
 	const entries = Object.entries(shape).map(([key, value]) => {
 		if (complexOptions.includes(key as ComplexOptions)) return [];
+		// @ts-expect-error STE-71
 		if (value.def.innerType instanceof z.ZodObject) return [];
 		const meta = value.meta();
+		// @ts-expect-error STE-71
 		const { innerType } = value.def;
 		const isBoolean = innerType instanceof z.ZodBoolean;
 		const isNumber = innerType instanceof z.ZodNumber;
@@ -70,6 +72,7 @@ function zodToYargs(): Omit<
 			"string";
 
 		const options: Options = {
+			// @ts-expect-error STE-71
 			default: value.def.defaultValue,
 			type: yargType,
 		};

@@ -9,7 +9,7 @@ import pluginPnpm from "eslint-plugin-pnpm";
 import eslintPluginReactHooks from "eslint-plugin-react-hooks";
 import storybook from "eslint-plugin-storybook";
 import testingLibrary from "eslint-plugin-testing-library";
-import eslintPluginZodX from "eslint-plugin-zod-x";
+import eslintPluginZodX from "eslint-plugin-zod";
 import { defineConfig } from "eslint/config";
 import globals from "globals";
 import * as jsoncParser from "jsonc-eslint-parser";

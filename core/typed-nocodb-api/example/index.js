@@ -15,8 +15,10 @@ const api = createApi({
 	token: process.env.NOCODB_TOKEN,
 });
 
-export function callApi() {
-	api.fetch({
+export async function callApi() {
+	const res = await api.fetch({
 		action: "LIST",
 	});
+
+	return res;
 }

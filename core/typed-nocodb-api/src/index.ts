@@ -91,20 +91,20 @@ export function createApi<Schema extends z.ZodObject>({
 
 	type API = typeof api;
 
+	type FetchOptions = {
+		[A in ACTION]: ("inputSchema" extends keyof API[A]
+			? { body: z.infer<API[A]["inputSchema"]> }
+			: {}) &
+			("querySchema" extends keyof API[A]
+				? { query?: z.infer<API[A]["querySchema"]> }
+				: {}) & {
+				action: A;
+				token?: string;
+			};
+	}[ACTION];
+
 	return {
-		async fetch(
-			props: {
-				[A in ACTION]: ("inputSchema" extends keyof API[A]
-					? { body: z.infer<API[A]["inputSchema"]> }
-					: {}) &
-					("querySchema" extends keyof API[A]
-						? { query?: z.infer<API[A]["querySchema"]> }
-						: {}) & {
-						action: A;
-						token?: string;
-					};
-			}[ACTION],
-		) {
+		async fetch(props: FetchOptions) {
 			const token = (_token ??= props.token);
 			if (!token) throw new Error("no token provided");
 

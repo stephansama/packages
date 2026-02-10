@@ -52,5 +52,6 @@ export async function loadReleases(args: Args) {
 	}
 
 	const input = await readStdin();
+	if (!input) throw new Error("no piped input provided");
 	return releasesSchema.parse(JSON.parse(input));
 }

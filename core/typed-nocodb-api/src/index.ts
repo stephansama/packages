@@ -112,6 +112,11 @@ export function createApi<Schema extends z.ZodObject>({
 
 			const url = new URL(current.url, origin);
 
+			const headers = new Headers({
+				"accept": "application/json",
+				"xc-token": token,
+			});
+
 			let params = "";
 
 			if ("query" in props && "querySchema" in current) {
@@ -123,16 +128,20 @@ export function createApi<Schema extends z.ZodObject>({
 
 			if ("body" in props && "inputSchema" in current) {
 				body = JSON.stringify(current.inputSchema.parse(props.body));
+				headers.append("Content-Type", "application/json");
 			}
 
 			const response = await fetch(url + params, {
 				body,
-				headers: new Headers({
-					"accept": "application/json",
-					"xc-token": token,
-				}),
+				headers,
 				method: current.method,
 			});
+
+			if (!response.ok) {
+				throw new Error(
+					`failed to query nocodb ${response.statusText}`,
+				);
+			}
 
 			const json = await response.json();
 			return current.responseSchema.parse(json);

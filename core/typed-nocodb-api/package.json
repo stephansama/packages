@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/typed-nocodb-api",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"description": "Typed API client for NocoDB using Zod",
 	"keywords": [
 		"typed-nocodb-api"

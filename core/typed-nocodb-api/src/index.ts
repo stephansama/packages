@@ -37,7 +37,7 @@ export function createApi<Schema extends z.ZodObject>({
 			inputSchema: z.object({ fields: schema }),
 			method: "post",
 			responseSchema: z.object({
-				records: z.array(z.object({ fields: schema, id: z.string() })),
+				records: z.array(z.object({ fields: schema, id: z.number() })),
 			}),
 			url: `/api/v3/data/${baseId}/${tableId}/records`,
 		},

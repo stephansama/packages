@@ -723,10 +723,6 @@ importers:
         version: 19.2.0
 
   core/typed-nocodb-api:
-    dependencies:
-      '@standard-schema/spec':
-        specifier: catalog:schema
-        version: 1.1.0
     devDependencies:
       tsdown:
         specifier: 'catalog:'

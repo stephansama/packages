@@ -58,7 +58,7 @@ export default defineConfig({
 		socialLinks: [
 			{
 				icon: "bluesky",
-				link: "https://bsky.app/profile/stephansama.bsky.social",
+				link: "https://bsky.app/profile/stephansama.info",
 			},
 			{
 				icon: "linkedin",
@@ -66,7 +66,7 @@ export default defineConfig({
 			},
 			{
 				icon: "npm",
-				link: "https://www.npmjs.com/~stephansama",
+				link: "https://www.npmx.dev/~stephansama",
 			},
 			{
 				icon: "github",

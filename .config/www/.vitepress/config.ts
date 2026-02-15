@@ -70,7 +70,7 @@ export default defineConfig({
 			},
 			{
 				icon: "github",
-				link: "https://github.com/stephansama",
+				link: "https://github.com/stephansama/packages",
 			},
 		],
 	},

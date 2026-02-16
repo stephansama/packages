@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/typed-env",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "standard schema compatible environment validator",
 	"keywords": [
 		"typed-env"

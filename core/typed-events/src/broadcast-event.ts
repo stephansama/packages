@@ -2,7 +2,7 @@ import type { StandardSchemaV1 } from "@standard-schema/spec";
 
 import type { Id, ValidatorMap } from "@/utils/types";
 
-import { validate, ValidatorError } from "@/utils";
+import { createId, validate, ValidatorError } from "@/utils";
 
 export interface TypedBroadcastEvent<
 	Name extends string,
@@ -27,7 +27,7 @@ export function createBroadcastEvent<
 	let _id: Id | null = null;
 	let _target: EventTarget | null = null;
 
-	const getId = () => (_id ??= crypto.randomUUID());
+	const getId = () => (_id ??= createId());
 
 	const _scopeEvent = (event: string) => [name, event].join(":");
 

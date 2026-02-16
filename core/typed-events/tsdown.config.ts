@@ -6,6 +6,7 @@ export default defineConfig({
 	entry: ["src/index.ts", "src/errors.ts", "src/react.ts"],
 	exports: true,
 	format: ["esm", "cjs"],
+	noExternal: ["nanoid"],
 	publint: true,
 	target: "esnext",
 });

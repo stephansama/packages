@@ -1,6 +1,7 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
 import dotenvx from "@dotenvx/dotenvx";
+import * as fsp from "node:fs/promises";
 
 export function createEnv<Schema extends StandardSchemaV1>(
 	schema: Schema,
@@ -18,8 +19,10 @@ export function createEnv<Schema extends StandardSchemaV1>(
 	}
 
 	return {
-		generateExample(path: string) {
-			for (const key of Object.keys(schema)) {
+		async generateExample(path: string) {
+			await fsp.writeFile(path, "");
+
+			for (const key of Object.keys(getObjectFromSchema(schema))) {
 				dotenvx.set(key, "***", { encrypt: false, path });
 			}
 		},
@@ -48,4 +51,19 @@ export function createEnv<Schema extends StandardSchemaV1>(
 			return result.value;
 		},
 	};
+}
+
+function getObjectFromSchema(node: StandardSchemaV1) {
+	switch (node["~standard"].vendor) {
+		case "arktype":
+			return (node as unknown as any).definition;
+		case "valibot":
+			return (node as unknown as any).entries;
+		case "zod":
+			return (node as unknown as any).shape;
+		default:
+			throw new Error(
+				"invalid schema provider used please pick one of arktype, valibot or zod",
+			);
+	}
 }

@@ -19,6 +19,9 @@ catalogs:
     '@catppuccin/palette':
       specifier: 1.7.1
       version: 1.7.1
+    '@dotenvx/dotenvx':
+      specifier: ^1.51.2
+      version: 1.51.2
     '@iconify/types':
       specifier: ^2.0.0
       version: 2.0.0
@@ -689,6 +692,25 @@ importers:
       vite:
         specifier: 'catalog:'
         version: 6.3.5(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.2)
+
+  core/typed-env:
+    dependencies:
+      '@standard-schema/spec':
+        specifier: catalog:schema
+        version: 1.1.0
+    devDependencies:
+      '@dotenvx/dotenvx':
+        specifier: 'catalog:'
+        version: 1.51.2
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.12(@arethetypeswrong/core@0.18.2)(oxc-resolver@11.14.2)(publint@0.3.15)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3))
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
+      zod:
+        specifier: catalog:schema
+        version: 4.2.1
 
   core/typed-events:
     dependencies:

@@ -1,0 +1,52 @@
+{
+	"name": "@stephansama/types-lhci",
+	"version": "0.0.0",
+	"description": "types for lhci configuration",
+	"keywords": [
+		"types-lhci"
+	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/types-lhci",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/stephansama/packages",
+		"directory": "core/types-lhci"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephansama.info"
+	},
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./package.json": "./package.json"
+	},
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.cts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsx ./build.ts",
+		"dev": "tsx --watch ./src/build.ts",
+		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+	},
+	"devDependencies": {
+		"tsdown": "catalog:",
+		"tsx": "catalog:",
+		"zod": "catalog:schema"
+	},
+	"peerDependencies": {
+		"zod": "catalog:schema"
+	},
+	"packageManager": "pnpm@10.11.0",
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	}
+}

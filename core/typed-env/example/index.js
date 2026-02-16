@@ -9,6 +9,10 @@ export const envConfig = createEnv(
 	}),
 );
 
+export async function generateExample() {
+	return await envConfig.generateExample(".env.example");
+}
+
 export async function validateEnv() {
 	return await envConfig.validate();
 }

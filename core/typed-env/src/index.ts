@@ -28,15 +28,11 @@ export function createEnv<Schema extends StandardSchemaV1>(
 		},
 		loadEnv,
 		schema,
-		async validate(
-			{
-				env = process.env,
-			}: {
-				env: Record<string, string | undefined>;
-			} = {
-				env: process.env,
-			},
-		): Promise<StandardSchemaV1.InferOutput<Schema>> {
+		async validate({
+			env = process.env,
+		}: { env?: Record<string, string | undefined> } = {}): Promise<
+			StandardSchemaV1.InferOutput<Schema>
+		> {
 			const result = await Promise.resolve(
 				schema["~standard"].validate(env),
 			);

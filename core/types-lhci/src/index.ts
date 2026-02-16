@@ -8,35 +8,35 @@ export const lhciBasicAuthSchema = z.object({
 
 export type LhciAssertSchema = z.infer<typeof lhciAssertSchema>;
 export const lhciAssertSchema = z.object({
-	assertions: z.record(
-		z.string(),
-		z
-			.tuple([
-				z.enum(["warn", "error"]),
-				z.object({
-					maxLength: z.number(),
-					minScore: z.number(),
-				}),
-			])
-			.or(z.enum(["off"])),
-	),
-	budgetsFile: z.string(),
-	includePassedAssertions: z.boolean(),
-	preset: z.enum([
-		"lighthouse:all",
-		"lighthouse:recommended",
-		"lighthouse:no-pwa",
-	]),
+	assertions: z
+		.record(
+			z.string(),
+			z
+				.tuple([
+					z.enum(["warn", "error"]),
+					z.object({
+						maxLength: z.number(),
+						minScore: z.number(),
+					}),
+				])
+				.or(z.enum(["off"])),
+		)
+		.optional(),
+	budgetsFile: z.string().optional(),
+	includePassedAssertions: z.boolean().optional(),
+	preset: z
+		.enum(["lighthouse:all", "lighthouse:recommended", "lighthouse:no-pwa"])
+		.optional(),
 });
 
 export type LhciCollectSchema = z.infer<typeof lhciCollectSchema>;
 export const lhciCollectSchema = z.object({
-	additive: z.boolean(),
-	chromePath: z.string(),
-	headful: z.boolean(),
-	isSinglePageApplication: z.boolean(),
+	additive: z.boolean().optional(),
+	chromePath: z.string().optional(),
+	headful: z.boolean().optional(),
+	isSinglePageApplication: z.boolean().optional(),
 	method: z.enum(["node", "psi"]).or(z.string()).default("node"),
-	numberOfRuns: z.number(),
+	numberOfRuns: z.number().optional(),
 	/** @see https://github.com/puppeteer/puppeteer/blob/aa246973b96c36768bf3d4db0383f7101a1b4ee9/docs/api.md#puppeteerlaunchoptions */
 	puppeteerLaunchOptions: z.object({
 		devtools: z.boolean(),
@@ -46,12 +46,12 @@ export const lhciCollectSchema = z.object({
 		pipe: z.boolean().default(false),
 		timeout: z.number().default(30000),
 	}),
-	puppeteerScript: z.string(),
+	puppeteerScript: z.string().optional(),
 	settings: z.object({}),
-	startServerCommand: z.string(),
-	staticDirFileDiscoveryDepth: z.number(),
+	startServerCommand: z.string().optional(),
+	staticDirFileDiscoveryDepth: z.number().optional(),
 	staticDistDir: z.string().optional(),
-	url: z.array(z.string()),
+	url: z.array(z.string()).optional(),
 });
 
 export type LhciUploadSchema = z.infer<typeof lhciUploadSchema>;

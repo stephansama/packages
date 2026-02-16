@@ -19,7 +19,7 @@ Use standard schema to validate and use handlebar template directories
 ## Installation
 
 ```sh
-pnpm install @stephansama/typed-templates
+pnpm install @stephansama/typed-templates @dotenvx/dotenvx
 ```
 
 ## Usage

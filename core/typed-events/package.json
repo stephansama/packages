@@ -50,7 +50,8 @@
 		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern"
 	},
 	"dependencies": {
-		"@standard-schema/spec": "catalog:schema"
+		"@standard-schema/spec": "catalog:schema",
+		"nanoid": "^5.1.6"
 	},
 	"devDependencies": {
 		"@testing-library/jest-dom": "catalog:",

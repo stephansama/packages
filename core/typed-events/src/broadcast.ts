@@ -2,7 +2,7 @@ import type { StandardSchemaV1 } from "@standard-schema/spec";
 
 import type { Id, ValidatorMap } from "@/utils";
 
-import { validate, ValidatorError } from "@/utils";
+import { createId, validate, ValidatorError } from "@/utils";
 
 export interface TypedBroadcastChannel<
 	Name extends string,
@@ -25,7 +25,7 @@ export function createBroadcastChannel<
 	let _id: Id | null = null;
 	let _channel: BroadcastChannel | null = null;
 
-	const getId = () => (_id ??= crypto.randomUUID());
+	const getId = () => (_id ??= createId());
 
 	function _validate<
 		Event extends keyof Map,

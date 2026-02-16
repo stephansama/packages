@@ -1,0 +1,54 @@
+{
+	"name": "@stephansama/typed-env",
+	"version": "0.0.0",
+	"description": "standard schema compatible environment validator",
+	"keywords": [
+		"typed-env"
+	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/typed-env",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/stephansama/packages",
+		"directory": "core/typed-env"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephansama.info"
+	},
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./package.json": "./package.json"
+	},
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.cts",
+	"scripts": {
+		"build": "tsdown",
+		"dev": "tsdown --watch",
+		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+	},
+	"dependencies": {
+		"@standard-schema/spec": "catalog:schema"
+	},
+	"devDependencies": {
+		"@dotenvx/dotenvx": "catalog:",
+		"tsdown": "catalog:",
+		"tsx": "catalog:",
+		"zod": "catalog:schema"
+	},
+	"peerDependencies": {
+		"@dotenvx/dotenvx": "catalog:",
+		"zod": "catalog:schema"
+	},
+	"packageManager": "pnpm@10.11.0",
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	}
+}

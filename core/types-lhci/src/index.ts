@@ -88,15 +88,15 @@ export const lhciUploadSchema = z
 	.and(
 		z.object({
 			githubApiHost: z.string().default("https://api.github.com"),
-			githubAppToken: z.string(),
+			githubAppToken: z.string().optional(),
 			githubStatusContextSuffix: z.string().optional(),
-			githubToken: z.string(),
+			githubToken: z.string().optional(),
 		}),
 	);
 
 export type LhciServerSchema = z.infer<typeof lhciServerSchema>;
 export const lhciServerSchema = z.object({
-	basicAuth: lhciBasicAuthSchema,
+	basicAuth: lhciBasicAuthSchema.optional(),
 	logLevel: z.enum(["silent", "verbose"]).default("verbose"),
 	port: z.number(),
 	storage: z.object({

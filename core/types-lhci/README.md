@@ -31,8 +31,7 @@ import { lhciSchema } from "@stephansama/types-lhci";
 const config = {
   ci: {
     upload: {
-      githubAppToken: process.env.GITHUB_APP_TOKEN || "fallback",
-      githubToken: process.env.GITHUB_TOKEN || "fallback",
+      githubAppToken: process.env.GITHUB_APP_TOKEN,
       serverBaseUrl: "https://lhci.example.com",
       target: "lhci",
       token: "project-token",

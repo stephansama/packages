@@ -1,5 +1,11 @@
 # @example/svelte-social-share-links/svelte-kit
 
+## 0.1.2
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 0.1.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-xsl
 
+## 1.1.2
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 1.1.1
 
 ### Patch Changes

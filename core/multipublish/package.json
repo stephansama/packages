@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/multipublish",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Publish packages to multiple providers easily",
 	"keywords": [
 		"multipublish"

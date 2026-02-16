@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 3.0.3
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 3.0.2
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
 	"name": "@example/astro-iconify-svgmap",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"private": true,
 	"description": "Example astro site using iconify svgmap",
 	"type": "module",
@@ -17,6 +17,6 @@
 		"@iconify-json/heroicons": "^1.2.3",
 		"@iconify-json/logos": "^1.2.10",
 		"@iconify-json/octicon": "^1.2.21",
-		"@stephansama/astro-iconify-svgmap": "^1.0.7"
+		"@stephansama/astro-iconify-svgmap": "^1.0.8"
 	}
 }

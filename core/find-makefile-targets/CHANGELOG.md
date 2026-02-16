@@ -1,5 +1,11 @@
 # @stephansama/find-makefile-targets
 
+## 1.0.3
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 1.0.2
 
 ### Patch Changes

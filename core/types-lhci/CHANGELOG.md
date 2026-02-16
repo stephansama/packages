@@ -1,5 +1,11 @@
 # @stephansama/types-lhci
 
+## 0.1.1
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 0.1.0
 
 ### Minor Changes

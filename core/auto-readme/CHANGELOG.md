@@ -1,5 +1,11 @@
 # @stephansama/auto-readme
 
+## 0.2.5
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 0.2.4
 
 ### Patch Changes

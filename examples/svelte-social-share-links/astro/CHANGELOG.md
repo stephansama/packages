@@ -1,5 +1,11 @@
 # @example/svelte-social-share-links/astro
 
+## 0.1.3
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 0.1.2
 
 ### Patch Changes

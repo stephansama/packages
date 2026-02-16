@@ -1,0 +1,7 @@
+# @stephansama/types-lhci
+
+## 0.1.0
+
+### Minor Changes
+
+- 953a8a4: initial release of lhci types

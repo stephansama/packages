@@ -12,7 +12,7 @@
 	},
 	"devDependencies": {
 		"@stephansama/catppuccin-xsl": "workspace:*",
-		"feedsmith": "^2.2.1",
-		"vite": "^7.1.7"
+		"feedsmith": "^2.9.0",
+		"vite": "^7.3.1"
 	}
 }

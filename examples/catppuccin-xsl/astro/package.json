@@ -10,8 +10,8 @@
 		"preview": "astro preview"
 	},
 	"dependencies": {
-		"astro": "^5.15.4",
-		"feedsmith": "^2.2.1"
+		"astro": "^5.17.2",
+		"feedsmith": "^2.9.0"
 	},
 	"devDependencies": {
 		"@astrojs/sitemap": "3.4.1",

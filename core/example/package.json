@@ -39,14 +39,14 @@
 		"typedoc": "pnpm run generate"
 	},
 	"dependencies": {
-		"@bluwy/giget-core": "^0.1.2",
+		"@bluwy/giget-core": "^0.1.6",
 		"@clack/prompts": "^0.11.0"
 	},
 	"devDependencies": {
 		"tsdown": "catalog:",
 		"undici": "catalog:"
 	},
-	"packageManager": "pnpm@10.11.0",
+	"packageManager": "pnpm@10.29.3",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true

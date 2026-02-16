@@ -9,7 +9,6 @@ import { envSchema, type Provider } from "./schema";
 
 const providerMap: Record<Provider, (model: string) => LanguageModel> = {
 	google: google,
-	// @ts-expect-error is valid
 	ollama: ollama,
 	openai: openai,
 };

@@ -714,6 +714,18 @@ importers:
         specifier: catalog:schema
         version: 4.2.1
 
+  core/types-lhci:
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.15.12(@arethetypeswrong/core@0.18.2)(oxc-resolver@11.14.2)(publint@0.3.15)(typescript@5.9.3)
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
+      zod:
+        specifier: catalog:schema
+        version: 4.2.1
+
   examples/astro-iconify-svgmap:
     dependencies:
       astro:
@@ -18819,6 +18831,7 @@ snapshots:
     dependencies:
       '@publint/pack': 0.1.2
       package-manager-detector: 1.6.0
+      package-manager-detector: 1.6.0
       picocolors: 1.1.1
       sade: 1.8.1
 
@@ -19243,6 +19256,24 @@ snapshots:
   rimraf@3.0.2:
     dependencies:
       glob: 7.2.3
+
+  rolldown-plugin-dts@0.17.3(oxc-resolver@11.14.2)(rolldown@1.0.0-beta.45)(typescript@5.9.3):
+    dependencies:
+      '@babel/generator': 7.28.5
+      '@babel/parser': 7.28.5
+      '@babel/types': 7.28.5
+      ast-kit: 2.1.3
+      birpc: 2.6.1
+      debug: 4.4.3
+      dts-resolver: 2.1.2(oxc-resolver@11.14.2)
+      get-tsconfig: 4.13.0
+      magic-string: 0.30.21
+      rolldown: 1.0.0-beta.45
+    optionalDependencies:
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - oxc-resolver
+      - supports-color
 
   rolldown-plugin-dts@0.17.3(oxc-resolver@11.14.2)(rolldown@1.0.0-beta.45)(typescript@5.9.3):
     dependencies:
@@ -20141,6 +20172,33 @@ snapshots:
   tsconfck@3.1.6(typescript@5.9.3):
     optionalDependencies:
       typescript: 5.9.3
+
+  tsdown@0.15.12(@arethetypeswrong/core@0.18.2)(oxc-resolver@11.14.2)(publint@0.3.15)(typescript@5.9.3):
+    dependencies:
+      ansis: 4.2.0
+      cac: 6.7.14
+      chokidar: 4.0.3
+      debug: 4.4.3
+      diff: 8.0.2
+      empathic: 2.0.0
+      hookable: 5.5.3
+      rolldown: 1.0.0-beta.45
+      rolldown-plugin-dts: 0.17.3(oxc-resolver@11.14.2)(rolldown@1.0.0-beta.45)(typescript@5.9.3)
+      semver: 7.7.3
+      tinyexec: 1.0.2
+      tinyglobby: 0.2.15
+      tree-kill: 1.2.2
+      unconfig: 7.3.3
+    optionalDependencies:
+      '@arethetypeswrong/core': 0.18.2
+      publint: 0.3.15
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - '@ts-macro/tsc'
+      - '@typescript/native-preview'
+      - oxc-resolver
+      - supports-color
+      - vue-tsc
 
   tsdown@0.15.12(@arethetypeswrong/core@0.18.2)(oxc-resolver@11.14.2)(publint@0.3.15)(typescript@5.9.3):
     dependencies:

@@ -47,11 +47,11 @@
 		"lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
 	},
 	"dependencies": {
-		"@ai-sdk/google": "^3.0.1",
-		"@ai-sdk/openai": "^3.0.1",
+		"@ai-sdk/google": "^3.0.29",
+		"@ai-sdk/openai": "^3.0.29",
 		"@commitlint/config-conventional": "^19.8.1",
-		"@dotenvx/dotenvx": "^1.51.2",
-		"ai": "^6.0.3",
+		"@dotenvx/dotenvx": "^1.52.0",
+		"ai": "^6.0.86",
 		"cosmiconfig": "catalog:cli",
 		"es-toolkit": "catalog:",
 		"neverthrow": "^8.2.0",
@@ -64,7 +64,7 @@
 		"@types/yargs": "catalog:",
 		"tsdown": "catalog:"
 	},
-	"packageManager": "pnpm@10.11.0",
+	"packageManager": "pnpm@10.29.3",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true

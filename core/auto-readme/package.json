@@ -66,17 +66,17 @@
 		"mdast-util-from-markdown": "^2.0.2",
 		"mdast-zone": "github:stephansama/mdast-zone#1c5b08cd97240debeed4c9c6afad49df5877a132",
 		"ora": "^8.2.0",
-		"pkg-types": "^2.2.0",
+		"pkg-types": "^2.3.0",
 		"remark": "15.0.1",
 		"remark-code-import": "^1.2.0",
 		"remark-collapse": "^0.1.2",
 		"remark-toc": "^9.0.0",
 		"remark-usage": "^11.0.1",
 		"vfile": "^6.0.3",
-		"yaml": "^2.8.1",
+		"yaml": "^2.8.2",
 		"yargs": "catalog:cli",
 		"zod": "catalog:schema",
-		"zod2md": "^0.2.4"
+		"zod2md": "^0.2.5"
 	},
 	"devDependencies": {
 		"@types/debug": "catalog:",
@@ -87,7 +87,7 @@
 		"tsdown": "catalog:",
 		"unified": "catalog:"
 	},
-	"packageManager": "pnpm@10.11.0",
+	"packageManager": "pnpm@10.29.3",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true

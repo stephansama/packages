@@ -34,7 +34,7 @@
 		"lint": "publint",
 		"type-check": "tsc --noEmit"
 	},
-	"packageManager": "pnpm@10.11.0",
+	"packageManager": "pnpm@10.29.3",
 	"publishConfig": {
 		"access": "public",
 		"provenance": true

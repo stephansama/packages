@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-typedoc
 
+## 1.0.4
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 1.0.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @example/astro-iconify-svgmap
 
+## 1.0.6
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 1.0.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @example/remark-asciinema
 
+## 0.0.7
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 0.0.6
 
 ### Patch Changes

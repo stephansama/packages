@@ -1,5 +1,11 @@
 # @stephansama/multipublish
 
+## 1.0.5
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 1.0.4
 
 ### Patch Changes

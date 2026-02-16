@@ -1,5 +1,11 @@
 # @stephansama/astro-iconify-svgmap
 
+## 1.0.8
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 1.0.7
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
 	"name": "create-stephansama-example",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"description": "Download an example from the @stephansama/packages examples",
 	"keywords": [
 		"create-example"

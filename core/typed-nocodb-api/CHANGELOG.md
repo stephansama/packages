@@ -1,5 +1,11 @@
 # @stephansama/typed-nocodb-api
 
+## 0.2.1
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 0.2.0
 
 ### Minor Changes

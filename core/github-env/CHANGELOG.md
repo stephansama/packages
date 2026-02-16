@@ -1,5 +1,11 @@
 # @stephansama/github-env
 
+## 0.1.5
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 0.1.4
 
 ### Patch Changes

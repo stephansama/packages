@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.4.1
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 1.4.0
 
 ### Minor Changes

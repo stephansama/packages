@@ -1,5 +1,11 @@
 # vanilla
 
+## 1.2.1
+
+### Patch Changes
+
+- a307d76: updated dependencies
+
 ## 1.2.0
 
 ### Minor Changes

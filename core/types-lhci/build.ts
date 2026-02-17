@@ -8,7 +8,6 @@ const outDir = path.resolve("./dist");
 await build({
 	dts: true,
 	entry: ["./src/index.ts"],
-	exports: true,
 });
 
 const schemas = await import("./dist/index.js");

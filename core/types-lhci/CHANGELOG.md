@@ -1,5 +1,11 @@
 # @stephansama/types-lhci
 
+## 0.1.2
+
+### Patch Changes
+
+- cd4774b: updated package exports
+
 ## 0.1.1
 
 ### Patch Changes

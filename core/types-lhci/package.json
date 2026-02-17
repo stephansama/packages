@@ -23,6 +23,7 @@
 			"import": "./dist/index.js",
 			"require": "./dist/index.cjs"
 		},
+		"./schema.json": "./dist/schema.json",
 		"./package.json": "./package.json"
 	},
 	"main": "./dist/index.cjs",

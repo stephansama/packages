@@ -117,7 +117,7 @@ describe("typed-nocodb-api", () => {
 	it("should perform CREATE action", async () => {
 		const newRecord = { completed: false, title: "New Task" };
 		const mockResponse = {
-			records: [{ fields: newRecord, id: "123" }],
+			records: [{ fields: newRecord, id: 123 }],
 		};
 
 		mockFetch.mockResolvedValue({
@@ -169,10 +169,15 @@ describe("typed-nocodb-api", () => {
 	it("should perform UPDATE action", async () => {
 		const updateData = {
 			fields: { completed: true, title: "Updated" },
-			id: "123",
+			id: 123,
+		};
+
+		const newRecord = { completed: false, title: "New Task" };
+		const mockResponse = {
+			records: [{ fields: newRecord, id: 123 }],
 		};
 		mockFetch.mockResolvedValue({
-			json: async () => ({}),
+			json: async () => mockResponse,
 			ok: true,
 			statusText: "OK",
 		});

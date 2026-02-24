@@ -90,7 +90,7 @@ function EventComponent() {
 					width="100px"
 				/>
 				<a
-					href="https://www.npmjs.com/package/@stephansama/typed-events"
+					href="https://www.npmx.dev/package/@stephansama/typed-events"
 					target="_blank"
 				>
 					<code>@stephansama/typed-events</code>

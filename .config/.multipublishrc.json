@@ -2,14 +2,6 @@
 	"$schema": "../node_modules/@stephansama/multipublish/config/schema.json",
 	"platforms": [
 		[
-			"jsr",
-			{
-				"experimentalUpdateCatalogs": true,
-				"experimentalGenerateJSR": true,
-				"defaultExclude": ["!config"]
-			}
-		],
-		[
 			"npm",
 			{
 				"registry": "https://npm.pkg.github.com/",

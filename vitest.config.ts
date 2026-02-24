@@ -7,7 +7,7 @@ export default defineConfig({
 			provider: "v8",
 			reporter: ["html", "json", "text"],
 		},
-		outputFile: { junit: "./coverage/test-report.junit.xml" },
+		outputFile: { junit: "./test-report.junit.xml" },
 		projects: ["./core/*"],
 		reporters: ["default", "junit"],
 	},

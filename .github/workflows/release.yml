@@ -10,6 +10,7 @@ env:
   ZX_VERBOSE: true
   DO_NOT_TRACK: 1
   NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
+  JSR_AUTH_TOKEN: ${{secrets.JSR_AUTH_TOKEN}}
   CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
   GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   TURBO_TOKEN: ${{secrets.TURBO_TOKEN}}

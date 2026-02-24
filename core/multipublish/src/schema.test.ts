@@ -30,6 +30,7 @@ describe("schema", () => {
 						allowSlowTypes: false,
 						experimentalGenerateJSR: false,
 						experimentalUpdateCatalogs: false,
+						tokenEnvironmentKey: "JSR_AUTH_TOKEN",
 					},
 				],
 			];

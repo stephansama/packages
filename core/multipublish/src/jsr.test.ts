@@ -50,6 +50,7 @@ describe("jsr", () => {
 				defaultInclude: ["src"],
 				experimentalGenerateJSR: false,
 				experimentalUpdateCatalogs: false,
+				tokenEnvironmentKey: "test",
 			};
 
 			updateIncludeExcludeList(jsrConfig, appConfig);
@@ -72,6 +73,7 @@ describe("jsr", () => {
 				defaultInclude: ["new-include"],
 				experimentalGenerateJSR: false,
 				experimentalUpdateCatalogs: false,
+				tokenEnvironmentKey: "test"
 			};
 
 			updateIncludeExcludeList(jsrConfig, appConfig);

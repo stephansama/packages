@@ -32,7 +32,7 @@
 		"scripts:pkg-pr-new": "node ./scripts/pkg-pr-new.js",
 		"test": "turbo test",
 		"pretest:ci": "pnpm run scripts:generate-examples",
-		"test:ci": "vitest --run --coverage --reporter=junit --outputFile=test-report.junit.xml",
+		"test:ci": "vitest --run --coverage",
 		"test:ui": "vitest --ui",
 		"version": "changeset version && pnpm install --lockfile-only"
 	},
@@ -87,9 +87,9 @@
 		"vitest": "catalog:vitest",
 		"yaml-eslint-parser": "^1.3.2"
 	},
-	"packageManager": "pnpm@10.29.3",
 	"devDependencies": {
 		"actions-up": "^1.11.0",
 		"taze": "^19.9.2"
-	}
+	},
+	"packageManager": "pnpm@10.29.3"
 }

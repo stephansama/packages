@@ -8,7 +8,7 @@ vi.mock("cosmiconfig", () => ({
 	getDefaultSearchPlaces: vi.fn(() => []),
 }));
 
-describe.skip("config", () => {
+describe("config", () => {
 	afterEach(() => {
 		vi.clearAllMocks();
 	});

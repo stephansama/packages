@@ -52,6 +52,7 @@ catalog:
   "@types/react": ^19.2.14
   "@types/vfile": ^4.0.0
   "@types/yargs": ^17.0.35
+  actions-up: ^1.11.0
   deepmerge: "^4.3.1"
   es-toolkit: 1.43.0
   astro: 5.9.3
@@ -63,6 +64,7 @@ catalog:
   prettier: ^3.8.1
   react: 19.2.0
   remark: ^15.0.1
+  taze: ^19.9.2
   tsdown: 0.15.12
   tsx: 4.21.0
   typescript: 5.9.3

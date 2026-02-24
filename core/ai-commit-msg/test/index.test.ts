@@ -33,7 +33,7 @@ import { getProvider } from "../src/ai";
 import { parseArgs } from "../src/args";
 import { loadConfig } from "../src/config";
 
-describe.skip("index run", () => {
+describe("index run", () => {
 	const mockExit = vi
 		.spyOn(process, "exit")
 		.mockImplementation((() => {}) as any);

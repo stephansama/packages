@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { debug, info, moduleName, warn } from "../src/util";
 
-describe.skip("util", () => {
+describe("util", () => {
 	it("should have correct module name", () => {
 		expect(moduleName).toBe("aicommitmsg");
 	});

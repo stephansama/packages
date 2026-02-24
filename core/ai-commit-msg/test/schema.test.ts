@@ -8,7 +8,7 @@ import {
 	providerSchema,
 } from "../src/schema";
 
-describe.skip("schema", () => {
+describe("schema", () => {
 	describe("constants", () => {
 		it("should have valid default prompt", () => {
 			expect(defaultPrompt).toContain("{{diff}}");

@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { parseArgs } from "../src/args";
 
-describe.skip("args", () => {
+describe("args", () => {
 	const originalArgv = process.argv;
 
 	afterEach(() => {

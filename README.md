@@ -10,7 +10,7 @@
 [![🦋 Changesets Release](https://github.com/stephansama/packages/actions/workflows/release.yml/badge.svg)](https://github.com/stephansama/packages/actions/workflows/release.yml)
 [![CodeQL](https://github.com/stephansama/packages/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/stephansama/packages/actions/workflows/github-code-scanning/codeql)
 
-Collection of open source [npm](https://www.npmx.dev/) packages
+Collection of open-source [npm](https://www.npmx.dev/) packages
 
 </div>
 

@@ -150,7 +150,8 @@ describe("publish", () => {
 			);
 		});
 
-		it("should publish to jsr", async () => {
+		it("should publish to jsr without token", async () => {
+			vi.stubEnv("JSR_AUTH_TOKEN", "");
 			vi.mocked(mocks.loadConfig).mockResolvedValue({
 				config: {
 					exports: "index.ts",
@@ -180,6 +181,43 @@ describe("publish", () => {
 
 			expect(mocks.execSync).toHaveBeenCalledWith(
 				"pnpm dlx jsr publish --allow-dirty --allow-slow-types",
+				{ stdio: "inherit" },
+			);
+		});
+
+		it("should publish to jsr with token", async () => {
+			const token = "test-token";
+			vi.stubEnv("JSR_AUTH_TOKEN", token);
+
+			vi.mocked(mocks.loadConfig).mockResolvedValue({
+				config: {
+					exports: "index.ts",
+					name: "@scope/pkg",
+					version: "1.0.0",
+				},
+				filename: "/path/to/pkg/jsr.json",
+			});
+
+			const pkg = {
+				dir: "/path/to/pkg",
+				packageJson: {
+					name: "@scope/pkg",
+					version: "1.0.0",
+				},
+				relativeDir: "./pkg",
+			};
+
+			const platform = "jsr";
+
+			await publishPlatform(pkg, platform);
+
+			expect(mocks.writeFile).toHaveBeenCalledWith(
+				"/path/to/pkg/jsr.json",
+				expect.any(String),
+			);
+
+			expect(mocks.execSync).toHaveBeenCalledWith(
+				`pnpm dlx jsr publish --allow-dirty --allow-slow-types --token ${token}`,
 				{ stdio: "inherit" },
 			);
 		});

@@ -7,6 +7,7 @@ export const jsrPlatformOptionsSchema = z.object({
 	defaultInclude: z.array(z.string()).optional(),
 	experimentalGenerateJSR: z.boolean().default(false),
 	experimentalUpdateCatalogs: z.boolean().default(false),
+	tokenEnvironmentKey: z.string().default("JSR_AUTH_TOKEN"),
 });
 
 export type NpmPlatformOptionsSchema = z.infer<typeof npmPlatformOptionsSchema>;

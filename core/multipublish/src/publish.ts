@@ -75,15 +75,18 @@ export async function publishPlatform(
 				}
 			}
 
+			const authToken = process.env[config.tokenEnvironmentKey];
+
 			await util.chdir(pkg.dir, () => {
 				cp.execSync(
 					[
 						jsrPublishCommand[packageManager],
 						"--allow-dirty",
-						isDryRun && "--dry-run",
 						config.allowSlowTypes && "--allow-slow-types",
+						isDryRun && "--dry-run",
+						authToken && `--token ${authToken}`,
 					]
-						.filter((x) => x)
+						.filter((x): x is string => !!x)
 						.join(" "),
 					{ stdio: "inherit" },
 				);
@@ -120,7 +123,9 @@ export async function publishPlatform(
 
 					const scope = pkg.packageJson.name.split("/").at(0);
 					if (!scope?.startsWith("@")) {
-						throw new Error("scope must start with `@` symbol");
+						return console.error(
+							"scope does not start with @ symbol. aborting.",
+						);
 					}
 
 					const npmrcFile =

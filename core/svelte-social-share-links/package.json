@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/svelte-social-share-links",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"private": false,
 	"description": "Svelte/Web component to share the current url with various social media providers",
 	"repository": {

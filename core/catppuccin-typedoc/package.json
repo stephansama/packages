@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/catppuccin-typedoc",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Catppuccin css variable theme for typedoc",
 	"keywords": [
 		"catppuccin-typedoc"

@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.4.2
+
+### Patch Changes
+
+- 5d6ed23: switch from npmjs to npmx
+
 ## 1.4.1
 
 ### Patch Changes

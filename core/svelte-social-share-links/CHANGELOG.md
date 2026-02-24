@@ -1,5 +1,11 @@
 # @stephansama/svelte-social-share-links
 
+## 1.1.1
+
+### Patch Changes
+
+- 5d6ed23: switch from npmjs to npmx
+
 ## 1.1.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-typedoc
 
+## 1.0.5
+
+### Patch Changes
+
+- 5d6ed23: switch from npmjs to npmx
+
 ## 1.0.4
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-rss
 
+## 2.0.2
+
+### Patch Changes
+
+- 5d6ed23: switch from npmjs to npmx
+
 ## 2.0.1
 
 ### Patch Changes

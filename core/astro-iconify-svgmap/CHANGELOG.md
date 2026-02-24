@@ -1,5 +1,11 @@
 # @stephansama/astro-iconify-svgmap
 
+## 1.0.9
+
+### Patch Changes
+
+- 5d6ed23: switch from npmjs to npmx
+
 ## 1.0.8
 
 ### Patch Changes

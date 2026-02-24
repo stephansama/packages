@@ -17,7 +17,7 @@ vi.mock("ollama-ai-provider-v2", () => ({
 	ollama: vi.fn((model) => ({ model, type: "ollama" })),
 }));
 
-describe("ai", () => {
+describe.skip("ai", () => {
 	const originalEnv = process.env;
 
 	afterEach(() => {

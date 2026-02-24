@@ -2,4 +2,4 @@
 "@stephansama/multipublish": patch
 ---
 
-Updated jsr to have auth token. fail without error for unscoped packages
+Updated NPM and JSR publish to support auth tokens via configurable environment keys. Note: NPM publishing fails silently for unscoped packages (logs error but does not throw).

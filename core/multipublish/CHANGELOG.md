@@ -1,5 +1,11 @@
 # @stephansama/multipublish
 
+## 1.0.7
+
+### Patch Changes
+
+- 45af1b2: Updated jsr to have auth token. fail without error for unscoped packages
+
 ## 1.0.6
 
 ### Patch Changes

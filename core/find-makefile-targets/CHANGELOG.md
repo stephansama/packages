@@ -1,5 +1,11 @@
 # @stephansama/find-makefile-targets
 
+## 1.0.4
+
+### Patch Changes
+
+- 5d6ed23: switch from npmjs to npmx
+
 ## 1.0.3
 
 ### Patch Changes

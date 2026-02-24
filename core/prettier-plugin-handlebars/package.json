@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/prettier-plugin-handlebars",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Prettier plugin that automatically assigns the default parser for various handlebars files",
 	"keywords": [
 		"prettier-plugin-handlebars"

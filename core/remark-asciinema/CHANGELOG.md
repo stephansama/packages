@@ -1,5 +1,11 @@
 # @stephansama/remark-asciinema
 
+## 1.0.13
+
+### Patch Changes
+
+- 5d6ed23: switch from npmjs to npmx
+
 ## 1.0.12
 
 ### Patch Changes

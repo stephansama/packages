@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-opml
 
+## 1.0.2
+
+### Patch Changes
+
+- 5d6ed23: switch from npmjs to npmx
+
 ## 1.0.1
 
 ### Patch Changes

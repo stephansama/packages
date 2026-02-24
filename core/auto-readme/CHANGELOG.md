@@ -1,5 +1,11 @@
 # @stephansama/auto-readme
 
+## 0.2.6
+
+### Patch Changes
+
+- 5d6ed23: switch from npmjs to npmx
+
 ## 0.2.5
 
 ### Patch Changes

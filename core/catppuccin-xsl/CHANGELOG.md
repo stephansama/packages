@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-xsl
 
+## 1.1.3
+
+### Patch Changes
+
+- 5d6ed23: switch from npmjs to npmx
+
 ## 1.1.2
 
 ### Patch Changes

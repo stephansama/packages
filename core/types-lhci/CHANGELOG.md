@@ -1,5 +1,11 @@
 # @stephansama/types-lhci
 
+## 0.2.0
+
+### Minor Changes
+
+- a19fd68: added env types for lhci and added some descriptions
+
 ## 0.1.3
 
 ### Patch Changes

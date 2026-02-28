@@ -1,64 +1,27 @@
 import type { PlopTypes } from "@turbo/gen";
 
+import { actions, prompts } from "./utils";
+
+/* eslint-disable perfectionist/sort-objects */
 export default function generator(plop: PlopTypes.NodePlopAPI) {
-	plop.setGenerator("package", {
-		description: "Generate a new package",
-		prompts: [
-			{
-				message: "What is the name of the new package?",
-				name: "name",
-				type: "input",
-				validate(input: string) {
-					if (input.includes(".")) {
-						return "library name cannot include an extension";
-					}
-					if (input.includes(" ")) {
-						return "library name cannot include spaces";
-					}
-					if (!input) {
-						return "library name is required";
-					}
-					return true;
-				},
-			},
-			{
-				message: "What is the description of the new package?",
-				name: "description",
-				type: "input",
-			},
-		],
-		// eslint-disable-next-line
+	plop.setGenerator("cli", {
+		description: "Generate a new cli package",
+		prompts: [prompts.name, prompts.description],
+		actions: [actions.addTemplate({ type: "cli" }), actions.addAllCommon],
+	});
+
+	plop.setGenerator("env", {
+		description: "Generate a new env package",
+		prompts: [prompts.name, prompts.description],
 		actions: [
-			{
-				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/package.json",
-				templateFile: "templates/lib/package.json.hbs",
-				type: "add",
-			},
-			{
-				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/README.md",
-				templateFile: "templates/lib/README.md.hbs",
-				type: "add",
-			},
-			{
-				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/tsdown.config.ts",
-				templateFile: "templates/lib/tsdown.config.ts.hbs",
-				type: "add",
-			},
-			{
-				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/tsconfig.json",
-				templateFile: "templates/lib/tsconfig.json.hbs",
-				type: "add",
-			},
-			{
-				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/typedoc.json",
-				templateFile: "templates/lib/typedoc.json",
-				type: "add",
-			},
-			{
-				path: "{{ turbo.paths.root }}/core/{{ dashCase name }}/src/index.ts",
-				templateFile: "templates/lib/BLANK",
-				type: "add",
-			},
+			actions.addTemplate({ type: "env" }),
+			actions.addCommonFile("tsconfig.json"),
 		],
+	});
+
+	plop.setGenerator("lib", {
+		description: "Generate a new lib package",
+		prompts: [prompts.name, prompts.description],
+		actions: [actions.addTemplate({ type: "lib" }), actions.addAllCommon],
 	});
 }

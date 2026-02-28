@@ -2,26 +2,28 @@
 	"name": "@stephansama/{{name}}",
 	"version": "0.0.0",
 	"description": "{{description}}",
+	"keywords": [
+		"{{name}}"
+	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/{{name}}",
 	"repository": {
-		"url": "https://github.com/stephansama/packages",
 		"type": "git",
+		"url": "https://github.com/stephansama/packages",
 		"directory": "core/{{name}}"
 	},
-	"homepage": "https://packages.stephansama.info/api/@stephansama/{{name}}",
+	"license": "MIT",
 	"author": {
-		"email": "stephanrandle.dev@gmail.com",
 		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
 		"url": "https://stephansama.info"
 	},
-	"license": "MIT",
 	"type": "module",
 	"scripts": {
 		"build": "tsdown",
 		"dev": "tsdown --watch",
-		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+		"lint:fix": "eslint ./ --fix"
 	},
-	"packageManager": "pnpm@10.11.0",
-	"keywords": ["{{name}}"],
 	"dependencies": {},
 	"devDependencies": {
 		"tsdown": "catalog:"

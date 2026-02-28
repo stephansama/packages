@@ -1,0 +1,37 @@
+{
+	"name": "@stephansama/{{name}}",
+	"version": "0.0.0",
+	"description": "{{description}}",
+	"keywords": [
+		"{{name}}"
+	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/{{name}}",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/stephansama/packages.git",
+		"directory": "core/{{name}}"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephansama.info"
+	},
+	"type": "module",
+	"bin": "./cli.mjs",
+	"files": [
+		"cli.mjs",
+		"dist"
+	],
+	"scripts": {
+		"build": "tsdown",
+		"dev": "tsdown --watch",
+		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+		"lint:fix": "eslint ./ --fix"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"readme": "./README.md"
+}

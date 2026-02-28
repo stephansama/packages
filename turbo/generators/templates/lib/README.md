@@ -9,6 +9,13 @@
 
 ##### Table of contents
 
+<details><summary>Open Table of contents</summary>
+
+- [Installation](#installation)
+- [Usage](#usage)
+
+</details>
+
 ## Installation
 
 ```sh

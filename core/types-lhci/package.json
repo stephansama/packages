@@ -23,6 +23,7 @@
 			"import": "./dist/index.js",
 			"require": "./dist/index.cjs"
 		},
+		"./env": "./types/env.d.ts",
 		"./schema.json": "./dist/schema.json",
 		"./package.json": "./package.json"
 	},
@@ -30,7 +31,8 @@
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.cts",
 	"files": [
-		"dist"
+		"dist",
+		"types"
 	],
 	"scripts": {
 		"build": "tsx ./build.ts",

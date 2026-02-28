@@ -1,6 +1,6 @@
 declare global {
 	namespace NodeJS {
-		interface ProcessEnv extends LighthouseCiEnvironments {}
+		interface ProcessEnv extends Partial<LighthouseCiEnvironments> {}
 	}
 }
 

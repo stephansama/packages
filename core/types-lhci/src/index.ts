@@ -35,7 +35,7 @@ export const lhciCollectSchema = z.object({
 		.boolean()
 		.optional()
 		.meta({ description: `Skips clearing of previous collect data` }),
-	autodiscoverUrlBlocklist: z.array(z.string()).meta({
+	autodiscoverUrlBlocklist: z.array(z.string()).optional().meta({
 		description: `A URL to not include when autodiscovering urls from staticDistDir. Use this flag multiple times to filter multiple URLs.`,
 	}),
 	chromePath: z.string().optional(),
@@ -145,11 +145,9 @@ export type LhciSchema = z.infer<typeof lhciSchema>;
 export const lhciSchema = z.object({
 	ci: z.object({
 		assert: lhciAssertSchema.optional(),
-		collect: lhciCollectSchema
-			.optional()
-			.meta({
-				description: `Runs Lighthouse n times and stores the LHRs in a local .lighthouseci/ folder.`,
-			}),
+		collect: lhciCollectSchema.optional().meta({
+			description: `Runs Lighthouse n times and stores the LHRs in a local .lighthouseci/ folder.`,
+		}),
 		server: lhciServerSchema.optional(),
 		upload: lhciUploadSchema.optional(),
 		wizard: lhciWizardSchema.optional(),

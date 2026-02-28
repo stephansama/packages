@@ -90,6 +90,7 @@
 	},
 	"devDependencies": {
 		"actions-up": "^1.11.0",
+		"node-plop": "catalog:",
 		"taze": "^19.9.2"
 	},
 	"packageManager": "pnpm@10.29.3"

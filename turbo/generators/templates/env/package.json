@@ -1,0 +1,29 @@
+{
+	"name": "@stephansama/{{name}}",
+	"version": "0.0.0",
+	"description": "{{description}}",
+	"homepage": "https://packages.stephansama.info/api/@stephansama/github-env",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/stephansama/packages.git",
+		"directory": "core/github-env"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephansama.info"
+	},
+	"type": "module",
+	"files": [
+		"types"
+	],
+	"scripts": {
+		"lint": "eslint ./types",
+		"lint:fix": "eslint ./types --fix"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	}
+}

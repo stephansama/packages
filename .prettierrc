@@ -6,7 +6,14 @@
 	"jsxSingleQuote": false,
 	"overrides": [
 		{ "files": ["*.md"], "options": { "tabWidth": 2, "useTabs": false } },
-		{ "files": "*.astro", "options": { "parser": "astro" } }
+		{ "files": "*.astro", "options": { "parser": "astro" } },
+		{
+			"files": ["pnpm-workspace.yaml"],
+			"options": {
+				"useTabs": true,
+				"singleQuote": true
+			}
+		}
 	],
 	"plugins": [
 		"@stephansama/prettier-plugin-handlebars",

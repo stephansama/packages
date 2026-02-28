@@ -3,4 +3,3 @@
 "use strict";
 
 import("./dist/index.js").then((mod) => mod.run());
-

@@ -2,11 +2,11 @@
 	"name": "@stephansama/{{name}}",
 	"version": "0.0.0",
 	"description": "{{description}}",
-	"homepage": "https://packages.stephansama.info/api/@stephansama/github-env",
+	"homepage": "https://packages.stephansama.info/api/@stephansama/{{name}}",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/stephansama/packages.git",
-		"directory": "core/github-env"
+		"directory": "core/{{name}}"
 	},
 	"license": "MIT",
 	"author": {
@@ -16,11 +16,11 @@
 	},
 	"type": "module",
 	"files": [
-		"types"
+		"src"
 	],
 	"scripts": {
-		"lint": "eslint ./types",
-		"lint:fix": "eslint ./types --fix"
+		"lint": "eslint ./src",
+		"lint:fix": "eslint ./src --fix"
 	},
 	"publishConfig": {
 		"access": "public",

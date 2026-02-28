@@ -1,13 +1,15 @@
 {
-	"name": "{{name}}",
+	"name": "@stephansama/{{name}}",
 	"version": "",
 	"description": "{{description}}",
-	"keywords": [],
+	"keywords": [
+		"{{name}}"
+	],
 	"homepage": "https://packages.stephansama.info/api/@stephansama/{{name}}",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/stephansama/packages.git",
-		"directory": "core/github-env"
+		"directory": "core/{{name}}"
 	},
 	"license": "MIT",
 	"author": {
@@ -21,7 +23,12 @@
 		"cli.mjs",
 		"dist"
 	],
-	"scripts": {},
+	"scripts": {
+		"build": "tsdown",
+		"dev": "tsdown --watch",
+		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+		"lint:fix": "eslint ./ --fix"
+	},
 	"publishConfig": {
 		"access": "public",
 		"provenance": true

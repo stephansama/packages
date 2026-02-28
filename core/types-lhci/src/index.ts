@@ -31,12 +31,26 @@ export const lhciAssertSchema = z.object({
 
 export type LhciCollectSchema = z.infer<typeof lhciCollectSchema>;
 export const lhciCollectSchema = z.object({
-	additive: z.boolean().optional(),
+	additive: z
+		.boolean()
+		.optional()
+		.meta({ description: `Skips clearing of previous collect data` }),
+	autodiscoverUrlBlocklist: z.array(z.string()).meta({
+		description: `A URL to not include when autodiscovering urls from staticDistDir. Use this flag multiple times to filter multiple URLs.`,
+	}),
 	chromePath: z.string().optional(),
-	headful: z.boolean().optional(),
-	isSinglePageApplication: z.boolean().optional(),
+	headful: z
+		.boolean()
+		.optional()
+		.meta({ description: `Run with a headful Chrome` }),
+	isSinglePageApplication: z.boolean().optional().meta({
+		description: `If the application is created by Single Page Application, enable redirect to index.html.`,
+	}),
 	method: z.enum(["node", "psi"]).or(z.string()).default("node"),
-	numberOfRuns: z.number().optional(),
+	numberOfRuns: z
+		.number()
+		.optional()
+		.meta({ description: `The number of times to run Lighthouse.` }),
 	/** @see https://github.com/puppeteer/puppeteer/blob/aa246973b96c36768bf3d4db0383f7101a1b4ee9/docs/api.md#puppeteerlaunchoptions */
 	puppeteerLaunchOptions: z.object({
 		devtools: z.boolean(),
@@ -48,8 +62,20 @@ export const lhciCollectSchema = z.object({
 	}),
 	puppeteerScript: z.string().optional(),
 	settings: z.object({}),
-	startServerCommand: z.string().optional(),
-	staticDirFileDiscoveryDepth: z.number().optional(),
+	startServerCommand: z
+		.string()
+		.optional()
+		.meta({ description: `The command to run to start the server.` }),
+	startServerReadyPattern: z
+		.string()
+		.default("listen|ready")
+		.meta({ description: `String pattern to listen for started server.` }),
+	startServerReadyTimeout: z.number().default(10000).meta({
+		description: `The number of milliseconds to wait for the server to start before continuing`,
+	}),
+	staticDirFileDiscoveryDepth: z.number().default(2).meta({
+		description: `The maximum depth of nested folders Lighthouse will look into to discover URLs on a static file folder.`,
+	}),
 	staticDistDir: z.string().optional(),
 	url: z.array(z.string()).optional(),
 });
@@ -119,7 +145,11 @@ export type LhciSchema = z.infer<typeof lhciSchema>;
 export const lhciSchema = z.object({
 	ci: z.object({
 		assert: lhciAssertSchema.optional(),
-		collect: lhciCollectSchema.optional(),
+		collect: lhciCollectSchema
+			.optional()
+			.meta({
+				description: `Runs Lighthouse n times and stores the LHRs in a local .lighthouseci/ folder.`,
+			}),
 		server: lhciServerSchema.optional(),
 		upload: lhciUploadSchema.optional(),
 		wizard: lhciWizardSchema.optional(),

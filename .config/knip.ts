@@ -1,6 +1,6 @@
 import type { KnipConfig } from "knip";
 
-const config: KnipConfig = {
+export default {
 	ignore: [
 		"**/*.test.*",
 		"**/.config/**",
@@ -21,6 +21,4 @@ const config: KnipConfig = {
 			project: ["src/**/*.{ts,tsx}"],
 		},
 	},
-};
-
-export default config;
+} as const satisfies KnipConfig;

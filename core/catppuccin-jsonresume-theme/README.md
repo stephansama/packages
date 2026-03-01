@@ -13,6 +13,7 @@ theme for [resume cli](https://github.com/jsonresume/resume-cli) website
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Credits](#credits)
 
 </details>
 
@@ -23,3 +24,13 @@ pnpm install @stephansama/catppuccin-jsonresume-theme
 ```
 
 ## Usage
+
+You must actually install the [wrapper library](https://github.com/stephansama/jsonresume-theme-catppuccin) in order to use this theme.
+
+```sh
+resume dev --theme catppuccin
+```
+
+## Credits
+
+Special thanks to [jsonresume-theme-github-styled](https://npmx.dev/package-code/jsonresume-theme-github-styled) for the base template.

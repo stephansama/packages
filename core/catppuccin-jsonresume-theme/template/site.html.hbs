@@ -22,26 +22,62 @@
 				theme: {
 					extend: {
 						colors: {
-							github: {
-								canvas: {
-									"default": "#ffffff",
-									"subtle": "#f6f8fa",
-									"dark": "#22272e",
-									"dark-subtle": "#2d333b",
+							catppuccin: {
+								latte: {
+									rosewater: "#dc8a78",
+									flamingo: "#dd7878",
+									pink: "#ea76cb",
+									mauve: "#8839ef",
+									red: "#d20f39",
+									maroon: "#e64553",
+									peach: "#fe640b",
+									yellow: "#df8e1d",
+									green: "#40a02b",
+									teal: "#179287",
+									sky: "#04a5e5",
+									sapphire: "#209fb5",
+									blue: "#1e66f5",
+									lavender: "#7287fd",
+									text: "#4c4f69",
+									subtext1: "#5c5f77",
+									subtext0: "#6c6f85",
+									overlay2: "#7c7f93",
+									overlay1: "#8c8fa1",
+									overlay0: "#9ca0b0",
+									surface2: "#acb0be",
+									surface1: "#bcc0cc",
+									surface0: "#ccd0da",
+									base: "#eff1f5",
+									mantle: "#e6e9ef",
+									crust: "#dce0e8",
 								},
-								border: {
-									default: "#d0d7de",
-									dark: "#444c56",
-								},
-								fg: {
-									"default": "#24292f",
-									"muted": "#57606a",
-									"dark": "#e6edf3",
-									"dark-muted": "#9198a1",
-								},
-								accent: {
-									emphasis: "#0969da",
-									dark: "#539bf5",
+								mocha: {
+									rosewater: "#f5e0dc",
+									flamingo: "#f2cdcd",
+									pink: "#f5c2e7",
+									mauve: "#cba6f7",
+									red: "#f38ba8",
+									maroon: "#eba0ac",
+									peach: "#fab387",
+									yellow: "#f9e2af",
+									green: "#a6e3a1",
+									teal: "#94e2d5",
+									sky: "#89dceb",
+									sapphire: "#74c7ec",
+									blue: "#89b4fa",
+									lavender: "#b4befe",
+									text: "#cdd6f4",
+									subtext1: "#bac2de",
+									subtext0: "#a6adc8",
+									overlay2: "#9399b2",
+									overlay1: "#7f849c",
+									overlay0: "#6c7086",
+									surface2: "#585b70",
+									surface1: "#45475a",
+									surface0: "#313244",
+									base: "#1e1e2e",
+									mantle: "#181825",
+									crust: "#11111b",
 								},
 							},
 						},
@@ -71,13 +107,13 @@
 		<style>
 			/* Prevent flash of unstyled content */
 			html {
-				background-color: #ffffff;
-				color: #24292f;
+				background-color: #eff1f5;
+				color: #4c4f69;
 			}
 
 			html.dark {
-				background-color: rgb(33, 40, 48);
-				color: #e6edf3;
+				background-color: #1e1e2e;
+				color: #cdd6f4;
 			}
 
 			body {
@@ -85,38 +121,12 @@
 				background-color: inherit;
 			}
 
-			/* Lighter text colors for dark mode */
-			.dark .text-github-fg-dark {
-				color: #e6edf3 !important;
-			}
-
-			.dark .text-github-fg-dark-muted {
-				color: #adbac7 !important;
-			}
-
-			.dark h1,
-			.dark h2,
-			.dark h3,
-			.dark h4,
-			.dark h5,
-			.dark h6 {
-				color: #e6edf3 !important;
-			}
-
-			.dark .glass-tile {
-				color: #e6edf3;
-			}
-
-			.dark .glass-tile .text-github-fg-muted {
-				color: #adbac7 !important;
-			}
-
-			/* GitHub Brand frosted glass tiles */
+			/* Catppuccin frosted glass tiles */
 			.glass-tile {
-				background: rgba(246, 248, 250, 0.7) !important;
+				background: rgba(230, 233, 239, 0.7) !important;
 				backdrop-filter: blur(20px) saturate(180%);
 				-webkit-backdrop-filter: blur(20px) saturate(180%);
-				border: 1px solid rgba(208, 215, 222, 0.5) !important;
+				border: 1px solid rgba(204, 208, 218, 0.5) !important;
 				border-radius: 8px !important;
 				box-shadow:
 					0 4px 6px -1px rgba(0, 0, 0, 0.1),
@@ -125,10 +135,10 @@
 			}
 
 			.dark .glass-tile {
-				background: rgba(45, 51, 59, 0.7) !important;
+				background: rgba(49, 50, 68, 0.7) !important;
 				backdrop-filter: blur(20px) saturate(180%);
 				-webkit-backdrop-filter: blur(20px) saturate(180%);
-				border: 1px solid rgba(68, 76, 86, 0.5) !important;
+				border: 1px solid rgba(69, 71, 90, 0.5) !important;
 				box-shadow:
 					0 4px 6px -1px rgba(0, 0, 0, 0.3),
 					0 2px 4px -1px rgba(0, 0, 0, 0.2),
@@ -156,7 +166,9 @@
 			}
 		</style>
 	</head>
-	<body class="text-github-fg-default dark:text-github-fg-dark">
+	<body
+		class="text-catppuccin-latte-text dark:text-catppuccin-mocha-text bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base"
+	>
 		<!-- Theme Toggle Button -->
 		<div
 			class="no-print fixed z-50"
@@ -167,7 +179,7 @@
 		>
 			<button
 				id="theme-toggle"
-				class="p-2 rounded-lg bg-github-canvas-subtle dark:bg-github-canvas-dark-subtle border border-github-border-default dark:border-github-border-dark hover:border-github-accent-emphasis dark:hover:border-github-accent-dark transition-colors"
+				class="p-2 rounded-lg bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 hover:border-catppuccin-latte-blue dark:hover:border-catppuccin-mocha-blue transition-colors"
 				title="Theme"
 			>
 				<svg
@@ -219,14 +231,14 @@
 					<img
 						src="{{basics.image}}"
 						alt="{{basics.name}}"
-						class="w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-github-border-default dark:border-github-border-dark flex-shrink-0"
+						class="w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 flex-shrink-0"
 					/>
 					{{/if}}
 					<div class="flex-1 min-w-0">
 						<h1 class="text-4xl font-bold mb-2">{{basics.name}}</h1>
 						{{#if basics.label}}
 						<p
-							class="text-xl text-github-fg-muted dark:text-github-fg-dark-muted"
+							class="text-xl text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
 						>
 							{{basics.label}}
 						</p>
@@ -235,7 +247,7 @@
 				</div>
 				{{#if basics.summary}}
 				<p
-					class="text-base text-github-fg-muted dark:text-github-fg-dark-muted leading-relaxed mb-6"
+					class="text-base text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 leading-relaxed mb-6"
 				>
 					{{basics.summary}}
 				</p>
@@ -246,7 +258,7 @@
 					{{#if basics.email}}
 					<a
 						href="mailto:{{basics.email}}"
-						class="flex items-center gap-2 text-github-accent-emphasis dark:text-github-accent-dark hover:underline"
+						class="flex items-center gap-2 text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
 					>
 						<svg
 							class="w-4 h-4"
@@ -265,7 +277,7 @@
 					{{/if}} {{#if basics.phone}}
 					<a
 						href="tel:{{basics.phone}}"
-						class="flex items-center gap-2 text-github-accent-emphasis dark:text-github-accent-dark hover:underline"
+						class="flex items-center gap-2 text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
 					>
 						<svg
 							class="w-4 h-4"
@@ -283,7 +295,7 @@
 						href="{{#if basics.url}}{{basics.url}}{{else}}{{basics.website}}{{/if}}"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex items-center gap-2 text-github-accent-emphasis dark:text-github-accent-dark hover:underline"
+						class="flex items-center gap-2 text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
 					>
 						<svg
 							class="w-4 h-4"
@@ -301,7 +313,7 @@
 					</a>
 					{{/if}} {{#if basics.location}}
 					<span
-						class="flex items-center gap-2 text-github-fg-muted dark:text-github-fg-dark-muted"
+						class="flex items-center gap-2 text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
 					>
 						<svg
 							class="w-4 h-4"
@@ -332,7 +344,7 @@
 						href="{{url}}"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-github-canvas-subtle dark:bg-github-canvas-dark-subtle border border-github-border-default dark:border-github-border-dark rounded-md hover:border-github-accent-emphasis dark:hover:border-github-accent-dark transition-colors"
+						class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-md hover:border-catppuccin-latte-blue dark:hover:border-catppuccin-mocha-blue transition-colors"
 						title="{{network}}{{#if username}}: {{username}}{{/if}}"
 					>
 						<!-- GitHub Icon -->
@@ -444,21 +456,21 @@
 			{{#if skills}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-github-border-default dark:border-github-border-dark"
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
 				>
 					Skills
 				</h2>
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 					{{#each skills}}
 					<div
-						class="glass-tile bg-github-canvas-subtle dark:bg-github-canvas-dark-subtle border border-github-border-default dark:border-github-border-dark rounded-lg p-4"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
 					>
 						<h3 class="font-semibold mb-2">{{name}}</h3>
 						{{#if keywords}}
 						<div class="flex flex-wrap gap-2">
 							{{#each keywords}}
 							<span
-								class="px-2 py-1 text-sm bg-github-canvas-default dark:bg-github-canvas-dark border border-github-border-default dark:border-github-border-dark rounded font-mono"
+								class="px-2 py-1 text-sm bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded font-mono"
 								>{{this}}</span
 							>
 							{{/each}}
@@ -474,14 +486,14 @@
 			{{#if work}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-github-border-default dark:border-github-border-dark"
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
 				>
 					Work Experience
 				</h2>
 				<div class="space-y-6">
 					{{#each work}}
 					<div
-						class="glass-tile bg-github-canvas-subtle dark:bg-github-canvas-dark-subtle border border-github-border-default dark:border-github-border-dark rounded-lg p-4 md:p-6"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4 md:p-6"
 					>
 						<div
 							class="flex flex-col md:flex-row md:justify-between md:items-start mb-3"
@@ -491,13 +503,13 @@
 									{{position}}
 								</h3>
 								<p
-									class="text-github-fg-muted dark:text-github-fg-dark-muted"
+									class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
 								>
 									{{#if url}}<a
 										href="{{url}}"
 										target="_blank"
 										rel="noopener noreferrer"
-										class="text-github-accent-emphasis dark:text-github-accent-dark hover:underline"
+										class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
 										>{{name}}</a
 									>{{else}}{{name}}{{/if}} {{#if location}}
 									<span
@@ -520,7 +532,7 @@
 								</p>
 							</div>
 							<div
-								class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted mt-1 md:mt-0 md:text-right"
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0 md:text-right"
 							>
 								{{#if startDate}}{{formatDate
 								startDate}}{{/if}}{{#if endDate}} → {{formatDate
@@ -530,13 +542,13 @@
 						</div>
 						{{#if summary}}
 						<p
-							class="text-github-fg-muted dark:text-github-fg-dark-muted mb-3"
+							class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mb-3"
 						>
 							{{summary}}
 						</p>
 						{{/if}} {{#if highlights}}
 						<ul
-							class="list-disc list-outside pl-5 space-y-1 text-github-fg-muted dark:text-github-fg-dark-muted"
+							class="list-disc list-outside pl-5 space-y-1 text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
 						>
 							{{#each highlights}}
 							<li>{{this}}</li>
@@ -553,14 +565,14 @@
 			{{#if education}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-github-border-default dark:border-github-border-dark"
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
 				>
 					Education
 				</h2>
 				<div class="space-y-4">
 					{{#each education}}
 					<div
-						class="glass-tile bg-github-canvas-subtle dark:bg-github-canvas-dark-subtle border border-github-border-default dark:border-github-border-dark rounded-lg p-4 md:p-6"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4 md:p-6"
 					>
 						<div
 							class="flex flex-col md:flex-row md:justify-between md:items-start"
@@ -570,19 +582,19 @@
 									{{studyType}}{{#if area}} in {{area}}{{/if}}
 								</h3>
 								<p
-									class="text-github-fg-muted dark:text-github-fg-dark-muted"
+									class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
 								>
 									{{#if url}}<a
 										href="{{url}}"
 										target="_blank"
 										rel="noopener noreferrer"
-										class="text-github-accent-emphasis dark:text-github-accent-dark hover:underline"
+										class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
 										>{{institution}}</a
 									>{{else}}{{institution}}{{/if}}
 								</p>
 								{{#if (or gpa score)}}
 								<p
-									class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted mt-1"
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1"
 								>
 									GPA: {{#if
 									gpa}}{{gpa}}{{else}}{{score}}{{/if}}
@@ -590,7 +602,7 @@
 								{{/if}}
 							</div>
 							<div
-								class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted mt-1 md:mt-0"
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
 							>
 								{{#if startDate}}{{formatDate
 								startDate}}{{/if}}{{#if endDate}} → {{formatDate
@@ -605,7 +617,7 @@
 							<div class="flex flex-wrap gap-2">
 								{{#each courses}}
 								<span
-									class="px-2 py-1 text-xs bg-github-canvas-default dark:bg-github-canvas-dark border border-github-border-default dark:border-github-border-dark rounded"
+									class="px-2 py-1 text-xs bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded"
 									>{{this}}</span
 								>
 								{{/each}}
@@ -622,14 +634,14 @@
 			{{#if projects}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-github-border-default dark:border-github-border-dark"
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
 				>
 					Projects
 				</h2>
 				<div class="space-y-4">
 					{{#each projects}}
 					<div
-						class="glass-tile bg-github-canvas-subtle dark:bg-github-canvas-dark-subtle border border-github-border-default dark:border-github-border-dark rounded-lg p-4 md:p-6"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4 md:p-6"
 					>
 						<div
 							class="flex flex-col md:flex-row md:justify-between md:items-start mb-2"
@@ -640,13 +652,13 @@
 										href="{{url}}"
 										target="_blank"
 										rel="noopener noreferrer"
-										class="text-github-accent-emphasis dark:text-github-accent-dark hover:underline"
+										class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
 										>{{name}}</a
 									>{{else}}{{name}}{{/if}}
 								</h3>
 								{{#if type}}
 								<p
-									class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted"
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
 								>
 									{{type}}
 								</p>
@@ -654,7 +666,7 @@
 							</div>
 							{{#if startDate}}
 							<div
-								class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted mt-1 md:mt-0"
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
 							>
 								{{formatDate startDate}}{{#if endDate}} →
 								{{formatDate endDate}}{{/if}}
@@ -663,13 +675,13 @@
 						</div>
 						{{#if description}}
 						<p
-							class="text-github-fg-muted dark:text-github-fg-dark-muted mb-2"
+							class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mb-2"
 						>
 							{{description}}
 						</p>
 						{{/if}} {{#if highlights}}
 						<ul
-							class="list-disc list-outside pl-5 space-y-1 text-sm text-github-fg-muted dark:text-github-fg-dark-muted mb-2"
+							class="list-disc list-outside pl-5 space-y-1 text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mb-2"
 						>
 							{{#each highlights}}
 							<li>{{this}}</li>
@@ -679,7 +691,7 @@
 						<div class="flex flex-wrap gap-2 mt-3">
 							{{#each keywords}}
 							<span
-								class="px-2 py-1 text-xs bg-github-canvas-default dark:bg-github-canvas-dark border border-github-border-default dark:border-github-border-dark rounded"
+								class="px-2 py-1 text-xs bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded"
 								>{{this}}</span
 							>
 							{{/each}}
@@ -695,14 +707,14 @@
 			{{#if awards}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-github-border-default dark:border-github-border-dark"
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
 				>
 					Awards & Honors
 				</h2>
 				<div class="space-y-3">
 					{{#each awards}}
 					<div
-						class="glass-tile bg-github-canvas-subtle dark:bg-github-canvas-dark-subtle border border-github-border-default dark:border-github-border-dark rounded-lg p-4"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
 					>
 						<div
 							class="flex flex-col md:flex-row md:justify-between md:items-start"
@@ -711,13 +723,13 @@
 								<h3 class="font-semibold">{{title}}</h3>
 								{{#if awarder}}
 								<p
-									class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted"
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
 								>
 									{{awarder}}
 								</p>
 								{{/if}} {{#if summary}}
 								<p
-									class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted mt-1"
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1"
 								>
 									{{summary}}
 								</p>
@@ -725,7 +737,7 @@
 							</div>
 							{{#if date}}
 							<div
-								class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted mt-1 md:mt-0"
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
 							>
 								{{formatDate date}}
 							</div>
@@ -741,14 +753,14 @@
 			{{#if certificates}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-github-border-default dark:border-github-border-dark"
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
 				>
 					Certificates
 				</h2>
 				<div class="space-y-3">
 					{{#each certificates}}
 					<div
-						class="glass-tile bg-github-canvas-subtle dark:bg-github-canvas-dark-subtle border border-github-border-default dark:border-github-border-dark rounded-lg p-4"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
 					>
 						<div
 							class="flex flex-col md:flex-row md:justify-between md:items-start"
@@ -759,13 +771,13 @@
 										href="{{url}}"
 										target="_blank"
 										rel="noopener noreferrer"
-										class="text-github-accent-emphasis dark:text-github-accent-dark hover:underline"
+										class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
 										>{{name}}</a
 									>{{else}}{{name}}{{/if}}
 								</h3>
 								{{#if issuer}}
 								<p
-									class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted"
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
 								>
 									{{issuer}}
 								</p>
@@ -773,7 +785,7 @@
 							</div>
 							{{#if date}}
 							<div
-								class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted mt-1 md:mt-0"
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
 							>
 								{{formatDate date}}
 							</div>
@@ -789,14 +801,14 @@
 			{{#if publications}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-github-border-default dark:border-github-border-dark"
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
 				>
 					Publications
 				</h2>
 				<div class="space-y-4">
 					{{#each publications}}
 					<div
-						class="glass-tile bg-github-canvas-subtle dark:bg-github-canvas-dark-subtle border border-github-border-default dark:border-github-border-dark rounded-lg p-4"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
 					>
 						<div
 							class="flex flex-col md:flex-row md:justify-between md:items-start"
@@ -807,19 +819,19 @@
 										href="{{url}}"
 										target="_blank"
 										rel="noopener noreferrer"
-										class="text-github-accent-emphasis dark:text-github-accent-dark hover:underline"
+										class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
 										>{{name}}</a
 									>{{else}}{{name}}{{/if}}
 								</h3>
 								{{#if publisher}}
 								<p
-									class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted"
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
 								>
 									{{publisher}}
 								</p>
 								{{/if}} {{#if summary}}
 								<p
-									class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted mt-2"
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-2"
 								>
 									{{summary}}
 								</p>
@@ -827,7 +839,7 @@
 							</div>
 							{{#if releaseDate}}
 							<div
-								class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted mt-1 md:mt-0"
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
 							>
 								{{formatDate releaseDate}}
 							</div>
@@ -843,14 +855,14 @@
 			{{#if volunteer}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-github-border-default dark:border-github-border-dark"
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
 				>
 					Volunteer Experience
 				</h2>
 				<div class="space-y-4">
 					{{#each volunteer}}
 					<div
-						class="glass-tile bg-github-canvas-subtle dark:bg-github-canvas-dark-subtle border border-github-border-default dark:border-github-border-dark rounded-lg p-4 md:p-6"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4 md:p-6"
 					>
 						<div
 							class="flex flex-col md:flex-row md:justify-between md:items-start mb-2"
@@ -860,19 +872,19 @@
 									{{position}}
 								</h3>
 								<p
-									class="text-github-fg-muted dark:text-github-fg-dark-muted"
+									class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
 								>
 									{{#if url}}<a
 										href="{{url}}"
 										target="_blank"
 										rel="noopener noreferrer"
-										class="text-github-accent-emphasis dark:text-github-accent-dark hover:underline"
+										class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
 										>{{organization}}</a
 									>{{else}}{{organization}}{{/if}}
 								</p>
 							</div>
 							<div
-								class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted mt-1 md:mt-0"
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
 							>
 								{{#if startDate}}{{formatDate
 								startDate}}{{/if}}{{#if endDate}} → {{formatDate
@@ -881,13 +893,13 @@
 						</div>
 						{{#if summary}}
 						<p
-							class="text-github-fg-muted dark:text-github-fg-dark-muted mb-2"
+							class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mb-2"
 						>
 							{{summary}}
 						</p>
 						{{/if}} {{#if highlights}}
 						<ul
-							class="list-disc list-outside pl-5 space-y-1 text-sm text-github-fg-muted dark:text-github-fg-dark-muted"
+							class="list-disc list-outside pl-5 space-y-1 text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
 						>
 							{{#each highlights}}
 							<li>{{this}}</li>
@@ -904,18 +916,18 @@
 			{{#if languages}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-github-border-default dark:border-github-border-dark"
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
 				>
 					Languages
 				</h2>
 				<div class="flex flex-wrap gap-3">
 					{{#each languages}}
 					<div
-						class="glass-tile bg-github-canvas-subtle dark:bg-github-canvas-dark-subtle border border-github-border-default dark:border-github-border-dark rounded-lg px-4 py-2"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg px-4 py-2"
 					>
 						<span class="font-medium">{{language}}</span>
 						{{#if fluency}}<span
-							class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted"
+							class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
 						>
 							- {{fluency}}</span
 						>{{/if}}
@@ -929,21 +941,21 @@
 			{{#if interests}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-github-border-default dark:border-github-border-dark"
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
 				>
 					Interests
 				</h2>
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 					{{#each interests}}
 					<div
-						class="glass-tile bg-github-canvas-subtle dark:bg-github-canvas-dark-subtle border border-github-border-default dark:border-github-border-dark rounded-lg p-4"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
 					>
 						<h3 class="font-semibold mb-2">{{name}}</h3>
 						{{#if keywords}}
 						<div class="flex flex-wrap gap-2">
 							{{#each keywords}}
 							<span
-								class="px-2 py-1 text-sm text-github-fg-muted dark:text-github-fg-dark-muted"
+								class="px-2 py-1 text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
 								>{{this}}</span
 							>
 							{{/each}}
@@ -959,19 +971,19 @@
 			{{#if references}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-github-border-default dark:border-github-border-dark"
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
 				>
 					References
 				</h2>
 				<div class="space-y-3">
 					{{#each references}}
 					<div
-						class="glass-tile bg-github-canvas-subtle dark:bg-github-canvas-dark-subtle border border-github-border-default dark:border-github-border-dark rounded-lg p-4"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
 					>
 						<h3 class="font-semibold">{{name}}</h3>
 						{{#if reference}}
 						<p
-							class="text-sm text-github-fg-muted dark:text-github-fg-dark-muted mt-1 italic"
+							class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 italic"
 						>
 							"{{reference}}"
 						</p>

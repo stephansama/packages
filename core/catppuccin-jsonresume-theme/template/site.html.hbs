@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>
+			{{basics.name}}{{#if basics.label}} &ndash; {{basics.label}}{{/if}}
+		</title>
+		{{#if basics.image}}
+		<link rel="icon" type="image/png" href="{{basics.image}}" />
+		{{/if}}
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+		<script src="https://cdn.tailwindcss.com" data-cfasync="false"></script>
+		<script data-cfasync="false">
+			tailwind.config = {
+				darkMode: "class",
+				theme: {
+					extend: {
+						colors: {
+							catppuccin: {
+								latte: {
+									rosewater: "#dc8a78",
+									flamingo: "#dd7878",
+									pink: "#ea76cb",
+									mauve: "#8839ef",
+									red: "#d20f39",
+									maroon: "#e64553",
+									peach: "#fe640b",
+									yellow: "#df8e1d",
+									green: "#40a02b",
+									teal: "#179287",
+									sky: "#04a5e5",
+									sapphire: "#209fb5",
+									blue: "#1e66f5",
+									lavender: "#7287fd",
+									text: "#4c4f69",
+									subtext1: "#5c5f77",
+									subtext0: "#6c6f85",
+									overlay2: "#7c7f93",
+									overlay1: "#8c8fa1",
+									overlay0: "#9ca0b0",
+									surface2: "#acb0be",
+									surface1: "#bcc0cc",
+									surface0: "#ccd0da",
+									base: "#eff1f5",
+									mantle: "#e6e9ef",
+									crust: "#dce0e8",
+								},
+								mocha: {
+									rosewater: "#f5e0dc",
+									flamingo: "#f2cdcd",
+									pink: "#f5c2e7",
+									mauve: "#cba6f7",
+									red: "#f38ba8",
+									maroon: "#eba0ac",
+									peach: "#fab387",
+									yellow: "#f9e2af",
+									green: "#a6e3a1",
+									teal: "#94e2d5",
+									sky: "#89dceb",
+									sapphire: "#74c7ec",
+									blue: "#89b4fa",
+									lavender: "#b4befe",
+									text: "#cdd6f4",
+									subtext1: "#bac2de",
+									subtext0: "#a6adc8",
+									overlay2: "#9399b2",
+									overlay1: "#7f849c",
+									overlay0: "#6c7086",
+									surface2: "#585b70",
+									surface1: "#45475a",
+									surface0: "#313244",
+									base: "#1e1e2e",
+									mantle: "#181825",
+									crust: "#11111b",
+								},
+							},
+						},
+					},
+				},
+			};
+		</script>
+		<script data-cfasync="false">
+			// Apply theme before body renders to prevent flicker
+			// Must run before Tailwind processes the page
+			(function () {
+				const savedTheme = localStorage.getItem("theme") || "system";
+				if (savedTheme === "dark") {
+					document.documentElement.classList.add("dark");
+				} else if (savedTheme === "system") {
+					const systemTheme = window.matchMedia(
+						"(prefers-color-scheme: dark)",
+					).matches
+						? "dark"
+						: "light";
+					if (systemTheme === "dark") {
+						document.documentElement.classList.add("dark");
+					}
+				}
+			})();
+		</script>
+		<style>
+			/* Prevent flash of unstyled content */
+			html {
+				background-color: #eff1f5;
+				color: #4c4f69;
+			}
+
+			html.dark {
+				background-color: #1e1e2e;
+				color: #cdd6f4;
+			}
+
+			body {
+				min-height: 100vh;
+				background-color: inherit;
+			}
+
+			/* Catppuccin frosted glass tiles */
+			.glass-tile {
+				background: rgba(230, 233, 239, 0.7) !important;
+				backdrop-filter: blur(20px) saturate(180%);
+				-webkit-backdrop-filter: blur(20px) saturate(180%);
+				border: 1px solid rgba(204, 208, 218, 0.5) !important;
+				border-radius: 8px !important;
+				box-shadow:
+					0 4px 6px -1px rgba(0, 0, 0, 0.1),
+					0 2px 4px -1px rgba(0, 0, 0, 0.06),
+					inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+			}
+
+			.dark .glass-tile {
+				background: rgba(49, 50, 68, 0.7) !important;
+				backdrop-filter: blur(20px) saturate(180%);
+				-webkit-backdrop-filter: blur(20px) saturate(180%);
+				border: 1px solid rgba(69, 71, 90, 0.5) !important;
+				box-shadow:
+					0 4px 6px -1px rgba(0, 0, 0, 0.3),
+					0 2px 4px -1px rgba(0, 0, 0, 0.2),
+					inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+			}
+
+			.font-mono {
+				font-family:
+					"JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono",
+					Menlo, Consolas, "Liberation Mono", monospace;
+			}
+
+			@media print {
+				.no-print {
+					display: none !important;
+				}
+				body {
+					background: white !important;
+				}
+				.glass-tile {
+					background: white !important;
+					backdrop-filter: none !important;
+					-webkit-backdrop-filter: none !important;
+				}
+			}
+		</style>
+	</head>
+	<body
+		class="text-catppuccin-latte-text dark:text-catppuccin-mocha-text bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base"
+	>
+		<!-- Theme Toggle Button -->
+		<div
+			class="no-print fixed z-50"
+			style="
+				top: max(1rem, env(safe-area-inset-top));
+				right: max(1rem, calc(50vw - 32rem - 4rem));
+			"
+		>
+			<button
+				id="theme-toggle"
+				class="p-2 rounded-lg bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 hover:border-catppuccin-latte-blue dark:hover:border-catppuccin-mocha-blue transition-colors"
+				title="Theme"
+			>
+				<svg
+					id="theme-toggle-dark-icon"
+					class="hidden w-5 h-5"
+					fill="currentColor"
+					viewBox="0 0 20 20"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+					></path>
+				</svg>
+				<svg
+					id="theme-toggle-light-icon"
+					class="hidden w-5 h-5"
+					fill="currentColor"
+					viewBox="0 0 20 20"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+						fill-rule="evenodd"
+						clip-rule="evenodd"
+					></path>
+				</svg>
+				<svg
+					id="theme-toggle-system-icon"
+					class="hidden w-5 h-5"
+					fill="currentColor"
+					viewBox="0 0 20 20"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z"
+						clip-rule="evenodd"
+					></path>
+				</svg>
+			</button>
+		</div>
+
+		<div class="max-w-5xl mx-auto px-4 py-8 md:py-12">
+			<!-- Header / Basics Section -->
+			{{#if basics}}
+			<header class="mb-8 md:mb-12">
+				<div class="flex flex-row items-center gap-4 md:gap-6 mb-4">
+					{{#if basics.image}}
+					<img
+						src="{{basics.image}}"
+						alt="{{basics.name}}"
+						class="w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 flex-shrink-0"
+					/>
+					{{/if}}
+					<div class="flex-1 min-w-0">
+						<h1 class="text-4xl font-bold mb-2">{{basics.name}}</h1>
+						{{#if basics.label}}
+						<p
+							class="text-xl text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+						>
+							{{basics.label}}
+						</p>
+						{{/if}}
+					</div>
+				</div>
+				{{#if basics.summary}}
+				<p
+					class="text-base text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 leading-relaxed mb-6"
+				>
+					{{basics.summary}}
+				</p>
+				{{/if}}
+
+				<!-- Contact Information -->
+				<div class="flex flex-wrap gap-3 md:gap-4 text-sm">
+					{{#if basics.email}}
+					<a
+						href="mailto:{{basics.email}}"
+						class="flex items-center gap-2 text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
+					>
+						<svg
+							class="w-4 h-4"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+						>
+							<path
+								d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+							></path>
+							<path
+								d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+							></path>
+						</svg>
+						{{basics.email}}
+					</a>
+					{{/if}} {{#if basics.phone}}
+					<a
+						href="tel:{{basics.phone}}"
+						class="flex items-center gap-2 text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
+					>
+						<svg
+							class="w-4 h-4"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+						>
+							<path
+								d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
+							></path>
+						</svg>
+						{{basics.phone}}
+					</a>
+					{{/if}} {{#if (or basics.url basics.website)}}
+					<a
+						href="{{#if basics.url}}{{basics.url}}{{else}}{{basics.website}}{{/if}}"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="flex items-center gap-2 text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
+					>
+						<svg
+							class="w-4 h-4"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"
+								clip-rule="evenodd"
+							></path>
+						</svg>
+						{{#if
+						basics.url}}{{basics.url}}{{else}}{{basics.website}}{{/if}}
+					</a>
+					{{/if}} {{#if basics.location}}
+					<span
+						class="flex items-center gap-2 text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+					>
+						<svg
+							class="w-4 h-4"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+								clip-rule="evenodd"
+							></path>
+						</svg>
+						{{#if
+						basics.location.city}}{{basics.location.city}}{{#if
+						basics.location.region}}, {{/if}}{{/if}}{{#if
+						basics.location.region}}{{basics.location.region}}{{/if}}{{#if
+						basics.location.countryCode}}
+						{{basics.location.countryCode}}{{/if}}
+					</span>
+					{{/if}}
+				</div>
+
+				<!-- Profiles -->
+				{{#if basics.profiles}}
+				<div class="flex flex-wrap gap-3 mt-4">
+					{{#each basics.profiles}}
+					<a
+						href="{{url}}"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-md hover:border-catppuccin-latte-blue dark:hover:border-catppuccin-mocha-blue transition-colors"
+						title="{{network}}{{#if username}}: {{username}}{{/if}}"
+					>
+						<!-- GitHub Icon -->
+						{{#if (eq network "GitHub")}}
+						<svg
+							class="w-4 h-4"
+							fill="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+							/>
+						</svg>
+						{{/if}}
+						<!-- LinkedIn Icon -->
+						{{#if (eq network "LinkedIn")}}
+						<svg
+							class="w-4 h-4"
+							fill="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+							/>
+						</svg>
+						{{/if}}
+						<!-- Twitter/X Icon -->
+						{{#if (eq network "Twitter")}}
+						<svg
+							class="w-4 h-4"
+							fill="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+							/>
+						</svg>
+						{{/if}} {{#if (eq network "X")}}
+						<svg
+							class="w-4 h-4"
+							fill="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+							/>
+						</svg>
+						{{/if}}
+						<!-- Instagram Icon -->
+						{{#if (eq network "Instagram")}}
+						<svg
+							class="w-4 h-4"
+							fill="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+							/>
+						</svg>
+						{{/if}}
+						<!-- Facebook Icon -->
+						{{#if (eq network "Facebook")}}
+						<svg
+							class="w-4 h-4"
+							fill="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+							/>
+						</svg>
+						{{/if}}
+						<!-- YouTube Icon -->
+						{{#if (eq network "YouTube")}}
+						<svg
+							class="w-4 h-4"
+							fill="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+							/>
+						</svg>
+						{{/if}}
+						<!-- Default Icon for other networks -->
+						{{#unless (or (eq network "GitHub") (eq network
+						"LinkedIn") (eq network "Twitter") (eq network "X") (eq
+						network "Instagram") (eq network "Facebook") (eq network
+						"YouTube"))}}
+						<svg
+							class="w-4 h-4"
+							fill="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+							/>
+						</svg>
+						{{/unless}}
+						<span>{{network}}</span>
+					</a>
+					{{/each}}
+				</div>
+				{{/if}}
+			</header>
+			{{/if}}
+
+			<!-- Skills -->
+			{{#if skills}}
+			<section class="mb-8">
+				<h2
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+				>
+					Skills
+				</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+					{{#each skills}}
+					<div
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
+					>
+						<h3 class="font-semibold mb-2">{{name}}</h3>
+						{{#if keywords}}
+						<div class="flex flex-wrap gap-2">
+							{{#each keywords}}
+							<span
+								class="px-2 py-1 text-sm bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded font-mono"
+								>{{this}}</span
+							>
+							{{/each}}
+						</div>
+						{{/if}}
+					</div>
+					{{/each}}
+				</div>
+			</section>
+			{{/if}}
+
+			<!-- Work Experience -->
+			{{#if work}}
+			<section class="mb-8">
+				<h2
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+				>
+					Work Experience
+				</h2>
+				<div class="space-y-6">
+					{{#each work}}
+					<div
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4 md:p-6"
+					>
+						<div
+							class="flex flex-col md:flex-row md:justify-between md:items-start mb-3"
+						>
+							<div>
+								<h3 class="text-xl font-semibold">
+									{{position}}
+								</h3>
+								<p
+									class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+								>
+									{{#if url}}<a
+										href="{{url}}"
+										target="_blank"
+										rel="noopener noreferrer"
+										class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
+										>{{name}}</a
+									>{{else}}{{name}}{{/if}} {{#if location}}
+									<span
+										class="inline-flex items-center gap-1 ml-2"
+									>
+										<svg
+											class="w-3 h-3"
+											fill="currentColor"
+											viewBox="0 0 20 20"
+										>
+											<path
+												fill-rule="evenodd"
+												d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+												clip-rule="evenodd"
+											></path>
+										</svg>
+										{{location}}
+									</span>
+									{{/if}}
+								</p>
+							</div>
+							<div
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0 md:text-right"
+							>
+								{{#if startDate}}{{formatDate
+								startDate}}{{/if}}{{#if endDate}} → {{formatDate
+								endDate}}{{else}}{{#if startDate}} →
+								Present{{/if}}{{/if}}
+							</div>
+						</div>
+						{{#if summary}}
+						<p
+							class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mb-3"
+						>
+							{{summary}}
+						</p>
+						{{/if}} {{#if highlights}}
+						<ul
+							class="list-disc list-outside pl-5 space-y-1 text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+						>
+							{{#each highlights}}
+							<li>{{this}}</li>
+							{{/each}}
+						</ul>
+						{{/if}}
+					</div>
+					{{/each}}
+				</div>
+			</section>
+			{{/if}}
+
+			<!-- Education -->
+			{{#if education}}
+			<section class="mb-8">
+				<h2
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+				>
+					Education
+				</h2>
+				<div class="space-y-4">
+					{{#each education}}
+					<div
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4 md:p-6"
+					>
+						<div
+							class="flex flex-col md:flex-row md:justify-between md:items-start"
+						>
+							<div>
+								<h3 class="text-xl font-semibold">
+									{{studyType}}{{#if area}} in {{area}}{{/if}}
+								</h3>
+								<p
+									class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+								>
+									{{#if url}}<a
+										href="{{url}}"
+										target="_blank"
+										rel="noopener noreferrer"
+										class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
+										>{{institution}}</a
+									>{{else}}{{institution}}{{/if}}
+								</p>
+								{{#if (or gpa score)}}
+								<p
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1"
+								>
+									GPA: {{#if
+									gpa}}{{gpa}}{{else}}{{score}}{{/if}}
+								</p>
+								{{/if}}
+							</div>
+							<div
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
+							>
+								{{#if startDate}}{{formatDate
+								startDate}}{{/if}}{{#if endDate}} → {{formatDate
+								endDate}}{{/if}}
+							</div>
+						</div>
+						{{#if courses}}
+						<div class="mt-3">
+							<p class="text-sm font-medium mb-2">
+								Relevant Courses:
+							</p>
+							<div class="flex flex-wrap gap-2">
+								{{#each courses}}
+								<span
+									class="px-2 py-1 text-xs bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded"
+									>{{this}}</span
+								>
+								{{/each}}
+							</div>
+						</div>
+						{{/if}}
+					</div>
+					{{/each}}
+				</div>
+			</section>
+			{{/if}}
+
+			<!-- Projects -->
+			{{#if projects}}
+			<section class="mb-8">
+				<h2
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+				>
+					Projects
+				</h2>
+				<div class="space-y-4">
+					{{#each projects}}
+					<div
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4 md:p-6"
+					>
+						<div
+							class="flex flex-col md:flex-row md:justify-between md:items-start mb-2"
+						>
+							<div>
+								<h3 class="text-xl font-semibold">
+									{{#if url}}<a
+										href="{{url}}"
+										target="_blank"
+										rel="noopener noreferrer"
+										class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
+										>{{name}}</a
+									>{{else}}{{name}}{{/if}}
+								</h3>
+								{{#if type}}
+								<p
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+								>
+									{{type}}
+								</p>
+								{{/if}}
+							</div>
+							{{#if startDate}}
+							<div
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
+							>
+								{{formatDate startDate}}{{#if endDate}} →
+								{{formatDate endDate}}{{/if}}
+							</div>
+							{{/if}}
+						</div>
+						{{#if description}}
+						<p
+							class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mb-2"
+						>
+							{{description}}
+						</p>
+						{{/if}} {{#if highlights}}
+						<ul
+							class="list-disc list-outside pl-5 space-y-1 text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mb-2"
+						>
+							{{#each highlights}}
+							<li>{{this}}</li>
+							{{/each}}
+						</ul>
+						{{/if}} {{#if keywords}}
+						<div class="flex flex-wrap gap-2 mt-3">
+							{{#each keywords}}
+							<span
+								class="px-2 py-1 text-xs bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded"
+								>{{this}}</span
+							>
+							{{/each}}
+						</div>
+						{{/if}}
+					</div>
+					{{/each}}
+				</div>
+			</section>
+			{{/if}}
+
+			<!-- Awards -->
+			{{#if awards}}
+			<section class="mb-8">
+				<h2
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+				>
+					Awards & Honors
+				</h2>
+				<div class="space-y-3">
+					{{#each awards}}
+					<div
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
+					>
+						<div
+							class="flex flex-col md:flex-row md:justify-between md:items-start"
+						>
+							<div>
+								<h3 class="font-semibold">{{title}}</h3>
+								{{#if awarder}}
+								<p
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+								>
+									{{awarder}}
+								</p>
+								{{/if}} {{#if summary}}
+								<p
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1"
+								>
+									{{summary}}
+								</p>
+								{{/if}}
+							</div>
+							{{#if date}}
+							<div
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
+							>
+								{{formatDate date}}
+							</div>
+							{{/if}}
+						</div>
+					</div>
+					{{/each}}
+				</div>
+			</section>
+			{{/if}}
+
+			<!-- Certificates -->
+			{{#if certificates}}
+			<section class="mb-8">
+				<h2
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+				>
+					Certificates
+				</h2>
+				<div class="space-y-3">
+					{{#each certificates}}
+					<div
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
+					>
+						<div
+							class="flex flex-col md:flex-row md:justify-between md:items-start"
+						>
+							<div>
+								<h3 class="font-semibold">
+									{{#if url}}<a
+										href="{{url}}"
+										target="_blank"
+										rel="noopener noreferrer"
+										class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
+										>{{name}}</a
+									>{{else}}{{name}}{{/if}}
+								</h3>
+								{{#if issuer}}
+								<p
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+								>
+									{{issuer}}
+								</p>
+								{{/if}}
+							</div>
+							{{#if date}}
+							<div
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
+							>
+								{{formatDate date}}
+							</div>
+							{{/if}}
+						</div>
+					</div>
+					{{/each}}
+				</div>
+			</section>
+			{{/if}}
+
+			<!-- Publications -->
+			{{#if publications}}
+			<section class="mb-8">
+				<h2
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+				>
+					Publications
+				</h2>
+				<div class="space-y-4">
+					{{#each publications}}
+					<div
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
+					>
+						<div
+							class="flex flex-col md:flex-row md:justify-between md:items-start"
+						>
+							<div>
+								<h3 class="font-semibold">
+									{{#if url}}<a
+										href="{{url}}"
+										target="_blank"
+										rel="noopener noreferrer"
+										class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
+										>{{name}}</a
+									>{{else}}{{name}}{{/if}}
+								</h3>
+								{{#if publisher}}
+								<p
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+								>
+									{{publisher}}
+								</p>
+								{{/if}} {{#if summary}}
+								<p
+									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-2"
+								>
+									{{summary}}
+								</p>
+								{{/if}}
+							</div>
+							{{#if releaseDate}}
+							<div
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
+							>
+								{{formatDate releaseDate}}
+							</div>
+							{{/if}}
+						</div>
+					</div>
+					{{/each}}
+				</div>
+			</section>
+			{{/if}}
+
+			<!-- Volunteer -->
+			{{#if volunteer}}
+			<section class="mb-8">
+				<h2
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+				>
+					Volunteer Experience
+				</h2>
+				<div class="space-y-4">
+					{{#each volunteer}}
+					<div
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4 md:p-6"
+					>
+						<div
+							class="flex flex-col md:flex-row md:justify-between md:items-start mb-2"
+						>
+							<div>
+								<h3 class="text-xl font-semibold">
+									{{position}}
+								</h3>
+								<p
+									class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+								>
+									{{#if url}}<a
+										href="{{url}}"
+										target="_blank"
+										rel="noopener noreferrer"
+										class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
+										>{{organization}}</a
+									>{{else}}{{organization}}{{/if}}
+								</p>
+							</div>
+							<div
+								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
+							>
+								{{#if startDate}}{{formatDate
+								startDate}}{{/if}}{{#if endDate}} → {{formatDate
+								endDate}}{{/if}}
+							</div>
+						</div>
+						{{#if summary}}
+						<p
+							class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mb-2"
+						>
+							{{summary}}
+						</p>
+						{{/if}} {{#if highlights}}
+						<ul
+							class="list-disc list-outside pl-5 space-y-1 text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+						>
+							{{#each highlights}}
+							<li>{{this}}</li>
+							{{/each}}
+						</ul>
+						{{/if}}
+					</div>
+					{{/each}}
+				</div>
+			</section>
+			{{/if}}
+
+			<!-- Languages -->
+			{{#if languages}}
+			<section class="mb-8">
+				<h2
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+				>
+					Languages
+				</h2>
+				<div class="flex flex-wrap gap-3">
+					{{#each languages}}
+					<div
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg px-4 py-2"
+					>
+						<span class="font-medium">{{language}}</span>
+						{{#if fluency}}<span
+							class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+						>
+							- {{fluency}}</span
+						>{{/if}}
+					</div>
+					{{/each}}
+				</div>
+			</section>
+			{{/if}}
+
+			<!-- Interests -->
+			{{#if interests}}
+			<section class="mb-8">
+				<h2
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+				>
+					Interests
+				</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+					{{#each interests}}
+					<div
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
+					>
+						<h3 class="font-semibold mb-2">{{name}}</h3>
+						{{#if keywords}}
+						<div class="flex flex-wrap gap-2">
+							{{#each keywords}}
+							<span
+								class="px-2 py-1 text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+								>{{this}}</span
+							>
+							{{/each}}
+						</div>
+						{{/if}}
+					</div>
+					{{/each}}
+				</div>
+			</section>
+			{{/if}}
+
+			<!-- References -->
+			{{#if references}}
+			<section class="mb-8">
+				<h2
+					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+				>
+					References
+				</h2>
+				<div class="space-y-3">
+					{{#each references}}
+					<div
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
+					>
+						<h3 class="font-semibold">{{name}}</h3>
+						{{#if reference}}
+						<p
+							class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 italic"
+						>
+							"{{reference}}"
+						</p>
+						{{/if}}
+					</div>
+					{{/each}}
+				</div>
+			</section>
+			{{/if}}
+		</div>
+
+		<script>
+			// Theme toggle functionality
+			const themeToggleBtn = document.getElementById("theme-toggle");
+			const themeToggleDarkIcon = document.getElementById(
+				"theme-toggle-dark-icon",
+			);
+			const themeToggleLightIcon = document.getElementById(
+				"theme-toggle-light-icon",
+			);
+			const themeToggleSystemIcon = document.getElementById(
+				"theme-toggle-system-icon",
+			);
+
+			function updateIcon(theme) {
+				themeToggleDarkIcon.classList.add("hidden");
+				themeToggleLightIcon.classList.add("hidden");
+				themeToggleSystemIcon.classList.add("hidden");
+
+				if (theme === "dark") {
+					themeToggleDarkIcon.classList.remove("hidden");
+				} else if (theme === "light") {
+					themeToggleLightIcon.classList.remove("hidden");
+				} else {
+					themeToggleSystemIcon.classList.remove("hidden");
+				}
+			}
+
+			function applyTheme(theme) {
+				if (theme === "system") {
+					const systemTheme = window.matchMedia(
+						"(prefers-color-scheme: dark)",
+					).matches
+						? "dark"
+						: "light";
+					document.documentElement.classList.toggle(
+						"dark",
+						systemTheme === "dark",
+					);
+				} else {
+					document.documentElement.classList.toggle(
+						"dark",
+						theme === "dark",
+					);
+				}
+				updateIcon(theme);
+			}
+
+			// Check for saved theme preference or default to system
+			const savedTheme = localStorage.getItem("theme") || "system";
+			applyTheme(savedTheme);
+
+			// Toggle theme on button click (cycles through light -> dark -> system)
+			themeToggleBtn.addEventListener("click", function () {
+				const currentTheme = localStorage.getItem("theme") || "system";
+				let newTheme;
+
+				if (currentTheme === "light") {
+					newTheme = "dark";
+				} else if (currentTheme === "dark") {
+					newTheme = "system";
+				} else {
+					newTheme = "light";
+				}
+
+				localStorage.setItem("theme", newTheme);
+				applyTheme(newTheme);
+			});
+
+			// Listen for system theme changes
+			window
+				.matchMedia("(prefers-color-scheme: dark)")
+				.addEventListener("change", (e) => {
+					const savedTheme =
+						localStorage.getItem("theme") || "system";
+					if (savedTheme === "system") {
+						applyTheme("system");
+					}
+				});
+		</script>
+	</body>
+</html>

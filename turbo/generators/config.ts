@@ -15,6 +15,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI) {
 		prompts: [prompts.name, prompts.description],
 		actions: [
 			actions.addTemplate({ type: "env" }),
+			actions.addCommonFile("README.md"),
 			actions.addCommonFile("tsconfig.json"),
 		],
 	});

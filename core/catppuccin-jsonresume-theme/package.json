@@ -40,8 +40,13 @@
 		"dev": "pnpm run --parallel \"/^dev:.*/\"",
 		"dev:js": "tsdown --watch",
 		"dev:tw": "pnpm run build:tw --watch",
+		"generate": "curl $npm_package_config_input | json2ts > $npm_package_config_output",
 		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
 		"lint:fix": "eslint ./ --fix"
+	},
+	"config": {
+		"input": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+		"output": "./src/types.d.ts"
 	},
 	"dependencies": {
 		"@tailwindcss/cli": "catalog:",
@@ -52,6 +57,7 @@
 	"devDependencies": {
 		"@catppuccin/tailwindcss": "catalog:",
 		"@types/handlebars-helpers": "catalog:",
+		"json-schema-to-typescript": "catalog:",
 		"tailwind-scrollbar": "catalog:",
 		"tsdown": "catalog:"
 	},

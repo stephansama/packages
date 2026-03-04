@@ -7,11 +7,13 @@ autoInstallPeers: true
 
 catalog:
   '@catppuccin/palette': 1.7.1
+  '@catppuccin/tailwindcss': ^1.0.0
   '@dotenvx/dotenvx': ^1.52.0
   '@iconify/types': ^2.0.0
   '@iconify/utils': ^2.3.0
   '@manypkg/find-root': ^3.1.0
   '@manypkg/get-packages': ^3.1.0
+  '@tailwindcss/cli': ^4.2.1
   '@testing-library/jest-dom': ^6.9.1
   '@testing-library/react': ^16.3.2
   '@types/debug': ^4.1.12
@@ -32,8 +34,11 @@ catalog:
   minify: 14.0.0
   node-plop: ^0.32.3
   prettier: ^3.8.1
+  prettier-plugin-tailwindcss: ^0.7.2
   react: 19.2.0
   remark: ^15.0.1
+  tailwind-scrollbar: ^4.0.2
+  tailwindcss: ^4.1.18
   tsdown: 0.15.12
   tsx: 4.21.0
   typescript: 5.9.3

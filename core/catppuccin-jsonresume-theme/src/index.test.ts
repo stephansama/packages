@@ -1,5 +1,4 @@
 import { describe, expect, it, vi } from "vitest";
-import * as fs from "node:fs";
 
 import { render } from "./index";
 
@@ -8,7 +7,10 @@ vi.mock("node:fs", async (importOriginal) => {
 	return {
 		...actual,
 		readFileSync: vi.fn((path, options) => {
-			if (typeof path === "string" && path.includes("dist-css/site.css")) {
+			if (
+				typeof path === "string" &&
+				path.includes("dist-css/site.css")
+			) {
 				return "/* mock css */";
 			}
 			return actual.readFileSync(path, options);

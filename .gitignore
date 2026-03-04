@@ -19,8 +19,7 @@ core/auto-readme/config
 core/example/scripts/examples.json
 core/multipublish/config
 core/types-lhci/config
-dist
-dist-js
+dist*/
 examples/catppuccin-xsl/vanilla/public/**/*
 node_modules
 storybook-static

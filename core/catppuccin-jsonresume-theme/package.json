@@ -30,20 +30,29 @@
 	"types": "./dist/index.d.cts",
 	"files": [
 		"dist",
+		"dist-css",
 		"template"
 	],
 	"scripts": {
-		"build": "tsdown",
-		"dev": "tsdown --watch",
+		"build": "pnpm run --sequential \"/^build:.*/\"",
+		"build:js": "tsdown",
+		"build:tw": "tailwindcss -i ./template/site.css -o ./dist-css/site.css",
+		"dev": "pnpm run --parallel \"/^dev:.*/\"",
+		"dev:js": "tsdown --watch",
+		"dev:tw": "pnpm run build:tw --watch",
 		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
 		"lint:fix": "eslint ./ --fix"
 	},
 	"dependencies": {
+		"@tailwindcss/cli": "catalog:",
 		"handlebars": "catalog:",
-		"handlebars-helpers": "catalog:"
+		"handlebars-helpers": "catalog:",
+		"tailwindcss": "catalog:"
 	},
 	"devDependencies": {
+		"@catppuccin/tailwindcss": "catalog:",
 		"@types/handlebars-helpers": "catalog:",
+		"tailwind-scrollbar": "catalog:",
 		"tsdown": "catalog:"
 	},
 	"publishConfig": {

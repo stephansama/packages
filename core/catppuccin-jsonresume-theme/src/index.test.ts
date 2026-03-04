@@ -1,6 +1,22 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { render } from "./index";
+
+vi.mock("node:fs", async (importOriginal) => {
+	const actual = await importOriginal<typeof import("node:fs")>();
+	return {
+		...actual,
+		readFileSync: vi.fn((path, options) => {
+			if (
+				typeof path === "string" &&
+				path.includes("dist-css/site.css")
+			) {
+				return "/* mock css */";
+			}
+			return actual.readFileSync(path, options);
+		}),
+	};
+});
 
 describe("render", () => {
 	it("should render a resume", () => {
@@ -45,7 +61,6 @@ describe("render", () => {
 			],
 		};
 
-		// @ts-expect-error - render expects a string in its type definition but it actually takes an object
 		const output = render(resume);
 
 		expect(output).toContain("John Doe");
@@ -61,7 +76,6 @@ describe("render", () => {
 			},
 		};
 
-		// @ts-expect-error
 		const output = render(resume);
 
 		expect(output).toContain("John Doe");
@@ -76,7 +90,6 @@ describe("render", () => {
 				},
 			],
 		};
-		// @ts-expect-error
 		const output = render(resume);
 		expect(output).toContain("2020");
 	});

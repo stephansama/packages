@@ -29,6 +29,7 @@ catalog:
   handlebars: 4.7.8
   handlebars-helpers: ^0.10.0
   happy-dom: ^20.6.1
+  json-schema-to-typescript: ^15.0.4
   jsr: ^0.13.5
   mdast: ^3.0.0
   minify: 14.0.0

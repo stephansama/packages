@@ -20,12 +20,10 @@ theme for [resume cli](https://github.com/jsonresume/resume-cli) website
 ## Installation
 
 ```sh
-pnpm install @stephansama/catppuccin-jsonresume-theme
+pnpm install jsonresume-theme-catppuccin@npm:@stephansama/catppuccin-jsonresume-theme@latest
 ```
 
 ## Usage
-
-You must actually install the [wrapper library](https://github.com/stephansama/jsonresume-theme-catppuccin) in order to use this theme.
 
 ```sh
 resume dev --theme catppuccin

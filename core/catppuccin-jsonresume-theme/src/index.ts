@@ -4,13 +4,11 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import * as url from "node:url";
 
-export function render(resume: string) {
+export function render(resume: {
+	basic: {};
+	// add resume type
+}) {
 	helpers({ handlebars: Handlebars });
-
-	Handlebars.registerHelper("year", function (dateString) {
-		if (!dateString) return "";
-		return dateString.substring(0, 4);
-	});
 
 	Handlebars.registerHelper("formatDate", function (dateString) {
 		if (!dateString) return "";
@@ -18,8 +16,10 @@ export function render(resume: string) {
 	});
 
 	const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-	const templatePath = path.join(__dirname, "../template/site.html.hbs");
-	const template = fs.readFileSync(templatePath, "utf8");
-	const compiledTemplate = Handlebars.compile(template);
-	return compiledTemplate(resume);
+	const templateHtmlPath = path.join(__dirname, "../template/site.html.hbs");
+	const templateCssPath = path.join(__dirname, "../dist-css/site.css");
+	const templateHtml = fs.readFileSync(templateHtmlPath, "utf8");
+	const templateCss = fs.readFileSync(templateCssPath, "utf8");
+	const compiledTemplate = Handlebars.compile(templateHtml);
+	return compiledTemplate({ ...resume, style: templateCss });
 }

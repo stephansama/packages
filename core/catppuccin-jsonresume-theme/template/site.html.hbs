@@ -15,79 +15,10 @@
 			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
 			rel="stylesheet"
 		/>
-		<script src="https://cdn.tailwindcss.com" data-cfasync="false"></script>
+		<style>
+			{{style}}
+		</style>
 		<script data-cfasync="false">
-			tailwind.config = {
-				darkMode: "class",
-				theme: {
-					extend: {
-						colors: {
-							catppuccin: {
-								latte: {
-									rosewater: "#dc8a78",
-									flamingo: "#dd7878",
-									pink: "#ea76cb",
-									mauve: "#8839ef",
-									red: "#d20f39",
-									maroon: "#e64553",
-									peach: "#fe640b",
-									yellow: "#df8e1d",
-									green: "#40a02b",
-									teal: "#179287",
-									sky: "#04a5e5",
-									sapphire: "#209fb5",
-									blue: "#1e66f5",
-									lavender: "#7287fd",
-									text: "#4c4f69",
-									subtext1: "#5c5f77",
-									subtext0: "#6c6f85",
-									overlay2: "#7c7f93",
-									overlay1: "#8c8fa1",
-									overlay0: "#9ca0b0",
-									surface2: "#acb0be",
-									surface1: "#bcc0cc",
-									surface0: "#ccd0da",
-									base: "#eff1f5",
-									mantle: "#e6e9ef",
-									crust: "#dce0e8",
-								},
-								mocha: {
-									rosewater: "#f5e0dc",
-									flamingo: "#f2cdcd",
-									pink: "#f5c2e7",
-									mauve: "#cba6f7",
-									red: "#f38ba8",
-									maroon: "#eba0ac",
-									peach: "#fab387",
-									yellow: "#f9e2af",
-									green: "#a6e3a1",
-									teal: "#94e2d5",
-									sky: "#89dceb",
-									sapphire: "#74c7ec",
-									blue: "#89b4fa",
-									lavender: "#b4befe",
-									text: "#cdd6f4",
-									subtext1: "#bac2de",
-									subtext0: "#a6adc8",
-									overlay2: "#9399b2",
-									overlay1: "#7f849c",
-									overlay0: "#6c7086",
-									surface2: "#585b70",
-									surface1: "#45475a",
-									surface0: "#313244",
-									base: "#1e1e2e",
-									mantle: "#181825",
-									crust: "#11111b",
-								},
-							},
-						},
-					},
-				},
-			};
-		</script>
-		<script data-cfasync="false">
-			// Apply theme before body renders to prevent flicker
-			// Must run before Tailwind processes the page
 			(function () {
 				const savedTheme = localStorage.getItem("theme") || "system";
 				if (savedTheme === "dark") {
@@ -104,67 +35,6 @@
 				}
 			})();
 		</script>
-		<style>
-			/* Prevent flash of unstyled content */
-			html {
-				background-color: #eff1f5;
-				color: #4c4f69;
-			}
-
-			html.dark {
-				background-color: #1e1e2e;
-				color: #cdd6f4;
-			}
-
-			body {
-				min-height: 100vh;
-				background-color: inherit;
-			}
-
-			/* Catppuccin frosted glass tiles */
-			.glass-tile {
-				background: rgba(230, 233, 239, 0.7) !important;
-				backdrop-filter: blur(20px) saturate(180%);
-				-webkit-backdrop-filter: blur(20px) saturate(180%);
-				border: 1px solid rgba(204, 208, 218, 0.5) !important;
-				border-radius: 8px !important;
-				box-shadow:
-					0 4px 6px -1px rgba(0, 0, 0, 0.1),
-					0 2px 4px -1px rgba(0, 0, 0, 0.06),
-					inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
-			}
-
-			.dark .glass-tile {
-				background: rgba(49, 50, 68, 0.7) !important;
-				backdrop-filter: blur(20px) saturate(180%);
-				-webkit-backdrop-filter: blur(20px) saturate(180%);
-				border: 1px solid rgba(69, 71, 90, 0.5) !important;
-				box-shadow:
-					0 4px 6px -1px rgba(0, 0, 0, 0.3),
-					0 2px 4px -1px rgba(0, 0, 0, 0.2),
-					inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
-			}
-
-			.font-mono {
-				font-family:
-					"JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono",
-					Menlo, Consolas, "Liberation Mono", monospace;
-			}
-
-			@media print {
-				.no-print {
-					display: none !important;
-				}
-				body {
-					background: white !important;
-				}
-				.glass-tile {
-					background: white !important;
-					backdrop-filter: none !important;
-					-webkit-backdrop-filter: none !important;
-				}
-			}
-		</style>
 	</head>
 	<body
 		class="text-catppuccin-latte-text dark:text-catppuccin-mocha-text bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base"
@@ -179,12 +49,12 @@
 		>
 			<button
 				id="theme-toggle"
-				class="p-2 rounded-lg bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 hover:border-catppuccin-latte-blue dark:hover:border-catppuccin-mocha-blue transition-colors"
+				class="bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 hover:border-catppuccin-latte-blue dark:hover:border-catppuccin-mocha-blue rounded-lg border p-2 transition-colors"
 				title="Theme"
 			>
 				<svg
 					id="theme-toggle-dark-icon"
-					class="hidden w-5 h-5"
+					class="hidden h-5 w-5"
 					fill="currentColor"
 					viewBox="0 0 20 20"
 					xmlns="http://www.w3.org/2000/svg"
@@ -195,7 +65,7 @@
 				</svg>
 				<svg
 					id="theme-toggle-light-icon"
-					class="hidden w-5 h-5"
+					class="hidden h-5 w-5"
 					fill="currentColor"
 					viewBox="0 0 20 20"
 					xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +78,7 @@
 				</svg>
 				<svg
 					id="theme-toggle-system-icon"
-					class="hidden w-5 h-5"
+					class="hidden h-5 w-5"
 					fill="currentColor"
 					viewBox="0 0 20 20"
 					xmlns="http://www.w3.org/2000/svg"
@@ -222,23 +92,23 @@
 			</button>
 		</div>
 
-		<div class="max-w-5xl mx-auto px-4 py-8 md:py-12">
+		<div class="mx-auto max-w-5xl px-4 py-8 md:py-12">
 			<!-- Header / Basics Section -->
 			{{#if basics}}
 			<header class="mb-8 md:mb-12">
-				<div class="flex flex-row items-center gap-4 md:gap-6 mb-4">
+				<div class="mb-4 flex flex-row items-center gap-4 md:gap-6">
 					{{#if basics.image}}
 					<img
 						src="{{basics.image}}"
 						alt="{{basics.name}}"
-						class="w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 flex-shrink-0"
+						class="border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 h-20 w-20 flex-shrink-0 rounded-full border-2 md:h-32 md:w-32"
 					/>
 					{{/if}}
-					<div class="flex-1 min-w-0">
-						<h1 class="text-4xl font-bold mb-2">{{basics.name}}</h1>
+					<div class="min-w-0 flex-1">
+						<h1 class="mb-2 text-4xl font-bold">{{basics.name}}</h1>
 						{{#if basics.label}}
 						<p
-							class="text-xl text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+							class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 text-xl"
 						>
 							{{basics.label}}
 						</p>
@@ -247,21 +117,21 @@
 				</div>
 				{{#if basics.summary}}
 				<p
-					class="text-base text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 leading-relaxed mb-6"
+					class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mb-6 text-base leading-relaxed"
 				>
 					{{basics.summary}}
 				</p>
 				{{/if}}
 
 				<!-- Contact Information -->
-				<div class="flex flex-wrap gap-3 md:gap-4 text-sm">
+				<div class="flex flex-wrap gap-3 text-sm md:gap-4">
 					{{#if basics.email}}
 					<a
 						href="mailto:{{basics.email}}"
-						class="flex items-center gap-2 text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
+						class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue flex items-center gap-2 hover:underline"
 					>
 						<svg
-							class="w-4 h-4"
+							class="h-4 w-4"
 							fill="currentColor"
 							viewBox="0 0 20 20"
 						>
@@ -277,10 +147,10 @@
 					{{/if}} {{#if basics.phone}}
 					<a
 						href="tel:{{basics.phone}}"
-						class="flex items-center gap-2 text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
+						class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue flex items-center gap-2 hover:underline"
 					>
 						<svg
-							class="w-4 h-4"
+							class="h-4 w-4"
 							fill="currentColor"
 							viewBox="0 0 20 20"
 						>
@@ -295,10 +165,10 @@
 						href="{{#if basics.url}}{{basics.url}}{{else}}{{basics.website}}{{/if}}"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex items-center gap-2 text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue hover:underline"
+						class="text-catppuccin-latte-blue dark:text-catppuccin-mocha-blue flex items-center gap-2 hover:underline"
 					>
 						<svg
-							class="w-4 h-4"
+							class="h-4 w-4"
 							fill="currentColor"
 							viewBox="0 0 20 20"
 						>
@@ -313,10 +183,10 @@
 					</a>
 					{{/if}} {{#if basics.location}}
 					<span
-						class="flex items-center gap-2 text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+						class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 flex items-center gap-2"
 					>
 						<svg
-							class="w-4 h-4"
+							class="h-4 w-4"
 							fill="currentColor"
 							viewBox="0 0 20 20"
 						>
@@ -338,19 +208,19 @@
 
 				<!-- Profiles -->
 				{{#if basics.profiles}}
-				<div class="flex flex-wrap gap-3 mt-4">
+				<div class="mt-4 flex flex-wrap gap-3">
 					{{#each basics.profiles}}
 					<a
 						href="{{url}}"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-md hover:border-catppuccin-latte-blue dark:hover:border-catppuccin-mocha-blue transition-colors"
+						class="bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 hover:border-catppuccin-latte-blue dark:hover:border-catppuccin-mocha-blue inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-sm transition-colors"
 						title="{{network}}{{#if username}}: {{username}}{{/if}}"
 					>
 						<!-- GitHub Icon -->
 						{{#if (eq network "GitHub")}}
 						<svg
-							class="w-4 h-4"
+							class="h-4 w-4"
 							fill="currentColor"
 							viewBox="0 0 24 24"
 						>
@@ -362,7 +232,7 @@
 						<!-- LinkedIn Icon -->
 						{{#if (eq network "LinkedIn")}}
 						<svg
-							class="w-4 h-4"
+							class="h-4 w-4"
 							fill="currentColor"
 							viewBox="0 0 24 24"
 						>
@@ -374,7 +244,7 @@
 						<!-- Twitter/X Icon -->
 						{{#if (eq network "Twitter")}}
 						<svg
-							class="w-4 h-4"
+							class="h-4 w-4"
 							fill="currentColor"
 							viewBox="0 0 24 24"
 						>
@@ -384,7 +254,7 @@
 						</svg>
 						{{/if}} {{#if (eq network "X")}}
 						<svg
-							class="w-4 h-4"
+							class="h-4 w-4"
 							fill="currentColor"
 							viewBox="0 0 24 24"
 						>
@@ -396,7 +266,7 @@
 						<!-- Instagram Icon -->
 						{{#if (eq network "Instagram")}}
 						<svg
-							class="w-4 h-4"
+							class="h-4 w-4"
 							fill="currentColor"
 							viewBox="0 0 24 24"
 						>
@@ -408,7 +278,7 @@
 						<!-- Facebook Icon -->
 						{{#if (eq network "Facebook")}}
 						<svg
-							class="w-4 h-4"
+							class="h-4 w-4"
 							fill="currentColor"
 							viewBox="0 0 24 24"
 						>
@@ -420,7 +290,7 @@
 						<!-- YouTube Icon -->
 						{{#if (eq network "YouTube")}}
 						<svg
-							class="w-4 h-4"
+							class="h-4 w-4"
 							fill="currentColor"
 							viewBox="0 0 24 24"
 						>
@@ -435,7 +305,7 @@
 						network "Instagram") (eq network "Facebook") (eq network
 						"YouTube"))}}
 						<svg
-							class="w-4 h-4"
+							class="h-4 w-4"
 							fill="currentColor"
 							viewBox="0 0 24 24"
 						>
@@ -456,21 +326,21 @@
 			{{#if skills}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+					class="border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 mb-4 border-b pb-2 text-2xl font-bold"
 				>
 					Skills
 				</h2>
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 					{{#each skills}}
 					<div
-						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg border p-4"
 					>
-						<h3 class="font-semibold mb-2">{{name}}</h3>
+						<h3 class="mb-2 font-semibold">{{name}}</h3>
 						{{#if keywords}}
 						<div class="flex flex-wrap gap-2">
 							{{#each keywords}}
 							<span
-								class="px-2 py-1 text-sm bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded font-mono"
+								class="bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded border px-2 py-1 font-mono text-sm"
 								>{{this}}</span
 							>
 							{{/each}}
@@ -486,17 +356,17 @@
 			{{#if work}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+					class="border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 mb-4 border-b pb-2 text-2xl font-bold"
 				>
 					Work Experience
 				</h2>
 				<div class="space-y-6">
 					{{#each work}}
 					<div
-						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4 md:p-6"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg border p-4 md:p-6"
 					>
 						<div
-							class="flex flex-col md:flex-row md:justify-between md:items-start mb-3"
+							class="mb-3 flex flex-col md:flex-row md:items-start md:justify-between"
 						>
 							<div>
 								<h3 class="text-xl font-semibold">
@@ -513,10 +383,10 @@
 										>{{name}}</a
 									>{{else}}{{name}}{{/if}} {{#if location}}
 									<span
-										class="inline-flex items-center gap-1 ml-2"
+										class="ml-2 inline-flex items-center gap-1"
 									>
 										<svg
-											class="w-3 h-3"
+											class="h-3 w-3"
 											fill="currentColor"
 											viewBox="0 0 20 20"
 										>
@@ -532,7 +402,7 @@
 								</p>
 							</div>
 							<div
-								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0 md:text-right"
+								class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 text-sm md:mt-0 md:text-right"
 							>
 								{{#if startDate}}{{formatDate
 								startDate}}{{/if}}{{#if endDate}} → {{formatDate
@@ -548,7 +418,7 @@
 						</p>
 						{{/if}} {{#if highlights}}
 						<ul
-							class="list-disc list-outside pl-5 space-y-1 text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+							class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 list-outside list-disc space-y-1 pl-5"
 						>
 							{{#each highlights}}
 							<li>{{this}}</li>
@@ -565,17 +435,17 @@
 			{{#if education}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+					class="border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 mb-4 border-b pb-2 text-2xl font-bold"
 				>
 					Education
 				</h2>
 				<div class="space-y-4">
 					{{#each education}}
 					<div
-						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4 md:p-6"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg border p-4 md:p-6"
 					>
 						<div
-							class="flex flex-col md:flex-row md:justify-between md:items-start"
+							class="flex flex-col md:flex-row md:items-start md:justify-between"
 						>
 							<div>
 								<h3 class="text-xl font-semibold">
@@ -594,7 +464,7 @@
 								</p>
 								{{#if (or gpa score)}}
 								<p
-									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1"
+									class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 text-sm"
 								>
 									GPA: {{#if
 									gpa}}{{gpa}}{{else}}{{score}}{{/if}}
@@ -602,7 +472,7 @@
 								{{/if}}
 							</div>
 							<div
-								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
+								class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 text-sm md:mt-0"
 							>
 								{{#if startDate}}{{formatDate
 								startDate}}{{/if}}{{#if endDate}} → {{formatDate
@@ -611,13 +481,13 @@
 						</div>
 						{{#if courses}}
 						<div class="mt-3">
-							<p class="text-sm font-medium mb-2">
+							<p class="mb-2 text-sm font-medium">
 								Relevant Courses:
 							</p>
 							<div class="flex flex-wrap gap-2">
 								{{#each courses}}
 								<span
-									class="px-2 py-1 text-xs bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded"
+									class="bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded border px-2 py-1 text-xs"
 									>{{this}}</span
 								>
 								{{/each}}
@@ -634,17 +504,17 @@
 			{{#if projects}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+					class="border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 mb-4 border-b pb-2 text-2xl font-bold"
 				>
 					Projects
 				</h2>
 				<div class="space-y-4">
 					{{#each projects}}
 					<div
-						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4 md:p-6"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg border p-4 md:p-6"
 					>
 						<div
-							class="flex flex-col md:flex-row md:justify-between md:items-start mb-2"
+							class="mb-2 flex flex-col md:flex-row md:items-start md:justify-between"
 						>
 							<div>
 								<h3 class="text-xl font-semibold">
@@ -658,7 +528,7 @@
 								</h3>
 								{{#if type}}
 								<p
-									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+									class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 text-sm"
 								>
 									{{type}}
 								</p>
@@ -666,7 +536,7 @@
 							</div>
 							{{#if startDate}}
 							<div
-								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
+								class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 text-sm md:mt-0"
 							>
 								{{formatDate startDate}}{{#if endDate}} →
 								{{formatDate endDate}}{{/if}}
@@ -681,17 +551,17 @@
 						</p>
 						{{/if}} {{#if highlights}}
 						<ul
-							class="list-disc list-outside pl-5 space-y-1 text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mb-2"
+							class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mb-2 list-outside list-disc space-y-1 pl-5 text-sm"
 						>
 							{{#each highlights}}
 							<li>{{this}}</li>
 							{{/each}}
 						</ul>
 						{{/if}} {{#if keywords}}
-						<div class="flex flex-wrap gap-2 mt-3">
+						<div class="mt-3 flex flex-wrap gap-2">
 							{{#each keywords}}
 							<span
-								class="px-2 py-1 text-xs bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded"
+								class="bg-catppuccin-latte-base dark:bg-catppuccin-mocha-base border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded border px-2 py-1 text-xs"
 								>{{this}}</span
 							>
 							{{/each}}
@@ -707,29 +577,29 @@
 			{{#if awards}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+					class="border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 mb-4 border-b pb-2 text-2xl font-bold"
 				>
 					Awards & Honors
 				</h2>
 				<div class="space-y-3">
 					{{#each awards}}
 					<div
-						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg border p-4"
 					>
 						<div
-							class="flex flex-col md:flex-row md:justify-between md:items-start"
+							class="flex flex-col md:flex-row md:items-start md:justify-between"
 						>
 							<div>
 								<h3 class="font-semibold">{{title}}</h3>
 								{{#if awarder}}
 								<p
-									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+									class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 text-sm"
 								>
 									{{awarder}}
 								</p>
 								{{/if}} {{#if summary}}
 								<p
-									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1"
+									class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 text-sm"
 								>
 									{{summary}}
 								</p>
@@ -737,7 +607,7 @@
 							</div>
 							{{#if date}}
 							<div
-								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
+								class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 text-sm md:mt-0"
 							>
 								{{formatDate date}}
 							</div>
@@ -753,17 +623,17 @@
 			{{#if certificates}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+					class="border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 mb-4 border-b pb-2 text-2xl font-bold"
 				>
 					Certificates
 				</h2>
 				<div class="space-y-3">
 					{{#each certificates}}
 					<div
-						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg border p-4"
 					>
 						<div
-							class="flex flex-col md:flex-row md:justify-between md:items-start"
+							class="flex flex-col md:flex-row md:items-start md:justify-between"
 						>
 							<div>
 								<h3 class="font-semibold">
@@ -777,7 +647,7 @@
 								</h3>
 								{{#if issuer}}
 								<p
-									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+									class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 text-sm"
 								>
 									{{issuer}}
 								</p>
@@ -785,7 +655,7 @@
 							</div>
 							{{#if date}}
 							<div
-								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
+								class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 text-sm md:mt-0"
 							>
 								{{formatDate date}}
 							</div>
@@ -801,17 +671,17 @@
 			{{#if publications}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+					class="border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 mb-4 border-b pb-2 text-2xl font-bold"
 				>
 					Publications
 				</h2>
 				<div class="space-y-4">
 					{{#each publications}}
 					<div
-						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg border p-4"
 					>
 						<div
-							class="flex flex-col md:flex-row md:justify-between md:items-start"
+							class="flex flex-col md:flex-row md:items-start md:justify-between"
 						>
 							<div>
 								<h3 class="font-semibold">
@@ -825,13 +695,13 @@
 								</h3>
 								{{#if publisher}}
 								<p
-									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+									class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 text-sm"
 								>
 									{{publisher}}
 								</p>
 								{{/if}} {{#if summary}}
 								<p
-									class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-2"
+									class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-2 text-sm"
 								>
 									{{summary}}
 								</p>
@@ -839,7 +709,7 @@
 							</div>
 							{{#if releaseDate}}
 							<div
-								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
+								class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 text-sm md:mt-0"
 							>
 								{{formatDate releaseDate}}
 							</div>
@@ -855,17 +725,17 @@
 			{{#if volunteer}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+					class="border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 mb-4 border-b pb-2 text-2xl font-bold"
 				>
 					Volunteer Experience
 				</h2>
 				<div class="space-y-4">
 					{{#each volunteer}}
 					<div
-						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4 md:p-6"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg border p-4 md:p-6"
 					>
 						<div
-							class="flex flex-col md:flex-row md:justify-between md:items-start mb-2"
+							class="mb-2 flex flex-col md:flex-row md:items-start md:justify-between"
 						>
 							<div>
 								<h3 class="text-xl font-semibold">
@@ -884,7 +754,7 @@
 								</p>
 							</div>
 							<div
-								class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 md:mt-0"
+								class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 text-sm md:mt-0"
 							>
 								{{#if startDate}}{{formatDate
 								startDate}}{{/if}}{{#if endDate}} → {{formatDate
@@ -899,7 +769,7 @@
 						</p>
 						{{/if}} {{#if highlights}}
 						<ul
-							class="list-disc list-outside pl-5 space-y-1 text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+							class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 list-outside list-disc space-y-1 pl-5 text-sm"
 						>
 							{{#each highlights}}
 							<li>{{this}}</li>
@@ -916,18 +786,18 @@
 			{{#if languages}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+					class="border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 mb-4 border-b pb-2 text-2xl font-bold"
 				>
 					Languages
 				</h2>
 				<div class="flex flex-wrap gap-3">
 					{{#each languages}}
 					<div
-						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg px-4 py-2"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg border px-4 py-2"
 					>
 						<span class="font-medium">{{language}}</span>
 						{{#if fluency}}<span
-							class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+							class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 text-sm"
 						>
 							- {{fluency}}</span
 						>{{/if}}
@@ -941,21 +811,21 @@
 			{{#if interests}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+					class="border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 mb-4 border-b pb-2 text-2xl font-bold"
 				>
 					Interests
 				</h2>
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 					{{#each interests}}
 					<div
-						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg border p-4"
 					>
-						<h3 class="font-semibold mb-2">{{name}}</h3>
+						<h3 class="mb-2 font-semibold">{{name}}</h3>
 						{{#if keywords}}
 						<div class="flex flex-wrap gap-2">
 							{{#each keywords}}
 							<span
-								class="px-2 py-1 text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0"
+								class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 px-2 py-1 text-sm"
 								>{{this}}</span
 							>
 							{{/each}}
@@ -971,19 +841,19 @@
 			{{#if references}}
 			<section class="mb-8">
 				<h2
-					class="text-2xl font-bold mb-4 pb-2 border-b border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0"
+					class="border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 mb-4 border-b pb-2 text-2xl font-bold"
 				>
 					References
 				</h2>
 				<div class="space-y-3">
 					{{#each references}}
 					<div
-						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg p-4"
+						class="glass-tile bg-catppuccin-latte-mantle dark:bg-catppuccin-mocha-mantle border-catppuccin-latte-surface0 dark:border-catppuccin-mocha-surface0 rounded-lg border p-4"
 					>
 						<h3 class="font-semibold">{{name}}</h3>
 						{{#if reference}}
 						<p
-							class="text-sm text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 italic"
+							class="text-catppuccin-latte-subtext0 dark:text-catppuccin-mocha-subtext0 mt-1 text-sm italic"
 						>
 							"{{reference}}"
 						</p>

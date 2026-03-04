@@ -45,7 +45,6 @@ describe("render", () => {
 			],
 		};
 
-		// @ts-expect-error - render expects a string in its type definition but it actually takes an object
 		const output = render(resume);
 
 		expect(output).toContain("John Doe");

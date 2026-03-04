@@ -4,10 +4,9 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import * as url from "node:url";
 
-export function render(resume: {
-	basic: {};
-	// add resume type
-}) {
+import type { ResumeSchema } from "./types";
+
+export function render(resume: ResumeSchema) {
 	helpers({ handlebars: Handlebars });
 
 	Handlebars.registerHelper("formatDate", function (dateString) {

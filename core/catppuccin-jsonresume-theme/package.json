@@ -30,6 +30,7 @@
 	"types": "./dist/index.d.cts",
 	"files": [
 		"dist",
+		"dist-css",
 		"template"
 	],
 	"scripts": {

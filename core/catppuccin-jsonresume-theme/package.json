@@ -35,10 +35,10 @@
 	],
 	"scripts": {
 		"build": "pnpm run --sequential \"/^build:.*/\"",
-		"build:js": "tsdown",
+		"build:ts": "tsdown",
 		"build:tw": "tailwindcss -i ./template/site.css -o ./dist-css/site.css",
 		"dev": "pnpm run --parallel \"/^dev:.*/\"",
-		"dev:js": "tsdown --watch",
+		"dev:ts": "pnpm run build:ts --watch",
 		"dev:tw": "pnpm run build:tw --watch",
 		"generate": "curl $npm_package_config_input | json2ts > $npm_package_config_output",
 		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",

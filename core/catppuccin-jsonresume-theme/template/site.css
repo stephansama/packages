@@ -4,12 +4,18 @@
 
 @plugin "tailwind-scrollbar";
 
+@theme {
+	--default-font-family: "Fira Sans";
+	--font-sans: "Fira Sans", sans-serif;
+	--font-mono: "Fira Code", mono;
+}
+
 html {
 	@apply scrollbar scrollbar-thumb-ctp-text scrollbar-track-ctp-base dark:scrollbar-thumb-ctp-red scroll-smooth antialiased;
 }
 
 body {
-	@apply text-ctp-text bg-ctp-base flex min-h-screen flex-col overflow-x-hidden;
+	@apply text-ctp-text bg-ctp-base flex min-h-screen flex-col overflow-x-hidden font-sans;
 }
 
 /* Catppuccin frosted glass tiles */

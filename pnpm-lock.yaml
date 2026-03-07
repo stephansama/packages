@@ -788,9 +788,6 @@ importers:
       '@standard-schema/spec':
         specifier: catalog:schema
         version: 1.1.0
-      nanoid:
-        specifier: ^5.1.6
-        version: 5.1.6
     devDependencies:
       '@testing-library/jest-dom':
         specifier: 'catalog:'
@@ -8138,11 +8135,6 @@ packages:
   nanoid@4.0.2:
     resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
     engines: {node: ^14 || ^16 || >=18}
-    hasBin: true
-
-  nanoid@5.1.6:
-    resolution: {integrity: sha512-c7+7RQ+dMB5dPwwCp4ee1/iV/q2P6aK1mTZcfr1BTuVlyW9hJYiMPybJCcnBlQtuSmTIWNeazm/zqNoZSSElBg==}
-    engines: {node: ^18 || >=20}
     hasBin: true
 
   nanomatch@1.2.13:
@@ -19196,8 +19188,6 @@ snapshots:
   nanoid@3.3.11: {}
 
   nanoid@4.0.2: {}
-
-  nanoid@5.1.6: {}
 
   nanomatch@1.2.13:
     dependencies:

@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 3.0.5
+
+### Patch Changes
+
+- f0104aa: fixed id dependency
+
 ## 3.0.4
 
 ### Patch Changes

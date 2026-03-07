@@ -1,5 +1,11 @@
 # vanilla
 
+## 1.2.2
+
+### Patch Changes
+
+- f0104aa: fixed id dependency
+
 ## 1.2.1
 
 ### Patch Changes

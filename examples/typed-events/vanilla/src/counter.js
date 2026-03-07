@@ -49,7 +49,7 @@ export function setupCounter(element) {
 	});
 
 	event.listen((e) => {
-		setCounter(e.detail.current);
+		setCounter(e.data.current);
 	});
 
 	broadcastEvent.listen("set", ({ data, raw, type }) => {

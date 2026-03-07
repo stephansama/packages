@@ -1,15 +1,14 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
-import type { Id, ValidatorMap } from "@/utils/types";
+import type { ValidatorMap } from "@/utils/types";
 
-import { createId, validate, ValidatorError } from "@/utils";
+import { validate, ValidatorError } from "@/utils";
 
 export interface TypedBroadcastEvent<
 	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,
 > extends ValidatorMap<Name, Map, "event" | "message"> {
 	readonly channel: BroadcastChannel;
-	readonly id: Id;
 	target: EventTarget;
 }
 
@@ -24,10 +23,7 @@ export function createBroadcastEvent<
 	Map extends Record<string, StandardSchemaV1>,
 >(name: Name, map: Map) {
 	let _channel: BroadcastChannel | null = null;
-	let _id: Id | null = null;
 	let _target: EventTarget | null = null;
-
-	const getId = () => (_id ??= createId());
 
 	const _scopeEvent = (event: string) => [name, event].join(":");
 
@@ -39,7 +35,7 @@ export function createBroadcastEvent<
 			callback,
 			data: payload,
 			onerror: (issues) => {
-				throw new TypedBroadcastEventError(String(getId()), issues);
+				throw new TypedBroadcastEventError(name, issues);
 			},
 			schema: map[event],
 			source: "TypedBroadcastEvent",
@@ -52,7 +48,7 @@ export function createBroadcastEvent<
 		},
 		dispatch(name, input) {
 			_validate(name, input, () => {
-				const payload = { ...input, id: this.id, name };
+				const payload = { ...input, name };
 				const eventName = _scopeEvent(name);
 				const event = new CustomEvent(eventName, {
 					detail: payload,
@@ -60,9 +56,6 @@ export function createBroadcastEvent<
 				this.target.dispatchEvent(event);
 				this.channel.postMessage(payload);
 			});
-		},
-		get id() {
-			return getId();
 		},
 		listen(name, callback) {
 			const eventName = _scopeEvent(name);
@@ -79,7 +72,6 @@ export function createBroadcastEvent<
 			const channelListener = (message: MessageEvent) => {
 				const { data } = message;
 				if (data.name !== name) return;
-				if (data.id === this.id) return;
 
 				const validateCallback = () =>
 					callback({ data, raw: message, type: "message" });

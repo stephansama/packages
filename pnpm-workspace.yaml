@@ -24,11 +24,13 @@ catalog:
   '@types/vfile': ^4.0.0
   '@types/yargs': ^17.0.35
   astro: 5.9.3
+  cleye: ^2.3.0
   deepmerge: ^4.3.1
   es-toolkit: 1.43.0
   handlebars: 4.7.8
   handlebars-helpers: ^0.10.0
   happy-dom: ^20.6.1
+  ico-endec: ^0.1.6
   json-schema-to-typescript: ^15.0.4
   jsr: ^0.13.5
   mdast: ^3.0.0
@@ -38,6 +40,7 @@ catalog:
   prettier-plugin-tailwindcss: ^0.7.2
   react: 19.2.0
   remark: ^15.0.1
+  sharp: ^0.34.5
   tailwind-scrollbar: ^4.0.2
   tailwindcss: ^4.1.18
   tsdown: 0.15.12

@@ -1,4 +1,4 @@
-# @stephansama/github-env
+# @stephansama/types-github-action-env
 
 ## 1.0.0
 

@@ -1,17 +1,8 @@
 {
 	"name": "@stephansama/github-env",
 	"version": "0.1.6",
-	"description": "Additional environment variable types for GitHub CI",
-	"keywords": [
-		"actions",
-		"env",
-		"environment-variables",
-		"github",
-		"github-env",
-		"process",
-		"types",
-		"typescript"
-	],
+	"description": "[Deprecated] Additional environment variable types for GitHub CI",
+	"keywords": [],
 	"homepage": "https://packages.stephansama.info/api/@stephansama/github-env",
 	"repository": {
 		"type": "git",
@@ -25,15 +16,7 @@
 		"url": "https://stephansama.info"
 	},
 	"type": "module",
-	"types": "./src/env.d.ts",
-	"files": [
-		"src"
-	],
-	"scripts": {
-		"prelint": "eslint ./",
-		"lint": "publint",
-		"type-check": "tsc --noEmit"
-	},
+	"scripts": {},
 	"packageManager": "pnpm@10.29.3",
 	"publishConfig": {
 		"access": "public",

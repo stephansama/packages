@@ -1,0 +1,42 @@
+{
+	"name": "@stephansama/types-github-action-env",
+	"version": "0.1.6",
+	"description": "environment variable types for GitHub Action environment",
+	"keywords": [
+		"actions",
+		"env",
+		"environment-variables",
+		"github",
+		"github-env",
+		"process",
+		"types",
+		"typescript"
+	],
+	"homepage": "https://packages.stephansama.info/api/@stephansama/types-github-action-env",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/stephansama/packages.git",
+		"directory": "core/types-github-action-env"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephansama.info"
+	},
+	"type": "module",
+	"types": "./src/env.d.ts",
+	"files": [
+		"src"
+	],
+	"scripts": {
+		"prelint": "eslint ./",
+		"lint": "publint",
+		"type-check": "tsc --noEmit"
+	},
+	"packageManager": "pnpm@10.29.3",
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	}
+}

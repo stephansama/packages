@@ -3,9 +3,10 @@ import type { Theme } from "vitepress";
 import CopyOrDownloadAsMarkdownButtons from "vitepress-plugin-llms/vitepress-components/CopyOrDownloadAsMarkdownButtons.vue";
 import DefaultTheme from "vitepress/theme";
 
-import "./extend.css";
-
+// eslint-disable-next-line
 import "@catppuccin/vitepress/theme/mocha/red.css";
+
+import "./extend.css";
 
 export default {
 	enhanceApp({ app }) {

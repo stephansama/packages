@@ -1,5 +1,11 @@
 # @stephansama/github-env
 
+## 1.0.0
+
+### Major Changes
+
+- 55958de: renamed github actions environment package
+
 ## 0.1.6
 
 ### Patch Changes

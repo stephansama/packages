@@ -12,7 +12,7 @@ Additional environment variable types for GitHub CI
 To use these type definitions, add the package to your `devDependencies`:
 
 ```sh
-pnpm install --save-dev @stephansama/github-env
+pnpm install --save-dev @stephansama/types-github-action-env
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ In order to enable the GitHub environment variables into your local scope you ca
 ```json
 {
   "compilerOptions": {
-    "types": ["@stephansama/github-env"]
+    "types": ["@stephansama/types-github-action-env"]
   }
 }
 ```
@@ -30,7 +30,7 @@ In order to enable the GitHub environment variables into your local scope you ca
 or add the following reference to any typescript file
 
 ```ts
-/// <reference types="@stephansama/github-env" />
+/// <reference types="@stephansama/types-github-action-env" />
 ```
 
 🎉 Now you have access to GitHub environment variables in your TypeScript files!

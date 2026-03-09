@@ -1,4 +1,7 @@
 import { defineConfig } from "vitepress";
+import llmstxt, {
+	copyOrDownloadAsMarkdownButtons,
+} from "vitepress-plugin-llms";
 
 import typedocSidebar from "../api/typedoc-sidebar.json" with { type: "json" };
 
@@ -21,6 +24,9 @@ export default defineConfig({
 	ignoreDeadLinks: true,
 	lastUpdated: true,
 	markdown: {
+		config(md) {
+			md.use(copyOrDownloadAsMarkdownButtons);
+		},
 		theme: { dark: "catppuccin-mocha", light: "catppuccin-latte" },
 	},
 	outDir: "../../dist",
@@ -75,6 +81,9 @@ export default defineConfig({
 		],
 	},
 	title: "@stephansama packages",
+	vite: {
+		plugins: [llmstxt()],
+	},
 });
 
 function iconLink({

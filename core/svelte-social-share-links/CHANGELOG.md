@@ -1,5 +1,11 @@
 # @stephansama/svelte-social-share-links
 
+## 1.1.2
+
+### Patch Changes
+
+- 79d5762: updated the svelte-social-share-links to export storybook website for user testing
+
 ## 1.1.1
 
 ### Patch Changes

@@ -35,7 +35,7 @@
 		"!dist/**/*.spec.*"
 	],
 	"scripts": {
-		"build": "pnpm run --sequential \"/^build:.*/\"",
+		"build": "pnpm run build:svelte && pnpm run build:vite",
 		"postbuild": "publint",
 		"build:storybook": "storybook build",
 		"build:svelte": "svelte-package",

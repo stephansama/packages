@@ -11,7 +11,11 @@
 			]
 		},
 		"build": {
-			"dependsOn": ["create-stephansama-example#build", "www#setup"],
+			"dependsOn": [
+				"create-stephansama-example#build",
+				"@stephansama/svelte-social-share-links#build:storybook",
+				"www#setup"
+			],
 			"outputs": ["$TURBO_ROOT$/dist"]
 		}
 	}

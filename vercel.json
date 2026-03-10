@@ -6,8 +6,8 @@
 			"destination": "/node_modules/index.html"
 		},
 		{
-			"source": "/api/@stephansama/svelte-social-share-links/:path*",
-			"destination": "/api/@stephansama/svelte-social-share-links/index.html"
+			"source": "/api/@stephansama/svelte-social-share-links/storybook/:path((?!.*\\.).*)",
+			"destination": "/api/@stephansama/svelte-social-share-links/storybook/index.html"
 		}
 	]
 }

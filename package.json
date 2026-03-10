@@ -31,6 +31,7 @@
 		"scripts:lint-examples": "node ./scripts/lint-examples.js",
 		"scripts:meta": "node ./scripts/meta.js",
 		"scripts:pkg-pr-new": "node ./scripts/pkg-pr-new.js",
+		"scripts:storybook": "node ./scripts/storybook.js",
 		"test": "turbo test",
 		"pretest:ci": "pnpm run scripts:generate-examples",
 		"test:ci": "vitest --run --coverage",

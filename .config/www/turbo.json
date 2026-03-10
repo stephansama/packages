@@ -6,8 +6,10 @@
 				"./api/",
 				"./public/healthcheck.json",
 				"./public/node_modules",
-				"./public/eslint"
-			]
+				"./public/eslint",
+				"./public/api"
+			],
+			"dependsOn": ["@stephansama/svelte-social-share-links#build:storybook"]
 		},
 		"build": {
 			"dependsOn": ["create-stephansama-example#build", "www#setup"],

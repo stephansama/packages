@@ -11,13 +11,13 @@
 			"dependsOn": ["^build"],
 			"outputs": ["dist*/**", "config", "!.next/cache/**"]
 		},
+		"build:storybook": {
+			"dependsOn": ["^build"],
+			"outputs": ["storybook-static"]
+		},
+		"lint": { "dependsOn": ["^lint"] },
 		"lint:fix": { "cache": false },
-		"lint": {
-			"dependsOn": ["^lint"]
-		},
-		"check-types": {
-			"dependsOn": ["^check-types"]
-		},
+		"check-types": { "dependsOn": ["^check-types"] },
 		"publish": {
 			"persistent": true,
 			"cache": false,

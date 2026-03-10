@@ -9,5 +9,12 @@
 			"source": "/api/@stephansama/svelte-social-share-links/storybook/:path((?!.*\\.).*)",
 			"destination": "/api/@stephansama/svelte-social-share-links/storybook/index.html"
 		}
+	],
+	"redirects": [
+		{
+			"source": "/api/@stephansama/svelte-social-share-links/storybook",
+			"destination": "/api/@stephansama/svelte-social-share-links/storybook/",
+			"permanent": true
+		}
 	]
 }

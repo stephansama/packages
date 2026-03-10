@@ -10,20 +10,30 @@ export const ACTIONS = [
 ] as const;
 export type ACTION = (typeof ACTIONS)[number];
 
-export function createApi<Schema extends z.ZodObject>({
+export function createApi<
+	Schema extends z.ZodObject,
+	References extends Array<string>,
+>({
 	baseId,
 	origin,
+	references,
 	schema,
 	tableId,
 	token,
 }: {
 	baseId: string;
 	origin: string;
+	references?: References;
 	schema: Schema;
 	tableId: string;
 	token?: string;
 }) {
 	let _token: string | undefined = token;
+
+	const referenceSchema =
+		references && references.length !== 0
+			? z.record(z.enum(references), z.number())
+			: z.object({});
 
 	const api = {
 		COUNT: {
@@ -37,7 +47,12 @@ export function createApi<Schema extends z.ZodObject>({
 			inputSchema: z.object({ fields: schema }),
 			method: "post",
 			responseSchema: z.object({
-				records: z.array(z.object({ fields: schema, id: z.string() })),
+				records: z.array(
+					z.object({
+						fields: schema.and(referenceSchema),
+						id: z.number(),
+					}),
+				),
 			}),
 			url: `/api/v3/data/${baseId}/${tableId}/records`,
 		},
@@ -63,7 +78,12 @@ export function createApi<Schema extends z.ZodObject>({
 				nestedPrev: z.string().optional().nullable(),
 				next: z.string().optional().nullable(),
 				prev: z.string().optional().nullable(),
-				records: z.array(z.object({ fields: schema, id: z.number() })),
+				records: z.array(
+					z.object({
+						fields: schema.and(referenceSchema),
+						id: z.number(),
+					}),
+				),
 			}),
 			url: `/api/v3/data/${baseId}/${tableId}/records`,
 		},
@@ -73,9 +93,16 @@ export function createApi<Schema extends z.ZodObject>({
 			url: `/api/v3/data/${baseId}/${tableId}/records/{recordId}`,
 		},
 		UPDATE: {
-			inputSchema: z.object({ fields: schema, id: z.string() }),
+			inputSchema: z.object({ fields: schema, id: z.number() }),
 			method: "patch",
-			responseSchema: z.object(),
+			responseSchema: z.object({
+				records: z.array(
+					z.object({
+						fields: schema.and(referenceSchema),
+						id: z.number(),
+					}),
+				),
+			}),
 			url: `/api/v3/data/${baseId}/${tableId}/records`,
 		},
 	} satisfies Record<

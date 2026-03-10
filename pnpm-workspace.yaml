@@ -23,6 +23,7 @@ catalog:
   '@types/react': ^19.2.14
   '@types/vfile': ^4.0.0
   '@types/yargs': ^17.0.35
+  actions-up: ^1.11.0
   astro: 5.9.3
   deepmerge: ^4.3.1
   es-toolkit: 1.43.0
@@ -40,6 +41,7 @@ catalog:
   remark: ^15.0.1
   tailwind-scrollbar: ^4.0.2
   tailwindcss: ^4.1.18
+  taze: ^19.9.2
   tsdown: 0.15.12
   tsx: 4.21.0
   typescript: 5.9.3

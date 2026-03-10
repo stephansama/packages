@@ -3,7 +3,6 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"prebuild": "pnpm run setup",
 		"build": "vitepress build",
 		"predev": "pnpm run setup",
 		"dev": "vitepress dev",

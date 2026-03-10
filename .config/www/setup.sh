@@ -2,12 +2,14 @@
 
 pnpm --workspace-root run scripts:generate-examples
 
-./node_modules/.bin/typedoc
+pnpm exec typedoc
 
-./node_modules/.bin/eslint-config-inspector build --base /eslint --outDir public/eslint
+pnpm exec eslint-config-inspector build --base /eslint --outDir public/eslint
 
-./node_modules/.bin/node-modules-inspector build --base /node_modules --outDir public/node_modules
+pnpm exec node-modules-inspector build --base /node_modules --outDir public/node_modules
 
 node -e "console.log(JSON.stringify({message: Date.now()}))" >public/healthcheck.json
 
-pnpm --workspace-root run --silent scripts:meta >public/meta.json
+pnpm --workspace-root run scripts:meta >public/meta.json
+
+pnpm --workspace-root run scripts:storybook

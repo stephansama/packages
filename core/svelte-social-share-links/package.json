@@ -1,12 +1,17 @@
 {
 	"name": "@stephansama/svelte-social-share-links",
 	"version": "1.1.1",
-	"private": false,
 	"description": "Svelte/Web component to share the current url with various social media providers",
+	"homepage": "https://packages.stephansama.info/api/@stephansama/svelte-social-share-links",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/stephansama/packages.git",
 		"directory": "core/svelte-social-share-links"
+	},
+	"author": {
+		"name": "Stephan Randle",
+		"email": "stephanrandle.dev@gmail.com",
+		"url": "https://stephansama.info"
 	},
 	"type": "module",
 	"exports": {
@@ -30,13 +35,14 @@
 		"!dist/**/*.spec.*"
 	],
 	"scripts": {
-		"prebuild": "svelte-package",
-		"build": "vite -c ./vite.webcomponent.config.ts build",
+		"build": "pnpm run --sequential \"/^build:.*/\"",
 		"postbuild": "publint",
+		"build:storybook": "storybook build",
+		"build:svelte": "svelte-package",
+		"build:vite": "vite -c ./vite.webcomponent.config.ts build",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"dev": "svelte-package --watch",
-		"storybook": "storybook dev -p 6006",
-		"storybook:build": "storybook build"
+		"dev:storybook": "storybook dev -p 6006"
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "catalog:storybook",
@@ -60,5 +66,8 @@
 		"access": "public",
 		"provenance": true
 	},
-	"readme": "./README.md"
+	"readme": "./README.md",
+	"storybook": {
+		"url": "https://packages.stephansama.info/api/@stephansama/svelte-social-share-links/storybook"
+	}
 }

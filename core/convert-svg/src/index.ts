@@ -1,0 +1,1 @@
+export { svgToIco } from "./ico";

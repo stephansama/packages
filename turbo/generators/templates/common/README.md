@@ -4,7 +4,7 @@
 [![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/{{name}})
 [![NPM Version](https://img.shields.io/npm/v/%40stephansama%2F{{name}}?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/{{name}})
 [![JSR](https://jsr.io/badges/@stephansama/{{name}})](https://jsr.io/@stephansama/{{name}})
-[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/{{name}})](https://socket.dev/npm/package/@stephansama/{{package}}/overview)
+[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/{{name}})](https://socket.dev/npm/package/@stephansama/{{name}}/overview)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/{{name}}?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/{{name}})
 
 {{description}}

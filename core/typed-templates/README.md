@@ -2,7 +2,11 @@
 
 [![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/typed-templates)
 [![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/typed-templates)
+
+[![JSR](https://jsr.io/badges/@stephansama/typed-templates)](https://jsr.io/@stephansama/typed-templates)
+
 [![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Ftyped-templates?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-templates)
+[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/typed-templates)](https://socket.dev/npm/package/@stephansama/typed-templates/overview)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/typed-templates?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-templates)
 
 Use standard schema to validate and use handlebar template directories

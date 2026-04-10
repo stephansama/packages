@@ -1,0 +1,12 @@
+{
+	"name": "@stephansama/scripts",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"add-socket": "tsx ./add-socket.ts"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"tsx": "catalog:"
+	}
+}

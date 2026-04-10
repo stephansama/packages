@@ -6,13 +6,11 @@
 	"jsxSingleQuote": false,
 	"overrides": [
 		{ "files": ["*.md"], "options": { "tabWidth": 2, "useTabs": false } },
-		{ "files": "*.astro", "options": { "parser": "astro" } },
+		{ "files": ["*.json"], "options": { "useTabs": false, "tabWidth": 2 } },
+		{ "files": ["*.astro"], "options": { "parser": "astro" } },
 		{
 			"files": ["pnpm-workspace.yaml"],
-			"options": {
-				"useTabs": true,
-				"singleQuote": true
-			}
+			"options": { "useTabs": true, "singleQuote": true }
 		}
 	],
 	"plugins": [

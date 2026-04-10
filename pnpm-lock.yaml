@@ -15,66 +15,76 @@ catalogs:
     yargs:
       specifier: 18.0.0
       version: 18.0.0
+  commitlint:
+    '@commitlint/cli':
+      specifier: 19.8.1
+      version: 19.8.1
+    '@commitlint/config-conventional':
+      specifier: 19.8.1
+      version: 19.8.1
+    '@commitlint/types':
+      specifier: 19.8.1
+      version: 19.8.1
   default:
     '@catppuccin/palette':
       specifier: 1.7.1
       version: 1.7.1
     '@catppuccin/tailwindcss':
-      specifier: ^1.0.0
+      specifier: 1.0.0
       version: 1.0.0
     '@dotenvx/dotenvx':
-      specifier: ^1.52.0
+      specifier: 1.52.0
       version: 1.52.0
     '@iconify/types':
-      specifier: ^2.0.0
+      specifier: 2.0.0
       version: 2.0.0
     '@iconify/utils':
-      specifier: ^2.3.0
+      specifier: 2.3.0
       version: 2.3.0
     '@manypkg/find-root':
-      specifier: ^3.1.0
+      specifier: 3.1.0
       version: 3.1.0
     '@manypkg/get-packages':
-      specifier: ^3.1.0
+      specifier: 3.1.0
       version: 3.1.0
     '@tailwindcss/cli':
-      specifier: ^4.2.1
+      specifier: 4.2.1
       version: 4.2.1
     '@testing-library/jest-dom':
-      specifier: ^6.9.1
+      specifier: 6.9.1
       version: 6.9.1
     '@testing-library/react':
-      specifier: ^16.3.2
+      specifier: 16.3.2
       version: 16.3.2
     '@types/debug':
-      specifier: ^4.1.12
+      specifier: 4.1.12
       version: 4.1.12
     '@types/handlebars-helpers':
-      specifier: ^0.5.6
+      specifier: 0.5.6
       version: 0.5.6
     '@types/mdast':
-      specifier: ^4.0.4
+      specifier: 4.0.4
       version: 4.0.4
     '@types/minify':
       specifier: 9.1.4
       version: 9.1.4
     '@types/react':
-      specifier: ^19.2.14
+      specifier: 19.2.14
       version: 19.2.14
     '@types/vfile':
-      specifier: ^4.0.0
+      specifier: 4.0.0
       version: 4.0.0
     '@types/yargs':
-      specifier: ^17.0.35
+      specifier: 17.0.35
       version: 17.0.35
     actions-up:
-      specifier: ^1.11.0
+      specifier: 1.11.0
       version: 1.11.0
     astro:
       specifier: 5.9.3
       version: 5.9.3
     deepmerge:
-      specifier: ^4.3.1
+      specifier: 4.3.1
       version: 4.3.1
     es-toolkit:
       specifier: 1.43.0
@@ -83,43 +93,37 @@ catalogs:
       specifier: 4.7.8
       version: 4.7.8
     handlebars-helpers:
-      specifier: ^0.10.0
+      specifier: 0.10.0
       version: 0.10.0
     happy-dom:
-      specifier: ^20.6.1
+      specifier: 20.6.1
       version: 20.6.1
     json-schema-to-typescript:
-      specifier: ^15.0.4
+      specifier: 15.0.4
       version: 15.0.4
     jsr:
-      specifier: ^0.13.5
+      specifier: 0.13.5
       version: 0.13.5
     mdast:
-      specifier: ^3.0.0
+      specifier: 3.0.0
       version: 3.0.0
     minify:
       specifier: 14.0.0
       version: 14.0.0
     node-plop:
-      specifier: ^0.32.3
+      specifier: 0.32.3
       version: 0.32.3
-    prettier:
-      specifier: ^3.8.1
-      version: 3.8.1
-    prettier-plugin-tailwindcss:
-      specifier: ^0.7.2
-      version: 0.7.2
     remark:
-      specifier: ^15.0.1
+      specifier: 15.0.1
       version: 15.0.1
     tailwind-scrollbar:
-      specifier: ^4.0.2
+      specifier: 4.0.2
       version: 4.0.2
     tailwindcss:
-      specifier: ^4.1.18
+      specifier: 4.1.18
       version: 4.1.18
     taze:
-      specifier: ^19.9.2
+      specifier: 19.9.2
       version: 19.9.2
     tsdown:
       specifier: 0.15.12
@@ -131,26 +135,51 @@ catalogs:
       specifier: 5.9.3
       version: 5.9.3
     undici:
-      specifier: ^7.22.0
+      specifier: 7.22.0
       version: 7.22.0
     unified:
-      specifier: ^11.0.5
+      specifier: 11.0.5
       version: 11.0.5
     unist-util-visit:
-      specifier: ^5.1.0
+      specifier: 5.1.0
       version: 5.1.0
     vite:
       specifier: 6.3.5
       version: 6.3.5
     vite-tsconfig-paths:
-      specifier: ^5.1.4
+      specifier: 5.1.4
       version: 5.1.4
     vitepress-plugin-llms:
-      specifier: ^1.11.0
-      version: 1.12.0
+      specifier: 1.11.0
+      version: 1.11.0
+  prettier:
+    prettier:
+      specifier: 3.8.1
+      version: 3.8.1
+    prettier-plugin-astro:
+      specifier: 0.14.1
+      version: 0.14.1
+    prettier-plugin-astro-organize-imports:
+      specifier: 0.4.11
+      version: 0.4.11
+    prettier-plugin-jsdoc:
+      specifier: 1.8.0
+      version: 1.8.0
+    prettier-plugin-organize-imports:
+      specifier: 4.3.0
+      version: 4.3.0
+    prettier-plugin-packagejson:
+      specifier: 2.5.22
+      version: 2.5.22
+    prettier-plugin-svelte:
+      specifier: 3.4.1
+      version: 3.4.1
+    prettier-plugin-tailwindcss:
+      specifier: 0.7.2
+      version: 0.7.2
   schema:
     '@standard-schema/spec':
-      specifier: ^1.1.0
+      specifier: 1.1.0
       version: 1.1.0
     arktype:
       specifier: 2.1.29
@@ -163,48 +192,55 @@ catalogs:
       version: 4.2.1
   storybook:
     '@chromatic-com/storybook':
-      specifier: ^4.1.3
+      specifier: 4.1.3
       version: 4.1.3
     '@storybook/addon-a11y':
-      specifier: ^10.2.8
+      specifier: 10.2.8
       version: 10.2.8
     '@storybook/addon-docs':
-      specifier: ^10.2.8
+      specifier: 10.2.8
       version: 10.2.8
     '@storybook/addon-svelte-csf':
-      specifier: ^5.0.11
+      specifier: 5.0.11
       version: 5.0.11
     '@storybook/svelte-vite':
-      specifier: ^10.2.8
+      specifier: 10.2.8
       version: 10.2.8
     storybook:
-      specifier: ^10.2.8
+      specifier: 10.2.8
       version: 10.2.8
   svelte:
     '@sveltejs/package':
-      specifier: ^2.5.7
+      specifier: 2.5.7
       version: 2.5.7
     '@sveltejs/vite-plugin-svelte':
-      specifier: ^6.2.4
+      specifier: 6.2.4
       version: 6.2.4
     '@tsconfig/svelte':
-      specifier: ^5.0.7
+      specifier: 5.0.7
       version: 5.0.7
     svelte:
-      specifier: ^5.51.2
+      specifier: 5.51.2
       version: 5.51.2
     svelte-check:
-      specifier: ^4.4.0
+      specifier: 4.4.0
       version: 4.4.0
+  turbo:
+    '@turbo/gen':
+      specifier: 2.8.20
+      version: 2.8.20
+    turbo:
+      specifier: 2.8.20
+      version: 2.8.20
   vitest:
     '@vitest/coverage-v8':
-      specifier: ^4.0.18
+      specifier: 4.0.18
       version: 4.0.18
     '@vitest/ui':
-      specifier: ^4.0.18
+      specifier: 4.0.18
       version: 4.0.18
     vitest:
-      specifier: ^4.0.18
+      specifier: 4.0.18
       version: 4.0.18
 
 overrides:
@@ -223,13 +259,13 @@ importers:
         specifier: ^2.29.8
         version: 2.29.8(@types/node@24.10.13)
       '@commitlint/cli':
-        specifier: ^19.8.1
+        specifier: catalog:commitlint
         version: 19.8.1(@types/node@24.10.13)(typescript@5.9.3)
       '@commitlint/config-conventional':
-        specifier: ^19.8.1
+        specifier: catalog:commitlint
         version: 19.8.1
       '@commitlint/types':
-        specifier: ^19.8.1
+        specifier: catalog:commitlint
         version: 19.8.1
       '@eslint/js':
         specifier: ^9.39.2
@@ -256,8 +292,8 @@ importers:
         specifier: ^1.0.13
         version: 1.0.13
       '@turbo/gen':
-        specifier: ^2.8.9
-        version: 2.8.9(@types/node@24.10.13)
+        specifier: catalog:turbo
+        version: 2.8.20(@types/node@24.10.13)
       '@types/node':
         specifier: ^24.10.13
         version: 24.10.13
@@ -328,32 +364,35 @@ importers:
         specifier: ^0.0.51
         version: 0.0.51
       prettier:
-        specifier: 'catalog:'
+        specifier: catalog:prettier
         version: 3.8.1
       prettier-plugin-astro:
-        specifier: ^0.14.1
+        specifier: catalog:prettier
         version: 0.14.1
       prettier-plugin-astro-organize-imports:
-        specifier: ^0.4.11
+        specifier: catalog:prettier
         version: 0.4.11(prettier-plugin-astro@0.14.1)(prettier-plugin-tailwindcss@0.7.2(prettier-plugin-astro@0.14.1)(prettier-plugin-jsdoc@1.8.0(prettier@3.8.1))(prettier-plugin-organize-imports@4.3.0(prettier@3.8.1)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3)))(prettier-plugin-svelte@3.4.1(prettier@3.8.1)(svelte@5.51.2))(prettier@3.8.1))(prettier@3.8.1)
       prettier-plugin-jsdoc:
-        specifier: ^1.8.0
+        specifier: catalog:prettier
         version: 1.8.0(prettier@3.8.1)
       prettier-plugin-organize-imports:
-        specifier: ^4.3.0
+        specifier: catalog:prettier
         version: 4.3.0(prettier@3.8.1)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3))
       prettier-plugin-packagejson:
-        specifier: ^2.5.22
+        specifier: catalog:prettier
         version: 2.5.22(prettier@3.8.1)
       prettier-plugin-svelte:
-        specifier: ^3.4.1
+        specifier: catalog:prettier
         version: 3.4.1(prettier@3.8.1)(svelte@5.51.2)
+      prettier-plugin-tailwindcss:
+        specifier: catalog:prettier
+        version: 0.7.2(prettier-plugin-astro@0.14.1)(prettier-plugin-jsdoc@1.8.0(prettier@3.8.1))(prettier-plugin-organize-imports@4.3.0(prettier@3.8.1)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3)))(prettier-plugin-svelte@3.4.1(prettier@3.8.1)(svelte@5.51.2))(prettier@3.8.1)
       publint:
         specifier: ^0.3.17
         version: 0.3.17
       turbo:
-        specifier: ^2.8.9
-        version: 2.8.9
+        specifier: catalog:turbo
+        version: 2.8.20
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -373,9 +412,6 @@ importers:
       node-plop:
         specifier: 'catalog:'
         version: 0.32.3(@types/node@24.10.13)
-      prettier-plugin-tailwindcss:
-        specifier: 'catalog:'
-        version: 0.7.2(prettier-plugin-astro@0.14.1)(prettier-plugin-jsdoc@1.8.0(prettier@3.8.1))(prettier-plugin-organize-imports@4.3.0(prettier@3.8.1)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3)))(prettier-plugin-svelte@3.4.1(prettier@3.8.1)(svelte@5.51.2))(prettier@3.8.1)
       taze:
         specifier: 'catalog:'
         version: 19.9.2
@@ -406,7 +442,7 @@ importers:
     devDependencies:
       vitepress-plugin-llms:
         specifier: 'catalog:'
-        version: 1.12.0
+        version: 1.11.0
 
   core/ai-commit-msg:
     dependencies:
@@ -717,7 +753,7 @@ importers:
   core/prettier-plugin-handlebars:
     devDependencies:
       prettier:
-        specifier: 'catalog:'
+        specifier: catalog:prettier
         version: 3.8.1
       tsdown:
         specifier: 'catalog:'
@@ -1235,9 +1271,6 @@ packages:
     hasBin: true
     peerDependencies:
       typescript: ^5.0.0
-
-  '@astrojs/compiler@2.12.2':
-    resolution: {integrity: sha512-w2zfvhjNCkNMmMMOn5b0J8+OmUaBL1o40ipMvqcG6NRpdC+lKxmTi48DT8Xw0SzJ3AfmeFLB45zXZXtmbsjcgw==}
 
   '@astrojs/compiler@2.13.0':
     resolution: {integrity: sha512-mqVORhUJViA28fwHYaWmsXSzLO9osbdZ5ImUfxBarqsYdMlPbqAqGJCxsNzvppp1BEzc1mJNjOVvQqeDN8Vspw==}
@@ -4241,34 +4274,39 @@ packages:
   '@tsconfig/svelte@5.0.7':
     resolution: {integrity: sha512-NOtJF9LQnV7k6bpzcXwL/rXdlFHvAT9e0imrftiMc6/+FUNBHRZ8UngDrM+jciA6ENzFYNoFs8rfwumuGF+Dhw==}
 
-  '@turbo/gen-darwin-64@2.8.9':
-    resolution: {integrity: sha512-Kt9e4uMLEpdGoqQvEJTKzTJMKviS8dww0c6cNVKOgyEbigX6lSd3/Z4zwrTCV48sSbDGR5k2wQwmo/dyerpRVQ==}
+  '@turbo/darwin-64@2.8.20':
+    resolution: {integrity: sha512-FQ9EX1xMU5nbwjxXxM3yU88AQQ6Sqc6S44exPRroMcx9XZHqqppl5ymJF0Ig/z3nvQNwDmz1Gsnvxubo+nXWjQ==}
     cpu: [x64]
     os: [darwin]
 
-  '@turbo/gen-darwin-arm64@2.8.9':
-    resolution: {integrity: sha512-KRpW8ALgRR9nc5kjlNj1R2tKjcmZn4UBNxLKkvDpf/h5CSiHJ8RGTfqXL8WWCrz6BLvEVgmr1dblR2of2Wv8/w==}
+  '@turbo/darwin-arm64@2.8.20':
+    resolution: {integrity: sha512-Gpyh9ATFGThD6/s9L95YWY54cizg/VRWl2B67h0yofG8BpHf67DFAh9nuJVKG7bY0+SBJDAo5cMur+wOl9YOYw==}
     cpu: [arm64]
     os: [darwin]
 
-  '@turbo/gen-linux-64@2.8.9':
-    resolution: {integrity: sha512-QixzBbLzMRQ9RIIPzL+2s7Ltx4gr/CeIgyG3WST4pETW/0kflX60SQMZbjRu1TAfQcXmIbqy/KcQ6tvZOKPqBg==}
+  '@turbo/gen@2.8.20':
+    resolution: {integrity: sha512-SazKn5Pc9mitpc3uc6Pmf+QhkNtvF5t6Ro0V1cuc0QFhblbfw4KwWqFnnfTEmGzgDtb2CZJB3BK8LFMBX52eLg==}
+    hasBin: true
+
+  '@turbo/linux-64@2.8.20':
+    resolution: {integrity: sha512-p2QxWUYyYUgUFG0b0kR+pPi8t7c9uaVlRtjTTI1AbCvVqkpjUfCcReBn6DgG/Hu8xrWdKLuyQFaLYFzQskZbcA==}
     cpu: [x64]
     os: [linux]
 
-  '@turbo/gen-linux-arm64@2.8.9':
-    resolution: {integrity: sha512-qfCWB+Lx7xwpET8kj5BmwEMZI3QpJy/rE0ZndXTGdTXGBNVymKSR5mFPZPbhgflZLRUH/CMSVWT0jIWzCap86Q==}
+  '@turbo/linux-arm64@2.8.20':
+    resolution: {integrity: sha512-Gn5yjlZGLRZWarLWqdQzv0wMqyBNIdq1QLi48F1oY5Lo9kiohuf7BPQWtWxeNVS2NgJ1+nb/DzK1JduYC4AWOA==}
     cpu: [arm64]
     os: [linux]
 
-  '@turbo/gen-windows-64@2.8.9':
-    resolution: {integrity: sha512-qM+X++pfhSoby+IboizvPz8xlCKVKcSVTLS9xhDvYBTrkW1SRZ3Q0+DaAcFrc1anG1tlvv3Gz4F05vn8Z6JDGg==}
+  '@turbo/windows-64@2.8.20':
+    resolution: {integrity: sha512-vyaDpYk/8T6Qz5V/X+ihKvKFEZFUoC0oxYpC1sZanK6gaESJlmV3cMRT3Qhcg4D2VxvtC2Jjs9IRkrZGL+exLw==}
     cpu: [x64]
     os: [win32]
 
-  '@turbo/gen@2.8.9':
-    resolution: {integrity: sha512-F9pQe1Hq6TDjN7kHiFJN6fzyq3gZYLb40jBsaweMDboPbcII9Map6M/9lKbs7L1t3osc8rQxF0fRerdx7Ea3bw==}
-    hasBin: true
+  '@turbo/windows-arm64@2.8.20':
+    resolution: {integrity: sha512-voicVULvUV5yaGXo0Iue13BcHGYW3u0VgqSbfQwBaHbpj1zLjYV4KIe+7fYIo6DO8FVUJzxFps3ODCQG/Wy2Qw==}
+    cpu: [arm64]
+    os: [win32]
 
   '@tybys/wasm-util@0.10.1':
     resolution: {integrity: sha512-9tTaPJLSiejZKx+Bmog4uSubteqTvFrVrURwkmHixBo0G4seD0zUxp98E1DzUBJxLQ3NPwXrGKDiVjwx/DpPsg==}
@@ -5803,10 +5841,6 @@ packages:
     resolution: {integrity: sha512-A6p/pu/6fyBcA1TRz/GqWYPViplrftcW2gZC9q79ngNCKAeR/X3gcEdXQHl4KNXV+3wgIJ1CPkJQ3IHM6lcsyA==}
     engines: {node: '>=18'}
 
-  default-browser@5.2.1:
-    resolution: {integrity: sha512-WY/3TUME0x3KPYdRRxEJJvXRHV4PyPoUsxtZa78lwItwRQRHhd2U9xOscaT/YTf8uCXIAjeJOFBVEh/7FtD8Xg==}
-    engines: {node: '>=18'}
-
   default-browser@5.5.0:
     resolution: {integrity: sha512-H9LMLr5zwIbSxrmvikGuI/5KGhZ8E2zH3stkMgM5LpOWDutGM2JZaj460Udnf1a+946zc7YBgrqEWwbk7zHvGw==}
     engines: {node: '>=18'}
@@ -6016,10 +6050,6 @@ packages:
   encodeurl@2.0.0:
     resolution: {integrity: sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==}
     engines: {node: '>= 0.8'}
-
-  enhanced-resolve@5.18.3:
-    resolution: {integrity: sha512-d4lC8xfavMeBjzGr2vECC3fsGXziXZQyJxD868h2M/mBI3PwAuODxAkLkq5HYuvrPYcUtiLzsTo8U3PgX3Ocww==}
-    engines: {node: '>=10.13.0'}
 
   enhanced-resolve@5.20.0:
     resolution: {integrity: sha512-/ce7+jQ1PQ6rVXwe+jKEg5hW5ciicHwIQUagZkp6IufBoY3YDgdTTY1azVs0qoRgVmvsNB+rbjLJxDAeHHtwsQ==}
@@ -6661,6 +6691,7 @@ packages:
   git-raw-commits@4.0.0:
     resolution: {integrity: sha512-ICsMM1Wk8xSGMowkOmPrzo2Fgmfo4bMHLNX6ytHjajRJUqvHOw/TFapQ+QG75c3X/tTDDhOSRPGC52dDbNM8FQ==}
     engines: {node: '>=16'}
+    deprecated: This package is no longer maintained. For the JavaScript API, please use @conventional-changelog/git-client instead.
     hasBin: true
 
   github-slugger@2.0.0:
@@ -7401,10 +7432,6 @@ packages:
 
   js-yaml@3.14.2:
     resolution: {integrity: sha512-PMSmkqxr106Xa156c2M265Z+FTrPl+oxd/rgOQy2tijQeK5TxQ43psO1ZCwhVOSdnn+RzkzlRz/eY4BgJBYVpg==}
-    hasBin: true
-
-  js-yaml@4.1.0:
-    resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
     hasBin: true
 
   js-yaml@4.1.1:
@@ -8226,9 +8253,6 @@ packages:
   mlly@1.7.4:
     resolution: {integrity: sha512-qmdSIPC4bDJXgZTCR7XosJiNKySV7O215tsPtDN9iEO/7q/76b/ijtgRu/+epFXSJhijtTCCGp3DWS549P3xKw==}
 
-  mlly@1.8.0:
-    resolution: {integrity: sha512-l8D9ODSRWLe2KHJSifWGwBqpTZXIXTeo8mlKjY+E2HAakaTeNpqAyBZ8GSqLzHgw4XmHmC8whvpjJNMbFZN7/g==}
-
   mlly@1.8.2:
     resolution: {integrity: sha512-d+ObxMQFmbt10sretNDytwt85VrbkhhUA/JBGm1MPaWJ65Cl4wOgLaB1NYvJSZ0Ef03MMEU/0xpPMXUIQ29UfA==}
 
@@ -8938,11 +8962,6 @@ packages:
   prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
-    hasBin: true
-
-  prettier@3.7.4:
-    resolution: {integrity: sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==}
-    engines: {node: '>=14'}
     hasBin: true
 
   prettier@3.8.1:
@@ -9894,12 +9913,6 @@ packages:
       svelte: ^4.0.0 || ^5.0.0-next.0
       typescript: '>=5.0.0'
 
-  svelte2tsx@0.7.45:
-    resolution: {integrity: sha512-cSci+mYGygYBHIZLHlm/jYlEc1acjAHqaQaDFHdEBpUueM9kSTnPpvPtSl5VkJOU1qSJ7h1K+6F/LIUYiqC8VA==}
-    peerDependencies:
-      svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
-      typescript: ^4.9.4 || ^5.0.0
-
   svelte2tsx@0.7.48:
     resolution: {integrity: sha512-B15C8dtOY6C9MbnQJDCkzbK3yByInzKtXrr23QCoF8APHMh6JaDhjCMcRl6ay4qaeKYqkX4X3tNaJrsZL45Zlg==}
     peerDependencies:
@@ -9986,9 +9999,6 @@ packages:
 
   tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
-
-  tinyexec@1.0.1:
-    resolution: {integrity: sha512-5uC6DDlmeqiOwCPmK9jMSdOuZTh8bU39Ys6yidB+UTt5hfZUPGAypSgFRiEp+jbi9qH40BLDvy85jIU88wKSqw==}
 
   tinyexec@1.0.2:
     resolution: {integrity: sha512-W/KYk+NFhkmsYpuHq5JykngiOCnxeVL8v8dFnqxSD8qEEdRfXk1SDM6JzNqcERbcGYj9tMrDQBYV9cjgnunFIg==}
@@ -10152,38 +10162,8 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  turbo-darwin-64@2.8.9:
-    resolution: {integrity: sha512-KnCw1ZI9KTnEAhdI9avZrnZ/z4wsM++flMA1w8s8PKOqi5daGpFV36qoPafg4S8TmYMe52JPWEoFr0L+lQ5JIw==}
-    cpu: [x64]
-    os: [darwin]
-
-  turbo-darwin-arm64@2.8.9:
-    resolution: {integrity: sha512-CbD5Y2NKJKBXTOZ7z7Cc7vGlFPZkYjApA7ri9lH4iFwKV1X7MoZswh9gyRLetXYWImVX1BqIvP8KftulJg/wIA==}
-    cpu: [arm64]
-    os: [darwin]
-
-  turbo-linux-64@2.8.9:
-    resolution: {integrity: sha512-OXC9HdCtsHvyH+5KUoH8ds+p5WU13vdif0OPbsFzZca4cUXMwKA3HWwUuCgQetk0iAE4cscXpi/t8A263n3VTg==}
-    cpu: [x64]
-    os: [linux]
-
-  turbo-linux-arm64@2.8.9:
-    resolution: {integrity: sha512-yI5n8jNXiFA6+CxnXG0gO7h5ZF1+19K8uO3/kXPQmyl37AdiA7ehKJQOvf9OPAnmkGDHcF2HSCPltabERNRmug==}
-    cpu: [arm64]
-    os: [linux]
-
-  turbo-windows-64@2.8.9:
-    resolution: {integrity: sha512-/OztzeGftJAg258M/9vK2ZCkUKUzqrWXJIikiD2pm8TlqHcIYUmepDbyZSDfOiUjMy6NzrLFahpNLnY7b5vNgg==}
-    cpu: [x64]
-    os: [win32]
-
-  turbo-windows-arm64@2.8.9:
-    resolution: {integrity: sha512-xZ2VTwVTjIqpFZKN4UBxDHCPM3oJ2J5cpRzCBSmRpJ/Pn33wpiYjs+9FB2E03svKaD04/lSSLlEUej0UYsugfg==}
-    cpu: [arm64]
-    os: [win32]
-
-  turbo@2.8.9:
-    resolution: {integrity: sha512-G+Mq8VVQAlpz/0HTsxiNNk/xywaHGl+dk1oiBREgOEVCCDjXInDlONWUn5srRnC9s5tdHTFD1bx1N19eR4hI+g==}
+  turbo@2.8.20:
+    resolution: {integrity: sha512-Rb4qk5YT8RUwwdXtkLpkVhNEe/lor6+WV7S5tTlLpxSz6MjV5Qi8jGNn4gS6NAvrYGA/rNrE6YUQM85sCZUDbQ==}
     hasBin: true
 
   type-check@0.4.0:
@@ -10806,9 +10786,8 @@ packages:
       vite:
         optional: true
 
-  vitepress-plugin-llms@1.12.0:
-    resolution: {integrity: sha512-zuzL7a8UJuGl46le5cAy/QxKMGlpSylcsLjDDn6BYPc1u+eP3nzoQk9ne9XFBqrE7exoJlIYJELVN8HMgYlFKQ==}
-    engines: {node: '>=18.0.0'}
+  vitepress-plugin-llms@1.11.0:
+    resolution: {integrity: sha512-n6fjWzBNKy40p8cij+d2cHiC2asNW1eQKdmc06gX9VAv7vWppIoVLH/f7Ht1bK0vSpGzzW2QimvNfbfv1oCdJw==}
 
   vitepress@1.6.4:
     resolution: {integrity: sha512-+2ym1/+0VVrbhNyRoFFesVvBvHAVMZMK0rw60E3X/5349M1GuVdKeazuksqopEdvkKwKGs21Q729jX81/bkBJg==}
@@ -11531,8 +11510,6 @@ snapshots:
       - prettier
       - prettier-plugin-astro
 
-  '@astrojs/compiler@2.12.2': {}
-
   '@astrojs/compiler@2.13.0': {}
 
   '@astrojs/internal-helpers@0.6.1': {}
@@ -11587,7 +11564,7 @@ snapshots:
       smol-toml: 1.6.0
       unified: 11.0.5
       unist-util-remove-position: 5.0.0
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
       unist-util-visit-parents: 6.0.2
       vfile: 6.0.3
     transitivePeerDependencies:
@@ -11613,7 +11590,7 @@ snapshots:
       smol-toml: 1.5.2
       unified: 11.0.5
       unist-util-remove-position: 5.0.0
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
       unist-util-visit-parents: 6.0.2
       vfile: 6.0.3
     transitivePeerDependencies:
@@ -11639,7 +11616,7 @@ snapshots:
       smol-toml: 1.5.2
       unified: 11.0.5
       unist-util-remove-position: 5.0.0
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
       unist-util-visit-parents: 6.0.2
       vfile: 6.0.3
     transitivePeerDependencies:
@@ -11659,7 +11636,7 @@ snapshots:
       remark-gfm: 4.0.1
       remark-smartypants: 3.0.2
       source-map: 0.7.4
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
       vfile: 6.0.3
     transitivePeerDependencies:
       - supports-color
@@ -12145,7 +12122,7 @@ snapshots:
       '@commitlint/load': 19.8.1(@types/node@24.10.13)(typescript@5.9.3)
       '@commitlint/read': 19.8.1
       '@commitlint/types': 19.8.1
-      tinyexec: 1.0.1
+      tinyexec: 1.0.2
       yargs: 17.7.2
     transitivePeerDependencies:
       - '@types/node'
@@ -12180,7 +12157,7 @@ snapshots:
   '@commitlint/is-ignored@19.8.1':
     dependencies:
       '@commitlint/types': 19.8.1
-      semver: 7.7.3
+      semver: 7.7.4
 
   '@commitlint/lint@19.8.1':
     dependencies:
@@ -12219,7 +12196,7 @@ snapshots:
       '@commitlint/types': 19.8.1
       git-raw-commits: 4.0.0
       minimist: 1.2.8
-      tinyexec: 1.0.1
+      tinyexec: 1.0.2
 
   '@commitlint/resolve-extends@19.8.1':
     dependencies:
@@ -12872,7 +12849,7 @@ snapshots:
       globals: 15.15.0
       kolorist: 1.8.0
       local-pkg: 1.1.1
-      mlly: 1.8.0
+      mlly: 1.8.2
     transitivePeerDependencies:
       - supports-color
 
@@ -13241,7 +13218,7 @@ snapshots:
   '@manypkg/tools@2.1.0':
     dependencies:
       jju: 1.4.0
-      js-yaml: 4.1.0
+      js-yaml: 4.1.1
       tinyglobby: 0.2.15
 
   '@mdx-js/mdx@3.1.0(acorn@8.15.0)':
@@ -13268,7 +13245,7 @@ snapshots:
       unified: 11.0.5
       unist-util-position-from-estree: 2.0.0
       unist-util-stringify-position: 4.0.0
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
       vfile: 6.0.3
     transitivePeerDependencies:
       - acorn
@@ -13562,7 +13539,7 @@ snapshots:
       pathe: 1.1.2
       picocolors: 1.1.1
       pkg-types: 2.3.0
-      prettier: 3.7.4
+      prettier: 3.8.1
       react-refresh: 0.14.2
       react-router: 7.9.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       semver: 7.7.4
@@ -13972,7 +13949,7 @@ snapshots:
       magic-string: 0.30.21
       storybook: 10.2.8(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.0(react@19.2.1))(react@19.2.1)
       svelte: 5.51.2
-      svelte2tsx: 0.7.45(svelte@5.51.2)(typescript@5.9.3)
+      svelte2tsx: 0.7.48(svelte@5.51.2)(typescript@5.9.3)
       typescript: 5.9.3
       vite: 6.3.5(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.2)
     transitivePeerDependencies:
@@ -13990,6 +13967,10 @@ snapshots:
   '@sveltejs/acorn-typescript@1.0.6(acorn@8.15.0)':
     dependencies:
       acorn: 8.15.0
+
+  '@sveltejs/acorn-typescript@1.0.6(acorn@8.16.0)':
+    dependencies:
+      acorn: 8.16.0
 
   '@sveltejs/adapter-static@3.0.10(@sveltejs/kit@2.52.0(@opentelemetry/api@1.9.0)(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.51.2)(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.2)))(svelte@5.51.2)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.2)))':
     dependencies:
@@ -14024,7 +14005,7 @@ snapshots:
       sade: 1.8.1
       semver: 7.7.4
       svelte: 5.51.2
-      svelte2tsx: 0.7.45(svelte@5.51.2)(typescript@5.9.3)
+      svelte2tsx: 0.7.48(svelte@5.51.2)(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
 
@@ -14166,7 +14147,7 @@ snapshots:
   '@tailwindcss/node@4.1.18':
     dependencies:
       '@jridgewell/remapping': 2.3.5
-      enhanced-resolve: 5.18.3
+      enhanced-resolve: 5.20.0
       jiti: 2.6.1
       lightningcss: 1.30.2
       magic-string: 0.30.21
@@ -14330,32 +14311,30 @@ snapshots:
 
   '@tsconfig/svelte@5.0.7': {}
 
-  '@turbo/gen-darwin-64@2.8.9':
+  '@turbo/darwin-64@2.8.20':
     optional: true
 
-  '@turbo/gen-darwin-arm64@2.8.9':
+  '@turbo/darwin-arm64@2.8.20':
     optional: true
 
-  '@turbo/gen-linux-64@2.8.9':
-    optional: true
-
-  '@turbo/gen-linux-arm64@2.8.9':
-    optional: true
-
-  '@turbo/gen-windows-64@2.8.9':
-    optional: true
-
-  '@turbo/gen@2.8.9(@types/node@24.10.13)':
+  '@turbo/gen@2.8.20(@types/node@24.10.13)':
     dependencies:
       '@inquirer/prompts': 7.10.1(@types/node@24.10.13)
-    optionalDependencies:
-      '@turbo/gen-darwin-64': 2.8.9
-      '@turbo/gen-darwin-arm64': 2.8.9
-      '@turbo/gen-linux-64': 2.8.9
-      '@turbo/gen-linux-arm64': 2.8.9
-      '@turbo/gen-windows-64': 2.8.9
+      esbuild: 0.25.12
     transitivePeerDependencies:
       - '@types/node'
+
+  '@turbo/linux-64@2.8.20':
+    optional: true
+
+  '@turbo/linux-arm64@2.8.20':
+    optional: true
+
+  '@turbo/windows-64@2.8.20':
+    optional: true
+
+  '@turbo/windows-arm64@2.8.20':
+    optional: true
 
   '@tybys/wasm-util@0.10.1':
     dependencies:
@@ -14952,6 +14931,10 @@ snapshots:
     dependencies:
       acorn: 8.15.0
 
+  acorn-jsx@5.3.2(acorn@8.16.0):
+    dependencies:
+      acorn: 8.16.0
+
   acorn-walk@8.3.2:
     optional: true
 
@@ -15437,7 +15420,7 @@ snapshots:
       tsconfck: 3.1.6(typescript@5.9.3)
       ultrahtml: 1.6.0
       unifont: 0.7.4
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
       unstorage: 1.17.4
       vfile: 6.0.3
       vite: 6.4.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.2)
@@ -16279,11 +16262,6 @@ snapshots:
 
   default-browser-id@5.0.0: {}
 
-  default-browser@5.2.1:
-    dependencies:
-      bundle-name: 4.1.0
-      default-browser-id: 5.0.0
-
   default-browser@5.5.0:
     dependencies:
       bundle-name: 4.1.0
@@ -16469,11 +16447,6 @@ snapshots:
 
   encodeurl@2.0.0: {}
 
-  enhanced-resolve@5.18.3:
-    dependencies:
-      graceful-fs: 4.2.11
-      tapable: 2.3.0
-
   enhanced-resolve@5.20.0:
     dependencies:
       graceful-fs: 4.2.11
@@ -16614,7 +16587,7 @@ snapshots:
   esast-util-from-js@2.0.1:
     dependencies:
       '@types/estree-jsx': 1.0.5
-      acorn: 8.15.0
+      acorn: 8.16.0
       esast-util-from-estree: 2.0.0
       vfile-message: 4.0.2
 
@@ -17604,7 +17577,7 @@ snapshots:
       '@types/ws': 8.18.1
       entities: 6.0.1
       whatwg-mimetype: 3.0.0
-      ws: 8.18.3
+      ws: 8.20.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -18272,10 +18245,6 @@ snapshots:
       argparse: 1.0.10
       esprima: 4.0.1
 
-  js-yaml@4.1.0:
-    dependencies:
-      argparse: 2.0.1
-
   js-yaml@4.1.1:
     dependencies:
       argparse: 2.0.1
@@ -18584,7 +18553,7 @@ snapshots:
 
   local-pkg@1.1.1:
     dependencies:
-      mlly: 1.8.0
+      mlly: 1.8.2
       pkg-types: 2.3.0
       quansync: 0.2.11
 
@@ -18838,7 +18807,7 @@ snapshots:
     dependencies:
       '@types/mdast': 4.0.4
       devlop: 1.1.0
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.3
       mdast-util-to-markdown: 2.1.2
       micromark-util-normalize-identifier: 2.0.1
     transitivePeerDependencies:
@@ -18847,7 +18816,7 @@ snapshots:
   mdast-util-gfm-strikethrough@2.0.0:
     dependencies:
       '@types/mdast': 4.0.4
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.3
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
       - supports-color
@@ -18857,7 +18826,7 @@ snapshots:
       '@types/mdast': 4.0.4
       devlop: 1.1.0
       markdown-table: 3.0.4
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.3
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
       - supports-color
@@ -18866,14 +18835,14 @@ snapshots:
     dependencies:
       '@types/mdast': 4.0.4
       devlop: 1.1.0
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.3
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
       - supports-color
 
   mdast-util-gfm@3.1.0:
     dependencies:
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.3
       mdast-util-gfm-autolink-literal: 2.0.1
       mdast-util-gfm-footnote: 2.1.0
       mdast-util-gfm-strikethrough: 2.0.0
@@ -18900,7 +18869,7 @@ snapshots:
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
       devlop: 1.1.0
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.3
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
       - supports-color
@@ -18913,7 +18882,7 @@ snapshots:
       '@types/unist': 3.0.3
       ccount: 2.0.1
       devlop: 1.1.0
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.3
       mdast-util-to-markdown: 2.1.2
       parse-entities: 4.0.2
       stringify-entities: 4.0.4
@@ -18924,7 +18893,7 @@ snapshots:
 
   mdast-util-mdx@3.0.0:
     dependencies:
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.3
       mdast-util-mdx-expression: 2.0.1
       mdast-util-mdx-jsx: 3.2.0
       mdast-util-mdxjs-esm: 2.0.1
@@ -18938,7 +18907,7 @@ snapshots:
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
       devlop: 1.1.0
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.3
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
       - supports-color
@@ -18986,7 +18955,7 @@ snapshots:
       github-slugger: 2.0.0
       mdast-util-to-string: 4.0.0
       unist-util-is: 6.0.1
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
 
   mdast-zone@https://codeload.github.com/stephansama/mdast-zone/tar.gz/1c5b08cd97240debeed4c9c6afad49df5877a132:
     dependencies:
@@ -19143,8 +19112,8 @@ snapshots:
 
   micromark-extension-mdxjs@3.0.0:
     dependencies:
-      acorn: 8.15.0
-      acorn-jsx: 5.3.2(acorn@8.15.0)
+      acorn: 8.16.0
+      acorn-jsx: 5.3.2(acorn@8.16.0)
       micromark-extension-mdx-expression: 3.0.1
       micromark-extension-mdx-jsx: 3.0.2
       micromark-extension-mdx-md: 2.0.0
@@ -19408,13 +19377,6 @@ snapshots:
   mkdirp@1.0.4: {}
 
   mlly@1.7.4:
-    dependencies:
-      acorn: 8.15.0
-      pathe: 2.0.3
-      pkg-types: 1.3.1
-      ufo: 1.6.1
-
-  mlly@1.8.0:
     dependencies:
       acorn: 8.15.0
       pathe: 2.0.3
@@ -19736,7 +19698,7 @@ snapshots:
 
   open@10.2.0:
     dependencies:
-      default-browser: 5.2.1
+      default-browser: 5.5.0
       define-lazy-prop: 3.0.0
       is-inside-container: 1.0.0
       wsl-utils: 0.1.0
@@ -20112,7 +20074,7 @@ snapshots:
 
   prettier-plugin-astro-organize-imports@0.4.11(prettier-plugin-astro@0.14.1)(prettier-plugin-tailwindcss@0.7.2(prettier-plugin-astro@0.14.1)(prettier-plugin-jsdoc@1.8.0(prettier@3.8.1))(prettier-plugin-organize-imports@4.3.0(prettier@3.8.1)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3)))(prettier-plugin-svelte@3.4.1(prettier@3.8.1)(svelte@5.51.2))(prettier@3.8.1))(prettier@3.8.1):
     dependencies:
-      '@astrojs/compiler': 2.12.2
+      '@astrojs/compiler': 2.13.0
       prettier: 3.8.1
       typescript: 5.9.3
     optionalDependencies:
@@ -20121,7 +20083,7 @@ snapshots:
 
   prettier-plugin-astro@0.14.1:
     dependencies:
-      '@astrojs/compiler': 2.12.2
+      '@astrojs/compiler': 2.13.0
       prettier: 3.8.1
       sass-formatter: 0.7.9
 
@@ -20129,7 +20091,7 @@ snapshots:
     dependencies:
       binary-searching: 2.0.5
       comment-parser: 1.4.1
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.3
       prettier: 3.8.1
     transitivePeerDependencies:
       - supports-color
@@ -20162,8 +20124,6 @@ snapshots:
       prettier-plugin-svelte: 3.4.1(prettier@3.8.1)(svelte@5.51.2)
 
   prettier@2.8.8: {}
-
-  prettier@3.7.4: {}
 
   prettier@3.8.1: {}
 
@@ -20532,7 +20492,7 @@ snapshots:
   remark-parse@11.0.0:
     dependencies:
       '@types/mdast': 4.0.4
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.3
       micromark-util-types: 2.0.2
       unified: 11.0.5
     transitivePeerDependencies:
@@ -20551,7 +20511,7 @@ snapshots:
       retext: 9.0.0
       retext-smartypants: 6.2.0
       unified: 11.0.5
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
 
   remark-stringify@11.0.0:
     dependencies:
@@ -21190,12 +21150,12 @@ snapshots:
       '@testing-library/user-event': 14.6.1(@testing-library/dom@10.4.1)
       '@vitest/expect': 3.2.4
       '@vitest/spy': 3.2.4
-      esbuild: 0.27.1
+      esbuild: 0.27.7
       open: 10.2.0
       recast: 0.23.11
       semver: 7.7.4
       use-sync-external-store: 1.6.0(react@19.2.1)
-      ws: 8.18.3
+      ws: 8.20.0
     optionalDependencies:
       prettier: 3.8.1
     transitivePeerDependencies:
@@ -21373,13 +21333,6 @@ snapshots:
     transitivePeerDependencies:
       - picomatch
 
-  svelte2tsx@0.7.45(svelte@5.51.2)(typescript@5.9.3):
-    dependencies:
-      dedent-js: 1.0.1
-      scule: 1.3.0
-      svelte: 5.51.2
-      typescript: 5.9.3
-
   svelte2tsx@0.7.48(svelte@5.51.2)(typescript@5.9.3):
     dependencies:
       dedent-js: 1.0.1
@@ -21391,10 +21344,10 @@ snapshots:
     dependencies:
       '@jridgewell/remapping': 2.3.5
       '@jridgewell/sourcemap-codec': 1.5.5
-      '@sveltejs/acorn-typescript': 1.0.6(acorn@8.15.0)
+      '@sveltejs/acorn-typescript': 1.0.6(acorn@8.16.0)
       '@types/estree': 1.0.8
       '@types/trusted-types': 2.0.7
-      acorn: 8.15.0
+      acorn: 8.16.0
       aria-query: 5.3.2
       axobject-query: 4.1.0
       clsx: 2.1.1
@@ -21483,8 +21436,6 @@ snapshots:
   tinybench@2.9.0: {}
 
   tinyexec@0.3.2: {}
-
-  tinyexec@1.0.1: {}
 
   tinyexec@1.0.2: {}
 
@@ -21621,32 +21572,14 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  turbo-darwin-64@2.8.9:
-    optional: true
-
-  turbo-darwin-arm64@2.8.9:
-    optional: true
-
-  turbo-linux-64@2.8.9:
-    optional: true
-
-  turbo-linux-arm64@2.8.9:
-    optional: true
-
-  turbo-windows-64@2.8.9:
-    optional: true
-
-  turbo-windows-arm64@2.8.9:
-    optional: true
-
-  turbo@2.8.9:
+  turbo@2.8.20:
     optionalDependencies:
-      turbo-darwin-64: 2.8.9
-      turbo-darwin-arm64: 2.8.9
-      turbo-linux-64: 2.8.9
-      turbo-linux-arm64: 2.8.9
-      turbo-windows-64: 2.8.9
-      turbo-windows-arm64: 2.8.9
+      '@turbo/darwin-64': 2.8.20
+      '@turbo/darwin-arm64': 2.8.20
+      '@turbo/linux-64': 2.8.20
+      '@turbo/linux-arm64': 2.8.20
+      '@turbo/windows-64': 2.8.20
+      '@turbo/windows-arm64': 2.8.20
 
   type-check@0.4.0:
     dependencies:
@@ -21866,7 +21799,7 @@ snapshots:
   unist-util-remove-position@5.0.0:
     dependencies:
       '@types/unist': 3.0.3
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
 
   unist-util-remove@4.0.0:
     dependencies:
@@ -21925,7 +21858,7 @@ snapshots:
   unplugin@2.3.11:
     dependencies:
       '@jridgewell/remapping': 2.3.5
-      acorn: 8.15.0
+      acorn: 8.16.0
       picomatch: 4.0.3
       webpack-virtual-modules: 0.6.2
 
@@ -22170,7 +22103,7 @@ snapshots:
     optionalDependencies:
       vite: 7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.2)
 
-  vitepress-plugin-llms@1.12.0:
+  vitepress-plugin-llms@1.11.0:
     dependencies:
       gray-matter: 4.0.3
       markdown-it: 14.1.1

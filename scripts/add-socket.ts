@@ -6,17 +6,13 @@ import path from "node:path";
 
 const md = String.raw;
 const template = md`
-[![JSR](https://jsr.io/badges/{{package}})](https://jsr.io/{{package}})
+[![socket.dev](https://badge.socket.dev/npm/package/{{package}})](https://socket.dev/npm/package/{{package}}/overview)
 `;
-// const template = md`
-// [![socket.dev](https://badge.socket.dev/npm/package/{{package}})](https://socket.dev/npm/package/{{package}}/overview)
-// `;
 
 const { packages } = await getPackages(process.cwd());
 
 for (const pkg of packages) {
 	if (!pkg.relativeDir.startsWith("core")) continue;
-	if (!pkg.packageJson.name.startsWith("@stephansama")) continue;
 
 	const readmePath = path.resolve(pkg.dir, "README.md");
 	const readmeFile = await fs.promises.readFile(readmePath, "utf8");

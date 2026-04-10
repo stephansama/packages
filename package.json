@@ -20,7 +20,6 @@
     "build:packages": "turbo build --filter='./core/*'",
     "build:www": "node ./scripts/build-www.js",
     "changeset": "changeset",
-    "dev": "turbo dev",
     "fmt:check": "prettier . --check",
     "fmt:write": "prettier . --write",
     "knip": "knip --config ./.config/knip.ts",

@@ -1,5 +1,11 @@
 # @stephansama/typed-env
 
+## 0.0.4
+
+### Patch Changes
+
+- 8bf5ceb: added socket and jsr badge to relevant packages
+
 ## 0.0.3
 
 ### Patch Changes

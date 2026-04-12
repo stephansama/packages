@@ -1,5 +1,11 @@
 # @stephansama/auto-readme
 
+## 0.2.7
+
+### Patch Changes
+
+- 8bf5ceb: added socket and jsr badge to relevant packages
+
 ## 0.2.6
 
 ### Patch Changes

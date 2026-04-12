@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.4.3
+
+### Patch Changes
+
+- 8bf5ceb: added socket and jsr badge to relevant packages
+
 ## 1.4.2
 
 ### Patch Changes

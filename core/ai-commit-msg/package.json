@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/ai-commit-msg",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "generate commit messages using ai",
 	"keywords": [
 		"ai-commit-msg"

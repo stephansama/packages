@@ -1,5 +1,11 @@
 # @stephansama/github-env
 
+## 1.0.1
+
+### Patch Changes
+
+- 8bf5ceb: added socket and jsr badge to relevant packages
+
 ## 1.0.0
 
 ### Major Changes

@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-xsl
 
+## 1.1.4
+
+### Patch Changes
+
+- 8bf5ceb: added socket and jsr badge to relevant packages
+
 ## 1.1.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
 	"name": "@stephansama/types-lhci",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "types for lhci configuration",
 	"keywords": [
 		"types-lhci"

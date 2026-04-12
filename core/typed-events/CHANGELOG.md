@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 3.0.6
+
+### Patch Changes
+
+- 8bf5ceb: added socket and jsr badge to relevant packages
+
 ## 3.0.5
 
 ### Patch Changes

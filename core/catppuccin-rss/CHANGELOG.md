@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-rss
 
+## 2.0.3
+
+### Patch Changes
+
+- 8bf5ceb: added socket and jsr badge to relevant packages
+
 ## 2.0.2
 
 ### Patch Changes

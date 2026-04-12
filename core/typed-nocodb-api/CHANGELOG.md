@@ -1,5 +1,11 @@
 # @stephansama/typed-nocodb-api
 
+## 0.2.3
+
+### Patch Changes
+
+- 8bf5ceb: added socket and jsr badge to relevant packages
+
 ## 0.2.2
 
 ### Patch Changes

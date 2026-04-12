@@ -1,5 +1,11 @@
 # @stephansama/find-makefile-targets
 
+## 1.0.5
+
+### Patch Changes
+
+- 8bf5ceb: added socket and jsr badge to relevant packages
+
 ## 1.0.4
 
 ### Patch Changes

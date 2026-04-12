@@ -3,6 +3,8 @@
 [![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/multipublish)
 [![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/multipublish)
 [![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Fmultipublish?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/multipublish)
+[![JSR](https://jsr.io/badges/@stephansama/multipublish)](https://jsr.io/@stephansama/multipublish)
+[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/multipublish)](https://socket.dev/npm/package/@stephansama/multipublish/overview)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/multipublish?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/multipublish)
 
 Publish packages to multiple providers easily
@@ -144,13 +146,14 @@ _(\*) Required._
 
 _Object containing the following properties:_
 
-| Property                     | Type            | Default |
-| :--------------------------- | :-------------- | :------ |
-| `allowSlowTypes`             | `boolean`       | `true`  |
-| `defaultExclude`             | `Array<string>` |         |
-| `defaultInclude`             | `Array<string>` |         |
-| `experimentalGenerateJSR`    | `boolean`       | `false` |
-| `experimentalUpdateCatalogs` | `boolean`       | `false` |
+| Property                     | Type            | Default            |
+| :--------------------------- | :-------------- | :----------------- |
+| `allowSlowTypes`             | `boolean`       | `true`             |
+| `defaultExclude`             | `Array<string>` |                    |
+| `defaultInclude`             | `Array<string>` |                    |
+| `experimentalGenerateJSR`    | `boolean`       | `false`            |
+| `experimentalUpdateCatalogs` | `boolean`       | `false`            |
+| `tokenEnvironmentKey`        | `string`        | `'JSR_AUTH_TOKEN'` |
 
 _All properties are optional._
 

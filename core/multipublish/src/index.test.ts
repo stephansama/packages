@@ -13,12 +13,23 @@ const mocks = vi.hoisted(() => ({
 					packageJson: { name: "pkg1", version: "1.0.0" },
 					relativeDir: "pkg1",
 				},
+				{
+					dir: "/mock/root/pkg2",
+					packageJson: {
+						name: "@stephansama/pkg2",
+						version: "1.0.0",
+					},
+					relativeDir: "pkg2",
+				},
 			],
 		}),
 	),
 	loadConfig: vi.fn(() => Promise.resolve({ platforms: ["npm"] })),
 	loadReleases: vi.fn(() =>
-		Promise.resolve([{ name: "pkg1", version: "1.0.0" }]),
+		Promise.resolve([
+			{ name: "pkg1", version: "1.0.0" },
+			{ name: "@stephansama/pkg2", version: "1.0.0" },
+		]),
 	),
 	publishPlatform: vi.fn(),
 	updateJsrConfigVersion: vi.fn(),
@@ -47,11 +58,19 @@ describe("run", () => {
 		expect(mocks.getPackages).toHaveBeenCalledOnce();
 		expect(mocks.loadReleases).toHaveBeenCalledOnce();
 		expect(mocks.updateJsrConfigVersion).not.toHaveBeenCalled();
-		expect(mocks.publishPlatform).toHaveBeenCalledOnce();
 		expect(mocks.publishPlatform).toHaveBeenCalledWith(
 			expect.objectContaining({
 				packageJson: expect.objectContaining({
 					name: "pkg1",
+					version: "1.0.0",
+				}),
+			}),
+			"npm",
+		);
+		expect(mocks.publishPlatform).toHaveBeenCalledWith(
+			expect.objectContaining({
+				packageJson: expect.objectContaining({
+					name: "@stephansama/pkg2",
 					version: "1.0.0",
 				}),
 			}),

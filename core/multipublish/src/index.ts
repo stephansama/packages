@@ -29,7 +29,15 @@ export async function run() {
 
 	for (const pkg of releasedPackages) {
 		if (args.versionJsr) {
+			if (!pkg.packageJson.name.includes("/")) {
+				console.warn(
+					`attempting to publish a non scoped package skipping`,
+				);
+				continue;
+			}
+
 			await updateJsrConfigVersion(pkg);
+
 			continue;
 		}
 

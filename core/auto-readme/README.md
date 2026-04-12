@@ -3,6 +3,8 @@
 [![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/auto-readme)
 [![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/auto-readme)
 [![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Fauto-readme?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/auto-readme)
+[![JSR](https://jsr.io/badges/@stephansama/auto-readme)](https://jsr.io/@stephansama/auto-readme)
+[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/auto-readme)](https://socket.dev/npm/package/@stephansama/auto-readme/overview)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/auto-readme?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/auto-readme)
 
 Generate lists and tables for your README automagically based on your repository
@@ -142,7 +144,7 @@ disableEmojis: true
 #### JavaScript Example
 
 ```javascript
-/** @type {import('@stephansama/auto-readme').Config} */
+/** @type {import("@stephansama/auto-readme").Config} */
 export default {
   disableEmojis: true,
 };

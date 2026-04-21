@@ -9,8 +9,8 @@
 .config/www/public/*
 .env**
 .next
-.react-router
 .publish
+.react-router
 .svelte-kit
 .turbo
 .wrangler
@@ -22,4 +22,5 @@ core/types-lhci/config
 dist*/
 examples/catppuccin-xsl/vanilla/public/**/*
 node_modules
+single-file.html
 storybook-static

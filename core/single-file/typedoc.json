@@ -1,0 +1,12 @@
+{
+	"entryPoints": ["src/*"],
+	"tsconfig": "./tsconfig.json",
+	"exclude": [
+		"**/tests/**",
+		"**/*.test.ts",
+		"**/*.spec.ts",
+		"node_modules",
+		"**/{node_modules,test,book,doc,dist}/**/*",
+		"**/{pages,components}/**"
+	]
+}

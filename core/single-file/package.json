@@ -45,8 +45,7 @@
     "he": "catalog:",
     "ky": "catalog:",
     "obug": "catalog:cli",
-    "oxc-parser": "catalog:",
-    "svg-sprite-loader": "catalog:"
+    "oxc-parser": "catalog:"
   },
   "devDependencies": {
     "@types/he": "catalog:",

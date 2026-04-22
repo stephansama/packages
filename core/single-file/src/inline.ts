@@ -69,7 +69,7 @@ export const img: InlineFunction = async ($, baseUrl) => {
 	}
 };
 
-export async function link($: cheerio.CheerioAPI, baseUrl: string) {
+export const link: InlineFunction = async ($, baseUrl) => {
 	for (const link of $("link[href]")) {
 		log.info(`loading \`link\` ${link.attribs.href}`);
 
@@ -99,13 +99,19 @@ export async function link($: cheerio.CheerioAPI, baseUrl: string) {
 			}
 		}
 	}
-}
+};
 
-export async function svgUse($: cheerio.CheerioAPI, baseUrl: string) {
-	for (const svgUse of $("use[href]")) {
-		const [url, hash] = svgUse.attribs.href.split("#");
+export const script: InlineFunction = async ($, baseUrl) => {
+	for (const current of $("script")) {
+		//
+	}
+};
+
+export const svgUse: InlineFunction = async ($, baseUrl) => {
+	for (const current of $("use[href]")) {
+		const [url, hash] = current.attribs.href.split("#");
 		if (!hash) {
-			log.warn(`no hash found for use element ${svgUse.attribs.href}`);
+			log.warn(`no hash found for use element ${current.attribs.href}`);
 			continue;
 		}
 
@@ -127,7 +133,7 @@ export async function svgUse($: cheerio.CheerioAPI, baseUrl: string) {
 			throw new Error("unable to parse parent");
 		}
 
-		$(svgUse).parent().attr("viewBox", viewBox);
-		$(svgUse).replaceWith(inner);
+		$(current).parent().attr("viewBox", viewBox);
+		$(current).replaceWith(inner);
 	}
-}
+};

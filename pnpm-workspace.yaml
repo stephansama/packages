@@ -4,21 +4,16 @@ packages:
   - examples/**
   - scripts
 
-__versions:
-  - 1.9.1
-  - 19.8.1
-  - 9.39.4
-  - 3.1.0
-  - 19.2.1
-  - 7.10.1
-  - 10.2.8
-  - 4.2.2
-  - 2.8.20
-  - 8.57.0
-  - 7.3.1
-  - 4.0.18
-
 autoInstallPeers: true
+
+# Shared version expressions (yaml anchors).
+# This is a yaml feature and is not interpreted by pnpm directly.
+__versions:
+  - &commitlint 19.8.1
+  - &manypkg 3.1.0
+  - &storybook 10.2.8
+  - &turbo 2.8.20
+  - &vitest 4.0.18
 
 catalog:
   '@catppuccin/palette': 1.7.1
@@ -26,8 +21,8 @@ catalog:
   '@dotenvx/dotenvx': 1.52.0
   '@iconify/types': 2.0.0
   '@iconify/utils': 2.3.0
-  '@manypkg/find-root': 3.1.0
-  '@manypkg/get-packages': 3.1.0
+  '@manypkg/find-root': *manypkg
+  '@manypkg/get-packages': *manypkg
   '@tailwindcss/cli': 4.2.1
   '@testing-library/jest-dom': 6.9.1
   '@testing-library/react': 16.3.2
@@ -45,8 +40,8 @@ catalog:
   dedent: ^1.7.2
   deepmerge: 4.3.1
   es-toolkit: 1.43.0
-  handlebars: 4.7.8
   handlebars-helpers: 0.10.0
+  handlebars: 4.7.8
   happy-dom: 20.6.1
   he: ^1.2.0
   json-schema-to-typescript: 15.0.4
@@ -68,8 +63,8 @@ catalog:
   undici: 7.22.0
   unified: 11.0.5
   unist-util-visit: 5.1.0
-  vite: 6.3.5
   vite-tsconfig-paths: 5.1.4
+  vite: 6.3.5
   vitepress-plugin-llms: 1.11.0
 
 catalogMode: strict
@@ -81,38 +76,38 @@ catalogs:
     obug: 2.1.1
     yargs: 18.0.0
   commitlint:
-    '@commitlint/cli': 19.8.1
-    '@commitlint/config-conventional': 19.8.1
-    '@commitlint/types': 19.8.1
+    '@commitlint/cli': *commitlint
+    '@commitlint/config-conventional': *commitlint
+    '@commitlint/types': *commitlint
   eslint:
-    '@eslint/js': ^9.39.2
-    '@eslint/json': ^0.14.0
-    '@typescript-eslint/parser': ^8.55.0
-    eslint: ^9.39.2
-    eslint-config-flat-gitignore: ^2.1.0
-    eslint-config-prettier: ^10.1.8
-    eslint-plugin-astro: ^1.6.0
-    eslint-plugin-baseline-js: ^0.4.2
-    eslint-plugin-jsx-a11y: ^6.10.2
-    eslint-plugin-perfectionist: ^4.15.1
-    eslint-plugin-pnpm: ^1.5.0
-    eslint-plugin-react-hooks: ^7.0.1
-    eslint-plugin-storybook: ^10.2.8
-    eslint-plugin-testing-library: ^7.15.4
-    eslint-plugin-zod: ^3.1.0
-    globals: ^16.5.0
-    jsonc-eslint-parser: ^2.4.2
-    typescript-eslint: ^8.55.0
-    yaml-eslint-parser: ^1.3.2
+    '@typescript-eslint/parser': '^8.55.0'
+    '@eslint/js': '^9.39.2'
+    '@eslint/json': '^0.14.0'
+    'eslint': '^9.39.2'
+    'eslint-config-flat-gitignore': '^2.1.0'
+    'eslint-config-prettier': '^10.1.8'
+    'eslint-plugin-astro': '^1.6.0'
+    'eslint-plugin-baseline-js': '^0.4.2'
+    'eslint-plugin-jsx-a11y': '^6.10.2'
+    'eslint-plugin-perfectionist': '^4.15.1'
+    'eslint-plugin-pnpm': '^1.5.0'
+    'eslint-plugin-react-hooks': '^7.0.1'
+    'eslint-plugin-storybook': '^10.2.8'
+    'eslint-plugin-testing-library': '^7.15.4'
+    'eslint-plugin-zod': '^3.1.0'
+    'globals': '^16.5.0'
+    'jsonc-eslint-parser': '^2.4.2'
+    'typescript-eslint': '^8.55.0'
+    'yaml-eslint-parser': '^1.3.2'
   prettier:
-    prettier: 3.8.1
-    prettier-plugin-astro: 0.14.1
-    prettier-plugin-astro-organize-imports: 0.4.11
-    prettier-plugin-jsdoc: 1.8.0
-    prettier-plugin-organize-imports: 4.3.0
-    prettier-plugin-packagejson: 2.5.22
-    prettier-plugin-svelte: 3.4.1
+    prettier-plugin-astro-organize-imports: '0.4.11'
+    prettier-plugin-astro: '0.14.1'
+    prettier-plugin-jsdoc: '1.8.0'
+    prettier-plugin-organize-imports: '4.3.0'
+    prettier-plugin-packagejson: '2.5.22'
+    prettier-plugin-svelte: '3.4.1'
     prettier-plugin-tailwindcss: 0.7.2
+    prettier: 3.8.1
   schema:
     '@standard-schema/spec': 1.1.0
     arktype: 2.1.29
@@ -120,11 +115,11 @@ catalogs:
     zod: 4.2.1
   storybook:
     '@chromatic-com/storybook': 4.1.3
-    '@storybook/addon-a11y': 10.2.8
-    '@storybook/addon-docs': 10.2.8
+    '@storybook/addon-a11y': *storybook
+    '@storybook/addon-docs': *storybook
     '@storybook/addon-svelte-csf': 5.0.11
-    '@storybook/svelte-vite': 10.2.8
-    storybook: 10.2.8
+    '@storybook/svelte-vite': *storybook
+    storybook: *storybook
   svelte:
     '@sveltejs/package': 2.5.7
     '@sveltejs/vite-plugin-svelte': 6.2.4
@@ -132,12 +127,12 @@ catalogs:
     svelte: 5.51.2
     svelte-check: 4.4.0
   turbo:
-    '@turbo/gen': 2.8.20
-    turbo: 2.8.20
+    turbo: *turbo
+    '@turbo/gen': *turbo
   vitest:
-    '@vitest/coverage-v8': 4.0.18
-    '@vitest/ui': 4.0.18
-    vitest: 4.0.18
+    '@vitest/coverage-v8': *vitest
+    '@vitest/ui': *vitest
+    vitest: *vitest
 
 cleanupUnusedCatalogs: true
 

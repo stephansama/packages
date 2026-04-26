@@ -1,54 +1,54 @@
 {
-	"name": "create-stephansama-example",
-	"version": "1.4.3",
-	"description": "Download an example from the @stephansama/packages examples",
-	"keywords": [
-		"create-example"
-	],
-	"homepage": "https://packages.stephansama.info/api/create-stephansama-example",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/stephansama/packages.git",
-		"directory": "core/example"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Stephan Randle",
-		"email": "stephanrandle.dev@gmail.com",
-		"url": "https://stephansama.info"
-	},
-	"type": "module",
-	"exports": {
-		".": "./dist/index.cjs",
-		"./package.json": "./package.json"
-	},
-	"main": "./dist/index.cjs",
-	"types": "./dist/index.d.cts",
-	"bin": "./cli.mjs",
-	"files": [
-		"./dist",
-		"./cli.mjs"
-	],
-	"scripts": {
-		"prebuild": "pnpm run generate",
-		"build": "tsdown",
-		"predev": "pnpm run generate",
-		"dev": "tsdown --watch",
-		"generate": "pnpm --workspace-root run scripts:generate-examples",
-		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-		"typedoc": "pnpm run generate"
-	},
-	"dependencies": {
-		"@bluwy/giget-core": "^0.1.6",
-		"@clack/prompts": "^0.11.0"
-	},
-	"devDependencies": {
-		"tsdown": "catalog:",
-		"undici": "catalog:"
-	},
-	"packageManager": "pnpm@10.29.3",
-	"publishConfig": {
-		"access": "public",
-		"provenance": true
-	}
+  "name": "create-stephansama-example",
+  "version": "1.4.3",
+  "description": "Download an example from the @stephansama/packages examples",
+  "keywords": [
+    "create-example"
+  ],
+  "homepage": "https://packages.stephansama.info/api/create-stephansama-example",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/example"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.cjs",
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.cts",
+  "bin": "./cli.mjs",
+  "files": [
+    "./dist",
+    "./cli.mjs"
+  ],
+  "scripts": {
+    "prebuild": "pnpm run generate",
+    "build": "tsdown",
+    "predev": "pnpm run generate",
+    "dev": "tsdown --watch",
+    "generate": "pnpm --filter=@stephansama/scripts run generate-examples",
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "typedoc": "pnpm run generate"
+  },
+  "dependencies": {
+    "@bluwy/giget-core": "^0.1.6",
+    "@clack/prompts": "^0.11.0"
+  },
+  "devDependencies": {
+    "tsdown": "catalog:",
+    "undici": "catalog:"
+  },
+  "packageManager": "pnpm@10.29.3",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
 }

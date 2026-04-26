@@ -50,6 +50,9 @@ catalogs:
     '@manypkg/get-packages':
       specifier: 3.1.0
       version: 3.1.0
+    '@manypkg/tools':
+      specifier: ^2.1.1
+      version: 2.1.1
     '@tailwindcss/cli':
       specifier: 4.2.1
       version: 4.2.1
@@ -1212,6 +1215,9 @@ importers:
 
   scripts:
     devDependencies:
+      '@manypkg/tools':
+        specifier: 'catalog:'
+        version: 2.1.1
       tsx:
         specifier: 'catalog:'
         version: 4.21.0
@@ -3226,6 +3232,10 @@ packages:
 
   '@manypkg/tools@2.1.0':
     resolution: {integrity: sha512-0FOIepYR4ugPYaHwK7hDeHDkfPOBVvayt9QpvRbi2LT/h2b0GaE/gM9Gag7fsnyYyNaTZ2IGyOuVg07IYepvYQ==}
+    engines: {node: '>=20.0.0'}
+
+  '@manypkg/tools@2.1.1':
+    resolution: {integrity: sha512-CEFCOGzhFdx5sIehISBRS9Ev5D1Zp+24YT1uyOkaEcY8uAKeK+kA58NChYfUwXmAFerm3zWZWYhQViUf8XhQcg==}
     engines: {node: '>=20.0.0'}
 
   '@mdx-js/mdx@3.1.0':
@@ -13430,6 +13440,12 @@ snapshots:
       '@manypkg/tools': 2.1.0
 
   '@manypkg/tools@2.1.0':
+    dependencies:
+      jju: 1.4.0
+      js-yaml: 4.1.1
+      tinyglobby: 0.2.15
+
+  '@manypkg/tools@2.1.1':
     dependencies:
       jju: 1.4.0
       js-yaml: 4.1.1

@@ -7,7 +7,7 @@ import * as url from "node:url";
 
 /**
  * @param {Object} param0
- * @param {boolean} [param0.writeToFile=true]
+ * @param {boolean} [param0.writeToFile=true] Default is `true`
  */
 export async function generate({ writeToFile = true } = {}) {
 	const { packages } = await getPackages(process.cwd());

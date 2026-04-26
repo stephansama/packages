@@ -11,5 +11,5 @@ pre-commit:
       name: Update README
     - run: lint-staged -v
       name: Lint staged
-    - run: pnpm --workspace-root run scripts:lint-examples
+    - run: pnpm --filter=@stephansama/scripts lint-examples
       name: Lint examples

@@ -14,6 +14,7 @@ create a single html file from a website url
 <details><summary>Open Table of contents</summary>
 
 - [Installation](#installation)
+- [CLI](#cli)
 - [Usage](#usage)
 
 </details>
@@ -23,6 +24,26 @@ create a single html file from a website url
 ```sh
 pnpm install @stephansama/single-file
 ```
+
+## CLI
+
+```sh
+# outputs to single-file.html by default
+npx @stephansama/single-file <url>
+
+# custom output path
+npx @stephansama/single-file <url> --output my-page.html
+npx @stephansama/single-file <url> -o my-page.html
+
+# verbose logging
+npx @stephansama/single-file <url> --verbose
+npx @stephansama/single-file <url> -v
+```
+
+| Flag        | Alias | Default            | Description                   |
+| ----------- | ----- | ------------------ | ----------------------------- |
+| `--output`  | `-o`  | `single-file.html` | Output path for the HTML file |
+| `--verbose` | `-v`  | `false`            | Enable verbose output         |
 
 ## Usage
 

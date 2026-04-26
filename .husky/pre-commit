@@ -1,5 +1,0 @@
-#!/bin/sh
-
-auto-readme -g
-lint-staged -v
-pnpm --workspace-root run scripts:lint-examples

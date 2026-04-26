@@ -1,0 +1,15 @@
+prepare-commit-msg:
+  jobs:
+    - run: ai-commit-msg -o {1}
+commit-msg:
+  jobs:
+    - run: pnpm dlx commitlint --config .config/.commitlintrc.ts --edit {1}
+pre-commit:
+  parallel: true
+  jobs:
+    - run: auto-readme -vg
+      name: Update README
+    - run: lint-staged -v
+      name: Lint staged
+    - run: pnpm --workspace-root run scripts:lint-examples
+      name: Lint examples

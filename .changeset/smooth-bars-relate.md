@@ -1,5 +1,5 @@
 ---
-"@stephansama/single-file": major
+"@stephansama/single-file": minor
 ---
 
 created single file cli package

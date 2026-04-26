@@ -25,3 +25,15 @@ pnpm install @stephansama/single-file
 ```
 
 ## Usage
+
+```javascript
+import singleFile from "@stephansama/single-file";
+
+export async function useAPI() {
+  const file = await singleFile.convertPageToSingleFile(
+    "https://blog.stephansama.info",
+  );
+
+  console.info(file);
+}
+```

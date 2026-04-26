@@ -2,7 +2,7 @@
 
 "use strict";
 
-import("./dist/index.js")
+import("./dist/cli.js")
 	.then((mod) => mod.run())
 	.catch((error) => {
 		console.error(error);

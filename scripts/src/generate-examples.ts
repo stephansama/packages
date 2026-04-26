@@ -11,7 +11,7 @@ import * as url from "node:url";
  */
 export async function generate({ writeToFile = true } = {}) {
 	const { packages } = await getPackages(process.cwd());
-	const outputDir = path.join(path.dirname(import.meta.filename), "dist");
+	const outputDir = path.join(path.dirname(import.meta.filename), "../dist");
 
 	fs.mkdirSync(outputDir, { recursive: true });
 

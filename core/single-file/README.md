@@ -7,7 +7,7 @@
 [![socket.dev](https://badge.socket.dev/npm/package/@stephansama/single-file)](https://socket.dev/npm/package/@stephansama/single-file/overview)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/single-file?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/single-file)
 
-create a single html file from a website url
+Fetch any webpage and produce a fully self-contained HTML file with all external resources — images, stylesheets, scripts, and SVGs — inlined directly into the document.
 
 ##### Table of contents
 

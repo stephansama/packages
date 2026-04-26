@@ -1,6 +1,6 @@
 {
   "name": "@stephansama/single-file",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "create a single html file from a website url",
   "keywords": [
     "single-file"

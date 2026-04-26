@@ -15,12 +15,8 @@ export const commonDebugOptions = {
 export const debug = obug.createDebug(DEBUG_BASE_NAMESPACE, commonDebugOptions);
 
 export const [error, info, warn] = DEBUG_NAMESPACES.map((namespace, index) => {
-	const currentDebugger = obug.createDebug(DEBUG_BASE_NAMESPACE, {
-		...commonDebugOptions,
-		color: index + 1,
-	});
-	const extend = debug.extend.bind(currentDebugger);
-	return extend(namespace);
+	debug.color = index + 1;
+	return debug.extend(namespace);
 });
 
 export function enable(isVerbose: boolean) {

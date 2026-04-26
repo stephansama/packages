@@ -17,11 +17,10 @@ export function escapeScript(script: string) {
 		.replaceAll("\r", "");
 }
 
-export function isProbablyUrl(str: string) {
-	if (!str) return false;
+const obviousQueries = ["\n", "{", "function"] as const;
 
-	// reject obvious non-URLs
-	if (str.includes("\n") || str.includes("{") || str.includes("function")) {
+export function isProbablyUrl(str: string) {
+	if (!str || obviousQueries.some((query) => query.includes(str))) {
 		return false;
 	}
 
@@ -40,12 +39,4 @@ export function isUrl(url: string, base: string) {
 		console.error(`${url} is not a URL\n${error}`);
 		return false;
 	}
-}
-
-export function str2ab(str: string) {
-	const array = new Uint8Array(str.length);
-	for (let i = 0; i < str.length; i++) {
-		array[i] = str.charCodeAt(i);
-	}
-	return array.buffer;
 }

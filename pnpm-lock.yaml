@@ -1215,6 +1215,9 @@ importers:
 
   scripts:
     devDependencies:
+      '@manypkg/find-root':
+        specifier: 'catalog:'
+        version: 3.1.0
       '@manypkg/get-packages':
         specifier: 'catalog:'
         version: 3.1.0

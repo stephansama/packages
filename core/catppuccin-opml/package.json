@@ -1,38 +1,37 @@
 {
-	"name": "@stephansama/catppuccin-opml",
-	"version": "1.0.3",
-	"description": "Catppuccin styled opml stylesheet",
-	"keywords": [
-		"catppuccin-opml",
-		"catppuccin",
-		"opml",
-		"xsl",
-		"stylesheet"
-	],
-	"homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-opml",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/stephansama/packages.git",
-		"directory": "core/catppuccin-opml"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Stephan Randle",
-		"email": "stephanrandle.dev@gmail.com",
-		"url": "https://stephansama.info"
-	},
-	"type": "module",
-	"exports": {
-		"./stylesheet.xsl": "./dist/catppuccin-opml.xsl"
-	},
-	"files": [
-		"dist"
-	],
-	"scripts": {},
-	"devDependencies": {},
-	"packageManager": "pnpm@10.29.3",
-	"publishConfig": {
-		"access": "public",
-		"provenance": true
-	}
+  "name": "@stephansama/catppuccin-opml",
+  "version": "1.0.3",
+  "description": "Catppuccin styled opml stylesheet",
+  "keywords": [
+    "catppuccin-opml",
+    "catppuccin",
+    "opml",
+    "xsl",
+    "stylesheet"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-opml",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/catppuccin-opml"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "./stylesheet.xsl": "./dist/catppuccin-opml.xsl"
+  },
+  "files": [
+    "dist"
+  ],
+  "packageManager": "pnpm@10.29.3",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
 }

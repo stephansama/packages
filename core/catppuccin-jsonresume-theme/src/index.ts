@@ -1,7 +1,7 @@
 import Handlebars from "handlebars";
 import helpers from "handlebars-helpers";
 import * as fs from "node:fs";
-import * as path from "node:path";
+import path from "node:path";
 import * as url from "node:url";
 
 import type { ResumeSchema } from "./types";
@@ -11,7 +11,7 @@ export function render(resume: ResumeSchema) {
 
 	Handlebars.registerHelper("formatDate", function (dateString) {
 		if (!dateString) return "";
-		return dateString.substring(0, 4);
+		return dateString.slice(0, 4);
 	});
 
 	const __dirname = path.dirname(url.fileURLToPath(import.meta.url));

@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { bufferToDataUri, escapeScript, isProbablyUrl, isUrl } from "./utilities";
+import {
+	bufferToDataUri,
+	escapeScript,
+	isProbablyUrl,
+	isUrl,
+} from "./utilities";
 
 describe("bufferToDataUri", () => {
 	it("defaults to image/png mime type", async () => {
@@ -9,7 +14,10 @@ describe("bufferToDataUri", () => {
 	});
 
 	it("defaults to image/png when mime is null", async () => {
-		const result = await bufferToDataUri(new Uint8Array([1, 2, 3]).buffer, null);
+		const result = await bufferToDataUri(
+			new Uint8Array([1, 2, 3]).buffer,
+			null,
+		);
 		expect(result).toMatch(/^data:image\/png;base64,/);
 	});
 

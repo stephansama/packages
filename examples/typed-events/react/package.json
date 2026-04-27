@@ -1,33 +1,33 @@
 {
-	"name": "@example/typed-events/react",
-	"version": "0.1.2",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"build": "react-router build",
-		"dev": "react-router dev",
-		"start": "react-router-serve ./build/server/index.js",
-		"typecheck": "react-router typegen && tsc"
-	},
-	"dependencies": {
-		"@react-router/node": "7.9.5",
-		"@react-router/serve": "7.9.5",
-		"isbot": "5.1.31",
-		"react": "19.2.0",
-		"react-dom": "19.2.0",
-		"react-router": "7.9.5"
-	},
-	"devDependencies": {
-		"@react-router/dev": "^7.13.0",
-		"@stephansama/typed-events": "workspace:*",
-		"@tailwindcss/vite": "^4.1.18",
-		"@types/node": "^22.19.11",
-		"@types/react": "^19.2.14",
-		"@types/react-dom": "^19.2.3",
-		"tailwindcss": "^4.1.18",
-		"typescript": "^5.9.3",
-		"vite": "^7.3.1",
-		"vite-tsconfig-paths": "^5.1.4",
-		"yup": "^1.7.1"
-	}
+  "name": "@example/typed-events/react",
+  "version": "0.1.2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc"
+  },
+  "dependencies": {
+    "@react-router/node": "7.9.5",
+    "@react-router/serve": "7.9.5",
+    "isbot": "5.1.31",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-router": "7.9.5"
+  },
+  "devDependencies": {
+    "@react-router/dev": "^7.13.0",
+    "@stephansama/typed-events": "workspace:*",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/node": "^22.19.11",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vite-tsconfig-paths": "^5.1.4",
+    "yup": "^1.7.1"
+  }
 }

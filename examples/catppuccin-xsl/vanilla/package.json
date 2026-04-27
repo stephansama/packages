@@ -1,18 +1,18 @@
 {
-	"name": "@example/catppuccin-xsl/vanilla",
-	"version": "1.0.1",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"prebuild": "node ./src/generate.js",
-		"build": "vite build",
-		"predev": "node ./src/generate.js",
-		"dev": "vite",
-		"preview": "vite preview"
-	},
-	"devDependencies": {
-		"@stephansama/catppuccin-xsl": "workspace:*",
-		"feedsmith": "^2.9.0",
-		"vite": "^7.3.1"
-	}
+  "name": "@example/catppuccin-xsl/vanilla",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prebuild": "node ./src/generate.js",
+    "build": "vite build",
+    "predev": "node ./src/generate.js",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@stephansama/catppuccin-xsl": "workspace:*",
+    "feedsmith": "^2.9.0",
+    "vite": "^7.3.1"
+  }
 }

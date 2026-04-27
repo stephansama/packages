@@ -1,68 +1,69 @@
 {
-	"name": "@stephansama/catppuccin-jsonresume-theme",
-	"version": "1.0.2",
-	"description": "theme for resume cli website",
-	"keywords": [
-		"catppuccin-jsonresume-theme"
-	],
-	"homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-jsonresume-theme",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/stephansama/packages",
-		"directory": "core/catppuccin-jsonresume-theme"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Stephan Randle",
-		"email": "stephanrandle.dev@gmail.com",
-		"url": "https://stephansama.info"
-	},
-	"type": "module",
-	"exports": {
-		".": {
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs"
-		},
-		"./package.json": "./package.json"
-	},
-	"main": "./dist/index.cjs",
-	"module": "./dist/index.js",
-	"types": "./dist/index.d.cts",
-	"files": [
-		"dist",
-		"dist-css",
-		"template"
-	],
-	"scripts": {
-		"build": "pnpm run --sequential \"/^build:.*/\"",
-		"build:ts": "tsdown",
-		"build:tw": "tailwindcss -i ./template/site.css -o ./dist-css/site.css",
-		"dev": "pnpm run --parallel \"/^dev:.*/\"",
-		"dev:ts": "pnpm run build:ts --watch",
-		"dev:tw": "pnpm run build:tw --watch",
-		"generate": "curl $npm_package_config_input | json2ts > $npm_package_config_output",
-		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-		"lint:fix": "eslint ./ --fix"
-	},
-	"config": {
-		"input": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
-		"output": "./src/types.d.ts"
-	},
-	"dependencies": {
-		"@tailwindcss/cli": "catalog:",
-		"handlebars": "catalog:",
-		"handlebars-helpers": "catalog:",
-		"tailwindcss": "catalog:"
-	},
-	"devDependencies": {
-		"@catppuccin/tailwindcss": "catalog:",
-		"@types/handlebars-helpers": "catalog:",
-		"json-schema-to-typescript": "catalog:",
-		"tailwind-scrollbar": "catalog:",
-		"tsdown": "catalog:"
-	},
-	"publishConfig": {
-		"access": "public",
-		"provenance": true
-	}
+  "name": "@stephansama/catppuccin-jsonresume-theme",
+  "version": "1.0.2",
+  "description": "theme for resume cli website",
+  "keywords": [
+    "catppuccin-jsonresume-theme"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/catppuccin-jsonresume-theme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stephansama/packages",
+    "directory": "core/catppuccin-jsonresume-theme"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "files": [
+    "dist",
+    "dist-css",
+    "template"
+  ],
+  "scripts": {
+    "build": "pnpm run --sequential \"/^build:.*/\"",
+    "build:ts": "tsdown",
+    "build:tw": "tailwindcss -i ./template/site.css -o ./dist-css/site.css",
+    "dev": "pnpm run --parallel \"/^dev:.*/\"",
+    "dev:ts": "pnpm run build:ts --watch",
+    "dev:tw": "pnpm run build:tw --watch",
+    "generate": "curl $npm_package_config_input | json2ts > $npm_package_config_output",
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --fix"
+  },
+  "config": {
+    "input": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+    "output": "./src/types.d.ts"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "catalog:",
+    "handlebars": "catalog:handlebars",
+    "handlebars-helpers": "catalog:handlebars",
+    "tailwindcss": "catalog:"
+  },
+  "devDependencies": {
+    "@catppuccin/tailwindcss": "catalog:",
+    "@types/handlebars-helpers": "catalog:handlebars",
+    "json-schema-to-typescript": "catalog:",
+    "tailwind-scrollbar": "catalog:",
+    "tsdown": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
 }

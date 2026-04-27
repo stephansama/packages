@@ -6,11 +6,11 @@ export interface TypedMessage<
 	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,
 > extends ValidatorMap<
-		Name,
-		Map,
-		"message",
-		{ origin: string; window: Window }
-	> {
+	Name,
+	Map,
+	"message",
+	{ origin: string; window: Window }
+> {
 	window: Window;
 }
 

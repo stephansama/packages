@@ -18,7 +18,7 @@ const jsonString = JSON.stringify(jsonSchema);
 
 await fsp.writeFile(path.join(schemaDir, "schema.json"), jsonString);
 
-/** @param {import('tsdown').Options} opts */
+/** @param {import("tsdown").Options} opts */
 function build(opts) {
 	return tsdown({
 		attw: { excludeEntrypoints: ["schema.json"] },

@@ -1,6 +1,6 @@
 import { lhciSchema } from "../dist/index.cjs";
 
-/** @type {import('../dist/index.d.cts').LhciSchema} */
+/** @type {import("../dist/index.d.cts").LhciSchema} */
 const config = {
 	ci: {
 		upload: {

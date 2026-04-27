@@ -2,9 +2,9 @@ import { enable } from "obug";
 import yargs, { type Options } from "yargs";
 import { hideBin } from "yargs/helpers";
 
-import { moduleName } from "./util";
+import { moduleName } from "./utilities";
 
-const args = {
+const arguments_ = {
 	config: { alias: "c", description: "Path to config file", type: "string" },
 	output: {
 		alias: "o",
@@ -18,9 +18,9 @@ const args = {
 	},
 } satisfies Record<string, Options>;
 
-export async function parseArgs() {
+export async function parseArguments() {
 	const yargsInstance = yargs(hideBin(process.argv))
-		.options(args)
+		.options(arguments_)
 		.help("h")
 		.alias("h", "help")
 		.epilogue(`--> @stephansama open-source ${new Date().getFullYear()}`);

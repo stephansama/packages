@@ -58,7 +58,7 @@ export const lhciCollectSchema = z.object({
 		handleSIGINT: z.boolean().default(true),
 		handleSIGTERM: z.boolean().default(true),
 		pipe: z.boolean().default(false),
-		timeout: z.number().default(30000),
+		timeout: z.number().default(30_000),
 	}),
 	puppeteerScript: z.string().optional(),
 	settings: z.object({}),
@@ -70,7 +70,7 @@ export const lhciCollectSchema = z.object({
 		.string()
 		.default("listen|ready")
 		.meta({ description: `String pattern to listen for started server.` }),
-	startServerReadyTimeout: z.number().default(10000).meta({
+	startServerReadyTimeout: z.number().default(10_000).meta({
 		description: `The number of milliseconds to wait for the server to start before continuing`,
 	}),
 	staticDirFileDiscoveryDepth: z.number().default(2).meta({

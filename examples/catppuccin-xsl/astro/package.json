@@ -1,20 +1,20 @@
 {
-	"name": "@example/catppuccin-xsl/astro",
-	"version": "0.0.2",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"astro": "astro",
-		"build": "astro build",
-		"dev": "astro dev",
-		"preview": "astro preview"
-	},
-	"dependencies": {
-		"astro": "^5.17.2",
-		"feedsmith": "^2.9.0"
-	},
-	"devDependencies": {
-		"@astrojs/sitemap": "3.4.1",
-		"@stephansama/catppuccin-xsl": "workspace:*"
-	}
+  "name": "@example/catppuccin-xsl/astro",
+  "version": "0.0.2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "astro": "astro",
+    "build": "astro build",
+    "dev": "astro dev",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.17.2",
+    "feedsmith": "^2.9.0"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "3.4.1",
+    "@stephansama/catppuccin-xsl": "workspace:*"
+  }
 }

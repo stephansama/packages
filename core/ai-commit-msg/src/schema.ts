@@ -8,7 +8,7 @@ export type Model = (typeof models)[number];
 export const providers = ["google", "openai", "ollama"] as const;
 export type Provider = (typeof providers)[number];
 
-export const envSchema = {
+export const environmentSchema = {
 	google: z.object({ GOOGLE_GENERATIVE_AI_API_KEY: z.string().min(1) }),
 	ollama: z.object({}),
 	openai: z.object({ OPENAI_API_KEY: z.string().min(1) }),

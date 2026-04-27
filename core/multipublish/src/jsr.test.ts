@@ -73,7 +73,7 @@ describe("jsr", () => {
 				defaultInclude: ["new-include"],
 				experimentalGenerateJSR: false,
 				experimentalUpdateCatalogs: false,
-				tokenEnvironmentKey: "test"
+				tokenEnvironmentKey: "test",
 			};
 
 			updateIncludeExcludeList(jsrConfig, appConfig);

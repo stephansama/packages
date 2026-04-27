@@ -51,7 +51,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: "./coverage/test-report.junit.xml"
       - name: 🚀 Publish Stackblitz
-        run: pnpm run scripts:pkg-pr-new
+        run: pnpm --filter=scripts pkg-pr-new
   release:
     name: Release
     runs-on: ubuntu-latest

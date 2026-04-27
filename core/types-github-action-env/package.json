@@ -24,8 +24,12 @@
     "email": "stephanrandle.dev@gmail.com",
     "url": "https://stephansama.info"
   },
+  "sideEffects": false,
   "type": "module",
-  "types": "./src/env.d.ts",
+  "exports": {
+    ".": "./src/environment.d.ts"
+  },
+  "types": "./src/environment.d.ts",
   "files": [
     "src"
   ],

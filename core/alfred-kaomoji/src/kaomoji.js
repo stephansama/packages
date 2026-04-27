@@ -1,10 +1,9 @@
-"use strict";
 import alfy from "alfy";
 
 import data from "../assets/kaomojis.json" with { type: "json" };
 
-const formattedData = Object.entries(data).map(([title, body], i) => {
-	const id = i + 1;
+const formattedData = Object.entries(data).map(([title, body], index) => {
+	const id = index + 1;
 	return { body, id, title };
 });
 

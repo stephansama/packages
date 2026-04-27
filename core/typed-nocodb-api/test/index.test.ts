@@ -48,9 +48,9 @@ describe("typed-nocodb-api", () => {
 
 	it("should perform LIST action", async () => {
 		const mockResponse = {
-			nestedNext: null,
-			nestedPrev: null,
-			next: null,
+			nestedNext: undefined,
+			nestedPrev: undefined,
+			next: undefined,
 			pageInfo: {
 				isFirstPage: true,
 				isLastPage: true,
@@ -58,7 +58,7 @@ describe("typed-nocodb-api", () => {
 				pageSize: 25,
 				totalRows: 1,
 			},
-			prev: null,
+			prev: undefined,
 			records: [{ fields: { completed: false, title: "Test" }, id: 1 }],
 		};
 		mockFetch.mockResolvedValue({
@@ -91,7 +91,7 @@ describe("typed-nocodb-api", () => {
 			}),
 		);
 
-		const { pageInfo, ...expectedResult } = mockResponse;
+		const { pageInfo: _pageInfo, ...expectedResult } = mockResponse;
 		expect(result).toEqual(expectedResult);
 	});
 

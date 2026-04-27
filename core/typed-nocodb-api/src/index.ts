@@ -115,11 +115,11 @@ export function createApi<Schema extends z.ZodObject>({
 				"xc-token": token,
 			});
 
-			let params = "";
+			let parameters = "";
 
 			if ("query" in props && "querySchema" in current) {
 				const parsed = current.querySchema.parse(props.query);
-				params = "?" + new URLSearchParams(parsed).toString();
+				parameters = "?" + new URLSearchParams(parsed).toString();
 			}
 
 			let body: string | undefined;
@@ -129,7 +129,7 @@ export function createApi<Schema extends z.ZodObject>({
 				headers.append("Content-Type", "application/json");
 			}
 
-			const response = await fetch(url + params, {
+			const response = await fetch(url + parameters, {
 				body,
 				headers,
 				method: current.method,

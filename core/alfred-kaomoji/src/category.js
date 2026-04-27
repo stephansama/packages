@@ -1,4 +1,3 @@
-"use strict";
 import alfy from "alfy";
 
 import data from "../assets/categories.json" with { type: "json" };

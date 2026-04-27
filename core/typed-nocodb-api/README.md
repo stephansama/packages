@@ -45,10 +45,10 @@ const api = createApi({
 });
 
 export async function callApi() {
-  const res = await api.fetch({
+  const response = await api.fetch({
     action: "LIST",
   });
 
-  return res;
+  return response;
 }
 ```

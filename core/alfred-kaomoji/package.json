@@ -22,13 +22,21 @@
   },
   "sideEffects": false,
   "type": "module",
+  "exports": {
+    "./category": "./src/category.js",
+    "./kaomoji": "./src/kaomoji.js"
+  },
+  "files": [
+    "./ci.js",
+    "src"
+  ],
   "scripts": {
     "postinstall": "node ./ci.js && alfy-init || true",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "preuninstall": "node ./ci.js && alfy-cleanup || true"
   },
   "dependencies": {
-    "alfy": "^2.1.0"
+    "alfy": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",
   "publishConfig": {

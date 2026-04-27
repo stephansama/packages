@@ -30,7 +30,7 @@ vi.mock("../src/ai", () => ({
 }));
 
 import { getProvider } from "../src/ai";
-import { parseArgs } from "../src/args";
+import { parseArguments } from "../src/arguments";
 import { loadConfig } from "../src/config";
 
 describe("index run", () => {
@@ -45,7 +45,7 @@ describe("index run", () => {
 		.mockImplementation(() => {});
 
 	beforeEach(() => {
-		(parseArgs as any).mockResolvedValue({ output: "COMMIT_EDITMSG" });
+		(parseArguments as any).mockResolvedValue({ output: "COMMIT_EDITMSG" });
 		(loadConfig as any).mockResolvedValue({
 			model: "gemini",
 			prompt: "example prompt {{diff}}",
@@ -69,7 +69,7 @@ describe("index run", () => {
 	it("should run successfully and write commit message", async () => {
 		await run();
 
-		expect(parseArgs).toHaveBeenCalled();
+		expect(parseArguments).toHaveBeenCalled();
 		expect(loadConfig).toHaveBeenCalled();
 		expect(getProvider).toHaveBeenCalledWith("google", "gemini");
 		expect(ai.generateText).toHaveBeenCalledWith(
@@ -85,7 +85,7 @@ describe("index run", () => {
 	});
 
 	it("should fetch COMMIT_EDITMSG if output arg is missing", async () => {
-		(parseArgs as any).mockResolvedValue({}); // No output
+		(parseArguments as any).mockResolvedValue({}); // No output
 		(cp.execSync as any).mockImplementation((cmd: string) => {
 			if (cmd.includes("git rev-parse")) return "git/COMMIT_EDITMSG\n";
 			if (cmd.includes("diff")) return "diff";

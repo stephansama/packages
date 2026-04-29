@@ -22,8 +22,8 @@ export function createBroadcastEvent<
 	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,
 >(name: Name, map: Map) {
-	let _channel: BroadcastChannel | null = null;
-	let _target: EventTarget | null = null;
+	let _channel: BroadcastChannel | undefined;
+	let _target: EventTarget | undefined;
 
 	const _scopeEvent = (event: string) => [name, event].join(":");
 

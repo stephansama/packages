@@ -29,6 +29,9 @@
   "files": [
     "dist"
   ],
+  "scripts": {
+    "lint:fix": "eslint ./ --fix"
+  },
   "packageManager": "pnpm@10.29.3",
   "publishConfig": {
     "access": "public",

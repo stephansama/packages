@@ -62,7 +62,7 @@ describe("typed-nocodb-api", () => {
 			records: [{ fields: { completed: false, title: "Test" }, id: 1 }],
 		};
 		mockFetch.mockResolvedValue({
-			json: async () => mockResponse,
+			json: () => mockResponse,
 			ok: true,
 			statusText: "OK",
 		});
@@ -91,14 +91,14 @@ describe("typed-nocodb-api", () => {
 			}),
 		);
 
-		const { pageInfo: _pageInfo, ...expectedResult } = mockResponse;
+		const { pageInfo: _, ...expectedResult } = mockResponse;
 		expect(result).toEqual(expectedResult);
 	});
 
 	it("should perform COUNT action", async () => {
 		const mockResponse = { count: 42 };
 		mockFetch.mockResolvedValue({
-			json: async () => mockResponse,
+			json: async () => await Promise.resolve(mockResponse),
 			ok: true,
 			statusText: "OK",
 		});
@@ -121,7 +121,7 @@ describe("typed-nocodb-api", () => {
 		};
 
 		mockFetch.mockResolvedValue({
-			json: async () => mockResponse,
+			json: async () => await Promise.resolve(mockResponse),
 			ok: true,
 			statusText: "OK",
 		});
@@ -172,7 +172,7 @@ describe("typed-nocodb-api", () => {
 			id: "123",
 		};
 		mockFetch.mockResolvedValue({
-			json: async () => ({}),
+			json: async () => await Promise.resolve({}),
 			ok: true,
 			statusText: "OK",
 		});

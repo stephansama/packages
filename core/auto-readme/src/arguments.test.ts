@@ -1,6 +1,6 @@
 import { afterEach, expect, it, vi } from "vitest";
 
-import * as module from "./args";
+import * as module from "./arguments";
 
 const yargs = vi.hoisted(() => ({
 	alias: vi.fn(() => yargs),
@@ -23,14 +23,14 @@ afterEach(vi.clearAllMocks);
 
 it("loads sets verbose when added", async () => {
 	yargs.parse.mockResolvedValue({ verbose: true });
-	await module.parseArgs();
+	await module.parseArguments();
 
 	expect(debug.default.enable).toHaveBeenCalled();
 });
 
 it("does not set verbosity when not added", async () => {
 	yargs.parse.mockResolvedValue({ verbose: false });
-	await module.parseArgs();
+	await module.parseArguments();
 
 	expect(debug.default.enable).not.toHaveBeenCalled();
 });

@@ -24,7 +24,7 @@ export function createMessage<
 	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,
 >(name: Name, map: Map) {
-	let _window: null | Window = null;
+	let _window: undefined | Window;
 	const getWindow = () => (_window ??= window);
 	const _scopeName = (input: string) => [name, input].join(":");
 
@@ -48,13 +48,13 @@ export function createMessage<
 		dispatch(
 			name,
 			input,
-			opts = { origin: getWindow().origin, window: getWindow() },
+			options = { origin: getWindow().origin, window: getWindow() },
 		) {
 			_validate(name, input, () => {
 				const id = _scopeName(name);
 				const data = { ...input, id };
 
-				opts.window.postMessage(data, opts.origin);
+				options.window.postMessage(data, options.origin);
 			});
 		},
 		listen(name, callback) {

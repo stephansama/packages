@@ -6,15 +6,15 @@ export const MODULE_NAME = "multipublish" as const;
 export const JSR_CONFIG_FILENAME = "jsr.json" as const;
 
 export async function chdir(
-	newDir: string,
+	newDirectory: string,
 	callback: () => Promise<void> | void,
 ) {
 	const cwd = process.cwd();
 	try {
-		process.chdir(newDir);
+		process.chdir(newDirectory);
 		await callback();
-	} catch (e) {
-		console.error(e);
+	} catch (error) {
+		console.error(error);
 	} finally {
 		process.chdir(cwd);
 	}
@@ -26,7 +26,7 @@ export function gitClean(filename: string) {
 	});
 }
 
-export function npmrcTemplate(opts: {
+export function npmrcTemplate(options: {
 	authToken: string;
 	registry: string;
 	registryDomain: string;
@@ -36,15 +36,15 @@ export function npmrcTemplate(opts: {
 	{{SCOPE}}:registry={{REGISTRY}}
 	//{{REGISTRY_DOMAIN}}/:_authToken={{AUTH_TOKEN}}
 	`
-		.replace("{{AUTH_TOKEN}}", opts.authToken)
-		.replace("{{REGISTRY}}", opts.registry)
-		.replace("{{REGISTRY_DOMAIN}}", opts.registryDomain)
-		.replace("{{SCOPE}}", opts.scope);
+		.replace("{{AUTH_TOKEN}}", options.authToken)
+		.replace("{{REGISTRY}}", options.registry)
+		.replace("{{REGISTRY_DOMAIN}}", options.registryDomain)
+		.replace("{{SCOPE}}", options.scope);
 }
 
 export async function readStdin() {
 	process.stdin.setEncoding("utf8");
-	if (process.stdin.isTTY) return null;
+	if (process.stdin.isTTY) return;
 	let chunks = "";
 	for await (const chunk of process.stdin) chunks += chunk;
 	return chunks;

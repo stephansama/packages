@@ -129,7 +129,7 @@ export function createApi<Schema extends z.ZodObject>({
 				headers.append("Content-Type", "application/json");
 			}
 
-			const response = await fetch(url + parameters, {
+			const response = await fetch(url.toString() + parameters, {
 				body,
 				headers,
 				method: current.method,

@@ -264,8 +264,9 @@ interface GitHubEnvironments {
 
 	/**
 	 * This is set only if debug logging is enabled, and always has the value of
+	 *
 	 * 1. It can be useful as an indicator to enable additional debugging or
-	 * verbose logging in your own job steps.
+	 *    verbose logging in your own job steps.
 	 */
 	readonly RUNNER_DEBUG?: "1";
 

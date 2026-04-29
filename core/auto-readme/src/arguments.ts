@@ -1,11 +1,11 @@
-import debug from "debug";
+import { enable } from "obug";
 import yargs, { type Options } from "yargs";
 import { hideBin } from "yargs/helpers";
 import * as z from "zod";
 
 import { configSchema } from "./schema";
 
-export type Args = Awaited<ReturnType<typeof parseArgs>>;
+export type Arguments = Awaited<ReturnType<typeof parseArguments>>;
 
 const complexOptions = [
 	"affectedRegexes",
@@ -16,7 +16,7 @@ const complexOptions = [
 
 type ComplexOptions = (typeof complexOptions)[number];
 
-const args = {
+const arguments_ = {
 	...zodToYargs(),
 	changes: {
 		alias: "g",
@@ -33,9 +33,9 @@ const args = {
 	config: { alias: "c", description: "Path to config file", type: "string" },
 } satisfies Record<string, Options>;
 
-export async function parseArgs() {
+export async function parseArguments() {
 	const yargsInstance = yargs(hideBin(process.argv))
-		.options(args)
+		.options(arguments_)
 		.help("h")
 		.alias("h", "help")
 		.epilogue(`--> @stephansama open-source ${new Date().getFullYear()}`);
@@ -44,7 +44,7 @@ export async function parseArgs() {
 		.wrap(yargsInstance.terminalWidth())
 		.parse();
 
-	if (parsed.verbose) debug.enable("autoreadme*");
+	if (parsed.verbose) enable("autoreadme*");
 
 	return parsed;
 }

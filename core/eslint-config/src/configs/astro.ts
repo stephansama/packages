@@ -10,7 +10,7 @@ export function config(options: Readonly<{ disableA11yStrict: boolean }>) {
 	configs.push(
 		...eslintPluginAstro.configs.recommended.map((config) => ({
 			...config,
-			name: `stephansama/astro/${config.name || "anonymous"}`,
+			name: `stephansama/${config.name || "anonymous"}`,
 		})),
 	);
 
@@ -18,7 +18,7 @@ export function config(options: Readonly<{ disableA11yStrict: boolean }>) {
 		configs.push(
 			...eslintPluginAstro.configs["jsx-a11y-strict"].map((config) => ({
 				...config,
-				name: `stephansama/astro-a11y/${config.name || "anonymous"}`,
+				name: `stephansama/a11y/${config.name || "anonymous"}`,
 			})),
 		);
 	}

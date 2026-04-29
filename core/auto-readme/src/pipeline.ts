@@ -1,4 +1,4 @@
-import * as path from "node:path";
+import path from "node:path";
 import { remark } from "remark";
 import remarkCodeImport from "remark-code-import";
 import remarkCollapse from "remark-collapse";
@@ -12,7 +12,7 @@ import type { Config } from "./schema";
 import { createFindParameter } from "./data";
 import { INFO, WARN } from "./log";
 import { autoReadmeRemarkPlugin } from "./plugin";
-import { fileExists } from "./utils";
+import { fileExists } from "./utilities";
 
 export async function parse(
 	file: string,
@@ -65,7 +65,9 @@ export async function parse(
 			test: {
 				ignoreFinalDefinitions: true,
 				test: (value, _) => {
-					return headings.some((i) => value.trim() === i?.trim());
+					return headings.some(
+						(item) => value.trim() === item?.trim(),
+					);
 				},
 			},
 		});

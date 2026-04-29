@@ -1,7 +1,7 @@
 {
-  "extends": ["../../tsconfig.base.json"],
+  "extends": ["../../tsconfig.json"],
   "include": ["./src/**/*"],
   "compilerOptions": {
-    "types": ["./types/plugins.d.ts"]
+    "types": ["./types/plugins.d.ts", "node"]
   }
 }

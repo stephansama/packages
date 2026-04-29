@@ -7,9 +7,7 @@ export function config(): Config[] {
 		{
 			files: ["*.json", "**/*.json"],
 			language: "jsonc/x",
-			plugins: {
-				jsonc,
-			},
+			plugins: { jsonc },
 		},
 		{
 			name: "stephansama/jsonc",

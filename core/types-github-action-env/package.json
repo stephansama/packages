@@ -36,6 +36,7 @@
   "scripts": {
     "prelint": "eslint ./",
     "lint": "publint",
+    "lint:fix": "publint --fix",
     "type-check": "tsc --noEmit"
   },
   "packageManager": "pnpm@10.29.3",

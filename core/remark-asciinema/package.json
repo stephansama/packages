@@ -38,7 +38,8 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "lint": "eslint ./",
-    "prepublishOnly": "tsdown"
+    "prepublishOnly": "tsdown",
+    "lint:fix": "eslint ./ --fix"
   },
   "devDependencies": {
     "remark": "catalog:",

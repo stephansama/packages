@@ -17,6 +17,7 @@
     "email": "stephanrandle.dev@gmail.com",
     "url": "https://stephansama.info"
   },
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
@@ -31,22 +32,22 @@
   "bin": "./cli.mjs",
   "files": [
     "./dist",
-    "./config",
-    "./cli.mjs"
+    "./config"
   ],
   "scripts": {
     "build": "node build.mjs",
     "dev": "node --watch build.mjs",
-    "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+    "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
     "@manypkg/find-root": "catalog:",
     "@manypkg/get-packages": "catalog:",
     "cosmiconfig": "catalog:cli",
     "dedent": "^1.7.1",
-    "fast-glob": "^3.3.3",
     "obug": "catalog:cli",
     "package-manager-detector": "^1.6.0",
+    "tinyglobby": "catalog:",
     "yaml": "^2.8.2",
     "yargs": "catalog:cli",
     "zod": "catalog:schema"
@@ -61,6 +62,9 @@
     "jsr": ">=0.10"
   },
   "packageManager": "pnpm@10.29.3",
+  "engines": {
+    "node": ">=24"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true

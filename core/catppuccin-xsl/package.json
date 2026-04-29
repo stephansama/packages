@@ -43,7 +43,8 @@
     "dev": "pnpm run --parallel \"/^dev:.*/\"",
     "dev:opml": "tsx watch ./src/opml.ts",
     "dev:rss": "tsx watch ./src/rss.ts",
-    "dev:sitemap": "tsx watch ./src/sitemap.ts"
+    "dev:sitemap": "tsx watch ./src/sitemap.ts",
+    "lint:fix": "eslint ./ --fix"
   },
   "devDependencies": {
     "@catppuccin/palette": "catalog:",

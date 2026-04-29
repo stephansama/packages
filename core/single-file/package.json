@@ -37,7 +37,7 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-    "lint:fix": "eslint ./ --fix"
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
     "cheerio": "catalog:",

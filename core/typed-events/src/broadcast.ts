@@ -21,7 +21,7 @@ export function createBroadcastChannel<
 	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,
 >(name: Name, map: Map) {
-	let _channel: BroadcastChannel | null = null;
+	let _channel: BroadcastChannel | undefined;
 
 	function _validate<
 		Event extends keyof Map,

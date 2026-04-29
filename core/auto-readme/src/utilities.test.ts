@@ -1,12 +1,12 @@
 import { afterEach, expect, it, vi } from "vitest";
 
 import * as logger from "./log";
-import * as module from "./utils";
+import * as module from "./utilties";
 
 const mockGitRoot = "/Users/stephansama/Code/packages/";
 
 const mocks = vi.hoisted(() => ({
-	access: vi.fn().mockResolvedValue(undefined),
+	access: vi.fn().mockResolvedValue(),
 	execSync: vi.fn(),
 	existsSync: vi.fn(),
 	isSymbolicLink: vi.fn(),

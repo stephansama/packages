@@ -1,5 +1,4 @@
 #!/usr/bin/env node
 
-"use strict";
-
-import("./dist/index.js").then((mod) => mod.run());
+const cli = await import("./dist/index.js");
+await cli.run();

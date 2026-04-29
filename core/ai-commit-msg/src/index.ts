@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import dotenvx from "@dotenvx/dotenvx";
 import { generateText } from "ai";
 import * as cp from "node:child_process";
@@ -21,14 +19,13 @@ export async function run() {
 
 	if (config.skipNextRun) {
 		console.warn("skipNextRun flag supplied skipping current run");
-		return process.exit(0);
+		return;
 	}
 
 	const providerResult = getProvider(config.provider, config.model);
 
 	if (providerResult.isErr()) {
-		console.error(providerResult.error.message);
-		return process.exit(1);
+		throw new Error(providerResult.error.message);
 	}
 
 	const model = providerResult.value;

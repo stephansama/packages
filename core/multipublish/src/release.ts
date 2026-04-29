@@ -2,9 +2,9 @@ import * as cp from "node:child_process";
 import * as fsp from "node:fs/promises";
 import * as z from "zod";
 
-import type { Args } from "./args";
+import type { Arguments } from "./arguments";
 
-import { gitClean, readStdin } from "./util";
+import { gitClean, readStdin } from "./utilities";
 
 export type ReleaseSchema = z.infer<typeof releaseSchema>;
 export const releaseSchema = z.object({
@@ -29,18 +29,22 @@ export const changesetStatusSchema = z
 		})),
 	);
 
-export async function loadReleases(args: Args) {
-	if (args.released) {
-		return releasesSchema.parse(args.released.map((name) => ({ name })));
+export async function loadReleases(arguments_: Arguments) {
+	if (arguments_.released) {
+		return releasesSchema.parse(
+			arguments_.released.map((name) => ({ name })),
+		);
 	}
 
-	if (args.releasedFile) {
-		const releasedFile = await fsp.readFile(args.releasedFile, "utf8");
-		const releasedInfo = JSON.parse(releasedFile);
-		return releasesSchema.parse(releasedInfo);
+	if (arguments_.releasedFile) {
+		const releasedFile = await fsp.readFile(
+			arguments_.releasedFile,
+			"utf8",
+		);
+		return releasesSchema.parse(JSON.parse(releasedFile));
 	}
 
-	if (args.useChangesetStatus) {
+	if (arguments_.useChangesetStatus) {
 		const changesetOutput = ".multipublish.status.json";
 		cp.execFileSync("changeset", ["status", `--output=${changesetOutput}`]);
 

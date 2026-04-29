@@ -1,12 +1,15 @@
 {
   "name": "scripts",
   "private": true,
+  "description": "stephansama packages scripts",
   "type": "module",
   "scripts": {
     "add-socket": "tsx ./src/add-socket.ts",
     "build-www": "tsx ./src/build-www.ts",
     "generate-examples": "tsx ./src/generate-examples.ts",
+    "lint:fix": "eslint ./ --fix",
     "lint-examples": "tsx ./src/lint-examples.ts",
+    "lint-fix": "tsx ./src/lint-fix.ts",
     "meta": "tsx ./src/meta.ts",
     "pkg-pr-new": "tsx ./src/pkg-pr-new.ts",
     "storybook": "tsx ./src/storybook.ts"

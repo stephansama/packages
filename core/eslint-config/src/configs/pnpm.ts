@@ -9,7 +9,7 @@ import * as glob from "@/glob";
 export function config(): Config[] {
 	return [
 		{
-			files: glob.PKG_JSON,
+			files: glob.ALL_PKG_JSON,
 			languageOptions: { parser: jsoncParser },
 			name: "stephansama/pnpm/package.json",
 			plugins: { pnpm },

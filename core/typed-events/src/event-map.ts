@@ -19,7 +19,7 @@ export function createEventMap<
 	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,
 >(name: Name, map: Map) {
-	let _target: EventTarget | null = null;
+	let _target: EventTarget | undefined;
 
 	const _scopeEvent = (event: string) => [name, event].join(":");
 
@@ -52,10 +52,14 @@ export function createEventMap<
 		},
 		listen(name, callback) {
 			const scopedName = _scopeEvent(name);
-			const listener = (e: Event) => {
-				if (e instanceof CustomEvent && e.type === scopedName) {
-					_validate(name, e.detail, () => {
-						callback({ data: e.detail, raw: e, type: "event" });
+			const listener = (event: Event) => {
+				if (event instanceof CustomEvent && event.type === scopedName) {
+					_validate(name, event.detail, () => {
+						callback({
+							data: event.detail,
+							raw: event,
+							type: "event",
+						});
 					});
 				}
 			};

@@ -62,7 +62,7 @@ const templatesSchema = z.object({
 });
 
 export const defaultTemplates = templatesSchema.parse({});
-export const defaultTableHeadings = tableHeadingsSchema.parse(undefined);
+export const defaultTableHeadings = tableHeadingsSchema.parse({});
 
 const _configSchema = z.object({
 	affectedRegexes: z.array(z.string()),

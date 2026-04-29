@@ -42,7 +42,8 @@
     "build:vite": "vite -c ./vite.webcomponent.config.ts build",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "dev": "svelte-package --watch",
-    "dev:storybook": "storybook dev -p 6006"
+    "dev:storybook": "storybook dev -p 6006",
+    "lint:fix": "eslint ./ --fix"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "catalog:storybook",

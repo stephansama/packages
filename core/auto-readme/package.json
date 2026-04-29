@@ -24,6 +24,7 @@
     "email": "stephanrandle.dev@gmail.com",
     "url": "https://stephansama.info"
   },
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
@@ -36,35 +37,34 @@
         "default": "./config/schema.cjs"
       }
     },
-    "./schema.json": "./config/schema.json",
-    "./package.json": "./package.json"
+    "./schema.json": "./config/schema.json"
   },
   "main": "./config/schema.js",
   "types": "./config/schema.d.ts",
   "bin": "./cli.mjs",
   "files": [
     "./dist",
-    "./config",
-    "./cli.mjs"
+    "./config"
   ],
   "scripts": {
     "build": "node build.mjs",
     "postbuild": "publint",
     "dev": "node --watch-path=./src build.mjs",
-    "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+    "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
-    "@iarna/toml": "^2.2.5",
-    "@manypkg/get-packages": "^3.1.0",
+    "@iarna/toml": "catalog:",
+    "@manypkg/get-packages": "catalog:",
     "cosmiconfig": "catalog:cli",
-    "debug": "^4.4.3",
     "deepmerge": "catalog:",
-    "fast-glob": "^3.3.3",
     "handlebars": "catalog:handlebars",
     "markdown-table": "^3.0.4",
+    "mdast": "catalog:",
     "mdast-comment-marker": "^3.0.0",
     "mdast-util-from-markdown": "^2.0.2",
     "mdast-zone": "github:stephansama/mdast-zone#1c5b08cd97240debeed4c9c6afad49df5877a132",
+    "obug": "catalog:cli",
     "ora": "^8.2.0",
     "pkg-types": "^2.3.0",
     "remark": "15.0.1",
@@ -72,6 +72,7 @@
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
     "remark-usage": "^11.0.1",
+    "tinyglobby": "catalog:",
     "vfile": "^6.0.3",
     "yaml": "^2.8.2",
     "yargs": "catalog:cli",
@@ -79,15 +80,16 @@
     "zod2md": "^0.2.5"
   },
   "devDependencies": {
-    "@types/debug": "catalog:",
     "@types/mdast": "catalog:",
     "@types/vfile": "catalog:",
     "@types/yargs": "catalog:",
-    "mdast": "catalog:",
     "tsdown": "catalog:",
     "unified": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",
+  "engines": {
+    "node": ">=24"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true

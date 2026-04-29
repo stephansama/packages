@@ -2,7 +2,7 @@ import toml from "@iarna/toml";
 import { cosmiconfig, getDefaultSearchPlaces, type Options } from "cosmiconfig";
 import deepmerge from "deepmerge";
 
-import type { Args } from "./args";
+import type { Arguments } from "./arguments";
 
 import { INFO, WARN } from "./log";
 import { configSchema } from "./schema";
@@ -13,30 +13,32 @@ const searchPlaces = getSearchPlaces();
 
 const loaders = { [".toml"]: loadToml };
 
-export async function loadConfig(args: Partial<Args>) {
-	const opts: Partial<Options> = { loaders, searchPlaces };
+export async function loadConfig(arguments_: Partial<Arguments>) {
+	const options: Partial<Options> = { loaders, searchPlaces };
 
-	if (args.config) opts.searchPlaces = [args.config];
+	if (arguments_.config) options.searchPlaces = [arguments_.config];
 
-	const explorer = cosmiconfig(moduleName, opts);
+	const explorer = cosmiconfig(moduleName, options);
 
 	const search = await explorer.search();
 
-	if (!search) {
-		const location = args.config ? " at location: " + args.config : "";
-		WARN(`no config file found`, location);
-		INFO("using default configuration");
-	} else {
+	if (search) {
 		INFO("found configuration file at: ", search.filepath);
 		INFO("loaded cosmiconfig", search.config);
+	} else {
+		const location = arguments_.config
+			? " at location: " + arguments_.config
+			: "";
+		WARN(`no config file found`, location);
+		INFO("using default configuration");
 	}
 
-	args = removeFalsy(args);
+	arguments_ = removeFalsy(arguments_);
 
-	INFO("merging config with args", args);
+	INFO("merging config with args", arguments_);
 
 	return configSchema.parse(
-		deepmerge(search?.config || {}, args, {
+		deepmerge(search?.config || {}, arguments_, {
 			arrayMerge: (_, sourceArray) => sourceArray,
 		}),
 	);
@@ -59,10 +61,10 @@ function getSearchPlaces() {
 	];
 }
 
-function removeFalsy(obj: object) {
+function removeFalsy(object: object) {
 	return Object.fromEntries(
-		Object.entries(obj)
-			.map(([k, v]) => (!v ? false : [k, v]))
-			.filter((e): e is [string, unknown] => Boolean(e)),
+		Object.entries(object)
+			.map(([k, v]) => (v ? [k, v] : false))
+			.filter(Boolean),
 	);
 }

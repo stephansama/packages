@@ -2,11 +2,8 @@ import type { Config } from "eslint/config";
 
 import zod from "eslint-plugin-zod";
 
+export const autoEnableModules = ["zod"] as const;
+
 export function config(): Config[] {
-	return [
-		{
-			name: "stephansama/zod",
-			plugins: { zod },
-		},
-	];
+	return [zod.configs.recommended];
 }

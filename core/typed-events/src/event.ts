@@ -23,10 +23,10 @@ export function createEvent<
 >(
 	name: Name,
 	schema: Schema,
-	opts: { silenceAsyncWarning?: boolean; target?: EventTarget } = {},
+	options: { silenceAsyncWarning?: boolean; target?: EventTarget } = {},
 ) {
 	type Detail = StandardSchemaV1.InferInput<Schema>;
-	let _target: EventTarget | null = opts?.target || null;
+	let _target: EventTarget | undefined = options?.target || undefined;
 
 	function _validate(callback: () => void, detail: Detail) {
 		validate({
@@ -37,7 +37,7 @@ export function createEvent<
 			},
 			schema,
 			source: "TypedEvent",
-			warnOnceCondition: !!opts.silenceAsyncWarning,
+			warnOnceCondition: !!options.silenceAsyncWarning,
 		});
 	}
 
@@ -51,11 +51,15 @@ export function createEvent<
 			_validate(callback, detail);
 		},
 		listen(callback) {
-			const listener = (e: Event) => {
-				if (e instanceof CustomEvent && e.type === name) {
+			const listener = (event: Event) => {
+				if (event instanceof CustomEvent && event.type === name) {
 					_validate(() => {
-						callback({ data: e.detail, raw: e, type: "event" });
-					}, e.detail);
+						callback({
+							data: event.detail,
+							raw: event,
+							type: "event",
+						});
+					}, event.detail);
 				}
 			};
 

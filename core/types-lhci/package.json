@@ -37,7 +37,8 @@
   "scripts": {
     "build": "tsx ./build.ts",
     "dev": "tsx --watch ./src/build.ts",
-    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "devDependencies": {
     "tsdown": "catalog:",

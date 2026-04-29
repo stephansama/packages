@@ -36,7 +36,8 @@
     "dev": "tsdown --watch",
     "generate": "pnpm --filter=scripts run generate-examples",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-    "typedoc": "pnpm run generate"
+    "typedoc": "pnpm run generate",
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
     "@bluwy/giget-core": "^0.1.6",

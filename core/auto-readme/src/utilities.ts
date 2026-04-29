@@ -1,8 +1,8 @@
-import glob from "fast-glob";
 import * as cp from "node:child_process";
 import * as fs from "node:fs";
 import * as fsp from "node:fs/promises";
-import * as path from "node:path";
+import path from "node:path";
+import { glob } from "tinyglobby";
 
 import type { Config } from "./schema";
 
@@ -10,7 +10,7 @@ import { ERROR, INFO } from "./log";
 
 const sh = String.raw;
 
-const opts: { encoding: BufferEncoding } = { encoding: "utf8" };
+const options: { encoding: BufferEncoding } = { encoding: "utf8" };
 
 const ignore = ["**/node_modules/**"];
 
@@ -32,12 +32,12 @@ export async function fileExists(file: string) {
 export function findAffectedMarkdowns(root: string, config: Config) {
 	const affected = cp
 		/* cspell:disable-next-line because of the filter */
-		.execSync(sh`git diff --cached --name-only --diff-filter=MACT`, opts)
+		.execSync(sh`git diff --cached --name-only --diff-filter=MACT`, options)
 		.trim()
 		.split("\n")
 		.filter(Boolean);
 
-	if (!affected.length) ERROR("no staged files found");
+	if (affected.length === 0) ERROR("no staged files found");
 
 	if (config.affectedRegexes?.length) {
 		INFO("adding the following expressions: ", config.affectedRegexes);
@@ -56,9 +56,7 @@ export function findAffectedMarkdowns(root: string, config: Config) {
 
 	const md = eligible.map((e) => findNearestReadme(root, path.resolve(e)));
 	const rootMd = path.join(root, "README.md");
-	const dedupe = [...new Set(md), rootMd].filter((s): s is string =>
-		Boolean(s),
-	);
+	const dedupe = [...new Set(md), rootMd].filter(Boolean);
 
 	INFO("Found the following readmes", dedupe);
 
@@ -66,7 +64,7 @@ export function findAffectedMarkdowns(root: string, config: Config) {
 }
 
 export function getGitRoot() {
-	const root = cp.execSync(sh`git rev-parse --show-toplevel`, opts).trim();
+	const root = cp.execSync(sh`git rev-parse --show-toplevel`, options).trim();
 
 	if (!root) {
 		throw new Error("must be ran within a git directory.");
@@ -100,22 +98,24 @@ function findNearestReadme(
 	inputFile: string,
 	maxRotations = 15,
 ) {
-	let dir = path.dirname(inputFile);
+	let dirname = path.dirname(inputFile);
 	let rotations = 0;
 
 	while (true) {
-		const option = path.join(dir, "README.md");
+		const option = path.join(dirname, "README.md");
 
 		if (fs.existsSync(option)) return option;
 
-		const parent = path.dirname(dir);
+		const parent = path.dirname(dirname);
 
-		if (parent === dir || dir === gitRoot || ++rotations > maxRotations) {
+		if (
+			parent === dirname ||
+			dirname === gitRoot ||
+			++rotations > maxRotations
+		) {
 			break;
 		}
 
-		dir = parent;
+		dirname = parent;
 	}
-
-	return null;
 }

@@ -4,7 +4,7 @@ import * as os from "node:os";
 import * as process from "node:process";
 import { describe, expect, it, vi } from "vitest";
 
-import { chdir, gitClean, npmrcTemplate, readStdin } from "./util";
+import { chdir, gitClean, npmrcTemplate, readStdin } from "./utilities";
 
 const mocks = vi.hoisted(() => ({
 	asyncIterator: vi.fn(),
@@ -25,36 +25,36 @@ vi.mock("node:process", async (importOriginal) => {
 
 describe("chdir", () => {
 	it("should change directory, execute callback, and then change back", async () => {
-		const initialDir = fs.realpathSync(process.cwd());
-		const tempDir = fs.realpathSync(os.tmpdir());
+		const initialDirectory = fs.realpathSync(process.cwd());
+		const temporaryDirectory = fs.realpathSync(os.tmpdir());
 
-		let callbackDir: string | undefined;
+		let callbackDirectory: string | undefined;
 
-		await chdir(tempDir, () => {
-			callbackDir = fs.realpathSync(process.cwd());
+		await chdir(temporaryDirectory, () => {
+			callbackDirectory = fs.realpathSync(process.cwd());
 		});
 
-		const finalDir = fs.realpathSync(process.cwd());
+		const finalDirectory = fs.realpathSync(process.cwd());
 
-		expect(callbackDir).toBe(tempDir);
-		expect(finalDir).toBe(initialDir);
+		expect(callbackDirectory).toBe(temporaryDirectory);
+		expect(finalDirectory).toBe(initialDirectory);
 	});
 });
 
 describe("gitClean", () => {
 	it("should remove the specified file", () => {
-		const tempFile = "dummy-file-for-testing.tmp";
-		fs.writeFileSync(tempFile, "delete me");
+		const temporaryFile = "dummy-file-for-testing.tmp";
+		fs.writeFileSync(temporaryFile, "delete me");
 
-		gitClean(tempFile);
+		gitClean(temporaryFile);
 
-		expect(fs.existsSync(tempFile)).toBe(false);
+		expect(fs.existsSync(temporaryFile)).toBe(false);
 	});
 });
 
 describe("npmrcTemplate", () => {
 	it("should generate correct .npmrc content", () => {
-		const opts = {
+		const options = {
 			authToken: "my-secret-token",
 			registry: "https://registry.npmjs.org/",
 			registryDomain: "registry.npmjs.org",
@@ -66,7 +66,7 @@ describe("npmrcTemplate", () => {
 //registry.npmjs.org/:_authToken=my-secret-token
 `.trim();
 
-		const result = npmrcTemplate(opts);
+		const result = npmrcTemplate(options);
 		expect(result.trim()).toBe(expected);
 	});
 });
@@ -83,7 +83,7 @@ describe("readStdin", () => {
 		const input = "hello world";
 
 		mocks.asyncIterator.mockImplementation(async function* () {
-			yield input;
+			yield await Promise.resolve(input);
 		});
 
 		const result = await readStdin();

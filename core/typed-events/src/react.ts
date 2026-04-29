@@ -15,6 +15,7 @@ export function useListener<
 	Schema extends StandardSchemaV1 = Input extends Validator<
 		Name,
 		infer S extends StandardSchemaV1,
+		/* eslint-disable @typescript-eslint/no-explicit-any */
 		any
 	>
 		? S

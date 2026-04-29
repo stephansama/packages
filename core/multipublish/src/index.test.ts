@@ -60,19 +60,19 @@ describe("run", () => {
 		expect(mocks.updateJsrConfigVersion).not.toHaveBeenCalled();
 		expect(mocks.publishPlatform).toHaveBeenCalledWith(
 			expect.objectContaining({
-				packageJson: expect.objectContaining({
+				packageJson: {
 					name: "pkg1",
 					version: "1.0.0",
-				}),
+				},
 			}),
 			"npm",
 		);
 		expect(mocks.publishPlatform).toHaveBeenCalledWith(
 			expect.objectContaining({
-				packageJson: expect.objectContaining({
+				packageJson: {
 					name: "@stephansama/pkg2",
 					version: "1.0.0",
-				}),
+				},
 			}),
 			"npm",
 		);

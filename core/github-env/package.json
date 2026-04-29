@@ -16,7 +16,9 @@
     "url": "https://stephansama.info"
   },
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "lint:fix": "eslint ./ --fix"
+  },
   "packageManager": "pnpm@10.29.3",
   "publishConfig": {
     "access": "public",

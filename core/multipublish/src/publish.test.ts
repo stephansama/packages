@@ -19,9 +19,9 @@ vi.mock("@manypkg/find-root", () => ({
 }));
 
 vi.mock("node:fs", async (importOriginal) => {
-	const mod = await importOriginal<typeof import("node:fs")>();
+	const original = await importOriginal<typeof import("node:fs")>();
 	return {
-		...mod,
+		...original,
 		existsSync: mocks.existsSync,
 	};
 });
@@ -32,9 +32,9 @@ vi.mock("node:child_process", () => ({
 }));
 
 vi.mock("node:fs/promises", async (importOriginal) => {
-	const mod = await importOriginal<typeof import("node:fs/promises")>();
+	const module_ = await importOriginal<typeof import("node:fs/promises")>();
 	return {
-		...mod,
+		...module_,
 		readFile: mocks.readFile,
 		writeFile: mocks.writeFile,
 	};
@@ -47,20 +47,21 @@ vi.mock("./detect", () => ({
 }));
 
 vi.mock("./util", async (importOriginal) => {
-	const mod = await importOriginal<typeof import("./util")>();
 	return {
-		...mod,
-		chdir: vi.fn(async (_dir, cb) => {
-			await cb();
-		}),
+		...(await importOriginal<typeof import("./utilities")>()),
+		chdir: vi.fn(
+			async (_directory: string, callback: () => Promise<void>) => {
+				await callback();
+			},
+		),
 		gitClean: vi.fn(),
 	};
 });
 
 vi.mock("./jsr", async (importOriginal) => {
-	const mod = await importOriginal<typeof import("./jsr")>();
+	const module_ = await importOriginal<typeof import("./jsr")>();
 	return {
-		...mod,
+		...module_,
 		loadConfig: mocks.loadConfig,
 		updateIncludeExcludeList: vi.fn(),
 	};

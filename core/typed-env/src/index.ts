@@ -5,11 +5,9 @@ import * as fsp from "node:fs/promises";
 
 export function createEnvironment<Schema extends StandardSchemaV1>(
 	schema: Schema,
-	loadEnvironmentConfig?: dotenvx.DotenvConfigOptions | true | undefined,
+	loadEnvironmentConfig?: dotenvx.DotenvConfigOptions | true,
 ) {
-	function loadEnvironment(
-		options?: dotenvx.DotenvConfigOptions | undefined,
-	) {
+	function loadEnvironment(options?: dotenvx.DotenvConfigOptions) {
 		return dotenvx.config(options);
 	}
 
@@ -53,7 +51,7 @@ export function createEnvironment<Schema extends StandardSchemaV1>(
 	};
 }
 
-function getObjectFromSchema(node: StandardSchemaV1) {
+function getObjectFromSchema(node: StandardSchemaV1): object {
 	switch (node["~standard"].vendor) {
 		case "arktype": {
 			return (node as unknown as any).definition;

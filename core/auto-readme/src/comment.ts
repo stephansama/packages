@@ -24,7 +24,7 @@ export function parseComment(comment: string) {
 
 	const languageInput = third ? first : undefined;
 	const actionInput = third ? second : first;
-	const formatInput = third ? third : second;
+	const formatInput = third || second;
 	const language = languageSchema.parse(languageInput);
 	const action = actionsSchema.parse(actionInput);
 	const format = formatsSchema.parse(formatInput);
@@ -39,10 +39,12 @@ export function parseComment(comment: string) {
 const startComment = "<!--";
 const endComment = "-->";
 
+const commentRegex = /start|end/;
+
 export function trimComment(comment: string) {
 	return comment
 		.replace(startComment, "")
-		.replace(/start|end/, "")
+		.replace(commentRegex, "")
 		.replace(endComment, "")
 		.trim();
 }

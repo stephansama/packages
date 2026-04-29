@@ -30,7 +30,9 @@ export function builder(
 		}
 	}
 
-	for (const [config, input] of Object.entries(configOptions)) {
+	for (const [config, input] of Object.entries(configOptions).toSorted(
+		([a]) => (a === "typescript" ? 0 : -1),
+	)) {
 		if (!input) continue;
 
 		const parameters = typeof input === "boolean" ? undefined : input;

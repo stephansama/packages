@@ -17,7 +17,9 @@ export const TSX = "**/*.tsx" as const;
 
 export const SVELTE = ["**/*.svelte", "**/*.svelte.js", "**/*.svelte.ts"];
 
-export const PKG_JSON = ["package.json", "**/package.json"];
+export const ROOT_PKG_JSON = "package.json" as const;
+export const PKG_JSON = `**/${ROOT_PKG_JSON}` as const;
+export const ALL_PKG_JSON = [ROOT_PKG_JSON, PKG_JSON];
 
 export const EXCLUDES = [
 	"**/node_modules",

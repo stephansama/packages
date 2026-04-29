@@ -12,9 +12,9 @@ const mockMd = md`
 
 it("loads ast comments", () => {
 	const comments = module.loadAstComments(fromMarkdown(mockMd));
-	for (let i = 0; i < comments.length; i++) {
-		expect(comments[i].action).toBe("ZOD");
-		expect(comments[i].isStart).toBe(i === 0);
+	for (const [index, comment] of comments.entries()) {
+		expect(comment.action).toBe("ZOD");
+		expect(comment.isStart).toBe(index === 0);
 	}
 });
 

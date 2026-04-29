@@ -17,6 +17,7 @@
     "email": "stephanrandle.dev@gmail.com",
     "url": "https://stephansama.info"
   },
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
@@ -28,25 +29,32 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.cts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-    "lint:fix": "eslint ./ --fix"
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
     "@e18e/eslint-plugin": "catalog:eslint",
+    "@eslint/css": "catalog:eslint",
     "@eslint/js": "catalog:eslint",
     "@eslint/markdown": "catalog:eslint",
     "@typescript-eslint/parser": "catalog:eslint",
     "eslint-config-flat-gitignore": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
     "eslint-plugin-astro": "catalog:eslint",
+    "eslint-plugin-barrel-files": "catalog:eslint",
     "eslint-plugin-baseline-js": "catalog:eslint",
     "eslint-plugin-command": "catalog:eslint",
     "eslint-plugin-jsdoc": "catalog:eslint",
     "eslint-plugin-jsonc": "catalog:eslint",
     "eslint-plugin-jsx-a11y": "catalog:eslint",
+    "eslint-plugin-lit": "catalog:eslint",
+    "eslint-plugin-n": "catalog:eslint",
     "eslint-plugin-node-dependencies": "catalog:eslint",
     "eslint-plugin-package-json": "catalog:eslint",
     "eslint-plugin-perfectionist": "catalog:eslint",
@@ -65,10 +73,14 @@
     "yaml-eslint-parser": "catalog:eslint"
   },
   "devDependencies": {
+    "eslint": "catalog:eslint",
     "tsdown": "catalog:"
   },
   "peerDependencies": {
     "eslint": "catalog:eslint"
+  },
+  "engines": {
+    "node": ">=24"
   },
   "publishConfig": {
     "access": "public",

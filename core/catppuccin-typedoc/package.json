@@ -28,7 +28,8 @@
   "scripts": {
     "build": "tsx ./src/generate.ts",
     "postbuild": "publint",
-    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "devDependencies": {
     "@catppuccin/palette": "catalog:"

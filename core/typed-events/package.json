@@ -46,7 +46,8 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
-    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
     "@standard-schema/spec": "catalog:schema"

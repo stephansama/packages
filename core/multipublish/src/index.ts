@@ -1,7 +1,7 @@
 import { findRoot } from "@manypkg/find-root";
 import { getPackages } from "@manypkg/get-packages";
 
-import { getArgs } from "./args";
+import { getArguments } from "./arguments";
 import { loadConfig } from "./config";
 import { updateJsrConfigVersion } from "./jsr";
 import { publishPlatform } from "./publish";
@@ -9,13 +9,13 @@ import { loadReleases } from "./release";
 
 export async function run() {
 	const root = await findRoot(process.cwd());
-	const args = await getArgs();
-	const config = await loadConfig(args);
+	const arguments_ = await getArguments();
+	const config = await loadConfig(arguments_);
 	const { packages } = await getPackages(root.rootDir);
-	const releases = await loadReleases(args);
+	const releases = await loadReleases(arguments_);
 	const releasedPackages = releases.map((release) => {
 		const pkg = packages.find(
-			(curr) => curr.packageJson.name === release.name,
+			(current) => current.packageJson.name === release.name,
 		);
 
 		if (!pkg) {
@@ -28,7 +28,7 @@ export async function run() {
 	});
 
 	for (const pkg of releasedPackages) {
-		if (args.versionJsr) {
+		if (arguments_.versionJsr) {
 			if (!pkg.packageJson.name.includes("/")) {
 				console.warn(
 					`attempting to publish a non scoped package skipping`,

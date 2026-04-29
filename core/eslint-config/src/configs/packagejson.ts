@@ -13,7 +13,7 @@ export function config(
 	const configs = new Array<Config>();
 
 	configs.push({
-		files: [...glob.PKG_JSON],
+		files: glob.ALL_PKG_JSON,
 		plugins: {
 			"node-dependencies": nodeDependenciesPlugin,
 		},

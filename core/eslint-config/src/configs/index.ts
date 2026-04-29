@@ -1,12 +1,15 @@
 export { config as astro } from "./astro";
 export { config as baseline } from "./baseline";
 export { config as command } from "./command";
+export { config as css } from "./css";
 export { config as e18e } from "./e18e";
 export { config as gitignore } from "./gitignore";
 export { config as javascript } from "./javascript";
 export { config as jsdoc } from "./jsdoc";
 export { config as json } from "./json";
+export { config as lit } from "./lit";
 export { config as markdown } from "./markdown";
+export { config as node } from "./node";
 export { config as packagejson } from "./packagejson";
 export { config as perfectionist } from "./perfectionist";
 export { config as pnpm } from "./pnpm";

@@ -2,13 +2,13 @@ import { enable } from "obug";
 import yargs, { type Options } from "yargs";
 import { hideBin } from "yargs/helpers";
 
-import { MODULE_NAME } from "./util";
+import { MODULE_NAME } from "./utilities";
 
-export type Args = Awaited<ReturnType<typeof parseArgs>>;
+export type Arguments = Awaited<ReturnType<typeof parseArguments>>;
 
-let _args: Args | null = null;
+let _arguments: Arguments | undefined;
 
-const args = {
+const arguments_ = {
 	config: { alias: "c", description: "Path to config file", type: "string" },
 	dry: { alias: "d", description: "Perform a dry run", type: "boolean" },
 	released: {
@@ -38,13 +38,13 @@ const args = {
 	},
 } satisfies Record<string, Options>;
 
-export async function getArgs() {
-	return (_args ??= await parseArgs());
+export async function getArguments() {
+	return (_arguments ??= await parseArguments());
 }
 
-export async function parseArgs() {
+export async function parseArguments() {
 	const yargsInstance = yargs(hideBin(process.argv))
-		.options(args)
+		.options(arguments_)
 		.help("h")
 		.alias("h", "help")
 		.epilogue(`--> @stephansama open-source ${new Date().getFullYear()}`);

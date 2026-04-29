@@ -43,7 +43,7 @@
     "dev:tw": "pnpm run build:tw --watch",
     "generate": "curl $npm_package_config_input | json2ts > $npm_package_config_output",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-    "lint:fix": "eslint ./ --fix"
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "config": {
     "input": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",

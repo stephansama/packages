@@ -1,11 +1,11 @@
 {
-  "extends": ["../../tsconfig.base.json"],
+  "extends": ["../../tsconfig.json"],
   "include": ["./src/**/*"],
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
+    "types": ["node"],
     "moduleResolution": "bundler",
     "lib": ["DOM", "ESNext"],
     "jsx": "react-jsx"

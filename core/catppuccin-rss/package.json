@@ -30,6 +30,9 @@
   "files": [
     "dist"
   ],
+  "scripts": {
+    "lint:fix": "eslint ./ --fix"
+  },
   "config": {
     "outputFolder": "./dist"
   },

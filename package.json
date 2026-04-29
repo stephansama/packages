@@ -25,6 +25,7 @@
     "fmt:write": "prettier . --write",
     "knip": "knip --config ./.config/knip.ts",
     "lint": "turbo lint",
+    "lint:fix": "turbo lint:fix",
     "prepare": "pnpm --filter=@stephansama/eslint-config build && [ \"$CI\" = \"true\" ] || lefthook install",
     "publish": "changeset publish",
     "test": "turbo test",
@@ -67,11 +68,15 @@
     "vitest": "catalog:vitest"
   },
   "devDependencies": {
+    "@eslint/css": "catalog:eslint",
     "@stephansama/eslint-config": "workspace:*",
     "actions-up": "catalog:",
     "lefthook": "catalog:",
     "node-plop": "catalog:",
     "taze": "catalog:"
   },
-  "packageManager": "pnpm@10.29.3"
+  "packageManager": "pnpm@10.29.3",
+  "engines": {
+    "node": ">=24"
+  }
 }

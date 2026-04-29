@@ -17,14 +17,6 @@ export const base = {
 	zod: true,
 } as const satisfies ConfigOptions;
 
-export const astro = { astro: true } as const satisfies ConfigOptions;
-
-export const pnpm = { pnpm: true } as const satisfies ConfigOptions;
-
-export const storybook = { storybook: true } as const satisfies ConfigOptions;
-
-export const svelte = { svelte: true } as const satisfies ConfigOptions;
-
 export const library = {
 	packagejson: { isLibrary: true },
 } as const satisfies ConfigOptions;

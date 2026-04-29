@@ -5,9 +5,15 @@ import { loadCollectionFromFS } from "@iconify/utils/lib/loader/fs";
 import { iconToSVG } from "@iconify/utils/lib/svg/build";
 import { iconToHTML } from "@iconify/utils/lib/svg/html";
 import { replaceIDs } from "@iconify/utils/lib/svg/id";
-import fs from "node:fs";
+import * as fs from "node:fs";
 
 import type { Options } from "./type";
+
+const regexes = {
+	height: /height=\S+/,
+	width: /width=\S+/,
+	xml: /xmlns=\S+/,
+};
 
 export function buildEnd(
 	collections: Record<string, IconifyJSON>,
@@ -27,7 +33,7 @@ export function buildEnd(
 }
 
 export function generateSprite(packIcons: IconifyJSON, loaded: string[]) {
-	let str = `<svg xmlns="http://www.w3.org/2000/svg" style="display:none">\n`;
+	let svgHtml = `<svg xmlns="http://www.w3.org/2000/svg" style="display:none">\n`;
 	for (const icon of loaded) {
 		const data = getIconData(packIcons, icon);
 		if (!data) {
@@ -36,48 +42,52 @@ export function generateSprite(packIcons: IconifyJSON, loaded: string[]) {
 		}
 		const svg = iconToSVG(data);
 		const html = iconToHTML(replaceIDs(svg.body), svg.attributes);
-		str += html
-			.replace(/svg/g, "symbol")
-			.replace(/xmlns=\S+/, `id="${icon}"`)
-			.replace(/width=\S+/, "")
-			.replace(/height=\S+/, "");
+		svgHtml += html
+			.replaceAll("svg", "symbol")
+			.replaceAll(regexes.xml, `id="${icon}"`)
+			.replaceAll(regexes.width, "")
+			.replaceAll(regexes.height, "");
 	}
-	str += `\n</svg>`;
-	return str;
+	svgHtml += `\n</svg>`;
+	return svgHtml;
 }
 
 export async function loadIcons(options: Options) {
 	const text = fs.readFileSync(
-		new URL("./package.json", options?.iconifyRootDirectory),
+		new URL("package.json", options?.iconifyRootDirectory),
 		{ encoding: "utf8" },
 	);
-	const { dependencies = {}, devDependencies = {} } = JSON.parse(text);
+	const { dependencies = {}, devDependencies = {} } =
+		(JSON.parse(text) as {}) || {};
 	const packages: string[] = [
-		...Object.keys(dependencies),
-		...Object.keys(devDependencies),
+		...Object.keys(dependencies as Record<string, string>),
+		...Object.keys(devDependencies as Record<string, string>),
 	];
 	const collections = packages
 		.filter((name) => name.startsWith("@iconify-json/"))
 		.map((name) => name.replace("@iconify-json/", ""));
 
-	if (!collections.length) {
+	if (collections.length === 0) {
 		throw new Error("must have at least one iconify pack loaded");
 	}
 
-	const allIcons: [string, IconifyJSON | undefined][] = await Promise.all(
-		collections.map(async (collection) => [
-			collection,
-			await loadCollectionFromFS(
+	const awaitedIcons = await Promise.all(
+		collections.map(async (collection) => {
+			const loaded = await loadCollectionFromFS(
 				collection,
 				true,
 				"@iconify-json",
 				options?.iconifyRootDirectory?.toString(),
-			),
-		]),
+			);
+			if (!loaded) return;
+			return [collection, loaded];
+		}),
 	);
 
-	return allIcons.reduce(
-		(prev, [name, value]) => ({ ...prev, [name]: value }),
-		{},
+	const allIcons = awaitedIcons.filter(
+		// eslint-disable-next-line unicorn/prefer-native-coercion-functions
+		(item): item is [string, IconifyJSON] => Boolean(item),
 	);
+
+	return Object.fromEntries(allIcons.map(([name, value]) => [name, value]));
 }

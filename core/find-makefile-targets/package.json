@@ -17,6 +17,7 @@
     "email": "stephanrandle.dev@gmail.com",
     "url": "https://stephansama.info"
   },
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
@@ -29,8 +30,7 @@
   "module": "./dist/index.js",
   "bin": "./cli.mjs",
   "files": [
-    "./dist",
-    "./cli.mjs"
+    "./dist"
   ],
   "scripts": {
     "build": "tsdown",
@@ -39,7 +39,7 @@
     "lint:fix": "eslint ./ --fix"
   },
   "dependencies": {
-    "@kba/makefile-parser": "^0.0.6"
+    "@kba/makefile-parser": "catalog:"
   },
   "devDependencies": {
     "tsdown": "catalog:"

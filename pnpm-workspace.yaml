@@ -14,13 +14,16 @@ __versions:
 autoInstallPeers: true
 
 catalog:
+  '@bluwy/giget-core': ^0.1.6
   '@catppuccin/palette': 1.7.1
   '@catppuccin/tailwindcss': 1.0.0
   '@changesets/cli': ^2.31.0
+  '@clack/prompts': ^0.11.0
   '@dotenvx/dotenvx': 1.52.0
   '@iarna/toml': ^2.2.5
   '@iconify/types': 2.0.0
   '@iconify/utils': 2.3.0
+  '@kba/makefile-parser': ^0.0.6
   '@manypkg/find-root': 3.1.0
   '@manypkg/get-packages': 3.1.0
   '@manypkg/tools': 2.1.1

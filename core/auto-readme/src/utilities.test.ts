@@ -1,12 +1,13 @@
 import { afterEach, expect, it, vi } from "vitest";
 
 import * as logger from "./log";
-import * as module from "./utilties";
+import * as module from "./utilities";
 
 const mockGitRoot = "/Users/stephansama/Code/packages/";
 
 const mocks = vi.hoisted(() => ({
-	access: vi.fn().mockResolvedValue(),
+	// eslint-disable-next-line unicorn/no-useless-undefined
+	access: vi.fn().mockResolvedValue(undefined),
 	execSync: vi.fn(),
 	existsSync: vi.fn(),
 	isSymbolicLink: vi.fn(),
@@ -53,7 +54,7 @@ it("logs additional affected regexes when supplied", () => {
 	);
 
 	module.findAffectedMarkdowns(mockGitRoot, {
-		affectedRegexes: [".*\\/schema\\.js"],
+		affectedRegexes: [String.raw`.*\/schema\.js`],
 	});
 
 	expect(infoSpy).toHaveBeenCalledTimes(4);

@@ -33,10 +33,22 @@ export function config(
 			name: `stephansama/tseslint/setup`,
 		},
 		{
+			files: [glob.TS, glob.TSX, glob.JS, glob.JSX],
 			name: `stephansama/tseslint/overrides`,
 			rules: {
 				"@typescript-eslint/no-empty-object-type": "off",
-				"n/no-missing-import": ["error", { ignoreTypeImport: true }],
+				"@typescript-eslint/no-unused-vars": [
+					"error",
+					{
+						args: "all",
+						argsIgnorePattern: "^_",
+						caughtErrors: "all",
+						caughtErrorsIgnorePattern: "^_",
+						destructuredArrayIgnorePattern: "^_",
+						ignoreRestSiblings: true,
+						varsIgnorePattern: "^_",
+					},
+				],
 			},
 		},
 	];

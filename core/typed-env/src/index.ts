@@ -54,13 +54,13 @@ export function createEnvironment<Schema extends StandardSchemaV1>(
 function getObjectFromSchema(node: StandardSchemaV1): object {
 	switch (node["~standard"].vendor) {
 		case "arktype": {
-			return (node as unknown as any).definition;
+			return (node as unknown as { definition: object }).definition;
 		}
 		case "valibot": {
-			return (node as unknown as any).entries;
+			return (node as unknown as { entries: object }).entries;
 		}
 		case "zod": {
-			return (node as unknown as any).shape;
+			return (node as unknown as { shape: object }).shape;
 		}
 		default: {
 			throw new Error(

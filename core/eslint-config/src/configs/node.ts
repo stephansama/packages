@@ -12,19 +12,28 @@ export function config(
 ): Config[] {
 	return [
 		{
-			...nodePlugin.configs["flat/recommended"],
 			files: [glob.JS, glob.JSX, glob.TS, glob.TSX],
-			name: "stephansama/node",
+			name: `stephansama/node`,
+			plugins: {
+				node: nodePlugin,
+			},
 			rules: {
-				...nodePlugin.configs["flat/recommended"].rules,
-				"n/no-extraneous-import": [
+				"node/no-extraneous-import": [
 					"error",
 					{
 						allowModules: options.allowModules || [],
 						resolvePaths: options.resolvePaths || [],
 					},
 				],
-				"n/no-unpublished-bin": "off",
+				"node/no-extraneous-require": [
+					"error",
+					{
+						allowModules: options.allowModules || [],
+						resolvePaths: options.resolvePaths || [],
+					},
+				],
+				"node/no-missing-import": ["error", { ignoreTypeImport: true }],
+				"node/no-unpublished-bin": "off",
 			},
 		},
 	];

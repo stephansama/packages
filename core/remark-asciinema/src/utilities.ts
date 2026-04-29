@@ -1,3 +1,5 @@
+const asciiRegex = /[^/]+$/;
+
 const html = String.raw;
 
 export function constructAsciinemaImage(asciiSource: string) {
@@ -9,7 +11,7 @@ export function constructAsciinemaImage(asciiSource: string) {
 }
 
 export function constructAsciinemaScript(asciiSource: string) {
-	const id = "asciicast-" + asciiSource.match(/[^/]+$/)?.at(0);
+	const id = "asciicast-" + asciiSource.match(asciiRegex)?.at(0);
 	const source = `${asciiSource}.js`;
 	return html`<script async="true" id="${id}" src="${source}"></script>`;
 }

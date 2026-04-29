@@ -19,6 +19,7 @@
     "email": "stephanrandle.dev@gmail.com",
     "url": "https://stephanrandle.netlify.app/"
   },
+  "sideEffects": true,
   "type": "module",
   "exports": {
     ".": {
@@ -31,15 +32,14 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.cts",
   "files": [
-    "dist",
-    "package.json"
+    "dist"
   ],
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
     "lint": "eslint ./",
-    "prepublishOnly": "tsdown",
-    "lint:fix": "eslint ./ --fix"
+    "lint:fix": "eslint ./ --fix",
+    "prepublishOnly": "tsdown"
   },
   "devDependencies": {
     "remark": "catalog:",

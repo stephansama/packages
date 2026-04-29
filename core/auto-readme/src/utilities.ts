@@ -54,7 +54,10 @@ export function findAffectedMarkdowns(root: string, config: Config) {
 
 	INFO("Found the following eligible affected files", eligible);
 
-	const md = eligible.map((e) => findNearestReadme(root, path.resolve(e)));
+	const md = eligible.map((current) => {
+		return findNearestReadme(root, path.resolve(current));
+	});
+
 	const rootMd = path.join(root, "README.md");
 	const dedupe = [...new Set(md), rootMd].filter(Boolean);
 

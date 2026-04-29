@@ -32,7 +32,8 @@
     "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "devDependencies": {
-    "@catppuccin/palette": "catalog:"
+    "@catppuccin/palette": "catalog:",
+    "tsx": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",
   "publishConfig": {

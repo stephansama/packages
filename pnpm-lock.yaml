@@ -785,6 +785,9 @@ importers:
       '@catppuccin/palette':
         specifier: 'catalog:'
         version: 1.7.1
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
 
   core/catppuccin-xsl:
     devDependencies:

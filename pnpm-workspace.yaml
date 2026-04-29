@@ -50,25 +50,15 @@ catalog:
   knip: ^5.88.1
   ky: 2.0.1
   lefthook: 2.1.6
-  markdown-table: ^3.0.4
   mdast: 3.0.0
-  mdast-comment-marker: ^3.0.0
-  mdast-util-from-markdown: ^2.0.2
-  mdast-zone: github:stephansama/mdast-zone#1c5b08cd97240debeed4c9c6afad49df5877a132
   minify: 14.0.0
   nano-staged: 1.0.2
   node-plop: 0.32.3
-  ora: ^8.2.0
   oxc-parser: 0.127.0
   pkg-pr-new: ^0.0.51
-  pkg-types: ^2.3.0
   publint: ^0.3.17
   react: 19.2.0
   remark: 15.0.1
-  remark-code-import: ^1.2.0
-  remark-collapse: ^0.1.2
-  remark-toc: ^9.0.0
-  remark-usage: ^11.0.1
   tailwind-scrollbar: 4.0.2
   tailwindcss: 4.1.18
   taze: 19.9.2
@@ -79,11 +69,8 @@ catalog:
   undici: 7.22.0
   unified: 11.0.5
   unist-util-visit: 5.1.0
-  vfile: ^6.0.3
   vite: 6.3.5
   vite-tsconfig-paths: 5.1.4
-  yaml: ^2.8.2
-  zod2md: ^0.2.5
 
 catalogMode: strict
 

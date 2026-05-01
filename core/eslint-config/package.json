@@ -46,7 +46,6 @@
     "@typescript-eslint/parser": "catalog:eslint",
     "eslint-config-flat-gitignore": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
-    "eslint-plugin-barrel-files": "catalog:eslint",
     "eslint-plugin-baseline-js": "catalog:eslint",
     "eslint-plugin-command": "catalog:eslint",
     "eslint-plugin-jsdoc": "catalog:eslint",

@@ -119,7 +119,6 @@ catalogs:
     eslint-config-flat-gitignore: 2.1.0
     eslint-config-prettier: 10.1.8
     eslint-plugin-astro: ^1.7.0
-    eslint-plugin-barrel-files: 3.0.1
     eslint-plugin-baseline-js: 0.4.2
     eslint-plugin-command: 3.5.2
     eslint-plugin-jsdoc: 62.9.0

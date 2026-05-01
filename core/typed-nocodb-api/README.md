@@ -26,6 +26,8 @@ pnpm install @stephansama/typed-nocodb-api
 
 ## Usage
 
+eslint-disable-next-line zod/consistent-import
+
 ```javascript
 import * as z from "zod";
 
@@ -35,7 +37,7 @@ const api = createApi({
   baseId: process.env.NOCODB_BASE,
   origin: "https://nocodb.com",
   schema: z.object({
-    column1: z.string(),
+    column1: z.string().trim(),
     column2: z.enum(["optionOne", "optionTwo", "optionThree"]),
     column3: z.number(),
     column4: z.boolean(),

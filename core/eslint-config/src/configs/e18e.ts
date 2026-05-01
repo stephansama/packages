@@ -16,7 +16,7 @@ export function config(): Config[] {
 			},
 		},
 		{
-			files: [glob.JS, glob.JSX, glob.TS, glob.TSX],
+			files: [glob.TS, glob.TSX],
 			name: "stephansama/e18e",
 			plugins: { e18e },
 			rules: {

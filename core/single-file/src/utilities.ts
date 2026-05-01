@@ -1,7 +1,4 @@
-export async function bufferToDataUri(
-	buffer: ArrayBuffer,
-	mime?: null | string,
-) {
+export function bufferToDataUri(buffer: ArrayBuffer, mime?: null | string) {
 	const base64 = Buffer.from(buffer).toString("base64");
 	return `data:${mime || "image/png"};base64,${base64}`;
 }
@@ -11,16 +8,18 @@ export function escapeScript(script: string) {
 		.replaceAll("\\", "\\\\")
 		.replaceAll("`", "\\`")
 		.replaceAll("${", "\\${")
-		.replaceAll("<script", "<\\x73cript")
-		.replaceAll("</script>", "<\\/script>")
-		.replaceAll("\n", "\\n")
+		.replaceAll("<script", String.raw`<\x73cript`)
+		.replaceAll("</script>", String.raw`<\/script>`)
+		.replaceAll("\n", String.raw`\n`)
 		.replaceAll("\r", "");
 }
 
 const obviousQueries = ["\n", "{", "function"] as const;
 
-export function isProbablyUrl(str: string) {
-	if (!str || obviousQueries.some((query) => query.includes(str))) {
+const probablyUrlRegex = /^https?:\/\/|\/|\.\/|\.\.\/|[\w\-./]+$/;
+
+export function isProbablyUrl(string_: string) {
+	if (!string_ || obviousQueries.some((query) => query.includes(string_))) {
 		return false;
 	}
 
@@ -28,7 +27,7 @@ export function isProbablyUrl(str: string) {
 	// - absolute URLs
 	// - root-relative (/foo.js)
 	// - relative (./foo.js, foo.js)
-	return /^(https?:\/\/|\/|\.\/|\.\.\/|[a-zA-Z0-9_\-./]+$)/.test(str);
+	return probablyUrlRegex.test(string_);
 }
 
 export function isUrl(url: string, base: string) {
@@ -36,7 +35,7 @@ export function isUrl(url: string, base: string) {
 	try {
 		return new URL(url, base).href;
 	} catch (error) {
-		console.error(`${url} is not a URL\n${error}`);
+		console.error(`${url} is not a URL\n${String(error)}`);
 		return false;
 	}
 }

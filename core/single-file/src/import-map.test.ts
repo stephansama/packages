@@ -11,7 +11,7 @@ const mockKy = vi.hoisted(() => ({ get: vi.fn() }));
 
 vi.mock("ky", () => ({ default: mockKy }));
 
-function makeMockResponse(opts: {
+function makeMockResponse(options: {
 	buffer?: ArrayBuffer;
 	contentType?: null | string;
 	text?: string;
@@ -19,9 +19,9 @@ function makeMockResponse(opts: {
 	return {
 		arrayBuffer: vi
 			.fn()
-			.mockResolvedValue(opts.buffer ?? new ArrayBuffer(0)),
-		headers: { get: vi.fn().mockReturnValue(opts.contentType ?? null) },
-		text: vi.fn().mockResolvedValue(opts.text ?? ""),
+			.mockResolvedValue(options.buffer ?? new ArrayBuffer(0)),
+		headers: { get: vi.fn().mockReturnValue(options.contentType) },
+		text: vi.fn().mockResolvedValue(options.text ?? ""),
 	};
 }
 
@@ -46,11 +46,11 @@ describe("determineImportType", () => {
 	});
 
 	it("returns unknown for null", () => {
-		expect(determineImportType(null)).toBe("unknown");
+		expect(determineImportType()).toBe("unknown");
 	});
 
 	it("returns unknown for undefined", () => {
-		expect(determineImportType(undefined)).toBe("unknown");
+		expect(determineImportType()).toBe("unknown");
 	});
 });
 
@@ -72,7 +72,7 @@ describe("loadImport", () => {
 	});
 
 	it("loads binary content when isBinary is true", async () => {
-		const buffer = new Uint8Array([0x89, 0x50, 0x4e, 0x47]).buffer;
+		const buffer = new Uint8Array([0x89, 0x50, 0x47]).buffer;
 		mockKy.get.mockReturnValue(
 			makeMockResponse({ buffer, contentType: "image/png" }),
 		);
@@ -130,54 +130,54 @@ describe("loadImport", () => {
 });
 
 describe("writeImportMap", () => {
-	it("returns an empty registry when there are no JS imports", async () => {
+	it("returns an empty registry when there are no JS imports", () => {
 		imports.set("https://example.com/style.css", {
 			contentType: "text/css",
 			data: "body {}",
 			type: "unknown",
 		});
 
-		const result = await writeImportMap();
+		const result = writeImportMap();
 
 		expect(result).toContain("<script");
 		expect(result).toContain("window.registry");
 		expect(result).not.toContain("URL.createObjectURL");
 	});
 
-	it("includes JS entries as URL.createObjectURL blobs", async () => {
+	it("includes JS entries as URL.createObjectURL blobs", () => {
 		imports.set("https://example.com/lib.js", {
 			contentType: "text/javascript",
 			data: "export const x = 1;",
 			type: "js",
 		});
 
-		const result = await writeImportMap();
+		const result = writeImportMap();
 
 		expect(result).toContain("https://example.com/lib.js");
 		expect(result).toContain("URL.createObjectURL");
 	});
 
-	it("escapes special characters in JS content", async () => {
+	it("escapes special characters in JS content", () => {
 		imports.set("https://example.com/tmpl.js", {
 			contentType: "text/javascript",
 			data: "const x = `${y}`;",
 			type: "js",
 		});
 
-		const result = await writeImportMap();
+		const result = writeImportMap();
 
 		expect(result).not.toContain("`${y}`");
 		expect(result).toContain("\\${y}");
 	});
 
-	it("excludes non-JS imports from the registry", async () => {
+	it("excludes non-JS imports from the registry", () => {
 		imports.set("https://example.com/img.png", {
 			contentType: "image/png",
 			data: new ArrayBuffer(4),
 			type: "binary",
 		});
 
-		const result = await writeImportMap();
+		const result = writeImportMap();
 
 		expect(result).not.toContain("img.png");
 	});

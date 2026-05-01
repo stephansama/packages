@@ -1,5 +1,5 @@
 import * as cheerio from "cheerio";
-import { default as html, default as js } from "dedent";
+import dedent from "dedent";
 import path from "node:path";
 import * as oxc from "oxc-parser";
 
@@ -12,22 +12,30 @@ export type InlineFunction = (
 	baseUrl: string,
 ) => Promise<void>;
 
+const html = dedent;
+const js = dedent;
+
+const regexes = {
+	id: /#.*/,
+	queryParameters: /\?.*/,
+};
+
 export const img: InlineFunction = async ($, baseUrl) => {
 	for (const img of $("img[src]")) {
 		log.info(`loading \`img\` ${img.attribs.src}`);
 
-		const src = utilities.isUrl(img.attribs.src, baseUrl);
-		if (!src) continue;
+		const source = utilities.isUrl(img.attribs.src, baseUrl);
+		if (!source) continue;
 
 		const importedImage = await importMap.loadImport({
-			file: src,
+			file: source,
 			isBinary: true,
 		});
 		const extension = img.attribs.src
 			.split(".")
 			.at(-1)
-			?.replace(/#.*/, "")
-			.replace(/\?.*/, "");
+			?.replace(regexes.id, "")
+			.replace(regexes.queryParameters, "");
 
 		switch (extension) {
 			case "svg": {
@@ -51,24 +59,24 @@ export const img: InlineFunction = async ($, baseUrl) => {
 					`.trim();
 
 					const encoded = encodeURIComponent(svg)
-						.replace(/'/g, "%27")
-						.replace(/"/g, "%22");
+						.replaceAll("'", "%27")
+						.replaceAll('"', "%22");
 
 					$(img).attr("src", `data:image/svg+xml,${encoded}`);
 					break;
 				} else {
-					const dataUri = await utilities.bufferToDataUri(
+					const dataUri = utilities.bufferToDataUri(
 						importedImage,
-						importMap.imports.get(src)?.contentType,
+						importMap.imports.get(source)?.contentType,
 					);
 					$(img).attr("src", dataUri);
 				}
 				break;
 			}
 			default: {
-				const dataUri = await utilities.bufferToDataUri(
+				const dataUri = utilities.bufferToDataUri(
 					importedImage,
-					importMap.imports.get(src)?.contentType,
+					importMap.imports.get(source)?.contentType,
 				);
 				$(img).attr("src", dataUri);
 			}
@@ -80,31 +88,31 @@ export const link: InlineFunction = async ($, baseUrl) => {
 	for (const link of $("link[href]")) {
 		log.info(`loading \`link\` ${link.attribs.href}`);
 
-		const src = utilities.isUrl(link.attribs.href, baseUrl);
-		if (!src) continue;
+		const source = utilities.isUrl(link.attribs.href, baseUrl);
+		if (!source) continue;
 
 		switch (link.attribs.rel) {
 			case "apple-touch-icon":
 			case "icon":
 			case "shortcut icon": {
 				const buffer = await importMap.loadImport({
-					file: src,
+					file: source,
 					isBinary: true,
 				});
-				const mime = importMap.imports.get(src)?.contentType;
-				const dataUri = await utilities.bufferToDataUri(buffer, mime);
+				const mime = importMap.imports.get(source)?.contentType;
+				const dataUri = utilities.bufferToDataUri(buffer, mime);
 				$(link).attr("href", dataUri);
 				break;
 			}
 
 			case "stylesheet": {
-				const linkSrc = await importMap.loadImport({ file: src });
+				const linkSource = await importMap.loadImport({ file: source });
 
-				$(link).replaceWith(
-					html`<style>
-						${linkSrc}
-					</style>`,
-				);
+				$(link).replaceWith(html`
+					<style>
+						${linkSource}
+					</style>
+				`);
 				break;
 			}
 		}
@@ -114,41 +122,44 @@ export const link: InlineFunction = async ($, baseUrl) => {
 export const script: InlineFunction = async ($, baseUrl) => {
 	for (const script of $("script[src]")) {
 		log.info(`loading \`script\` ${script.attribs.src}`);
-		const src = utilities.isUrl(script.attribs.src, baseUrl);
-		if (!src) continue;
+		const source = utilities.isUrl(script.attribs.src, baseUrl);
+		if (!source) continue;
 
-		const dirname = src.startsWith("http")
+		const dirname = source.startsWith("http")
 			? undefined
-			: path.posix.dirname(new URL(src).pathname);
+			: path.posix.dirname(new URL(source).pathname);
 
-		let scriptSrc = await importMap.loadImport({ dirname, file: src });
+		let scriptSource = await importMap.loadImport({
+			dirname,
+			file: source,
+		});
 
-		const parsed = await oxc.parse(src, scriptSrc);
+		const parsed = await oxc.parse(source, scriptSource);
 
 		for (const imported of parsed.module.staticImports) {
 			const entries = imported.entries
 				.map((entry) => {
-					return `${entry.importName}${entry.localName ? " as " + entry.localName : ""}`;
+					return `${entry.importName.name}${entry.localName ? " as " + entry.localName.value : ""}`;
 				})
 				.join(",");
 
-			scriptSrc = [
-				scriptSrc.slice(0, imported.start),
+			scriptSource = [
+				scriptSource.slice(0, imported.start),
 				js`const {${entries}}=await import(window["${importMap.WINDOW_KEY}"]["${imported.moduleRequest}"]);`,
-				scriptSrc.slice(imported.end),
+				scriptSource.slice(imported.end),
 			].join("");
 		}
 
 		for (const imported of parsed.module.dynamicImports) {
-			scriptSrc = [
-				scriptSrc.slice(0, imported.start),
+			scriptSource = [
+				scriptSource.slice(0, imported.start),
 				js`await import(window["${importMap.WINDOW_KEY}"]["${imported.moduleRequest}"]);`,
-				scriptSrc.slice(imported.end),
+				scriptSource.slice(imported.end),
 			].join("");
 		}
 
 		$(script).removeAttr("src");
-		$(script).text(scriptSrc);
+		$(script).text(scriptSource);
 	}
 };
 
@@ -162,13 +173,13 @@ export const svgUse: InlineFunction = async ($, baseUrl) => {
 
 		log.info(`loading \`svg>use\` ${url}#${hash}`);
 
-		const src = utilities.isUrl(url, baseUrl);
-		if (!src) {
+		const source = utilities.isUrl(url, baseUrl);
+		if (!source) {
 			log.error(`unable to load source for use element`);
 			continue;
 		}
 
-		const svgMap = await importMap.loadImport({ file: src });
+		const svgMap = await importMap.loadImport({ file: source });
 		const $$ = cheerio.load(svgMap, { xmlMode: true });
 
 		const symbol = $$(`symbol#${hash}`);

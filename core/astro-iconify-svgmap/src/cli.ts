@@ -20,13 +20,16 @@ const {
 });
 
 const configFile = fs.readFileSync(config, { encoding: "utf8" });
-const options = JSON.parse(configFile || "false") || defaultConfig;
+const options = (JSON.parse(configFile || "false") || defaultConfig) as object;
 const usage = JSON.parse(
 	fs.readFileSync(path.resolve(LOADED_ICONS_FILENAME), {
 		encoding: "utf8",
 	}) || "{}",
-);
+) as Record<string, string[]>;
 
-loadIcons(options).then((data) => {
-	buildEnd(data, usage, options);
-});
+try {
+	const icons = await loadIcons(options);
+	buildEnd(icons, usage, options);
+} catch (error) {
+	console.error(error);
+}

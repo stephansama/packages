@@ -20,11 +20,11 @@ export function config(
 	return [
 		...tseslint.configs.recommendedTypeChecked.map((config) => ({
 			...config,
-			files: [glob.TS, glob.TSX, glob.JS, glob.JSX],
+			files: [glob.TS, glob.TSX],
 			name: `stephansama/tseslint/${config.name || "anonymous"}`,
 		})),
 		{
-			files: [glob.TS, glob.TSX, glob.JS, glob.JSX],
+			files: [glob.TS, glob.TSX],
 			languageOptions: {
 				parserOptions: {
 					projectService: options,
@@ -33,7 +33,7 @@ export function config(
 			name: `stephansama/tseslint/setup`,
 		},
 		{
-			files: [glob.TS, glob.TSX, glob.JS, glob.JSX],
+			files: [glob.TS, glob.TSX],
 			name: `stephansama/tseslint/overrides`,
 			rules: {
 				"@typescript-eslint/no-empty-object-type": "off",

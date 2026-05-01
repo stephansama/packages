@@ -5,7 +5,7 @@ import { createApi } from "../src/index";
 
 const apiSchema = z.object({
 	completed: z.boolean(),
-	title: z.string(),
+	title: z.string().trim(),
 });
 
 describe("typed-nocodb-api", () => {
@@ -76,8 +76,8 @@ describe("typed-nocodb-api", () => {
 		});
 
 		const expectedUrl = `${origin}/api/v3/data/${baseId}/${tableId}/records`;
-		const calledUrl = mockFetch.mock.calls[0][0];
-		const calledOptions = mockFetch.mock.calls[0][1];
+		const calledUrl = mockFetch.mock.calls[0][0] as string;
+		const calledOptions = mockFetch.mock.calls[0][1] as object;
 
 		expect(calledUrl).toContain(expectedUrl);
 		expect(calledUrl).toContain(
@@ -86,7 +86,7 @@ describe("typed-nocodb-api", () => {
 
 		expect(calledOptions).toEqual(
 			expect.objectContaining({
-				headers: expect.any(Headers),
+				headers: expect.any(Headers) as Headers,
 				method: "get",
 			}),
 		);
@@ -145,7 +145,7 @@ describe("typed-nocodb-api", () => {
 
 	it("should perform DELETE action", async () => {
 		mockFetch.mockResolvedValue({
-			json: async () => ({}),
+			json: () => ({}),
 			ok: true,
 			statusText: "OK",
 		});

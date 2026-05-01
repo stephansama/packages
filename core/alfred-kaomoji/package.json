@@ -33,8 +33,8 @@
   "scripts": {
     "postinstall": "node ./ci.js && alfy-init || true",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-    "preuninstall": "node ./ci.js && alfy-cleanup || true",
-    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix",
+    "preuninstall": "node ./ci.js && alfy-cleanup || true"
   },
   "dependencies": {
     "alfy": "catalog:"

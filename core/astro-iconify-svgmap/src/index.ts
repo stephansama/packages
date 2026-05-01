@@ -34,13 +34,13 @@ export function createIntegration(options_: Options = {}): AstroIntegration {
 					path.resolve(CONFIG_FILENAME),
 					{ encoding: "utf8" },
 				);
-				const options =
-					JSON.parse(configFile || "false") || defaultConfig;
+				const options = (JSON.parse(configFile || "false") ||
+					defaultConfig) as object;
 				const usage = JSON.parse(
 					fs.readFileSync(path.resolve(LOADED_ICONS_FILENAME), {
 						encoding: "utf8",
 					}) || "{}",
-				);
+				) as Record<string, string[]>;
 				const icons = await loadIcons(options_);
 				buildEnd(icons, usage, options);
 			},
@@ -67,7 +67,7 @@ export default function createPlugin(options?: Options): Plugin {
 			_config = resolvedConfig;
 		},
 		configureServer(server) {
-			server.middlewares.use(async function (request, res, next) {
+			server.middlewares.use(function (request, response, next) {
 				for (const pack of Object.keys(inMemoryCollections)) {
 					if (request.url === `/${pack}.svg`) {
 						const loaded = JSON.parse(
@@ -78,13 +78,13 @@ export default function createPlugin(options?: Options): Plugin {
 									flag: "as+",
 								},
 							) || "{}",
-						);
-						res.setHeader("Content-Type", "image/svg+xml");
+						) as Record<string, string[]>;
+						response.setHeader("Content-Type", "image/svg+xml");
 						const sprite = generateSprite(
 							inMemoryCollections[pack],
 							loaded[pack] || [],
 						);
-						return res.end(sprite);
+						return response.end(sprite);
 					}
 				}
 

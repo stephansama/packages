@@ -26,6 +26,9 @@ pnpm install @stephansama/typed-env
 
 ## Usage
 
+is already a namespace import
+eslint-disable-next-line zod/consistent-import
+
 ```javascript
 import * as z from "zod";
 

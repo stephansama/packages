@@ -30,14 +30,16 @@ export function createApi<Schema extends z.ZodObject>({
 			method: "get",
 			responseSchema: z
 				.object({ count: z.number() })
-				.or(z.object({ msg: z.string() })),
+				.or(z.object({ msg: z.string().trim() })),
 			url: `/api/v3/data/${baseId}/${tableId}/records`,
 		},
 		CREATE: {
 			inputSchema: z.object({ fields: schema }),
 			method: "post",
 			responseSchema: z.object({
-				records: z.array(z.object({ fields: schema, id: z.string() })),
+				records: z.array(
+					z.object({ fields: schema, id: z.string().trim() }),
+				),
 			}),
 			url: `/api/v3/data/${baseId}/${tableId}/records`,
 		},
@@ -50,19 +52,19 @@ export function createApi<Schema extends z.ZodObject>({
 		LIST: {
 			method: "get",
 			querySchema: z.object({
-				fields: z.array(z.string()).or(z.string()),
+				fields: z.array(z.string().trim()).or(z.string().trim()),
 				sort: z
 					.object({
 						direction: z.enum(["asc", "desc"]),
-						field: z.string(),
+						field: z.string().trim(),
 					})
 					.transform((input) => JSON.stringify(input)),
 			}),
 			responseSchema: z.object({
-				nestedNext: z.string().optional().nullable(),
-				nestedPrev: z.string().optional().nullable(),
-				next: z.string().optional().nullable(),
-				prev: z.string().optional().nullable(),
+				nestedNext: z.string().trim().optional().nullable(),
+				nestedPrev: z.string().trim().optional().nullable(),
+				next: z.string().trim().optional().nullable(),
+				prev: z.string().trim().optional().nullable(),
 				records: z.array(z.object({ fields: schema, id: z.number() })),
 			}),
 			url: `/api/v3/data/${baseId}/${tableId}/records`,
@@ -73,7 +75,7 @@ export function createApi<Schema extends z.ZodObject>({
 			url: `/api/v3/data/${baseId}/${tableId}/records/{recordId}`,
 		},
 		UPDATE: {
-			inputSchema: z.object({ fields: schema, id: z.string() }),
+			inputSchema: z.object({ fields: schema, id: z.string().trim() }),
 			method: "patch",
 			responseSchema: z.object(),
 			url: `/api/v3/data/${baseId}/${tableId}/records`,

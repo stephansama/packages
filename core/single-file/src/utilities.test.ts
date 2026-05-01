@@ -1,3 +1,4 @@
+/* eslint-disable e18e/prefer-static-regex */
 import { describe, expect, it } from "vitest";
 
 import {
@@ -8,43 +9,40 @@ import {
 } from "./utilities";
 
 describe("bufferToDataUri", () => {
-	it("defaults to image/png mime type", async () => {
-		const result = await bufferToDataUri(new Uint8Array([1, 2, 3]).buffer);
+	it("defaults to image/png mime type", () => {
+		const result = bufferToDataUri(new Uint8Array([1, 2, 3]).buffer);
 		expect(result).toMatch(/^data:image\/png;base64,/);
 	});
 
-	it("defaults to image/png when mime is null", async () => {
-		const result = await bufferToDataUri(
-			new Uint8Array([1, 2, 3]).buffer,
-			null,
-		);
+	it("defaults to image/png when mime is null", () => {
+		const result = bufferToDataUri(new Uint8Array([1, 2, 3]).buffer);
 		expect(result).toMatch(/^data:image\/png;base64,/);
 	});
 
-	it("uses the provided mime type", async () => {
-		const result = await bufferToDataUri(
+	it("uses the provided mime type", () => {
+		const result = bufferToDataUri(
 			new Uint8Array([1]).buffer,
 			"image/svg+xml",
 		);
 		expect(result).toMatch(/^data:image\/svg\+xml;base64,/);
 	});
 
-	it("encodes buffer content as base64", async () => {
+	it("encodes buffer content as base64", () => {
 		// "hello" in ASCII bytes — use Uint8Array to avoid Node Buffer shared pool
 		const bytes = new Uint8Array([104, 101, 108, 108, 111]);
-		const result = await bufferToDataUri(bytes.buffer);
+		const result = bufferToDataUri(bytes.buffer);
 		expect(result).toBe("data:image/png;base64,aGVsbG8=");
 	});
 
-	it("handles empty buffer", async () => {
-		const result = await bufferToDataUri(new ArrayBuffer(0));
+	it("handles empty buffer", () => {
+		const result = bufferToDataUri(new ArrayBuffer(0));
 		expect(result).toBe("data:image/png;base64,");
 	});
 });
 
 describe("escapeScript", () => {
 	it("escapes backslashes", () => {
-		expect(escapeScript("a\\b")).toBe("a\\\\b");
+		expect(escapeScript(String.raw`a\b`)).toBe(String.raw`a\\b`);
 	});
 
 	it("escapes backticks", () => {
@@ -56,19 +54,19 @@ describe("escapeScript", () => {
 	});
 
 	it("escapes opening script tags", () => {
-		expect(escapeScript("<script")).toBe("<\\x73cript");
+		expect(escapeScript("<script")).toBe(String.raw`<\x73cript`);
 	});
 
 	it("escapes closing script tags", () => {
-		expect(escapeScript("</script>")).toBe("<\\/script>");
+		expect(escapeScript("</script>")).toBe(String.raw`<\/script>`);
 	});
 
-	it("converts newlines to \\n literal", () => {
-		expect(escapeScript("a\nb")).toBe("a\\nb");
+	it(String.raw`converts newlines to \n literal`, () => {
+		expect(escapeScript("a\nb")).toBe(String.raw`a\nb`);
 	});
 
 	it("removes carriage returns", () => {
-		expect(escapeScript("a\r\nb")).toBe("a\\nb");
+		expect(escapeScript("a\r\nb")).toBe(String.raw`a\nb`);
 	});
 
 	it("handles multiple replacements in one string", () => {
@@ -83,7 +81,7 @@ describe("escapeScript", () => {
 		expect(result).not.toContain("\n");
 		// closing script tag is escaped
 		expect(result).not.toContain("</script>");
-		expect(result).toContain("<\\/script>");
+		expect(result).toContain(String.raw`<\/script>`);
 	});
 });
 

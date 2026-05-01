@@ -53,8 +53,8 @@
     "build": "tsdown --profile=node16",
     "dev": "tsdown --watch",
     "lint": "eslint ./",
-    "prepublishOnly": "tsdown",
-    "lint:fix": "eslint ./ --fix"
+    "lint:fix": "eslint ./ --fix",
+    "prepublishOnly": "tsdown"
   },
   "devDependencies": {
     "@iconify/types": "catalog:",

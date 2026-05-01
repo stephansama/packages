@@ -17,6 +17,7 @@
     "email": "stephanrandle.dev@gmail.com",
     "url": "https://stephansama.info"
   },
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
@@ -30,7 +31,6 @@
   "types": "./dist/index.d.cts",
   "bin": "./cli.mjs",
   "files": [
-    "cli.mjs",
     "dist"
   ],
   "scripts": {

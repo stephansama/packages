@@ -1,3 +1,5 @@
+// is already a namespace import
+// eslint-disable-next-line zod/consistent-import
 import * as z from "zod";
 
 import { createEnvironment } from "../dist/index.cjs";

@@ -2,16 +2,18 @@ import { describe, expect, it } from "vitest";
 import * as z from "zod";
 
 import { createHandlebarSchemaSingleton } from "@/singleton";
-import { getFileContext } from "@/utils";
+import { getFileContext } from "@/utilities";
 
 const { templateDirectory } = getFileContext(import.meta.url);
 
 const validSchema = createHandlebarSchemaSingleton(
 	["./fixtures/singleton/valid.hbs", "./fixtures/singleton/valid2.hbs"],
 	z.object({
-		items: z.array(z.object({ key: z.string(), value: z.string() })),
-		map_type: z.string(),
-		name: z.string(),
+		items: z.array(
+			z.object({ key: z.string().trim(), value: z.string().trim() }),
+		),
+		map_type: z.string().trim(),
+		name: z.string().trim(),
 	}),
 	{ templateDirectory },
 );
@@ -19,9 +21,11 @@ const validSchema = createHandlebarSchemaSingleton(
 const invalidSchema = createHandlebarSchemaSingleton(
 	["./fixtures/singleton/invalid.hbs", "./fixtures/singleton/valid.hbs"],
 	z.object({
-		items: z.array(z.object({ key: z.string(), value: z.string() })),
-		map_type: z.string(),
-		name: z.string(),
+		items: z.array(
+			z.object({ key: z.string().trim(), value: z.string().trim() }),
+		),
+		map_type: z.string().trim(),
+		name: z.string().trim(),
 	}),
 	{ templateDirectory },
 );
@@ -32,7 +36,8 @@ describe("audit", () => {
 		expect(result).toBeTruthy();
 	});
 
-	it("it invalidates an invalid files", async () => {
+	it("it invalidates an invalid files", () => {
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
 		expect(invalidSchema.audit()).rejects.toThrow(
 			"Missing key 'different'",
 		);
@@ -40,8 +45,9 @@ describe("audit", () => {
 });
 
 describe("compile", () => {
-	it("prevents compiling bad input", async () => {
-		// @ts-expect-error
+	it("prevents compiling bad input", () => {
+		// @ts-expect-error something with typescript
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
 		expect(validSchema.compile("constList", {})).rejects.toThrow();
 	});
 

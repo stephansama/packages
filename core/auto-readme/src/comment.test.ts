@@ -48,9 +48,11 @@ it.each([
 		const output = module.parseComment(input);
 		expect(output.action).toBe(expected.action);
 		expect(output.format).toBe(
+			// eslint-disable-next-line unicorn/no-useless-undefined
 			expected.format || formatsSchema.parse(undefined),
 		);
 		expect(output.language).toBe(
+			// eslint-disable-next-line unicorn/no-useless-undefined
 			expected.language || languageSchema.parse(undefined),
 		);
 		expect(output.isStart).toBe(expected.isStart);

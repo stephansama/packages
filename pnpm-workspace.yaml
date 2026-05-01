@@ -86,6 +86,7 @@ catalogs:
     cleye: 2.6.0
     cosmiconfig: 9.0.0
     obug: 2.1.1
+    picospinner: ^3.0.0
     yargs: 18.0.0
   commitlint:
     '@commitlint/cli': 19.8.1

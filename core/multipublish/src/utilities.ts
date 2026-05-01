@@ -33,8 +33,8 @@ export function npmrcTemplate(options: {
 	scope: string;
 }) {
 	return dedent`
-	{{SCOPE}}:registry={{REGISTRY}}
-	//{{REGISTRY_DOMAIN}}/:_authToken={{AUTH_TOKEN}}
+		{{SCOPE}}:registry={{REGISTRY}}
+		//{{REGISTRY_DOMAIN}}/:_authToken={{AUTH_TOKEN}}
 	`
 		.replace("{{AUTH_TOKEN}}", options.authToken)
 		.replace("{{REGISTRY}}", options.registry)

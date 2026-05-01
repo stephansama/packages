@@ -1,7 +1,7 @@
 import { fromMarkdown } from "mdast-util-from-markdown";
 import * as cp from "node:child_process";
 import * as fsp from "node:fs/promises";
-import ora from "ora";
+import { Spinner } from "picospinner";
 
 import type { Config } from "./schema";
 
@@ -36,16 +36,16 @@ export async function run() {
 
 	INFO("Loaded the following files:", paths.join("\n"));
 
-	const type = arguments_.onlyReadmes ? "readmes" : "all markdown files";
-
 	if (paths.length === 0) {
 		return ERROR(`no ${isAffected} readmes found to update`);
 	}
 
-	const spinner = !arguments_.verbose && ora(`Updating ${type}`).start();
+	const spinner = !arguments_.verbose && makeSpinner();
+	if (spinner) spinner.start();
 
 	await Promise.all(
 		paths
+			// eslint-disable-next-line unicorn/prefer-native-coercion-functions
 			.filter((path): path is string => Boolean(path))
 			.map(async (path) => {
 				const file = await fsp.readFile(path, { encoding: "utf8" });
@@ -89,4 +89,8 @@ export async function run() {
 	}
 
 	if (spinner) spinner.stop();
+}
+
+function makeSpinner() {
+	return new Spinner("Updating readme...", { colors: { spinner: "red" } });
 }

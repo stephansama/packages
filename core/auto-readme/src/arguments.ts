@@ -73,6 +73,7 @@ function zodToYargs(): Omit<
 
 		const options: Options = {
 			// @ts-expect-error STE-71
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			default: value.def.defaultValue,
 			type: yargType,
 		};
@@ -83,5 +84,6 @@ function zodToYargs(): Omit<
 		return [key, options];
 	});
 
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 	return Object.fromEntries(entries);
 }

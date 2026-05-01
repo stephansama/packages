@@ -65,7 +65,6 @@
     "mdast-util-from-markdown": "^2.0.2",
     "mdast-zone": "github:stephansama/mdast-zone#1c5b08cd97240debeed4c9c6afad49df5877a132",
     "obug": "catalog:cli",
-    "ora": "^8.2.0",
     "pkg-types": "^2.3.0",
     "remark": "15.0.1",
     "remark-code-import": "^1.2.0",
@@ -83,6 +82,7 @@
     "@types/mdast": "catalog:",
     "@types/vfile": "catalog:",
     "@types/yargs": "catalog:",
+    "picospinner": "catalog:cli",
     "tsdown": "catalog:",
     "unified": "catalog:"
   },

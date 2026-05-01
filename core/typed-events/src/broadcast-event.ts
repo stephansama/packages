@@ -65,15 +65,19 @@ export function createBroadcastEvent<
 				if (event.type !== eventName) return;
 
 				const validateCallback = () =>
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 					callback({ data: event.detail, raw: event, type: "event" });
 				_validate(name, event.detail, validateCallback);
 			};
 
 			const channelListener = (message: MessageEvent) => {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				const { data } = message;
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 				if (data.name !== name) return;
 
 				const validateCallback = () =>
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 					callback({ data, raw: message, type: "message" });
 				_validate(name, message.data, validateCallback);
 			};

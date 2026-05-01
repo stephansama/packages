@@ -82,14 +82,17 @@ it("sets up the event listener map", () => {
 	render(<ExampleEventMapInteraction />);
 
 	const setDarkButton = screen.getByRole("button", {
+		// eslint-disable-next-line e18e/prefer-static-regex
 		name: /set dark/i,
 	});
 
 	const setLightButton = screen.getByRole("button", {
+		// eslint-disable-next-line e18e/prefer-static-regex
 		name: /set light/i,
 	});
 
 	const toggleButton = screen.getByRole("button", {
+		// eslint-disable-next-line e18e/prefer-static-regex
 		name: /toggle/i,
 	});
 

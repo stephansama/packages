@@ -4,8 +4,8 @@ import { createEnvironment } from "../dist/index.cjs";
 
 export const config = createEnvironment(
 	z.object({
-		GENERATIVE_API_KEY: z.string(),
-		OTHER_SUPER_SECRET_KEY: z.string(),
+		GENERATIVE_API_KEY: z.string().trim(),
+		OTHER_SUPER_SECRET_KEY: z.string().trim(),
 	}),
 );
 

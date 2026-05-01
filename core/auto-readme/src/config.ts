@@ -38,8 +38,8 @@ export async function loadConfig(arguments_: Partial<Arguments>) {
 	INFO("merging config with args", arguments_);
 
 	return configSchema.parse(
-		deepmerge(search?.config || {}, arguments_, {
-			arrayMerge: (_, sourceArray) => sourceArray,
+		deepmerge((search?.config as object) || {}, arguments_, {
+			arrayMerge: (_, sourceArray) => sourceArray as unknown[],
 		}),
 	);
 }
@@ -63,6 +63,7 @@ function getSearchPlaces() {
 
 function removeFalsy(object: object) {
 	return Object.fromEntries(
+		// @ts-expect-error some sort of mismatch
 		Object.entries(object)
 			.map(([k, v]) => (v ? [k, v] : false))
 			.filter(Boolean),

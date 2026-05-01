@@ -30,8 +30,8 @@ key = "value"
 afterEach(vi.clearAllMocks);
 
 it("loadsToml properly", () => {
-	const obj = module.loadToml("", mockToml);
-	expect(obj).toBeTruthy();
+	const object = module.loadToml("", mockToml);
+	expect(object).toBeTruthy();
 });
 
 it("throws an error when invalid toml is provided to loadsToml", () => {
@@ -49,6 +49,7 @@ it("loads the default config", async () => {
 	searchMock.mock.mockResolvedValue("truthy");
 
 	const loaded = await module.loadConfig({});
+	// eslint-disable-next-line unicorn/no-useless-undefined
 	const defaultConfig = configSchema.parse(undefined);
 
 	expect(infoSpy).toHaveBeenCalled();
@@ -64,6 +65,7 @@ it("warns the user when the supplied config cannot be found", async () => {
 	searchMock.mock.mockResolvedValue("");
 
 	const loaded = await module.loadConfig({ config: "./schema.js" });
+	// eslint-disable-next-line unicorn/no-useless-undefined
 	const defaultConfig = configSchema.parse(undefined);
 
 	expect(infoSpy).toHaveBeenCalled();

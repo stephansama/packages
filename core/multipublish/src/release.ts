@@ -8,8 +8,8 @@ import { gitClean, readStdin } from "./utilities";
 
 export type ReleaseSchema = z.infer<typeof releaseSchema>;
 export const releaseSchema = z.object({
-	name: z.string(),
-	version: z.string().optional(),
+	name: z.string().trim(),
+	version: z.string().trim().optional(),
 });
 
 export type ReleasesSchema = z.infer<typeof releasesSchema>;
@@ -19,7 +19,10 @@ export type ChangesetStatusSchema = z.input<typeof changesetStatusSchema>;
 export const changesetStatusSchema = z
 	.object({
 		releases: z.array(
-			z.object({ name: z.string(), newVersion: z.string() }),
+			z.object({
+				name: z.string().trim(),
+				newVersion: z.string().trim(),
+			}),
 		),
 	})
 	.transform<ReleasesSchema>((schema) =>

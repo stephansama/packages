@@ -9,8 +9,10 @@ import type { AgentName } from "./detect";
 
 export type CatalogSchema = z.infer<typeof catalogSchema>;
 export const catalogSchema = z.object({
-	catalog: z.record(z.string(), z.string()).optional(),
-	catalogs: z.record(z.string(), z.record(z.string(), z.string())).optional(),
+	catalog: z.record(z.string(), z.string().trim()).optional(),
+	catalogs: z
+		.record(z.string(), z.record(z.string(), z.string().trim()))
+		.optional(),
 });
 
 export type ValidCatalogAgent = Extract<AgentName, "bun" | "pnpm">;

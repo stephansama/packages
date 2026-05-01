@@ -18,7 +18,7 @@ it("dispatches an event with a valid event", () => {
 it("prevents an event from being dispatched with an invalid event", () => {
 	const event = createEvent("test", z.object({ shape: z.number() }));
 
-	// @ts-expect-error
+	// @ts-expect-error type mismatch
 	expect(() => event.dispatch({})).toThrowError();
 });
 

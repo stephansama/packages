@@ -35,7 +35,8 @@ export function findAffectedMarkdowns(root: string, config: Config) {
 		.execSync(sh`git diff --cached --name-only --diff-filter=MACT`, options)
 		.trim()
 		.split("\n")
-		.filter(Boolean);
+		// eslint-disable-next-line unicorn/prefer-native-coercion-functions
+		.filter((item): item is string => Boolean(item));
 
 	if (affected.length === 0) ERROR("no staged files found");
 
@@ -59,7 +60,11 @@ export function findAffectedMarkdowns(root: string, config: Config) {
 	});
 
 	const rootMd = path.join(root, "README.md");
-	const dedupe = [...new Set(md), rootMd].filter(Boolean);
+
+	// eslint-disable-next-line unicorn/prefer-native-coercion-functions
+	const dedupe = [...new Set(md), rootMd].filter((item): item is string =>
+		Boolean(item),
+	);
 
 	INFO("Found the following readmes", dedupe);
 

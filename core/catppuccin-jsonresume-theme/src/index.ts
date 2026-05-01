@@ -11,6 +11,7 @@ export function render(resume: ResumeSchema) {
 
 	Handlebars.registerHelper("formatDate", function (dateString) {
 		if (!dateString) return "";
+		if (typeof dateString !== "string") return "";
 		return dateString.slice(0, 4);
 	});
 

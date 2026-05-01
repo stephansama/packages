@@ -7,23 +7,33 @@ import * as z from "zod";
 import type { JsrPlatformOptionsSchema } from "./schema";
 
 type ExportsSchema = z.infer<typeof exportSchema>;
-export const exportSchema = z.string().or(
-	z.record(
-		z.string(),
-		z.string().or(
-			z.object({
-				import: z.object({ default: z.string() }).or(z.string()),
-				require: z.object({ default: z.string() }).or(z.string()),
-			}),
+export const exportSchema = z
+	.string()
+	.trim()
+	.or(
+		z.record(
+			z.string(),
+			z
+				.string()
+				.trim()
+				.or(
+					z.object({
+						import: z
+							.object({ default: z.string().trim() })
+							.or(z.string().trim()),
+						require: z
+							.object({ default: z.string().trim() })
+							.or(z.string().trim()),
+					}),
+				),
 		),
-	),
-);
+	);
 
 export const packageJsonSchema = z.object({
 	exports: exportSchema,
-	license: z.string().optional(),
-	name: z.string().min(1),
-	version: z.string(),
+	license: z.string().trim().optional(),
+	name: z.string().trim().min(1),
+	version: z.string().trim(),
 });
 
 export const jsrTransformer = packageJsonSchema.transform((schema) => ({
@@ -37,15 +47,16 @@ export { jsrTransformer as transformer };
 
 export type JsrSchema = z.infer<typeof jsrSchema>;
 export const jsrSchema = z.object({
-	exclude: z.array(z.string()).optional(),
+	exclude: z.array(z.string().trim()).optional(),
 	exports: z
 		.string()
-		.or(z.array(z.string()))
-		.or(z.record(z.string(), z.string())),
-	include: z.array(z.string()).optional(),
-	license: z.string().optional(),
-	name: z.string().min(1),
-	version: z.string(),
+		.trim()
+		.or(z.array(z.string().trim()))
+		.or(z.record(z.string(), z.string().trim())),
+	include: z.array(z.string().trim()).optional(),
+	license: z.string().trim().optional(),
+	name: z.string().trim().min(1),
+	version: z.string().trim(),
 });
 
 export async function loadConfig(basePath: string) {
@@ -99,13 +110,12 @@ export async function updateJsrConfigVersion(
 function convertPackageJsonExportsToJsr(exports: ExportsSchema) {
 	if (typeof exports === "string") return exports;
 	return Object.fromEntries(
-		Object.entries(exports).map(([key, value]) => [
-			key,
-			typeof value === "string"
-				? value
-				: typeof value.import === "string"
-					? value.import
-					: value.import.default,
-		]),
+		Object.entries(exports).map(([key, value]) => {
+			let current = "";
+			if (typeof value === "string") current = value;
+			else if (typeof value.import === "string") current = value.import;
+			else current = value.import.default;
+			return [key, current];
+		}),
 	);
 }

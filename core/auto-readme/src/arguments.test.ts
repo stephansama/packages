@@ -15,7 +15,7 @@ const yargs = vi.hoisted(() => ({
 
 const debug = vi.hoisted(() => ({ default: { enable: vi.fn() } }));
 
-vi.mock("debug", () => ({ default: debug.default }));
+vi.mock("obug", () => ({ enable: debug.default.enable }));
 
 vi.mock("yargs", () => ({ default: yargs.default }));
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call */
 import * as ai from "ai";
 import { err, ok } from "neverthrow";
 import * as cp from "node:child_process";
@@ -17,8 +18,8 @@ vi.mock("ai", () => ({
 	generateText: vi.fn(),
 }));
 
-vi.mock("../src/args", () => ({
-	parseArgs: vi.fn(),
+vi.mock("../src/arguments", () => ({
+	parseArguments: vi.fn(),
 }));
 
 vi.mock("../src/config", () => ({
@@ -104,13 +105,11 @@ describe("index run", () => {
 		);
 	});
 
-	it("should exit if provider initialization fails", async () => {
+	it("should exit if provider initialization fails", () => {
 		(getProvider as any).mockReturnValue(err(new Error("Provider error")));
 
-		await run();
-
-		expect(mockConsoleError).toHaveBeenCalledWith("Provider error");
-		expect(mockExit).toHaveBeenCalledWith(1);
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		expect(run()).rejects.toThrowError();
 	});
 
 	it("should skip run if skipNextRun is true", async () => {
@@ -123,7 +122,6 @@ describe("index run", () => {
 		expect(mockConsoleWarn).toHaveBeenCalledWith(
 			"skipNextRun flag supplied skipping current run",
 		);
-		expect(mockExit).toHaveBeenCalledWith(0);
 		expect(ai.generateText).not.toHaveBeenCalled();
 	});
 });

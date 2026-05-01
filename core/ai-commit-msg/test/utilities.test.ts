@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { debug, info, moduleName, warn } from "../src/util";
+import { debug, info, moduleName, warn } from "../src/utilities";
 
 describe("util", () => {
 	it("should have correct module name", () => {

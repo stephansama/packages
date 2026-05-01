@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { parseArgs } from "../src/args";
+import { parseArguments } from "../src/arguments";
 
 describe("args", () => {
 	const originalArgv = process.argv;
@@ -20,10 +20,10 @@ describe("args", () => {
 			"msg.txt",
 			"--verbose",
 		];
-		const args = await parseArgs();
-		expect(args.config).toBe("conf.json");
-		expect(args.output).toBe("msg.txt");
-		expect(args.verbose).toBe(true);
+		const arguments_ = await parseArguments();
+		expect(arguments_.config).toBe("conf.json");
+		expect(arguments_.output).toBe("msg.txt");
+		expect(arguments_.verbose).toBe(true);
 	});
 
 	it("should handle aliases", async () => {
@@ -36,17 +36,17 @@ describe("args", () => {
 			"msg.txt",
 			"-v",
 		];
-		const args = await parseArgs();
-		expect(args.config).toBe("conf.json");
-		expect(args.output).toBe("msg.txt");
-		expect(args.verbose).toBe(true);
+		const arguments_ = await parseArguments();
+		expect(arguments_.config).toBe("conf.json");
+		expect(arguments_.output).toBe("msg.txt");
+		expect(arguments_.verbose).toBe(true);
 	});
 
 	it("should handle missing optional args", async () => {
 		process.argv = ["node", "script"];
-		const args = await parseArgs();
-		expect(args.config).toBeUndefined();
-		expect(args.output).toBeUndefined();
-		expect(args.verbose).toBeUndefined();
+		const arguments_ = await parseArguments();
+		expect(arguments_.config).toBeUndefined();
+		expect(arguments_.output).toBeUndefined();
+		expect(arguments_.verbose).toBeUndefined();
 	});
 });

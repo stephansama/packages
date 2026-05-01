@@ -8,8 +8,9 @@ export interface RemarkAsciinemaOptions {
 	embedType: RemarkAsciinemaEmbedOption;
 }
 
-export default function asciinema(inputOptions: RemarkAsciinemaOptions) {
-	const { embedType = "script" } = inputOptions;
+export default function asciinema(inputOptions?: RemarkAsciinemaOptions) {
+	inputOptions ??= { embedType: "script" };
+	const embedType = inputOptions.embedType;
 	const transform =
 		embedType === "script"
 			? utilities.constructAsciinemaScript

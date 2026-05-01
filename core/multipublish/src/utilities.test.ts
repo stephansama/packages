@@ -75,7 +75,7 @@ describe("readStdin", () => {
 	it("should return null if stdin is a TTY", async () => {
 		vi.mocked(process.stdin).isTTY = true;
 		const result = await readStdin();
-		expect(result).toBeNull();
+		expect(result).toBeUndefined();
 	});
 
 	it("should read from stdin", async () => {

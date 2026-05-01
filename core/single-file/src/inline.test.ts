@@ -33,7 +33,8 @@ describe("img", () => {
 	it("inlines a PNG image as a base64 data URI", async () => {
 		mockKy.get.mockReturnValue(
 			makeMockResponse({
-				buffer: new Uint8Array([0x89, 0x50, 0x47]).buffer,
+				// eslint-disable-next-line unicorn/number-literal-case
+				buffer: new Uint8Array([0x89, 0x50, 0x4e, 0x47]).buffer,
 				contentType: "image/png",
 			}),
 		);

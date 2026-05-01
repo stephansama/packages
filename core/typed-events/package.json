@@ -35,8 +35,7 @@
     "./react": {
       "import": "./dist/react.js",
       "require": "./dist/react.cjs"
-    },
-    "./package.json": "./package.json"
+    }
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

@@ -56,7 +56,9 @@ export function createEventMap<
 				if (event instanceof CustomEvent && event.type === scopedName) {
 					_validate(name, event.detail, () => {
 						callback({
+							// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 							data: event.detail,
+							// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 							raw: event,
 							type: "event",
 						});

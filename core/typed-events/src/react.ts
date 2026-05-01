@@ -61,12 +61,19 @@ export function useListeners<
 	},
 ) {
 	React.useEffect(() => {
-		const cleanups = Object.entries(listeners).map(([event, callback]) => {
+		const cleanups = Object.entries<
+			(typeof listeners)[keyof typeof listeners]
+		>(listeners).map(([event, callback]) => {
+			if (!callback) return;
 			return map.listen(event, callback);
 		});
 
 		return () => {
-			for (const cleanup of cleanups) cleanup();
+			for (const cleanup of cleanups) {
+				if (cleanup) {
+					cleanup();
+				}
+			}
 		};
 	}, [map, listeners]);
 }

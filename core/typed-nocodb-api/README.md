@@ -26,8 +26,6 @@ pnpm install @stephansama/typed-nocodb-api
 
 ## Usage
 
-eslint-disable-next-line zod/consistent-import
-
 ```javascript
 import * as z from "zod";
 

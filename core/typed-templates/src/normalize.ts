@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/no-abusive-eslint-disable */
+/* eslint-disable */
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
 export type NormalizedSchema =

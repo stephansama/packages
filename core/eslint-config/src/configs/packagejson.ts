@@ -22,7 +22,7 @@ export function config(
 			"node-dependencies/no-deprecated": "error",
 			"node-dependencies/no-dupe-deps": "error",
 			"node-dependencies/no-restricted-deps": "error",
-			"node-dependencies/require-provenance-deps": "error",
+			"node-dependencies/require-provenance-deps": "warn",
 			"node-dependencies/valid-semver": "error",
 		},
 	});

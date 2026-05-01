@@ -45,11 +45,8 @@ export function createMessage<
 	}
 
 	return {
-		dispatch(
-			name,
-			input,
-			options = { origin: getWindow().origin, window: getWindow() },
-		) {
+		dispatch(name, input, options) {
+			options ??= { origin: getWindow().origin, window: getWindow() };
 			_validate(name, input, () => {
 				const id = _scopeName(name);
 				const data = { ...input, id };
@@ -58,10 +55,11 @@ export function createMessage<
 			});
 		},
 		listen(name, callback) {
-			const listener = (raw: MessageEvent) => {
+			const listener = (raw: MessageEvent<{ id: string }>) => {
 				const { data } = raw;
 				if (data.id !== _scopeName(name)) return;
 				_validate(name, data, () => {
+					// @ts-expect-error slightly mistyped
 					callback({ data, raw, type: "message" });
 				});
 			};

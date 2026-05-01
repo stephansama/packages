@@ -1,6 +1,6 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
-import * as path from "node:path";
+import path from "node:path";
 import * as url from "node:url";
 
 export function getFileContext(current = import.meta.url) {

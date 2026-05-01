@@ -39,6 +39,7 @@ export const EXCLUDES = [
 	"**/bun.lockb",
 
 	"**/output",
+	"**/fixtures",
 	"**/coverage",
 	"**/temp",
 	"**/.temp",

@@ -329,8 +329,8 @@ catalogs:
       specifier: 0.5.4
       version: 0.5.4
     handlebars:
-      specifier: 4.7.8
-      version: 4.7.8
+      specifier: 4.7.9
+      version: 4.7.9
     handlebars-helpers:
       specifier: 0.10.0
       version: 0.10.0
@@ -371,8 +371,8 @@ catalogs:
       specifier: 1.1.0
       version: 1.1.0
     arktype:
-      specifier: 2.1.29
-      version: 2.1.29
+      specifier: 2.2.0
+      version: 2.2.0
     valibot:
       specifier: 1.2.0
       version: 1.2.0
@@ -694,7 +694,7 @@ importers:
         version: 4.3.1
       handlebars:
         specifier: catalog:handlebars
-        version: 4.7.8
+        version: 4.7.9
       markdown-table:
         specifier: ^3.0.4
         version: 3.0.4
@@ -776,7 +776,7 @@ importers:
         version: 4.2.1
       handlebars:
         specifier: catalog:handlebars
-        version: 4.7.8
+        version: 4.7.9
       handlebars-helpers:
         specifier: catalog:handlebars
         version: 0.10.0
@@ -826,7 +826,7 @@ importers:
         version: 9.1.4
       handlebars:
         specifier: catalog:handlebars
-        version: 4.7.8
+        version: 4.7.9
       minify:
         specifier: 'catalog:'
         version: 14.0.0(@swc/helpers@0.5.17)
@@ -1193,10 +1193,10 @@ importers:
     devDependencies:
       arktype:
         specifier: catalog:schema
-        version: 2.1.29
+        version: 2.2.0
       handlebars:
         specifier: catalog:handlebars
-        version: 4.7.8
+        version: 4.7.9
       tsdown:
         specifier: 'catalog:'
         version: 0.15.12(@arethetypeswrong/core@0.18.2)(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(oxc-resolver@11.19.1(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2))(publint@0.3.18)(typescript@5.9.3)(vue-tsc@2.2.12(typescript@5.9.3))
@@ -5396,8 +5396,8 @@ packages:
   arkregex@0.0.5:
     resolution: {integrity: sha512-ncYjBdLlh5/QnVsAA8De16Tc9EqmYM7y/WU9j+236KcyYNUXogpz3sC4ATIZYzzLxwI+0sEOaQLEmLmRleaEXw==}
 
-  arktype@2.1.29:
-    resolution: {integrity: sha512-jyfKk4xIOzvYNayqnD8ZJQqOwcrTOUbIU4293yrzAjA3O1dWh61j71ArMQ6tS/u4pD7vabSPe7nG3RCyoXW6RQ==}
+  arktype@2.2.0:
+    resolution: {integrity: sha512-t54MZ7ti5BhOEvzEkgKnWvqj+UbDfWig+DHr5I34xatymPusKLS0lQpNJd8M6DzmIto2QGszHfNKoFIT8tMCZQ==}
 
   arr-diff@4.0.0:
     resolution: {integrity: sha512-YVIQ82gZPGBebQV/a8dar4AitzCQs0jjXwMPZllpXMaGjXPYVUawSxQrRsjhjupyVxEvbHgUmIhKVlND+j02kA==}
@@ -7297,6 +7297,11 @@ packages:
 
   handlebars@4.7.8:
     resolution: {integrity: sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ==}
+    engines: {node: '>=0.4.7'}
+    hasBin: true
+
+  handlebars@4.7.9:
+    resolution: {integrity: sha512-4E71E0rpOaQuJR2A3xDZ+GM1HyWYv1clR58tC8emQNeQe3RH7MAzSbat+V0wG78LQBo6m6bzSG/L4pBuCsgnUQ==}
     engines: {node: '>=0.4.7'}
     hasBin: true
 
@@ -14992,7 +14997,7 @@ snapshots:
 
   '@types/handlebars-helpers@0.5.6':
     dependencies:
-      handlebars: 4.7.8
+      handlebars: 4.7.9
 
   '@types/hast@3.0.4':
     dependencies:
@@ -15909,7 +15914,7 @@ snapshots:
     dependencies:
       '@ark/util': 0.56.0
 
-  arktype@2.1.29:
+  arktype@2.2.0:
     dependencies:
       '@ark/schema': 0.56.0
       '@ark/util': 0.56.0
@@ -16273,7 +16278,7 @@ snapshots:
 
   barhandles@0.5.4:
     dependencies:
-      handlebars: 4.7.8
+      handlebars: 4.7.9
       lodash: 4.17.21
 
   base-64@1.0.0: {}
@@ -18389,7 +18394,7 @@ snapshots:
       for-own: 1.0.0
       get-object: 0.2.0
       get-value: 2.0.6
-      handlebars: 4.7.8
+      handlebars: 4.7.9
       handlebars-helper-create-frame: 0.1.0
       handlebars-utils: 1.0.6
       has-value: 1.0.0
@@ -18417,6 +18422,15 @@ snapshots:
       typeof-article: 0.1.1
 
   handlebars@4.7.8:
+    dependencies:
+      minimist: 1.2.8
+      neo-async: 2.6.2
+      source-map: 0.6.1
+      wordwrap: 1.0.0
+    optionalDependencies:
+      uglify-js: 3.19.3
+
+  handlebars@4.7.9:
     dependencies:
       minimist: 1.2.8
       neo-async: 2.6.2

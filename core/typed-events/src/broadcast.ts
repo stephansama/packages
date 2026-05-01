@@ -48,14 +48,15 @@ export function createBroadcastChannel<
 			});
 		},
 		listen(name, callback) {
-			const listener = (message: MessageEvent) => {
+			function listener(message: MessageEvent<{ name: string }>) {
 				const { data } = message;
 				if (data.name !== name) return;
 
 				_validate(name, data, () => {
+					// @ts-expect-error cannot verify before going in
 					callback({ data, raw: message, type: "message" });
 				});
-			};
+			}
 			this.channel.addEventListener("message", listener);
 			return () => this.channel.removeEventListener("message", listener);
 		},

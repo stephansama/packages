@@ -55,10 +55,13 @@ export function createEvent<
 				if (event instanceof CustomEvent && event.type === name) {
 					_validate(() => {
 						callback({
+							// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 							data: event.detail,
+							// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 							raw: event,
 							type: "event",
 						});
+						// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 					}, event.detail);
 				}
 			};

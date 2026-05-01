@@ -45,8 +45,8 @@ export const schemaMap = createHandlebarSchemaMap(
       path: "../tests/fixtures/map/const-list.ts.hbs",
       schema: z.object({
         body: z.unknown(),
-        name: z.string(),
-        plural_name: z.string(),
+        name: z.string().trim(),
+        plural_name: z.string().trim(),
       }),
     },
     constMap: {
@@ -54,12 +54,12 @@ export const schemaMap = createHandlebarSchemaMap(
       schema: z.object({
         items: z.array(
           z.object({
-            key: z.string(),
+            key: z.string().trim(),
             value: z.unknown(),
           }),
         ),
-        map_type: z.string(),
-        name: z.string(),
+        map_type: z.string().trim(),
+        name: z.string().trim(),
       }),
     },
   },
@@ -78,9 +78,11 @@ export const singleSchema = createHandlebarSchemaSingleton(
     "../tests/fixtures/singleton/valid2.hbs",
   ],
   z.object({
-    items: z.array(z.object({ key: z.string(), value: z.string() })),
-    map_type: z.string(),
-    name: z.string(),
+    items: z.array(
+      z.object({ key: z.string().trim(), value: z.string().trim() }),
+    ),
+    map_type: z.string().trim(),
+    name: z.string().trim(),
   }),
   { templateDirectory },
 );

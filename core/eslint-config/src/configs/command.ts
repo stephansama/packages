@@ -5,9 +5,8 @@ import command from "eslint-plugin-command/config";
 export function config(options: Parameters<typeof command>[0]): Config[] {
 	const configs = new Array<Config>();
 
-	const result = command(options);
 	configs.push({
-		...result,
+		...command(options),
 		name: "stephansama/command",
 	});
 

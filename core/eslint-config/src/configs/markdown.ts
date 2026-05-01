@@ -1,12 +1,14 @@
 import type { Config } from "eslint/config";
 
-import markdown from "@eslint/markdown";
-
+import { ensurePackages } from "@/environment";
 import * as glob from "@/glob";
 
-export function config(): Config[] {
+export async function config(): Promise<Config[]> {
+	await ensurePackages("@eslint/markdown");
+	const markdown = await import("@eslint/markdown");
+
 	return [
-		...markdown.configs.recommended.map((config) => ({
+		...markdown.default.configs.recommended.map((config) => ({
 			...config,
 			name: `stephansama/${config.name}`,
 		})),

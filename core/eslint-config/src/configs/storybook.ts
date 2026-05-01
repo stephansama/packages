@@ -1,10 +1,14 @@
 import type { Config } from "eslint/config";
 
-import storybook from "eslint-plugin-storybook";
+import { ensurePackages } from "@/environment";
 
 export const autoEnableModules = ["storybook"] as const;
 
-export function config(): Config[] {
+export async function config(): Promise<Config[]> {
+	await ensurePackages("eslint-plugin-storybook");
+
+	const storybook = await import("eslint-plugin-storybook");
+
 	return [
 		{
 			...storybook.configs["flat/recommended"],

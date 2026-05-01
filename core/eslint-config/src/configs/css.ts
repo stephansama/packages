@@ -1,14 +1,18 @@
 import type { Config } from "eslint/config";
 
-import css from "@eslint/css";
+import { ensurePackages } from "@/environment";
 
-export function config(): Config[] {
+export async function config(): Promise<Config[]> {
+	await ensurePackages("@eslint/css");
+
+	const css = await import("@eslint/css");
+
 	return [
 		{
 			files: ["**/*.css"],
 			language: "css/css",
 			name: "stephansama/css",
-			plugins: { css },
+			plugins: { css: css.default },
 			rules: {
 				"font-family-fallbacks": "error",
 				"no-duplicate-imports": "error",

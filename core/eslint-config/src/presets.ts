@@ -5,6 +5,7 @@ export const base = {
 	e18e: true,
 	gitignore: true,
 	javascript: true,
+		pnpm: true,
 	jsdoc: true,
 	json: true,
 	markdown: true,

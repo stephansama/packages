@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import fs from "node:fs";
+import * as fs from "node:fs";
 import path from "node:path";
 import { parseArgs } from "node:util";
 
 import { CONFIG_FILENAME, defaultConfig, LOADED_ICONS_FILENAME } from "./const";
-import { buildEnd, loadIcons } from "./util";
+import { buildEnd, loadIcons } from "./utilities";
 
 const {
 	values: { config },

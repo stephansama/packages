@@ -39,21 +39,18 @@
     "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
+    "@antfu/install-pkg": "catalog:",
+    "@clack/prompts": "catalog:",
     "@e18e/eslint-plugin": "catalog:eslint",
-    "@eslint/css": "catalog:eslint",
     "@eslint/js": "catalog:eslint",
-    "@eslint/markdown": "catalog:eslint",
     "@typescript-eslint/parser": "catalog:eslint",
     "eslint-config-flat-gitignore": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
-    "eslint-plugin-astro": "catalog:eslint",
     "eslint-plugin-barrel-files": "catalog:eslint",
     "eslint-plugin-baseline-js": "catalog:eslint",
     "eslint-plugin-command": "catalog:eslint",
     "eslint-plugin-jsdoc": "catalog:eslint",
-    "eslint-plugin-jsonc": "catalog:eslint",
     "eslint-plugin-jsx-a11y": "catalog:eslint",
-    "eslint-plugin-lit": "catalog:eslint",
     "eslint-plugin-n": "catalog:eslint",
     "eslint-plugin-node-dependencies": "catalog:eslint",
     "eslint-plugin-package-json": "catalog:eslint",
@@ -61,23 +58,72 @@
     "eslint-plugin-pnpm": "catalog:eslint",
     "eslint-plugin-prettier": "catalog:eslint",
     "eslint-plugin-regexp": "catalog:eslint",
-    "eslint-plugin-storybook": "catalog:eslint",
-    "eslint-plugin-svelte": "catalog:eslint",
     "eslint-plugin-testing-library": "catalog:eslint",
     "eslint-plugin-unicorn": "catalog:eslint",
-    "eslint-plugin-zod": "catalog:eslint",
     "globals": "catalog:eslint",
-    "jsonc-eslint-parser": "catalog:eslint",
-    "svelte-eslint-parser": "catalog:eslint",
     "typescript-eslint": "catalog:eslint",
     "yaml-eslint-parser": "catalog:eslint"
   },
   "devDependencies": {
+    "@eslint/css": "catalog:eslint",
+    "@eslint/markdown": "catalog:eslint",
+    "cleye": "catalog:cli",
     "eslint": "catalog:eslint",
+    "eslint-plugin-astro": "catalog:eslint",
+    "eslint-plugin-jsonc": "catalog:eslint",
+    "eslint-plugin-lit": "catalog:eslint",
+    "eslint-plugin-storybook": "catalog:eslint",
+    "eslint-plugin-svelte": "catalog:eslint",
+    "eslint-plugin-zod": "catalog:eslint",
+    "jsonc-eslint-parser": "catalog:eslint",
+    "local-pkg": "catalog:",
+    "svelte-eslint-parser": "catalog:eslint",
     "tsdown": "catalog:"
   },
   "peerDependencies": {
-    "eslint": "catalog:eslint"
+    "@eslint/css": "catalog:eslint",
+    "@eslint/markdown": "catalog:eslint",
+    "eslint": "catalog:eslint",
+    "eslint-plugin-astro": "catalog:eslint",
+    "eslint-plugin-jsonc": "catalog:eslint",
+    "eslint-plugin-lit": "catalog:eslint",
+    "eslint-plugin-storybook": "catalog:eslint",
+    "eslint-plugin-svelte": "catalog:eslint",
+    "eslint-plugin-zod": "catalog:eslint",
+    "jsonc-eslint-parser": "catalog:eslint",
+    "svelte-eslint-parser": "catalog:eslint"
+  },
+  "peerDependenciesMeta": {
+    "@eslint/css": {
+      "optional": true
+    },
+    "@eslint/markdown": {
+      "optional": true
+    },
+    "eslint-plugin-astro": {
+      "optional": true
+    },
+    "eslint-plugin-jsonc": {
+      "optional": true
+    },
+    "eslint-plugin-lit": {
+      "optional": true
+    },
+    "eslint-plugin-storybook": {
+      "optional": true
+    },
+    "eslint-plugin-svelte": {
+      "optional": true
+    },
+    "eslint-plugin-zod": {
+      "optional": true
+    },
+    "jsonc-eslint-parser": {
+      "optional": true
+    },
+    "svelte-eslint-parser": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=24"

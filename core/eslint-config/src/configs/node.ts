@@ -32,7 +32,13 @@ export function config(
 						resolvePaths: options.resolvePaths || [],
 					},
 				],
-				"node/no-missing-import": ["error", { ignoreTypeImport: true }],
+				"node/no-missing-import": [
+					"error",
+					{
+						ignoreTypeImport: true,
+					},
+				],
+				"node/no-missing-require": ["error", {}],
 				"node/no-unpublished-bin": "off",
 			},
 		},

@@ -25,3 +25,11 @@ pnpm install @stephansama/eslint-config
 ```
 
 ## Usage
+
+```javascript
+import { config, presets } from "../dist/index.js";
+
+export default config({
+  ...presets.base,
+});
+```

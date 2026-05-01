@@ -1,9 +1,11 @@
 import type { Config } from "eslint/config";
 
-import zod from "eslint-plugin-zod";
+import { ensurePackages } from "@/environment";
 
 export const autoEnableModules = ["zod"] as const;
 
-export function config(): Config[] {
-	return [zod.configs.recommended];
+export async function config(): Promise<Config[]> {
+	await ensurePackages("eslint-plugin-zod");
+	const zod = await import("eslint-plugin-zod");
+	return [zod.default.configs.recommended];
 }

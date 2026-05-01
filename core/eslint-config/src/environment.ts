@@ -1,17 +1,48 @@
 // based on sxzz https://github.com/sxzz/eslint-config/blob/cc49fe78c03d53bd8c1923ab6d3a4adb1c348119/src/env.ts
-import * as module from "node:module";
+import { resolveModule } from "local-pkg";
 import * as process from "node:process";
 
-const cwd = process.cwd();
+export type Awaitable<T> = Promise<T> | T;
+
+export async function ensurePackages(...packages: string[]): Promise<void> {
+	const nonExistingPackages = packages.filter((pkg): pkg is string => {
+		return (pkg && !hasPackage(pkg)) || false;
+	});
+
+	if (!isDebugging()) {
+		console.info("ensuring", packages);
+		console.info(nonExistingPackages);
+	}
+
+	if (nonExistingPackages.length === 0) return;
+
+	const prompts = await import("@clack/prompts");
+
+	const result = await prompts.confirm({
+		message: `${nonExistingPackages.length === 1 ? "Package is" : "Packages are"} required for this config: ${nonExistingPackages.join(", ")}. Do you want to install them?`,
+	});
+
+	if (!result) return;
+
+	await import("@antfu/install-pkg").then((pkg) => {
+		return pkg.installPackage(nonExistingPackages, { dev: true });
+	});
+}
 
 export function hasPackage(name: string) {
-	const require = module.createRequire(`${process.cwd()}/`);
-	try {
-		require.resolve(name, { paths: [cwd] });
-		return true;
-	} catch {
-		return false;
-	}
+	return !!resolveModule(name);
+}
+
+export async function interopDefault<T>(
+	m: Awaitable<T>,
+): Promise<T extends { default: infer U } ? U : T> {
+	const resolved = await m;
+	return (resolved as any).default || resolved;
+}
+
+export function isDebugging() {
+	if (isInEditorEnvironment()) return false;
+	return process.env.DEBUG;
 }
 
 export function isInEditorEnvironment() {
@@ -30,7 +61,8 @@ export function isInGitHooksOrLintStaged() {
 	return !!(
 		process.env.GIT_PARAMS ||
 		process.env.VSCODE_GIT_COMMAND ||
-		process.env.npm_lifecycle_script?.startsWith("nano-staged") ||
-		process.env.npm_lifecycle_script?.startsWith("lint-staged")
+		["nano-staged", "lint-staged"].some((item) => {
+			return process.env.npm_lifecycle_script?.startsWith(item);
+		})
 	);
 }

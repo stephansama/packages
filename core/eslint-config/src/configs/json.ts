@@ -1,13 +1,17 @@
 import type { Config } from "eslint/config";
 
-import jsonc from "eslint-plugin-jsonc";
+import { ensurePackages } from "@/environment";
 
-export function config(): Config[] {
+export async function config(): Promise<Config[]> {
+	await ensurePackages("eslint-plugin-jsonc");
+
+	const jsonc = await import("eslint-plugin-jsonc");
+
 	return [
 		{
 			files: ["*.json", "**/*.json"],
 			language: "jsonc/x",
-			plugins: { jsonc },
+			plugins: { jsonc: jsonc.default },
 		},
 		{
 			name: "stephansama/jsonc",

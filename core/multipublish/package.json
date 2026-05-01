@@ -21,14 +21,14 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./config/schema.js",
+      "require": "./config/schema.cjs"
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.cts",
+  "main": "./config/schema.cjs",
+  "module": "./config/schema.js",
+  "types": "./config/schema.d.cts",
   "bin": "./cli.mjs",
   "files": [
     "./dist",

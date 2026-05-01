@@ -1,14 +1,18 @@
 import type { Config } from "eslint/config";
 
-import lit from "eslint-plugin-lit";
+import { ensurePackages } from "@/environment";
 
 export const autoEnableModules = ["lit"] as const;
 
-export function config(): Config[] {
+export async function config(): Promise<Config[]> {
+	await ensurePackages("eslint-plugin-lit");
+
+	const lit = await import("eslint-plugin-lit");
+
 	return [
 		{
 			name: "stephansama/lit",
-			plugins: { lit },
+			plugins: { lit: lit.default },
 			rules: {
 				"lit/attribute-names": "error",
 				"lit/attribute-value-entities": "error",

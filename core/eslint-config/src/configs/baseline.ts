@@ -1,6 +1,6 @@
 import type { Config } from "eslint/config";
 
-import baselineJs from "eslint-plugin-baseline-js";
+import baseline from "eslint-plugin-baseline-js";
 
 import * as glob from "@/glob";
 
@@ -19,7 +19,7 @@ export function config(
 			name: "stephansama/baseline",
 			plugins: {
 				// @ts-expect-error incorrectly typed but works properly
-				"baseline-js": baselineJs,
+				"baseline-js": baseline,
 			},
 			rules: {
 				// Allow only "widely available" Baseline features

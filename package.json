@@ -42,6 +42,7 @@
     "@manypkg/get-packages": "catalog:",
     "@stephansama/ai-commit-msg": "workspace:*",
     "@stephansama/auto-readme": "workspace:*",
+    "@stephansama/eslint-config": "workspace:*",
     "@stephansama/multipublish": "workspace:*",
     "@stephansama/prettier-plugin-handlebars": "workspace:*",
     "@tsconfig/recommended": "catalog:",
@@ -68,9 +69,9 @@
     "vitest": "catalog:vitest"
   },
   "devDependencies": {
-    "@eslint/css": "catalog:eslint",
-    "@stephansama/eslint-config": "workspace:*",
+    "@eslint/markdown": "catalog:",
     "actions-up": "catalog:",
+    "eslint-plugin-jsonc": "catalog:",
     "lefthook": "catalog:",
     "node-plop": "catalog:",
     "taze": "catalog:"

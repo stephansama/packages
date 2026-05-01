@@ -1,7 +1,6 @@
 import type { Config } from "eslint/config";
 
-import * as auto from "./auto";
-import * as configs from "./configs";
+import { autoEnableMap, configs } from "./configs";
 import { hasPackage } from "./environment";
 
 export type BuilderOptions = Partial<{
@@ -23,9 +22,9 @@ export function builder(
 	buildOptions.autoEnable ??= true;
 
 	if (buildOptions.autoEnable) {
-		for (const key in auto) {
-			configOptions[key as keyof typeof configOptions] ??= auto[
-				key as keyof typeof auto
+		for (const key in autoEnableMap) {
+			configOptions[key as keyof typeof configOptions] ??= autoEnableMap[
+				key as keyof typeof autoEnableMap
 			].some((module) => hasPackage(module));
 		}
 	}
@@ -36,7 +35,15 @@ export function builder(
 		if (!input) continue;
 
 		const parameters = typeof input === "boolean" ? undefined : input;
-		build.push(...configs[config as keyof typeof configs](parameters));
+		const result = configs[config as keyof typeof configs](parameters);
+
+		if (result instanceof Promise) {
+			result
+				.then((current) => build.push(...current))
+				.catch((error) => console.error(error));
+		} else {
+			build.push(...result);
+		}
 	}
 
 	if (buildOptions.configs) {

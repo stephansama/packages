@@ -4,7 +4,7 @@ import { run } from "./index";
 
 const mocks = vi.hoisted(() => ({
 	findRoot: vi.fn(() => Promise.resolve({ rootDir: "/mock/root" })),
-	getArgs: vi.fn(() => Promise.resolve({ versionJsr: false })),
+	getArguments: vi.fn(() => Promise.resolve({ versionJsr: false })),
 	getPackages: vi.fn(() =>
 		Promise.resolve({
 			packages: [
@@ -38,7 +38,7 @@ const mocks = vi.hoisted(() => ({
 vi.mock("@manypkg/find-root", () => ({ findRoot: mocks.findRoot }));
 vi.mock("@manypkg/get-packages", () => ({ getPackages: mocks.getPackages }));
 
-vi.mock("./args", () => ({ getArgs: mocks.getArgs }));
+vi.mock("./arguments", () => ({ getArguments: mocks.getArguments }));
 vi.mock("./config", () => ({ loadConfig: mocks.loadConfig }));
 vi.mock("./release", () => ({ loadReleases: mocks.loadReleases }));
 vi.mock("./publish", () => ({ publishPlatform: mocks.publishPlatform }));
@@ -53,7 +53,7 @@ describe("run", () => {
 		await run();
 
 		expect(mocks.findRoot).toHaveBeenCalledOnce();
-		expect(mocks.getArgs).toHaveBeenCalledOnce();
+		expect(mocks.getArguments).toHaveBeenCalledOnce();
 		expect(mocks.loadConfig).toHaveBeenCalledOnce();
 		expect(mocks.getPackages).toHaveBeenCalledOnce();
 		expect(mocks.loadReleases).toHaveBeenCalledOnce();
@@ -79,7 +79,7 @@ describe("run", () => {
 	});
 
 	it("should call updateJsrConfigVersion if args.versionJsr is true", async () => {
-		mocks.getArgs.mockResolvedValueOnce({ versionJsr: true });
+		mocks.getArguments.mockResolvedValueOnce({ versionJsr: true });
 
 		await run();
 

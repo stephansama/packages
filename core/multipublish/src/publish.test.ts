@@ -8,7 +8,7 @@ const mocks = vi.hoisted(() => ({
 	execSync: vi.fn(),
 	existsSync: vi.fn(),
 	findRoot: vi.fn(),
-	getArgs: vi.fn(),
+	getArguments: vi.fn(),
 	loadConfig: vi.fn(),
 	readFile: vi.fn(),
 	writeFile: vi.fn(),
@@ -40,13 +40,13 @@ vi.mock("node:fs/promises", async (importOriginal) => {
 	};
 });
 
-vi.mock("./args", () => ({ getArgs: mocks.getArgs }));
+vi.mock("./arguments", () => ({ getArguments: mocks.getArguments }));
 
 vi.mock("./detect", () => ({
 	detectPackageManager: mocks.detectPackageManager,
 }));
 
-vi.mock("./util", async (importOriginal) => {
+vi.mock("./utilities", async (importOriginal) => {
 	return {
 		...(await importOriginal<typeof import("./utilities")>()),
 		chdir: vi.fn(
@@ -69,7 +69,7 @@ vi.mock("./jsr", async (importOriginal) => {
 
 describe("publish", () => {
 	beforeEach(() => {
-		mocks.getArgs.mockResolvedValue({ dry: false });
+		mocks.getArguments.mockResolvedValue({ dry: false });
 		mocks.detectPackageManager.mockResolvedValue("pnpm");
 		mocks.findRoot.mockResolvedValue({ rootDir: "/fake/root" });
 	});

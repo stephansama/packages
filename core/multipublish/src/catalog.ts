@@ -49,7 +49,7 @@ export function loadVersion({
 	version: string;
 }) {
 	if (!version.includes("catalog:")) return version;
-	const catalogName = version.split("catalog:").at(2);
+	const catalogName = version.split("catalog:").at(1);
 	const currentCatalog = catalogName
 		? catalogs.catalogs?.[catalogName]
 		: catalogs.catalog;

@@ -16,8 +16,8 @@ export function escapeScript(script: string) {
 
 const obviousQueries = ["\n", "{", "function"] as const;
 
-// eslint-disable-next-line regexp/no-unused-capturing-group
-const probablyUrlRegex = /(^https?:\/\/|\/|\.\/|\.\.\/|[\w\-./]+$)/;
+// eslint-disable-next-line regexp/no-unused-capturing-group, regexp/prefer-w
+const probablyUrlRegex = /^(https?:\/\/|\/|\.\/|\.\.\/|[a-zA-Z0-9_\-./]+$)/;
 
 export function isProbablyUrl(string_: string) {
 	if (!string_ || obviousQueries.some((query) => query.includes(string_))) {

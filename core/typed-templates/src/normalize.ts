@@ -17,7 +17,7 @@ export function compareSchemas(
 	b: NormalizedSchema,
 	path = "",
 ): string[] {
-	const errors = Array<string>();
+	const errors = new Array<string>();
 
 	if (a.kind !== "any" && b.kind !== "any" && a.kind !== b.kind) {
 		errors.push(`Type mismatch at ${path}: ${a.kind} vs ${b.kind}`);
@@ -45,16 +45,20 @@ export function compareSchemas(
 
 export function normalizeStandardSchema(node: StandardSchemaV1) {
 	switch (node["~standard"].vendor) {
-		case "arktype":
+		case "arktype": {
 			return normalizeArkType(node);
-		case "valibot":
+		}
+		case "valibot": {
 			return normalizeValibotSchema(node);
-		case "zod":
+		}
+		case "zod": {
 			return normalizeZodSchema(node);
-		default:
+		}
+		default: {
 			throw new Error(
 				"invalid schema provider used please pick one of arktype, valibot or zod",
 			);
+		}
 	}
 }
 
@@ -62,21 +66,25 @@ function normalizeArkType(node: any): NormalizedSchema {
 	const optional = node.optional === true;
 
 	switch (node.kind) {
-		case "any":
+		case "any": {
 			return { kind: "any", optional };
+		}
 
-		case "array":
+		case "array": {
 			return {
 				element: normalizeArkType(node.element),
 				kind: "array",
 				optional,
 			};
+		}
 
-		case "boolean":
+		case "boolean": {
 			return { kind: "boolean", optional };
+		}
 
-		case "number":
+		case "number": {
 			return { kind: "number", optional };
+		}
 
 		case "object": {
 			const shape: Record<string, NormalizedSchema> = {};
@@ -93,14 +101,17 @@ function normalizeArkType(node: any): NormalizedSchema {
 			return { kind: "object", optional, shape };
 		}
 
-		case "string":
+		case "string": {
 			return { kind: "string", optional };
+		}
 
-		case "union":
+		case "union": {
 			return { kind: "any", optional };
+		}
 
-		default:
+		default: {
 			return { kind: "any", optional };
+		}
 	}
 }
 
@@ -109,14 +120,16 @@ function normalizeHandlebarsSchema(node: any): NormalizedSchema {
 
 	switch (node._type) {
 		case "any":
-		case undefined:
+		case undefined: {
 			return { kind: "any", optional };
-		case "array":
+		}
+		case "array": {
 			return {
 				element: normalizeHandlebarsSchema(node["#"]),
 				kind: "array",
 				optional,
 			};
+		}
 
 		case "object": {
 			const shape: Record<string, NormalizedSchema> = {};
@@ -129,25 +142,29 @@ function normalizeHandlebarsSchema(node: any): NormalizedSchema {
 			return { kind: "object", optional, shape };
 		}
 
-		default:
+		default: {
 			throw new Error(`Unknown handlebars type: ${node._type}`);
+		}
 	}
 }
 
 function normalizeValibotSchema(schema: any): NormalizedSchema {
 	switch (schema.type) {
-		case "array":
+		case "array": {
 			return {
 				element: normalizeValibotSchema(schema.item),
 				kind: "array",
 				optional: false,
 			};
+		}
 
-		case "boolean":
+		case "boolean": {
 			return { kind: "boolean", optional: false };
+		}
 
-		case "number":
+		case "number": {
 			return { kind: "number", optional: false };
+		}
 
 		case "object": {
 			const shape: Record<string, NormalizedSchema> = {};
@@ -164,11 +181,13 @@ function normalizeValibotSchema(schema: any): NormalizedSchema {
 			return { ...inner, optional: true };
 		}
 
-		case "string":
+		case "string": {
 			return { kind: "string", optional: false };
+		}
 
-		default:
+		default: {
 			return { kind: "any", optional: false };
+		}
 	}
 }
 
@@ -176,12 +195,13 @@ function normalizeZodSchema(node: any): NormalizedSchema {
 	const def = node.def;
 
 	switch (def.type) {
-		case "array":
+		case "array": {
 			return {
 				element: normalizeZodSchema(def.element),
 				kind: "array",
 				optional: false,
 			};
+		}
 
 		case "object": {
 			const shape: Record<string, NormalizedSchema> = {};
@@ -193,14 +213,17 @@ function normalizeZodSchema(node: any): NormalizedSchema {
 			return { kind: "object", optional: false, shape };
 		}
 
-		case "optional":
+		case "optional": {
 			return { kind: def.innerType.def.type, optional: true };
+		}
 
-		case "string":
+		case "string": {
 			return { kind: "string", optional: false };
+		}
 
-		default:
+		default: {
 			return { kind: "any", optional: false };
+		}
 	}
 }
 

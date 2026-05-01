@@ -17,6 +17,7 @@
     "email": "stephanrandle.dev@gmail.com",
     "url": "https://stephansama.info"
   },
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
@@ -24,8 +25,7 @@
       "require": "./dist/index.cjs"
     },
     "./env": "./types/env.d.ts",
-    "./schema.json": "./dist/schema.json",
-    "./package.json": "./package.json"
+    "./schema.json": "./dist/schema.json"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

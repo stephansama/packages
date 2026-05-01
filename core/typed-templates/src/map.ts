@@ -3,10 +3,10 @@ import type { StandardSchemaV1 } from "@standard-schema/spec";
 import barhandles from "barhandles";
 import Handlebars from "handlebars";
 import * as fsp from "node:fs/promises";
-import * as path from "node:path";
+import path from "node:path";
 
 import * as normalize from "./normalize";
-import { validate } from "./utils";
+import { validate } from "./utilities";
 
 export type HandlebarSchemaMapOptions = {
 	path: string;
@@ -15,15 +15,13 @@ export type HandlebarSchemaMapOptions = {
 
 export function createHandlebarSchemaMap<
 	Map extends Record<string, HandlebarSchemaMapOptions>,
->(
-	map: Map,
-	opts: { templateDirectory: string } = { templateDirectory: "./templates" },
-) {
+>(map: Map, options: { templateDirectory: string }) {
+	options ??= { templateDirectory: "./templates" };
 	return {
 		async audit() {
 			for (const item of Object.values(map)) {
 				const file = await fsp.readFile(
-					path.resolve(opts.templateDirectory, item.path),
+					path.resolve(options.templateDirectory, item.path),
 					"utf8",
 				);
 
@@ -31,10 +29,10 @@ export function createHandlebarSchemaMap<
 
 				const errors = normalize.compareSchemas(
 					normalize.handlebarSchema(handlebarSchema),
-					normalize.standardSchema(item.schema)!,
+					normalize.standardSchema(item.schema),
 				);
 
-				if (errors.length) {
+				if (errors.length > 0) {
 					throw new Error(
 						`found the following errors comparing the schemas:\n\n${errors.join("\n")}\n\n`,
 					);
@@ -50,7 +48,7 @@ export function createHandlebarSchemaMap<
 			data: StandardSchemaV1.InferInput<(typeof map)[Key]["schema"]>,
 		) {
 			const file = await fsp.readFile(
-				path.resolve(opts.templateDirectory, map[template].path),
+				path.resolve(options.templateDirectory, map[template].path),
 				"utf8",
 			);
 			const compiled = Handlebars.compile(file);

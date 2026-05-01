@@ -1,9 +1,9 @@
 import * as fsp from "node:fs/promises";
-import * as path from "node:path";
+import path from "node:path";
 import { type Options, build as tsdown } from "tsdown";
 import * as z from "zod";
 
-const outDir = path.resolve("./dist");
+const outDirectory = path.resolve("./dist");
 
 await build({
 	dts: true,
@@ -16,15 +16,15 @@ const jsonSchema = z.toJSONSchema(schemas.lhciSchema);
 
 const jsonString = JSON.stringify(jsonSchema);
 
-await fsp.writeFile(path.join(outDir, "schema.json"), jsonString);
+await fsp.writeFile(path.join(outDirectory, "schema.json"), jsonString);
 
-function build(opts: Options) {
+function build(options: Options) {
 	return tsdown({
 		attw: { excludeEntrypoints: ["schema.json"] },
 		format: ["esm", "cjs"],
-		outDir,
+		outDir: outDirectory,
 		skipNodeModulesBundle: true,
 		target: "esnext",
-		...opts,
+		...options,
 	});
 }

@@ -27,9 +27,9 @@ const usage = JSON.parse(
 	}) || "{}",
 ) as Record<string, string[]>;
 
-try {
-	const icons = await loadIcons(options);
-	buildEnd(icons, usage, options);
-} catch (error) {
-	console.error(error);
-}
+loadIcons(options)
+	.then((data) => {
+		buildEnd(data, usage, options);
+	})
+	// eslint-disable-next-line unicorn/prefer-top-level-await
+	.catch((error) => console.error(error));

@@ -28,9 +28,10 @@ export function config(
 	});
 
 	if (options?.isLibrary) {
-		configs.push(packageJson.configs.recommended, {
-			name: "stephansama/packagejson/overrides",
+		configs.push({
+			...packageJson.configs.recommended,
 			rules: {
+				...packageJson.configs.recommended.rules,
 				"package-json/sort-collections": "warn",
 			},
 		});

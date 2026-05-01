@@ -24,3 +24,4 @@ examples/catppuccin-xsl/vanilla/public/**/*
 node_modules
 single-file.html
 storybook-static
+test-report.junit.xml

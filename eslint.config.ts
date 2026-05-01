@@ -1,13 +1,12 @@
 import { config, globs, presets } from "@stephansama/eslint-config";
 
-const t = "";
-
-export default config(
+export default await config(
 	{
 		...presets.base,
 		...presets.library,
 		astro: true,
 		json: true,
+		markdown: true,
 		node: {
 			allowModules: ["vitest", "@manypkg/get-packages"],
 		},

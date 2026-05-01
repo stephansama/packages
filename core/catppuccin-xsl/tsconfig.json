@@ -2,7 +2,6 @@
   "extends": ["../../tsconfig.json"],
   "include": ["src", "templates"],
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@templates/*": ["./templates/*"]

@@ -9,20 +9,22 @@ export const providers = ["google", "openai", "ollama"] as const;
 export type Provider = (typeof providers)[number];
 
 export const environmentSchema = {
-	google: z.object({ GOOGLE_GENERATIVE_AI_API_KEY: z.string().min(1) }),
+	google: z.object({
+		GOOGLE_GENERATIVE_AI_API_KEY: z.string().trim().min(1),
+	}),
 	ollama: z.object({}),
-	openai: z.object({ OPENAI_API_KEY: z.string().min(1) }),
+	openai: z.object({ OPENAI_API_KEY: z.string().trim().min(1) }),
 } satisfies Partial<Record<Provider, z.ZodType>>;
 
 export const providerSchema = z.enum(providers);
 
 export const configSchema = z.object({
-	baseURL: z.string().optional(),
-	headers: z.record(z.string(), z.string()).optional(),
-	model: z.string().meta({
+	baseURL: z.string().trim().optional(),
+	headers: z.record(z.string(), z.string().trim()).optional(),
+	model: z.string().trim().meta({
 		description: "model to use from provider",
 	}),
-	prompt: z.string().default(defaultPrompt).meta({
+	prompt: z.string().trim().default(defaultPrompt).meta({
 		description: "prompt used to fuel generated commit",
 	}),
 	provider: providerSchema,

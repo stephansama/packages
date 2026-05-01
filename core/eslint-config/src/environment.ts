@@ -9,7 +9,7 @@ export async function ensurePackages(...packages: string[]): Promise<void> {
 		return (pkg && !hasPackage(pkg)) || false;
 	});
 
-	if (!isDebugging()) {
+	if (isDebugging()) {
 		console.info("ensuring", packages);
 		console.info(nonExistingPackages);
 	}

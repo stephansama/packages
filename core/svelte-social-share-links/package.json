@@ -8,23 +8,25 @@
     "url": "git+https://github.com/stephansama/packages.git",
     "directory": "core/svelte-social-share-links"
   },
+  "license": "MIT",
   "author": {
     "name": "Stephan Randle",
     "email": "stephanrandle.dev@gmail.com",
     "url": "https://stephansama.info"
   },
+  "sideEffects": true,
   "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "svelte": "./dist/index.js"
     },
-    "./wc": "./dist-js/components.iife.js",
     "./networks": {
       "types": "./dist/networks.d.ts",
       "require": "./dist/networks.js"
     },
-    "./networks.json": "./dist/networks.json"
+    "./networks.json": "./dist/networks.json",
+    "./wc": "./dist-js/components.iife.js"
   },
   "svelte": "./dist/index.js",
   "types": "./dist/index.d.ts",

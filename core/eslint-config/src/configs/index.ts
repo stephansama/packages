@@ -48,6 +48,10 @@ export const configs = {
 	zod,
 };
 
+export type StephansamaConfig = keyof typeof configs;
+
+export const order = [] satisfies Array<StephansamaConfig>;
+
 /** Packages that will auto enable configurations */
 export const autoEnableMap = {
 	astro: ["astro"],

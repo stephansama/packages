@@ -47,7 +47,9 @@ catalog:
   dedent: 1.7.2
   deepmerge: 4.3.1
   es-toolkit: 1.43.0
+  eslint-plugin-astro: ^1.7.0
   eslint-plugin-jsonc: ^3.1.2
+  eslint-plugin-zod: ^3.11.0
   happy-dom: 20.6.1
   he: 1.2.0
   jsdom: 27.4.0
@@ -199,8 +201,10 @@ cleanupUnusedCatalogs: true
 engineStrict: true
 
 ignoredBuiltDependencies:
+  - '@parcel/watcher'
   - '@swc/core'
   - core-js-pure
+  - highlight.js
   - sharp
   - workerd
 

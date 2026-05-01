@@ -71,7 +71,9 @@
   "devDependencies": {
     "@eslint/markdown": "catalog:",
     "actions-up": "catalog:",
+    "eslint-plugin-astro": "catalog:",
     "eslint-plugin-jsonc": "catalog:",
+    "eslint-plugin-zod": "catalog:",
     "lefthook": "catalog:",
     "node-plop": "catalog:",
     "taze": "catalog:"

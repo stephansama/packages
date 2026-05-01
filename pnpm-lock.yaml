@@ -131,9 +131,15 @@ catalogs:
     es-toolkit:
       specifier: 1.43.0
       version: 1.43.0
+    eslint-plugin-astro:
+      specifier: ^1.7.0
+      version: 1.7.0
     eslint-plugin-jsonc:
       specifier: ^3.1.2
       version: 3.1.2
+    eslint-plugin-zod:
+      specifier: ^3.11.0
+      version: 3.11.0
     happy-dom:
       specifier: 20.6.1
       version: 20.6.1
@@ -567,9 +573,15 @@ importers:
       actions-up:
         specifier: 'catalog:'
         version: 1.11.0
+      eslint-plugin-astro:
+        specifier: 'catalog:'
+        version: 1.7.0(eslint@10.2.1(jiti@2.6.1))
       eslint-plugin-jsonc:
         specifier: 'catalog:'
         version: 3.1.2(eslint@10.2.1(jiti@2.6.1))
+      eslint-plugin-zod:
+        specifier: 'catalog:'
+        version: 3.11.0(eslint@10.2.1(jiti@2.6.1))(typescript@5.9.3)(zod@4.2.1)
       lefthook:
         specifier: 'catalog:'
         version: 2.1.6

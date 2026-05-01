@@ -17,7 +17,6 @@ export default await config(
 			{
 				files: [`examples/${globs.PKG_JSON}`],
 				rules: {
-					"node-dependencies/require-provenance-deps": "off",
 					"package-json/require-description": "off",
 					"pnpm/json-enforce-catalog": "off",
 				},

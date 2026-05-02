@@ -1,8 +1,7 @@
 // based on sxzz https://github.com/sxzz/eslint-config/blob/cc49fe78c03d53bd8c1923ab6d3a4adb1c348119/src/env.ts
+// based on antfu https://github.com/antfu/eslint-config/blob/8d25a37e3e0c5776796ff042265889fc1657bcd5/src/utils.ts#L119
 import { resolveModule } from "local-pkg";
 import * as process from "node:process";
-
-export type Awaitable<T> = Promise<T> | T;
 
 export async function ensurePackages(...packages: string[]): Promise<void> {
 	const nonExistingPackages = packages.filter((pkg): pkg is string => {
@@ -15,6 +14,8 @@ export async function ensurePackages(...packages: string[]): Promise<void> {
 	}
 
 	if (nonExistingPackages.length === 0) return;
+
+	if (isInEditorEnvironment()) return;
 
 	const prompts = await import("@clack/prompts");
 
@@ -34,7 +35,7 @@ export function hasPackage(name: string) {
 }
 
 export async function interopDefault<T>(
-	m: Awaitable<T>,
+	m: Promise<T> | T,
 ): Promise<T extends { default: infer U } ? U : T> {
 	const resolved = await m;
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any

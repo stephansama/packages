@@ -18,11 +18,6 @@ export function config(
 	}> = {},
 ): Config[] {
 	return [
-		...tseslint.configs.recommendedTypeChecked.map((config) => ({
-			...config,
-			files: [glob.TS, glob.TSX],
-			name: `stephansama/tseslint/${config.name || "anonymous"}`,
-		})),
 		{
 			files: [glob.TS, glob.TSX],
 			languageOptions: {
@@ -32,6 +27,11 @@ export function config(
 			},
 			name: `stephansama/tseslint/setup`,
 		},
+		...tseslint.configs.recommendedTypeChecked.map((config) => ({
+			...config,
+			files: [glob.TS, glob.TSX],
+			name: `stephansama/tseslint/${config.name || "anonymous"}`,
+		})),
 		{
 			files: [glob.TS, glob.TSX],
 			name: `stephansama/tseslint/overrides`,

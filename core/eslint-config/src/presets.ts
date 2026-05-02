@@ -1,4 +1,4 @@
-import type { ConfigOptions } from "./builder";
+import type { ConfigOptions } from "./types";
 
 export const base = {
 	baseline: true,
@@ -13,8 +13,9 @@ export const base = {
 	regexp: true,
 	typescript: true,
 	unicorn: true,
-	zod: true,
 } as const satisfies ConfigOptions;
+
+export const zod = { zod: true } as const satisfies ConfigOptions;
 
 export const library = {
 	packagejson: { isLibrary: true },

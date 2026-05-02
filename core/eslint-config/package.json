@@ -6,11 +6,15 @@
     "eslint-config"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/eslint-config",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stephansama/packages",
+    "url": "git+https://github.com/stephansama/packages.git",
     "directory": "core/eslint-config"
   },
+  "funding": "https://github.com/sponsors/stephansama",
   "license": "MIT",
   "author": {
     "name": "Stephan Randle",
@@ -21,14 +25,19 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./cli": {
+      "import": "./dist/cli.mjs",
+      "require": "./dist/cli.cjs"
     },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
+  "bin": "./cli.mjs",
   "files": [
     "dist"
   ],
@@ -130,5 +139,13 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "inlinedDependencies": {
+    "acorn": "8.16.0",
+    "local-pkg": "1.1.2",
+    "mlly": "1.8.2",
+    "pathe": "2.0.3",
+    "quansync": "0.2.11",
+    "ufo": "1.6.3"
   }
 }

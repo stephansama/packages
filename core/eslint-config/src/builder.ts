@@ -1,38 +1,44 @@
 import type { Config } from "eslint/config";
 
-import { autoEnableMap, configs } from "./configs";
+import type { BuilderOptions, ConfigOptions } from "./types";
+
+import { autoEnableMap } from "./auto";
+import * as configs from "./configs";
 import { hasPackage } from "./environment";
 
-export type BuilderOptions = Partial<{
-	/** Auto enable configuration options based on the current working project */
-	autoEnable: boolean;
-	configs: Array<Config>;
-}>;
+type BuilderKey = keyof BuilderOptions;
+type Options = BuilderOptions & ConfigOptions;
 
-export type ConfigOptions = Partial<{
-	[K in keyof typeof configs]: boolean | Parameters<(typeof configs)[K]>[0];
-}>;
+const excludeOptions = new Set<BuilderKey>([
+	"autoEnable",
+	"overrides",
+	"overrides_prepend",
+]);
 
-export async function builder(
-	configOptions: ConfigOptions,
-	buildOptions: BuilderOptions = {},
-): Promise<Config[]> {
+export async function builder(options: Options): Promise<Config[]> {
 	const build = new Array<Config>();
 
-	buildOptions.autoEnable ??= true;
+	options.autoEnable ??= true;
 
-	if (buildOptions.autoEnable) {
+	if (options.autoEnable) {
 		for (const key in autoEnableMap) {
 			const currentMap = autoEnableMap[key as keyof typeof autoEnableMap];
-			configOptions[key as keyof typeof configOptions] ??=
-				currentMap.some((module) => hasPackage(module));
+			const enableOption = currentMap.some((module) => {
+				return hasPackage(module);
+			});
+
+			// @ts-expect-error only updates valid configuration options
+			options[key as keyof typeof options] ??= enableOption;
 		}
 	}
 
-	for (const [config, input] of Object.entries(configOptions)) {
-		if (!input) continue;
+	if (options.overrides_prepend) build.push(...options.overrides_prepend);
+
+	for (const [config, input] of Object.entries(options)) {
+		if (!input || excludeOptions.has(config as BuilderKey)) continue;
 
 		const parameters = typeof input === "boolean" ? undefined : input;
+		// @ts-expect-error update typing later
 		const result = configs[config as keyof typeof configs](parameters);
 
 		if (result instanceof Promise) {
@@ -42,9 +48,7 @@ export async function builder(
 		}
 	}
 
-	if (buildOptions.configs) {
-		build.push(...buildOptions.configs);
-	}
+	if (options.overrides) build.push(...options.overrides);
 
 	return build;
 }

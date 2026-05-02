@@ -11,11 +11,16 @@ export default defineConfig([
 		target: "esnext",
 	},
 	{
+		attw: true,
 		dts: false,
 		entry: {
 			cli: "./src/cli/index.ts",
 		},
+		exports: {
+			bin: true,
+		},
 		format: ["esm", "cjs"],
+		publint: true,
 		target: "esnext",
 	},
 ]);

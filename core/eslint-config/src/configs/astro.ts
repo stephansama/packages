@@ -2,18 +2,14 @@ import type { Config } from "eslint/config";
 
 import { ensurePackages, interopDefault } from "@/environment";
 
-export const autoEnableModules = ["astro"] as const;
+export type Options = Readonly<{ disableA11yStrict: boolean }>;
 
-export async function config(
-	options: Readonly<{ disableA11yStrict: boolean }>,
-) {
+export async function config(options?: Options) {
 	const configs = new Array<Config>();
 
 	await ensurePackages("eslint-plugin-astro");
 
-	const astro = await interopDefault<typeof import("eslint-plugin-astro")>(
-		import("eslint-plugin-astro"),
-	);
+	const astro = await interopDefault(import("eslint-plugin-astro"));
 
 	configs.push(
 		...astro.configs.recommended.map((config) => ({

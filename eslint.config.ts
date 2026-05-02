@@ -5,6 +5,10 @@ export default await config({
 	...presets.library,
 	...presets.zod,
 	astro: true,
+	autoEnable: false,
+	imports: {
+		project: ["core/*/{ts,js}config.json", "examples/*/{ts,js}config.json"],
+	},
 	json: true,
 	markdown: true,
 	node: {

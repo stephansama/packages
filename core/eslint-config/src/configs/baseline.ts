@@ -4,15 +4,15 @@ import baseline from "eslint-plugin-baseline-js";
 
 import * as glob from "@/glob";
 
+export type Options = Readonly<{
+	available?: BaselineAvailability;
+	baseline?: BaselineAvailability;
+	ignoreFeatures?: string[];
+}>;
+
 type BaselineAvailability = "newly" | "widely" | number;
 
-export function config(
-	options?: Readonly<{
-		available?: BaselineAvailability;
-		baseline?: BaselineAvailability;
-		ignoreFeatures?: string[];
-	}>,
-): Config[] {
+export function config(options?: Options): Config[] {
 	return [
 		{
 			files: [glob.negate(glob.MD)],

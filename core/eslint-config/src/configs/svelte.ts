@@ -1,11 +1,9 @@
 import type { Config } from "eslint/config";
 
-import ts from "typescript-eslint";
+import * as ts from "typescript-eslint";
 
 import { ensurePackages } from "@/environment";
 import * as glob from "@/glob";
-
-export const autoEnableModules = ["svelte"] as const;
 
 export async function config(): Promise<Config[]> {
 	await ensurePackages("eslint-plugin-svelte");

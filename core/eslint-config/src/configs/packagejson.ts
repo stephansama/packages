@@ -1,15 +1,15 @@
 import type { Config } from "eslint/config";
 
 import nodeDependenciesPlugin from "eslint-plugin-node-dependencies";
-import packageJson from "eslint-plugin-package-json";
+import * as packageJson from "eslint-plugin-package-json";
 
 import * as glob from "@/glob";
 
-export function config(
-	options: Readonly<{
-		isLibrary?: boolean;
-	}>,
-): Config[] {
+export type Options = Readonly<{
+	isLibrary?: boolean;
+}>;
+
+export function config(options: Options): Config[] {
 	const configs = new Array<Config>();
 
 	configs.push({

@@ -5,8 +5,6 @@ import recommended from "eslint-plugin-prettier/recommended";
 
 delete recommended.rules?.["vue/html-self-closing"];
 
-export const autoEnableModules = ["prettier"] as const;
-
 export function config(): Config[] {
 	return [
 		{

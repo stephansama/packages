@@ -38,6 +38,7 @@ export async function builder(options: Options): Promise<Config[]> {
 		if (!input || excludeOptions.has(config as BuilderKey)) continue;
 
 		const parameters = typeof input === "boolean" ? undefined : input;
+
 		// @ts-expect-error update typing later
 		const result = configs[config as keyof typeof configs](parameters);
 

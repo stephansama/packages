@@ -1,6 +1,6 @@
 import type { Config } from "eslint/config";
 
-import regexp from "eslint-plugin-regexp";
+import * as regexp from "eslint-plugin-regexp";
 
 import * as glob from "@/glob";
 

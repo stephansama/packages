@@ -1,39 +1,42 @@
 import type { Config } from "eslint/config";
 
 import nodePlugin from "eslint-plugin-n";
+import { defineConfig } from "eslint/config";
 
 import * as glob from "@/glob";
 
-export function config(
-	options: Readonly<{
-		allowModules?: Array<string>;
-		resolvePaths?: Array<string>;
-	}>,
-): Config[] {
-	return [
-		{
-			files: [glob.JS, glob.JSX, glob.TS, glob.TSX],
-			name: `stephansama/node`,
-			plugins: {
-				node: nodePlugin,
-			},
-			rules: {
-				"node/no-extraneous-import": [
-					"error",
-					{
-						allowModules: options.allowModules || [],
-						resolvePaths: options.resolvePaths || [],
-					},
-				],
-				"node/no-extraneous-require": [
-					"error",
-					{
-						allowModules: options.allowModules || [],
-						resolvePaths: options.resolvePaths || [],
-					},
-				],
-				"node/no-unpublished-bin": "off",
-			},
+export type Options = Readonly<{
+	allowModules?: Array<string>;
+	resolvePaths?: Array<string>;
+}>;
+
+export function config(options: Options): Config[] {
+	return defineConfig({
+		extends: ["node/recommended-module"],
+		files: [glob.JS, glob.JSX, glob.TS, glob.TSX],
+		name: `stephansama/node`,
+		plugins: {
+			n: nodePlugin,
 		},
-	];
+		rules: {
+			"n/no-extraneous-import": [
+				"error",
+				{
+					allowModules: options.allowModules || [],
+					resolvePaths: options.resolvePaths || [],
+				},
+			],
+			"n/no-extraneous-require": [
+				"error",
+				{
+					allowModules: options.allowModules || [],
+					resolvePaths: options.resolvePaths || [],
+				},
+			],
+			// handled by ./imports.ts
+			"n/no-missing-import": "off",
+			"n/no-missing-require": "off",
+			"n/no-unpublished-bin": "off",
+		},
+	});
 }

@@ -11,7 +11,7 @@ export default defineConfig([
 		target: "esnext",
 	},
 	{
-		attw: true,
+		attw: false,
 		dts: false,
 		entry: {
 			cli: "./src/cli/index.ts",

@@ -4,6 +4,7 @@ export const base = {
 	baseline: true,
 	e18e: true,
 	gitignore: true,
+	imports: true,
 	javascript: true,
 	jsdoc: true,
 	packagejson: true,

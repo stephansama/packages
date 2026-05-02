@@ -12,10 +12,10 @@ export const MD = "**/*.md" as const;
 export const ASTRO = "**/*.astro" as const;
 
 export const JS = "**/*.?([cm])js" as const;
-export const JSX = "**/*.jsx" as const;
+export const JSX = "**/*.?([cm])jsx" as const;
 
 export const TS = "**/*.?([cm])ts" as const;
-export const TSX = "**/*.tsx" as const;
+export const TSX = "**/*.?([cm])tsx" as const;
 
 export const SVELTE = ["**/*.svelte", "**/*.svelte.js", "**/*.svelte.ts"];
 

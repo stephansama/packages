@@ -4,6 +4,7 @@ export { config as command } from "./command";
 export { config as css } from "./css";
 export { config as e18e } from "./e18e";
 export { config as gitignore } from "./gitignore";
+export { config as imports } from "./imports";
 export { config as javascript } from "./javascript";
 export { config as jsdoc } from "./jsdoc";
 export { config as json } from "./json";

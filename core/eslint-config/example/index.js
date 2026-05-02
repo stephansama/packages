@@ -1,5 +1,8 @@
-import { config, presets } from "../dist/index.js";
+import { config, presets } from "../dist/index.cjs";
 
-export default config({
-	...presets.base,
-});
+const loadConfig = async () =>
+	await config({
+		...presets.base,
+	});
+
+export default loadConfig;

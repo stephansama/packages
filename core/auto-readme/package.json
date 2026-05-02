@@ -28,19 +28,13 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": {
-        "types": "./config/schema.d.ts",
-        "default": "./config/schema.js"
-      },
-      "require": {
-        "types": "./config/schema.d.cts",
-        "default": "./config/schema.cjs"
-      }
+      "import": "./config/schema.mjs",
+      "require": "./config/schema.cjs"
     },
-    "./schema.json": "./config/schema.json"
+    "./package.json": "./package.json"
   },
-  "main": "./config/schema.js",
-  "types": "./config/schema.d.ts",
+  "main": "./config/schema.cjs",
+  "types": "./config/schema.d.cts",
   "bin": "./cli.mjs",
   "files": [
     "./dist",
@@ -93,5 +87,6 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  }
+  },
+  "module": "./config/schema.mjs"
 }

@@ -25,21 +25,21 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./errors": {
-      "import": "./dist/errors.js",
+      "import": "./dist/errors.mjs",
       "require": "./dist/errors.cjs"
     },
     "./react": {
-      "import": "./dist/react.js",
+      "import": "./dist/react.mjs",
       "require": "./dist/react.cjs"
     },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "files": [
     "./dist/"

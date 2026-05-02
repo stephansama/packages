@@ -26,24 +26,24 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./cli": {
-      "import": "./dist/cli.js",
+      "import": "./dist/cli.mjs",
       "require": "./dist/cli.cjs"
     },
     "./get": {
-      "import": "./dist/get.js",
+      "import": "./dist/get.mjs",
       "require": "./dist/get.cjs"
     },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "bin": {
-    "iconify-svgmap": "./dist/cli.js"
+    "iconify-svgmap": "./dist/cli.mjs"
   },
   "files": [
     "client.d.ts",
@@ -71,5 +71,19 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "inlinedDependencies": {
+    "@antfu/install-pkg": "1.1.0",
+    "@antfu/utils": "8.1.1",
+    "@iconify/utils": "2.3.0",
+    "acorn": "8.16.0",
+    "kolorist": "1.8.0",
+    "local-pkg": "1.1.2",
+    "mlly": "1.8.2",
+    "package-manager-detector": "1.6.0",
+    "pathe": "2.0.3",
+    "quansync": "0.2.11",
+    "tinyexec": "1.0.2",
+    "ufo": "1.6.3"
   }
 }

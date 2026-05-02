@@ -10,7 +10,7 @@ await build({ attw: false, entry: ["./src/index.ts"] });
 
 await build({ dts: true, entry: ["./src/schema.ts"], outDir: schemaDirectory });
 
-const { configSchema } = await import("./config/schema.js");
+const { configSchema } = await import("./config/schema.mjs");
 
 const jsonSchema = z.toJSONSchema(configSchema);
 

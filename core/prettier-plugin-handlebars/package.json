@@ -21,13 +21,13 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "files": [
     "dist"
@@ -46,5 +46,8 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "inlinedDependencies": {
+    "prettier": "3.8.1"
   }
 }

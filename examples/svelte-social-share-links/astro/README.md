@@ -1,4 +1,8 @@
-# Astro Starter Kit: Minimal
+<div align="center">
+
+# [`@stephansama`](https://github.com/stephansama) / \[`# Astro Starter Kit: Minimal`]\(https://packages.stephansama.info/api/@stephansama/# Astro Starter Kit: Minimal/)
+
+</div>
 
 ```sh
 pnpm create astro@latest -- --template minimal

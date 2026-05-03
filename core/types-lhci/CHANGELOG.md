@@ -1,5 +1,11 @@
 # @stephansama/types-lhci
 
+## 0.2.2
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 0.2.1
 
 ### Patch Changes

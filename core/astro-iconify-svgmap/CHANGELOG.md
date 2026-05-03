@@ -1,5 +1,11 @@
 # @stephansama/astro-iconify-svgmap
 
+## 1.0.11
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 1.0.10
 
 ### Patch Changes

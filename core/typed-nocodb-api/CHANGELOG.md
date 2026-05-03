@@ -1,5 +1,11 @@
 # @stephansama/typed-nocodb-api
 
+## 0.2.4
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 0.2.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @stephansama/remark-asciinema
 
+## 1.0.15
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 1.0.14
 
 ### Patch Changes

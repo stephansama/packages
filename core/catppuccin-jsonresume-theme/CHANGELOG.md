@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-jsonresume-theme
 
+## 1.0.3
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 1.0.2
 
 ### Patch Changes

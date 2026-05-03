@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-rss
 
+## 2.0.4
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 2.0.3
 
 ### Patch Changes

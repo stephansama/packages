@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-typedoc
 
+## 1.0.7
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 1.0.6
 
 ### Patch Changes

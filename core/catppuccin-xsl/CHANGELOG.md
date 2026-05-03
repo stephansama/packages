@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-xsl
 
+## 1.1.5
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 1.1.4
 
 ### Patch Changes

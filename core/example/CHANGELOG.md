@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.4.4
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 1.4.3
 
 ### Patch Changes

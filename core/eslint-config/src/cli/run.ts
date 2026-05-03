@@ -2,12 +2,17 @@ import type { Config } from "eslint/config";
 
 import * as prompts from "@clack/prompts";
 import { cli, command, type Flags } from "cleye";
+import fs from "node:fs";
 import path from "node:path";
 import { register } from "tsx/esm/api";
 
 import type { Preset } from "@/types";
 
+import * as configs from "@/configs";
+import { dependenciesMap } from "@/dependencies";
 import * as presets from "@/presets";
+
+import packageJson from "../../package.json";
 
 const flags = {
 	config: {
@@ -37,7 +42,15 @@ export async function run() {
 				name: "generate",
 			}),
 			command({
-				flags,
+				flags: {
+					...flags,
+					["package-json"]: {
+						alias: "p",
+						default: "package.json",
+						description: "location of package.json to update",
+						type: String,
+					},
+				},
 				help: {
 					description: `update eslint dependencies to current eslint config options`,
 				},
@@ -67,7 +80,7 @@ export async function run() {
 
 	switch (input.command) {
 		case "generate": {
-			const selectedPresets = await prompts.autocompleteMultiselect({
+			const selectedPresets = await prompts.multiselect({
 				message: "select presets",
 				options: Object.keys(presets).map((option) => ({
 					hint: getPresetDescription(option as Preset),
@@ -81,21 +94,74 @@ export async function run() {
 				return;
 			}
 
-			const selectedConfigurations = selectedPresets.map(
+			const selectedConfigurations = selectedPresets.filter(
 				(preset): preset is Preset => !!preset,
 			);
 
-			console.info("generating eslint config");
+			let accumulated = {};
+
+			const allConfigKeys = new Set(Object.keys(configs));
+
+			for (const config of selectedConfigurations) {
+				accumulated = { ...accumulated, ...presets[config] };
+			}
+
+			const accumulatedKeys = Object.keys(accumulated);
+
+			/* eslint-disable baseline-js/use-baseline */
+			const missing = allConfigKeys.difference(new Set(accumulatedKeys));
+
+			const additionalConfigurations =
+				await prompts.autocompleteMultiselect({
+					message: "add any other additional configurations",
+					options: Array.from(missing, (item) => ({
+						label: item,
+						value: item,
+					})),
+				});
+
+			if (prompts.isCancel(additionalConfigurations)) {
+				await unregister();
+				return;
+			}
+
+			console.info(
+				"generating eslint config with loaded configurations",
+				accumulatedKeys,
+				additionalConfigurations,
+			);
 			break;
 		}
 		case "update": {
-			const dependencies = Array.from(loadedConfigurations, (item) => {
-				return item
-					.replace("stephansama/", "")
-					.replace(afterSlashRegex, "");
-			});
+			const packageJsonFile = await fs.promises.readFile(
+				input.flags["package-json"],
+				"utf8",
+			);
+			const userPackageJson = JSON.parse(
+				packageJsonFile,
+			) as typeof packageJson;
+			const userDependencies = {
+				...userPackageJson.dependencies,
+				...userPackageJson.devDependencies,
+			};
+			const dependencies = [...loadedConfigurations]
+				.flatMap(
+					(config) =>
+						dependenciesMap[config as keyof typeof dependenciesMap],
+				)
+				.filter((config) => !!config);
 
-			console.info("updating eslint config", dependencies);
+			console.info(
+				"updating eslint config",
+				JSON.stringify(
+					{
+						dependencies,
+						userDependencies,
+					},
+					undefined,
+					2,
+				),
+			);
 			break;
 		}
 		default: {

@@ -23,6 +23,7 @@ export async function config(options: Options = {}): Promise<Config[]> {
 			languageOptions: {
 				globals: vitest.environments.env.globals,
 			},
+			name: "stephansama/vitest",
 			plugins: {
 				vitest,
 			},

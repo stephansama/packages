@@ -14,6 +14,7 @@ export function config(options: Options): Config[] {
 
 	configs.push({
 		files: glob.ALL_PKG_JSON,
+		name: "stephansama/packagejson/node-dependencies",
 		plugins: {
 			"node-dependencies": nodeDependenciesPlugin,
 		},
@@ -30,6 +31,7 @@ export function config(options: Options): Config[] {
 	if (options?.isLibrary) {
 		configs.push({
 			...packageJson.configs.recommended,
+			name: "stephansama/packagejson/library",
 			rules: {
 				...packageJson.configs.recommended.rules,
 				"package-json/sort-collections": "warn",

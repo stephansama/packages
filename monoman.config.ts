@@ -1,8 +1,10 @@
 import { defineConfig } from "monoman";
 
+type PackageJsonLike = Record<string, Record<string, string> | string>;
+
 export default defineConfig([
 	{
-		contents(data: Record<string, Record<string, string> | string>) {
+		contents(data: PackageJsonLike) {
 			data.engines = {
 				node: ">=24",
 			};

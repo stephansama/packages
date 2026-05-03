@@ -11,7 +11,7 @@ export function config(): Config[] {
 			name: "stephansama/unicorn",
 		},
 		{
-			name: "stephansama/unicorn-overrides",
+			name: "stephansama/unicorn/overrides",
 			rules: {
 				"unicorn/prefer-global-this": "off",
 				"unicorn/prevent-abbreviations": [
@@ -30,7 +30,7 @@ export function config(): Config[] {
 		},
 		{
 			files: [glob.MD],
-			name: "stephansama/unicorn-overrides-markdown",
+			name: "stephansama/unicorn/overrides-markdown",
 			rules: {
 				"unicorn/expiring-todo-comments": "off",
 			},

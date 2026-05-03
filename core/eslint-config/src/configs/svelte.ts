@@ -27,6 +27,7 @@ export async function config(): Promise<Config[]> {
 					projectService: true,
 				},
 			},
+			name: "stephansama/svelte/parser",
 		},
 	];
 }

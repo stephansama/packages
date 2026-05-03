@@ -57,8 +57,7 @@ export async function run() {
 	const loadedConfigurations = new Set(
 		loaded.default
 			.map((current) => current.name)
-			// eslint-disable-next-line unicorn/prefer-native-coercion-functions
-			.filter((current): current is string => Boolean(current))
+			.filter((current): current is string => !!current)
 			.map((item) => {
 				return item
 					.replace("stephansama/", "")
@@ -81,6 +80,10 @@ export async function run() {
 				await unregister();
 				return;
 			}
+
+			const selectedConfigurations = selectedPresets.map(
+				(preset): preset is Preset => !!preset,
+			);
 
 			console.info("generating eslint config");
 			break;

@@ -85,8 +85,7 @@ export async function loadIcons(options: Options) {
 	);
 
 	const allIcons = awaitedIcons.filter(
-		// eslint-disable-next-line unicorn/prefer-native-coercion-functions
-		(item): item is [string, IconifyJSON] => Boolean(item),
+		(item): item is [string, IconifyJSON] => !!item,
 	);
 
 	return Object.fromEntries(allIcons.map(([name, value]) => [name, value]));

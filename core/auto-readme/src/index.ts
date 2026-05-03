@@ -45,8 +45,7 @@ export async function run() {
 
 	await Promise.all(
 		paths
-			// eslint-disable-next-line unicorn/prefer-native-coercion-functions
-			.filter((path): path is string => Boolean(path))
+			.filter((path): path is string => !!path)
 			.map(async (path) => {
 				const file = await fsp.readFile(path, { encoding: "utf8" });
 				// get rid of ast via garbage collector faster

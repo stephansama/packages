@@ -26,6 +26,12 @@ export default await config({
 			},
 		},
 		{
+			files: [`core/example/${globs.PKG_JSON}`],
+			rules: {
+				"package-json/no-redundant-publishConfig": "off",
+			},
+		},
+		{
 			files: ["core/alfred-kaomoji/ci.js"],
 			rules: {
 				"n/hashbang": "off",

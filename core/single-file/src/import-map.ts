@@ -40,7 +40,6 @@ export async function loadImport(
 export async function loadImport(
 	arguments_: LoadImportArguments & { isBinary?: false },
 ): Promise<string>;
-
 export async function loadImport({
 	dirname,
 	file,

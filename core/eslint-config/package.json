@@ -37,7 +37,9 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
-  "bin": "./cli.mjs",
+  "bin": {
+    "eslint-config": "./dist/cli.mjs"
+  },
   "files": [
     "dist"
   ],

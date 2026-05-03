@@ -2,11 +2,13 @@ import type { ConfigOptions } from "./types";
 
 export const base = {
 	baseline: true,
+	command: true,
 	e18e: true,
 	gitignore: true,
 	imports: true,
 	javascript: true,
 	jsdoc: true,
+	node: true,
 	packagejson: true,
 	perfectionist: true,
 	pnpm: true,

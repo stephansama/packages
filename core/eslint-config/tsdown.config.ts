@@ -11,16 +11,17 @@ export default defineConfig([
 		target: "esnext",
 	},
 	{
-		attw: false,
-		dts: false,
+		attw: {
+			profile: "node16",
+		},
 		entry: {
 			cli: "./src/cli/index.ts",
 		},
 		exports: {
 			bin: true,
+			enabled: true,
 		},
 		format: ["esm", "cjs"],
-		publint: true,
 		target: "esnext",
 	},
 ]);

@@ -107,9 +107,6 @@ catalogs:
     '@types/yargs':
       specifier: 17.0.35
       version: 17.0.35
-    '@vitest/eslint-plugin':
-      specifier: ^1.6.16
-      version: 1.6.16
     actions-up:
       specifier: 1.11.0
       version: 1.11.0
@@ -165,7 +162,7 @@ catalogs:
       specifier: 14.0.0
       version: 14.0.0
     monoman:
-      specifier: ^0.8.2
+      specifier: 0.8.2
       version: 0.8.2
     nano-staged:
       specifier: 1.0.2
@@ -241,7 +238,7 @@ catalogs:
       specifier: 8.59.0
       version: 8.59.0
     '@vitest/eslint-plugin':
-      specifier: ^1.6.16
+      specifier: 1.6.16
       version: 1.6.16
     eslint:
       specifier: 10.2.1
@@ -577,7 +574,7 @@ importers:
         specifier: catalog:eslint
         version: 8.0.1
       '@vitest/eslint-plugin':
-        specifier: 'catalog:'
+        specifier: catalog:eslint
         version: 1.6.16(@typescript-eslint/eslint-plugin@8.55.0(@typescript-eslint/parser@8.59.0(eslint@10.2.1(jiti@2.6.1))(typescript@5.9.3))(eslint@10.2.1(jiti@2.6.1))(typescript@5.9.3))(eslint@10.2.1(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.18)
       actions-up:
         specifier: 'catalog:'

@@ -12,6 +12,7 @@ export function config(): Config[] {
 		},
 		{
 			files: [glob.MD],
+			name: "stephansama/regexp/overrides",
 			rules: {
 				"regexp/no-legacy-features": "off",
 				"regexp/no-missing-g-flag": "off",

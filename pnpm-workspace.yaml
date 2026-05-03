@@ -39,7 +39,6 @@ catalog:
   '@types/react': 19.2.14
   '@types/vfile': 4.0.0
   '@types/yargs': 17.0.35
-  '@vitest/eslint-plugin': ^1.6.16
   actions-up: 1.11.0
   alfy: 2.1.0
   astro: 5.9.3
@@ -58,7 +57,7 @@ catalog:
   local-pkg: 1.1.2
   mdast: 3.0.0
   minify: 14.0.0
-  monoman: ^0.8.2
+  monoman: 0.8.2
   nano-staged: 1.0.2
   node-plop: 0.32.3
   oxc-parser: 0.127.0
@@ -98,7 +97,7 @@ catalogs:
     '@eslint/js': 9.39.2
     '@eslint/markdown': 8.0.1
     '@typescript-eslint/parser': 8.59.0
-    '@vitest/eslint-plugin': ^1.6.16
+    '@vitest/eslint-plugin': 1.6.16
     eslint: 10.2.1
     eslint-config-flat-gitignore: 2.1.0
     eslint-config-prettier: 10.1.8

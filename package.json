@@ -71,7 +71,7 @@
   },
   "devDependencies": {
     "@eslint/markdown": "catalog:eslint",
-    "@vitest/eslint-plugin": "catalog:",
+    "@vitest/eslint-plugin": "catalog:eslint",
     "actions-up": "catalog:",
     "eslint-plugin-astro": "catalog:eslint",
     "eslint-plugin-jsonc": "catalog:eslint",

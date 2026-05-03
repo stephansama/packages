@@ -1,5 +1,11 @@
 # @stephansama/auto-readme
 
+## 0.2.9
+
+### Patch Changes
+
+- d53e888: updated auto readme default heading implementation
+
 ## 0.2.8
 
 ### Patch Changes

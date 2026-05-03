@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.4.5
+
+### Patch Changes
+
+- d53e888: updated auto readme default heading implementation
+
 ## 1.4.4
 
 ### Patch Changes

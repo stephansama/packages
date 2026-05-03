@@ -1,1 +1,5 @@
-# [@stephansama](https://github.com/stephansama/) package scripts
+<div align="center">
+
+# [`@stephansama`](https://github.com/stephansama) / scripts
+
+</div>

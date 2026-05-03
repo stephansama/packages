@@ -20,6 +20,7 @@ export { config as storybook } from "./storybook";
 export { config as svelte } from "./svelte";
 export { config as typescript } from "./typescript";
 export { config as unicorn } from "./unicorn";
+export { config as vitest } from "./vitest";
 export { config as vue } from "./vue";
 export { config as zod } from "./zod";
 

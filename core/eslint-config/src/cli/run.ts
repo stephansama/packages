@@ -7,7 +7,6 @@ import { register } from "tsx/esm/api";
 
 import type { Preset } from "@/types";
 
-import * as auto from "@/auto";
 import * as presets from "@/presets";
 
 const flags = {
@@ -64,11 +63,6 @@ export async function run() {
 				return item
 					.replace("stephansama/", "")
 					.replace(afterSlashRegex, "");
-			})
-			.filter((item) => {
-				return auto.autoEnableMap[
-					item as keyof typeof auto.autoEnableMap
-				];
 			}),
 	);
 
@@ -92,9 +86,11 @@ export async function run() {
 			break;
 		}
 		case "update": {
-			const dependencies = Array.from(loadedConfigurations, (item) =>
-				item.replace("stephansama/", "").replace(afterSlashRegex, ""),
-			);
+			const dependencies = Array.from(loadedConfigurations, (item) => {
+				return item
+					.replace("stephansama/", "")
+					.replace(afterSlashRegex, "");
+			});
 
 			console.info("updating eslint config", dependencies);
 			break;

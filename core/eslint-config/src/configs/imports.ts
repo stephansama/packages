@@ -3,9 +3,12 @@ import type { Config } from "eslint/config";
 import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
 import { importX } from "eslint-plugin-import-x";
 
-export type Options = Readonly<{ project: Array<string> | string }>;
+export type Options = Partial<{
+	ignore: Array<string>;
+	project: Array<string> | string;
+}>;
 
-export function config(options?: Options): Config[] {
+export function config(options?: Readonly<Options>): Config[] {
 	return [
 		{
 			...importX.flatConfigs.recommended,
@@ -19,6 +22,10 @@ export function config(options?: Options): Config[] {
 			name: "stephansama/imports/overrides",
 			rules: {
 				"import-x/namespace": ["error", { allowComputed: true }],
+				"import-x/no-unresolved": [
+					"error",
+					{ ignore: options?.ignore || [] },
+				],
 			},
 		},
 		{

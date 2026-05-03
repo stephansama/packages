@@ -3,7 +3,7 @@ import type { ConfigDependency, StephansamaConfig } from "./types";
 export const dependenciesMap = {
 	astro: ["eslint-plugin-astro"],
 	css: ["@eslint/css"],
-	json: ["jsonc-eslint-parser", "eslint-plugin-jsonc"],
+	json: ["eslint-plugin-jsonc"],
 	lit: ["eslint-plugin-lit"],
 	markdown: ["@eslint/markdown"],
 	storybook: ["eslint-plugin-storybook"],

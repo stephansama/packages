@@ -111,7 +111,7 @@ function convertPackageJsonExportsToJsr(exports: ExportsSchema) {
 	if (typeof exports === "string") return exports;
 	return Object.fromEntries(
 		Object.entries(exports).map(([key, value]) => {
-			let current = "";
+			let current: string | undefined;
 			if (typeof value === "string") current = value;
 			else if (typeof value.import === "string") current = value.import;
 			else current = value.import.default;

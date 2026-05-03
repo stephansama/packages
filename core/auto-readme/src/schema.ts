@@ -67,7 +67,10 @@ const templatesSchema = z.object({
 });
 
 export const defaultTemplates = templatesSchema.parse({});
-export const defaultTableHeadings = tableHeadingsSchema.parse({});
+
+// use undefined to generate default headings
+// eslint-disable-next-line unicorn/no-useless-undefined
+export const defaultTableHeadings = tableHeadingsSchema.parse(undefined);
 
 const _configSchema = z.object({
 	affectedRegexes: z.array(z.string().trim()),

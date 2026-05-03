@@ -99,8 +99,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			const headings =
 				(config.headings?.WORKSPACE?.length &&
 					config.headings?.WORKSPACE) ||
-				defaultTableHeadings.WORKSPACE! ||
-				[];
+				defaultTableHeadings.WORKSPACE!;
 
 			if (comment && comment.format === "LIST") {
 				// throw new Error("List is currently not su")

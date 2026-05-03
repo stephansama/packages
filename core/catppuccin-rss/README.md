@@ -1,6 +1,6 @@
 <div align="center">
 
-# [`@stephansama`](https://github.com/stephansama) / \[`# [Catppuccin](https://github.com/catppuccin/catppuccin) x [Pretty-feed-v3](https://github.com/genmon/aboutfeeds/blob/main/tools/pretty-feed-v3.xsl)`]\(https://packages.stephansama.info/api/@stephansama/# [Catppuccin](https://github.com/catppuccin/catppuccin) x [Pretty-feed-v3](https://github.com/genmon/aboutfeeds/blob/main/tools/pretty-feed-v3.xsl)/)
+# [`@stephansama`](https://github.com/stephansama) / \[`catppuccin-rss`]\(https://packages.stephansama.info/api/@stephansama/catppuccin-rss/)
 
 </div>
 

@@ -1,6 +1,6 @@
 <div align="center">
 
-# [`@stephansama`](https://github.com/stephansama) / \[`# Auto Readme 🪄`]\(https://packages.stephansama.info/api/@stephansama/# Auto Readme 🪄/)
+# [`@stephansama`](https://github.com/stephansama) / \[`auto-readme`]\(https://packages.stephansama.info/api/@stephansama/auto-readme/)
 
 </div>
 

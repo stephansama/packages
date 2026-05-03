@@ -1,6 +1,6 @@
 <div align="center">
 
-# [`@stephansama`](https://github.com/stephansama) / \[`# svelte-social-share-links`]\(https://packages.stephansama.info/api/@stephansama/# svelte-social-share-links/)
+# [`@stephansama`](https://github.com/stephansama) / \[`svelte-social-share-links`]\(https://packages.stephansama.info/api/@stephansama/svelte-social-share-links/)
 
 </div>
 

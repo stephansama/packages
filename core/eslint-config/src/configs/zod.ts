@@ -5,5 +5,10 @@ import { ensurePackages } from "@/environment";
 export async function config(): Promise<Config[]> {
 	await ensurePackages("eslint-plugin-zod");
 	const zod = await import("eslint-plugin-zod");
-	return [zod.default.configs.recommended];
+	return [
+		{
+			...zod.default.configs.recommended,
+			name: "stephansama/zod",
+		},
+	];
 }

@@ -69,11 +69,11 @@
     "vitest": "catalog:vitest"
   },
   "devDependencies": {
-    "@eslint/markdown": "catalog:",
+    "@eslint/markdown": "catalog:eslint",
     "actions-up": "catalog:",
-    "eslint-plugin-astro": "catalog:",
-    "eslint-plugin-jsonc": "catalog:",
-    "eslint-plugin-zod": "catalog:",
+    "eslint-plugin-astro": "catalog:eslint",
+    "eslint-plugin-jsonc": "catalog:eslint",
+    "eslint-plugin-zod": "catalog:eslint",
     "lefthook": "catalog:",
     "node-plop": "catalog:",
     "taze": "catalog:"

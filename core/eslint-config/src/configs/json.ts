@@ -11,10 +11,11 @@ export async function config(): Promise<Config[]> {
 		{
 			files: ["*.json", "**/*.json"],
 			language: "jsonc/x",
+			name: "stephansama/json/setup",
 			plugins: { jsonc: jsonc.default },
 		},
 		{
-			name: "stephansama/jsonc",
+			name: "stephansama/json/overrides",
 			rules: {
 				"jsonc/quote-props": "off",
 				"jsonc/quotes": "off",

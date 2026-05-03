@@ -7,9 +7,22 @@ export type Options = Readonly<{ project: Array<string> | string }>;
 
 export function config(options?: Options): Config[] {
 	return [
-		importX.flatConfigs.recommended,
-		importX.flatConfigs.typescript,
 		{
+			...importX.flatConfigs.recommended,
+			name: "stephansama/imports/recommended",
+		},
+		{
+			...importX.flatConfigs.typescript,
+			name: "stephansama/imports/typescript",
+		},
+		{
+			name: "stephansama/imports/overrides",
+			rules: {
+				"import-x/namespace": ["error", { allowComputed: true }],
+			},
+		},
+		{
+			name: "stephansama/imports/resolver",
 			settings: {
 				"import-x/resolver-next": [
 					createTypeScriptImportResolver({

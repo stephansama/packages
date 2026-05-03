@@ -12,7 +12,7 @@ export type Options = Readonly<{
 
 export function config(options: Options): Config[] {
 	return defineConfig({
-		extends: ["node/recommended-module"],
+		extends: ["n/recommended-module"],
 		files: [glob.JS, glob.JSX, glob.TS, glob.TSX],
 		name: `stephansama/node`,
 		plugins: {

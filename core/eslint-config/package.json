@@ -71,12 +71,14 @@
     "eslint-plugin-testing-library": "catalog:eslint",
     "eslint-plugin-unicorn": "catalog:eslint",
     "globals": "catalog:eslint",
+    "tsx": "catalog:",
     "typescript-eslint": "catalog:eslint",
     "yaml-eslint-parser": "catalog:eslint"
   },
   "devDependencies": {
     "@eslint/css": "catalog:eslint",
     "@eslint/markdown": "catalog:eslint",
+    "@vitest/eslint-plugin": "catalog:eslint",
     "cleye": "catalog:cli",
     "eslint": "catalog:eslint",
     "eslint-plugin-astro": "catalog:eslint",
@@ -93,6 +95,7 @@
   "peerDependencies": {
     "@eslint/css": "catalog:eslint",
     "@eslint/markdown": "catalog:eslint",
+    "@vitest/eslint-plugin": "catalog:eslint",
     "eslint": "catalog:eslint",
     "eslint-plugin-astro": "catalog:eslint",
     "eslint-plugin-jsonc": "catalog:eslint",
@@ -144,10 +147,13 @@
   },
   "inlinedDependencies": {
     "acorn": "8.16.0",
+    "cleye": "2.6.0",
     "local-pkg": "1.1.2",
     "mlly": "1.8.2",
     "pathe": "2.0.3",
     "quansync": "0.2.11",
+    "terminal-columns": "2.0.0",
+    "type-flag": "4.2.0",
     "ufo": "1.6.3"
   }
 }

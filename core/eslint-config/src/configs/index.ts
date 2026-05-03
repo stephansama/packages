@@ -22,3 +22,12 @@ export { config as typescript } from "./typescript";
 export { config as unicorn } from "./unicorn";
 export { config as vue } from "./vue";
 export { config as zod } from "./zod";
+
+/* eslint-disable perfectionist/sort-exports */
+export type { Options as AstroOptions } from "./astro";
+export type { Options as BaselineOptions } from "./baseline";
+export type { Options as CommandOptions } from "./command";
+export type { Options as ImportOptions } from "./imports";
+export type { Options as NodeOptions } from "./node";
+export type { Options as PackageJsonOptions } from "./packagejson";
+export type { Options as TypeScriptOptions } from "./typescript";

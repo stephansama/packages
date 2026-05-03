@@ -1,6 +1,7 @@
-import toml from "@iarna/toml";
+// eslint-disable-next-line e18e/ban-dependencies
 import { cosmiconfig, getDefaultSearchPlaces, type Options } from "cosmiconfig";
 import deepmerge from "deepmerge";
+import * as toml from "smol-toml";
 
 import type { Arguments } from "./arguments";
 

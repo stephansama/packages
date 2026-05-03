@@ -34,6 +34,7 @@
     "./package.json": "./package.json"
   },
   "main": "./config/schema.cjs",
+  "module": "./config/schema.mjs",
   "types": "./config/schema.d.cts",
   "bin": "./cli.mjs",
   "files": [
@@ -48,29 +49,29 @@
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
-    "@iarna/toml": "catalog:",
     "@manypkg/get-packages": "catalog:",
     "cosmiconfig": "catalog:cli",
     "deepmerge": "catalog:",
     "handlebars": "catalog:handlebars",
-    "markdown-table": "^3.0.4",
+    "markdown-table": "catalog:",
     "mdast": "catalog:",
-    "mdast-comment-marker": "^3.0.0",
-    "mdast-util-from-markdown": "^2.0.2",
+    "mdast-comment-marker": "catalog:",
+    "mdast-util-from-markdown": "catalog:",
     "mdast-zone": "github:stephansama/mdast-zone#1c5b08cd97240debeed4c9c6afad49df5877a132",
     "obug": "catalog:cli",
-    "pkg-types": "^2.3.0",
-    "remark": "15.0.1",
-    "remark-code-import": "^1.2.0",
-    "remark-collapse": "^0.1.2",
-    "remark-toc": "^9.0.0",
-    "remark-usage": "^11.0.1",
+    "pkg-types": "catalog:",
+    "remark": "catalog:",
+    "remark-code-import": "catalog:",
+    "remark-collapse": "catalog:",
+    "remark-toc": "catalog:",
+    "remark-usage": "catalog:",
+    "smol-toml": "catalog:",
     "tinyglobby": "catalog:",
-    "vfile": "^6.0.3",
-    "yaml": "^2.8.2",
+    "vfile": "catalog:",
+    "yaml": "catalog:",
     "yargs": "catalog:cli",
     "zod": "catalog:schema",
-    "zod2md": "^0.2.5"
+    "zod2md": "catalog:"
   },
   "devDependencies": {
     "@types/mdast": "catalog:",
@@ -87,6 +88,5 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "module": "./config/schema.mjs"
+  }
 }

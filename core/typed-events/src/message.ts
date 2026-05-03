@@ -45,8 +45,15 @@ export function createMessage<
 	}
 
 	return {
-		dispatch(name, input, options) {
-			options ??= { origin: getWindow().origin, window: getWindow() };
+		dispatch(
+			name,
+			input,
+			// eslint-disable-next-line unicorn/no-object-as-default-parameter
+			options = {
+				origin: getWindow().origin,
+				window: getWindow(),
+			},
+		) {
 			_validate(name, input, () => {
 				const id = _scopeName(name);
 				const data = { ...input, id };

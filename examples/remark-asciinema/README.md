@@ -1,8 +1,4 @@
-<div align="center">
-
-# [`@stephansama`](https://github.com/stephansama) / \[`# Remark Asciinema Example`]\(https://packages.stephansama.info/api/@stephansama/# Remark Asciinema Example/)
-
-</div>
+# Remark Asciinema Example
 
 ```sh
 pnpm create astro@latest -- --template blog

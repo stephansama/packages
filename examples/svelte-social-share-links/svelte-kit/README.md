@@ -1,8 +1,4 @@
-<div align="center">
-
-# [`@stephansama`](https://github.com/stephansama) / \[`# sv`]\(https://packages.stephansama.info/api/@stephansama/# sv/)
-
-</div>
+# sv
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 

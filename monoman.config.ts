@@ -34,7 +34,7 @@ export default defineConfig([
 				})
 				.join("\n");
 		},
-		exclude: ["README.md"],
+		exclude: ["README.md", "examples/**/README.md"],
 		include: ["**/README.md"],
 		type: "text",
 	},

@@ -7,13 +7,22 @@
 [![socket.dev](https://badge.socket.dev/npm/package/@stephansama/eslint-config)](https://socket.dev/npm/package/@stephansama/eslint-config/overview)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/eslint-config?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/eslint-config)
 
-stephansama eslint configuration for multiple use cases
+A modular, composable ESLint flat config package with 25+ configs covering JavaScript, TypeScript, frameworks, testing, and file formats. Supports auto-detection of installed packages and ships with a CLI for interactive setup.
 
 ##### Table of contents
 
 <details><summary>Open Table of contents</summary>
 
 - [Installation](#installation)
+- [Configs](#configs)
+  - [Core](#core)
+  - [Code Quality](#code-quality)
+  - [Package Management](#package-management)
+  - [Node.js](#nodejs)
+  - [Frameworks (async, auto-detected)](#frameworks-async-auto-detected)
+  - [Testing & Validation](#testing--validation)
+  - [File Formats (async)](#file-formats-async)
+- [Presets](#presets)
 - [Usage](#usage)
 
 </details>
@@ -22,6 +31,89 @@ stephansama eslint configuration for multiple use cases
 
 ```sh
 pnpm install @stephansama/eslint-config
+```
+
+## Configs
+
+### Core
+
+| Config       | Plugin(s)                   | Description                                                                         |
+| ------------ | --------------------------- | ----------------------------------------------------------------------------------- |
+| `baseline`   | `eslint-plugin-baseline-js` | Enforces Baseline-widely-available web features; configurable availability level    |
+| `javascript` | `@eslint/js`                | Recommended JS rules with browser/node globals, JSX, ES2021                         |
+| `typescript` | `typescript-eslint`         | Type-checked recommended rules via `projectService`                                 |
+| `e18e`       | `@e18e/eslint-plugin`       | Modern API preferences (`Object.hasOwn`, nullish coalescing, `Array` methods, etc.) |
+
+### Code Quality
+
+| Config          | Plugin(s)                     | Description                                                   |
+| --------------- | ----------------------------- | ------------------------------------------------------------- |
+| `imports`       | `eslint-plugin-import-x`      | Import ordering and resolution with TypeScript resolver       |
+| `jsdoc`         | `eslint-plugin-jsdoc`         | JSDoc validation (TypeScript-aware; `require-jsdoc` disabled) |
+| `unicorn`       | `eslint-plugin-unicorn`       | Opinionated best practices with custom abbreviation allowlist |
+| `perfectionist` | `eslint-plugin-perfectionist` | Natural-sort ordering for imports, exports, and object keys   |
+| `prettier`      | `eslint-plugin-prettier`      | Prettier formatting as ESLint warnings                        |
+| `regexp`        | `eslint-plugin-regexp`        | Regex best practices                                          |
+| `command`       | `eslint-plugin-command`       | Magic comment commands (e.g. `// @keep-sorted`)               |
+
+### Package Management
+
+| Config        | Plugin(s)                                                       | Description                                                                               |
+| ------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `packagejson` | `eslint-plugin-package-json`, `eslint-plugin-node-dependencies` | Validates `package.json` — versions, deps, provenance; `isLibrary` option adds sort rules |
+| `pnpm`        | `eslint-plugin-pnpm`                                            | Enforces pnpm catalog usage and workspace settings                                        |
+| `gitignore`   | `eslint-config-flat-gitignore`                                  | Applies `.gitignore` patterns as ESLint ignores                                           |
+
+### Node.js
+
+| Config | Plugin(s)         | Description                                                                 |
+| ------ | ----------------- | --------------------------------------------------------------------------- |
+| `node` | `eslint-plugin-n` | Node.js recommended rules; missing-import resolution delegated to `imports` |
+
+### Frameworks (async, auto-detected)
+
+| Config      | Plugin(s)                 | Description                                                             |
+| ----------- | ------------------------- | ----------------------------------------------------------------------- |
+| `astro`     | `eslint-plugin-astro`     | Astro recommended + jsx-a11y-strict (opt out via `disableA11yStrict`)   |
+| `svelte`    | `eslint-plugin-svelte`    | Svelte with TypeScript parser support                                   |
+| `vue`       | —                         | Placeholder (empty config)                                              |
+| `lit`       | `eslint-plugin-lit`       | Lit element rules (attribute names, binding positions, lifecycle, etc.) |
+| `storybook` | `eslint-plugin-storybook` | Storybook flat/recommended                                              |
+
+### Testing & Validation
+
+| Config   | Plugin(s)               | Description                                                                |
+| -------- | ----------------------- | -------------------------------------------------------------------------- |
+| `vitest` | `@vitest/eslint-plugin` | Vitest rules for `**/*.test.{ts,js}`; `typeAware` option (default: `true`) |
+| `zod`    | `eslint-plugin-zod`     | Zod schema best practices                                                  |
+
+### File Formats (async)
+
+| Config     | Plugin(s)             | Description                                                     |
+| ---------- | --------------------- | --------------------------------------------------------------- |
+| `json`     | `eslint-plugin-jsonc` | JSON/JSONC linting                                              |
+| `markdown` | `@eslint/markdown`    | Markdown code block linting; disables noisy rules inside fences |
+| `css`      | `@eslint/css`         | CSS rules (font fallbacks, selector complexity, layers, etc.)   |
+
+## Presets
+
+Presets are pre-composed sets of configs you can spread into the `config()` call.
+
+| Preset           | Configs Included                                                                                                                                         |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `base` (default) | `baseline`, `e18e`, `gitignore`, `imports`, `javascript`, `jsdoc`, `packagejson`, `perfectionist`, `pnpm`, `prettier`, `regexp`, `typescript`, `unicorn` |
+| `zod`            | `zod`                                                                                                                                                    |
+| `library`        | `packagejson` with `isLibrary: true`                                                                                                                     |
+
+```javascript
+import { config, presets } from "@stephansama/eslint-config";
+
+export default config({
+  ...presets.base,
+  // enable additional configs
+  vitest: true,
+  node: true,
+});
 ```
 
 ## Usage

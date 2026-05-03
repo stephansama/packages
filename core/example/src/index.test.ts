@@ -52,7 +52,7 @@ describe("cli index", () => {
 		await expect(main()).resolves.not.toThrow();
 	});
 
-	it("should use fallback examples ", async () => {
+	it("should use fallback examples", async () => {
 		mockPool
 			.intercept({
 				method: "GET",

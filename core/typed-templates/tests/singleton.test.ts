@@ -31,24 +31,22 @@ const invalidSchema = createHandlebarSchemaSingleton(
 );
 
 describe("audit", () => {
-	it("it validates valid files", async () => {
+	it("validates valid files", async () => {
 		const result = await validSchema.audit();
 		expect(result).toBeTruthy();
 	});
 
-	it("it invalidates an invalid files", () => {
-		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		expect(invalidSchema.audit()).rejects.toThrow(
+	it("invalidates an invalid files", async () => {
+		await expect(invalidSchema.audit()).rejects.toThrow(
 			"Missing key 'different'",
 		);
 	});
 });
 
 describe("compile", () => {
-	it("prevents compiling bad input", () => {
+	it("prevents compiling bad input", async () => {
 		// @ts-expect-error something with typescript
-		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		expect(validSchema.compile("constList", {})).rejects.toThrow();
+		await expect(validSchema.compile("constList", {})).rejects.toThrow();
 	});
 
 	it("compiles with valid input", async () => {
@@ -61,6 +59,6 @@ describe("compile", () => {
 			},
 		);
 
-		expect(output);
+		expect(output).toBeTruthy();
 	});
 });

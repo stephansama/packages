@@ -39,6 +39,7 @@ catalog:
   '@types/react': 19.2.14
   '@types/vfile': 4.0.0
   '@types/yargs': 17.0.35
+  '@vitest/eslint-plugin': ^1.6.16
   actions-up: 1.11.0
   alfy: 2.1.0
   astro: 5.9.3

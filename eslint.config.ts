@@ -15,6 +15,8 @@ export default await config({
 	node: {
 		allowModules: ["vitest", "@manypkg/get-packages"],
 	},
+	vitest: true,
+	// eslint-disable-next-line perfectionist/sort-objects
 	overrides: [
 		{
 			files: [`examples/${globs.PKG_JSON}`],

@@ -19,5 +19,8 @@
     "@manypkg/get-packages": "catalog:",
     "@manypkg/tools": "catalog:",
     "tsx": "catalog:"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }

@@ -18,5 +18,8 @@
   },
   "devDependencies": {
     "@stephansama/svelte-social-share-links": "workspace:*"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }

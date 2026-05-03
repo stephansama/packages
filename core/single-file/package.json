@@ -61,5 +61,8 @@
     "cleye": "2.6.0",
     "terminal-columns": "2.0.0",
     "type-flag": "4.2.0"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }

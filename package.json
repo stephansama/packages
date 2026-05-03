@@ -53,6 +53,7 @@
     "eslint": "catalog:eslint",
     "jsdom": "catalog:",
     "knip": "catalog:",
+    "monoman": "catalog:",
     "nano-staged": "catalog:",
     "pkg-pr-new": "catalog:",
     "prettier": "catalog:prettier",

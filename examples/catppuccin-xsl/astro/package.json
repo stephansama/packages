@@ -16,5 +16,8 @@
   "devDependencies": {
     "@astrojs/sitemap": "3.4.1",
     "@stephansama/catppuccin-xsl": "workspace:*"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }

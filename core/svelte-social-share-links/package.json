@@ -72,5 +72,8 @@
   "readme": "./README.md",
   "storybook": {
     "url": "https://packages.stephansama.info/api/@stephansama/svelte-social-share-links/storybook"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }

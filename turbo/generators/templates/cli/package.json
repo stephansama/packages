@@ -33,5 +33,8 @@
     "access": "public",
     "provenance": true
   },
-  "readme": "./README.md"
+  "readme": "./README.md",
+  "engines": {
+    "node": ">=24"
+  }
 }

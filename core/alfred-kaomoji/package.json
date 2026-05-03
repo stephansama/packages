@@ -28,6 +28,7 @@
   },
   "files": [
     "./ci.js",
+    "assets",
     "src"
   ],
   "scripts": {
@@ -43,5 +44,8 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "engines": {
+    "node": ">=24"
   }
 }

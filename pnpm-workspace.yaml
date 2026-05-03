@@ -57,6 +57,7 @@ catalog:
   local-pkg: 1.1.2
   mdast: 3.0.0
   minify: 14.0.0
+  monoman: ^0.8.2
   nano-staged: 1.0.2
   node-plop: 0.32.3
   oxc-parser: 0.127.0

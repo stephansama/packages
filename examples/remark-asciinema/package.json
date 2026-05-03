@@ -20,5 +20,8 @@
   "devDependencies": {
     "@astrojs/check": "0.9.6",
     "@stephansama/remark-asciinema": "workspace:*"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }

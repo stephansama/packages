@@ -68,6 +68,9 @@
     "vite": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",
+  "engines": {
+    "node": ">=24"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true

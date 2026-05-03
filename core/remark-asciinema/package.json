@@ -46,15 +46,18 @@
     "tsdown": "catalog:",
     "unist-util-visit": "catalog:"
   },
+  "engines": {
+    "node": ">=24"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "readme": "./README.md",
   "inlinedDependencies": {
     "@types/unist": "3.0.3",
     "unist-util-is": "6.0.1",
     "unist-util-visit": "5.1.0",
     "unist-util-visit-parents": "6.0.2"
-  }
+  },
+  "readme": "./README.md"
 }

@@ -12,5 +12,8 @@
     "@stephansama/typed-events": "workspace:*",
     "vite": "^7.3.1",
     "zod": "4.0.15"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }

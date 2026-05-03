@@ -7,6 +7,7 @@ export default await config({
 	astro: true,
 	autoEnable: false,
 	imports: {
+		ignore: ["astro:.*"],
 		project: ["core/*/{ts,js}config.json", "examples/*/{ts,js}config.json"],
 	},
 	json: true,
@@ -20,6 +21,13 @@ export default await config({
 			rules: {
 				"package-json/require-description": "off",
 				"pnpm/json-enforce-catalog": "off",
+			},
+		},
+		{
+			files: ["core/alfred-kaomoji/ci.js"],
+			rules: {
+				"n/hashbang": "off",
+				"n/no-process-exit": "off",
 			},
 		},
 		{

@@ -10,6 +10,7 @@ export function config(): Config[] {
 			extends: ["e18e/recommended"],
 			files: glob.ALL_PKG_JSON,
 			languageOptions: { parser: jsonParser },
+			name: "stephansama/e18e/setup",
 			plugins: { e18e },
 			rules: {
 				"e18e/no-indexof-equality": "off",

@@ -929,6 +929,9 @@ importers:
       globals:
         specifier: catalog:eslint
         version: 17.5.0
+      jsonc-eslint-parser:
+        specifier: catalog:eslint
+        version: 2.4.2
       tsx:
         specifier: 'catalog:'
         version: 4.21.0
@@ -972,9 +975,6 @@ importers:
       eslint-plugin-zod:
         specifier: catalog:eslint
         version: 3.11.0(eslint@10.2.1(jiti@2.6.1))(typescript@5.9.3)(zod@4.2.1)
-      jsonc-eslint-parser:
-        specifier: catalog:eslint
-        version: 2.4.2
       local-pkg:
         specifier: 'catalog:'
         version: 1.1.2

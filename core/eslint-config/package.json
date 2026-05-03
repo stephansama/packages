@@ -73,6 +73,7 @@
     "eslint-plugin-testing-library": "catalog:eslint",
     "eslint-plugin-unicorn": "catalog:eslint",
     "globals": "catalog:eslint",
+    "jsonc-eslint-parser": "catalog:eslint",
     "tsx": "catalog:",
     "typescript-eslint": "catalog:eslint",
     "yaml-eslint-parser": "catalog:eslint"
@@ -89,7 +90,6 @@
     "eslint-plugin-storybook": "catalog:eslint",
     "eslint-plugin-svelte": "catalog:eslint",
     "eslint-plugin-zod": "catalog:eslint",
-    "jsonc-eslint-parser": "catalog:eslint",
     "local-pkg": "catalog:",
     "svelte-eslint-parser": "catalog:eslint",
     "tsdown": "catalog:"
@@ -105,7 +105,6 @@
     "eslint-plugin-storybook": "catalog:eslint",
     "eslint-plugin-svelte": "catalog:eslint",
     "eslint-plugin-zod": "catalog:eslint",
-    "jsonc-eslint-parser": "catalog:eslint",
     "svelte-eslint-parser": "catalog:eslint"
   },
   "peerDependenciesMeta": {

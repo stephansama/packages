@@ -20,7 +20,7 @@ const resolvedVirtualModuleId = "\0" + virtualModuleId;
 
 const js = String.raw;
 
-import type { AstroIntegration } from "astro";
+import type { AstroConfig, AstroIntegration } from "astro";
 
 export function createIntegration(options_: Options = {}): AstroIntegration {
 	return {
@@ -47,10 +47,9 @@ export function createIntegration(options_: Options = {}): AstroIntegration {
 			"astro:config:setup"({ updateConfig }) {
 				updateConfig({
 					vite: {
-						// @ts-expect-error correctly typed
 						plugins: [createPlugin(options_)],
 					},
-				});
+				} as Partial<AstroConfig>);
 			},
 		},
 	};

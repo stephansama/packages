@@ -23,15 +23,15 @@ export function config(options: Options): Config[] {
 			"n/no-extraneous-import": [
 				"error",
 				{
-					allowModules: options.allowModules || [],
-					resolvePaths: options.resolvePaths || [],
+					allowModules: options?.allowModules || [],
+					resolvePaths: options?.resolvePaths || [],
 				},
 			],
 			"n/no-extraneous-require": [
 				"error",
 				{
-					allowModules: options.allowModules || [],
-					resolvePaths: options.resolvePaths || [],
+					allowModules: options?.allowModules || [],
+					resolvePaths: options?.resolvePaths || [],
 				},
 			],
 			// handled by ./imports.ts

@@ -8,8 +8,6 @@ export default defineConfig([
 			};
 			return data;
 		},
-		exclude: ["exclude/package.json"],
-		// Globs to match files
 		include: ["**/package.json"],
 		type: "json",
 	},

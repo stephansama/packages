@@ -19,6 +19,7 @@ export function config(options: Options): Config[] {
 			n: nodePlugin,
 		},
 		rules: {
+			"n/hashbang": "off",
 			"n/no-extraneous-import": [
 				"error",
 				{

@@ -17,27 +17,27 @@
     "email": "stephanrandle.dev@gmail.com",
     "url": "https://stephansama.info"
   },
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "bin": "./cli.mjs",
   "files": [
-    "cli.mjs",
     "dist"
   ],
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-    "lint:fix": "eslint ./ --fix"
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
     "cheerio": "catalog:",
@@ -56,5 +56,13 @@
     "access": "public",
     "provenance": true
   },
-  "readme": "./README.md"
+  "readme": "./README.md",
+  "inlinedDependencies": {
+    "cleye": "2.6.0",
+    "terminal-columns": "2.0.0",
+    "type-flag": "4.2.0"
+  },
+  "engines": {
+    "node": ">=24"
+  }
 }

@@ -1,18 +1,21 @@
+// is already a namespace import
+// remark-usage-ignore-next
+// eslint-disable-next-line zod/consistent-import
 import * as z from "zod";
 
-import { createEnv } from "../dist/index.cjs";
+import { createEnvironment } from "../dist/index.cjs";
 
-export const envConfig = createEnv(
+export const config = createEnvironment(
 	z.object({
-		GENERATIVE_API_KEY: z.string(),
-		OTHER_SUPER_SECRET_KEY: z.string(),
+		GENERATIVE_API_KEY: z.string().trim(),
+		OTHER_SUPER_SECRET_KEY: z.string().trim(),
 	}),
 );
 
 export async function generateExample() {
-	return await envConfig.generateExample(".env.example");
+	return await config.generateExample(".env.example");
 }
 
-export async function validateEnv() {
-	return await envConfig.validate();
+export async function validateEnvironment() {
+	return await config.validate();
 }

@@ -1,37 +1,51 @@
 {
-	"name": "@stephansama/alfred-kaomoji",
-	"version": "1.1.3",
-	"description": "Alfred Kaomoji Picker",
-	"keywords": [
-		"alfred",
-		"kaomoji",
-		"emoji",
-		"picker"
-	],
-	"homepage": "https://packages.stephansama.info/api/@stephansama/alfred-kaomoji",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/stephansama/packages",
-		"directory": "core/alfred-kaomoji"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Stephan Randle",
-		"email": "stephanrandle.dev@gmail.com",
-		"url": "https://stephansama.info"
-	},
-	"type": "module",
-	"scripts": {
-		"postinstall": "node ./ci.js && alfy-init || true",
-		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-		"preuninstall": "node ./ci.js && alfy-cleanup || true"
-	},
-	"dependencies": {
-		"alfy": "^2.1.0"
-	},
-	"packageManager": "pnpm@10.29.3",
-	"publishConfig": {
-		"access": "public",
-		"provenance": true
-	}
+  "name": "@stephansama/alfred-kaomoji",
+  "version": "1.1.3",
+  "description": "Alfred Kaomoji Picker",
+  "keywords": [
+    "alfred",
+    "kaomoji",
+    "emoji",
+    "picker"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/alfred-kaomoji",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stephansama/packages",
+    "directory": "core/alfred-kaomoji"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "./category": "./src/category.js",
+    "./kaomoji": "./src/kaomoji.js"
+  },
+  "files": [
+    "./ci.js",
+    "assets",
+    "src"
+  ],
+  "scripts": {
+    "postinstall": "node ./ci.js && alfy-init || true",
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix",
+    "preuninstall": "node ./ci.js && alfy-cleanup || true"
+  },
+  "dependencies": {
+    "alfy": "catalog:"
+  },
+  "packageManager": "pnpm@10.29.3",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=24"
+  }
 }

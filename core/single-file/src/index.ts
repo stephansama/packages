@@ -22,7 +22,7 @@ export async function convertPageToSingleFile(url: string) {
 		await inlineCallback($, url);
 	}
 
-	const registryScript = await writeImportMap();
+	const registryScript = writeImportMap();
 
 	$("head").prepend(registryScript);
 

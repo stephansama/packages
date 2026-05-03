@@ -1,0 +1,160 @@
+{
+  "name": "@stephansama/eslint-config",
+  "version": "0.0.0",
+  "description": "stephansama eslint configuration for multiple use cases",
+  "keywords": [
+    "eslint-config"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/eslint-config",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/eslint-config"
+  },
+  "funding": "https://github.com/sponsors/stephansama",
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./cli": {
+      "import": "./dist/cli.mjs",
+      "require": "./dist/cli.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "bin": {
+    "eslint-config": "./dist/cli.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
+  },
+  "dependencies": {
+    "@antfu/install-pkg": "catalog:",
+    "@clack/prompts": "catalog:",
+    "@e18e/eslint-plugin": "catalog:eslint",
+    "@eslint/js": "catalog:eslint",
+    "@typescript-eslint/parser": "catalog:eslint",
+    "eslint-config-flat-gitignore": "catalog:eslint",
+    "eslint-config-prettier": "catalog:eslint",
+    "eslint-import-resolver-typescript": "catalog:eslint",
+    "eslint-plugin-baseline-js": "catalog:eslint",
+    "eslint-plugin-command": "catalog:eslint",
+    "eslint-plugin-import-x": "catalog:eslint",
+    "eslint-plugin-jsdoc": "catalog:eslint",
+    "eslint-plugin-jsx-a11y": "catalog:eslint",
+    "eslint-plugin-n": "catalog:eslint",
+    "eslint-plugin-node-dependencies": "catalog:eslint",
+    "eslint-plugin-package-json": "catalog:eslint",
+    "eslint-plugin-perfectionist": "catalog:eslint",
+    "eslint-plugin-pnpm": "catalog:eslint",
+    "eslint-plugin-prettier": "catalog:eslint",
+    "eslint-plugin-regexp": "catalog:eslint",
+    "eslint-plugin-testing-library": "catalog:eslint",
+    "eslint-plugin-unicorn": "catalog:eslint",
+    "globals": "catalog:eslint",
+    "jsonc-eslint-parser": "catalog:eslint",
+    "tsx": "catalog:",
+    "typescript-eslint": "catalog:eslint",
+    "yaml-eslint-parser": "catalog:eslint"
+  },
+  "devDependencies": {
+    "@eslint/css": "catalog:eslint",
+    "@eslint/markdown": "catalog:eslint",
+    "@vitest/eslint-plugin": "catalog:eslint",
+    "cleye": "catalog:cli",
+    "eslint": "catalog:eslint",
+    "eslint-plugin-astro": "catalog:eslint",
+    "eslint-plugin-jsonc": "catalog:eslint",
+    "eslint-plugin-lit": "catalog:eslint",
+    "eslint-plugin-storybook": "catalog:eslint",
+    "eslint-plugin-svelte": "catalog:eslint",
+    "eslint-plugin-zod": "catalog:eslint",
+    "local-pkg": "catalog:",
+    "svelte-eslint-parser": "catalog:eslint",
+    "tsdown": "catalog:"
+  },
+  "peerDependencies": {
+    "@eslint/css": "catalog:eslint",
+    "@eslint/markdown": "catalog:eslint",
+    "@vitest/eslint-plugin": "catalog:eslint",
+    "eslint": "catalog:eslint",
+    "eslint-plugin-astro": "catalog:eslint",
+    "eslint-plugin-jsonc": "catalog:eslint",
+    "eslint-plugin-lit": "catalog:eslint",
+    "eslint-plugin-storybook": "catalog:eslint",
+    "eslint-plugin-svelte": "catalog:eslint",
+    "eslint-plugin-zod": "catalog:eslint",
+    "svelte-eslint-parser": "catalog:eslint"
+  },
+  "peerDependenciesMeta": {
+    "@eslint/css": {
+      "optional": true
+    },
+    "@eslint/markdown": {
+      "optional": true
+    },
+    "eslint-plugin-astro": {
+      "optional": true
+    },
+    "eslint-plugin-jsonc": {
+      "optional": true
+    },
+    "eslint-plugin-lit": {
+      "optional": true
+    },
+    "eslint-plugin-storybook": {
+      "optional": true
+    },
+    "eslint-plugin-svelte": {
+      "optional": true
+    },
+    "eslint-plugin-zod": {
+      "optional": true
+    },
+    "jsonc-eslint-parser": {
+      "optional": true
+    },
+    "svelte-eslint-parser": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "inlinedDependencies": {
+    "acorn": "8.16.0",
+    "cleye": "2.6.0",
+    "local-pkg": "1.1.2",
+    "mlly": "1.8.2",
+    "pathe": "2.0.3",
+    "quansync": "0.2.11",
+    "terminal-columns": "2.0.0",
+    "type-flag": "4.2.0",
+    "ufo": "1.6.3"
+  }
+}

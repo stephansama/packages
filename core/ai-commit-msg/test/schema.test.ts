@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
 	configSchema,
 	defaultPrompt,
-	envSchema,
+	environmentSchema,
 	providers,
 	providerSchema,
 } from "../src/schema";
@@ -35,19 +35,19 @@ describe("schema", () => {
 	describe("envSchema", () => {
 		it("should validate google env", () => {
 			const valid = { GOOGLE_GENERATIVE_AI_API_KEY: "key" };
-			const result = envSchema.google.safeParse(valid);
+			const result = environmentSchema.google.safeParse(valid);
 			expect(result.success).toBe(true);
 		});
 
 		it("should validate openai env", () => {
 			const valid = { OPENAI_API_KEY: "key" };
-			const result = envSchema.openai.safeParse(valid);
+			const result = environmentSchema.openai.safeParse(valid);
 			expect(result.success).toBe(true);
 		});
 
 		it("should validate ollama env (empty object allowed)", () => {
 			const valid = {};
-			const result = envSchema.ollama.safeParse(valid);
+			const result = environmentSchema.ollama.safeParse(valid);
 			expect(result.success).toBe(true);
 		});
 	});

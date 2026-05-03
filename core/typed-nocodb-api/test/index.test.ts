@@ -5,7 +5,7 @@ import { createApi } from "../src/index";
 
 const apiSchema = z.object({
 	completed: z.boolean(),
-	title: z.string(),
+	title: z.string().trim(),
 });
 
 describe("typed-nocodb-api", () => {
@@ -48,9 +48,9 @@ describe("typed-nocodb-api", () => {
 
 	it("should perform LIST action", async () => {
 		const mockResponse = {
-			nestedNext: null,
-			nestedPrev: null,
-			next: null,
+			nestedNext: undefined,
+			nestedPrev: undefined,
+			next: undefined,
 			pageInfo: {
 				isFirstPage: true,
 				isLastPage: true,
@@ -58,11 +58,11 @@ describe("typed-nocodb-api", () => {
 				pageSize: 25,
 				totalRows: 1,
 			},
-			prev: null,
+			prev: undefined,
 			records: [{ fields: { completed: false, title: "Test" }, id: 1 }],
 		};
 		mockFetch.mockResolvedValue({
-			json: async () => mockResponse,
+			json: () => mockResponse,
 			ok: true,
 			statusText: "OK",
 		});
@@ -76,8 +76,8 @@ describe("typed-nocodb-api", () => {
 		});
 
 		const expectedUrl = `${origin}/api/v3/data/${baseId}/${tableId}/records`;
-		const calledUrl = mockFetch.mock.calls[0][0];
-		const calledOptions = mockFetch.mock.calls[0][1];
+		const calledUrl = mockFetch.mock.calls[0][0] as string;
+		const calledOptions = mockFetch.mock.calls[0][1] as object;
 
 		expect(calledUrl).toContain(expectedUrl);
 		expect(calledUrl).toContain(
@@ -86,19 +86,19 @@ describe("typed-nocodb-api", () => {
 
 		expect(calledOptions).toEqual(
 			expect.objectContaining({
-				headers: expect.any(Headers),
+				headers: expect.any(Headers) as Headers,
 				method: "get",
 			}),
 		);
 
-		const { pageInfo, ...expectedResult } = mockResponse;
+		const { pageInfo: _, ...expectedResult } = mockResponse;
 		expect(result).toEqual(expectedResult);
 	});
 
 	it("should perform COUNT action", async () => {
 		const mockResponse = { count: 42 };
 		mockFetch.mockResolvedValue({
-			json: async () => mockResponse,
+			json: async () => await Promise.resolve(mockResponse),
 			ok: true,
 			statusText: "OK",
 		});
@@ -121,7 +121,7 @@ describe("typed-nocodb-api", () => {
 		};
 
 		mockFetch.mockResolvedValue({
-			json: async () => mockResponse,
+			json: async () => await Promise.resolve(mockResponse),
 			ok: true,
 			statusText: "OK",
 		});
@@ -145,7 +145,7 @@ describe("typed-nocodb-api", () => {
 
 	it("should perform DELETE action", async () => {
 		mockFetch.mockResolvedValue({
-			json: async () => ({}),
+			json: () => ({}),
 			ok: true,
 			statusText: "OK",
 		});
@@ -172,7 +172,7 @@ describe("typed-nocodb-api", () => {
 			id: "123",
 		};
 		mockFetch.mockResolvedValue({
-			json: async () => ({}),
+			json: async () => await Promise.resolve({}),
 			ok: true,
 			statusText: "OK",
 		});

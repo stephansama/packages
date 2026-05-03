@@ -33,6 +33,10 @@ pnpm install @stephansama/typed-events
 
 ## Usage
 
+```javascript
+import * as z from "zod";
+```
+
 ### createEvent
 
 create a typed [`CustomEvent`](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent)
@@ -56,7 +60,7 @@ somewhere in your codebase
 
 ```javascript
 export function listenForAnimationEvent() {
-  const item = document.getElementById("item");
+  const item = document.querySelector("#item");
 
   const cleanup = customAnimationEvent.listen((event) => {
     item.style.x = event.data.x;
@@ -71,15 +75,15 @@ somewhere else in your codebase
 
 ```javascript
 export function dispatchEvent() {
-  const x = document.getElementById("x");
-  const y = document.getElementById("y");
+  const x = document.querySelector("#x");
+  const y = document.querySelector("#y");
 
-  const button = document.getElementById("button");
+  const button = document.querySelector("#button");
 
   button.addEventListener("click", () => {
     customAnimationEvent.dispatch({
-      x: +x.innerText,
-      y: +y.innerText,
+      x: +x.textContent,
+      y: +y.textContent,
     });
   });
 }
@@ -104,7 +108,7 @@ somewhere in your codebase
 
 ```javascript
 export function listenForEventMap() {
-  const value = document.getElementById("value");
+  const value = document.querySelector("#value");
 
   const cleanup = eventMap.listen("update", (message) => {
     value.textContent = message.data.value;
@@ -118,7 +122,7 @@ somewhere else in your codebase
 
 ```javascript
 export function dispatchEventMap() {
-  const button = document.getElementById("button");
+  const button = document.querySelector("#button");
 
   button.addEventListener("click", () => {
     eventMap.dispatch("update", {
@@ -150,7 +154,7 @@ somewhere in your codebase
 
 ```javascript
 export function listenForChannelMessage() {
-  const value = document.getElementById("value");
+  const value = document.querySelector("#value");
 
   const cleanup = channel.listen("update", (message) => {
     value.textContent = message.data.value;
@@ -164,7 +168,7 @@ somewhere else in your codebase
 
 ```javascript
 export function dispatchChannelMessage() {
-  const button = document.getElementById("button");
+  const button = document.querySelector("#button");
 
   button.addEventListener("click", () => {
     channel.dispatch("update", {
@@ -197,7 +201,7 @@ somewhere in your codebase
 
 ```javascript
 export function listenForBroadcastEvent() {
-  const value = document.getElementById("value");
+  const value = document.querySelector("#value");
 
   const cleanup = broadcastEvent.listen("update", (message) => {
     value.textContent = message.data.value;
@@ -211,7 +215,7 @@ somewhere else in your codebase
 
 ```javascript
 export function dispatchBroadcastEvent() {
-  const button = document.getElementById("button");
+  const button = document.querySelector("#button");
 
   button.addEventListener("click", () => {
     broadcastEvent.dispatch("update", {
@@ -243,7 +247,7 @@ somewhere in your codebase
 
 ```javascript
 export function listenForMessage() {
-  const value = document.getElementById("value");
+  const value = document.querySelector("#value");
 
   const cleanup = message.listen("update", (message) => {
     value.textContent = message.data.value;
@@ -257,7 +261,7 @@ somewhere else in your codebase
 
 ```javascript
 export function dispatchMessage() {
-  const button = document.getElementById("button");
+  const button = document.querySelector("#button");
 
   button.addEventListener("click", () => {
     message.dispatch("update", {

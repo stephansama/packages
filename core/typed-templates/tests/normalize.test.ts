@@ -1,3 +1,5 @@
+import type { StandardSchemaV1 } from "@standard-schema/spec";
+
 import { describe, expect, it } from "vitest";
 import * as z from "zod";
 
@@ -10,7 +12,9 @@ import { zodUserSchema } from "./fixtures/schemas/zod";
 
 describe("schema normalization (real libraries)", () => {
 	it("normalizes arktype schema", () => {
-		const normalized = normalize.standardSchema(arkUser as any);
+		const normalized = normalize.standardSchema(
+			arkUser as StandardSchemaV1,
+		);
 
 		expect(normalized).toMatchInlineSnapshot(
 			{},
@@ -24,7 +28,9 @@ describe("schema normalization (real libraries)", () => {
 	});
 
 	it("normalizes valibot schema", () => {
-		const normalized = normalize.standardSchema(valibotUser as any);
+		const normalized = normalize.standardSchema(
+			valibotUser as StandardSchemaV1,
+		);
 
 		expect(normalized).toEqual({
 			kind: "object",
@@ -101,8 +107,8 @@ describe("schema comparison", () => {
 		const handlebars = normalize.handlebarSchema(handlebarsUser);
 		const incompatibleZod = normalize.standardSchema(
 			z.object({
-				name: z.string(),
-				tags: z.array(z.string()),
+				name: z.string().trim(),
+				tags: z.array(z.string().trim()),
 			}),
 		);
 
@@ -113,6 +119,7 @@ describe("schema comparison", () => {
 		);
 
 		expect(errors.length).toBeGreaterThan(0);
+		// eslint-disable-next-line e18e/prefer-static-regex
 		expect(errors[0]).toMatch(/Missing key/);
 		expect(errors[0]).toContain("age");
 	});

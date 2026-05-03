@@ -3,6 +3,7 @@
 // remark-usage-ignore-next
 /* eslint perfectionist/sort-imports: ["off"] */
 // remark-usage-ignore-next
+// eslint-disable-next-line zod/consistent-import
 import * as z from "zod";
 
 // ### createEvent
@@ -23,7 +24,7 @@ export const customAnimationEvent = createEvent(
 
 // somewhere in your codebase
 export function listenForAnimationEvent() {
-	const item = document.getElementById("item");
+	const item = document.querySelector("#item");
 
 	const cleanup = customAnimationEvent.listen((event) => {
 		item.style.x = event.data.x;
@@ -35,15 +36,15 @@ export function listenForAnimationEvent() {
 
 // somewhere else in your codebase
 export function dispatchEvent() {
-	const x = document.getElementById("x");
-	const y = document.getElementById("y");
+	const x = document.querySelector("#x");
+	const y = document.querySelector("#y");
 
-	const button = document.getElementById("button");
+	const button = document.querySelector("#button");
 
 	button.addEventListener("click", () => {
 		customAnimationEvent.dispatch({
-			x: +x.innerText,
-			y: +y.innerText,
+			x: +x.textContent,
+			y: +y.textContent,
 		});
 	});
 }
@@ -62,7 +63,7 @@ export const eventMap = createEventMap("event-map", {
 
 // somewhere in your codebase
 export function listenForEventMap() {
-	const value = document.getElementById("value");
+	const value = document.querySelector("#value");
 
 	const cleanup = eventMap.listen("update", (message) => {
 		value.textContent = message.data.value;
@@ -73,7 +74,7 @@ export function listenForEventMap() {
 
 // somewhere else in your codebase
 export function dispatchEventMap() {
-	const button = document.getElementById("button");
+	const button = document.querySelector("#button");
 
 	button.addEventListener("click", () => {
 		eventMap.dispatch("update", {
@@ -98,7 +99,7 @@ export const channel = createBroadcastChannel("broadcaster", {
 
 // somewhere in your codebase
 export function listenForChannelMessage() {
-	const value = document.getElementById("value");
+	const value = document.querySelector("#value");
 
 	const cleanup = channel.listen("update", (message) => {
 		value.textContent = message.data.value;
@@ -109,7 +110,7 @@ export function listenForChannelMessage() {
 
 // somewhere else in your codebase
 export function dispatchChannelMessage() {
-	const button = document.getElementById("button");
+	const button = document.querySelector("#button");
 
 	button.addEventListener("click", () => {
 		channel.dispatch("update", {
@@ -135,7 +136,7 @@ export const broadcastEvent = createBroadcastEvent("broadcaster", {
 
 // somewhere in your codebase
 export function listenForBroadcastEvent() {
-	const value = document.getElementById("value");
+	const value = document.querySelector("#value");
 
 	const cleanup = broadcastEvent.listen("update", (message) => {
 		value.textContent = message.data.value;
@@ -146,7 +147,7 @@ export function listenForBroadcastEvent() {
 
 // somewhere else in your codebase
 export function dispatchBroadcastEvent() {
-	const button = document.getElementById("button");
+	const button = document.querySelector("#button");
 
 	button.addEventListener("click", () => {
 		broadcastEvent.dispatch("update", {
@@ -171,7 +172,7 @@ export const message = createMessage("event-map", {
 
 // somewhere in your codebase
 export function listenForMessage() {
-	const value = document.getElementById("value");
+	const value = document.querySelector("#value");
 
 	const cleanup = message.listen("update", (message) => {
 		value.textContent = message.data.value;
@@ -182,7 +183,7 @@ export function listenForMessage() {
 
 // somewhere else in your codebase
 export function dispatchMessage() {
-	const button = document.getElementById("button");
+	const button = document.querySelector("#button");
 
 	button.addEventListener("click", () => {
 		message.dispatch("update", {

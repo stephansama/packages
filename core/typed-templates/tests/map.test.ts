@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import * as z from "zod";
 
 import { createHandlebarSchemaMap } from "@/map";
-import { getFileContext } from "@/utils";
+import { getFileContext } from "@/utilities";
 
 const { templateDirectory } = getFileContext(import.meta.url);
 
@@ -12,8 +12,8 @@ const validSchema = createHandlebarSchemaMap(
 			path: "./fixtures/map/const-list.ts.hbs",
 			schema: z.object({
 				body: z.unknown(),
-				name: z.string(),
-				plural_name: z.string(),
+				name: z.string().trim(),
+				plural_name: z.string().trim(),
 			}),
 		},
 		constMap: {
@@ -21,12 +21,12 @@ const validSchema = createHandlebarSchemaMap(
 			schema: z.object({
 				items: z.array(
 					z.object({
-						key: z.string(),
+						key: z.string().trim(),
 						value: z.unknown(),
 					}),
 				),
-				map_type: z.string(),
-				name: z.string(),
+				map_type: z.string().trim(),
+				name: z.string().trim(),
 			}),
 		},
 	},
@@ -39,8 +39,8 @@ const invalidSchema = createHandlebarSchemaMap(
 			path: "./fixtures/map/const-list.ts.hbs",
 			schema: z.object({
 				body: z.unknown(),
-				name: z.string(),
-				plural_name: z.string(),
+				name: z.string().trim(),
+				plural_name: z.string().trim(),
 			}),
 		},
 		constMap: {
@@ -48,12 +48,12 @@ const invalidSchema = createHandlebarSchemaMap(
 			schema: z.object({
 				items: z.array(
 					z.object({
-						key: z.string(),
+						key: z.string().trim(),
 						value: z.unknown(),
 					}),
 				),
-				map_type: z.string(),
-				name: z.string(),
+				map_type: z.string().trim(),
+				name: z.string().trim(),
 			}),
 		},
 		invalid: {
@@ -65,13 +65,13 @@ const invalidSchema = createHandlebarSchemaMap(
 );
 
 describe("audit", () => {
-	it("it validates valid files", async () => {
+	it("validates valid files", async () => {
 		const result = await validSchema.audit();
 		expect(result).toBeTruthy();
 	});
 
-	it("it invalidates an invalid files", async () => {
-		expect(invalidSchema.audit()).rejects.toThrow(
+	it("invalidates an invalid files", async () => {
+		await expect(invalidSchema.audit()).rejects.toThrow(
 			"Missing key 'different'",
 		);
 	});
@@ -79,8 +79,8 @@ describe("audit", () => {
 
 describe("compile", () => {
 	it("prevents compiling bad input", async () => {
-		// @ts-expect-error
-		expect(validSchema.compile("constList", {})).rejects.toThrow();
+		// @ts-expect-error something with typescript
+		await expect(validSchema.compile("constList", {})).rejects.toThrow();
 	});
 
 	it("compiles with valid input", async () => {
@@ -90,6 +90,6 @@ describe("compile", () => {
 			plural_name: "Plural",
 		});
 
-		expect(output);
+		expect(output).toBeTruthy();
 	});
 });

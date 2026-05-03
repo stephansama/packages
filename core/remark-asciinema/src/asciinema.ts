@@ -1,10 +1,6 @@
 import { visit, type Visitor } from "unist-util-visit";
 
-import {
-	constructAsciinemaImage,
-	constructAsciinemaScript,
-	getURL,
-} from "./utils";
+import * as utilities from "./utilities";
 
 export type RemarkAsciinemaEmbedOption = "image" | "script";
 
@@ -12,13 +8,13 @@ export interface RemarkAsciinemaOptions {
 	embedType: RemarkAsciinemaEmbedOption;
 }
 
-export default function asciinema(
-	options: RemarkAsciinemaOptions = { embedType: "script" },
-) {
+export default function asciinema(inputOptions?: RemarkAsciinemaOptions) {
+	inputOptions ??= { embedType: "script" };
+	const embedType = inputOptions.embedType;
 	const transform =
-		options.embedType === "script"
-			? constructAsciinemaScript
-			: constructAsciinemaImage;
+		embedType === "script"
+			? utilities.constructAsciinemaScript
+			: utilities.constructAsciinemaImage;
 
 	return function transformer(tree: Parameters<typeof visit>[0]) {
 		visit(
@@ -29,7 +25,7 @@ export default function asciinema(
 				index: Parameters<Visitor>[1],
 				parent: Parameters<Visitor>[2],
 			) => {
-				const asciinemaURL = getURL(node?.url, (url) =>
+				const asciinemaURL = utilities.getURL(node?.url, (url) =>
 					url.host.includes("asciinema.org"),
 				);
 

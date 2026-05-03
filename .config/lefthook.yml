@@ -9,7 +9,7 @@ pre-commit:
   jobs:
     - run: auto-readme -vg
       name: Update README
-    - run: lint-staged -v
+    - run: nano-staged -c ./.nanostagedrc.mjs -v
       name: Lint staged
     - run: pnpm --filter=@stephansama/scripts lint-examples
       name: Lint examples

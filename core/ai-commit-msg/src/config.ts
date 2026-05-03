@@ -1,7 +1,7 @@
 import { cosmiconfig, getDefaultSearchPlaces, type Options } from "cosmiconfig";
 
 import { type Config, configSchema } from "./schema";
-import { moduleName } from "./util";
+import { moduleName } from "./utilities";
 
 const searchPlaces = getSearchPlaces();
 
@@ -12,9 +12,9 @@ const defaultConfig = {
 } satisfies Config;
 
 export async function loadConfig() {
-	const opts: Partial<Options> = { searchPlaces };
+	const options: Partial<Options> = { searchPlaces };
 
-	const explorer = cosmiconfig(moduleName, opts);
+	const explorer = cosmiconfig(moduleName, options);
 
 	const result = await explorer.search();
 

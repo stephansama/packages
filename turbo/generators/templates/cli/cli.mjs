@@ -1,10 +1,4 @@
 #!/usr/bin/env node
 
-"use strict";
-
-import("./dist/index.js")
-	.then((mod) => mod.run())
-	.catch((error) => {
-		console.error(error);
-		process.exit(1);
-	});
+const cli = await import("./dist/index.js");
+await cli.run();

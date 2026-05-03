@@ -1,0 +1,89 @@
+import { enable } from "obug";
+import yargs, { type Options } from "yargs";
+import { hideBin } from "yargs/helpers";
+import * as z from "zod";
+
+import { configSchema } from "./schema";
+
+export type Arguments = Awaited<ReturnType<typeof parseArguments>>;
+
+const complexOptions = [
+	"affectedRegexes",
+	"collapseHeadings",
+	"headings",
+	"templates",
+] as const;
+
+type ComplexOptions = (typeof complexOptions)[number];
+
+const arguments_ = {
+	...zodToYargs(),
+	changes: {
+		alias: "g",
+		default: false,
+		description: "Check only changed git files",
+		type: "boolean",
+	},
+	check: {
+		alias: "k",
+		default: false,
+		description: "Do not write to files. Only check for changes",
+		type: "boolean",
+	},
+	config: { alias: "c", description: "Path to config file", type: "string" },
+} satisfies Record<string, Options>;
+
+export async function parseArguments() {
+	const yargsInstance = yargs(hideBin(process.argv))
+		.options(arguments_)
+		.help("h")
+		.alias("h", "help")
+		.epilogue(`--> @stephansama open-source ${new Date().getFullYear()}`);
+
+	const parsed = await yargsInstance
+		.wrap(yargsInstance.terminalWidth())
+		.parse();
+
+	if (parsed.verbose) enable("autoreadme*");
+
+	return parsed;
+}
+
+function zodToYargs(): Omit<
+	Record<keyof typeof shape, Options>,
+	ComplexOptions
+> {
+	const { shape } = configSchema.unwrap();
+	const entries = Object.entries(shape).map(([key, value]) => {
+		if (complexOptions.includes(key as ComplexOptions)) return [];
+		// @ts-expect-error STE-71
+		if (value.def.innerType instanceof z.ZodObject) return [];
+		const meta = value.meta();
+		// @ts-expect-error STE-71
+		const { innerType } = value.def;
+		const isBoolean = innerType instanceof z.ZodBoolean;
+		const isNumber = innerType instanceof z.ZodNumber;
+		const isArray = innerType instanceof z.ZodArray;
+
+		const yargType: Options["type"] =
+			(isArray && "array") ||
+			(isNumber && "number") ||
+			(isBoolean && "boolean") ||
+			"string";
+
+		const options: Options = {
+			// @ts-expect-error STE-71
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+			default: value.def.defaultValue,
+			type: yargType,
+		};
+
+		if (meta?.alias) options.alias = meta.alias as string;
+		if (meta?.description) options.description = meta.description;
+
+		return [key, options];
+	});
+
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+	return Object.fromEntries(entries);
+}

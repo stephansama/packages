@@ -10,7 +10,7 @@ const mocks = vi.hoisted(() => ({
 
 vi.mock("@kba/makefile-parser", () => ({ default: mocks.parser }));
 vi.mock("node:fs/promises", () => ({ readFile: mocks.readFile }));
-vi.mock("node:path", () => ({ resolve: mocks.resolve }));
+vi.mock("node:path", () => ({ default: { resolve: mocks.resolve } }));
 
 beforeEach(() => {
 	process.argv = ["node", "cli.mjs", "Makefile"];

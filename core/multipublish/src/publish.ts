@@ -4,16 +4,16 @@ import { findRoot } from "@manypkg/find-root";
 import * as cp from "node:child_process";
 import * as fs from "node:fs";
 import * as fsp from "node:fs/promises";
-import * as path from "node:path";
+import path from "node:path";
 
 import type { Config } from "./schema";
 
-import { getArgs } from "./args";
+import { getArguments } from "./arguments";
 import { updatePackageJsonWithCatalog } from "./catalog";
 import { type AgentName, detectPackageManager } from "./detect";
 import * as jsr from "./jsr";
 import { jsrPlatformOptionsSchema, npmPlatformOptionsSchema } from "./schema";
-import * as util from "./util";
+import * as utilities from "./utilities";
 
 export const npmPublishCommand = {
 	bun: "bun publish",
@@ -38,18 +38,21 @@ export async function publishPlatform(
 	const isString = typeof platform === "string";
 	const key = isString ? platform : platform[0];
 	const rawConfig = isString ? {} : platform[1];
-	const args = await getArgs();
-	const isDryRun = !!args.dry;
+	const arguments_ = await getArguments();
+	const isDryRun = !!arguments_.dry;
 	const packageJsonPath = path.join(pkg.dir, "package.json");
 
-	switch (key) {
+	switch (key + "") {
 		case "jsr": {
 			const config = jsrPlatformOptionsSchema.parse(rawConfig);
 			const userJsr = await jsr.loadConfig(pkg.dir);
 
 			if (config.experimentalGenerateJSR) {
 				userJsr.config = jsr.transformer.parse(pkg.packageJson);
-				userJsr.filename = path.join(pkg.dir, util.JSR_CONFIG_FILENAME);
+				userJsr.filename = path.join(
+					pkg.dir,
+					utilities.JSR_CONFIG_FILENAME,
+				);
 			}
 
 			if (!userJsr.config) {
@@ -77,7 +80,7 @@ export async function publishPlatform(
 
 			const authToken = process.env[config.tokenEnvironmentKey];
 
-			await util.chdir(pkg.dir, () => {
+			await utilities.chdir(pkg.dir, () => {
 				cp.execSync(
 					[
 						jsrPublishCommand[packageManager],
@@ -92,9 +95,9 @@ export async function publishPlatform(
 				);
 			});
 
-			util.gitClean(userJsr.filename);
+			utilities.gitClean(userJsr.filename);
 			if (config.experimentalUpdateCatalogs) {
-				util.gitClean(packageJsonPath);
+				utilities.gitClean(packageJsonPath);
 			}
 
 			break;
@@ -131,7 +134,7 @@ export async function publishPlatform(
 					const npmrcFile =
 						npmrcPrefix +
 						"\n" +
-						util.npmrcTemplate({
+						utilities.npmrcTemplate({
 							authToken,
 							registry: config.registry,
 							registryDomain: new URL(config.registry).host,
@@ -150,24 +153,27 @@ export async function publishPlatform(
 				}
 			}
 
-			await util.chdir(pkg.dir, () => {
+			await utilities.chdir(pkg.dir, () => {
 				cp.execSync(
 					[
 						npmPublishCommand[packageManager],
 						packageManager === "pnpm" && "--no-git-checks",
 						isDryRun && "--dry-run",
 					]
-						.filter((x) => x)
+						.filter(Boolean)
 						.join(" "),
 					{ stdio: "inherit" },
 				);
 			});
 
-			util.gitClean(packageJsonPath);
-			if (config.strategy === ".npmrc") util.gitClean(npmrcPath);
+			utilities.gitClean(packageJsonPath);
+			if (config.strategy === ".npmrc") utilities.gitClean(npmrcPath);
 			break;
 		}
-		default:
-			throw new Error(`no implementation found for ${key}`);
+		default: {
+			throw new Error(
+				`no implementation found for ${key || "default key"}`,
+			);
+		}
 	}
 }

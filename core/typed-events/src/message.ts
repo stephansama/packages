@@ -6,11 +6,11 @@ export interface TypedMessage<
 	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,
 > extends ValidatorMap<
-		Name,
-		Map,
-		"message",
-		{ origin: string; window: Window }
-	> {
+	Name,
+	Map,
+	"message",
+	{ origin: string; window: Window }
+> {
 	window: Window;
 }
 
@@ -24,7 +24,7 @@ export function createMessage<
 	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,
 >(name: Name, map: Map) {
-	let _window: null | Window = null;
+	let _window: undefined | Window;
 	const getWindow = () => (_window ??= window);
 	const _scopeName = (input: string) => [name, input].join(":");
 
@@ -48,20 +48,25 @@ export function createMessage<
 		dispatch(
 			name,
 			input,
-			opts = { origin: getWindow().origin, window: getWindow() },
+			// eslint-disable-next-line unicorn/no-object-as-default-parameter
+			options = {
+				origin: getWindow().origin,
+				window: getWindow(),
+			},
 		) {
 			_validate(name, input, () => {
 				const id = _scopeName(name);
 				const data = { ...input, id };
 
-				opts.window.postMessage(data, opts.origin);
+				options.window.postMessage(data, options.origin);
 			});
 		},
 		listen(name, callback) {
-			const listener = (raw: MessageEvent) => {
+			const listener = (raw: MessageEvent<{ id: string }>) => {
 				const { data } = raw;
 				if (data.id !== _scopeName(name)) return;
 				_validate(name, data, () => {
+					// @ts-expect-error slightly mistyped
 					callback({ data, raw, type: "message" });
 				});
 			};

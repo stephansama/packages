@@ -17,21 +17,26 @@
     "email": "stephanrandle.dev@gmail.com",
     "url": "https://stephansama.info"
   },
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
-    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern"
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "devDependencies": {
     "prettier": "catalog:prettier",
@@ -41,5 +46,11 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "inlinedDependencies": {
+    "prettier": "3.8.1"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }

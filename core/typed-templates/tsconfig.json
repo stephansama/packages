@@ -1,10 +1,10 @@
 {
-	"extends": "../../tsconfig.base.json",
-	"include": ["src", "types", "tests"],
-	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["./src/*"]
-		}
-	}
+  "extends": "../../tsconfig.json",
+  "include": ["src", "types", "tests"],
+  "compilerOptions": {
+    "types": ["node"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
 }

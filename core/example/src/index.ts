@@ -2,9 +2,9 @@ import type { Package } from "@manypkg/get-packages";
 
 import { downloadTemplate } from "@bluwy/giget-core";
 import * as clack from "@clack/prompts";
-import * as path from "node:path";
+import path from "node:path";
 
-import rootPkgJson from "../../../package.json";
+import rootPackageJson from "../../../package.json";
 import fallbackExamples from "../../../scripts/dist/examples";
 
 type RelativePackageJSON = Package["packageJson"] & {
@@ -13,15 +13,15 @@ type RelativePackageJSON = Package["packageJson"] & {
 };
 
 export async function fetchExamples() {
-	const url = new URL("meta.json", rootPkgJson.homepage).href;
+	const url = new URL("meta.json", rootPackageJson.homepage).href;
 	try {
-		const res = await fetch(url);
-		const json = await res.json();
-		const examples = (json as RelativePackageJSON[]).filter(({ name }) =>
-			name.startsWith("@example"),
-		);
+		const response = await fetch(url);
+		const json = await response.json();
+		const examples = (json as RelativePackageJSON[]).filter(({ name }) => {
+			return name.startsWith("@example");
+		});
 
-		if (!examples.length) {
+		if (examples.length === 0) {
 			throw new Error("no examples found from remote");
 		}
 
@@ -48,21 +48,21 @@ export async function main() {
 
 	if (clack.isCancel(example)) return cancel();
 
-	const exampleData = examples.find((e) => e.name === example);
+	const exampleData = examples.find((current) => current.name === example);
 
 	if (!exampleData) throw new Error("unable to find example data");
 
-	const [, ...relativeDir] = exampleData.relativeDir.split("/");
+	const [, ...relativeDirectory] = exampleData.relativeDir.split("/");
 
-	const defaultDir = "./" + relativeDir.join("-");
+	const defaultDirectory = "./" + relativeDirectory.join("-");
 
-	const dir = await clack.text({
-		defaultValue: defaultDir,
+	const directory = await clack.text({
+		defaultValue: defaultDirectory,
 		message: "Input the directory to clone to:",
-		placeholder: defaultDir,
+		placeholder: defaultDirectory,
 	});
 
-	if (clack.isCancel(dir)) return cancel();
+	if (clack.isCancel(directory)) return cancel();
 
 	const spinner = clack.spinner();
 	spinner.start("Downloading template");
@@ -71,17 +71,16 @@ export async function main() {
 		`github:stephansama/packages/${exampleData.relativeDir}`,
 		{
 			cwd: path.resolve(),
-			dir,
+			dir: directory,
 			force: true,
 		},
-	).catch((e) => console.error(e));
+	).catch((error) => console.error(error));
 
 	spinner.stop("Downloaded example");
 
-	clack.outro(`successfully downloaded example template to ${dir}`);
+	clack.outro(`successfully downloaded example template to ${directory}`);
 }
 
 function cancel() {
 	clack.cancel("Operation canceled");
-	process.exit(0);
 }

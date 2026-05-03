@@ -1,76 +1,82 @@
 {
-	"name": "@stephansama/typed-events",
-	"version": "3.0.6",
-	"description": "Typed events store using standard schema",
-	"keywords": [
-		"typed-events",
-		"standard-schema",
-		"validation",
-		"events",
-		"strict"
-	],
-	"homepage": "https://packages.stephansama.info/api/@stephansama/typed-events",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/stephansama/packages.git",
-		"directory": "core/typed-events"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Stephan Randle",
-		"email": "stephanrandle.dev@gmail.com",
-		"url": "https://stephansama.info"
-	},
-	"sideEffects": false,
-	"type": "module",
-	"exports": {
-		".": {
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs"
-		},
-		"./errors": {
-			"import": "./dist/errors.js",
-			"require": "./dist/errors.cjs"
-		},
-		"./react": {
-			"import": "./dist/react.js",
-			"require": "./dist/react.cjs"
-		},
-		"./package.json": "./package.json"
-	},
-	"main": "./dist/index.cjs",
-	"module": "./dist/index.js",
-	"types": "./dist/index.d.cts",
-	"files": [
-		"./dist/"
-	],
-	"scripts": {
-		"build": "tsdown",
-		"dev": "tsdown --watch",
-		"lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern"
-	},
-	"dependencies": {
-		"@standard-schema/spec": "catalog:schema"
-	},
-	"devDependencies": {
-		"@testing-library/jest-dom": "catalog:",
-		"@testing-library/react": "catalog:",
-		"@types/react": "catalog:",
-		"happy-dom": "catalog:",
-		"react": "catalog:",
-		"tsdown": "catalog:",
-		"vite-tsconfig-paths": "catalog:",
-		"zod": "catalog:schema"
-	},
-	"peerDependencies": {
-		"react": ">=18"
-	},
-	"optionalDependencies": {
-		"react": ">=19.0.4"
-	},
-	"packageManager": "pnpm@10.29.3",
-	"publishConfig": {
-		"access": "public",
-		"provenance": true
-	}
+  "name": "@stephansama/typed-events",
+  "version": "3.0.6",
+  "description": "Typed events store using standard schema",
+  "keywords": [
+    "typed-events",
+    "standard-schema",
+    "validation",
+    "events",
+    "strict"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/typed-events",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/typed-events"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./errors": {
+      "import": "./dist/errors.mjs",
+      "require": "./dist/errors.cjs"
+    },
+    "./react": {
+      "import": "./dist/react.mjs",
+      "require": "./dist/react.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "files": [
+    "./dist/"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
+  },
+  "dependencies": {
+    "@standard-schema/spec": "catalog:schema"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "catalog:",
+    "@testing-library/react": "catalog:",
+    "@types/react": "catalog:",
+    "happy-dom": "catalog:",
+    "react": "catalog:",
+    "tsdown": "catalog:",
+    "vite-tsconfig-paths": "catalog:",
+    "zod": "catalog:schema"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "packageManager": "pnpm@10.29.3",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=24"
+  }
 }

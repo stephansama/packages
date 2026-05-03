@@ -59,7 +59,8 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				const body =
 					`${heading}\n` +
 					Object.entries(inputs)
-						.sort((a) => (a[1].required ? -1 : 1))
+						// eslint-disable-next-line baseline-js/use-baseline
+						.toSorted((a) => (a[1].required ? -1 : 1))
 						.map(([key, value]) => {
 							return `- ${wrapRequired(value.required, key)}: (default: ${value.default})\n\n${value.description}`;
 						})
@@ -98,7 +99,8 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			const headings =
 				(config.headings?.WORKSPACE?.length &&
 					config.headings?.WORKSPACE) ||
-				defaultTableHeadings.WORKSPACE!;
+				defaultTableHeadings.WORKSPACE! ||
+				[];
 
 			if (comment && comment.format === "LIST") {
 				// throw new Error("List is currently not su")
@@ -111,7 +113,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			);
 
 			const table = markdownTable([
-				tableHeadings,
+				tableHeadings || [],
 				...packages
 					.filter((pkg) =>
 						config.onlyShowPublicPackages
@@ -120,7 +122,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 					)
 					.map((pkg) => {
 						const { name } = pkg.packageJson;
-						return headings.map((heading) => {
+						return headings?.map((heading) => {
 							if (heading === "name") {
 								const scoped = config.removeScope
 									? name.replace(config.removeScope, "")
@@ -170,15 +172,15 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				return [start, ast, end];
 			}
 
-			function mapDependencies(isDev: boolean) {
+			function mapDependencies(isDevelopment: boolean) {
 				return function ([name, version]: [string, string]) {
 					const url = templates.registryUrl({ name });
 					return headings.map((key) => {
 						if (key === "devDependency") {
 							if (config.disableEmojis) {
-								return `\`${isDev}\``;
+								return `\`${isDevelopment}\``;
 							}
-							return `${isDev ? "⌨️" : "👥"}`;
+							return `${isDevelopment ? "⌨️" : "👥"}`;
 						}
 						if (key === "name") {
 							return `[${name}](${url})`;
@@ -227,6 +229,7 @@ function loadTemplates(
 > {
 	if (!templates) throw new Error("failed to load templates");
 
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 	return Object.fromEntries(
 		Object.entries(templates).map(([key, value]) => {
 			if (typeof value !== "string") return [];

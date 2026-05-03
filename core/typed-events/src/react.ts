@@ -15,6 +15,7 @@ export function useListener<
 	Schema extends StandardSchemaV1 = Input extends Validator<
 		Name,
 		infer S extends StandardSchemaV1,
+		/* eslint-disable @typescript-eslint/no-explicit-any */
 		any
 	>
 		? S
@@ -34,16 +35,14 @@ export function useListener<
 }
 
 /**
- * @param map - typed validated event map
- * @param listeners - map of listeners to add
+ * @param map - Typed validated event map
+ * @param listeners - Map of listeners to add
  */
 export function useListeners<
 	Name extends string,
 	Map extends ValidatorMap<Name, EventMap, EventTypeKeys>,
-	EventMap extends Record<
-		string,
-		StandardSchemaV1
-	> = Map extends ValidatorMap<Name, infer EM, any, any> ? EM : never,
+	EventMap extends Record<string, StandardSchemaV1> =
+		Map extends ValidatorMap<Name, infer EM, any, any> ? EM : never,
 	EventTypeKeys extends keyof RawEventMap = Map extends ValidatorMap<
 		Name,
 		EventMap,
@@ -62,12 +61,19 @@ export function useListeners<
 	},
 ) {
 	React.useEffect(() => {
-		const cleanups = Object.entries(listeners).map(([event, callback]) => {
+		const cleanups = Object.entries<
+			(typeof listeners)[keyof typeof listeners]
+		>(listeners).map(([event, callback]) => {
+			if (!callback) return;
 			return map.listen(event, callback);
 		});
 
 		return () => {
-			for (const cleanup of cleanups) cleanup();
+			for (const cleanup of cleanups) {
+				if (cleanup) {
+					cleanup();
+				}
+			}
 		};
 	}, [map, listeners]);
 }

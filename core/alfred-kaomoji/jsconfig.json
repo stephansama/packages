@@ -1,9 +1,8 @@
 {
-	"compilerOptions": {
-		"baseUrl": ".",
-		"allowJs": true,
-		"skipLibCheck": true
-	},
-	"include": ["./src/*.js"],
-	"exclude": ["node_modules"]
+  "compilerOptions": {
+    "allowJs": true,
+    "skipLibCheck": true
+  },
+  "include": ["./src/*.js"],
+  "exclude": ["node_modules"]
 }

@@ -2,18 +2,15 @@
 
 import { getPackages } from "@manypkg/get-packages";
 import * as fs from "node:fs";
-import * as path from "node:path";
+import path from "node:path";
 import * as url from "node:url";
 
-/**
- * @param {Object} param0
- * @param {boolean} [param0.writeToFile=true] Default is `true`
- */
 export async function generate({ writeToFile = true } = {}) {
 	const { packages } = await getPackages(process.cwd());
-	const outputDir = path.join(path.dirname(import.meta.filename), "../dist");
+	const dirname = path.dirname(import.meta.filename);
+	const outputDirectory = path.join(dirname, "../dist");
 
-	fs.mkdirSync(outputDir, { recursive: true });
+	fs.mkdirSync(outputDirectory, { recursive: true });
 
 	const examples = packages
 		.filter((pkg) => {
@@ -45,7 +42,7 @@ export async function generate({ writeToFile = true } = {}) {
 
 	if (writeToFile) {
 		fs.writeFileSync(
-			path.join(outputDir, "examples.js"),
+			path.join(outputDirectory, "examples.js"),
 			`export default ${JSON.stringify(examples, undefined, 2)}`,
 		);
 	}
@@ -53,4 +50,6 @@ export async function generate({ writeToFile = true } = {}) {
 	return examples;
 }
 
-if (url.fileURLToPath(import.meta.url) === process.argv[1]) generate();
+if (url.fileURLToPath(import.meta.url) === process.argv[1]) {
+	await generate();
+}

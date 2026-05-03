@@ -6,15 +6,22 @@ vi.mock("node:fs", async (importOriginal) => {
 	const actual = await importOriginal<typeof import("node:fs")>();
 	return {
 		...actual,
-		readFileSync: vi.fn((path, options) => {
-			if (
-				typeof path === "string" &&
-				path.includes("dist-css/site.css")
-			) {
-				return "/* mock css */";
-			}
-			return actual.readFileSync(path, options);
-		}),
+		readFileSync: vi.fn(
+			(
+				path: string,
+				options: Parameters<
+					(typeof import("node:fs"))["readFileSync"]
+				>[1],
+			) => {
+				if (
+					typeof path === "string" &&
+					path.includes("dist-css/site.css")
+				) {
+					return "/* mock css */";
+				}
+				return actual.readFileSync(path, options);
+			},
+		),
 	};
 });
 

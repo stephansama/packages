@@ -5,7 +5,7 @@ import { openai } from "@ai-sdk/openai";
 import { err, ok, Result } from "neverthrow";
 import { ollama } from "ollama-ai-provider-v2";
 
-import { envSchema, type Provider } from "./schema";
+import { environmentSchema, type Provider } from "./schema";
 
 const providerMap: Record<Provider, (model: string) => LanguageModel> = {
 	google: google,
@@ -17,7 +17,7 @@ export function getProvider(
 	provider: Provider,
 	model: string,
 ): Result<LanguageModel, Error> {
-	const result = envSchema[provider].safeParse(process.env);
+	const result = environmentSchema[provider].safeParse(process.env);
 
 	if (result.error) return err(new Error(result.error.message));
 

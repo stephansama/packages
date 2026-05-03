@@ -1,11 +1,10 @@
 {
-	"extends": ["../../tsconfig.base.json"],
-	"include": ["src", "templates"],
-	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["./src/*"],
-			"@templates/*": ["./templates/*"]
-		}
-	}
+  "extends": ["../../tsconfig.json"],
+  "include": ["src", "templates"],
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "@templates/*": ["./templates/*"]
+    }
+  }
 }

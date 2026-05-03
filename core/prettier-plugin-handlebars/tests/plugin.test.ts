@@ -6,7 +6,7 @@ import { expect, it } from "vitest";
 import plugin from "../src/index";
 
 const tests = await fs.readdir(
-	url.fileURLToPath(new URL("./fixtures/", import.meta.url)),
+	url.fileURLToPath(new URL("fixtures/", import.meta.url)),
 );
 
 const cases = await Promise.all(
@@ -15,7 +15,7 @@ const cases = await Promise.all(
 			(filename) =>
 				url.fileURLToPath(
 					new URL(
-						`./fixtures/${extension}/${filename}.${extension}.hbs`,
+						`fixtures/${extension}/${filename}.${extension}.hbs`,
 						import.meta.url,
 					),
 				),
@@ -40,7 +40,7 @@ it.each(cases)(
 	async ({ filepath, input, output }) => {
 		const formatted = await prettier.format(input, {
 			filepath,
-			plugins: [new URL("../dist/index.js", import.meta.url).href],
+			plugins: [new URL("../dist/index.mjs", import.meta.url).href],
 		});
 
 		expect(formatted).not.toEqual(input);

@@ -1,5 +1,5 @@
 import { merge } from "es-toolkit/compat";
-import * as path from "node:path";
+import path from "node:path";
 import { describe, expect, it, vi } from "vitest";
 
 import * as catalog from "./catalog";
@@ -10,13 +10,13 @@ const mocks = vi.hoisted(() => ({
 }));
 
 vi.mock("./catalog", async (importOriginal) => {
-	const mod = await importOriginal<typeof import("./catalog")>();
-	return { ...mod, catalogLoadMap: mocks.catalogLoadMap };
+	const module_ = await importOriginal<typeof import("./catalog")>();
+	return { ...module_, catalogLoadMap: mocks.catalogLoadMap };
 });
 
 vi.mock("node:fs/promises", async (importOriginal) => {
-	const mod = await importOriginal<typeof import("node:fs/promises")>();
-	return { ...mod, writeFile: mocks.writeFile };
+	const module_ = await importOriginal<typeof import("node:fs/promises")>();
+	return { ...module_, writeFile: mocks.writeFile };
 });
 
 describe("catalog", () => {

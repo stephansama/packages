@@ -1,34 +1,31 @@
-#!/usr/bin/env node
-
 import dotenvx from "@dotenvx/dotenvx";
 import { generateText } from "ai";
 import * as cp from "node:child_process";
 import * as fsp from "node:fs/promises";
 
 import { getProvider } from "./ai";
-import { parseArgs } from "./args";
+import { parseArguments } from "./arguments";
 import { loadConfig } from "./config";
 import { defaultPrompt } from "./schema";
 
 export async function run() {
 	dotenvx.config();
 
-	const args = await parseArgs();
+	const parsed = await parseArguments();
 
-	if (!args.output) args.output = getCommitEditMsgFile();
+	if (!parsed.output) parsed.output = getCommitEditMessageFile();
 
 	const config = await loadConfig();
 
 	if (config.skipNextRun) {
 		console.warn("skipNextRun flag supplied skipping current run");
-		return process.exit(0);
+		return;
 	}
 
 	const providerResult = getProvider(config.provider, config.model);
 
 	if (providerResult.isErr()) {
-		console.error(providerResult.error.message);
-		return process.exit(1);
+		throw new Error(providerResult.error.message);
 	}
 
 	const model = providerResult.value;
@@ -44,10 +41,10 @@ export async function run() {
 		prompt: prompt.replace("{{diff}}", diff),
 	});
 
-	await fsp.writeFile(args.output, text);
+	await fsp.writeFile(parsed.output, text);
 }
 
-function getCommitEditMsgFile() {
+function getCommitEditMessageFile() {
 	const output = cp.execSync(`git rev-parse --git-path COMMIT_EDITMSG`, {
 		encoding: "utf8",
 	});
@@ -64,5 +61,5 @@ function getDiff() {
 		encoding: "utf8",
 	});
 
-	if (output) return output.substring(0, 8000).trim();
+	if (output) return output.slice(0, 8000).trim();
 }

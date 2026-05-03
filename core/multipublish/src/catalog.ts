@@ -1,7 +1,7 @@
 import { findRoot } from "@manypkg/find-root";
 import { getPackages, type Package } from "@manypkg/get-packages";
 import * as fsp from "node:fs/promises";
-import * as path from "node:path";
+import path from "node:path";
 import * as yaml from "yaml";
 import * as z from "zod";
 
@@ -9,8 +9,10 @@ import type { AgentName } from "./detect";
 
 export type CatalogSchema = z.infer<typeof catalogSchema>;
 export const catalogSchema = z.object({
-	catalog: z.record(z.string(), z.string()).optional(),
-	catalogs: z.record(z.string(), z.record(z.string(), z.string())).optional(),
+	catalog: z.record(z.string(), z.string().trim()).optional(),
+	catalogs: z
+		.record(z.string(), z.record(z.string(), z.string().trim()))
+		.optional(),
 });
 
 export type ValidCatalogAgent = Extract<AgentName, "bun" | "pnpm">;
@@ -31,7 +33,7 @@ export async function loadPnpmCatalogs() {
 	const { rootDir } = await findRoot(process.cwd());
 	const workspacePath = path.join(rootDir, "pnpm-workspace.yaml");
 	const workspaceFile = await fsp.readFile(workspacePath, {
-		encoding: "utf-8",
+		encoding: "utf8",
 	});
 	const catalogs = catalogSchema.parse(yaml.parse(workspaceFile));
 	return catalogs;
@@ -47,7 +49,7 @@ export function loadVersion({
 	version: string;
 }) {
 	if (!version.includes("catalog:")) return version;
-	const [_, catalogName] = version.split("catalog:");
+	const catalogName = version.split("catalog:").at(1);
 	const currentCatalog = catalogName
 		? catalogs.catalogs?.[catalogName]
 		: catalogs.catalog;

@@ -8,7 +8,7 @@ const mocks = vi.hoisted(() => ({
 	execSync: vi.fn(),
 	existsSync: vi.fn(),
 	findRoot: vi.fn(),
-	getArgs: vi.fn(),
+	getArguments: vi.fn(),
 	loadConfig: vi.fn(),
 	readFile: vi.fn(),
 	writeFile: vi.fn(),
@@ -19,9 +19,9 @@ vi.mock("@manypkg/find-root", () => ({
 }));
 
 vi.mock("node:fs", async (importOriginal) => {
-	const mod = await importOriginal<typeof import("node:fs")>();
+	const original = await importOriginal<typeof import("node:fs")>();
 	return {
-		...mod,
+		...original,
 		existsSync: mocks.existsSync,
 	};
 });
@@ -32,35 +32,36 @@ vi.mock("node:child_process", () => ({
 }));
 
 vi.mock("node:fs/promises", async (importOriginal) => {
-	const mod = await importOriginal<typeof import("node:fs/promises")>();
+	const module_ = await importOriginal<typeof import("node:fs/promises")>();
 	return {
-		...mod,
+		...module_,
 		readFile: mocks.readFile,
 		writeFile: mocks.writeFile,
 	};
 });
 
-vi.mock("./args", () => ({ getArgs: mocks.getArgs }));
+vi.mock("./arguments", () => ({ getArguments: mocks.getArguments }));
 
 vi.mock("./detect", () => ({
 	detectPackageManager: mocks.detectPackageManager,
 }));
 
-vi.mock("./util", async (importOriginal) => {
-	const mod = await importOriginal<typeof import("./util")>();
+vi.mock("./utilities", async (importOriginal) => {
 	return {
-		...mod,
-		chdir: vi.fn(async (_dir, cb) => {
-			await cb();
-		}),
+		...(await importOriginal<typeof import("./utilities")>()),
+		chdir: vi.fn(
+			async (_directory: string, callback: () => Promise<void>) => {
+				await callback();
+			},
+		),
 		gitClean: vi.fn(),
 	};
 });
 
 vi.mock("./jsr", async (importOriginal) => {
-	const mod = await importOriginal<typeof import("./jsr")>();
+	const module_ = await importOriginal<typeof import("./jsr")>();
 	return {
-		...mod,
+		...module_,
 		loadConfig: mocks.loadConfig,
 		updateIncludeExcludeList: vi.fn(),
 	};
@@ -68,7 +69,7 @@ vi.mock("./jsr", async (importOriginal) => {
 
 describe("publish", () => {
 	beforeEach(() => {
-		mocks.getArgs.mockResolvedValue({ dry: false });
+		mocks.getArguments.mockResolvedValue({ dry: false });
 		mocks.detectPackageManager.mockResolvedValue("pnpm");
 		mocks.findRoot.mockResolvedValue({ rootDir: "/fake/root" });
 	});

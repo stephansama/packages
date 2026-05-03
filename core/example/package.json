@@ -17,6 +17,7 @@
     "email": "stephanrandle.dev@gmail.com",
     "url": "https://stephansama.info"
   },
+  "sideEffects": true,
   "type": "module",
   "exports": {
     ".": "./dist/index.cjs",
@@ -26,8 +27,7 @@
   "types": "./dist/index.d.cts",
   "bin": "./cli.mjs",
   "files": [
-    "./dist",
-    "./cli.mjs"
+    "./dist"
   ],
   "scripts": {
     "prebuild": "pnpm run generate",
@@ -36,19 +36,22 @@
     "dev": "tsdown --watch",
     "generate": "pnpm --filter=scripts run generate-examples",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix",
     "typedoc": "pnpm run generate"
   },
   "dependencies": {
-    "@bluwy/giget-core": "^0.1.6",
-    "@clack/prompts": "^0.11.0"
+    "@bluwy/giget-core": "catalog:",
+    "@clack/prompts": "catalog:"
   },
   "devDependencies": {
     "tsdown": "catalog:",
     "undici": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",
+  "engines": {
+    "node": ">=24"
+  },
   "publishConfig": {
-    "access": "public",
     "provenance": true
   }
 }

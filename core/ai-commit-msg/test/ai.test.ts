@@ -18,16 +18,16 @@ vi.mock("ollama-ai-provider-v2", () => ({
 }));
 
 describe("ai", () => {
-	const originalEnv = process.env;
+	const originalEnvironment = process.env;
 
 	afterEach(() => {
-		process.env = originalEnv;
+		process.env = originalEnvironment;
 		vi.clearAllMocks();
 	});
 
 	it("should return google provider when env is valid", () => {
 		process.env = {
-			...originalEnv,
+			...originalEnvironment,
 			GOOGLE_GENERATIVE_AI_API_KEY: "test-key",
 		};
 		const result = getProvider("google", "gemini-pro");
@@ -36,7 +36,7 @@ describe("ai", () => {
 	});
 
 	it("should fail google provider when env is missing", () => {
-		process.env = { ...originalEnv };
+		process.env = { ...originalEnvironment };
 		delete process.env.GOOGLE_GENERATIVE_AI_API_KEY;
 
 		const result = getProvider("google", "gemini-pro");
@@ -44,14 +44,14 @@ describe("ai", () => {
 	});
 
 	it("should return openai provider when env is valid", () => {
-		process.env = { ...originalEnv, OPENAI_API_KEY: "test-key" };
+		process.env = { ...originalEnvironment, OPENAI_API_KEY: "test-key" };
 		const result = getProvider("openai", "gpt-4");
 		expect(result.isOk()).toBe(true);
 		expect(openai).toHaveBeenCalledWith("gpt-4");
 	});
 
 	it("should fail openai provider when env is missing", () => {
-		process.env = { ...originalEnv };
+		process.env = { ...originalEnvironment };
 		delete process.env.OPENAI_API_KEY;
 
 		const result = getProvider("openai", "gpt-4");
@@ -59,7 +59,7 @@ describe("ai", () => {
 	});
 
 	it("should return ollama provider (no env required by schema)", () => {
-		process.env = { ...originalEnv };
+		process.env = { ...originalEnvironment };
 		const result = getProvider("ollama", "llama2");
 		expect(result.isOk()).toBe(true);
 		expect(ollama).toHaveBeenCalledWith("llama2");

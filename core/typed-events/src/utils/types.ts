@@ -1,7 +1,5 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
-export type { StandardSchemaV1 };
-
 export type { TypedBroadcastChannel } from "@/broadcast";
 export type { TypedBroadcastEvent } from "@/broadcast-event";
 export type { TypedEvent } from "@/event";
@@ -11,7 +9,7 @@ export type ListenerCallback<Input, Keys extends keyof RawEventMap> = (
 	payload: AnyPayload<Input, Keys>,
 ) => void;
 
-export type RawEventMap<Shape = any> = {
+export type RawEventMap<Shape = unknown> = {
 	event: CustomEvent<Shape>;
 	message: MessageEvent<Shape>;
 };
@@ -24,10 +22,10 @@ export interface Validator<
 	Name extends string,
 	Schema extends StandardSchemaV1,
 	EventTypeKeys extends keyof RawEventMap,
-	DispatchOpts = {},
+	DispatchOptions = {},
 	Input = object & StandardSchemaV1.InferInput<Schema>,
 > {
-	dispatch(input: Input, opts?: DispatchOpts): void;
+	dispatch(input: Input, options?: DispatchOptions): void;
 	listen(callback: ListenerCallback<Input, EventTypeKeys>): () => void;
 
 	name: Name;
@@ -38,7 +36,7 @@ export interface ValidatorMap<
 	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,
 	EventTypeKeys extends keyof RawEventMap,
-	DispatchOpts = {},
+	DispatchOptions = {},
 > {
 	dispatch<
 		Event extends keyof Map & string,
@@ -46,7 +44,7 @@ export interface ValidatorMap<
 	>(
 		name: Event,
 		input: Input,
-		opts?: DispatchOpts,
+		options?: DispatchOptions,
 	): void;
 
 	listen<
@@ -75,3 +73,5 @@ type RawEvent<
 	Type extends keyof RawEventMap<Shape>,
 	Shape,
 > = RawEventMap<Shape>[Type];
+
+export { type StandardSchemaV1 } from "@standard-schema/spec";

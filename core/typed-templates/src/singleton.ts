@@ -3,25 +3,23 @@ import type { StandardSchemaV1 } from "@standard-schema/spec";
 import barhandles from "barhandles";
 import Handlebars from "handlebars";
 import * as fsp from "node:fs/promises";
-import * as path from "node:path";
+import path from "node:path";
 
 import * as normalize from "./normalize";
-import { validate } from "./utils";
+import { validate } from "./utilities";
 
 export function createHandlebarSchemaSingleton<
 	const Files extends readonly string[],
 	Schema extends StandardSchemaV1,
 	File = Files[number],
->(
-	files: Files,
-	schema: Schema,
-	opts: { templateDirectory: string } = { templateDirectory: "./templates" },
-) {
+>(files: Files, schema: Schema, options?: { templateDirectory: string }) {
+	options ??= { templateDirectory: "./templates" };
+
 	return {
 		async audit() {
 			for (const filename of files) {
 				const file = await fsp.readFile(
-					path.join(opts.templateDirectory, filename),
+					path.join(options.templateDirectory, filename),
 					"utf8",
 				);
 
@@ -29,10 +27,10 @@ export function createHandlebarSchemaSingleton<
 
 				const errors = normalize.compareSchemas(
 					normalize.handlebarSchema(handlebarSchema),
-					normalize.standardSchema(schema)!,
+					normalize.standardSchema(schema),
 				);
 
-				if (errors.length) {
+				if (errors.length > 0) {
 					throw new Error(
 						`found the following errors comparing the schemas:\n\n${errors.join("\n")}\n\n`,
 					);
@@ -47,7 +45,7 @@ export function createHandlebarSchemaSingleton<
 			template: File & string,
 			data: StandardSchemaV1.InferInput<Schema>,
 		) {
-			const filename = path.resolve(opts.templateDirectory, template);
+			const filename = path.resolve(options.templateDirectory, template);
 			const file = await fsp.readFile(filename, "utf8");
 			const compiled = Handlebars.compile(file);
 

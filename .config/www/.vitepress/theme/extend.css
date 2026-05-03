@@ -15,8 +15,7 @@ html.dark {
 	);
 }
 
-.VPImage[src="https://www.github.com/stephansama.png"]
-{
+.VPImage[src="https://www.github.com/stephansama.png"] {
 	filter: drop-shadow(-2px 4px 6px #0003);
 	border-radius: 99999px;
 	padding: 20px;

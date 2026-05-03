@@ -1,14 +1,14 @@
 import { getPackages } from "@manypkg/get-packages";
 import * as fs from "node:fs";
 import * as fsp from "node:fs/promises";
-import * as path from "node:path";
+import path from "node:path";
 import { readPackageJSON } from "pkg-types";
 import * as yaml from "yaml";
 import { zod2md } from "zod2md";
 
 import type { AstComments } from "./comment";
 
-import { fileExists } from "./utils";
+import { fileExists } from "./utilities";
 
 export type ActionData = Awaited<ReturnType<typeof loadActionData>>;
 
@@ -25,8 +25,8 @@ export function createFindParameter(parameterList: string[]) {
 		return parameterList
 			?.find((p) => p.startsWith(parameterName))
 			?.replace(parameterName + "=", "")
-			?.replace(/"/gi, "")
-			?.replace(/_/gi, " ");
+			?.replaceAll('"', "")
+			?.replaceAll("_", " ");
 	};
 }
 
@@ -41,8 +41,8 @@ export async function loadActionData(
 			const find = createFindParameter(action.parameters);
 			switch (action.action) {
 				case "ACTION": {
-					const baseDir = path.dirname(file);
-					const actionYaml = await loadActionYaml(baseDir);
+					const baseDirectory = path.dirname(file);
+					const actionYaml = await loadActionYaml(baseDirectory);
 					return {
 						action: action.action,
 						actionYaml,
@@ -106,23 +106,24 @@ export async function loadActionData(
 					};
 				}
 
-				default:
+				default: {
 					throw new Error("feature not yet implemented");
+				}
 			}
 		}),
 	);
 }
 
-async function loadActionYaml(baseDir: string) {
-	const actionYmlPath = path.resolve(baseDir, "action.yml");
-	const actionYamlPath = path.resolve(baseDir, "action.yaml");
+async function loadActionYaml(baseDirectory: string) {
+	const actionYmlPath = path.resolve(baseDirectory, "action.yml");
+	const actionYamlPath = path.resolve(baseDirectory, "action.yaml");
 	const actualPath =
 		((await fileExists(actionYamlPath)) && actionYamlPath) ||
 		((await fileExists(actionYmlPath)) && actionYmlPath);
 
 	if (!actualPath) {
 		const locations = [actionYmlPath, actionYamlPath];
-		const error = `no yaml file found at locations: ${locations}`;
+		const error = `no yaml file found at locations: ${locations.join(",")}`;
 		throw new Error(error);
 	}
 

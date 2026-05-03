@@ -3,4 +3,4 @@ export {
 	type HandlebarSchemaMapOptions,
 } from "./map";
 export { createHandlebarSchemaSingleton } from "./singleton";
-export { getFileContext } from "./utils";
+export { getFileContext } from "./utilities";

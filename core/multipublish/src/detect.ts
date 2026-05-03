@@ -2,7 +2,7 @@ import { detect } from "package-manager-detector/detect";
 
 export type AgentName = NonNullable<Awaited<ReturnType<typeof detect>>>["name"];
 
-let _detected: AgentName | null = null;
+let _detected: AgentName | undefined;
 
 export async function detectPackageManager() {
 	if (_detected) return _detected;

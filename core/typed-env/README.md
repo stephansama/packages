@@ -26,23 +26,25 @@ pnpm install @stephansama/typed-env
 
 ## Usage
 
+is already a namespace import
+
 ```javascript
 import * as z from "zod";
 
-import { createEnv } from "@stephansama/typed-env";
+import { createEnvironment } from "@stephansama/typed-env";
 
-export const envConfig = createEnv(
+export const config = createEnvironment(
   z.object({
-    GENERATIVE_API_KEY: z.string(),
-    OTHER_SUPER_SECRET_KEY: z.string(),
+    GENERATIVE_API_KEY: z.string().trim(),
+    OTHER_SUPER_SECRET_KEY: z.string().trim(),
   }),
 );
 
 export async function generateExample() {
-  return await envConfig.generateExample(".env.example");
+  return await config.generateExample(".env.example");
 }
 
-export async function validateEnv() {
-  return await envConfig.validate();
+export async function validateEnvironment() {
+  return await config.validate();
 }
 ```

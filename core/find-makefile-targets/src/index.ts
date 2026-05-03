@@ -1,13 +1,13 @@
 import parser from "@kba/makefile-parser";
 import * as fsp from "node:fs/promises";
-import * as path from "node:path";
+import path from "node:path";
 
 export async function main() {
 	const input = process.argv.at(2);
 
 	if (!input) {
 		console.error("no file provided");
-		return process.exit(0);
+		return;
 	}
 
 	const filename = path.resolve(process.cwd(), input);
@@ -17,9 +17,9 @@ export async function main() {
 
 	const targets = parsed.ast.map((tree) => tree.target).filter(Boolean);
 
-	if (!targets.length) {
-		console.info("no targets found for file: ", filename);
-		return process.exit(1);
+	if (targets.length === 0) {
+		console.info(`no targets found for file: ${filename}`);
+		return;
 	}
 
 	for (const target of targets) {

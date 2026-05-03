@@ -2,8 +2,8 @@ import * as z from "zod";
 
 export type LhciBasicAuthSchema = z.infer<typeof lhciBasicAuthSchema>;
 export const lhciBasicAuthSchema = z.object({
-	password: z.string(),
-	username: z.string(),
+	password: z.string().trim(),
+	username: z.string().trim(),
 });
 
 export type LhciAssertSchema = z.infer<typeof lhciAssertSchema>;
@@ -22,7 +22,7 @@ export const lhciAssertSchema = z.object({
 				.or(z.enum(["off"])),
 		)
 		.optional(),
-	budgetsFile: z.string().optional(),
+	budgetsFile: z.string().trim().optional(),
 	includePassedAssertions: z.boolean().optional(),
 	preset: z
 		.enum(["lighthouse:all", "lighthouse:recommended", "lighthouse:no-pwa"])
@@ -35,10 +35,10 @@ export const lhciCollectSchema = z.object({
 		.boolean()
 		.optional()
 		.meta({ description: `Skips clearing of previous collect data` }),
-	autodiscoverUrlBlocklist: z.array(z.string()).optional().meta({
+	autodiscoverUrlBlocklist: z.array(z.string().trim()).optional().meta({
 		description: `A URL to not include when autodiscovering urls from staticDistDir. Use this flag multiple times to filter multiple URLs.`,
 	}),
-	chromePath: z.string().optional(),
+	chromePath: z.string().trim().optional(),
 	headful: z
 		.boolean()
 		.optional()
@@ -46,7 +46,7 @@ export const lhciCollectSchema = z.object({
 	isSinglePageApplication: z.boolean().optional().meta({
 		description: `If the application is created by Single Page Application, enable redirect to index.html.`,
 	}),
-	method: z.enum(["node", "psi"]).or(z.string()).default("node"),
+	method: z.enum(["node", "psi"]).or(z.string().trim()).default("node"),
 	numberOfRuns: z
 		.number()
 		.optional()
@@ -58,26 +58,28 @@ export const lhciCollectSchema = z.object({
 		handleSIGINT: z.boolean().default(true),
 		handleSIGTERM: z.boolean().default(true),
 		pipe: z.boolean().default(false),
-		timeout: z.number().default(30000),
+		timeout: z.number().default(30_000),
 	}),
-	puppeteerScript: z.string().optional(),
+	puppeteerScript: z.string().trim().optional(),
 	settings: z.object({}),
 	startServerCommand: z
 		.string()
+		.trim()
 		.optional()
 		.meta({ description: `The command to run to start the server.` }),
 	startServerReadyPattern: z
 		.string()
+		.trim()
 		.default("listen|ready")
 		.meta({ description: `String pattern to listen for started server.` }),
-	startServerReadyTimeout: z.number().default(10000).meta({
+	startServerReadyTimeout: z.number().default(10_000).meta({
 		description: `The number of milliseconds to wait for the server to start before continuing`,
 	}),
 	staticDirFileDiscoveryDepth: z.number().default(2).meta({
 		description: `The maximum depth of nested folders Lighthouse will look into to discover URLs on a static file folder.`,
 	}),
-	staticDistDir: z.string().optional(),
-	url: z.array(z.string()).optional(),
+	staticDistDir: z.string().trim().optional(),
+	url: z.array(z.string().trim()).optional(),
 });
 
 export type LhciUploadSchema = z.infer<typeof lhciUploadSchema>;
@@ -85,22 +87,23 @@ export const lhciUploadSchema = z
 	.discriminatedUnion("target", [
 		z.object({
 			basicAuth: lhciBasicAuthSchema.optional(),
-			extraHeaders: z.record(z.string(), z.string()).optional(),
+			extraHeaders: z.record(z.string(), z.string().trim()).optional(),
 			ignoreDuplicateBuildFailure: z.boolean().optional(),
-			serverBaseUrl: z.string().default("http://localhost:9001/"),
+			serverBaseUrl: z.string().trim().default("http://localhost:9001/"),
 			target: z.literal("lhci"),
-			token: z.string(),
+			token: z.string().trim(),
 			urlReplacementPatterns: z
-				.array(z.string())
+				.array(z.string().trim())
 				.default([
 					"s#:[0-9]{3,5}/#:PORT/#",
 					"s/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/UUID/ig",
 				]),
 		}),
 		z.object({
-			outputDir: z.string(),
+			outputDir: z.string().trim(),
 			reportFilenamePattern: z
 				.string()
+				.trim()
 				.default(
 					"%%HOSTNAME%%-%%PATHNAME%%-%%DATETIME%%.report.%%EXTENSION%%",
 				),
@@ -113,10 +116,10 @@ export const lhciUploadSchema = z
 	])
 	.and(
 		z.object({
-			githubApiHost: z.string().default("https://api.github.com"),
-			githubAppToken: z.string().optional(),
-			githubStatusContextSuffix: z.string().optional(),
-			githubToken: z.string().optional(),
+			githubApiHost: z.string().trim().default("https://api.github.com"),
+			githubAppToken: z.string().trim().optional(),
+			githubStatusContextSuffix: z.string().trim().optional(),
+			githubToken: z.string().trim().optional(),
 		}),
 	);
 
@@ -127,18 +130,18 @@ export const lhciServerSchema = z.object({
 	port: z.number(),
 	storage: z.object({
 		sqlConnectionSsl: z.boolean().default(false),
-		sqlConnectionUrl: z.string(),
+		sqlConnectionUrl: z.string().trim(),
 		sqlDangerouslyResetDatabase: z.boolean().default(false),
-		sqlDatabasePath: z.string(),
+		sqlDatabasePath: z.string().trim(),
 		sqlDialect: z.enum(["sqlite", "postgres", "mysql"]).default("sqlite"),
-		sqlMigrationOptions: z.object({ tableName: z.string() }),
+		sqlMigrationOptions: z.object({ tableName: z.string().trim() }),
 	}),
 });
 
 export type LhciWizardSchema = z.infer<typeof lhciWizardSchema>;
 export const lhciWizardSchema = z.object({
-	extraHeaders: z.string().optional(),
-	serverBaseUrl: z.string().optional(),
+	extraHeaders: z.string().trim().optional(),
+	serverBaseUrl: z.string().trim().optional(),
 });
 
 export type LhciSchema = z.infer<typeof lhciSchema>;

@@ -52,7 +52,7 @@ regular text with a link to https://asciinema.org/a/ddUZ6Icj09rgjrqhprGccnRyg
 
 describe("remark asciinema", () => {
 	it("should replace link with embed script when no options are provided", async () => {
-		const result = await remark().use(plugin).process(testFile);
+		const result = await remark().use(plugin, true).process(testFile);
 		const rString = result.toString();
 
 		expect(rString).toBe(testOutput);

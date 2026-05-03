@@ -1,24 +1,27 @@
 {
-	"name": "@example/remark-asciinema",
-	"version": "0.0.7",
-	"private": true,
-	"description": "Example astro site demonstrating how to use remark-asciinema plugin",
-	"type": "module",
-	"scripts": {
-		"astro": "astro",
-		"build": "astro build",
-		"dev": "astro dev",
-		"lint": "eslint ./ && astro check",
-		"lint:fix": "eslint ./src/ --fix",
-		"preview": "astro preview"
-	},
-	"dependencies": {
-		"@astrojs/mdx": "4.3.4",
-		"@astrojs/sitemap": "3.4.1",
-		"astro": "5.9.3"
-	},
-	"devDependencies": {
-		"@astrojs/check": "^0.9.6",
-		"@stephansama/remark-asciinema": "^1.0.12"
-	}
+  "name": "@example/remark-asciinema",
+  "version": "0.0.7",
+  "private": true,
+  "description": "Example astro site demonstrating how to use remark-asciinema plugin",
+  "type": "module",
+  "scripts": {
+    "astro": "astro",
+    "build": "astro build",
+    "dev": "astro dev",
+    "lint": "astro check && eslint ./",
+    "lint:fix": "eslint ./src/ --fix",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "4.3.4",
+    "@astrojs/sitemap": "3.4.1",
+    "astro": "5.9.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.6",
+    "@stephansama/remark-asciinema": "workspace:*"
+  },
+  "engines": {
+    "node": ">=24"
+  }
 }

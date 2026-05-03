@@ -1,20 +1,22 @@
 import { MockAgent, setGlobalDispatcher } from "undici";
 import { describe, expect, it, vi } from "vitest";
 
-import rootPkgJson from "../../../package.json";
+import rootPackageJson from "../../../package.json";
 import { main } from "./index.ts";
 
-const mockPkgJson = { dependencies: { typescript: "^5.2.3", vite: "^7.2.3" } };
+const mockPackageJson = {
+	dependencies: { typescript: "^5.2.3", vite: "^7.2.3" },
+};
 
 const mockAgent = new MockAgent();
 
 setGlobalDispatcher(mockAgent);
 
-const mockPool = mockAgent.get(rootPkgJson.homepage);
+const mockPool = mockAgent.get(rootPackageJson.homepage);
 
 vi.mock("node:fs", async (importActual) => ({
 	...(await importActual()),
-	readFileSync: vi.fn().mockReturnValue(JSON.stringify(mockPkgJson)),
+	readFileSync: vi.fn().mockReturnValue(JSON.stringify(mockPackageJson)),
 	writeFileSync: vi.fn(),
 }));
 
@@ -50,7 +52,7 @@ describe("cli index", () => {
 		await expect(main()).resolves.not.toThrow();
 	});
 
-	it("should use fallback examples ", async () => {
+	it("should use fallback examples", async () => {
 		mockPool
 			.intercept({
 				method: "GET",

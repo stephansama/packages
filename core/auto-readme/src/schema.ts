@@ -39,9 +39,10 @@ const tableHeadingsSchema = z
 const templatesSchema = z.object({
 	downloadImage: z
 		.string()
+		.trim()
 		.default("https://img.shields.io/npm/dw/{{name}}?labelColor=211F1F"),
 	emojis: z
-		.record(headingsSchema, z.string())
+		.record(headingsSchema, z.string().trim())
 		.default({
 			default: "⚙️",
 			description: "📝",
@@ -53,20 +54,24 @@ const templatesSchema = z.object({
 			version: "",
 		})
 		.meta({ description: "Table heading emojis used when enabled" }),
-	registryUrl: z.string().default("https://www.npmjs.com/package/{{name}}"),
+	registryUrl: z
+		.string()
+		.trim()
+		.default("https://www.npmjs.com/package/{{name}}"),
 	versionImage: z
 		.string()
+		.trim()
 		.default(
 			"https://img.shields.io/npm/v/{{uri_name}}?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F",
 		),
 });
 
 export const defaultTemplates = templatesSchema.parse({});
-export const defaultTableHeadings = tableHeadingsSchema.parse(undefined);
+export const defaultTableHeadings = tableHeadingsSchema.parse({});
 
 const _configSchema = z.object({
-	affectedRegexes: z.array(z.string()),
-	collapseHeadings: z.array(z.string()),
+	affectedRegexes: z.array(z.string().trim()),
+	collapseHeadings: z.array(z.string().trim()),
 	defaultLanguage: languageSchema.meta({
 		alias: "l",
 		description: "Default language to infer projects from",
@@ -100,7 +105,7 @@ const _configSchema = z.object({
 		alias: "p",
 		description: "Only show public packages in workspaces",
 	}),
-	removeScope: z.string().default("").meta({
+	removeScope: z.string().trim().default("").meta({
 		description: "Remove common workspace scope",
 	}),
 	templates: templatesSchema
@@ -109,13 +114,13 @@ const _configSchema = z.object({
 		.describe(
 			"Handlebars templates used to fuel list and table generation",
 		),
-	tocHeading: z.string().default("Table of contents").meta({
+	tocHeading: z.string().trim().default("Table of contents").meta({
 		description: "Markdown heading used to generate table of contents",
 	}),
-	usageFile: z.string().default("").meta({
+	usageFile: z.string().trim().default("").meta({
 		description: "Workspace level usage file",
 	}),
-	usageHeading: z.string().default("Usage").meta({
+	usageHeading: z.string().trim().default("Usage").meta({
 		description: "Markdown heading used to generate usage example",
 	}),
 	verbose: z.boolean().default(false).meta({

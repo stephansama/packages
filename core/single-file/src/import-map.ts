@@ -18,25 +18,27 @@ export const imports = new Map<
 	}
 >();
 
-export type LoadImportArgs = { dirname?: string; file: string };
+export type LoadImportArguments = { dirname?: string; file: string };
 
 export function determineImportType(contentType?: null | string): ImportType {
 	switch (contentType) {
 		case "application/ecmascript":
 		case "application/javascript":
 		case "text/ecmascript":
-		case "text/javascript":
+		case "text/javascript": {
 			return "js";
-		default:
+		}
+		default: {
 			return "unknown";
+		}
 	}
 }
 
 export async function loadImport(
-	args: LoadImportArgs & { isBinary: true },
+	arguments_: LoadImportArguments & { isBinary: true },
 ): Promise<ArrayBuffer>;
 export async function loadImport(
-	args: LoadImportArgs & { isBinary?: false },
+	arguments_: LoadImportArguments & { isBinary?: false },
 ): Promise<string>;
 
 export async function loadImport({
@@ -70,13 +72,13 @@ export async function loadImport({
 	return text;
 }
 
-export async function writeImportMap() {
+export function writeImportMap() {
 	const registryImports = imports
 		.entries()
 		.filter(([_, entry]) => entry.type === "js")
 		.map(([file, source]) => {
 			if (typeof source.data !== "string") {
-				throw new Error(
+				throw new TypeError(
 					`source is not of type string (shouldn't happen)`,
 				);
 			}
@@ -91,7 +93,7 @@ export async function writeImportMap() {
 			);
 		});
 
-	const registryString = Array.from(registryImports).join("\n");
+	const registryString = [...registryImports].join("\n");
 
 	return `<script type="module">\nwindow.registry = {\n${registryString}\n};\n</script>`;
 }

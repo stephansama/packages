@@ -1,3 +1,4 @@
+/* eslint-disable e18e/prefer-static-regex */
 import * as cheerio from "cheerio";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -8,7 +9,7 @@ const mockKy = vi.hoisted(() => ({ get: vi.fn() }));
 
 vi.mock("ky", () => ({ default: mockKy }));
 
-function makeMockResponse(opts: {
+function makeMockResponse(options: {
 	buffer?: ArrayBuffer;
 	contentType?: null | string;
 	text?: string;
@@ -16,9 +17,9 @@ function makeMockResponse(opts: {
 	return {
 		arrayBuffer: vi
 			.fn()
-			.mockResolvedValue(opts.buffer ?? new ArrayBuffer(0)),
-		headers: { get: vi.fn().mockReturnValue(opts.contentType ?? null) },
-		text: vi.fn().mockResolvedValue(opts.text ?? ""),
+			.mockResolvedValue(options.buffer ?? new ArrayBuffer(0)),
+		headers: { get: vi.fn().mockReturnValue(options.contentType) },
+		text: vi.fn().mockResolvedValue(options.text ?? ""),
 	};
 }
 
@@ -32,6 +33,7 @@ describe("img", () => {
 	it("inlines a PNG image as a base64 data URI", async () => {
 		mockKy.get.mockReturnValue(
 			makeMockResponse({
+				// eslint-disable-next-line unicorn/number-literal-case
 				buffer: new Uint8Array([0x89, 0x50, 0x4e, 0x47]).buffer,
 				contentType: "image/png",
 			}),
@@ -47,7 +49,7 @@ describe("img", () => {
 		const svgContent = `<svg xmlns="http://www.w3.org/2000/svg"><circle r="10"/></svg>`;
 		mockKy.get.mockReturnValue(
 			makeMockResponse({
-				buffer: Buffer.from(svgContent).buffer as ArrayBuffer,
+				buffer: Buffer.from(svgContent).buffer,
 				contentType: "image/svg+xml",
 			}),
 		);
@@ -62,7 +64,7 @@ describe("img", () => {
 		const svgContent = `<svg xmlns="http://www.w3.org/2000/svg"><symbol id="icon" viewBox="0 0 24 24"><path d="M0 0"/></symbol></svg>`;
 		mockKy.get.mockReturnValue(
 			makeMockResponse({
-				buffer: Buffer.from(svgContent).buffer as ArrayBuffer,
+				buffer: Buffer.from(svgContent).buffer,
 				contentType: "image/svg+xml",
 			}),
 		);

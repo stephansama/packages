@@ -12,7 +12,7 @@ import {
 	defaultConfig,
 	LOADED_ICONS_FILENAME,
 } from "./const.ts";
-import { buildEnd, generateSprite, loadIcons } from "./util.ts";
+import { buildEnd, generateSprite, loadIcons } from "./utilities";
 
 const PLUGIN_NAME = pkg.name;
 const virtualModuleId = "virtual:iconify-svgmap";
@@ -22,33 +22,33 @@ const js = String.raw;
 
 import type { AstroIntegration } from "astro";
 
-export function createIntegration(opts: Options = {}): AstroIntegration {
+export function createIntegration(options_: Options = {}): AstroIntegration {
 	return {
 		name: "astro-icon",
-		// eslint-disable-next-line
+		// eslint-disable-next-line perfectionist/sort-objects
 		hooks: {
-			async "astro:build:done"(o) {
+			async "astro:build:done"(_) {
 				console.log("starting build done");
 
 				const configFile = fs.readFileSync(
 					path.resolve(CONFIG_FILENAME),
 					{ encoding: "utf8" },
 				);
-				const options =
-					JSON.parse(configFile || "false") || defaultConfig;
+				const options = (JSON.parse(configFile || "false") ||
+					defaultConfig) as object;
 				const usage = JSON.parse(
 					fs.readFileSync(path.resolve(LOADED_ICONS_FILENAME), {
 						encoding: "utf8",
 					}) || "{}",
-				);
-				const icons = await loadIcons(opts);
+				) as Record<string, string[]>;
+				const icons = await loadIcons(options_);
 				buildEnd(icons, usage, options);
 			},
-			"astro:config:setup"({ config, logger, updateConfig }) {
+			"astro:config:setup"({ updateConfig }) {
 				updateConfig({
 					vite: {
 						// @ts-expect-error correctly typed
-						plugins: [createPlugin(opts)],
+						plugins: [createPlugin(options_)],
 					},
 				});
 			},
@@ -57,19 +57,19 @@ export function createIntegration(opts: Options = {}): AstroIntegration {
 }
 
 export default function createPlugin(options?: Options): Plugin {
-	let config: ResolvedConfig;
+	let _config: ResolvedConfig;
 	let inMemoryCollections: Record<string, IconifyJSON> = {};
 
 	fs.writeFileSync(path.resolve(CONFIG_FILENAME), JSON.stringify(options));
 
 	return {
 		configResolved(resolvedConfig) {
-			config = resolvedConfig;
+			_config = resolvedConfig;
 		},
 		configureServer(server) {
-			server.middlewares.use(async (req, res, next) => {
+			server.middlewares.use(function (request, response, next) {
 				for (const pack of Object.keys(inMemoryCollections)) {
-					if (req.url === `/${pack}.svg`) {
+					if (request.url === `/${pack}.svg`) {
 						const loaded = JSON.parse(
 							fs.readFileSync(
 								path.resolve(LOADED_ICONS_FILENAME),
@@ -78,13 +78,13 @@ export default function createPlugin(options?: Options): Plugin {
 									flag: "as+",
 								},
 							) || "{}",
-						);
-						res.setHeader("Content-Type", "image/svg+xml");
+						) as Record<string, string[]>;
+						response.setHeader("Content-Type", "image/svg+xml");
 						const sprite = generateSprite(
 							inMemoryCollections[pack],
 							loaded[pack] || [],
 						);
-						return res.end(sprite);
+						return response.end(sprite);
 					}
 				}
 
@@ -94,7 +94,8 @@ export default function createPlugin(options?: Options): Plugin {
 
 		async load(id) {
 			if (id !== resolvedVirtualModuleId) return;
-			inMemoryCollections = await loadIcons(options || defaultConfig);
+			inMemoryCollections =
+				(await loadIcons(options || defaultConfig)) || {};
 
 			return js`export default ${JSON.stringify(inMemoryCollections)};`;
 		},

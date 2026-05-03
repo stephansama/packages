@@ -7,13 +7,14 @@ import { generate } from "./generate-examples.js";
 
 const root = await findRoot(process.cwd());
 
-const templateStr = (await generate({ writeToFile: false }))
+const generated = await generate({ writeToFile: false });
+const templateString = generated
 	.map((example) => `--template ${example.relativeDir}`)
 	.join(" ");
 
 const sh = String.raw;
 
 cp.execSync(
-	sh`pnpx pkg-pr-new publish '${root.rootDir}/core/*' --pnpm --packageManager='pnpm' ${templateStr}`,
+	sh`pnpx pkg-pr-new publish '${root.rootDir}/core/*' --pnpm --packageManager='pnpm' ${templateString}`,
 	{ stdio: "inherit" },
 );

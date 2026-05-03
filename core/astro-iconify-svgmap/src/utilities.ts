@@ -58,10 +58,10 @@ export async function loadIcons(options: Options) {
 		{ encoding: "utf8" },
 	);
 	const { dependencies = {}, devDependencies = {} } =
-		(JSON.parse(text) as {}) || {};
+		(JSON.parse(text) as Record<string, Record<string, string>>) || {};
 	const packages: string[] = [
-		...Object.keys(dependencies as Record<string, string>),
-		...Object.keys(devDependencies as Record<string, string>),
+		...Object.keys(dependencies),
+		...Object.keys(devDependencies),
 	];
 	const collections = packages
 		.filter((name) => name.startsWith("@iconify-json/"))

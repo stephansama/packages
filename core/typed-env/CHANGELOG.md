@@ -1,5 +1,11 @@
 # @stephansama/typed-env
 
+## 0.0.5
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 0.0.4
 
 ### Patch Changes

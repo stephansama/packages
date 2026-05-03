@@ -1,5 +1,11 @@
 # vanilla
 
+## 1.2.3
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 1.2.2
 
 ### Patch Changes

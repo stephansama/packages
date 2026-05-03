@@ -1,5 +1,11 @@
 # @example/remark-asciinema
 
+## 0.0.8
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 0.0.7
 
 ### Patch Changes

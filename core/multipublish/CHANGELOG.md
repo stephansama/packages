@@ -1,5 +1,11 @@
 # @stephansama/multipublish
 
+## 1.0.9
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 1.0.8
 
 ### Patch Changes

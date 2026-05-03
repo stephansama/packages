@@ -1,6 +1,6 @@
 {
   "name": "@stephansama/github-env",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "[Deprecated] Additional environment variable types for GitHub CI",
   "keywords": [],
   "homepage": "https://packages.stephansama.info/api/@stephansama/github-env",

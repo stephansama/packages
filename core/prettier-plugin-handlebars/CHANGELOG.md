@@ -1,5 +1,11 @@
 # @stephansama/prettier-plugin-handlebars
 
+## 0.1.4
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 0.1.3
 
 ### Patch Changes

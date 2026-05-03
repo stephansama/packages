@@ -1,5 +1,11 @@
 # @example/typed-events/react
 
+## 0.1.3
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 0.1.2
 
 ### Patch Changes

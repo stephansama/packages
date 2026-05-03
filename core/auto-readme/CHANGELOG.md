@@ -1,5 +1,11 @@
 # @stephansama/auto-readme
 
+## 0.2.8
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 0.2.7
 
 ### Patch Changes

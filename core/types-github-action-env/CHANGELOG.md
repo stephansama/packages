@@ -1,5 +1,11 @@
 # @stephansama/github-env
 
+## 1.0.2
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 1.0.1
 
 ### Patch Changes

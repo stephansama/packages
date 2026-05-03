@@ -1,5 +1,11 @@
 # @stephansama/svelte-social-share-links
 
+## 1.1.4
+
+### Patch Changes
+
+- 4f78352: created eslint-config package
+
 ## 1.1.3
 
 ### Patch Changes

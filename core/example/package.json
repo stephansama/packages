@@ -35,6 +35,7 @@
     "predev": "pnpm run generate",
     "dev": "tsdown --watch",
     "generate": "pnpm --filter=scripts run generate-examples",
+    "prelint": "pnpm run generate",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix",
     "typedoc": "pnpm run generate"

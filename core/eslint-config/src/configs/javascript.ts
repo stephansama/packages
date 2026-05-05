@@ -31,5 +31,11 @@ export function config(): Config[] {
 			},
 			name: "stephansama/javascript/setup",
 		},
+		{
+			name: "stephansama/javascript/rules",
+			rules: {
+				"no-console": ["warn", { allow: ["warn", "error", "info"] }],
+			},
+		},
 	];
 }

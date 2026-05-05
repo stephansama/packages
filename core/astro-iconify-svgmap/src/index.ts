@@ -47,8 +47,8 @@ export function createIntegration(options_: Options = {}): AstroIntegration {
 			"astro:config:setup"({ updateConfig }) {
 				updateConfig({
 					vite: {
-						// @ts-expect-error correctly typed
-						plugins: [createPlugin(options_)],
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
+						plugins: [createPlugin(options_) as any],
 					},
 				});
 			},

@@ -10,7 +10,7 @@ export type Options = Readonly<{
 	resolvePaths?: Array<string>;
 }>;
 
-export function config(options: Options): Config[] {
+export function config(options?: Options): Config[] {
 	return defineConfig({
 		extends: ["n/recommended-module"],
 		files: [glob.JS, glob.JSX, glob.TS, glob.TSX],
@@ -23,20 +23,21 @@ export function config(options: Options): Config[] {
 			"n/no-extraneous-import": [
 				"error",
 				{
-					allowModules: options.allowModules || [],
-					resolvePaths: options.resolvePaths || [],
+					allowModules: options?.allowModules || [],
+					resolvePaths: options?.resolvePaths || [],
 				},
 			],
 			"n/no-extraneous-require": [
 				"error",
 				{
-					allowModules: options.allowModules || [],
-					resolvePaths: options.resolvePaths || [],
+					allowModules: options?.allowModules || [],
+					resolvePaths: options?.resolvePaths || [],
 				},
 			],
 			// handled by ./imports.ts
 			"n/no-missing-import": "off",
 			"n/no-missing-require": "off",
+			"n/no-process-exit": "off",
 			"n/no-unpublished-bin": "off",
 		},
 	});

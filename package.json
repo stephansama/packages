@@ -26,7 +26,7 @@
     "knip": "knip --config ./.config/knip.ts",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
-    "prepare": "pnpm --filter=@stephansama/eslint-config build && [ \"$CI\" = \"true\" ] || lefthook install",
+    "prepare": "pnpm --filter=scripts prepare-local",
     "publish": "changeset publish",
     "test": "turbo test",
     "pretest:ci": "pnpm --filter=scripts generate-examples",

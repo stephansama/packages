@@ -12,6 +12,7 @@
     "lint-fix": "tsx ./src/lint-fix.ts",
     "meta": "tsx ./src/meta.ts",
     "pkg-pr-new": "tsx ./src/pkg-pr-new.ts",
+    "prepare-local": "tsx ./src/prepare-local.ts",
     "storybook": "tsx ./src/storybook.ts"
   },
   "devDependencies": {

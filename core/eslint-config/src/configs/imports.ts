@@ -24,7 +24,7 @@ export function config(options?: Readonly<Options>): Config[] {
 				"import-x/namespace": ["error", { allowComputed: true }],
 				"import-x/no-unresolved": [
 					"error",
-					{ ignore: options?.ignore || [] },
+					{ ignore: options?.ignore },
 				],
 			},
 		},

@@ -1,5 +1,11 @@
 # @stephansama/astro-iconify-svgmap
 
+## 1.0.12
+
+### Patch Changes
+
+- ee1d981: updated console rules and fixed conditions
+
 ## 1.0.11
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @stephansama/eslint-config
 
+## 0.1.2
+
+### Patch Changes
+
+- ee1d981: updated console rules and fixed conditions
+
 ## 0.1.1
 
 ### Patch Changes

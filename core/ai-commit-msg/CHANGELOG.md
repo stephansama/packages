@@ -1,5 +1,11 @@
 # @stephansama/ai-commit-msg
 
+## 1.0.5
+
+### Patch Changes
+
+- ee1d981: updated console rules and fixed conditions
+
 ## 1.0.4
 
 ### Patch Changes

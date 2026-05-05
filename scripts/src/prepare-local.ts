@@ -3,6 +3,7 @@
 import { getPackages } from "@manypkg/get-packages";
 import * as cp from "node:child_process";
 import * as fs from "node:fs";
+import path from "node:path";
 
 if (process.env.CI) process.exit(0);
 
@@ -27,10 +28,15 @@ const stephansamaPackages = packages.filter((pkg) => {
 
 for (const pkg of stephansamaPackages) {
 	const hasAllOutputs = pkg.packageJson.files.every((file) => {
-		return fs.existsSync(file);
+		return fs.existsSync(path.resolve(pkg.dir, file));
 	});
 
 	if (hasAllOutputs) continue;
 
-	cp.execSync(sh`pnpm --filter='${pkg.packageJson.name}' run build`);
+	console.info(`running build for ${pkg.packageJson.name}`);
+
+	cp.execSync(sh`pnpm --filter='${pkg.packageJson.name}' run build`, {
+		encoding: "utf8",
+		stdio: "inherit",
+	});
 }

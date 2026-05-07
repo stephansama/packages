@@ -3,16 +3,20 @@ import * as tseslint from "typescript-eslint";
 
 import * as glob from "@/glob";
 
-export type Options = Readonly<{
-	/** @see https://typescript-eslint.io/packages/parser#allowDefaultProject */
-	allowDefaultProject?: Array<string>;
-	/** @see https://typescript-eslint.io/packages/parser#defaultProject */
-	defaultProject?: string;
-	/** @see https://typescript-eslint.io/packages/parser#loadTypeScriptPlugins */
-	loadTypeScriptPlugins?: boolean;
-	/** @see https://typescript-eslint.io/packages/parser#maximumdefaultprojectfilematchcount_this_will_slow_down_linting */
-	maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING?: number;
-}>;
+export type Options = Readonly<
+	Partial<{
+		/** @see https://typescript-eslint.io/packages/parser#allowDefaultProject */
+		allowDefaultProject: Array<string>;
+		/** @see https://typescript-eslint.io/packages/parser#defaultProject */
+		defaultProject: string;
+		/** @see https://typescript-eslint.io/packages/parser#loadTypeScriptPlugins */
+		loadTypeScriptPlugins: boolean;
+		/** @see https://typescript-eslint.io/packages/parser#maximumdefaultprojectfilematchcount_this_will_slow_down_linting */
+		maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING: number;
+		/** @see https://typescript-eslint.io/packages/parser/#project */
+		project: string;
+	}>
+>;
 
 export function config(options: Options = {}): Config[] {
 	return [
@@ -22,6 +26,7 @@ export function config(options: Options = {}): Config[] {
 				parserOptions: {
 					projectService: options,
 				},
+				project: options?.project || "tsconfig.json",
 			},
 			name: `stephansama/tseslint/setup`,
 		},

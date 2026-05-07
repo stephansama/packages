@@ -1,5 +1,11 @@
 # @stephansama/eslint-config
 
+## 0.1.3
+
+### Patch Changes
+
+- a526f8e: updated eslint config default options
+
 ## 0.1.2
 
 ### Patch Changes

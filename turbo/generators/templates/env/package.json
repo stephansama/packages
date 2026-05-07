@@ -22,11 +22,11 @@
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix"
   },
+  "engines": {
+    "node": ">=24"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "engines": {
-    "node": ">=24"
   }
 }

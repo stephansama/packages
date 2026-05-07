@@ -29,12 +29,12 @@
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./ --fix"
   },
+  "engines": {
+    "node": ">=24"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "readme": "./README.md",
-  "engines": {
-    "node": ">=24"
-  }
+  "readme": "./README.md"
 }

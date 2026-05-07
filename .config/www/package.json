@@ -7,9 +7,9 @@
     "build": "vitepress build",
     "predev": "pnpm run setup",
     "dev": "vitepress dev",
+    "lint:fix": "eslint ./ --fix",
     "preview": "vitepress preview",
-    "setup": "sh ./setup.sh",
-    "lint:fix": "eslint ./ --fix"
+    "setup": "sh ./setup.sh"
   },
   "dependencies": {
     "@catppuccin/vitepress": "catalog:vitepress",

@@ -65,6 +65,9 @@
   "peerDependencies": {
     "svelte": ">=5"
   },
+  "engines": {
+    "node": ">=24"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true
@@ -72,8 +75,5 @@
   "readme": "./README.md",
   "storybook": {
     "url": "https://packages.stephansama.info/api/@stephansama/svelte-social-share-links/storybook"
-  },
-  "engines": {
-    "node": ">=24"
   }
 }

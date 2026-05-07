@@ -43,14 +43,14 @@
     "tsdown": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",
+  "engines": {
+    "node": ">=24"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
   "inlinedDependencies": {
     "prettier": "3.8.1"
-  },
-  "engines": {
-    "node": ">=24"
   }
 }

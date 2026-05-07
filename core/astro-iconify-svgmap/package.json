@@ -86,7 +86,7 @@
     "package-manager-detector": "1.6.0",
     "pathe": "2.0.3",
     "quansync": "0.2.11",
-    "tinyexec": "1.0.2",
+    "tinyexec": "1.1.2",
     "ufo": "1.6.3"
   }
 }

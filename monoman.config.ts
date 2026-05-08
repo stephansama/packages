@@ -13,4 +13,17 @@ export default defineConfig([
 		include: ["**/package.json"],
 		type: "json",
 	},
+	{
+		contents(data: Record<string, unknown>) {
+			data.extends = ["../../tsconfig.base.json"];
+
+			data.compilerOptions = data?.compilerOptions || {};
+			data.compilerOptions.composite = true;
+
+			return data;
+		},
+		exclude: ["**/node_modules/**/tsconfig.json"],
+		include: ["./core/**/tsconfig.json"],
+		type: "json",
+	},
 ]);

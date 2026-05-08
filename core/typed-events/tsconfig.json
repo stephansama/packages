@@ -1,13 +1,25 @@
 {
-  "extends": ["../../tsconfig.json"],
-  "include": ["./src/**/*"],
+  "extends": [
+    "../../tsconfig.base.json"
+  ],
+  "include": [
+    "./src/**/*"
+  ],
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "moduleResolution": "bundler",
-    "lib": ["DOM", "ESNext"],
-    "jsx": "react-jsx"
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
+    "jsx": "react-jsx",
+    "composite": true
   }
 }

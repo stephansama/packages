@@ -14,6 +14,8 @@ __versions:
 autoInstallPeers: true
 
 catalog:
+  '@ai-sdk/google': ^3.0.29
+  '@ai-sdk/openai': ^3.0.29
   '@antfu/install-pkg': 1.1.0
   '@bluwy/giget-core': 0.1.6
   '@catppuccin/palette': 1.7.1
@@ -39,6 +41,7 @@ catalog:
   '@types/vfile': 4.0.0
   '@types/yargs': 17.0.35
   actions-up: 1.11.0
+  ai: ^6.0.86
   alfy: 2.1.0
   astro: 5.9.3
   cheerio: 1.2.0
@@ -58,11 +61,15 @@ catalog:
   mdast: 3.0.0
   mdast-comment-marker: ^3.0.0
   mdast-util-from-markdown: ^2.0.2
+  mdast-zone: github:stephansama/mdast-zone#1c5b08cd97240debeed4c9c6afad49df5877a132
   minify: 14.0.0
   monoman: 0.8.2
   nano-staged: 1.0.2
+  neverthrow: ^8.2.0
   node-plop: 0.32.3
+  ollama-ai-provider-v2: ^1.5.5
   oxc-parser: 0.127.0
+  package-manager-detector: ^1.6.0
   pkg-pr-new: 0.0.51
   pkg-types: ^2.3.0
   publint: 0.3.17
@@ -188,6 +195,12 @@ catalogs:
     '@vitest/coverage-v8': 4.0.18
     '@vitest/ui': 4.0.18
     vitest: 4.0.18
+  conflicts_commitlint_h19_8_1:
+    '@commitlint/config-conventional': ^19.8.1
+  conflicts_@dotenvx/dotenvx_h1_52_0:
+    '@dotenvx/dotenvx': ^1.52.0
+  conflicts_dedent_h1_7_1:
+    dedent: ^1.7.1
 
 cleanupUnusedCatalogs: true
 

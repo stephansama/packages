@@ -5,7 +5,7 @@ export default await config({
 	...presets.library,
 	...presets.zod,
 	astro: true,
-	autoEnable: false,
+	ignore: [`./turbo/generators/**`],
 	imports: {
 		ignore: ["astro:.*"],
 		project: ["core/*/{ts,js}config.json", "examples/*/{ts,js}config.json"],

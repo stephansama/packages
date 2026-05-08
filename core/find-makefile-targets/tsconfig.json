@@ -1,7 +1,15 @@
 {
-  "extends": ["../../tsconfig.json"],
-  "include": ["./src/**/*"],
+  "extends": [
+    "../../tsconfig.base.json"
+  ],
+  "include": [
+    "./src/**/*"
+  ],
   "compilerOptions": {
-    "types": ["./types/makefile-parser.d.ts", "node"]
+    "types": [
+      "./types/makefile-parser.d.ts",
+      "node"
+    ],
+    "composite": true
   }
 }

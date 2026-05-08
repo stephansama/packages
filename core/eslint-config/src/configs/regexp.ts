@@ -8,7 +8,7 @@ export function config(): Config[] {
 	return [
 		{
 			...regexp.configs["flat/recommended"],
-			name: "stephansama/regexp",
+			name: "stephansama/regexp/setup",
 		},
 		{
 			files: [glob.MD],

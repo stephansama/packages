@@ -1,10 +1,20 @@
 {
-  "extends": ["../../tsconfig.json"],
-  "include": ["src", "types"],
+  "extends": [
+    "../../tsconfig.base.json"
+  ],
+  "include": [
+    "src",
+    "types"
+  ],
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
-    "types": ["node"]
+    "types": [
+      "node"
+    ],
+    "composite": true
   }
 }

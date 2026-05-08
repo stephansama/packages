@@ -8,7 +8,7 @@ export function config(): Config[] {
 	return [
 		{
 			...unicorn.configs.recommended,
-			name: "stephansama/unicorn",
+			name: "stephansama/unicorn/setup",
 		},
 		{
 			name: "stephansama/unicorn/overrides",

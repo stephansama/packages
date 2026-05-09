@@ -5,11 +5,11 @@ commit-msg:
   jobs:
     - run: pnpm dlx commitlint --config .config/.commitlintrc.ts --edit {1}
 pre-commit:
-  parallel: true
+  parallel: false
   jobs:
-    - run: auto-readme -vg
-      name: Update README
     - run: nano-staged -c ./.nanostagedrc.mjs -v
       name: Lint staged
+    - run: auto-readme -vg
+      name: Update README
     - run: pnpm --filter=@stephansama/scripts lint-examples
       name: Lint examples

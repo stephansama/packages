@@ -24,7 +24,8 @@
       "import": "./config/schema.mjs",
       "require": "./config/schema.cjs"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./schema.json": "./config/schema.json"
   },
   "main": "./config/schema.cjs",
   "module": "./config/schema.mjs",

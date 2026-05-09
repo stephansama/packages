@@ -8,7 +8,7 @@
   "homepage": "https://packages.stephansama.info/api/@stephansama/ai-commit-msg",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stephansama/packages",
+    "url": "git+https://github.com/stephansama/packages.git",
     "directory": "core/ai-commit-msg"
   },
   "license": "MIT",
@@ -21,20 +21,15 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": {
-        "types": "./config/schema.d.ts",
-        "default": "./config/schema.js"
-      },
-      "require": {
-        "types": "./config/schema.d.cts",
-        "default": "./config/schema.cjs"
-      }
+      "import": "./config/schema.mjs",
+      "require": "./config/schema.cjs"
     },
+    "./package.json": "./package.json",
     "./schema.json": "./config/schema.json"
   },
-  "main": "./config/schema.js",
-  "module": "./config/schema.js",
-  "types": "./config/schema.d.ts",
+  "main": "./config/schema.cjs",
+  "module": "./config/schema.mjs",
+  "types": "./config/schema.d.cts",
   "bin": "./cli.mjs",
   "files": [
     "./dist",

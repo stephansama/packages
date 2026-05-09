@@ -2,6 +2,9 @@
   "name": "@example/typed-events/react",
   "version": "0.1.3",
   "private": true,
+  "repository": {
+    "url": "git+https://github.com/stephansama/packages.git"
+  },
   "type": "module",
   "scripts": {
     "build": "react-router build",

@@ -32,11 +32,11 @@
       "import": "./dist/errors.mjs",
       "require": "./dist/errors.cjs"
     },
-    "./package.json": "./package.json",
     "./react": {
       "import": "./dist/react.mjs",
       "require": "./dist/react.cjs"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",

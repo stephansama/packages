@@ -2,6 +2,9 @@
   "name": "@example/typed-events/vanilla",
   "version": "1.2.3",
   "private": true,
+  "repository": {
+    "url": "git+https://github.com/stephansama/packages.git"
+  },
   "type": "module",
   "scripts": {
     "build": "vite build",

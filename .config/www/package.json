@@ -7,7 +7,7 @@
     "build": "vitepress build",
     "predev": "pnpm run setup",
     "dev": "vitepress dev",
-    "prelint": "pnpm run setup:typedoc",
+    "prelint": "pnpm run setup:examples && pnpm run setup:typedoc",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
     "preview": "vitepress preview",

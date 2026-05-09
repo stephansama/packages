@@ -8,7 +8,7 @@
   "homepage": "https://packages.stephansama.info/api/@stephansama/types-lhci",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stephansama/packages",
+    "url": "git+https://github.com/stephansama/packages.git",
     "directory": "core/types-lhci"
   },
   "license": "MIT",
@@ -24,7 +24,8 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./schema.json": "./dist/schema.json"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -35,6 +36,7 @@
   ],
   "scripts": {
     "build": "tsdown",
+    "postbuild": "publint",
     "dev": "tsdown --watch",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"

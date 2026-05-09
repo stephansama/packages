@@ -8,7 +8,7 @@ export default defineConfig([
 		attw: true,
 		dts: false,
 		entry: "./src/index.ts",
-		format: ['esm', 'cjs'],
+		format: ["esm", "cjs"],
 		skipNodeModulesBundle: true,
 		target: "esnext",
 	},
@@ -16,7 +16,14 @@ export default defineConfig([
 		attw: true,
 		dts: true,
 		entry: "./src/schema.ts",
-		format: ['esm', 'cjs'],
+		exports: {
+			customExports(exports) {
+				exports["./schema.json"] = "./config/schema.json";
+				return exports;
+			},
+			enabled: true,
+		},
+		format: ["esm", "cjs"],
 		hooks: {
 			async "build:done"() {
 				const { configSchema } = await import("./config/schema.mjs");

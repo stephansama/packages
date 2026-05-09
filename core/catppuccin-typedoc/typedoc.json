@@ -2,11 +2,11 @@
   "entryPoints": ["src/*"],
   "tsconfig": "./tsconfig.json",
   "exclude": [
-    "**/tests/**",
-    "**/*.test.ts",
     "**/*.spec.ts",
-    "node_modules",
+    "**/*.test.ts",
+    "**/tests/**",
     "**/{node_modules,test,book,doc,dist}/**/*",
-    "**/{pages,components}/**"
+    "**/{pages,components}/**",
+    "node_modules"
   ]
 }

@@ -35,8 +35,11 @@
       "import": "./config/schema.mjs",
       "require": "./config/schema.cjs"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./schema.json": "./config/schema.json"
   },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "bin": "./cli.mjs",
   "files": [
@@ -90,7 +93,5 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs"
+  }
 }

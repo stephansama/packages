@@ -16,6 +16,13 @@ export default defineConfig([
 		attw: true,
 		dts: true,
 		entry: "./src/schema.ts",
+		exports: {
+			customExports(exports) {
+				exports["./schema.json"] = "./config/schema.json";
+				return exports;
+			},
+			enabled: true,
+		},
 		format: ["esm", "cjs"],
 		hooks: {
 			async "build:done"() {

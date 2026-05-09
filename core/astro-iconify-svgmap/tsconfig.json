@@ -5,5 +5,5 @@
     "types": ["node"],
     "composite": true
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*", "tsdown.config.ts"]
 }

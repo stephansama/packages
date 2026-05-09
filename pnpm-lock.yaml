@@ -125,6 +125,9 @@ catalogs:
     es-toolkit:
       specifier: 1.43.0
       version: 1.43.0
+    eslint-plugin-svelte:
+      specifier: ^3.17.1
+      version: 3.17.1
     happy-dom:
       specifier: 20.6.1
       version: 20.6.1
@@ -208,6 +211,9 @@ catalogs:
       version: 11.0.1
     smol-toml:
       specifier: 1.6.1
+      version: 1.6.1
+    svelte-eslint-parser:
+      specifier: ^1.6.1
       version: 1.6.1
     tailwind-scrollbar:
       specifier: 4.0.2
@@ -618,6 +624,9 @@ importers:
       eslint-plugin-jsonc:
         specifier: catalog:eslint
         version: 3.1.2(eslint@10.2.1(jiti@2.6.1))
+      eslint-plugin-svelte:
+        specifier: 'catalog:'
+        version: 3.17.1(eslint@10.2.1(jiti@2.6.1))(svelte@5.51.2)
       eslint-plugin-zod:
         specifier: catalog:eslint
         version: 3.11.0(eslint@10.2.1(jiti@2.6.1))(typescript@5.9.3)(zod@4.2.1)
@@ -627,6 +636,9 @@ importers:
       node-plop:
         specifier: 'catalog:'
         version: 0.32.3(@types/node@24.12.2)
+      svelte-eslint-parser:
+        specifier: 'catalog:'
+        version: 1.6.1(svelte@5.51.2)
       taze:
         specifier: 'catalog:'
         version: 19.9.2
@@ -10950,6 +10962,15 @@ packages:
       svelte:
         optional: true
 
+  svelte-eslint-parser@1.6.1:
+    resolution: {integrity: sha512-hhvSH6kRj46UzrBVO5TaotD+Iuvruj5ccKBcO4wAhVcPTLmIc/c32D8UllBTYO0on4LzYuM0rNzf1lM/gBlkSQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0, pnpm: 10.33.0}
+    peerDependencies:
+      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0
+    peerDependenciesMeta:
+      svelte:
+        optional: true
+
   svelte2tsx@0.7.48:
     resolution: {integrity: sha512-B15C8dtOY6C9MbnQJDCkzbK3yByInzKtXrr23QCoF8APHMh6JaDhjCMcRl6ay4qaeKYqkX4X3tNaJrsZL45Zlg==}
     peerDependencies:
@@ -18357,7 +18378,7 @@ snapshots:
       postcss-load-config: 3.1.4(postcss@8.5.13)
       postcss-safe-parser: 7.0.1(postcss@8.5.13)
       semver: 7.7.4
-      svelte-eslint-parser: 1.6.0(svelte@5.51.2)
+      svelte-eslint-parser: 1.6.1(svelte@5.51.2)
     optionalDependencies:
       svelte: 5.51.2
     transitivePeerDependencies:
@@ -23101,6 +23122,18 @@ snapshots:
       - picomatch
 
   svelte-eslint-parser@1.6.0(svelte@5.51.2):
+    dependencies:
+      eslint-scope: 8.4.0
+      eslint-visitor-keys: 4.2.1
+      espree: 10.4.0
+      postcss: 8.5.13
+      postcss-scss: 4.0.9(postcss@8.5.13)
+      postcss-selector-parser: 7.1.1
+      semver: 7.7.4
+    optionalDependencies:
+      svelte: 5.51.2
+
+  svelte-eslint-parser@1.6.1(svelte@5.51.2):
     dependencies:
       eslint-scope: 8.4.0
       eslint-visitor-keys: 4.2.1

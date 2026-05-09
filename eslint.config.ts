@@ -15,6 +15,7 @@ export default await config({
 	node: {
 		allowModules: ["vitest", "@manypkg/get-packages"],
 	},
+	svelte: true,
 	vitest: true,
 	// eslint-disable-next-line perfectionist/sort-objects
 	overrides: [

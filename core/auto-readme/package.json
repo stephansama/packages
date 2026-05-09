@@ -42,9 +42,9 @@
     "./config"
   ],
   "scripts": {
-    "build": "node build.mjs",
+    "build": "tsx build.ts",
     "postbuild": "publint",
-    "dev": "node --watch-path=./src build.mjs",
+    "dev": "tsx watch --include ./src build.ts",
     "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },

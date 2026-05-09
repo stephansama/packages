@@ -41,8 +41,8 @@
     "./config"
   ],
   "scripts": {
-    "build": "node build.mjs",
-    "dev": "tsdown --watch",
+    "build": "tsx build.ts",
+    "dev": "tsx --watch build.ts",
     "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
@@ -62,7 +62,8 @@
   },
   "devDependencies": {
     "@types/yargs": "catalog:",
-    "tsdown": "catalog:"
+    "tsdown": "catalog:",
+    "tsx": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",
   "engines": {

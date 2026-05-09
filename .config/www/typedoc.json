@@ -5,10 +5,31 @@
   "plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
   "indexFormat": "htmlTable",
   "useCodeBlocks": true,
+  "exclude": [
+    "../../core/alfred-kaomoji/",
+    "../../core/catppuccin-opml/",
+    "../../core/catppuccin-rss/",
+    "../../core/github-env/"
+  ],
   "excludeExternals": true,
   "skipErrorChecking": true,
   "jsDocCompatibility": true,
   "entryPointStrategy": "packages",
-  "exclude": ["**/tsdown.config.ts"],
-  "entryPoints": ["../../core/*"]
+  "entryPoints": ["../../core/*"],
+  "packageOptions": {
+    "entryPoints": ["src/*"],
+    "tsconfig": "./tsconfig.json",
+    "exclude": [
+      "**/*.spec.ts",
+      "**/*.test.ts",
+      "**/tests/**",
+      "**/{node_modules,test,book,doc,dist}/**/*",
+      "**/{pages,components}/**",
+      "node_modules",
+      "tsdown.config.ts"
+    ],
+    "skipErrorChecking": true,
+    "excludeExternals": true,
+    "jsDocCompatibility": true
+  }
 }

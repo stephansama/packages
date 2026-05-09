@@ -19,7 +19,8 @@
     "setup:meta": "pnpm --filter=scripts meta >public/meta.json",
     "setup:node-modules-inspector": "node-modules-inspector build --base /node_modules --outDir public/node_modules",
     "setup:storybook": "pnpm --filter=scripts storybook",
-    "setup:typedoc": "typedoc"
+    "setup:typedoc": "typedoc",
+    "setup:typedoc-sidebar": "pnpm --filter=scripts typedoc-sidebar"
   },
   "dependencies": {
     "@catppuccin/vitepress": "catalog:vitepress",

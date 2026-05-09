@@ -15,7 +15,8 @@
     "meta": "tsx ./src/meta.ts",
     "pkg-pr-new": "tsx ./src/pkg-pr-new.ts",
     "prepare-local": "tsx ./src/prepare-local.ts",
-    "storybook": "tsx ./src/storybook.ts"
+    "storybook": "tsx ./src/storybook.ts",
+    "typedoc-sidebar": "tsx ./src/typedoc-sidebar.ts"
   },
   "devDependencies": {
     "@manypkg/find-root": "catalog:manypkg",

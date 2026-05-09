@@ -6,7 +6,7 @@ export async function getIcon(pack: string, name: string) {
 
 	const fs = await import("node:fs");
 
-	const { LOADED_ICONS_FILENAME } = await import("./const.ts");
+	const { LOADED_ICONS_FILENAME } = await import("./const");
 
 	const current = fs.readFileSync(LOADED_ICONS_FILENAME, {
 		encoding: "utf8",

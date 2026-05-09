@@ -11,6 +11,7 @@ export default await config({
 	ignore: [`./turbo/generators/**`],
 	imports: {
 		ignore: ["astro:.*", "virtual:.*", "$app/state"],
+		noWarnOnMultipleProjects: true,
 		project: ["core/*/{ts,js}config.json", "examples/*/{ts,js}config.json"],
 	},
 	json: true,

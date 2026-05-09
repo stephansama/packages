@@ -4,7 +4,7 @@ import type { Plugin, ResolvedConfig } from "vite";
 import fs from "node:fs";
 import path from "node:path";
 
-import type { Options } from "./type.ts";
+import type { Options } from "./type";
 
 import pkg from "../package.json";
 import { CONFIG_FILENAME, defaultConfig, LOADED_ICONS_FILENAME } from "./const";

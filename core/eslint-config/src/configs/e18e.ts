@@ -4,7 +4,29 @@ import * as jsonParser from "jsonc-eslint-parser";
 
 import * as glob from "@/glob";
 
-export function config(): Config[] {
+export type Options = Partial<{
+	banDependenciesAllowList: Array<string>;
+	banDependenciesDisallowList: Array<string>;
+}>;
+
+type E18EOptions = Partial<{
+	// https://github.com/e18e/eslint-plugin/blob/8faf4cf6cc048f16eaae50900f30ff88a9861e9b/src/rules/ban-dependencies.ts#L166
+	allowed: Array<string>;
+	// https://github.com/e18e/eslint-plugin/blob/8faf4cf6cc048f16eaae50900f30ff88a9861e9b/src/rules/ban-dependencies.ts#L159
+	modules: Array<string>;
+}>;
+
+export function config(options: Options): Config[] {
+	const banDependenciesOptions: E18EOptions = {};
+
+	if (options.banDependenciesAllowList) {
+		banDependenciesOptions.allowed = options.banDependenciesAllowList;
+	}
+
+	if (options.banDependenciesDisallowList) {
+		banDependenciesOptions.modules = options.banDependenciesDisallowList;
+	}
+
 	return defineConfig([
 		{
 			extends: ["e18e/recommended"],
@@ -13,6 +35,7 @@ export function config(): Config[] {
 			name: "stephansama/e18e/setup",
 			plugins: { e18e },
 			rules: {
+				"e18e/ban-dependencies": ["error", banDependenciesOptions],
 				"e18e/no-indexof-equality": "off",
 			},
 		},
@@ -21,7 +44,7 @@ export function config(): Config[] {
 			name: "stephansama/e18e",
 			plugins: { e18e },
 			rules: {
-				"e18e/ban-dependencies": "error",
+				"e18e/ban-dependencies": ["error", banDependenciesOptions],
 				"e18e/no-indexof-equality": "error",
 				"e18e/prefer-array-at": "error",
 				"e18e/prefer-array-fill": "error",

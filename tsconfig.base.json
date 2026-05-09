@@ -3,7 +3,6 @@
   "exclude": ["**/node_modules/**", "**/dist/**"],
   "include": ["./**/*"],
   "compilerOptions": {
-    "allowImportingTsExtensions": true,
     "composite": true,
     "allowJs": true,
     "isolatedModules": true,

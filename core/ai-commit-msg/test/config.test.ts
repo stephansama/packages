@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/no-abusive-eslint-disable */
+/* eslint-disable */
 import { cosmiconfig } from "cosmiconfig";
 import { afterEach, describe, expect, it, vi } from "vitest";
 

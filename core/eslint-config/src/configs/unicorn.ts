@@ -26,6 +26,7 @@ export function config(): Config[] {
 					},
 				],
 				"unicorn/require-module-specifiers": "off",
+				"unicorn/template-indent": "off",
 			},
 		},
 		{

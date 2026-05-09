@@ -1,6 +1,6 @@
 {
   "extends": ["../../tsconfig.base.json"],
-  "include": ["src", "templates"],
+  "include": ["src", "templates", "vitest.config.ts"],
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"],

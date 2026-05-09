@@ -1,4 +1,3 @@
-// eslint-disable-next-line e18e/ban-dependencies
 import { cosmiconfig, getDefaultSearchPlaces, type Options } from "cosmiconfig";
 
 import { type Config, configSchema } from "./schema";

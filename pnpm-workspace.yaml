@@ -14,8 +14,6 @@ __versions:
 autoInstallPeers: true
 
 catalog:
-  '@ai-sdk/google': ^3.0.29
-  '@ai-sdk/openai': ^3.0.29
   '@antfu/install-pkg': 1.1.0
   '@bluwy/giget-core': 0.1.6
   '@catppuccin/palette': 1.7.1
@@ -41,14 +39,12 @@ catalog:
   '@types/vfile': 4.0.0
   '@types/yargs': 17.0.35
   actions-up: 1.11.0
-  ai: ^6.0.86
   alfy: 2.1.0
   astro: 5.9.3
   cheerio: 1.2.0
   dedent: 1.7.2
   deepmerge: 4.3.1
   es-toolkit: 1.43.0
-  eslint-plugin-svelte: ^3.17.1
   happy-dom: 20.6.1
   he: 1.2.0
   jsdom: 27.4.0
@@ -68,7 +64,6 @@ catalog:
   nano-staged: 1.0.2
   neverthrow: ^8.2.0
   node-plop: 0.32.3
-  ollama-ai-provider-v2: ^1.5.5
   oxc-parser: 0.127.0
   package-manager-detector: ^1.6.0
   pkg-pr-new: 0.0.51
@@ -81,7 +76,6 @@ catalog:
   remark-toc: ^9.0.0
   remark-usage: ^11.0.1
   smol-toml: 1.6.1
-  svelte-eslint-parser: ^1.6.1
   tailwind-scrollbar: 4.0.2
   tailwindcss: 4.1.18
   taze: 19.9.2
@@ -101,6 +95,11 @@ catalog:
 catalogMode: strict
 
 catalogs:
+  ai:
+    '@ai-sdk/google': 3.0.29
+    '@ai-sdk/openai': 3.0.29
+    ai: ^6.0.86
+    ollama-ai-provider-v2: ^1.5.5
   cli:
     cleye: 2.6.0
     cosmiconfig: 9.0.0
@@ -111,10 +110,6 @@ catalogs:
     '@commitlint/cli': 19.8.1
     '@commitlint/config-conventional': 19.8.1
     '@commitlint/types': 19.8.1
-  conflicts_@dotenvx/dotenvx_h1_52_0:
-    '@dotenvx/dotenvx': ^1.52.0
-  conflicts_dedent_h1_7_1:
-    dedent: ^1.7.1
   eslint:
     '@e18e/eslint-plugin': 0.4.1
     '@eslint/css': 1.1.0
@@ -201,8 +196,6 @@ catalogs:
     '@vitest/coverage-v8': 4.0.18
     '@vitest/ui': 4.0.18
     vitest: 4.0.18
-  conflicts_commitlint_h19_8_1:
-    '@commitlint/config-conventional': ^19.8.1
 
 cleanupUnusedCatalogs: true
 

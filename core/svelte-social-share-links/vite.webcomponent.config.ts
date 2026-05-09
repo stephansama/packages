@@ -1,16 +1,17 @@
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-import { resolve } from "path";
+import path from "node:path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
 	build: {
 		lib: {
-			entry: resolve(__dirname, "dist/index.js"),
+			entry: path.resolve(__dirname, "dist/index.js"),
 			fileName: "components",
 			formats: ["iife"],
 			name: "Components",
 		},
 		outDir: "dist-js",
 	},
-	plugins: [svelte()],
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	plugins: [svelte() as any],
 });

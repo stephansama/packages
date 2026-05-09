@@ -58,9 +58,9 @@ function EventComponent() {
 		},
 	});
 
-	useListener(event, (e) => {
+	useListener(event, (payload) => {
 		console.info("hello from typed event");
-		setCount(e.data.current);
+		setCount(payload.data.current);
 	});
 
 	function handleClick() {

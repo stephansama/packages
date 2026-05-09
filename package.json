@@ -75,11 +75,11 @@
     "actions-up": "catalog:",
     "eslint-plugin-astro": "catalog:eslint",
     "eslint-plugin-jsonc": "catalog:eslint",
-    "eslint-plugin-svelte": "catalog:",
+    "eslint-plugin-svelte": "catalog:eslint",
     "eslint-plugin-zod": "catalog:eslint",
     "lefthook": "catalog:",
     "node-plop": "catalog:",
-    "svelte-eslint-parser": "catalog:",
+    "svelte-eslint-parser": "catalog:eslint",
     "taze": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",

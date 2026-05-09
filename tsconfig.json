@@ -1,5 +1,7 @@
 {
   "references": [
+    { "path": "./tsconfig.root.json" },
+    { "path": "./.config/www/tsconfig.json" },
     { "path": "./scripts/tsconfig.json" },
     { "path": "./core/ai-commit-msg/tsconfig.json" },
     { "path": "./core/alfred-kaomoji/jsconfig.json" },

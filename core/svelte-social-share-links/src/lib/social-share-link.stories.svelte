@@ -1,37 +1,38 @@
 <script module>
 	import { defineMeta } from "@storybook/addon-svelte-csf";
-	import SocialShareLink from "./SocialShareLink.svelte";
 	import { fn } from "storybook/test";
+
 	import * as networks from "./networks.json";
+	import SocialShareLink from "./social-share-link.svelte";
 
 	// More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 	const { Story } = defineMeta({
-		title: "SocialShareLink",
-		component: SocialShareLink,
-		tags: ["autodocs"],
-		argTypes: {
-			url: { type: "string" },
-			network: {
-				type: "string",
-				options: Object.keys(networks),
-				control: { type: "select" },
-			},
-			label: { type: "string" },
-			styled: { type: "boolean" },
-		},
 		args: {
 			onclick: fn(),
 		},
+		argTypes: {
+			label: { type: "string" },
+			network: {
+				control: { type: "select" },
+				options: Object.keys(networks),
+				type: "string",
+			},
+			styled: { type: "boolean" },
+			url: { type: "string" },
+		},
+		component: SocialShareLink,
+		tags: ["autodocs"],
+		title: "SocialShareLink",
 	});
 </script>
 
 <!-- More on writing stories with args: https://storybook.js.org/docs/writing-stories/args -->
 <Story
 	name="Styled"
-	args={{ url: "https://stephansama.info", network: "bluesky", styled: true }}
+	args={{ network: "bluesky", styled: true, url: "https://stephansama.info" }}
 />
 
 <Story
 	name="Unstyled"
-	args={{ url: "https://stephansama.info", network: "bluesky", styled: false }}
+	args={{ network: "bluesky", styled: false, url: "https://stephansama.info" }}
 />

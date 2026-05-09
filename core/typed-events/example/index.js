@@ -1,7 +1,5 @@
 // remark-usage-ignore-next
-/* eslint perfectionist/sort-modules: ["off"] */
-// remark-usage-ignore-next
-/* eslint perfectionist/sort-imports: ["off"] */
+/* eslint-disable perfectionist/sort-modules, import-x/no-duplicates */
 // remark-usage-ignore-next
 // eslint-disable-next-line zod/consistent-import
 import * as z from "zod";

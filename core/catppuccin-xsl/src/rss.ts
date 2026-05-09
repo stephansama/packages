@@ -5,16 +5,16 @@ import { rssSchema } from "@templates/schema";
 import { minify } from "minify";
 
 import pkg from "../package.json" with { type: "json" };
-import * as utils from "./utils";
+import * as utilities from "./utilities";
 
-const lightColors = utils.convertColors(flavors.latte.colors);
+const lightColors = utilities.convertColors(flavors.latte.colors);
 const lightStyle = await rssSchema.compile("style", lightColors);
 const darkThemes = Object.entries(flavors).filter(
 	([theme]) => theme !== "latte",
 );
 
-for (const [theme, val] of darkThemes) {
-	const colors = utils.convertColors(val.colors);
+for (const [theme, value] of darkThemes) {
+	const colors = utilities.convertColors(value.colors);
 	const currentStyle = await rssSchema.compile("style", colors);
 	const currentComment = await rssSchema.compile("comment", {
 		package_name: pkg.name,
@@ -35,5 +35,5 @@ for (const [theme, val] of darkThemes) {
 		style,
 	});
 
-	await utils.writeFile(`rss-${theme}.xsl`, xml);
+	await utilities.writeFile(`rss-${theme}.xsl`, xml);
 }

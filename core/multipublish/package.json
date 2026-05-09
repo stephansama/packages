@@ -35,8 +35,8 @@
     "./config"
   ],
   "scripts": {
-    "build": "node build.mjs",
-    "dev": "node --watch build.mjs",
+    "build": "tsx build.ts",
+    "dev": "tsx --watch build.ts",
     "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
@@ -44,11 +44,11 @@
     "@manypkg/find-root": "catalog:",
     "@manypkg/get-packages": "catalog:",
     "cosmiconfig": "catalog:cli",
-    "dedent": "^1.7.1",
+    "dedent": "catalog:",
     "obug": "catalog:cli",
-    "package-manager-detector": "^1.6.0",
+    "package-manager-detector": "catalog:",
     "tinyglobby": "catalog:",
-    "yaml": "^2.8.2",
+    "yaml": "catalog:",
     "yargs": "catalog:cli",
     "zod": "catalog:schema"
   },
@@ -56,7 +56,8 @@
     "@types/yargs": "catalog:",
     "es-toolkit": "catalog:",
     "jsr": "catalog:",
-    "tsdown": "catalog:"
+    "tsdown": "catalog:",
+    "tsx": "catalog:"
   },
   "peerDependencies": {
     "jsr": ">=0.10"

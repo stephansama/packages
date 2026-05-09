@@ -1,9 +1,9 @@
 import * as fsp from "node:fs/promises";
 import path from "node:path";
-import { build as tsdown } from "tsdown";
+import { build as tsdown, type UserConfig } from "tsdown";
 import * as z from "zod";
 
-const outputDirectory = path.resolve("./dist");
+const outDirectory = path.resolve("./dist");
 const schemaDirectory = path.resolve("./config");
 
 await build({ attw: false, entry: ["./src/index.ts"] });
@@ -18,13 +18,12 @@ const jsonString = JSON.stringify(jsonSchema);
 
 await fsp.writeFile(path.join(schemaDirectory, "schema.json"), jsonString);
 
-/** @param {import("tsdown").InlineConfig} options */
-function build(options) {
+function build(options: UserConfig) {
 	return tsdown({
 		attw: { excludeEntrypoints: ["schema.json"] },
 		exports: true,
 		format: ["esm", "cjs"],
-		outDir: outputDirectory,
+		outDir: outDirectory,
 		skipNodeModulesBundle: true,
 		target: "esnext",
 		...options,

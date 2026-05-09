@@ -1,10 +1,6 @@
 {
-  "extends": [
-    "../../tsconfig.base.json"
-  ],
-  "include": [
-    "./src/**/*"
-  ],
+  "extends": ["../../tsconfig.base.json"],
+  "include": ["./src/**/*", "build.ts", "vitest.config.ts"],
   "compilerOptions": {
     "composite": true
   }

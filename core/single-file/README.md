@@ -48,7 +48,7 @@ npx @stephansama/single-file <url> -v
 ## Usage
 
 ```javascript
-import singleFile from "@stephansama/single-file";
+import * as singleFile from "@stephansama/single-file";
 
 export async function useAPI() {
   const file = await singleFile.convertPageToSingleFile(

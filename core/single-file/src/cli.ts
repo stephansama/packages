@@ -1,7 +1,7 @@
 import { cli } from "cleye";
 import * as fs from "node:fs";
 
-import { convertPageToSingleFile } from ".";
+import { convertPageToSingleFile } from "./convert";
 import * as log from "./log";
 
 export async function run() {

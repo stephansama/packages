@@ -57,7 +57,7 @@
     "mdast": "catalog:",
     "mdast-comment-marker": "catalog:",
     "mdast-util-from-markdown": "catalog:",
-    "mdast-zone": "github:stephansama/mdast-zone#1c5b08cd97240debeed4c9c6afad49df5877a132",
+    "mdast-zone": "catalog:",
     "obug": "catalog:cli",
     "pkg-types": "catalog:",
     "remark": "catalog:",

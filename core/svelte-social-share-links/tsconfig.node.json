@@ -19,5 +19,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["vite.config.ts"]
+  "include": [
+    "vite.config.ts",
+    "vite.webcomponent.config.ts",
+    "svelte.config.js"
+  ]
 }

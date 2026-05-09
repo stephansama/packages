@@ -2,7 +2,6 @@
   "name": "@stephansama/github-env",
   "version": "1.0.2",
   "description": "[Deprecated] Additional environment variable types for GitHub CI",
-  "keywords": [],
   "homepage": "https://packages.stephansama.info/api/@stephansama/github-env",
   "repository": {
     "type": "git",
@@ -15,7 +14,10 @@
     "email": "stephanrandle.dev@gmail.com",
     "url": "https://stephansama.info"
   },
+  "sideEffects": false,
   "type": "module",
+  "exports": "./package.json",
+  "files": [],
   "scripts": {
     "lint:fix": "eslint ./ --fix"
   },

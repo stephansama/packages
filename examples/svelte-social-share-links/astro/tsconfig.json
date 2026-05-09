@@ -1,6 +1,6 @@
 {
   "extends": "astro/tsconfigs/strict",
+  "exclude": ["dist"],
   "include": [".astro/types.d.ts", "**/*"],
-  "compilerOptions": { "composite": true, "noEmit": false },
-  "exclude": ["dist"]
+  "compilerOptions": { "composite": true, "noEmit": false }
 }

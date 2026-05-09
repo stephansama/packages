@@ -2,7 +2,6 @@ import type { PlopTypes } from "@turbo/gen";
 
 import { actions, prompts } from "./utils";
 
-/* eslint-disable perfectionist/sort-objects */
 export default function generator(plop: PlopTypes.NodePlopAPI) {
 	plop.setGenerator("cli", {
 		description: "Generate a new cli package",

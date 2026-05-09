@@ -58,13 +58,16 @@ describe("schema", () => {
 				model: "gemini-2.5-flash",
 				provider: "google",
 			};
+
 			const result = configSchema.safeParse(config);
+
 			expect(result.success).toBe(true);
-			if (result.success) {
-				expect(result.data.prompt).toBe(defaultPrompt);
-				expect(result.data.useConventionalCommits).toBe(true);
-				expect(result.data.verbose).toBe(0);
-			}
+
+			if (!result.success) return;
+
+			expect(result.data.prompt).toBe(defaultPrompt);
+			expect(result.data.useConventionalCommits).toBe(true);
+			expect(result.data.verbose).toBe(0);
 		});
 
 		it("should parse full config", () => {
@@ -77,17 +80,20 @@ describe("schema", () => {
 				verbose: 2,
 			};
 			const result = configSchema.safeParse(config);
+
 			expect(result.success).toBe(true);
-			if (result.success) {
-				expect(result.data.prompt).toBe("custom prompt");
-				expect(result.data.verbose).toBe(2);
-			}
+
+			if (!result.success) return;
+
+			expect(result.data.prompt).toBe("custom prompt");
+			expect(result.data.verbose).toBe(2);
 		});
 
 		it("should fail if model is missing", () => {
 			const config = {
 				provider: "google",
 			};
+
 			const result = configSchema.safeParse(config);
 			expect(result.success).toBe(false);
 		});

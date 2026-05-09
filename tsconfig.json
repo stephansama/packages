@@ -21,6 +21,12 @@
     { "path": "./core/typed-nocodb-api/tsconfig.json" },
     { "path": "./core/typed-templates/tsconfig.json" },
     { "path": "./core/types-github-action-env/tsconfig.json" },
-    { "path": "./core/types-lhci/tsconfig.json" }
+    { "path": "./core/types-lhci/tsconfig.json" },
+    { "path": "./examples/astro-iconify-svgmap/tsconfig.json" },
+    { "path": "./examples/remark-asciinema/tsconfig.json" },
+    { "path": "./examples/svelte-social-share-links/astro/tsconfig.json" },
+    {
+      "path": "./examples/svelte-social-share-links/svelte-kit/tsconfig.json"
+    }
   ]
 }

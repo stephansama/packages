@@ -1,4 +1,3 @@
-// @ts-check
 import svelte from "@astrojs/svelte";
 import { defineConfig } from "astro/config";
 

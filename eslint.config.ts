@@ -7,7 +7,7 @@ export default await config({
 	astro: true,
 	ignore: [`./turbo/generators/**`],
 	imports: {
-		ignore: ["astro:.*"],
+		ignore: ["astro:.*", "virtual:.*"],
 		project: ["core/*/{ts,js}config.json", "examples/*/{ts,js}config.json"],
 	},
 	json: true,

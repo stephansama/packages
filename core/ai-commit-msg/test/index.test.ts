@@ -11,7 +11,7 @@ vi.mock("node:child_process");
 vi.mock("node:fs/promises");
 
 vi.mock("@dotenvx/dotenvx", () => ({
-	default: { config: vi.fn() },
+	config: vi.fn(),
 }));
 
 vi.mock("ai", () => ({

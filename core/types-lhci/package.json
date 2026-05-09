@@ -21,28 +21,26 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
-    "./env": "./types/env.d.ts",
-    "./schema.json": "./dist/schema.json"
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "files": [
     "dist",
     "types"
   ],
   "scripts": {
-    "build": "tsx ./build.ts",
-    "dev": "tsx --watch ./src/build.ts",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "devDependencies": {
     "tsdown": "catalog:",
-    "tsx": "catalog:",
     "zod": "catalog:schema"
   },
   "peerDependencies": {

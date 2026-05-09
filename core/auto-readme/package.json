@@ -28,23 +28,25 @@
   "type": "module",
   "exports": {
     ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./schema": {
       "import": "./config/schema.mjs",
       "require": "./config/schema.cjs"
     },
     "./package.json": "./package.json"
   },
-  "main": "./config/schema.cjs",
-  "module": "./config/schema.mjs",
-  "types": "./config/schema.d.cts",
+  "types": "./dist/index.d.cts",
   "bin": "./cli.mjs",
   "files": [
     "./dist",
     "./config"
   ],
   "scripts": {
-    "build": "tsx build.ts",
+    "build": "tsdown",
     "postbuild": "publint",
-    "dev": "tsx watch --include ./src build.ts",
+    "dev": "tsdown --watch",
     "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
@@ -79,7 +81,6 @@
     "@types/yargs": "catalog:",
     "picospinner": "catalog:cli",
     "tsdown": "catalog:",
-    "tsx": "catalog:",
     "unified": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",
@@ -89,5 +90,7 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs"
 }

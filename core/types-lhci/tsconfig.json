@@ -4,5 +4,5 @@
     "composite": true,
     "types": ["node"]
   },
-  "include": ["./src/**/*", "build.ts", "types"]
+  "include": ["./src/**/*", "tsdown.config.ts", "types"]
 }

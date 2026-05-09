@@ -35,8 +35,8 @@
     "./config"
   ],
   "scripts": {
-    "build": "tsx build.ts",
-    "dev": "tsx --watch build.ts",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },

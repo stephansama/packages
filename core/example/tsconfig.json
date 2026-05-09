@@ -1,6 +1,7 @@
 {
   "extends": ["../../tsconfig.base.json"],
   "include": ["./src/**/*", "tsdown.config.ts"],
+  "files": ["../../scripts/dist/examples.js"],
   "compilerOptions": {
     "composite": true
   }

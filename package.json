@@ -39,7 +39,7 @@
     "@commitlint/cli": "catalog:commitlint",
     "@commitlint/config-conventional": "catalog:commitlint",
     "@commitlint/types": "catalog:commitlint",
-    "@manypkg/get-packages": "catalog:",
+    "@manypkg/get-packages": "catalog:manypkg",
     "@stephansama/ai-commit-msg": "workspace:*",
     "@stephansama/auto-readme": "workspace:*",
     "@stephansama/eslint-config": "workspace:*",

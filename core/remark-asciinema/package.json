@@ -42,7 +42,7 @@
     "prepublishOnly": "tsdown"
   },
   "devDependencies": {
-    "remark": "catalog:",
+    "remark": "catalog:remark",
     "tsdown": "catalog:",
     "unist-util-visit": "catalog:"
   },

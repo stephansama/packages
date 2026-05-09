@@ -16,9 +16,9 @@
     "storybook": "tsx ./src/storybook.ts"
   },
   "devDependencies": {
-    "@manypkg/find-root": "catalog:",
-    "@manypkg/get-packages": "catalog:",
-    "@manypkg/tools": "catalog:",
+    "@manypkg/find-root": "catalog:manypkg",
+    "@manypkg/get-packages": "catalog:manypkg",
+    "@manypkg/tools": "catalog:manypkg",
     "tsx": "catalog:"
   },
   "engines": {

@@ -16,7 +16,7 @@ type E18EOptions = Partial<{
 	modules: Array<string>;
 }>;
 
-export function config(options: Options): Config[] {
+export function config(options: Options = {}): Config[] {
 	const banDependenciesOptions: E18EOptions = {};
 
 	if (options.banDependenciesAllowList) {

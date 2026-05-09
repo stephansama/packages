@@ -41,8 +41,8 @@
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
-    "@manypkg/find-root": "catalog:",
-    "@manypkg/get-packages": "catalog:",
+    "@manypkg/find-root": "catalog:manypkg",
+    "@manypkg/get-packages": "catalog:manypkg",
     "cosmiconfig": "catalog:cli",
     "dedent": "catalog:",
     "obug": "catalog:cli",

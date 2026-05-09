@@ -7,8 +7,6 @@ commit-msg:
 pre-commit:
   parallel: false
   jobs:
-    - run: nano-staged -c ./.nanostagedrc.mjs -v
-      name: Lint staged
     - run: auto-readme -vg
       name: Update README
     - run: pnpm --filter=@stephansama/scripts lint-examples

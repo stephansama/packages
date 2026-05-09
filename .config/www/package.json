@@ -12,6 +12,7 @@
     "lint:fix": "eslint ./ --fix",
     "preview": "vitepress preview",
     "setup": "pnpm run --sequential \"/^setup:.*/\"",
+    "presetup:eslint-config-inspector": "pnpm --filter=@stephansama/eslint-config run build",
     "setup:eslint-config-inspector": "eslint-config-inspector build --base /eslint --outDir public/eslint",
     "setup:examples": "pnpm --filter=scripts generate-examples",
     "setup:healthcheck": "node -e \"console.log(JSON.stringify({message: Date.now()}))\" >public/healthcheck.json",

@@ -79,6 +79,7 @@
     "@types/yargs": "catalog:",
     "picospinner": "catalog:cli",
     "tsdown": "catalog:",
+    "tsx": "catalog:",
     "unified": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",

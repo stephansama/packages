@@ -2,6 +2,7 @@
 **/.vitepress/cache
 **/coverage/
 *.bak
+*.tsbuildinfo
 *storybook.log
 .DS_Store
 .astro

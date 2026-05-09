@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "add-socket": "tsx ./src/add-socket.ts",
+    "build": "pnpm run generate-examples",
     "build-www": "tsx ./src/build-www.ts",
     "generate-examples": "tsx ./src/generate-examples.ts",
     "lint:fix": "eslint ./ --fix",

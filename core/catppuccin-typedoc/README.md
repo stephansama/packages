@@ -1,4 +1,8 @@
-# @stephansama/catppuccin-typedoc
+<div align="center">
+
+# [`@stephansama`](https://github.com/stephansama) / catppuccin-typedoc
+
+</div>
 
 [![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/catppuccin-typedoc)
 [![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/catppuccin-typedoc)

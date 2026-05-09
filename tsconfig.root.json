@@ -1,6 +1,11 @@
 {
-  "extends": "./tsconfig.base.json",
-  "include": ["./.config/knip.ts", "./.config/.commitlintrc.ts"],
+  "extends": ["./tsconfig.base.json"],
+  "include": [
+    "./.config/knip.ts",
+    "./.config/.commitlintrc.ts",
+    "monoman.config.ts",
+    "eslint.config.ts"
+  ],
   "compilerOptions": {
     "composite": true,
     "noEmit": false,

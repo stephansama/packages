@@ -20,4 +20,4 @@ const updatedSidebar = sidebarJson.map((current) => ({
 const updatedSidebarFile = JSON.stringify(updatedSidebar);
 await fs.promises.writeFile(sidebarPath, updatedSidebarFile, "utf8");
 
-console.info(updatedSidebar);
+console.info("removed @stephansama scope from sidebar");

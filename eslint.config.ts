@@ -54,6 +54,7 @@ export default await config({
 			rules: {
 				"e18e/no-indexof-equality": "off",
 				"markdown/heading-increment": "off",
+				"markdown/no-missing-label-refs": "off",
 				"markdown/no-multiple-h1": "off",
 				"markdown/no-space-in-emphasis": "warn",
 				"no-irregular-whitespace": "off",

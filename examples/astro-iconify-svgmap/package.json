@@ -4,7 +4,9 @@
   "private": true,
   "description": "Example astro site using iconify svgmap",
   "repository": {
-    "url": "git+https://github.com/stephansama/packages.git"
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "examples/astro-iconify-svgmap"
   },
   "type": "module",
   "scripts": {

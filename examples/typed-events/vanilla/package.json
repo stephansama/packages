@@ -3,7 +3,9 @@
   "version": "1.2.3",
   "private": true,
   "repository": {
-    "url": "git+https://github.com/stephansama/packages.git"
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "examples/typed-events/vanilla"
   },
   "type": "module",
   "scripts": {

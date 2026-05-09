@@ -9,5 +9,6 @@
   "skipErrorChecking": true,
   "jsDocCompatibility": true,
   "entryPointStrategy": "packages",
+  "exclude": ["tsdown.config.ts"],
   "entryPoints": ["../../core/*"]
 }

@@ -7,9 +7,9 @@ export default defineConfig([
 	{
 		attw: true,
 		dts: true,
-		format: ["esm", "cjs"],
 		entry: "./src/index.ts",
 		exports: true,
+		format: ["esm", "cjs"],
 		hooks: {
 			async "build:done"() {
 				const schema = await import("./dist/index.mjs");

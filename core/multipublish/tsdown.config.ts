@@ -16,7 +16,7 @@ export default defineConfig({
 	exports: {
 		bin: true,
 		customExports(exports) {
-			exports["./schema.json"] = "./config/schema.json";
+			exports["./schema.json"] = "./dist/schema.json";
 
 			return Object.fromEntries(
 				Object.entries(exports).toSorted(([keyA], [keyB]) =>
@@ -29,10 +29,10 @@ export default defineConfig({
 	format: "esm",
 	hooks: {
 		async "build:done"() {
-			const { configSchema } = await import("./config/schema.mjs");
+			const { configSchema } = await import("./dist/schema.mjs");
 			const jsonSchema = z.toJSONSchema(configSchema);
 			const jsonString = JSON.stringify(jsonSchema);
-			const jsonPath = path.join("./config/", "schema.json");
+			const jsonPath = path.join("./dist/", "schema.json");
 			await fs.promises.writeFile(jsonPath, jsonString);
 		},
 	},

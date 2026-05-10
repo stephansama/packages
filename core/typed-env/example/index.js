@@ -3,7 +3,7 @@
 // eslint-disable-next-line zod/consistent-import
 import * as z from "zod";
 
-import { createEnvironment } from "../dist/index.cjs";
+import { createEnvironment } from "../dist/index.mjs";
 
 export const config = createEnvironment(
 	z.object({

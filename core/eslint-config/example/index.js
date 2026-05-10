@@ -1,4 +1,4 @@
-import { config, presets } from "../dist/index.cjs";
+import { config, presets } from "../dist/index.mjs";
 
 const loadConfig = async () =>
 	await config({

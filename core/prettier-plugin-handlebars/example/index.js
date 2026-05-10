@@ -1,4 +1,4 @@
-import prettierPluginHandlebars from "../dist/index.cjs";
+import prettierPluginHandlebars from "../dist/index.mjs";
 
 /** @type {import("prettier").Config} */
 export default {

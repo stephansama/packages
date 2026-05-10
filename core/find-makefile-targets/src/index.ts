@@ -1,6 +1,10 @@
+#!/usr/bin/env node
+
 import parser from "@kba/makefile-parser";
 import * as fsp from "node:fs/promises";
 import path from "node:path";
+
+await main();
 
 export async function main() {
 	const input = process.argv.at(2);

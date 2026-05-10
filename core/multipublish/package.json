@@ -20,17 +20,16 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./config/schema.mjs",
-      "require": "./config/schema.cjs"
-    },
+    ".": "./dist/index.mjs",
+    "./cli": "./dist/cli.mjs",
     "./package.json": "./package.json",
+    "./schema": "./dist/schema.mjs",
     "./schema.json": "./config/schema.json"
   },
-  "main": "./config/schema.cjs",
-  "module": "./config/schema.mjs",
   "types": "./config/schema.d.cts",
-  "bin": "./cli.mjs",
+  "bin": {
+    "multipublish": "./dist/cli.mjs"
+  },
   "files": [
     "./dist",
     "./config"

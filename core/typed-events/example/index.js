@@ -9,7 +9,7 @@ import * as z from "zod";
 // create a typed [`CustomEvent`](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent)
 // using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
 // <details><summary>open example</summary>
-import { createEvent } from "../dist/index.cjs";
+import { createEvent } from "../dist/index.mjs";
 
 export const customAnimationEvent = createEvent(
 	"custom-animation-event",
@@ -51,7 +51,7 @@ export function dispatchEvent() {
 // ### createEventMap
 //
 // <details><summary>open example</summary>
-import { createEventMap } from "../dist/index.cjs";
+import { createEventMap } from "../dist/index.mjs";
 
 export const eventMap = createEventMap("event-map", {
 	reset: z.object({}),
@@ -87,7 +87,7 @@ export function dispatchEventMap() {
 // using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
 //
 // <details><summary>open example</summary>
-import { createBroadcastChannel } from "../dist/index.cjs";
+import { createBroadcastChannel } from "../dist/index.mjs";
 
 export const channel = createBroadcastChannel("broadcaster", {
 	reset: z.object({}),
@@ -124,7 +124,7 @@ export function dispatchChannelMessage() {
 // using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
 //
 // <details><summary>open example</summary>
-import { createBroadcastEvent } from "../dist/index.cjs";
+import { createBroadcastEvent } from "../dist/index.mjs";
 
 export const broadcastEvent = createBroadcastEvent("broadcaster", {
 	reset: z.object({}),
@@ -160,7 +160,7 @@ export function dispatchBroadcastEvent() {
 // using a [standard-schema](https://github.com/standard-schema/standard-schema) compatible validator
 //
 // <details><summary>open example</summary>
-import { createMessage } from "../dist/index.cjs";
+import { createMessage } from "../dist/index.mjs";
 
 export const message = createMessage("event-map", {
 	reset: z.object({}),
@@ -195,7 +195,7 @@ export function dispatchMessage() {
 // you can use `useListener` or `useListeners` to automatically register and cleanup typed event listeners
 //
 // <details><summary>open example</summary>
-import { useListeners } from "../dist/react.cjs";
+import { useListeners } from "../dist/react.mjs";
 
 const map = createBroadcastEvent("react-example", {
 	first: z.object({}),

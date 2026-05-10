@@ -8,7 +8,11 @@ export default await config({
 	e18e: {
 		banDependenciesAllowList: ["cosmiconfig"],
 	},
-	ignore: [`./turbo/generators/**`, `./.config/www/api/**`],
+	ignore: [
+		`**/__snapshots__/**`,
+		`./.config/www/api/**`,
+		`./turbo/generators/**`,
+	],
 	imports: {
 		ignore: ["astro:.*", "virtual:.*", "$app/state"],
 		noWarnOnMultipleProjects: true,
@@ -17,7 +21,7 @@ export default await config({
 	json: true,
 	markdown: true,
 	node: {
-		allowModules: ["vitest", "@manypkg/get-packages"],
+		allowModules: ["vitest", "@manypkg/get-packages", "tsnapi"],
 	},
 	svelte: true,
 	vitest: true,

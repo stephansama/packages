@@ -1,27 +1,20 @@
 import { defineConfig } from "tsdown";
+import ApiSnapshot from "tsnapi/rolldown";
 
-export default defineConfig([
-	{
-		attw: true,
-		dts: true,
-		entry: ["src/index.ts"],
-		exports: true,
-		format: ["esm", "cjs"],
-		publint: true,
-		target: "esnext",
+export default defineConfig({
+	attw: { profile: "esm-only" },
+	dts: true,
+	entry: {
+		cli: "./src/cli/index.ts",
+		index: "./src/index.ts",
 	},
-	{
-		attw: {
-			profile: "node16",
-		},
-		entry: {
-			cli: "./src/cli/index.ts",
-		},
-		exports: {
-			bin: true,
-			enabled: true,
-		},
-		format: ["esm", "cjs"],
-		target: "esnext",
+	exports: {
+		bin: "./src/cli/index.ts",
+		enabled: true,
+		legacy: true,
 	},
-]);
+	format: ["esm"],
+	plugins: [ApiSnapshot()],
+	publint: true,
+	target: "esnext",
+});

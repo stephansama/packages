@@ -1,3 +1,5 @@
 #!/usr/bin/env node
 
-export { run } from "./run";
+import { run } from "./run";
+
+await run();

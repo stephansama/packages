@@ -20,12 +20,14 @@
   "sideEffects": true,
   "type": "module",
   "exports": {
-    ".": "./dist/index.cjs",
+    ".": "./dist/index.mjs",
+    "./cli": "./dist/cli.mjs",
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "types": "./dist/index.d.cts",
-  "bin": "./cli.mjs",
+  "types": "./dist/index.d.mts",
+  "bin": {
+    "create-stephansama-example": "./dist/cli.mjs"
+  },
   "files": [
     "./dist"
   ],

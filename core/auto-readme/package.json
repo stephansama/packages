@@ -27,24 +27,20 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    },
-    "./schema": {
-      "import": "./config/schema.mjs",
-      "require": "./config/schema.cjs"
-    },
+    ".": "./dist/index.mjs",
+    "./cli": "./dist/cli.mjs",
     "./package.json": "./package.json",
-    "./schema.json": "./config/schema.json"
+    "./schema": "./dist/schema.mjs",
+    "./schema.json": "./dist/schema.json"
   },
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.cts",
-  "bin": "./cli.mjs",
+  "types": "./dist/index.d.mts",
+  "bin": {
+    "auto-readme": "./dist/cli.mjs"
+  },
   "files": [
-    "./dist",
-    "./config"
+    "./dist"
   ],
   "scripts": {
     "build": "tsdown",

@@ -1,5 +1,5 @@
 {
-  "$schema": "../node_modules/@stephansama/auto-readme/config/schema.json",
+  "$schema": "../node_modules/@stephansama/auto-readme/dist/schema.json",
   "usageFile": "./example/index.js",
   "collapseHeadings": ["Configuration File", "Schema"],
   "enablePrettier": false,

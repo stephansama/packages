@@ -24,19 +24,13 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    },
-    "./cli": {
-      "import": "./dist/cli.mjs",
-      "require": "./dist/cli.cjs"
-    },
+    ".": "./dist/index.mjs",
+    "./cli": "./dist/cli.mjs",
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.cts",
+  "types": "./dist/index.d.mts",
   "bin": {
     "eslint-config": "./dist/cli.mjs"
   },
@@ -47,7 +41,8 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix",
+    "snapshot:update": "tsnapi -u"
   },
   "dependencies": {
     "@antfu/install-pkg": "catalog:",
@@ -92,7 +87,8 @@
     "eslint-plugin-zod": "catalog:eslint",
     "local-pkg": "catalog:",
     "svelte-eslint-parser": "catalog:eslint",
-    "tsdown": "catalog:"
+    "tsdown": "catalog:",
+    "tsnapi": "catalog:typescript"
   },
   "peerDependencies": {
     "@eslint/css": "catalog:eslint",
@@ -143,7 +139,8 @@
     "node": ">=24"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "inlinedDependencies": {
     "acorn": "8.16.0",

@@ -1,6 +1,6 @@
 import { remark } from "remark";
 
-import asciinema from "../dist/index.cjs";
+import asciinema from "../dist/index.mjs";
 
 export async function pipeline() {
 	const file = await remark()

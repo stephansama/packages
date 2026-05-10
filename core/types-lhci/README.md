@@ -33,7 +33,7 @@ pnpm install @stephansama/types-lhci
 ```javascript
 import { lhciSchema } from "@stephansama/types-lhci";
 
-/** @type {import("../dist/index.d.cts").LhciSchema} */
+/** @type {import("../dist/index.mjs").LhciSchema} */
 const config = {
   ci: {
     upload: {

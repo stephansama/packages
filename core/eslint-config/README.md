@@ -27,6 +27,8 @@ A modular, composable ESLint flat config package with 25+ configs covering JavaS
   - [Testing & Validation](#testing--validation)
   - [File Formats (async)](#file-formats-async)
 - [Presets](#presets)
+- [CLI Commands](#cli-commands)
+  - [CLI Flags](#cli-flags)
 - [Usage](#usage)
 
 </details>
@@ -119,6 +121,19 @@ export default config({
   node: true,
 });
 ```
+
+## CLI Commands
+
+- `generate`: Generates an ESLint config based on interactive prompts.
+- `update`: Updates ESLint dependencies to match current config options.
+
+### CLI Flags
+
+| Flag             | Alias | Command  | Description                           | Default            |
+| :--------------- | :---- | :------- | :------------------------------------ | :----------------- |
+| `--config`       | `-c`  | Both     | Location of ESLint configuration file | `eslint.config.ts` |
+| `--verbose`      | `-v`  | Both     | Enable verbose output                 |                    |
+| `--package-json` | `-p`  | `update` | Location of `package.json` to update  | `package.json`     |
 
 ## Usage
 

@@ -18,6 +18,7 @@ Publish packages to multiple providers easily
 <details><summary>Open Table of contents</summary>
 
 - [Installation](#installation)
+- [CLI Options](#cli-options)
 - [Usage](#usage)
   - [Configuration](#configuration)
   - [GitHub NPM Registry](#github-npm-registry)
@@ -33,6 +34,18 @@ Publish packages to multiple providers easily
 ```sh
 pnpm install @stephansama/multipublish
 ```
+
+## CLI Options
+
+| Option                 | Alias | Description                                           | Type      |
+| :--------------------- | :---- | :---------------------------------------------------- | :-------- |
+| `--config`             | `-c`  | Path to config file                                   | `string`  |
+| `--dry`                | `-d`  | Perform a dry run                                     | `boolean` |
+| `--released`           | `-r`  | Packages that have been updated and require a publish | `array`   |
+| `--releasedFile`       | `-f`  | File denoting which packages have been updated        | `string`  |
+| `--useChangesetStatus` | `-s`  | Path to changeset status file used to version release | `boolean` |
+| `--verbose`            | `-v`  | Enable verbose logging                                | `boolean` |
+| `--versionJsr`         | `-j`  | Update version JSR configuration files                | `boolean` |
 
 ## Usage
 

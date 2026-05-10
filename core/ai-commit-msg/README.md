@@ -18,6 +18,7 @@ generate commit messages using ai
 <details><summary>Open Table of contents</summary>
 
 - [Installation](#installation)
+- [CLI Options](#cli-options)
 - [Usage](#usage)
   - [Husky](#husky)
 
@@ -28,6 +29,14 @@ generate commit messages using ai
 ```sh
 pnpm install @stephansama/ai-commit-msg
 ```
+
+## CLI Options
+
+| Option      | Alias | Description                | Type      |
+| :---------- | :---- | :------------------------- | :-------- |
+| `--config`  | `-c`  | Path to config file        | `string`  |
+| `--output`  | `-o`  | Output file for commit-msg | `string`  |
+| `--verbose` | `-v`  | Enable verbose logging     | `boolean` |
 
 ## Usage
 

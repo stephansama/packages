@@ -8,7 +8,7 @@ description: >
   files from a schema shape.
 type: core
 library: "@stephansama/typed-env"
-library_version: "1.0.0"
+library_version: "0.0.7"
 sources:
   - stephansama/packages:core/typed-env/src/index.ts
   - stephansama/packages:core/typed-env/README.md
@@ -62,7 +62,7 @@ const config = await env.validate();
 ### Generate a .env.example file
 
 ```ts
-import { generateExample } from "./env";
+import { env } from "./env";
 
 // writes placeholder values (***) for each key in the schema
 await env.generateExample(".env.example");

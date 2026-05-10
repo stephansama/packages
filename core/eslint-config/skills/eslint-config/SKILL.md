@@ -9,7 +9,7 @@ description: >
   Use overrides/overrides_prepend for project-specific rules.
 type: core
 library: "@stephansama/eslint-config"
-library_version: "1.0.0"
+library_version: "0.2.1"
 sources:
   - stephansama/packages:core/eslint-config/src/builder.ts
   - stephansama/packages:core/eslint-config/src/auto.ts

@@ -16,9 +16,9 @@ sources:
   - stephansama/packages:core/typed-events/README.md
 ---
 
-This skill builds on `typed-events`. Read it first for foundational concepts including factory selection, cleanup patterns, and SSR behaviour.
-
 # typed-events — React
+
+This skill builds on `typed-events`. Read it first for foundational concepts including factory selection, cleanup patterns, and SSR behaviour.
 
 ## Setup
 

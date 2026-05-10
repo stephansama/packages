@@ -8,7 +8,7 @@ description: >
   compile(key, data) validates data then renders. Supports zod, valibot, arktype only.
 type: core
 library: "@stephansama/typed-templates"
-library_version: "1.0.0"
+library_version: "1.1.6"
 sources:
   - stephansama/packages:core/typed-templates/src/map.ts
   - stephansama/packages:core/typed-templates/src/singleton.ts

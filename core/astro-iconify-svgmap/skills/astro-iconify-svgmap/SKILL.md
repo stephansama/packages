@@ -30,7 +30,7 @@ Generates SVG sprite maps from Iconify icon packs at build time and serves them 
 pnpm add @stephansama/astro-iconify-svgmap @iconify-json/mdi
 ```
 
-2. Add to `astro.config.mjs`:
+1. Add to `astro.config.mjs`:
 
 ```js
 import { createIntegration } from "@stephansama/astro-iconify-svgmap";
@@ -41,7 +41,7 @@ export default defineConfig({
 });
 ```
 
-3. Import the virtual module in your base layout (this activates the Vite plugin):
+1. Import the virtual module in your base layout (this activates the Vite plugin):
 
 ```astro
 ---
@@ -50,7 +50,7 @@ import "virtual:iconify-svgmap";
 ---
 ```
 
-4. Use icons in any `.astro` component:
+1. Use icons in any `.astro` component:
 
 ```astro
 ---

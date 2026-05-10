@@ -8,7 +8,7 @@ description: >
   multipublish key.
 type: core
 library: "@stephansama/multipublish"
-library_version: "1.0.0"
+library_version: "1.0.11"
 sources:
   - stephansama/packages:core/multipublish/src/publish.ts
   - stephansama/packages:core/multipublish/src/jsr.ts
@@ -153,7 +153,7 @@ Source: `core/multipublish/src/publish.ts`
 
 Wrong:
 
-```
+```text
 packages/my-pkg/
   deno.json
   jsr.json   ← both exist

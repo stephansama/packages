@@ -8,7 +8,7 @@ description: >
   google or OPENAI_API_KEY for openai. Use skipNextRun to bypass a single hook run.
 type: core
 library: "@stephansama/ai-commit-msg"
-library_version: "1.0.0"
+library_version: "1.0.7"
 sources:
   - stephansama/packages:core/ai-commit-msg/src/index.ts
   - stephansama/packages:core/ai-commit-msg/src/schema.ts
@@ -29,14 +29,14 @@ Writes an AI-generated conventional commit message to the `COMMIT_EDITMSG` file 
 npm install --save-dev husky && npx husky init
 ```
 
-2. Create `.husky/prepare-commit-msg`:
+1. Create `.husky/prepare-commit-msg`:
 
 ```sh
 #!/bin/sh
 ai-commit-msg -o "$1"
 ```
 
-3. Create a config file at `ai-commit-msg.config.ts` (or `package.json` key `ai-commit-msg`):
+1. Create a config file at `ai-commit-msg.config.ts` (or `package.json` key `ai-commit-msg`):
 
 ```ts
 // ai-commit-msg.config.ts
@@ -46,7 +46,7 @@ export default {
 };
 ```
 
-4. Set the required environment variable:
+1. Set the required environment variable:
 
 ```sh
 export GOOGLE_GENERATIVE_AI_API_KEY=your-key

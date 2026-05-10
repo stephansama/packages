@@ -1,5 +1,11 @@
 # @stephansama/typed-env
 
+## 0.0.8
+
+### Patch Changes
+
+- ce47508: added cross agent skill to packages
+
 ## 0.0.7
 
 ### Patch Changes

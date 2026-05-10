@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 3.0.10
+
+### Patch Changes
+
+- ce47508: added cross agent skill to packages
+
 ## 3.0.9
 
 ### Patch Changes

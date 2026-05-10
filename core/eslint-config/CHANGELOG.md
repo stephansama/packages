@@ -1,5 +1,11 @@
 # @stephansama/eslint-config
 
+## 0.2.2
+
+### Patch Changes
+
+- ce47508: added cross agent skill to packages
+
 ## 0.2.1
 
 ### Patch Changes

@@ -1,6 +1,7 @@
 import * as fs from "node:fs";
 import path from "node:path";
 import { defineConfig } from "tsdown";
+import ApiSnapshot from "tsnapi/rolldown";
 import * as z from "zod";
 
 export default defineConfig([
@@ -10,6 +11,7 @@ export default defineConfig([
 		entry: "./src/index.ts",
 		exports: true,
 		format: ["esm", "cjs"],
+		plugins: [ApiSnapshot()],
 		publint: false,
 		skipNodeModulesBundle: true,
 		target: "esnext",

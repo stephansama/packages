@@ -1,4 +1,5 @@
 import { defineConfig } from "tsdown";
+import ApiSnapshot from "tsnapi/rolldown";
 
 export default defineConfig({
 	attw: { profile: "node16" },
@@ -7,6 +8,7 @@ export default defineConfig({
 	exports: true,
 	format: ["esm", "cjs"],
 	noExternal: ["nanoid"],
+	plugins: [ApiSnapshot()],
 	publint: true,
 	target: "esnext",
 });

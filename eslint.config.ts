@@ -17,7 +17,7 @@ export default await config({
 	json: true,
 	markdown: true,
 	node: {
-		allowModules: ["vitest", "@manypkg/get-packages"],
+		allowModules: ["vitest", "@manypkg/get-packages", "tsnapi"],
 	},
 	svelte: true,
 	vitest: true,

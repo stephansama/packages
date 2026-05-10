@@ -190,6 +190,8 @@ catalogs:
     typedoc: 0.28.10
     typedoc-plugin-markdown: 4.8.1
     typedoc-vitepress-theme: 1.1.2
+  typescript:
+    tsnapi: ^0.3.2
   vitepress:
     '@catppuccin/vitepress': 0.1.2
     vitepress: 1.6.4
@@ -209,6 +211,7 @@ ignoredBuiltDependencies:
   - core-js-pure
   - highlight.js
   - sharp
+  - unrs-resolver
   - workerd
 
 onlyBuiltDependencies:

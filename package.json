@@ -65,6 +65,7 @@
     "prettier-plugin-svelte": "catalog:prettier",
     "prettier-plugin-tailwindcss": "catalog:prettier",
     "publint": "catalog:",
+    "tsnapi": "catalog:typescript",
     "turbo": "catalog:turbo",
     "typescript": "catalog:",
     "vitest": "catalog:vitest"

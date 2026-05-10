@@ -8,7 +8,11 @@ export default await config({
 	e18e: {
 		banDependenciesAllowList: ["cosmiconfig"],
 	},
-	ignore: [`./turbo/generators/**`, `./.config/www/api/**`],
+	ignore: [
+		`**/__snapshots__/**`,
+		`./.config/www/api/**`,
+		`./turbo/generators/**`,
+	],
 	imports: {
 		ignore: ["astro:.*", "virtual:.*", "$app/state"],
 		noWarnOnMultipleProjects: true,

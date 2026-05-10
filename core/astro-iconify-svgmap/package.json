@@ -50,10 +50,10 @@
   "devDependencies": {
     "@iconify/types": "catalog:",
     "@iconify/utils": "catalog:",
+    "@tanstack/intent": "catalog:tanstack",
     "astro": "catalog:",
     "tsdown": "catalog:",
-    "vite": "catalog:",
-    "@tanstack/intent": "catalog:tanstack"
+    "vite": "catalog:"
   },
   "peerDependencies": {
     "astro": "catalog:",

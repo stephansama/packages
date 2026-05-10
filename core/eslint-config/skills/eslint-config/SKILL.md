@@ -8,7 +8,7 @@ description: >
   svelte, lit, storybook, typescript, zod, prettier, vue). Returns Promise<Config[]>.
   Use overrides/overrides_prepend for project-specific rules.
 type: core
-library: '@stephansama/eslint-config'
+library: "@stephansama/eslint-config"
 library_version: "1.0.0"
 sources:
   - stephansama/packages:core/eslint-config/src/builder.ts
@@ -26,7 +26,7 @@ Modular ESLint flat config with 25+ composable configs and auto-detection of ins
 
 ```js
 // eslint.config.js
-import { config, presets } from '@stephansama/eslint-config';
+import { config, presets } from "@stephansama/eslint-config";
 
 export default config({
   ...presets.base,
@@ -42,7 +42,7 @@ export default config({
 ### Library package configuration
 
 ```js
-import { config, presets } from '@stephansama/eslint-config';
+import { config, presets } from "@stephansama/eslint-config";
 
 export default config({
   ...presets.base,
@@ -54,12 +54,12 @@ export default config({
 ### Framework-specific config
 
 ```js
-import { config, presets } from '@stephansama/eslint-config';
+import { config, presets } from "@stephansama/eslint-config";
 
 export default config({
   ...presets.base,
-  astro: true,   // auto-enabled if astro is installed
-  svelte: true,  // auto-enabled if svelte is installed
+  astro: true, // auto-enabled if astro is installed
+  svelte: true, // auto-enabled if svelte is installed
   vitest: true,
 });
 ```
@@ -67,20 +67,20 @@ export default config({
 ### Project-specific rule overrides
 
 ```js
-import { config, presets } from '@stephansama/eslint-config';
+import { config, presets } from "@stephansama/eslint-config";
 
 export default config({
   ...presets.base,
   overrides: [
     {
       rules: {
-        'unicorn/filename-case': 'off',
+        "unicorn/filename-case": "off",
       },
     },
   ],
   overrides_prepend: [
     {
-      ignores: ['generated/**'],
+      ignores: ["generated/**"],
     },
   ],
 });
@@ -157,7 +157,7 @@ Correct:
 ```js
 export default config({
   ...presets.base,
-  typescript: { project: './tsconfig.json' },
+  typescript: { project: "./tsconfig.json" },
 });
 ```
 

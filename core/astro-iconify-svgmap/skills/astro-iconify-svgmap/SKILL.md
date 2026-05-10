@@ -9,7 +9,7 @@ description: >
 type: framework
 requires:
   - astro
-library: '@stephansama/astro-iconify-svgmap'
+library: "@stephansama/astro-iconify-svgmap"
 library_version: "1.0.14"
 sources:
   - stephansama/packages:core/astro-iconify-svgmap/src/index.ts
@@ -33,8 +33,8 @@ pnpm add @stephansama/astro-iconify-svgmap @iconify-json/mdi
 2. Add to `astro.config.mjs`:
 
 ```js
-import { createIntegration } from '@stephansama/astro-iconify-svgmap';
-import { defineConfig } from 'astro/config';
+import { createIntegration } from "@stephansama/astro-iconify-svgmap";
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
   integrations: [createIntegration()],
@@ -46,7 +46,7 @@ export default defineConfig({
 ```astro
 ---
 // src/layouts/BaseLayout.astro
-import 'virtual:iconify-svgmap';
+import "virtual:iconify-svgmap";
 ---
 ```
 
@@ -54,13 +54,13 @@ import 'virtual:iconify-svgmap';
 
 ```astro
 ---
-import { getIcon } from '@stephansama/astro-iconify-svgmap/get';
+import { getIcon } from "@stephansama/astro-iconify-svgmap/get";
 
-const iconHref = await getIcon('mdi', 'home');
+const iconHref = await getIcon("mdi", "home");
 ---
 
 <svg width="24" height="24">
-  <use href={iconHref} />
+  <use href={iconHref}></use>
 </svg>
 ```
 
@@ -70,13 +70,13 @@ const iconHref = await getIcon('mdi', 'home');
 
 ```astro
 ---
-import { getIcon } from '@stephansama/astro-iconify-svgmap/get';
+import { getIcon } from "@stephansama/astro-iconify-svgmap/get";
 
-const href = await getIcon('mdi', 'account');
+const href = await getIcon("mdi", "account");
 ---
 
 <svg width="24" height="24" aria-hidden="true">
-  <use href={href} />
+  <use href={href}></use>
 </svg>
 ```
 
@@ -86,13 +86,13 @@ const href = await getIcon('mdi', 'account');
 
 ```js
 // astro.config.mjs — inside a pnpm monorepo where icons are in the workspace root
-import { createIntegration } from '@stephansama/astro-iconify-svgmap';
-import { defineConfig } from 'astro/config';
+import { createIntegration } from "@stephansama/astro-iconify-svgmap";
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
   integrations: [
     createIntegration({
-      iconifyRootDirectory: new URL('../../', import.meta.url),
+      iconifyRootDirectory: new URL("../../", import.meta.url),
     }),
   ],
 });
@@ -103,7 +103,7 @@ export default defineConfig({
 ### Custom output directory
 
 ```js
-createIntegration({ outDir: 'public/icons' })
+createIntegration({ outDir: "public/icons" });
 ```
 
 Sprites are written to `<outDir>/<pack>.svg` at build time. Default is `public`.
@@ -114,7 +114,7 @@ Sprites are written to `<outDir>/<pack>.svg` at build time. Default is `public`.
 
 ## Common Mistakes
 
-### CRITICAL No @iconify-json/* packages installed
+### CRITICAL No @iconify-json/\* packages installed
 
 Wrong:
 
@@ -125,7 +125,7 @@ pnpm add @stephansama/astro-iconify-svgmap
 
 ```astro
 ---
-const href = await getIcon('mdi', 'home');
+const href = await getIcon("mdi", "home");
 // loadIcons finds no @iconify-json/mdi → sprite is empty
 ---
 ```
@@ -147,8 +147,8 @@ Wrong:
 ```astro
 ---
 // BaseLayout.astro — virtual module never imported
-import { getIcon } from '@stephansama/astro-iconify-svgmap/get';
-const href = await getIcon('mdi', 'home');
+import { getIcon } from "@stephansama/astro-iconify-svgmap/get";
+const href = await getIcon("mdi", "home");
 ---
 ```
 
@@ -156,7 +156,7 @@ Correct:
 
 ```astro
 ---
-import 'virtual:iconify-svgmap';
+import "virtual:iconify-svgmap";
 ---
 ```
 
@@ -169,12 +169,12 @@ Source: `core/astro-iconify-svgmap/src/index.ts`
 Wrong:
 
 ```js
-import createPlugin from '@stephansama/astro-iconify-svgmap';
-import { defineConfig } from 'astro/config';
+import createPlugin from "@stephansama/astro-iconify-svgmap";
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
   vite: {
-    plugins: [createPlugin()],  // bypasses astro:build:done hook
+    plugins: [createPlugin()], // bypasses astro:build:done hook
   },
 });
 ```
@@ -182,7 +182,7 @@ export default defineConfig({
 Correct:
 
 ```js
-import { createIntegration } from '@stephansama/astro-iconify-svgmap';
+import { createIntegration } from "@stephansama/astro-iconify-svgmap";
 
 export default defineConfig({
   integrations: [createIntegration()],
@@ -200,15 +200,15 @@ Wrong:
 ```js
 // apps/site/astro.config.mjs in a monorepo
 // @iconify-json/mdi is in the workspace root node_modules, not apps/site/node_modules
-createIntegration()  // looks in apps/site/node_modules — finds nothing
+createIntegration(); // looks in apps/site/node_modules — finds nothing
 ```
 
 Correct:
 
 ```js
 createIntegration({
-  iconifyRootDirectory: new URL('../../', import.meta.url),
-})
+  iconifyRootDirectory: new URL("../../", import.meta.url),
+});
 ```
 
 The default icon discovery path is relative to the Astro project root. In a pnpm monorepo, `@iconify-json/*` packages are typically hoisted to the workspace root. Pass `iconifyRootDirectory` as a `URL` pointing to the directory that contains the `node_modules/@iconify-json/` tree.

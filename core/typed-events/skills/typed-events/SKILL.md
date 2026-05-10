@@ -7,7 +7,7 @@ description: >
   createBroadcastChannel, createBroadcastEvent, or createMessage. For React
   hooks (useListener, useListeners), see react-typed-events/SKILL.md.
 type: core
-library: '@stephansama/typed-events'
+library: "@stephansama/typed-events"
 library_version: "3.0.9"
 sources:
   - stephansama/packages:core/typed-events/src/event.ts
@@ -24,22 +24,22 @@ Typed, schema-validated wrappers for native browser event APIs. Each factory ret
 
 ## Choosing the right factory
 
-| Goal | Use |
-| --- | --- |
-| Fire an event on the current page | `createEvent` |
-| Group related events under a namespace | `createEventMap` |
-| Sync state across browser tabs | `createBroadcastChannel` |
-| Fire locally AND across tabs simultaneously | `createBroadcastEvent` |
-| Send a message to an iframe or cross-origin window | `createMessage` |
+| Goal                                               | Use                      |
+| -------------------------------------------------- | ------------------------ |
+| Fire an event on the current page                  | `createEvent`            |
+| Group related events under a namespace             | `createEventMap`         |
+| Sync state across browser tabs                     | `createBroadcastChannel` |
+| Fire locally AND across tabs simultaneously        | `createBroadcastEvent`   |
+| Send a message to an iframe or cross-origin window | `createMessage`          |
 
 ## Setup
 
 ```ts
-import * as z from 'zod';
-import { createEvent } from '@stephansama/typed-events';
+import * as z from "zod";
+import { createEvent } from "@stephansama/typed-events";
 
 export const animationEvent = createEvent(
-  'my-app:animation',
+  "my-app:animation",
   z.object({ x: z.number(), y: z.number() }),
 );
 ```
@@ -49,16 +49,16 @@ export const animationEvent = createEvent(
 ### Single validated CustomEvent
 
 ```ts
-import * as z from 'zod';
-import { createEvent } from '@stephansama/typed-events';
+import * as z from "zod";
+import { createEvent } from "@stephansama/typed-events";
 
 export const clickEvent = createEvent(
-  'my-app:click',
+  "my-app:click",
   z.object({ id: z.string() }),
 );
 
 // dispatch
-clickEvent.dispatch({ id: 'btn-1' });
+clickEvent.dispatch({ id: "btn-1" });
 
 // listen — store cleanup and call it when done
 const cleanup = clickEvent.listen(({ data }) => {
@@ -71,17 +71,17 @@ cleanup();
 ### Namespaced event map (group related events)
 
 ```ts
-import * as z from 'zod';
-import { createEventMap } from '@stephansama/typed-events';
+import * as z from "zod";
+import { createEventMap } from "@stephansama/typed-events";
 
-export const formEvents = createEventMap('form', {
+export const formEvents = createEventMap("form", {
   submit: z.object({ values: z.record(z.string()) }),
   reset: z.object({}),
 });
 
-formEvents.dispatch('submit', { values: { email: 'a@b.com' } });
+formEvents.dispatch("submit", { values: { email: "a@b.com" } });
 
-const cleanup = formEvents.listen('submit', ({ data }) => {
+const cleanup = formEvents.listen("submit", ({ data }) => {
   console.log(data.values);
 });
 ```
@@ -91,16 +91,16 @@ Event names are scoped internally as `form:submit` and `form:reset`.
 ### Cross-tab sync with BroadcastChannel
 
 ```ts
-import * as z from 'zod';
-import { createBroadcastChannel } from '@stephansama/typed-events';
+import * as z from "zod";
+import { createBroadcastChannel } from "@stephansama/typed-events";
 
-export const tabChannel = createBroadcastChannel('my-app', {
-  theme: z.object({ mode: z.enum(['light', 'dark']) }),
+export const tabChannel = createBroadcastChannel("my-app", {
+  theme: z.object({ mode: z.enum(["light", "dark"]) }),
 });
 
-tabChannel.dispatch('theme', { mode: 'dark' });
+tabChannel.dispatch("theme", { mode: "dark" });
 
-const cleanup = tabChannel.listen('theme', ({ data }) => {
+const cleanup = tabChannel.listen("theme", ({ data }) => {
   document.documentElement.dataset.theme = data.mode;
 });
 ```
@@ -108,17 +108,17 @@ const cleanup = tabChannel.listen('theme', ({ data }) => {
 ### Fire locally and across tabs simultaneously
 
 ```ts
-import * as z from 'zod';
-import { createBroadcastEvent } from '@stephansama/typed-events';
+import * as z from "zod";
+import { createBroadcastEvent } from "@stephansama/typed-events";
 
-export const syncEvent = createBroadcastEvent('my-app', {
+export const syncEvent = createBroadcastEvent("my-app", {
   update: z.object({ value: z.number() }),
 });
 
 // dispatches both a CustomEvent (same-page) and a BroadcastChannel message (other tabs)
-syncEvent.dispatch('update', { value: 42 });
+syncEvent.dispatch("update", { value: 42 });
 
-const cleanup = syncEvent.listen('update', ({ data, type }) => {
+const cleanup = syncEvent.listen("update", ({ data, type }) => {
   // type is 'event' (same-page) or 'message' (other tab)
   console.log(type, data.value);
 });
@@ -128,7 +128,7 @@ const cleanup = syncEvent.listen('update', ({ data, type }) => {
 
 ```ts
 const myTarget = new EventTarget();
-const ev = createEvent('my-app:tick', z.object({ ts: z.number() }), {
+const ev = createEvent("my-app:tick", z.object({ ts: z.number() }), {
   target: myTarget,
 });
 // Or set after creation:
@@ -146,7 +146,7 @@ Wrong:
 ```ts
 // async zod schema
 const schema = z.object({ x: z.number() }).transform(async (v) => v);
-const ev = createEvent('my-app:tick', schema);
+const ev = createEvent("my-app:tick", schema);
 ev.dispatch({ x: 1 }); // validation runs async, callback fires before it resolves
 ```
 
@@ -154,7 +154,7 @@ Correct:
 
 ```ts
 const schema = z.object({ x: z.number() });
-const ev = createEvent('my-app:tick', schema);
+const ev = createEvent("my-app:tick", schema);
 ```
 
 When a schema's `~standard.validate` returns a Promise, typed-events fires the callback immediately and runs validation non-blocking. Invalid data reaches listeners. Use synchronous validators.
@@ -188,14 +188,16 @@ Wrong:
 
 ```ts
 // top-level module — executes on the server
-export const ev = createEvent('my-app:tick', schema);
+export const ev = createEvent("my-app:tick", schema);
 ev.dispatch({ ts: Date.now() }); // ReferenceError: document is not defined
 ```
 
 Correct:
 
 ```ts
-export const ev = createEvent('my-app:tick', schema, { target: new EventTarget() });
+export const ev = createEvent("my-app:tick", schema, {
+  target: new EventTarget(),
+});
 // or guard dispatch/listen calls inside browser-only code
 ```
 
@@ -209,16 +211,16 @@ Wrong:
 
 ```ts
 // createEvent only fires on the current page
-const tabSync = createEvent('my-app:sync', schema);
+const tabSync = createEvent("my-app:sync", schema);
 tabSync.dispatch(payload); // other tabs never receive this
 ```
 
 Correct:
 
 ```ts
-import { createBroadcastChannel } from '@stephansama/typed-events';
-const tabSync = createBroadcastChannel('my-app', { sync: schema });
-tabSync.dispatch('sync', payload);
+import { createBroadcastChannel } from "@stephansama/typed-events";
+const tabSync = createBroadcastChannel("my-app", { sync: schema });
+tabSync.dispatch("sync", payload);
 ```
 
 `createEvent` and `createEventMap` dispatch `CustomEvent` on an `EventTarget` — same-page only. Use `createBroadcastChannel` or `createBroadcastEvent` for cross-tab communication.
@@ -230,14 +232,14 @@ Source: `core/typed-events/src/broadcast.ts`
 Wrong:
 
 ```ts
-const ev = createEvent('click', schema);
+const ev = createEvent("click", schema);
 // TypeScript error: Argument of type '"click"' is not assignable to parameter of type 'never'
 ```
 
 Correct:
 
 ```ts
-const ev = createEvent('my-app:click', schema);
+const ev = createEvent("my-app:click", schema);
 ```
 
 The `Name` generic is `Restrict<string, keyof DocumentEventMap>` which resolves to `never` for any name that matches a native DOM event (`click`, `input`, `change`, etc.). Use a namespaced name.

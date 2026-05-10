@@ -42,14 +42,14 @@
     "barhandles": "catalog:handlebars"
   },
   "devDependencies": {
+    "@tanstack/intent": "catalog:tanstack",
     "arktype": "catalog:schema",
     "handlebars": "catalog:handlebars",
     "tsdown": "catalog:",
     "tsx": "catalog:",
     "valibot": "catalog:schema",
     "vite-tsconfig-paths": "catalog:",
-    "zod": "catalog:schema",
-    "@tanstack/intent": "catalog:tanstack"
+    "zod": "catalog:schema"
   },
   "peerDependencies": {
     "arktype": ">=2",

@@ -45,10 +45,10 @@
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "catalog:",
+    "@tanstack/intent": "catalog:tanstack",
     "tsdown": "catalog:",
     "tsx": "catalog:",
-    "zod": "catalog:schema",
-    "@tanstack/intent": "catalog:tanstack"
+    "zod": "catalog:schema"
   },
   "peerDependencies": {
     "@dotenvx/dotenvx": "catalog:",

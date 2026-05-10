@@ -7,7 +7,7 @@ description: >
   npm, yarn (jsr and npm); deno (jsr only). Config via cosmiconfig or package.json
   multipublish key.
 type: core
-library: '@stephansama/multipublish'
+library: "@stephansama/multipublish"
 library_version: "1.0.0"
 sources:
   - stephansama/packages:core/multipublish/src/publish.ts
@@ -70,10 +70,13 @@ Place as `.multipublishrc.json`, `.config/multipublishrc.json`, or a `multipubli
 ```json
 {
   "platforms": [
-    ["npm", {
-      "registry": "https://npm.pkg.github.com",
-      "tokenEnvironmentKey": "GITHUB_TOKEN"
-    }]
+    [
+      "npm",
+      {
+        "registry": "https://npm.pkg.github.com",
+        "tokenEnvironmentKey": "GITHUB_TOKEN"
+      }
+    ]
   ]
 }
 ```

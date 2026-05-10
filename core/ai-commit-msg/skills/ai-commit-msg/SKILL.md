@@ -7,7 +7,7 @@ description: >
   key, etc.). Default is ollama/llama2. Requires GOOGLE_GENERATIVE_AI_API_KEY for
   google or OPENAI_API_KEY for openai. Use skipNextRun to bypass a single hook run.
 type: core
-library: '@stephansama/ai-commit-msg'
+library: "@stephansama/ai-commit-msg"
 library_version: "1.0.0"
 sources:
   - stephansama/packages:core/ai-commit-msg/src/index.ts
@@ -41,8 +41,8 @@ ai-commit-msg -o "$1"
 ```ts
 // ai-commit-msg.config.ts
 export default {
-  provider: 'google',
-  model: 'gemini-2.5-flash',
+  provider: "google",
+  model: "gemini-2.5-flash",
 };
 ```
 
@@ -58,8 +58,8 @@ export GOOGLE_GENERATIVE_AI_API_KEY=your-key
 
 ```ts
 export default {
-  provider: 'google',
-  model: 'gemini-2.5-flash',
+  provider: "google",
+  model: "gemini-2.5-flash",
 };
 ```
 
@@ -69,8 +69,8 @@ Requires `GOOGLE_GENERATIVE_AI_API_KEY` in the environment.
 
 ```ts
 export default {
-  provider: 'openai',
-  model: 'gpt-4o-mini',
+  provider: "openai",
+  model: "gpt-4o-mini",
 };
 ```
 
@@ -80,8 +80,8 @@ Requires `OPENAI_API_KEY` in the environment.
 
 ```ts
 export default {
-  provider: 'ollama',
-  model: 'llama3.2',
+  provider: "ollama",
+  model: "llama3.2",
 };
 ```
 
@@ -91,9 +91,10 @@ Requires the Ollama server running locally (`ollama serve`).
 
 ```ts
 export default {
-  provider: 'google',
-  model: 'gemini-2.5-flash',
-  prompt: 'Write a short conventional commit message in lowercase for this diff:\n\n{{diff}}',
+  provider: "google",
+  model: "gemini-2.5-flash",
+  prompt:
+    "Write a short conventional commit message in lowercase for this diff:\n\n{{diff}}",
 };
 ```
 
@@ -103,8 +104,8 @@ The `{{diff}}` placeholder is replaced with the staged diff (truncated at 8000 c
 
 ```ts
 export default {
-  provider: 'google',
-  model: 'gemini-2.5-flash',
+  provider: "google",
+  model: "gemini-2.5-flash",
   skipNextRun: true,
 };
 ```
@@ -127,8 +128,8 @@ Correct:
 ```ts
 // ai-commit-msg.config.ts
 export default {
-  provider: 'google',
-  model: 'gemini-2.5-flash',
+  provider: "google",
+  model: "gemini-2.5-flash",
 };
 ```
 
@@ -141,7 +142,7 @@ Source: `core/ai-commit-msg/src/config.ts:defaultConfig`
 Wrong:
 
 ```ts
-export default { provider: 'google', model: 'gemini-2.5-flash' };
+export default { provider: "google", model: "gemini-2.5-flash" };
 // GOOGLE_GENERATIVE_AI_API_KEY not set in environment
 // hook runs: "unable to validate env due to the following issues: ..."
 ```
@@ -163,9 +164,9 @@ Wrong:
 
 ```ts
 export default {
-  provider: 'google',
-  model: 'gemini-2.5-flash',
-  prompt: 'Write a short conventional commit message.',
+  provider: "google",
+  model: "gemini-2.5-flash",
+  prompt: "Write a short conventional commit message.",
   // no {{diff}} — model has no context
 };
 ```
@@ -174,9 +175,10 @@ Correct:
 
 ```ts
 export default {
-  provider: 'google',
-  model: 'gemini-2.5-flash',
-  prompt: 'Write a short conventional commit message for this diff:\n\n{{diff}}',
+  provider: "google",
+  model: "gemini-2.5-flash",
+  prompt:
+    "Write a short conventional commit message for this diff:\n\n{{diff}}",
 };
 ```
 

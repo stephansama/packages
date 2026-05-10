@@ -6,71 +6,71 @@
 # Status: reviewed
 
 library:
-  name: '@stephansama/packages'
-  version: 'monorepo'
-  repository: 'https://github.com/stephansama/packages'
-  description: 'Collection of focused developer-workflow tools: type-safe event systems, environment and template validators, ESLint configs, AI commit messages, README generators, and multi-registry publishing.'
-  primary_framework: 'framework-agnostic'
+  name: "@stephansama/packages"
+  version: "monorepo"
+  repository: "https://github.com/stephansama/packages"
+  description: "Collection of focused developer-workflow tools: type-safe event systems, environment and template validators, ESLint configs, AI commit messages, README generators, and multi-registry publishing."
+  primary_framework: "framework-agnostic"
 
 domains:
-  - name: 'standard-schema validation layer'
-    slug: 'standard-schema'
-    description: 'Packages that wrap the standard-schema spec to add runtime type safety to browser events, environment variables, and Handlebars templates. Developers reach for these when they want TypeScript-level safety at runtime without writing their own validation glue.'
+  - name: "standard-schema validation layer"
+    slug: "standard-schema"
+    description: "Packages that wrap the standard-schema spec to add runtime type safety to browser events, environment variables, and Handlebars templates. Developers reach for these when they want TypeScript-level safety at runtime without writing their own validation glue."
 
-  - name: 'developer workflow automation'
-    slug: 'workflow'
-    description: 'CLI tools that automate repetitive developer tasks: generating commit messages, keeping READMEs current, and publishing to multiple registries. Each is a drop-in Git-hook or CI step.'
+  - name: "developer workflow automation"
+    slug: "workflow"
+    description: "CLI tools that automate repetitive developer tasks: generating commit messages, keeping READMEs current, and publishing to multiple registries. Each is a drop-in Git-hook or CI step."
 
-  - name: 'code quality configuration'
-    slug: 'code-quality'
-    description: 'Composable ESLint flat config that auto-detects installed packages and assembles the right rule sets without per-project boilerplate.'
+  - name: "code quality configuration"
+    slug: "code-quality"
+    description: "Composable ESLint flat config that auto-detects installed packages and assembles the right rule sets without per-project boilerplate."
 
-  - name: 'framework integration'
-    slug: 'framework'
-    description: 'Astro-specific integration for generating optimised SVG sprite maps from Iconify icon packs at build time.'
+  - name: "framework integration"
+    slug: "framework"
+    description: "Astro-specific integration for generating optimised SVG sprite maps from Iconify icon packs at build time."
 
 skills:
-  - name: 'typed-events'
-    slug: 'typed-events'
-    domain: 'standard-schema'
-    description: 'Add validated, type-safe wrappers around the browser CustomEvent, BroadcastChannel, and window.postMessage APIs using a standard-schema-compatible validator.'
-    type: 'core'
+  - name: "typed-events"
+    slug: "typed-events"
+    domain: "standard-schema"
+    description: "Add validated, type-safe wrappers around the browser CustomEvent, BroadcastChannel, and window.postMessage APIs using a standard-schema-compatible validator."
+    type: "core"
     packages:
-      - '@stephansama/typed-events'
+      - "@stephansama/typed-events"
     covers:
-      - 'createEvent'
-      - 'createEventMap'
-      - 'createBroadcastChannel'
-      - 'createBroadcastEvent'
-      - 'createMessage'
-      - 'useListener (React)'
-      - 'useListeners (React)'
-      - 'TypedEvent / TypedEventMap / TypedBroadcastChannel / TypedBroadcastEvent / TypedMessage interfaces'
-      - 'ListenerCallback / Validator / ValidatorMap types'
-      - 'cleanup function pattern'
+      - "createEvent"
+      - "createEventMap"
+      - "createBroadcastChannel"
+      - "createBroadcastEvent"
+      - "createMessage"
+      - "useListener (React)"
+      - "useListeners (React)"
+      - "TypedEvent / TypedEventMap / TypedBroadcastChannel / TypedBroadcastEvent / TypedMessage interfaces"
+      - "ListenerCallback / Validator / ValidatorMap types"
+      - "cleanup function pattern"
     tasks:
-      - 'Create a validated custom event and dispatch/listen to it'
-      - 'Create a namespaced event map for grouping related events'
-      - 'Create a BroadcastChannel that syncs across browser tabs'
-      - 'Create an event that fires both locally and across tabs simultaneously'
-      - 'Create a typed window.postMessage channel'
-      - 'Register and auto-clean up event listeners in a React component'
+      - "Create a validated custom event and dispatch/listen to it"
+      - "Create a namespaced event map for grouping related events"
+      - "Create a BroadcastChannel that syncs across browser tabs"
+      - "Create an event that fires both locally and across tabs simultaneously"
+      - "Create a typed window.postMessage channel"
+      - "Register and auto-clean up event listeners in a React component"
     failure_modes:
-      - mistake: 'using async schema validator causes silent validation bypass'
-        mechanism: 'When a schema returns a Promise (e.g. async zod parse), typed-events fires the callback anyway and validation runs non-blocking; invalid data can be acted on before validation completes.'
+      - mistake: "using async schema validator causes silent validation bypass"
+        mechanism: "When a schema returns a Promise (e.g. async zod parse), typed-events fires the callback anyway and validation runs non-blocking; invalid data can be acted on before validation completes."
         wrong_pattern: |
           // Using an async schema
           const myEvent = createEvent('my-event', z.object({ x: z.number() }).parseAsync);
         correct_pattern: |
           // Use a synchronous validator; typed-events warns once in development
           const myEvent = createEvent('my-event', z.object({ x: z.number() }));
-        source: 'src/utils/validate.ts:warnOnce, src/utils/warn.ts'
-        priority: 'CRITICAL'
-        status: 'active'
-        version_context: 'Warning fires once in dev; silent in production if silenceAsyncWarning is set'
+        source: "src/utils/validate.ts:warnOnce, src/utils/warn.ts"
+        priority: "CRITICAL"
+        status: "active"
+        version_context: "Warning fires once in dev; silent in production if silenceAsyncWarning is set"
 
-      - mistake: 'forgetting to call the cleanup function from listen()'
-        mechanism: 'listen() returns a cleanup function that removes the event listener. Not calling it on component unmount or effect cleanup leaks the listener for the lifetime of the page.'
+      - mistake: "forgetting to call the cleanup function from listen()"
+        mechanism: "listen() returns a cleanup function that removes the event listener. Not calling it on component unmount or effect cleanup leaks the listener for the lifetime of the page."
         wrong_pattern: |
           // In a React useEffect or vanilla JS — no cleanup
           myEvent.listen((e) => { doSomething(e.data); });
@@ -79,11 +79,11 @@ skills:
             const cleanup = myEvent.listen((e) => { doSomething(e.data); });
             return () => cleanup();
           }, []);
-        source: 'src/event.ts:listen, README.md examples'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/event.ts:listen, README.md examples"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'using createEvent or createMessage in SSR without setting a target'
+      - mistake: "using createEvent or createMessage in SSR without setting a target"
         mechanism: "createEvent's target getter defaults to `document`, and createMessage's window getter defaults to `window`. Both throw a ReferenceError during server-side rendering where these globals do not exist."
         wrong_pattern: |
           // Top-level module — runs on server
@@ -93,12 +93,12 @@ skills:
           // Set target lazily or only use inside browser-only code
           export const clickEvent = createEvent('click-event', schema);
           // Only call clickEvent.dispatch() / .listen() inside browser guards
-        source: 'src/event.ts:target getter, src/message.ts:window getter'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/event.ts:target getter, src/message.ts:window getter"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'unstable listener reference in useListeners causes repeated registrations'
-        mechanism: 'useListeners depends on [map, listeners] in its useEffect. If the listeners object is created inline (new object each render), the effect re-runs every render, registering a new listener while the previous one is cleaned up — causing flickering or missed events.'
+      - mistake: "unstable listener reference in useListeners causes repeated registrations"
+        mechanism: "useListeners depends on [map, listeners] in its useEffect. If the listeners object is created inline (new object each render), the effect re-runs every render, registering a new listener while the previous one is cleaned up — causing flickering or missed events."
         wrong_pattern: |
           function MyComponent() {
             useListeners(map, {
@@ -112,53 +112,53 @@ skills:
             }), []);
             useListeners(map, handlers);
           }
-        source: 'src/react.ts:useListeners, React useEffect docs'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/react.ts:useListeners, React useEffect docs"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'picking the wrong event primitive for the use case'
-        mechanism: 'Five distinct factories exist for five different browser communication mechanisms. Agents default to createEvent for all cases, missing createBroadcastEvent (cross-tab + local) or createMessage (cross-origin iframes).'
+      - mistake: "picking the wrong event primitive for the use case"
+        mechanism: "Five distinct factories exist for five different browser communication mechanisms. Agents default to createEvent for all cases, missing createBroadcastEvent (cross-tab + local) or createMessage (cross-origin iframes)."
         wrong_pattern: |
           // Trying to sync state across tabs but using createEvent (same-page only)
           const tabSync = createEvent('tab-sync', schema);
         correct_pattern: |
           // Use createBroadcastChannel or createBroadcastEvent for cross-tab
           const tabSync = createBroadcastChannel('tab-sync', { update: schema });
-        source: 'README.md, src/broadcast.ts, src/broadcast-event.ts, src/message.ts'
-        priority: 'HIGH'
-        status: 'active'
+        source: "README.md, src/broadcast.ts, src/broadcast-event.ts, src/message.ts"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'using a native DOM event name with createEvent'
+      - mistake: "using a native DOM event name with createEvent"
         mechanism: "The Name generic is Restrict<string, keyof DocumentEventMap> which resolves to `never` for any name that clashes with a native DOM event (e.g. 'click', 'input', 'change'). TypeScript will reject it, but agents copying patterns may not notice the constraint."
         wrong_pattern: |
           // TypeScript error: 'click' is in DocumentEventMap
           const clickEvent = createEvent('click', schema);
         correct_pattern: |
           const clickEvent = createEvent('my-app:click', schema);
-        source: 'src/event.ts:Restrict, src/utils/types.ts'
-        priority: 'MEDIUM'
-        status: 'active'
+        source: "src/event.ts:Restrict, src/utils/types.ts"
+        priority: "MEDIUM"
+        status: "active"
 
-  - name: 'typed-env'
-    slug: 'typed-env'
-    domain: 'standard-schema'
-    description: 'Validate and type process.env environment variables at runtime using a standard-schema-compatible validator, with helpers to generate .env.example files.'
-    type: 'core'
+  - name: "typed-env"
+    slug: "typed-env"
+    domain: "standard-schema"
+    description: "Validate and type process.env environment variables at runtime using a standard-schema-compatible validator, with helpers to generate .env.example files."
+    type: "core"
     packages:
-      - '@stephansama/typed-env'
+      - "@stephansama/typed-env"
     covers:
-      - 'createEnvironment'
-      - 'validate()'
-      - 'generateExample(path)'
-      - 'loadEnv(options)'
-      - 'loadEnvironmentConfig parameter'
-      - '@dotenvx/dotenvx integration'
+      - "createEnvironment"
+      - "validate()"
+      - "generateExample(path)"
+      - "loadEnv(options)"
+      - "loadEnvironmentConfig parameter"
+      - "@dotenvx/dotenvx integration"
     tasks:
-      - 'Validate environment variables against a zod/valibot/arktype schema at startup'
-      - 'Auto-load .env file before validating'
-      - 'Generate a .env.example file from the schema shape'
+      - "Validate environment variables against a zod/valibot/arktype schema at startup"
+      - "Auto-load .env file before validating"
+      - "Generate a .env.example file from the schema shape"
     failure_modes:
-      - mistake: 'using a schema library other than zod, valibot, or arktype'
+      - mistake: "using a schema library other than zod, valibot, or arktype"
         mechanism: 'generateExample() uses a hard-coded vendor switch on schema["~standard"].vendor. Any other standard-schema-compatible library throws "invalid schema provider used please pick one of arktype, valibot or zod".'
         wrong_pattern: |
           import { object, string } from 'typebox'; // not supported
@@ -168,24 +168,24 @@ skills:
           import * as z from 'zod';
           const config = createEnvironment(z.object({ KEY: z.string() }));
           await config.generateExample('.env.example');
-        source: 'src/index.ts:getObjectFromSchema'
-        priority: 'CRITICAL'
-        status: 'active'
+        source: "src/index.ts:getObjectFromSchema"
+        priority: "CRITICAL"
+        status: "active"
 
-      - mistake: 'not passing loadEnvironmentConfig and expecting dotenv to auto-load'
-        mechanism: 'createEnvironment does not load any .env file by default. validate() reads process.env as-is. If .env loading is needed, pass true or a dotenvx config object as the second argument.'
+      - mistake: "not passing loadEnvironmentConfig and expecting dotenv to auto-load"
+        mechanism: "createEnvironment does not load any .env file by default. validate() reads process.env as-is. If .env loading is needed, pass true or a dotenvx config object as the second argument."
         wrong_pattern: |
           const config = createEnvironment(schema);
           await config.validate(); // process.env has no .env values loaded
         correct_pattern: |
           const config = createEnvironment(schema, true); // loads .env quietly
           await config.validate();
-        source: 'src/index.ts:createEnvironment'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/index.ts:createEnvironment"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'validate() throws with raw JSON and no context'
-        mechanism: 'On validation failure, validate() throws a single Error whose message is JSON.stringify(issues). Callers that do not wrap in try/catch will crash the process; the error message is not human-friendly without a JSON parser.'
+      - mistake: "validate() throws with raw JSON and no context"
+        mechanism: "On validation failure, validate() throws a single Error whose message is JSON.stringify(issues). Callers that do not wrap in try/catch will crash the process; the error message is not human-friendly without a JSON parser."
         wrong_pattern: |
           await config.validate(); // unhandled rejection crashes process
         correct_pattern: |
@@ -195,32 +195,32 @@ skills:
             console.error('Environment validation failed:', err.message);
             process.exit(1);
           }
-        source: 'src/index.ts:validate'
-        priority: 'MEDIUM'
-        status: 'active'
+        source: "src/index.ts:validate"
+        priority: "MEDIUM"
+        status: "active"
 
-  - name: 'typed-templates'
-    slug: 'typed-templates'
-    domain: 'standard-schema'
-    description: 'Validate Handlebars template variables at authoring time (audit) and at compile time using a standard-schema-compatible validator.'
-    type: 'core'
+  - name: "typed-templates"
+    slug: "typed-templates"
+    domain: "standard-schema"
+    description: "Validate Handlebars template variables at authoring time (audit) and at compile time using a standard-schema-compatible validator."
+    type: "core"
     packages:
-      - '@stephansama/typed-templates'
+      - "@stephansama/typed-templates"
     covers:
-      - 'createHandlebarSchemaMap'
-      - 'createHandlebarSchemaSingleton'
-      - 'getFileContext'
-      - 'audit()'
-      - 'compile(key, data)'
-      - 'isLinting()'
+      - "createHandlebarSchemaMap"
+      - "createHandlebarSchemaSingleton"
+      - "getFileContext"
+      - "audit()"
+      - "compile(key, data)"
+      - "isLinting()"
     tasks:
-      - 'Create a map of typed Handlebars templates each with their own schema'
-      - 'Create a singleton schema shared across multiple templates'
-      - 'Audit that template slots match the schema shape'
-      - 'Compile a template with validated data'
+      - "Create a map of typed Handlebars templates each with their own schema"
+      - "Create a singleton schema shared across multiple templates"
+      - "Audit that template slots match the schema shape"
+      - "Compile a template with validated data"
     failure_modes:
-      - mistake: 'not using getFileContext(import.meta.url) for templateDirectory'
-        mechanism: 'compile() and audit() resolve template paths relative to templateDirectory. Without getFileContext, developers pass ad-hoc paths that break when the file is executed from a different working directory.'
+      - mistake: "not using getFileContext(import.meta.url) for templateDirectory"
+        mechanism: "compile() and audit() resolve template paths relative to templateDirectory. Without getFileContext, developers pass ad-hoc paths that break when the file is executed from a different working directory."
         wrong_pattern: |
           const schemaMap = createHandlebarSchemaMap(map, {
             templateDirectory: './templates', // cwd-relative, breaks in CI
@@ -228,12 +228,12 @@ skills:
         correct_pattern: |
           const { templateDirectory } = getFileContext(import.meta.url);
           const schemaMap = createHandlebarSchemaMap(map, { templateDirectory });
-        source: 'src/utilities.ts:getFileContext, README.md'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/utilities.ts:getFileContext, README.md"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'calling audit() on every import instead of guarding with isLinting()'
-        mechanism: 'audit() reads the filesystem and throws on schema mismatches. Running it unconditionally means it fires at application startup, not just during linting/dev. isLinting() returns true only when the file is run directly (process.argv[1] matches).'
+      - mistake: "calling audit() on every import instead of guarding with isLinting()"
+        mechanism: "audit() reads the filesystem and throws on schema mismatches. Running it unconditionally means it fires at application startup, not just during linting/dev. isLinting() returns true only when the file is run directly (process.argv[1] matches)."
         wrong_pattern: |
           export const schemaMap = createHandlebarSchemaMap(map, { templateDirectory });
           await schemaMap.audit(); // runs every time the module is imported
@@ -241,11 +241,11 @@ skills:
           export const schemaMap = createHandlebarSchemaMap(map, { templateDirectory });
           const { isLinting } = getFileContext(import.meta.url);
           if (isLinting()) await schemaMap.audit();
-        source: 'src/utilities.ts:getFileContext, README.md'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/utilities.ts:getFileContext, README.md"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'using a schema library other than zod, valibot, or arktype'
+      - mistake: "using a schema library other than zod, valibot, or arktype"
         mechanism: 'audit() calls normalizeStandardSchema() which has the same hard-coded vendor switch as typed-env. Unsupported vendors throw "invalid schema provider".'
         wrong_pattern: |
           import { Type } from '@sinclair/typebox';
@@ -253,12 +253,12 @@ skills:
         correct_pattern: |
           import * as z from 'zod';
           const map = createHandlebarSchemaMap({ tmpl: { path, schema: z.object({}) } }, opts);
-        source: 'src/normalize.ts:normalizeStandardSchema'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/normalize.ts:normalizeStandardSchema"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'confusing createHandlebarSchemaMap and createHandlebarSchemaSingleton use cases'
-        mechanism: 'SchemaMap is key-based: each template has its own schema. Singleton shares one schema across multiple files. Using singleton when templates have different shapes causes audit() to pass (singleton checks each file against the shared schema) but compile() may receive wrong data.'
+      - mistake: "confusing createHandlebarSchemaMap and createHandlebarSchemaSingleton use cases"
+        mechanism: "SchemaMap is key-based: each template has its own schema. Singleton shares one schema across multiple files. Using singleton when templates have different shapes causes audit() to pass (singleton checks each file against the shared schema) but compile() may receive wrong data."
         wrong_pattern: |
           // Templates have different shapes but singleton is used
           const single = createHandlebarSchemaSingleton(
@@ -272,34 +272,34 @@ skills:
             header: { path: 'header.hbs', schema: headerSchema },
             footer: { path: 'footer.hbs', schema: footerSchema },
           }, { templateDirectory });
-        source: 'src/map.ts, src/singleton.ts, README.md'
-        priority: 'MEDIUM'
-        status: 'active'
+        source: "src/map.ts, src/singleton.ts, README.md"
+        priority: "MEDIUM"
+        status: "active"
 
-  - name: 'eslint-config'
-    slug: 'eslint-config'
-    domain: 'code-quality'
-    description: 'Set up a modular, framework-aware ESLint flat config using composable configs and presets, with auto-detection of installed packages.'
-    type: 'core'
+  - name: "eslint-config"
+    slug: "eslint-config"
+    domain: "code-quality"
+    description: "Set up a modular, framework-aware ESLint flat config using composable configs and presets, with auto-detection of installed packages."
+    type: "core"
     packages:
-      - '@stephansama/eslint-config'
+      - "@stephansama/eslint-config"
     covers:
-      - 'config() / builder()'
-      - 'presets.base'
-      - 'presets.zod'
-      - 'presets.library'
-      - 'autoEnable (default: true)'
-      - 'overrides / overrides_prepend'
-      - '25+ individual configs: baseline, javascript, typescript, imports, jsdoc, unicorn, perfectionist, prettier, regexp, command, packagejson, pnpm, gitignore, node, astro, svelte, vue, lit, storybook, vitest, zod, json, markdown, css, e18e, baseline'
+      - "config() / builder()"
+      - "presets.base"
+      - "presets.zod"
+      - "presets.library"
+      - "autoEnable (default: true)"
+      - "overrides / overrides_prepend"
+      - "25+ individual configs: baseline, javascript, typescript, imports, jsdoc, unicorn, perfectionist, prettier, regexp, command, packagejson, pnpm, gitignore, node, astro, svelte, vue, lit, storybook, vitest, zod, json, markdown, css, e18e, baseline"
     tasks:
-      - 'Set up base ESLint config for a new TypeScript project'
-      - 'Add framework-specific rules (Astro, Svelte, Lit, Storybook)'
-      - 'Set up library-specific packagejson validation'
-      - 'Add project-specific overrides on top of the preset'
-      - 'Opt out of auto-detection and manually compose configs'
+      - "Set up base ESLint config for a new TypeScript project"
+      - "Add framework-specific rules (Astro, Svelte, Lit, Storybook)"
+      - "Set up library-specific packagejson validation"
+      - "Add project-specific overrides on top of the preset"
+      - "Opt out of auto-detection and manually compose configs"
     failure_modes:
-      - mistake: 'not awaiting the async config function'
-        mechanism: 'config() returns a Promise<Config[]> because several framework configs (astro, svelte, json, markdown, css) are async. ESLint v9 flat config supports async default exports, but the export must be awaited or returned as a Promise.'
+      - mistake: "not awaiting the async config function"
+        mechanism: "config() returns a Promise<Config[]> because several framework configs (astro, svelte, json, markdown, css) are async. ESLint v9 flat config supports async default exports, but the export must be awaited or returned as a Promise."
         wrong_pattern: |
           // eslint.config.js — not awaited
           import { config, presets } from '@stephansama/eslint-config';
@@ -309,22 +309,22 @@ skills:
           export default config({ ...presets.base }); // OK as Promise return
           // OR explicitly:
           export default await config({ ...presets.base });
-        source: 'src/builder.ts:builder, README.md usage example'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/builder.ts:builder, README.md usage example"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'pnpm config linting a non-pnpm workspace'
-        mechanism: 'presets.base includes pnpm: true which activates eslint-plugin-pnpm. This enforces catalog: syntax and workspace: directives. Projects not using pnpm will see spurious errors on every package version string.'
+      - mistake: "pnpm config linting a non-pnpm workspace"
+        mechanism: "presets.base includes pnpm: true which activates eslint-plugin-pnpm. This enforces catalog: syntax and workspace: directives. Projects not using pnpm will see spurious errors on every package version string."
         wrong_pattern: |
           // yarn or npm project
           export default config({ ...presets.base }); // pnpm rules fire
         correct_pattern: |
           export default config({ ...presets.base, pnpm: false });
-        source: 'src/presets.ts, src/configs/pnpm.ts'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/presets.ts, src/configs/pnpm.ts"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'typescript config requires tsconfig.json via projectService'
+      - mistake: "typescript config requires tsconfig.json via projectService"
         mechanism: "The typescript config uses typescript-eslint's projectService which discovers tsconfig.json automatically. Projects without a tsconfig.json nearby, or monorepos where files fall outside all tsconfig paths, will see errors about files not being part of any project."
         wrong_pattern: |
           // No tsconfig.json in project root
@@ -332,12 +332,12 @@ skills:
         correct_pattern: |
           // Ensure tsconfig.json exists; for monorepos set project option
           export default config({ typescript: { project: './tsconfig.json' } });
-        source: 'src/configs/typescript.ts, recent PR #268 added project option'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/configs/typescript.ts, recent PR #268 added project option"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'autoEnable silently enables configs for detected packages'
-        mechanism: 'autoEnable: true (the default) checks installed packages and enables astro, svelte, vue, lit, storybook, prettier, typescript, zod configs when their packages are detected. Agents may not realize these are active and produce configs missing their options.'
+      - mistake: "autoEnable silently enables configs for detected packages"
+        mechanism: "autoEnable: true (the default) checks installed packages and enables astro, svelte, vue, lit, storybook, prettier, typescript, zod configs when their packages are detected. Agents may not realize these are active and produce configs missing their options."
         wrong_pattern: |
           // zod is installed; agent writes config without zod options
           export default config({ ...presets.base });
@@ -345,53 +345,53 @@ skills:
         correct_pattern: |
           // Be explicit to control the config; or disable autoEnable
           export default config({ ...presets.base, zod: true, autoEnable: false });
-        source: 'src/auto.ts:autoEnableMap, src/builder.ts'
-        priority: 'MEDIUM'
-        status: 'active'
+        source: "src/auto.ts:autoEnableMap, src/builder.ts"
+        priority: "MEDIUM"
+        status: "active"
 
-  - name: 'multipublish'
-    slug: 'multipublish'
-    domain: 'workflow'
-    description: 'Publish monorepo packages simultaneously to npm (and custom registries) and JSR using a single config, integrated with changesets.'
-    type: 'core'
+  - name: "multipublish"
+    slug: "multipublish"
+    domain: "workflow"
+    description: "Publish monorepo packages simultaneously to npm (and custom registries) and JSR using a single config, integrated with changesets."
+    type: "core"
     packages:
-      - '@stephansama/multipublish'
+      - "@stephansama/multipublish"
     covers:
-      - 'platforms config array'
-      - 'jsr platform: experimentalGenerateJSR, experimentalUpdateCatalogs, allowSlowTypes, defaultInclude/defaultExclude, tokenEnvironmentKey'
-      - 'npm platform: registry, strategy (.npmrc | package.json), tokenEnvironmentKey'
-      - 'CLI: --dry, --versionJsr, --useChangesetStatus'
-      - 'changesets integration (stdin pipe or --useChangesetStatus)'
-      - 'preversion hook pattern'
+      - "platforms config array"
+      - "jsr platform: experimentalGenerateJSR, experimentalUpdateCatalogs, allowSlowTypes, defaultInclude/defaultExclude, tokenEnvironmentKey"
+      - "npm platform: registry, strategy (.npmrc | package.json), tokenEnvironmentKey"
+      - "CLI: --dry, --versionJsr, --useChangesetStatus"
+      - "changesets integration (stdin pipe or --useChangesetStatus)"
+      - "preversion hook pattern"
     tasks:
-      - 'Publish a monorepo package to both npm and JSR after a changesets release'
-      - 'Generate jsr.json from package.json automatically'
-      - 'Keep JSR version in sync with changesets versioning'
-      - 'Publish to GitHub npm registry with scoped token'
+      - "Publish a monorepo package to both npm and JSR after a changesets release"
+      - "Generate jsr.json from package.json automatically"
+      - "Keep JSR version in sync with changesets versioning"
+      - "Publish to GitHub npm registry with scoped token"
     failure_modes:
-      - mistake: 'no jsr.json/deno.json and experimentalGenerateJSR not set'
+      - mistake: "no jsr.json/deno.json and experimentalGenerateJSR not set"
         mechanism: 'The jsr platform loader globs for deno.json or jsr.json. If neither exists and experimentalGenerateJSR is false (the default), it throws "failed to load userJsr config file" at publish time.'
         wrong_pattern: |
           { "platforms": [["jsr", {}]] }
           # No jsr.json in package directory → throws
         correct_pattern: |
           { "platforms": [["jsr", { "experimentalGenerateJSR": true }]] }
-        source: 'src/publish.ts:jsr case, src/jsr.ts:loadConfig'
-        priority: 'CRITICAL'
-        status: 'active'
+        source: "src/publish.ts:jsr case, src/jsr.ts:loadConfig"
+        priority: "CRITICAL"
+        status: "active"
 
-      - mistake: 'experimentalUpdateCatalogs used with npm or yarn'
-        mechanism: 'updatePackageJsonWithCatalog is only implemented for pnpm and bun. With any other package manager it logs a console.error and silently skips, leaving catalog: refs unconverted.'
+      - mistake: "experimentalUpdateCatalogs used with npm or yarn"
+        mechanism: "updatePackageJsonWithCatalog is only implemented for pnpm and bun. With any other package manager it logs a console.error and silently skips, leaving catalog: refs unconverted."
         wrong_pattern: |
           { "platforms": [["jsr", { "experimentalUpdateCatalogs": true }]] }
           # used in a yarn workspace → silently skips
         correct_pattern: |
           # Only use experimentalUpdateCatalogs with pnpm or bun workspaces
-        source: 'src/publish.ts:experimentalUpdateCatalogs check'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/publish.ts:experimentalUpdateCatalogs check"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'npm .npmrc strategy without auth token env var'
+      - mistake: "npm .npmrc strategy without auth token env var"
         mechanism: 'The default npm strategy is ".npmrc". It reads process.env[config.tokenEnvironmentKey] (defaults to NODE_AUTH_TOKEN). If the env var is missing it throws "no auth token provided".'
         wrong_pattern: |
           { "platforms": [["npm", { "registry": "https://npm.pkg.github.com" }]] }
@@ -402,55 +402,55 @@ skills:
             "registry": "https://npm.pkg.github.com",
             "tokenEnvironmentKey": "GITHUB_TOKEN"
           }]] }
-        source: 'src/publish.ts:npm .npmrc case'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/publish.ts:npm .npmrc case"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'having both deno.json and jsr.json in a package directory'
+      - mistake: "having both deno.json and jsr.json in a package directory"
         mechanism: 'loadConfig globs for {deno,jsr}.json. If both files exist it throws "please only have one deno or jsr configuration file".'
         wrong_pattern: |
           # package has both deno.json AND jsr.json
         correct_pattern: |
           # Keep only one: prefer jsr.json for new projects
-        source: 'src/jsr.ts:loadConfig'
-        priority: 'MEDIUM'
-        status: 'active'
+        source: "src/jsr.ts:loadConfig"
+        priority: "MEDIUM"
+        status: "active"
 
-      - mistake: 'using deno as package manager for npm publishing'
+      - mistake: "using deno as package manager for npm publishing"
         mechanism: 'publishPlatform checks packageManager and throws "deno is not supported for npm publish" when the npm platform is selected with deno.'
         wrong_pattern: |
           # Deno workspace with npm platform
           { "platforms": [["npm", {}]] } # in a deno project → throws
         correct_pattern: |
           # Use jsr platform for deno projects; use pnpm/npm/yarn for npm platform
-        source: 'src/publish.ts:npm case'
-        priority: 'MEDIUM'
-        status: 'active'
+        source: "src/publish.ts:npm case"
+        priority: "MEDIUM"
+        status: "active"
 
-  - name: 'auto-readme'
-    slug: 'auto-readme'
-    domain: 'workflow'
-    description: 'Automatically generate and keep updated tables and lists in README files using HTML comment markers, supporting workspace packages, GitHub Action inputs, package.json deps, and Zod schemas.'
-    type: 'core'
+  - name: "auto-readme"
+    slug: "auto-readme"
+    domain: "workflow"
+    description: "Automatically generate and keep updated tables and lists in README files using HTML comment markers, supporting workspace packages, GitHub Action inputs, package.json deps, and Zod schemas."
+    type: "core"
     packages:
-      - '@stephansama/auto-readme'
+      - "@stephansama/auto-readme"
     covers:
-      - 'comment marker syntax: <!-- ACTION start --> / <!-- ACTION end -->'
-      - 'actions: WORKSPACE, ACTION, PKG, ZOD, USAGE'
-      - 'formats: TABLE (default), LIST'
-      - 'language: JS (default), RS'
-      - 'CLI flags: --changes (-g), --check (-k), --config (-c), --verbose (-v)'
-      - 'configuration: cosmiconfig (package.json, .autoreadmerc.*, autoreadme.config.*)'
-      - 'enableToc, enableUsage, enablePrettier'
-      - 'collapseHeadings, removeScope, onlyShowPublicPackages'
+      - "comment marker syntax: <!-- ACTION start --> / <!-- ACTION end -->"
+      - "actions: WORKSPACE, ACTION, PKG, ZOD, USAGE"
+      - "formats: TABLE (default), LIST"
+      - "language: JS (default), RS"
+      - "CLI flags: --changes (-g), --check (-k), --config (-c), --verbose (-v)"
+      - "configuration: cosmiconfig (package.json, .autoreadmerc.*, autoreadme.config.*)"
+      - "enableToc, enableUsage, enablePrettier"
+      - "collapseHeadings, removeScope, onlyShowPublicPackages"
     tasks:
-      - 'Auto-generate a workspace packages table in a monorepo README'
-      - 'Auto-generate a GitHub Action inputs table from action.yml'
-      - 'Embed a Zod schema reference table in a README'
-      - 'Generate a table of contents'
-      - 'Run as a pre-commit hook only for changed READMEs'
+      - "Auto-generate a workspace packages table in a monorepo README"
+      - "Auto-generate a GitHub Action inputs table from action.yml"
+      - "Embed a Zod schema reference table in a README"
+      - "Generate a table of contents"
+      - "Run as a pre-commit hook only for changed READMEs"
     failure_modes:
-      - mistake: 'using ZOD action with LIST format'
+      - mistake: "using ZOD action with LIST format"
         mechanism: 'The ZOD action only supports TABLE format. Specifying LIST throws "cannot display zod in list format" at pipeline execution time.'
         wrong_pattern: |
           <!-- ZOD-LIST path="./src/schema.js" start -->
@@ -458,11 +458,11 @@ skills:
         correct_pattern: |
           <!-- ZOD path="./src/schema.js" start -->
           <!-- ZOD end -->
-        source: 'src/data.ts:ZOD case'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/data.ts:ZOD case"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'ZOD comment missing path= parameter'
+      - mistake: "ZOD comment missing path= parameter"
         mechanism: 'The ZOD data loader extracts the path parameter from the comment parameters list. If path= is absent it throws "no path found for zod table at markdown file <file>".'
         wrong_pattern: |
           <!-- ZOD start -->
@@ -470,11 +470,11 @@ skills:
         correct_pattern: |
           <!-- ZOD path="./src/schema.js" start -->
           <!-- ZOD end -->
-        source: 'src/data.ts:ZOD case'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/data.ts:ZOD case"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'ACTION comment without action.yml or action.yaml in the directory'
+      - mistake: "ACTION comment without action.yml or action.yaml in the directory"
         mechanism: 'The ACTION data loader looks for action.yml or action.yaml in the same directory as the README file. If neither exists it throws "no yaml file found at locations: ...".'
         wrong_pattern: |
           <!-- ACTION start -->  ← in a directory without action.yml
@@ -482,12 +482,12 @@ skills:
         correct_pattern: |
           # Place the ACTION comment in the same directory as action.yml/action.yaml
           # Or use PKG for package.json dependency tables instead
-        source: 'src/data.ts:loadActionYaml'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/data.ts:loadActionYaml"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'comment markers left unclosed or mismatched'
-        mechanism: 'remark-zone processes start/end comment pairs. An unmatched start or end marker causes the zone transform to silently skip or corrupt the section.'
+      - mistake: "comment markers left unclosed or mismatched"
+        mechanism: "remark-zone processes start/end comment pairs. An unmatched start or end marker causes the zone transform to silently skip or corrupt the section."
         wrong_pattern: |
           <!-- WORKSPACE start -->
           <!-- some other content -->
@@ -495,32 +495,32 @@ skills:
         correct_pattern: |
           <!-- WORKSPACE start -->
           <!-- WORKSPACE end -->
-        source: 'src/plugin.ts:zone usage'
-        priority: 'MEDIUM'
-        status: 'active'
+        source: "src/plugin.ts:zone usage"
+        priority: "MEDIUM"
+        status: "active"
 
-  - name: 'ai-commit-msg'
-    slug: 'ai-commit-msg'
-    domain: 'workflow'
-    description: 'Generate conventional commit messages from staged git diffs using an AI model (Google, OpenAI, or Ollama), wired as a prepare-commit-msg Git hook.'
-    type: 'core'
+  - name: "ai-commit-msg"
+    slug: "ai-commit-msg"
+    domain: "workflow"
+    description: "Generate conventional commit messages from staged git diffs using an AI model (Google, OpenAI, or Ollama), wired as a prepare-commit-msg Git hook."
+    type: "core"
     packages:
-      - '@stephansama/ai-commit-msg'
+      - "@stephansama/ai-commit-msg"
     covers:
-      - 'providers: google, openai, ollama'
-      - 'default provider: ollama / default model: llama2'
-      - 'configuration: cosmiconfig (package.json, .ai-commit-msgrc.*, etc.)'
-      - 'configSchema: provider, model, prompt, skipNextRun, useConventionalCommits, verbose, baseURL, headers'
-      - 'prepare-commit-msg hook integration'
-      - 'diff truncation at 8000 chars'
-      - '{{diff}} prompt placeholder'
+      - "providers: google, openai, ollama"
+      - "default provider: ollama / default model: llama2"
+      - "configuration: cosmiconfig (package.json, .ai-commit-msgrc.*, etc.)"
+      - "configSchema: provider, model, prompt, skipNextRun, useConventionalCommits, verbose, baseURL, headers"
+      - "prepare-commit-msg hook integration"
+      - "diff truncation at 8000 chars"
+      - "{{diff}} prompt placeholder"
     tasks:
-      - 'Set up AI commit message generation as a Git hook'
-      - 'Switch from the default ollama provider to Google or OpenAI'
-      - 'Customise the commit message prompt'
-      - 'Skip the hook for a single commit'
+      - "Set up AI commit message generation as a Git hook"
+      - "Switch from the default ollama provider to Google or OpenAI"
+      - "Customise the commit message prompt"
+      - "Skip the hook for a single commit"
     failure_modes:
-      - mistake: 'default config uses ollama/llama2 which fails if ollama is not running'
+      - mistake: "default config uses ollama/llama2 which fails if ollama is not running"
         mechanism: 'Without any config file, loadConfig returns provider: "ollama", model: "llama2". If the Ollama server is not running locally the hook throws a network error and the commit fails.'
         wrong_pattern: |
           # No config file — relies on ollama running locally
@@ -529,11 +529,11 @@ skills:
           # Create config with an available provider
           # ai-commit-msg.config.ts
           export default { provider: 'google', model: 'gemini-2.5-flash' };
-        source: 'src/config.ts:defaultConfig'
-        priority: 'CRITICAL'
-        status: 'active'
+        source: "src/config.ts:defaultConfig"
+        priority: "CRITICAL"
+        status: "active"
 
-      - mistake: 'missing API key env var for non-ollama providers'
+      - mistake: "missing API key env var for non-ollama providers"
         mechanism: 'getProvider() validates the environment against environmentSchema before constructing the model. Google requires GOOGLE_GENERATIVE_AI_API_KEY; OpenAI requires OPENAI_API_KEY. Missing keys cause an err() result which throws "unable to validate env due to the following issues".'
         wrong_pattern: |
           export default { provider: 'google', model: 'gemini-2.5-flash' };
@@ -541,11 +541,11 @@ skills:
         correct_pattern: |
           # Set env var before the hook runs (e.g. in .env or shell profile)
           export GOOGLE_GENERATIVE_AI_API_KEY=your-key
-        source: 'src/ai.ts:getProvider, src/schema.ts:environmentSchema'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/ai.ts:getProvider, src/schema.ts:environmentSchema"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'custom prompt without {{diff}} placeholder loses the diff'
+      - mistake: "custom prompt without {{diff}} placeholder loses the diff"
         mechanism: 'The prompt string is processed with prompt.replace("{{diff}}", diff). A custom prompt that omits {{diff}} sends a message with no diff context; the model generates a generic or empty commit message.'
         wrong_pattern: |
           export default {
@@ -559,43 +559,43 @@ skills:
             model: 'gemini-2.5-flash',
             prompt: 'Write a short conventional commit message for this diff:\n\n{{diff}}',
           };
-        source: 'src/index.ts:prompt.replace'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/index.ts:prompt.replace"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'running the hook with no staged changes produces empty diff'
+      - mistake: "running the hook with no staged changes produces empty diff"
         mechanism: "getDiff() runs `git --no-pager diff --staged`. With nothing staged it returns an empty string, which throws 'unable to get git diff'. The commit is blocked."
         wrong_pattern: |
           git commit -m "wip"  # nothing staged
         correct_pattern: |
           git add <files> && git commit  # stage files first
           # Or use skipNextRun: true in config to bypass for manual commits
-        source: 'src/index.ts:getDiff'
-        priority: 'MEDIUM'
-        status: 'active'
+        source: "src/index.ts:getDiff"
+        priority: "MEDIUM"
+        status: "active"
 
-  - name: 'astro-iconify-svgmap'
-    slug: 'astro-iconify-svgmap'
-    domain: 'framework'
-    description: 'Astro integration that generates optimised SVG sprite maps from installed @iconify-json/* packages, serving them via a virtual module and writing sprite files at build time.'
-    type: 'framework'
+  - name: "astro-iconify-svgmap"
+    slug: "astro-iconify-svgmap"
+    domain: "framework"
+    description: "Astro integration that generates optimised SVG sprite maps from installed @iconify-json/* packages, serving them via a virtual module and writing sprite files at build time."
+    type: "framework"
     packages:
-      - '@stephansama/astro-iconify-svgmap'
+      - "@stephansama/astro-iconify-svgmap"
     covers:
-      - 'createIntegration(options)'
-      - 'createPlugin(options) (internal Vite plugin)'
-      - 'virtual:iconify-svgmap module (must be imported in Astro base layout)'
+      - "createIntegration(options)"
+      - "createPlugin(options) (internal Vite plugin)"
+      - "virtual:iconify-svgmap module (must be imported in Astro base layout)"
       - 'Options: iconifyRootDirectory, outDir (default: "public")'
-      - '@iconify-json/* package auto-discovery from package.json deps'
-      - 'astro:config:setup and astro:build:done hooks'
+      - "@iconify-json/* package auto-discovery from package.json deps"
+      - "astro:config:setup and astro:build:done hooks"
       - 'SVG sprite map usage via <use href="#icon-name"> pattern'
     tasks:
-      - 'Add the integration to an Astro project and serve icon sprites'
-      - 'Import the virtual module in base layout to enable sprite tracking'
-      - 'Reference icons in components using the SVG <use> pattern'
-      - 'Point to a custom package.json root for icon discovery in a monorepo'
+      - "Add the integration to an Astro project and serve icon sprites"
+      - "Import the virtual module in base layout to enable sprite tracking"
+      - "Reference icons in components using the SVG <use> pattern"
+      - "Point to a custom package.json root for icon discovery in a monorepo"
     failure_modes:
-      - mistake: 'no @iconify-json/* packages installed'
+      - mistake: "no @iconify-json/* packages installed"
         mechanism: 'loadIcons() filters package.json dependencies for names starting with "@iconify-json/". If none are found it throws "must have at least one iconify pack loaded".'
         wrong_pattern: |
           // astro.config.mjs — @iconify/utils installed but no icon packs
@@ -606,24 +606,24 @@ skills:
           // pnpm add @iconify-json/mdi
           import { createIntegration } from '@stephansama/astro-iconify-svgmap';
           export default defineConfig({ integrations: [createIntegration()] });
-        source: 'src/utilities.ts:loadIcons'
-        priority: 'CRITICAL'
-        status: 'active'
+        source: "src/utilities.ts:loadIcons"
+        priority: "CRITICAL"
+        status: "active"
 
-      - mistake: 'using createPlugin directly in Astro config instead of createIntegration'
-        mechanism: 'createPlugin returns a Vite plugin, not an Astro integration. Using it directly in integrations[] silently fails to wire the astro:build:done hook that writes sprite files at build time.'
+      - mistake: "using createPlugin directly in Astro config instead of createIntegration"
+        mechanism: "createPlugin returns a Vite plugin, not an Astro integration. Using it directly in integrations[] silently fails to wire the astro:build:done hook that writes sprite files at build time."
         wrong_pattern: |
           import createPlugin from '@stephansama/astro-iconify-svgmap';
           export default defineConfig({ integrations: [createPlugin()] }); // wrong
         correct_pattern: |
           import { createIntegration } from '@stephansama/astro-iconify-svgmap';
           export default defineConfig({ integrations: [createIntegration()] });
-        source: 'src/index.ts:createIntegration vs createPlugin'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/index.ts:createIntegration vs createPlugin"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'icon packs in monorepo root but iconifyRootDirectory not set'
-        mechanism: 'loadIcons reads package.json from options.iconifyRootDirectory. The default reads the package.json adjacent to the integration call (i.e. the Astro project root). In a monorepo where icon packs are installed at the workspace root, this finds no @iconify-json/* packages and throws.'
+      - mistake: "icon packs in monorepo root but iconifyRootDirectory not set"
+        mechanism: "loadIcons reads package.json from options.iconifyRootDirectory. The default reads the package.json adjacent to the integration call (i.e. the Astro project root). In a monorepo where icon packs are installed at the workspace root, this finds no @iconify-json/* packages and throws."
         wrong_pattern: |
           // Monorepo: icon packs at root, Astro app in apps/web/
           createIntegration() // reads apps/web/package.json → no icon packs
@@ -631,12 +631,12 @@ skills:
           createIntegration({
             iconifyRootDirectory: new URL('../../', import.meta.url), // workspace root
           })
-        source: 'src/utilities.ts:loadIcons, src/type.ts:Options'
-        priority: 'HIGH'
-        status: 'active'
+        source: "src/utilities.ts:loadIcons, src/type.ts:Options"
+        priority: "HIGH"
+        status: "active"
 
-      - mistake: 'not importing virtual:iconify-svgmap in the base layout'
-        mechanism: 'The plugin tracks which icons are used by intercepting imports of virtual:iconify-svgmap. If the virtual module is never imported in the Astro base layout, no icons are tracked and the generated sprite map is empty at build time.'
+      - mistake: "not importing virtual:iconify-svgmap in the base layout"
+        mechanism: "The plugin tracks which icons are used by intercepting imports of virtual:iconify-svgmap. If the virtual module is never imported in the Astro base layout, no icons are tracked and the generated sprite map is empty at build time."
         wrong_pattern: |
           // BaseLayout.astro — virtual module never imported
           // Icons are referenced via <use> but the map is empty
@@ -644,60 +644,60 @@ skills:
           // BaseLayout.astro
           import iconMap from 'virtual:iconify-svgmap';
           // Then render the sprite map in the layout body
-        source: 'src/index.ts:load hook, maintainer interview'
-        priority: 'CRITICAL'
-        status: 'active'
+        source: "src/index.ts:load hook, maintainer interview"
+        priority: "CRITICAL"
+        status: "active"
 
 tensions:
-  - name: 'synchronous validation requirement vs async schema ergonomics'
-    skills: ['typed-events', 'typed-templates', 'typed-env']
-    description: 'typed-events requires synchronous validators for correct dispatch/listen behaviour; typed-templates and typed-env also use synchronous validation. Standard-schema allows async validators, but all three packages degrade silently or warn when given them.'
-    implication: 'An agent that defaults to async zod patterns (z.parseAsync, async validators) will produce code that passes TypeScript but silently bypasses validation at runtime in typed-events, or produces unexpected behaviour in typed-templates.'
+  - name: "synchronous validation requirement vs async schema ergonomics"
+    skills: ["typed-events", "typed-templates", "typed-env"]
+    description: "typed-events requires synchronous validators for correct dispatch/listen behaviour; typed-templates and typed-env also use synchronous validation. Standard-schema allows async validators, but all three packages degrade silently or warn when given them."
+    implication: "An agent that defaults to async zod patterns (z.parseAsync, async validators) will produce code that passes TypeScript but silently bypasses validation at runtime in typed-events, or produces unexpected behaviour in typed-templates."
 
-  - name: 'autoEnable convenience vs explicit config control'
-    skills: ['eslint-config']
-    description: 'autoEnable: true silently activates framework configs based on installed packages, which is convenient for simple projects but surprising in monorepos or projects with multiple framework deps.'
-    implication: 'An agent generating an eslint.config.js without setting autoEnable: false may produce a config that appears complete but is missing awareness of which configs are auto-active, leading to rules firing unexpectedly.'
+  - name: "autoEnable convenience vs explicit config control"
+    skills: ["eslint-config"]
+    description: "autoEnable: true silently activates framework configs based on installed packages, which is convenient for simple projects but surprising in monorepos or projects with multiple framework deps."
+    implication: "An agent generating an eslint.config.js without setting autoEnable: false may produce a config that appears complete but is missing awareness of which configs are auto-active, leading to rules firing unexpectedly."
 
-  - name: 'default ollama provider vs production AI providers'
-    skills: ['ai-commit-msg']
-    description: 'The default config (ollama/llama2) works zero-config in local dev with Ollama installed, but fails in CI or on machines without Ollama. Production-ready configs need an explicit provider and API key.'
-    implication: 'An agent generating a hook setup without a config file will produce a setup that works locally on the developer machine but fails in CI pipelines.'
+  - name: "default ollama provider vs production AI providers"
+    skills: ["ai-commit-msg"]
+    description: "The default config (ollama/llama2) works zero-config in local dev with Ollama installed, but fails in CI or on machines without Ollama. Production-ready configs need an explicit provider and API key."
+    implication: "An agent generating a hook setup without a config file will produce a setup that works locally on the developer machine but fails in CI pipelines."
 
 cross_references:
-  - from: 'typed-events'
-    to: 'typed-env'
-    reason: 'Both require standard-schema-compatible validators; the same vendor restriction (zod/valibot/arktype) applies to both.'
+  - from: "typed-events"
+    to: "typed-env"
+    reason: "Both require standard-schema-compatible validators; the same vendor restriction (zod/valibot/arktype) applies to both."
 
-  - from: 'typed-templates'
-    to: 'typed-env'
-    reason: 'Both use the same hard-coded vendor normalisation. Awareness of the supported set prevents the same mistake in both packages.'
+  - from: "typed-templates"
+    to: "typed-env"
+    reason: "Both use the same hard-coded vendor normalisation. Awareness of the supported set prevents the same mistake in both packages."
 
-  - from: 'multipublish'
-    to: 'auto-readme'
-    reason: 'Both use cosmiconfig for config discovery with similar file naming conventions; understanding one helps configure the other.'
+  - from: "multipublish"
+    to: "auto-readme"
+    reason: "Both use cosmiconfig for config discovery with similar file naming conventions; understanding one helps configure the other."
 
-  - from: 'ai-commit-msg'
-    to: 'auto-readme'
-    reason: 'Both are typically wired as Git hooks (prepare-commit-msg and pre-commit respectively); knowing the hook setup pattern for one applies to the other.'
+  - from: "ai-commit-msg"
+    to: "auto-readme"
+    reason: "Both are typically wired as Git hooks (prepare-commit-msg and pre-commit respectively); knowing the hook setup pattern for one applies to the other."
 
 gaps:
-  - skill: 'astro-iconify-svgmap'
-    question: 'How are icons referenced in Astro components — is there a recommended component pattern for using the sprite map from virtual:iconify-svgmap?'
-    context: 'The virtual module exports icon collections but no component usage pattern is documented in the README or source.'
+  - skill: "astro-iconify-svgmap"
+    question: "How are icons referenced in Astro components — is there a recommended component pattern for using the sprite map from virtual:iconify-svgmap?"
+    context: "The virtual module exports icon collections but no component usage pattern is documented in the README or source."
     status: 'resolved — import virtual:iconify-svgmap in base layout; use SVG <use href="#icon-name"> pattern in components'
 
-  - skill: 'auto-readme'
-    question: 'What is the RS language option for? No Rust-specific action or data loader is visible in the source.'
+  - skill: "auto-readme"
+    question: "What is the RS language option for? No Rust-specific action or data loader is visible in the source."
     context: 'languageSchema includes "RS" but all data loaders appear JS-only.'
-    status: 'resolved — abandoned Rust implementation; RS option exists in schema but has no backing implementation; do not document as a supported feature'
+    status: "resolved — abandoned Rust implementation; RS option exists in schema but has no backing implementation; do not document as a supported feature"
 
-  - skill: 'auto-readme'
-    question: 'The USAGE action is included in the schema but its data loader returns minimal data and the remark plugin does not render it specially. What is the intended workflow for USAGE comments?'
-    context: 'enableUsage in config and USAGE comment action seem related but their interaction is not fully clear from the source.'
-    status: 'open'
+  - skill: "auto-readme"
+    question: "The USAGE action is included in the schema but its data loader returns minimal data and the remark plugin does not render it specially. What is the intended workflow for USAGE comments?"
+    context: "enableUsage in config and USAGE comment action seem related but their interaction is not fully clear from the source."
+    status: "open"
 
-  - skill: 'multipublish'
-    question: 'Does --useChangesetStatus read from changesets release state directly, or does it require piping stdin? The distinction matters for CI setup.'
-    context: 'Both stdin piping and --useChangesetStatus are mentioned in the README but their precise difference is not clear from the source.'
-    status: 'resolved — --useChangesetStatus reads pending changeset state directly (which packages have unreleased changesets); stdin piping receives published package info from changeset publish output and can come from any source'
+  - skill: "multipublish"
+    question: "Does --useChangesetStatus read from changesets release state directly, or does it require piping stdin? The distinction matters for CI setup."
+    context: "Both stdin piping and --useChangesetStatus are mentioned in the README but their precise difference is not clear from the source."
+    status: "resolved — --useChangesetStatus reads pending changeset state directly (which packages have unreleased changesets); stdin piping receives published package info from changeset publish output and can come from any source"

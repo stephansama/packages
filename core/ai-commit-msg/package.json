@@ -56,10 +56,10 @@
     "zod": "catalog:schema"
   },
   "devDependencies": {
+    "@tanstack/intent": "catalog:tanstack",
     "@types/yargs": "catalog:",
     "tsdown": "catalog:",
-    "tsx": "catalog:",
-    "@tanstack/intent": "catalog:tanstack"
+    "tsx": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",
   "engines": {

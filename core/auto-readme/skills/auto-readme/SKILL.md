@@ -7,7 +7,7 @@ description: >
   reference tables), USAGE actions. Run via CLI or as a pre-commit hook with
   --changes to process only modified READMEs.
 type: core
-library: '@stephansama/auto-readme'
+library: "@stephansama/auto-readme"
 library_version: "1.0.0"
 sources:
   - stephansama/packages:core/auto-readme/src/comment.ts
@@ -171,7 +171,9 @@ Wrong:
 
 ```md
 <!-- WORKSPACE start -->
+
 Some content
+
 <!-- WORKSPACE start -->  ← second start, no end
 ```
 

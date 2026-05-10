@@ -38,7 +38,7 @@ via `pnpm create stephansama-example`
 If you use an AI agent (Claude Code, Cursor, Copilot, etc.), run the following to install skills for all packages:
 
 ```sh
-npx @tanstack/intent@latest install
+pnpm dlx @tanstack/intent@latest install
 ```
 
 ## 📦 Packages

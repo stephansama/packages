@@ -7,7 +7,7 @@ description: >
   auto-loading .env files via dotenvx, or generating .env.example placeholder
   files from a schema shape.
 type: core
-library: '@stephansama/typed-env'
+library: "@stephansama/typed-env"
 library_version: "1.0.0"
 sources:
   - stephansama/packages:core/typed-env/src/index.ts
@@ -21,8 +21,8 @@ Runtime environment validation with full TypeScript inference. `createEnvironmen
 ## Setup
 
 ```ts
-import * as z from 'zod';
-import { createEnvironment } from '@stephansama/typed-env';
+import * as z from "zod";
+import { createEnvironment } from "@stephansama/typed-env";
 
 export const env = createEnvironment(
   z.object({
@@ -41,8 +41,8 @@ Call `env.validate()` once at application startup to fail fast with a descriptiv
 
 ```ts
 // src/env.ts
-import * as z from 'zod';
-import { createEnvironment } from '@stephansama/typed-env';
+import * as z from "zod";
+import { createEnvironment } from "@stephansama/typed-env";
 
 export const env = createEnvironment(
   z.object({
@@ -53,7 +53,7 @@ export const env = createEnvironment(
 );
 
 // src/main.ts
-import { env } from './env';
+import { env } from "./env";
 
 const config = await env.validate();
 // config is fully typed: { PORT: number; DATABASE_URL: string }
@@ -62,10 +62,10 @@ const config = await env.validate();
 ### Generate a .env.example file
 
 ```ts
-import { generateExample } from './env';
+import { generateExample } from "./env";
 
 // writes placeholder values (***) for each key in the schema
-await env.generateExample('.env.example');
+await env.generateExample(".env.example");
 ```
 
 Run this as a script or CI step to keep `.env.example` in sync with the schema. Requires zod, valibot, or arktype — the schema's `vendor` field determines how keys are extracted.
@@ -74,7 +74,7 @@ Run this as a script or CI step to keep `.env.example` in sync with the schema. 
 
 ```ts
 export const env = createEnvironment(schema, {
-  path: '.env.production',
+  path: ".env.production",
   override: true,
 });
 ```
@@ -86,7 +86,7 @@ Pass a `DotenvConfigOptions` object as the second argument instead of `true` for
 ```ts
 export const env = createEnvironment(schema);
 // load manually when needed
-env.loadEnv({ path: '.env.local' });
+env.loadEnv({ path: ".env.local" });
 const config = await env.validate();
 ```
 
@@ -97,17 +97,17 @@ const config = await env.validate();
 Wrong:
 
 ```ts
-import { Type } from '@sinclair/typebox';
+import { Type } from "@sinclair/typebox";
 const env = createEnvironment(Type.Object({ KEY: Type.String() }));
-await env.generateExample('.env.example'); // throws: "invalid schema provider"
+await env.generateExample(".env.example"); // throws: "invalid schema provider"
 ```
 
 Correct:
 
 ```ts
-import * as z from 'zod';
+import * as z from "zod";
 const env = createEnvironment(z.object({ KEY: z.string() }));
-await env.generateExample('.env.example');
+await env.generateExample(".env.example");
 ```
 
 `generateExample` uses a hard-coded vendor switch on `schema["~standard"].vendor`. Only `"zod"`, `"valibot"`, and `"arktype"` are handled. Any other standard-schema implementation throws.
@@ -149,7 +149,7 @@ Correct:
 try {
   const config = await env.validate();
 } catch (err) {
-  console.error('Environment validation failed:', (err as Error).message);
+  console.error("Environment validation failed:", (err as Error).message);
   process.exit(1);
 }
 ```

@@ -6,7 +6,7 @@ description: >
   React components that need automatic cleanup on unmount. Import from
   @stephansama/typed-events/react. Requires react >= 18.
 type: framework
-library: '@stephansama/typed-events'
+library: "@stephansama/typed-events"
 framework: react
 library_version: "3.0.9"
 requires:
@@ -23,11 +23,11 @@ This skill builds on `typed-events`. Read it first for foundational concepts inc
 ## Setup
 
 ```ts
-import * as z from 'zod';
-import { createBroadcastEvent } from '@stephansama/typed-events';
-import { useListeners } from '@stephansama/typed-events/react';
+import * as z from "zod";
+import { createBroadcastEvent } from "@stephansama/typed-events";
+import { useListeners } from "@stephansama/typed-events/react";
 
-export const appEvents = createBroadcastEvent('my-app', {
+export const appEvents = createBroadcastEvent("my-app", {
   update: z.object({ value: z.number() }),
   reset: z.object({}),
 });
@@ -91,9 +91,12 @@ Correct:
 
 ```tsx
 function MyComponent() {
-  const handlers = useMemo(() => ({
-    update: ({ data }) => setValue(data.value),
-  }), []);
+  const handlers = useMemo(
+    () => ({
+      update: ({ data }) => setValue(data.value),
+    }),
+    [],
+  );
 
   useListeners(appEvents, handlers);
 }
@@ -108,13 +111,13 @@ Source: `core/typed-events/src/react.ts`
 Wrong:
 
 ```ts
-import { useListener } from '@stephansama/typed-events'; // not exported here
+import { useListener } from "@stephansama/typed-events"; // not exported here
 ```
 
 Correct:
 
 ```ts
-import { useListener, useListeners } from '@stephansama/typed-events/react';
+import { useListener, useListeners } from "@stephansama/typed-events/react";
 ```
 
 React hooks are exported from the `/react` subpath only. The main entrypoint exports only the event factories.

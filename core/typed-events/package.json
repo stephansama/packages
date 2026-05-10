@@ -45,6 +45,7 @@
     "@standard-schema/spec": "catalog:schema"
   },
   "devDependencies": {
+    "@tanstack/intent": "catalog:tanstack",
     "@testing-library/jest-dom": "catalog:",
     "@testing-library/react": "catalog:",
     "@types/react": "catalog:",
@@ -52,8 +53,7 @@
     "react": "catalog:",
     "tsdown": "catalog:",
     "vite-tsconfig-paths": "catalog:",
-    "zod": "catalog:schema",
-    "@tanstack/intent": "catalog:tanstack"
+    "zod": "catalog:schema"
   },
   "peerDependencies": {
     "react": ">=18"

@@ -77,13 +77,13 @@
     "zod2md": "catalog:"
   },
   "devDependencies": {
+    "@tanstack/intent": "catalog:tanstack",
     "@types/mdast": "catalog:",
     "@types/vfile": "catalog:",
     "@types/yargs": "catalog:",
     "picospinner": "catalog:cli",
     "tsdown": "catalog:",
-    "unified": "catalog:",
-    "@tanstack/intent": "catalog:tanstack"
+    "unified": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",
   "engines": {

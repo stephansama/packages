@@ -7,7 +7,7 @@ description: >
   correct path resolution. audit() checks template slots match schema shape.
   compile(key, data) validates data then renders. Supports zod, valibot, arktype only.
 type: core
-library: '@stephansama/typed-templates'
+library: "@stephansama/typed-templates"
 library_version: "1.0.0"
 sources:
   - stephansama/packages:core/typed-templates/src/map.ts
@@ -23,23 +23,26 @@ Schema-validated Handlebars template compilation. `audit()` verifies template sl
 
 ## Choosing the right factory
 
-| Scenario | Use |
-| --- | --- |
-| Each template has a different data shape | `createHandlebarSchemaMap` |
+| Scenario                                     | Use                              |
+| -------------------------------------------- | -------------------------------- |
+| Each template has a different data shape     | `createHandlebarSchemaMap`       |
 | Multiple templates share the same data shape | `createHandlebarSchemaSingleton` |
 
 ## Setup
 
 ```ts
-import * as z from 'zod';
-import { createHandlebarSchemaMap, getFileContext } from '@stephansama/typed-templates';
+import * as z from "zod";
+import {
+  createHandlebarSchemaMap,
+  getFileContext,
+} from "@stephansama/typed-templates";
 
 const { isLinting, templateDirectory } = getFileContext(import.meta.url);
 
 export const templates = createHandlebarSchemaMap(
   {
     greeting: {
-      path: 'greeting.hbs',
+      path: "greeting.hbs",
       schema: z.object({ name: z.string() }),
     },
   },
@@ -56,15 +59,18 @@ if (isLinting()) await templates.audit();
 ### Compile a template
 
 ```ts
-const output = await templates.compile('greeting', { name: 'Alice' });
+const output = await templates.compile("greeting", { name: "Alice" });
 // data is validated against the schema before compilation
 ```
 
 ### Singleton: one schema, multiple templates
 
 ```ts
-import * as z from 'zod';
-import { createHandlebarSchemaSingleton, getFileContext } from '@stephansama/typed-templates';
+import * as z from "zod";
+import {
+  createHandlebarSchemaSingleton,
+  getFileContext,
+} from "@stephansama/typed-templates";
 
 const { isLinting, templateDirectory } = getFileContext(import.meta.url);
 
@@ -73,14 +79,16 @@ const itemSchema = z.object({
 });
 
 export const itemTemplates = createHandlebarSchemaSingleton(
-  ['list.hbs', 'table.hbs'],
+  ["list.hbs", "table.hbs"],
   itemSchema,
   { templateDirectory },
 );
 
 if (isLinting()) await itemTemplates.audit();
 
-const output = await itemTemplates.compile('list.hbs', { items: [{ key: 'a', value: '1' }] });
+const output = await itemTemplates.compile("list.hbs", {
+  items: [{ key: "a", value: "1" }],
+});
 ```
 
 ### Run audit as a lint script
@@ -103,7 +111,7 @@ Wrong:
 
 ```ts
 const templates = createHandlebarSchemaMap(map, {
-  templateDirectory: './templates', // resolved from process.cwd()
+  templateDirectory: "./templates", // resolved from process.cwd()
 });
 ```
 
@@ -144,9 +152,9 @@ Source: `core/typed-templates/src/utilities.ts:getFileContext`
 Wrong:
 
 ```ts
-import { Type } from '@sinclair/typebox';
+import { Type } from "@sinclair/typebox";
 const templates = createHandlebarSchemaMap(
-  { tmpl: { path: 'tmpl.hbs', schema: Type.Object({ name: Type.String() }) } },
+  { tmpl: { path: "tmpl.hbs", schema: Type.Object({ name: Type.String() }) } },
   { templateDirectory },
 );
 await templates.audit(); // throws: "invalid schema provider"
@@ -155,9 +163,9 @@ await templates.audit(); // throws: "invalid schema provider"
 Correct:
 
 ```ts
-import * as z from 'zod';
+import * as z from "zod";
 const templates = createHandlebarSchemaMap(
-  { tmpl: { path: 'tmpl.hbs', schema: z.object({ name: z.string() }) } },
+  { tmpl: { path: "tmpl.hbs", schema: z.object({ name: z.string() }) } },
   { templateDirectory },
 );
 ```
@@ -173,7 +181,7 @@ Wrong:
 ```ts
 // header.hbs uses { title, subtitle } — footer.hbs uses { links[] }
 const single = createHandlebarSchemaSingleton(
-  ['header.hbs', 'footer.hbs'],
+  ["header.hbs", "footer.hbs"],
   z.object({ title: z.string() }), // one schema for both
   { templateDirectory },
 );
@@ -183,10 +191,19 @@ const single = createHandlebarSchemaSingleton(
 Correct:
 
 ```ts
-const map = createHandlebarSchemaMap({
-  header: { path: 'header.hbs', schema: z.object({ title: z.string(), subtitle: z.string() }) },
-  footer: { path: 'footer.hbs', schema: z.object({ links: z.array(z.string()) }) },
-}, { templateDirectory });
+const map = createHandlebarSchemaMap(
+  {
+    header: {
+      path: "header.hbs",
+      schema: z.object({ title: z.string(), subtitle: z.string() }),
+    },
+    footer: {
+      path: "footer.hbs",
+      schema: z.object({ links: z.array(z.string()) }),
+    },
+  },
+  { templateDirectory },
+);
 ```
 
 `createHandlebarSchemaSingleton` validates all files against a single schema. Use it only when all files share the exact same slot names. Use `createHandlebarSchemaMap` when templates differ.

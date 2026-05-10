@@ -78,6 +78,7 @@
   "devDependencies": {
     "@eslint/css": "catalog:eslint",
     "@eslint/markdown": "catalog:eslint",
+    "@tanstack/intent": "catalog:tanstack",
     "@vitest/eslint-plugin": "catalog:eslint",
     "cleye": "catalog:cli",
     "eslint": "catalog:eslint",
@@ -90,8 +91,7 @@
     "local-pkg": "catalog:",
     "svelte-eslint-parser": "catalog:eslint",
     "tsdown": "catalog:",
-    "tsnapi": "catalog:typescript",
-    "@tanstack/intent": "catalog:tanstack"
+    "tsnapi": "catalog:typescript"
   },
   "peerDependencies": {
     "@eslint/css": "catalog:eslint",

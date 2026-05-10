@@ -55,12 +55,12 @@
     "zod": "catalog:schema"
   },
   "devDependencies": {
+    "@tanstack/intent": "catalog:tanstack",
     "@types/yargs": "catalog:",
     "es-toolkit": "catalog:",
     "jsr": "catalog:",
     "tsdown": "catalog:",
-    "tsx": "catalog:",
-    "@tanstack/intent": "catalog:tanstack"
+    "tsx": "catalog:"
   },
   "peerDependencies": {
     "jsr": ">=0.10"

@@ -20,15 +20,18 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": "./config/schema.mjs",
+    ".": "./dist/index.mjs",
+    "./cli": "./dist/cli.mjs",
     "./package.json": "./package.json",
+    "./schema": "./dist/schema.mjs",
     "./schema.json": "./config/schema.json"
   },
   "types": "./config/schema.d.cts",
-  "bin": "./cli.mjs",
+  "bin": {
+    "ai-commit-msg": "./dist/cli.mjs"
+  },
   "files": [
-    "./dist",
-    "./config"
+    "./dist"
   ],
   "scripts": {
     "build": "tsdown",

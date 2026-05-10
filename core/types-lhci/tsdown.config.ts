@@ -5,7 +5,7 @@ import ApiSnapshot from "tsnapi/rolldown";
 import * as z from "zod";
 
 export default defineConfig({
-	attw: { profile: "esm-only" },
+	attw: { excludeEntrypoints: ["schema.json"], profile: "esm-only" },
 	dts: true,
 	entry: "./src/index.ts",
 	exports: {

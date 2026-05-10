@@ -20,15 +20,12 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    },
+    ".": "./dist/index.mjs",
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "bin": "./cli.mjs",
+  "bin": {
+    "find-makefile-targets": "./dist/index.mjs"
+  },
   "files": [
     "./dist"
   ],

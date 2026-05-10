@@ -20,8 +20,10 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": "./config/schema.mjs",
+    ".": "./dist/index.mjs",
+    "./cli": "./dist/cli.mjs",
     "./package.json": "./package.json",
+    "./schema": "./dist/schema.mjs",
     "./schema.json": "./config/schema.json"
   },
   "types": "./config/schema.d.cts",

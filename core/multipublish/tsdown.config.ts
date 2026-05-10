@@ -4,44 +4,38 @@ import { defineConfig } from "tsdown";
 import ApiSnapshot from "tsnapi/rolldown";
 import * as z from "zod";
 
-export default defineConfig([
-	{
-		attw: { excludeEntrypoints: ["schema.json"], profile: "esm-only" },
-		deps: { skipNodeModulesBundle: true },
-		dts: false,
-		entry: "./src/index.ts",
-		format: "esm",
-		plugins: [ApiSnapshot()],
-		target: "esnext",
+export default defineConfig({
+	attw: { excludeEntrypoints: ["schema.json"], profile: "esm-only" },
+	deps: { skipNodeModulesBundle: true },
+	dts: true,
+	entry: {
+		cli: "./src/cli.ts",
+		index: "./src/index.ts",
+		schema: "./src/schema.ts",
 	},
-	{
-		deps: { skipNodeModulesBundle: true },
-		dts: true,
-		entry: "./src/schema.ts",
-		exports: {
-			customExports(exports) {
-				exports["./schema.json"] = "./config/schema.json";
-				return exports;
-			},
-			enabled: true,
+	exports: {
+		bin: true,
+		customExports(exports) {
+			exports["./schema.json"] = "./config/schema.json";
+
+			return Object.fromEntries(
+				Object.entries(exports).toSorted(([keyA], [keyB]) =>
+					keyA.localeCompare(keyB),
+				),
+			);
 		},
-		format: "esm",
-		hooks: {
-			async "build:done"() {
-				const { configSchema } = await import("./config/schema.mjs");
-
-				const jsonSchema = z.toJSONSchema(configSchema);
-
-				const jsonString = JSON.stringify(jsonSchema);
-
-				await fs.promises.writeFile(
-					path.join("./config/", "schema.json"),
-					jsonString,
-				);
-			},
-		},
-		outDir: "config",
-		plugins: [ApiSnapshot()],
-		target: "esnext",
+		enabled: true,
 	},
-]);
+	format: "esm",
+	hooks: {
+		async "build:done"() {
+			const { configSchema } = await import("./config/schema.mjs");
+			const jsonSchema = z.toJSONSchema(configSchema);
+			const jsonString = JSON.stringify(jsonSchema);
+			const jsonPath = path.join("./config/", "schema.json");
+			await fs.promises.writeFile(jsonPath, jsonString);
+		},
+	},
+	plugins: [ApiSnapshot()],
+	target: "esnext",
+});

@@ -19,9 +19,7 @@ export default defineConfig({
 			exports["./schema.json"] = "./dist/schema.json";
 
 			return Object.fromEntries(
-				Object.entries(exports)
-					.toSorted(([keyA], [keyB]) => keyA.localeCompare(keyB))
-					.map((entry) => entry),
+				Object.entries(exports).toSorted(([a], [b]) => a.localeCompare(b)),
 			);
 		},
 		enabled: true,

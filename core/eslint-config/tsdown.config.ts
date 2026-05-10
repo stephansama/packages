@@ -24,6 +24,7 @@ export default defineConfig([
 			enabled: true,
 		},
 		format: ["esm", "cjs"],
+		plugins: [ApiSnapshot()],
 		target: "esnext",
 	},
 ]);

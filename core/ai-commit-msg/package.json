@@ -37,6 +37,8 @@
   ],
   "scripts": {
     "build": "tsdown",
+    "postbuild": "tsnapi",
+    "snapshot:update": "tsnapi -u",
     "dev": "tsdown --watch",
     "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"

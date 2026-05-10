@@ -45,6 +45,7 @@
   ],
   "scripts": {
     "build": "tsdown",
+    "snapshot:update": "tsnapi -u",
     "dev": "tsdown --watch",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
@@ -92,7 +93,8 @@
     "eslint-plugin-zod": "catalog:eslint",
     "local-pkg": "catalog:",
     "svelte-eslint-parser": "catalog:eslint",
-    "tsdown": "catalog:"
+    "tsdown": "catalog:",
+    "tsnapi": "catalog:typescript"
   },
   "peerDependencies": {
     "@eslint/css": "catalog:eslint",

@@ -11,7 +11,6 @@ export default defineConfig([
 		entry: "./src/index.ts",
 		exports: true,
 		format: ["esm", "cjs"],
-		plugins: [ApiSnapshot()],
 		publint: false,
 		skipNodeModulesBundle: true,
 		target: "esnext",
@@ -36,6 +35,7 @@ export default defineConfig([
 				await fs.promises.writeFile(jsonSchemaPath, jsonSchemaFile);
 			},
 		},
+		plugins: [ApiSnapshot()],
 		outDir: "config",
 	},
 	//

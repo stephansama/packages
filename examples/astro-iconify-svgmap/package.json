@@ -1,6 +1,6 @@
 {
   "name": "@example/astro-iconify-svgmap",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "private": true,
   "description": "Example astro site using iconify svgmap",
   "repository": {
@@ -22,7 +22,7 @@
     "@iconify-json/heroicons": "1.2.3",
     "@iconify-json/logos": "1.2.10",
     "@iconify-json/octicon": "1.2.21",
-    "@stephansama/astro-iconify-svgmap": "1.0.12"
+    "@stephansama/astro-iconify-svgmap": "1.0.13"
   },
   "engines": {
     "node": ">=24"

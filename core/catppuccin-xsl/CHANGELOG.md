@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-xsl
 
+## 1.1.6
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 1.1.5
 
 ### Patch Changes

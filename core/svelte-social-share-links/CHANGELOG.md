@@ -1,5 +1,11 @@
 # @stephansama/svelte-social-share-links
 
+## 1.1.5
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 1.1.4
 
 ### Patch Changes

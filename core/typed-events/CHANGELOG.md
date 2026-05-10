@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 3.0.8
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 3.0.7
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @stephansama/find-makefile-targets
 
+## 1.0.7
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 1.0.6
 
 ### Patch Changes

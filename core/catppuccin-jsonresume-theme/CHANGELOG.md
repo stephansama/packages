@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-jsonresume-theme
 
+## 1.0.4
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 1.0.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @stephansama/types-lhci
 
+## 0.2.3
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 0.2.2
 
 ### Patch Changes

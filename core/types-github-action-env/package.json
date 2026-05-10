@@ -1,6 +1,6 @@
 {
   "name": "@stephansama/types-github-action-env",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "environment variable types for GitHub Action environment",
   "keywords": [
     "actions",

@@ -1,5 +1,11 @@
 # @stephansama/auto-readme
 
+## 0.2.10
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 0.2.9
 
 ### Patch Changes

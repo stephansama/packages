@@ -1,5 +1,11 @@
 # @example/svelte-social-share-links/astro
 
+## 0.1.5
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 0.1.4
 
 ### Patch Changes

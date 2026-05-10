@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.4.6
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 1.4.5
 
 ### Patch Changes

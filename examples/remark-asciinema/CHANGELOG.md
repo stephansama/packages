@@ -1,5 +1,11 @@
 # @example/remark-asciinema
 
+## 0.0.9
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 0.0.8
 
 ### Patch Changes

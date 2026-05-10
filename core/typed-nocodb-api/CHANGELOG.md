@@ -1,5 +1,11 @@
 # @stephansama/typed-nocodb-api
 
+## 0.2.5
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 0.2.4
 
 ### Patch Changes

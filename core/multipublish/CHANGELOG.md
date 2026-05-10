@@ -1,5 +1,11 @@
 # @stephansama/multipublish
 
+## 1.0.10
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 1.0.9
 
 ### Patch Changes

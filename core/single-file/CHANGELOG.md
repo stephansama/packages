@@ -1,5 +1,11 @@
 # @stephansama/single-file
 
+## 0.1.2
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 0.1.1
 
 ### Patch Changes

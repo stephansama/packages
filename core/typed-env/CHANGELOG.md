@@ -1,5 +1,11 @@
 # @stephansama/typed-env
 
+## 0.0.6
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 0.0.5
 
 ### Patch Changes

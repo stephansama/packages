@@ -1,5 +1,11 @@
 # @stephansama/ai-commit-msg
 
+## 1.0.7
+
+### Patch Changes
+
+- 7083cc6: added tsnapi snapshots to preserve api state
+
 ## 1.0.6
 
 ### Patch Changes

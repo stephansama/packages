@@ -1,5 +1,11 @@
 # @stephansama/find-makefile-targets
 
+## 1.0.8
+
+### Patch Changes
+
+- 7083cc6: added tsnapi snapshots to preserve api state
+
 ## 1.0.7
 
 ### Patch Changes

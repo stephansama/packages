@@ -1,5 +1,11 @@
 # @stephansama/typed-env
 
+## 0.0.7
+
+### Patch Changes
+
+- 7083cc6: added tsnapi snapshots to preserve api state
+
 ## 0.0.6
 
 ### Patch Changes

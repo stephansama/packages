@@ -1,5 +1,11 @@
 # @stephansama/eslint-config
 
+## 0.2.1
+
+### Patch Changes
+
+- 7083cc6: added tsnapi snapshots to preserve api state
+
 ## 0.2.0
 
 ### Minor Changes

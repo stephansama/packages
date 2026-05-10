@@ -27,7 +27,9 @@
     "./schema.json": "./config/schema.json"
   },
   "types": "./config/schema.d.cts",
-  "bin": "./cli.mjs",
+  "bin": {
+    "multipublish": "./dist/cli.mjs"
+  },
   "files": [
     "./dist",
     "./config"

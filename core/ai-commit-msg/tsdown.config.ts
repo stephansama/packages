@@ -1,15 +1,15 @@
 import * as fs from "node:fs";
 import path from "node:path";
 import { defineConfig } from "tsdown";
-import * as z from "zod";
 import ApiSnapshot from "tsnapi/rolldown";
+import * as z from "zod";
 
 export default defineConfig([
 	{
 		// attw: { 'profile': 'esm-only' },
 		dts: false,
 		entry: "./src/index.ts",
-		format: ["esm",],
+		format: ["esm"],
 		plugins: [ApiSnapshot()],
 		skipNodeModulesBundle: true,
 		target: "esnext",
@@ -25,7 +25,7 @@ export default defineConfig([
 			},
 			enabled: true,
 		},
-		format: ["esm",],
+		format: ["esm"],
 		hooks: {
 			async "build:done"() {
 				const { configSchema } = await import("./config/schema.mjs");
@@ -40,8 +40,8 @@ export default defineConfig([
 				);
 			},
 		},
-		plugins: [ApiSnapshot()],
 		outDir: "config",
+		plugins: [ApiSnapshot()],
 		skipNodeModulesBundle: true,
 		target: "esnext",
 	},

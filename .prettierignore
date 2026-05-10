@@ -1,3 +1,5 @@
 !patches/*
 **/tests/fixtures/**
+__snapshots__
+core/catppuccin-xsl/templates/**/*.hbs
 pnpm-lock.yaml

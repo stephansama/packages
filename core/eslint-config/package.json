@@ -28,6 +28,8 @@
     "./cli": "./dist/cli.mjs",
     "./package.json": "./package.json"
   },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "bin": {
     "eslint-config": "./dist/cli.mjs"
@@ -37,10 +39,10 @@
   ],
   "scripts": {
     "build": "tsdown",
-    "snapshot:update": "tsnapi -u",
     "dev": "tsdown --watch",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
-    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
+    "lint:fix": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix",
+    "snapshot:update": "tsnapi -u"
   },
   "dependencies": {
     "@antfu/install-pkg": "catalog:",
@@ -150,7 +152,5 @@
     "terminal-columns": "2.0.0",
     "type-flag": "4.2.0",
     "ufo": "1.6.3"
-  },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs"
+  }
 }

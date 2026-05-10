@@ -183,6 +183,8 @@ catalogs:
     '@tsconfig/svelte': 5.0.7
     svelte: 5.51.2
     svelte-check: 4.4.0
+  tanstack:
+    '@tanstack/intent': 0.0.41
   turbo:
     '@turbo/gen': *turbo
     turbo: *turbo

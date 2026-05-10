@@ -3,7 +3,8 @@
   "version": "1.0.11",
   "description": "Publish packages to multiple providers easily",
   "keywords": [
-    "multipublish"
+    "multipublish",
+    "tanstack-intent"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/multipublish",
   "repository": {
@@ -32,7 +33,8 @@
   },
   "files": [
     "./dist",
-    "./config"
+    "./config",
+    "skills"
   ],
   "scripts": {
     "build": "tsdown",
@@ -53,6 +55,7 @@
     "zod": "catalog:schema"
   },
   "devDependencies": {
+    "@tanstack/intent": "catalog:tanstack",
     "@types/yargs": "catalog:",
     "es-toolkit": "catalog:",
     "jsr": "catalog:",

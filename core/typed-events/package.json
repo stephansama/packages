@@ -7,7 +7,8 @@
     "standard-schema",
     "validation",
     "events",
-    "strict"
+    "strict",
+    "tanstack-intent"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/typed-events",
   "repository": {
@@ -31,7 +32,8 @@
   },
   "types": "./dist/index.d.mts",
   "files": [
-    "./dist/"
+    "./dist/",
+    "skills"
   ],
   "scripts": {
     "build": "tsdown",
@@ -43,6 +45,7 @@
     "@standard-schema/spec": "catalog:schema"
   },
   "devDependencies": {
+    "@tanstack/intent": "catalog:tanstack",
     "@testing-library/jest-dom": "catalog:",
     "@testing-library/react": "catalog:",
     "@types/react": "catalog:",

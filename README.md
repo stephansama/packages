@@ -19,6 +19,7 @@ Collection of open-source [npm](https://www.npmx.dev/) packages
 <details><summary>Open Table of contents</summary>
 
 - [Introduction](#introduction)
+- [AI Agent Support](#ai-agent-support)
 - [📦 Packages](#-packages)
   - [☂️ Codecov coverage graph](#️-codecov-coverage-graph)
 - [Related repositories](#related-repositories)
@@ -31,6 +32,14 @@ view examples here 👉 [![packages](https://pkg.pr.new/badge/stephansama/packag
 
 or install an example with [`create-stephansama-example`](https://github.com/stephansama/packages/tree/main/core/example)
 via `pnpm create stephansama-example`
+
+## AI Agent Support
+
+If you use an AI agent (Claude Code, Cursor, Copilot, etc.), run the following to install skills for all packages:
+
+```sh
+pnpm dlx @tanstack/intent@latest install
+```
 
 ## 📦 Packages
 

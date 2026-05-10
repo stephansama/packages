@@ -10,7 +10,8 @@
     "generator",
     "list",
     "markdown",
-    "table"
+    "table",
+    "tanstack-intent"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/auto-readme",
   "repository": {
@@ -40,7 +41,8 @@
     "auto-readme": "./dist/cli.mjs"
   },
   "files": [
-    "./dist"
+    "./dist",
+    "skills"
   ],
   "scripts": {
     "build": "tsdown",
@@ -75,6 +77,7 @@
     "zod2md": "catalog:"
   },
   "devDependencies": {
+    "@tanstack/intent": "catalog:tanstack",
     "@types/mdast": "catalog:",
     "@types/vfile": "catalog:",
     "@types/yargs": "catalog:",

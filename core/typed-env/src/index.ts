@@ -1,6 +1,6 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
-import dotenvx from "@dotenvx/dotenvx";
+import * as dotenvx from "@dotenvx/dotenvx";
 import * as fsp from "node:fs/promises";
 
 export function createEnvironment<Schema extends StandardSchemaV1>(

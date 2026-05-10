@@ -7,9 +7,20 @@
     "build": "vitepress build",
     "predev": "pnpm run setup",
     "dev": "vitepress dev",
+    "prelint": "pnpm run setup:examples && pnpm run setup:typedoc",
+    "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
     "preview": "vitepress preview",
-    "setup": "sh ./setup.sh"
+    "setup": "pnpm run --sequential \"/^setup:.*/\"",
+    "presetup:eslint-config-inspector": "pnpm --filter=@stephansama/eslint-config run build",
+    "setup:eslint-config-inspector": "eslint-config-inspector build --base /eslint --outDir public/eslint",
+    "setup:examples": "pnpm --filter=scripts generate-examples",
+    "setup:healthcheck": "node -e \"console.log(JSON.stringify({message: Date.now()}))\" >public/healthcheck.json",
+    "setup:meta": "pnpm --filter=scripts meta >public/meta.json",
+    "setup:node-modules-inspector": "node-modules-inspector build --base /node_modules --outDir public/node_modules",
+    "setup:storybook": "pnpm --filter=scripts storybook",
+    "setup:typedoc": "typedoc",
+    "setup:typedoc-sidebar": "pnpm --filter=scripts typedoc-sidebar"
   },
   "dependencies": {
     "@catppuccin/vitepress": "catalog:vitepress",

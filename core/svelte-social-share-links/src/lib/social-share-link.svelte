@@ -1,7 +1,5 @@
 <svelte:options
 	customElement={{
-		tag: "social-share-link",
-		shadow: "none",
 		props: {
 			hashtags: { type: "String" },
 			image: { type: "String" },
@@ -12,15 +10,16 @@
 			url: { type: "String" },
 			user: { type: "String" },
 		},
+		shadow: "none",
+		tag: "social-share-link",
 	}}
 />
 
 <script lang="ts">
-	import * as networks from "./networks.json" with { type: "json" };
-
 	import type { Network, NetworkSchema, UrlProps } from "./networks";
 
 	import { buildUrlFromSchema } from "./networks";
+	import * as networks from "./networks.json" with { type: "json" };
 
 	export interface SocialShareLinkProps extends UrlProps {
 		label?: string;

@@ -59,7 +59,6 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				const body =
 					`${heading}\n` +
 					Object.entries(inputs)
-						// eslint-disable-next-line baseline-js/use-baseline
 						.toSorted((a) => (a[1].required ? -1 : 1))
 						.map(([key, value]) => {
 							return `- ${wrapRequired(value.required, key)}: (default: ${value.default})\n\n${value.description}`;

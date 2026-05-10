@@ -5,6 +5,7 @@ import { importX } from "eslint-plugin-import-x";
 
 export type Options = Partial<{
 	ignore: Array<string>;
+	noWarnOnMultipleProjects: boolean;
 	project: Array<string> | string;
 }>;
 
@@ -35,6 +36,8 @@ export function config(options?: Readonly<Options>): Config[] {
 					createTypeScriptImportResolver({
 						alwaysTryTypes: true,
 						bun: true,
+						noWarnOnMultipleProjects:
+							options?.noWarnOnMultipleProjects,
 						project: options?.project || "tsconfig.json",
 					}),
 				],

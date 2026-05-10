@@ -1,16 +1,12 @@
-import type { CatppuccinColors, ColorName } from "@catppuccin/palette";
+import type { CatppuccinColors } from "@catppuccin/palette";
 
 import * as fsp from "node:fs/promises";
-import * as path from "node:path";
+import path from "node:path";
 import * as url from "node:url";
 
 export function convertColors(colors: CatppuccinColors) {
-	return Object.entries(colors).reduce(
-		(acc, [key, val]) => {
-			acc[key as keyof typeof acc] = val.hex;
-			return acc;
-		},
-		{} as Record<ColorName, string>,
+	return Object.fromEntries(
+		Object.entries(colors).map(([key, value]) => [key, value.hex]),
 	);
 }
 

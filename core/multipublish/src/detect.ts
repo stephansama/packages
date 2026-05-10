@@ -4,7 +4,7 @@ export type AgentName = NonNullable<Awaited<ReturnType<typeof detect>>>["name"];
 
 let _detected: AgentName | undefined;
 
-export async function detectPackageManager() {
+export async function detectPackageManager(): Promise<AgentName> {
 	if (_detected) return _detected;
 
 	const detected = await detect();

@@ -2,7 +2,7 @@ import { MockAgent, setGlobalDispatcher } from "undici";
 import { describe, expect, it, vi } from "vitest";
 
 import rootPackageJson from "../../../package.json";
-import { main } from "./index.ts";
+import { main } from "./index";
 
 const mockPackageJson = {
 	dependencies: { typescript: "^5.2.3", vite: "^7.2.3" },

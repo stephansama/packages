@@ -1,11 +1,9 @@
-import {
-	createHandlebarSchemaMap,
-	getFileContext,
-	type HandlebarSchemaMapOptions,
-} from "@stephansama/typed-templates";
+import * as templates from "@stephansama/typed-templates";
 import * as z from "zod";
 
-const { isLinting, templateDirectory } = getFileContext(import.meta.url);
+const { isLinting, templateDirectory } = templates.getFileContext(
+	import.meta.url,
+);
 
 const catppuccinStyleSchema = z.looseObject({
 	base: z.string().trim(),
@@ -26,9 +24,9 @@ const themeStylesheet = {
 		darkStyle: z.string().trim(),
 		lightStyle: z.string().trim(),
 	}),
-} satisfies HandlebarSchemaMapOptions;
+} satisfies templates.HandlebarSchemaMapOptions;
 
-export const opmlSchema = createHandlebarSchemaMap(
+export const opmlSchema = templates.createHandlebarSchemaMap(
 	{
 		markup: {
 			path: "./opml/markup.xml.hbs",
@@ -40,7 +38,7 @@ export const opmlSchema = createHandlebarSchemaMap(
 	{ templateDirectory },
 );
 
-export const rssSchema = createHandlebarSchemaMap(
+export const rssSchema = templates.createHandlebarSchemaMap(
 	{
 		comment: {
 			path: "./rss/comment.hbs",
@@ -64,7 +62,7 @@ export const rssSchema = createHandlebarSchemaMap(
 	{ templateDirectory },
 );
 
-export const sitemapSchema = createHandlebarSchemaMap(
+export const sitemapSchema = templates.createHandlebarSchemaMap(
 	{
 		markup: {
 			path: "./sitemap/markup.xml.hbs",

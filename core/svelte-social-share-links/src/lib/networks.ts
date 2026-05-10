@@ -26,6 +26,14 @@ export type UrlProps = {
 	user?: string;
 };
 
+const urlRegexes = {
+	hash: /\[h\]/i,
+	image: /\[i\]/i,
+	title: /\[t\]/i,
+	url: /\[u\]/i,
+	user: /\[uid\]/i,
+};
+
 export function buildUrl(network: Network, props: UrlProps) {
 	return buildUrlFromSchema(networks[network], props);
 }
@@ -35,19 +43,25 @@ export function buildUrlFromSchema(
 	{ args, shareUrl }: NetworkSchema,
 	props: UrlProps,
 ) {
-	const argTitle = args?.title && props.title ? args?.title : "";
-	const argUser = args?.user && props.user ? args?.user : "";
-	const argHashtags = args?.hashtags && props.hashtags ? args?.hashtags : "";
-	const argImage = args?.image && props.image ? args?.image : "";
+	const argumentTitle = args?.title && props.title ? args?.title : "";
+	const argumentUser = args?.user && props.user ? args?.user : "";
+	const argumentHashtags =
+		args?.hashtags && props.hashtags ? args?.hashtags : "";
+	const argumentImage = args?.image && props.image ? args?.image : "";
 
 	// Replace placeholders with actual values (encode all parameters for URL safety)
-	const template = shareUrl + argTitle + argUser + argHashtags + argImage;
+	const template =
+		shareUrl +
+		argumentTitle +
+		argumentUser +
+		argumentHashtags +
+		argumentImage;
 	const fullUrl = template
-		.replace(/\[u\]/i, encodeURIComponent(props.url))
-		.replace(/\[t\]/i, encodeURIComponent(props.title || ""))
-		.replace(/\[uid\]/i, encodeURIComponent(props.user || ""))
-		.replace(/\[h\]/i, encodeURIComponent(props.hashtags || ""))
-		.replace(/\[i\]/i, encodeURIComponent(props.image || ""));
+		.replace(urlRegexes.url, encodeURIComponent(props.url))
+		.replace(urlRegexes.title, encodeURIComponent(props.title || ""))
+		.replace(urlRegexes.user, encodeURIComponent(props.user || ""))
+		.replace(urlRegexes.hash, encodeURIComponent(props.hashtags || ""))
+		.replace(urlRegexes.image, encodeURIComponent(props.image || ""));
 
 	return new URL(fullUrl).href;
 }

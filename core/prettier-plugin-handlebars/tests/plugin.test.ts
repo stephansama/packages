@@ -1,6 +1,6 @@
 import * as fs from "node:fs/promises";
 import * as url from "node:url";
-import prettier from "prettier";
+import * as prettier from "prettier";
 import { expect, it } from "vitest";
 
 import plugin from "../src/index";
@@ -12,13 +12,11 @@ const tests = await fs.readdir(
 const cases = await Promise.all(
 	tests.map(async (extension) => {
 		const [inputFilepath, outputFilepath] = ["input", "output"].map(
-			(filename) =>
-				url.fileURLToPath(
-					new URL(
-						`fixtures/${extension}/${filename}.${extension}.hbs`,
-						import.meta.url,
-					),
-				),
+			(filename) => {
+				const relativePath = `fixtures/${extension}/${filename}.${extension}.hbs`;
+				const testUrl = new URL(relativePath, import.meta.url);
+				return url.fileURLToPath(testUrl);
+			},
 		);
 		const input = await fs.readFile(inputFilepath, { encoding: "utf8" });
 		const output = await fs.readFile(outputFilepath, { encoding: "utf8" });

@@ -5,20 +5,23 @@
   "type": "module",
   "scripts": {
     "add-socket": "tsx ./src/add-socket.ts",
+    "build": "pnpm run generate-examples",
     "build-www": "tsx ./src/build-www.ts",
     "generate-examples": "tsx ./src/generate-examples.ts",
+    "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
     "lint-examples": "tsx ./src/lint-examples.ts",
     "lint-fix": "tsx ./src/lint-fix.ts",
     "meta": "tsx ./src/meta.ts",
     "pkg-pr-new": "tsx ./src/pkg-pr-new.ts",
     "prepare-local": "tsx ./src/prepare-local.ts",
-    "storybook": "tsx ./src/storybook.ts"
+    "storybook": "tsx ./src/storybook.ts",
+    "typedoc-sidebar": "tsx ./src/typedoc-sidebar.ts"
   },
   "devDependencies": {
-    "@manypkg/find-root": "catalog:",
-    "@manypkg/get-packages": "catalog:",
-    "@manypkg/tools": "catalog:",
+    "@manypkg/find-root": "catalog:manypkg",
+    "@manypkg/get-packages": "catalog:manypkg",
+    "@manypkg/tools": "catalog:manypkg",
     "tsx": "catalog:"
   },
   "engines": {

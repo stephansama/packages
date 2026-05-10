@@ -4,14 +4,10 @@ import type { Plugin, ResolvedConfig } from "vite";
 import fs from "node:fs";
 import path from "node:path";
 
-import type { Options } from "./type.ts";
+import type { Options } from "./type";
 
 import pkg from "../package.json";
-import {
-	CONFIG_FILENAME,
-	defaultConfig,
-	LOADED_ICONS_FILENAME,
-} from "./const.ts";
+import { CONFIG_FILENAME, defaultConfig, LOADED_ICONS_FILENAME } from "./const";
 import { buildEnd, generateSprite, loadIcons } from "./utilities";
 
 const PLUGIN_NAME = pkg.name;
@@ -28,7 +24,7 @@ export function createIntegration(options_: Options = {}): AstroIntegration {
 		// eslint-disable-next-line perfectionist/sort-objects
 		hooks: {
 			async "astro:build:done"(_) {
-				console.log("starting build done");
+				console.info("starting build done");
 
 				const configFile = fs.readFileSync(
 					path.resolve(CONFIG_FILENAME),

@@ -5,6 +5,8 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { getProvider } from "../src/ai";
 
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 vi.mock("@ai-sdk/google", () => ({
 	google: vi.fn((model) => ({ model, type: "google" })),
 }));
@@ -16,6 +18,8 @@ vi.mock("@ai-sdk/openai", () => ({
 vi.mock("ollama-ai-provider-v2", () => ({
 	ollama: vi.fn((model) => ({ model, type: "ollama" })),
 }));
+
+/* eslint-enable @typescript-eslint/no-unsafe-assignment */
 
 describe("ai", () => {
 	const originalEnvironment = process.env;

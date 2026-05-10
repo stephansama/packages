@@ -7,13 +7,13 @@ vi.mock("node:fs/promises", async (importOriginal) => ({
 }));
 
 it("./opml.ts", async () => {
-	await expect(import("./opml.ts")).resolves.not.toThrow();
+	await expect(import("./opml")).resolves.not.toThrow();
 });
 
 it("./rss.ts", async () => {
-	await expect(import("./rss.ts")).resolves.not.toThrow();
+	await expect(import("./rss")).resolves.not.toThrow();
 });
 
 it("./sitemap.ts", async () => {
-	await expect(import("./sitemap.ts")).resolves.not.toThrow();
+	await expect(import("./sitemap")).resolves.not.toThrow();
 });

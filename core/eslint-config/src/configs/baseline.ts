@@ -15,7 +15,7 @@ type BaselineAvailability = "newly" | "widely" | number;
 export function config(options?: Options): Config[] {
 	return [
 		{
-			files: [glob.negate(glob.MD)],
+			files: [glob.negate(glob.MD), glob.TS, glob.TSX, glob.JS, glob.JSX],
 			name: "stephansama/baseline",
 			plugins: {
 				// @ts-expect-error incorrectly typed but works properly

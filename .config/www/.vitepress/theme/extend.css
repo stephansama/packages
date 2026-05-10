@@ -20,3 +20,38 @@ html.dark {
 	border-radius: 99999px;
 	padding: 20px;
 }
+
+.VPNavBarTitle.has-sidebar > a.title[href="/"] {
+	border-bottom: 1px solid transparent;
+	border-image: linear-gradient(
+			90deg,
+			transparent,
+			var(--vp-c-divider),
+			transparent
+		)
+		1;
+}
+
+.markdown-copy-buttons {
+	justify-content: flex-end;
+}
+
+h2:not(.title):not(.text),
+.prev-next {
+	border-top: 1px solid transparent;
+	border-image: linear-gradient(
+			90deg,
+			transparent,
+			var(--vp-c-divider),
+			transparent
+		)
+		1;
+}
+
+p:has(> a > img):not(:has(> :not(a))) {
+	display: flex;
+	gap: 0.25em;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}

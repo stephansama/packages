@@ -2,6 +2,7 @@
   "$schema": "../node_modules/@stephansama/auto-readme/config/schema.json",
   "usageFile": "./example/index.js",
   "collapseHeadings": ["Configuration File", "Schema"],
+  "enablePrettier": false,
   "enableToc": true,
   "enableUsage": true,
   "removeScope": "@stephansama/",

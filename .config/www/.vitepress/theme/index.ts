@@ -3,7 +3,7 @@ import type { Theme } from "vitepress";
 import CopyOrDownloadAsMarkdownButtons from "vitepress-plugin-llms/vitepress-components/CopyOrDownloadAsMarkdownButtons.vue";
 import DefaultTheme from "vitepress/theme";
 
-// eslint-disable-next-line
+// eslint-disable-next-line perfectionist/sort-imports
 import "@catppuccin/vitepress/theme/mocha/red.css";
 
 import "./extend.css";

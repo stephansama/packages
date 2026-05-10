@@ -1,4 +1,4 @@
-import dotenvx from "@dotenvx/dotenvx";
+import * as dotenvx from "@dotenvx/dotenvx";
 import { generateText } from "ai";
 import * as cp from "node:child_process";
 import * as fsp from "node:fs/promises";

@@ -27,6 +27,7 @@ export default defineConfig({
 		config(md) {
 			md.use(copyOrDownloadAsMarkdownButtons);
 		},
+		lineNumbers: true,
 		theme: { dark: "catppuccin-mocha", light: "catppuccin-latte" },
 	},
 	outDir: "../../dist",

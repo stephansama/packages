@@ -1,4 +1,8 @@
-# ![image](./icon.png) Alfred Kaomoji Picker
+<div align="center">
+
+# [`@stephansama`](https://github.com/stephansama) / alfred-kaomoji
+
+</div>
 
 [![Source code](https://img.shields.io/badge/Source%20code-211F1F?style=flat&logo=github)](https://github.com/stephansama/packages/tree/main/core/alfred-kaomoji)
 [![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/alfred-kaomoji)

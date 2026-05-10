@@ -1,21 +1,34 @@
 {
-  "extends": "@tsconfig/recommended/tsconfig.json",
-  "exclude": ["node_modules", "dist"],
-  "include": ["./**/*"],
-  "compilerOptions": {
-    "allowImportingTsExtensions": true,
-    "allowJs": true,
-    "isolatedModules": true,
-    "lib": ["ESNext"],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "target": "esnext",
-    "useDefineForClassFields": true,
-    "verbatimModuleSyntax": true
-  }
+  "references": [
+    { "path": "./tsconfig.root.json" },
+    { "path": "./.config/www/tsconfig.json" },
+    { "path": "./scripts/tsconfig.json" },
+    { "path": "./core/ai-commit-msg/tsconfig.json" },
+    { "path": "./core/alfred-kaomoji/jsconfig.json" },
+    { "path": "./core/astro-iconify-svgmap/tsconfig.json" },
+    { "path": "./core/auto-readme/tsconfig.json" },
+    { "path": "./core/catppuccin-jsonresume-theme/tsconfig.json" },
+    { "path": "./core/catppuccin-typedoc/tsconfig.json" },
+    { "path": "./core/catppuccin-xsl/tsconfig.json" },
+    { "path": "./core/eslint-config/tsconfig.json" },
+    { "path": "./core/example/tsconfig.json" },
+    { "path": "./core/find-makefile-targets/tsconfig.json" },
+    { "path": "./core/multipublish/tsconfig.json" },
+    { "path": "./core/prettier-plugin-handlebars/tsconfig.json" },
+    { "path": "./core/remark-asciinema/tsconfig.json" },
+    { "path": "./core/single-file/tsconfig.json" },
+    { "path": "./core/svelte-social-share-links/tsconfig.json" },
+    { "path": "./core/typed-env/tsconfig.json" },
+    { "path": "./core/typed-events/tsconfig.json" },
+    { "path": "./core/typed-nocodb-api/tsconfig.json" },
+    { "path": "./core/typed-templates/tsconfig.json" },
+    { "path": "./core/types-github-action-env/tsconfig.json" },
+    { "path": "./core/types-lhci/tsconfig.json" },
+    { "path": "./examples/astro-iconify-svgmap/tsconfig.json" },
+    { "path": "./examples/remark-asciinema/tsconfig.json" },
+    { "path": "./examples/svelte-social-share-links/astro/tsconfig.json" },
+    {
+      "path": "./examples/svelte-social-share-links/svelte-kit/tsconfig.json"
+    }
+  ]
 }

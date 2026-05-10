@@ -28,28 +28,33 @@
   "type": "module",
   "exports": {
     ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./schema": {
       "import": "./config/schema.mjs",
       "require": "./config/schema.cjs"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./schema.json": "./config/schema.json"
   },
-  "main": "./config/schema.cjs",
-  "module": "./config/schema.mjs",
-  "types": "./config/schema.d.cts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
   "bin": "./cli.mjs",
   "files": [
     "./dist",
     "./config"
   ],
   "scripts": {
-    "build": "node build.mjs",
+    "build": "tsdown",
     "postbuild": "publint",
-    "dev": "node --watch-path=./src build.mjs",
+    "dev": "tsdown --watch",
     "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
-    "@manypkg/get-packages": "catalog:",
+    "@manypkg/get-packages": "catalog:manypkg",
     "cosmiconfig": "catalog:cli",
     "deepmerge": "catalog:",
     "handlebars": "catalog:handlebars",
@@ -57,14 +62,14 @@
     "mdast": "catalog:",
     "mdast-comment-marker": "catalog:",
     "mdast-util-from-markdown": "catalog:",
-    "mdast-zone": "github:stephansama/mdast-zone#1c5b08cd97240debeed4c9c6afad49df5877a132",
+    "mdast-zone": "catalog:",
     "obug": "catalog:cli",
     "pkg-types": "catalog:",
-    "remark": "catalog:",
-    "remark-code-import": "catalog:",
-    "remark-collapse": "catalog:",
-    "remark-toc": "catalog:",
-    "remark-usage": "catalog:",
+    "remark": "catalog:remark",
+    "remark-code-import": "catalog:remark",
+    "remark-collapse": "catalog:remark",
+    "remark-toc": "catalog:remark",
+    "remark-usage": "catalog:remark",
     "smol-toml": "catalog:",
     "tinyglobby": "catalog:",
     "vfile": "catalog:",

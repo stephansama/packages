@@ -2,6 +2,11 @@
   "name": "@example/svelte-social-share-links/astro",
   "version": "0.1.4",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "examples/svelte-social-share-links/astro"
+  },
   "type": "module",
   "scripts": {
     "astro": "astro",

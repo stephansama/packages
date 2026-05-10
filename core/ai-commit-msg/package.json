@@ -8,7 +8,7 @@
   "homepage": "https://packages.stephansama.info/api/@stephansama/ai-commit-msg",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stephansama/packages",
+    "url": "git+https://github.com/stephansama/packages.git",
     "directory": "core/ai-commit-msg"
   },
   "license": "MIT",
@@ -21,48 +21,44 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": {
-        "types": "./config/schema.d.ts",
-        "default": "./config/schema.js"
-      },
-      "require": {
-        "types": "./config/schema.d.cts",
-        "default": "./config/schema.cjs"
-      }
+      "import": "./config/schema.mjs",
+      "require": "./config/schema.cjs"
     },
+    "./package.json": "./package.json",
     "./schema.json": "./config/schema.json"
   },
-  "main": "./config/schema.js",
-  "module": "./config/schema.js",
-  "types": "./config/schema.d.ts",
+  "main": "./config/schema.cjs",
+  "module": "./config/schema.mjs",
+  "types": "./config/schema.d.cts",
   "bin": "./cli.mjs",
   "files": [
     "./dist",
     "./config"
   ],
   "scripts": {
-    "build": "node build.mjs",
+    "build": "tsdown",
     "dev": "tsdown --watch",
     "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
-    "@ai-sdk/google": "^3.0.29",
-    "@ai-sdk/openai": "^3.0.29",
-    "@commitlint/config-conventional": "^19.8.1",
-    "@dotenvx/dotenvx": "^1.52.0",
-    "ai": "^6.0.86",
+    "@ai-sdk/google": "catalog:ai",
+    "@ai-sdk/openai": "catalog:ai",
+    "@commitlint/config-conventional": "catalog:commitlint",
+    "@dotenvx/dotenvx": "catalog:",
+    "ai": "catalog:ai",
     "cosmiconfig": "catalog:cli",
     "es-toolkit": "catalog:",
-    "neverthrow": "^8.2.0",
+    "neverthrow": "catalog:",
     "obug": "catalog:cli",
-    "ollama-ai-provider-v2": "^1.5.5",
+    "ollama-ai-provider-v2": "catalog:ai",
     "yargs": "catalog:cli",
     "zod": "catalog:schema"
   },
   "devDependencies": {
     "@types/yargs": "catalog:",
-    "tsdown": "catalog:"
+    "tsdown": "catalog:",
+    "tsx": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",
   "engines": {

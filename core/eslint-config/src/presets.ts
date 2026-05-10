@@ -4,7 +4,7 @@ export const base = {
 	baseline: true,
 	command: true,
 	e18e: true,
-	gitignore: true,
+	ignore: true,
 	imports: true,
 	javascript: true,
 	jsdoc: true,

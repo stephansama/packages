@@ -11,7 +11,7 @@ vi.mock("node:child_process");
 vi.mock("node:fs/promises");
 
 vi.mock("@dotenvx/dotenvx", () => ({
-	default: { config: vi.fn() },
+	config: vi.fn(),
 }));
 
 vi.mock("ai", () => ({
@@ -105,11 +105,10 @@ describe("index run", () => {
 		);
 	});
 
-	it("should exit if provider initialization fails", () => {
+	it("should exit if provider initialization fails", async () => {
 		(getProvider as any).mockReturnValue(err(new Error("Provider error")));
 
-		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		expect(run()).rejects.toThrowError();
+		await expect(run()).rejects.toThrowError();
 	});
 
 	it("should skip run if skipNextRun is true", async () => {

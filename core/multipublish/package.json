@@ -24,7 +24,8 @@
       "import": "./config/schema.mjs",
       "require": "./config/schema.cjs"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./schema.json": "./config/schema.json"
   },
   "main": "./config/schema.cjs",
   "module": "./config/schema.mjs",
@@ -35,20 +36,20 @@
     "./config"
   ],
   "scripts": {
-    "build": "node build.mjs",
-    "dev": "node --watch build.mjs",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
-    "@manypkg/find-root": "catalog:",
-    "@manypkg/get-packages": "catalog:",
+    "@manypkg/find-root": "catalog:manypkg",
+    "@manypkg/get-packages": "catalog:manypkg",
     "cosmiconfig": "catalog:cli",
-    "dedent": "^1.7.1",
+    "dedent": "catalog:",
     "obug": "catalog:cli",
-    "package-manager-detector": "^1.6.0",
+    "package-manager-detector": "catalog:",
     "tinyglobby": "catalog:",
-    "yaml": "^2.8.2",
+    "yaml": "catalog:",
     "yargs": "catalog:cli",
     "zod": "catalog:schema"
   },
@@ -56,7 +57,8 @@
     "@types/yargs": "catalog:",
     "es-toolkit": "catalog:",
     "jsr": "catalog:",
-    "tsdown": "catalog:"
+    "tsdown": "catalog:",
+    "tsx": "catalog:"
   },
   "peerDependencies": {
     "jsr": ">=0.10"

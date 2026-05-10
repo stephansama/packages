@@ -11,7 +11,7 @@
   "homepage": "https://packages.stephansama.info/api/@stephansama/alfred-kaomoji",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stephansama/packages",
+    "url": "git+https://github.com/stephansama/packages.git",
     "directory": "core/alfred-kaomoji"
   },
   "license": "MIT",

@@ -5,9 +5,13 @@ export default await config({
 	...presets.library,
 	...presets.zod,
 	astro: true,
-	autoEnable: false,
+	e18e: {
+		banDependenciesAllowList: ["cosmiconfig"],
+	},
+	ignore: [`./turbo/generators/**`, `./.config/www/api/**`],
 	imports: {
-		ignore: ["astro:.*"],
+		ignore: ["astro:.*", "virtual:.*", "$app/state"],
+		noWarnOnMultipleProjects: true,
 		project: ["core/*/{ts,js}config.json", "examples/*/{ts,js}config.json"],
 	},
 	json: true,
@@ -15,6 +19,7 @@ export default await config({
 	node: {
 		allowModules: ["vitest", "@manypkg/get-packages"],
 	},
+	svelte: true,
 	vitest: true,
 	// eslint-disable-next-line perfectionist/sort-objects
 	overrides: [
@@ -41,14 +46,17 @@ export default await config({
 		{
 			files: ["**/kaomojis.json"],
 			rules: {
-				"no-irregular-whitespace": "warn",
+				"no-irregular-whitespace": "off",
 			},
 		},
 		{
 			files: [globs.MD],
 			rules: {
 				"e18e/no-indexof-equality": "off",
-				"markdown/heading-increment": "warn",
+				"markdown/heading-increment": "off",
+				"markdown/no-missing-label-refs": "off",
+				"markdown/no-multiple-h1": "off",
+				"markdown/no-space-in-emphasis": "warn",
 				"no-irregular-whitespace": "off",
 			},
 		},

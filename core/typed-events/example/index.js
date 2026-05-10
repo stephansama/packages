@@ -1,9 +1,6 @@
 // remark-usage-ignore-next
-/* eslint perfectionist/sort-modules: ["off"] */
+/* eslint-disable perfectionist/sort-modules, import-x/no-duplicates, zod/consistent-import */
 // remark-usage-ignore-next
-/* eslint perfectionist/sort-imports: ["off"] */
-// remark-usage-ignore-next
-// eslint-disable-next-line zod/consistent-import
 import * as z from "zod";
 
 // ### createEvent

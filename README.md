@@ -21,7 +21,6 @@ Collection of open-source [npm](https://www.npmx.dev/) packages
 - [Introduction](#introduction)
 - [📦 Packages](#-packages)
   - [☂️ Codecov coverage graph](#️-codecov-coverage-graph)
-  - [⭐ Stargazers](#-stargazers)
 - [Related repositories](#related-repositories)
 
 </details>
@@ -75,10 +74,6 @@ All packages are packaged underneath the `@stephansama` scope (for example: `@st
 ### ☂️ Codecov coverage graph
 
 ![graph](https://codecov.io/github/stephansama/packages/graphs/tree.svg)
-
-### ⭐ Stargazers
-
-[![Stargazers repo roster for @stephansama/packages](https://reporoster.com/stars/stephansama/packages)](https://github.com/stephansama/packages/stargazers)
 
 </div>
 

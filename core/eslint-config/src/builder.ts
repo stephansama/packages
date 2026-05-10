@@ -5,6 +5,7 @@ import type { BuilderOptions, ConfigOptions } from "./types";
 import { autoEnableMap } from "./auto";
 import * as configs from "./configs";
 import { hasPackage } from "./environment";
+import * as order from "./order";
 
 type BuilderKey = keyof BuilderOptions;
 type Options = BuilderOptions & ConfigOptions;
@@ -34,7 +35,16 @@ export async function builder(options: Options): Promise<Config[]> {
 
 	if (options.overrides_prepend) build.push(...options.overrides_prepend);
 
-	for (const [config, input] of Object.entries(options)) {
+	const sortedEntries = Object.entries(options)
+		.filter(([key]) => !excludeOptions.has(key as BuilderKey))
+		.toSorted(([keyA], [keyB]) => {
+			return (
+				(order.map.get(keyA as order.OrderType) ?? Infinity) -
+				(order.map.get(keyB as order.OrderType) ?? Infinity)
+			);
+		});
+
+	for (const [config, input] of sortedEntries) {
 		if (!input || excludeOptions.has(config as BuilderKey)) continue;
 
 		const parameters = typeof input === "boolean" ? undefined : input;
@@ -42,11 +52,9 @@ export async function builder(options: Options): Promise<Config[]> {
 		// @ts-expect-error update typing later
 		const result = configs[config as keyof typeof configs](parameters);
 
-		if (result instanceof Promise) {
-			build.push(...(await result));
-		} else {
-			build.push(...result);
-		}
+		const loaded = result instanceof Promise ? await result : result;
+
+		build.push(...loaded);
 	}
 
 	if (options.overrides) build.push(...options.overrides);

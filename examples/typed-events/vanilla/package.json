@@ -2,6 +2,11 @@
   "name": "@example/typed-events/vanilla",
   "version": "1.2.3",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "examples/typed-events/vanilla"
+  },
   "type": "module",
   "scripts": {
     "build": "vite build",
@@ -10,7 +15,7 @@
   },
   "devDependencies": {
     "@stephansama/typed-events": "workspace:*",
-    "vite": "^7.3.1",
+    "vite": "7.3.1",
     "zod": "4.0.15"
   },
   "engines": {

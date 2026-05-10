@@ -33,10 +33,10 @@ const message = createMessage("crossorigin", {
 
 export function setupCounter(element) {
 	let counter = 0;
-	const theme = document.getElementById("theme");
-	const [light, dark, toggle] = ["light", "dark", "toggle"].map((id) =>
-		document.getElementById(id),
-	);
+	const theme = document.querySelector("#theme");
+	const [light, dark, toggle] = ["light", "dark", "toggle"].map((id) => {
+		return document.querySelector(`#${id}`);
+	});
 
 	function setCounter(count) {
 		counter = count;
@@ -44,16 +44,16 @@ export function setupCounter(element) {
 	}
 
 	broadcast.listen("update", ({ data, type }) => {
-		console.log("setting ", type);
+		console.info("setting", type);
 		setCounter(data.current);
 	});
 
-	event.listen((e) => {
-		setCounter(e.data.current);
+	event.listen((payload) => {
+		setCounter(payload.data.current);
 	});
 
-	broadcastEvent.listen("set", ({ data, raw, type }) => {
-		console.log("setting ", type);
+	broadcastEvent.listen("set", ({ data, type }) => {
+		console.info("setting", type);
 		theme.textContent = data.theme;
 	});
 
@@ -77,9 +77,9 @@ export function setupCounter(element) {
 		const img = document.querySelector("img");
 
 		img.src =
-			img.src !== "https://api.iconify.design/logos:neovim.svg"
-				? "https://api.iconify.design/logos:neovim.svg"
-				: "https://api.iconify.design/logos:vitejs.svg";
+			img.src === "https://api.iconify.design/logos:neovim.svg"
+				? "https://api.iconify.design/logos:vitejs.svg"
+				: "https://api.iconify.design/logos:neovim.svg";
 	});
 
 	message.window = window.parent;

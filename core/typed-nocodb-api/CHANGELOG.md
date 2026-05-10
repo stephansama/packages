@@ -1,5 +1,11 @@
 # @stephansama/typed-nocodb-api
 
+## 0.2.6
+
+### Patch Changes
+
+- 7083cc6: added tsnapi snapshots to preserve api state
+
 ## 0.2.5
 
 ### Patch Changes

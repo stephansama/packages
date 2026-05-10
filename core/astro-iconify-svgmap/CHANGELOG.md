@@ -1,5 +1,11 @@
 # @stephansama/astro-iconify-svgmap
 
+## 1.0.14
+
+### Patch Changes
+
+- 7083cc6: added tsnapi snapshots to preserve api state
+
 ## 1.0.13
 
 ### Patch Changes

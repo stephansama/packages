@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 3.0.9
+
+### Patch Changes
+
+- 7083cc6: added tsnapi snapshots to preserve api state
+
 ## 3.0.8
 
 ### Patch Changes

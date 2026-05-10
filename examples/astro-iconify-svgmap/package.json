@@ -22,7 +22,7 @@
     "@iconify-json/heroicons": "1.2.3",
     "@iconify-json/logos": "1.2.10",
     "@iconify-json/octicon": "1.2.21",
-    "@stephansama/astro-iconify-svgmap": "1.0.13"
+    "@stephansama/astro-iconify-svgmap": "1.0.14"
   },
   "engines": {
     "node": ">=24"

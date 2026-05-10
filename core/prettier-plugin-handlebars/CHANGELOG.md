@@ -1,5 +1,11 @@
 # @stephansama/prettier-plugin-handlebars
 
+## 0.1.6
+
+### Patch Changes
+
+- 7083cc6: added tsnapi snapshots to preserve api state
+
 ## 0.1.5
 
 ### Patch Changes

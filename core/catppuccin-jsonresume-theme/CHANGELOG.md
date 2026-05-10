@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-jsonresume-theme
 
+## 1.0.5
+
+### Patch Changes
+
+- 7083cc6: added tsnapi snapshots to preserve api state
+
 ## 1.0.4
 
 ### Patch Changes

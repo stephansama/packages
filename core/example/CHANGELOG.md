@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.4.7
+
+### Patch Changes
+
+- 7083cc6: added tsnapi snapshots to preserve api state
+
 ## 1.4.6
 
 ### Patch Changes

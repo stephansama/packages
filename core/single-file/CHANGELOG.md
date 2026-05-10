@@ -1,5 +1,11 @@
 # @stephansama/single-file
 
+## 0.1.3
+
+### Patch Changes
+
+- 7083cc6: added tsnapi snapshots to preserve api state
+
 ## 0.1.2
 
 ### Patch Changes

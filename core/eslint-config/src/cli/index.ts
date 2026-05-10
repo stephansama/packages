@@ -2,4 +2,4 @@
 
 import { run } from "./run";
 
-run()
+await run();

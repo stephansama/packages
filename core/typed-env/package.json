@@ -3,7 +3,8 @@
   "version": "0.0.7",
   "description": "standard schema compatible environment validator",
   "keywords": [
-    "typed-env"
+    "typed-env",
+    "tanstack-intent"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/typed-env",
   "repository": {
@@ -30,7 +31,8 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "files": [
-    "dist"
+    "dist",
+    "skills"
   ],
   "scripts": {
     "build": "tsdown",
@@ -45,7 +47,8 @@
     "@dotenvx/dotenvx": "catalog:",
     "tsdown": "catalog:",
     "tsx": "catalog:",
-    "zod": "catalog:schema"
+    "zod": "catalog:schema",
+    "@tanstack/intent": "catalog:tanstack"
   },
   "peerDependencies": {
     "@dotenvx/dotenvx": "catalog:",

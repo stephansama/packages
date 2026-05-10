@@ -10,7 +10,8 @@
     "generator",
     "list",
     "markdown",
-    "table"
+    "table",
+    "tanstack-intent"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/auto-readme",
   "repository": {
@@ -40,7 +41,8 @@
     "auto-readme": "./dist/cli.mjs"
   },
   "files": [
-    "./dist"
+    "./dist",
+    "skills"
   ],
   "scripts": {
     "build": "tsdown",
@@ -80,7 +82,8 @@
     "@types/yargs": "catalog:",
     "picospinner": "catalog:cli",
     "tsdown": "catalog:",
-    "unified": "catalog:"
+    "unified": "catalog:",
+    "@tanstack/intent": "catalog:tanstack"
   },
   "packageManager": "pnpm@10.29.3",
   "engines": {

@@ -3,7 +3,8 @@
   "version": "1.1.6",
   "description": "Use standard schema to validate and use handlebar template directories",
   "keywords": [
-    "typed-templates"
+    "typed-templates",
+    "tanstack-intent"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/typed-templates",
   "repository": {
@@ -27,7 +28,8 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "files": [
-    "dist"
+    "dist",
+    "skills"
   ],
   "scripts": {
     "build": "tsdown",
@@ -46,7 +48,8 @@
     "tsx": "catalog:",
     "valibot": "catalog:schema",
     "vite-tsconfig-paths": "catalog:",
-    "zod": "catalog:schema"
+    "zod": "catalog:schema",
+    "@tanstack/intent": "catalog:tanstack"
   },
   "peerDependencies": {
     "arktype": ">=2",

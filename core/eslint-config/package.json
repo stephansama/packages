@@ -3,7 +3,8 @@
   "version": "0.2.1",
   "description": "stephansama eslint configuration for multiple use cases",
   "keywords": [
-    "eslint-config"
+    "eslint-config",
+    "tanstack-intent"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/eslint-config",
   "bugs": {
@@ -35,7 +36,8 @@
     "eslint-config": "./dist/cli.mjs"
   },
   "files": [
-    "dist"
+    "dist",
+    "skills"
   ],
   "scripts": {
     "build": "tsdown",
@@ -88,7 +90,8 @@
     "local-pkg": "catalog:",
     "svelte-eslint-parser": "catalog:eslint",
     "tsdown": "catalog:",
-    "tsnapi": "catalog:typescript"
+    "tsnapi": "catalog:typescript",
+    "@tanstack/intent": "catalog:tanstack"
   },
   "peerDependencies": {
     "@eslint/css": "catalog:eslint",

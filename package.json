@@ -45,6 +45,7 @@
     "@stephansama/eslint-config": "workspace:*",
     "@stephansama/multipublish": "workspace:*",
     "@stephansama/prettier-plugin-handlebars": "workspace:*",
+    "@tanstack/intent": "catalog:tanstack",
     "@tsconfig/recommended": "catalog:",
     "@turbo/gen": "catalog:turbo",
     "@types/node": "catalog:",

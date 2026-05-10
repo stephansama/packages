@@ -1,5 +1,11 @@
 # @stephansama/ai-commit-msg
 
+## 1.0.6
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 1.0.5
 
 ### Patch Changes

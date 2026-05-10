@@ -1,5 +1,11 @@
 # @stephansama/remark-asciinema
 
+## 1.0.16
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 1.0.15
 
 ### Patch Changes

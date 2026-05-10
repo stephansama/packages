@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-typedoc
 
+## 1.0.8
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 1.0.7
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @stephansama/astro-iconify-svgmap
 
+## 1.0.13
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 1.0.12
 
 ### Patch Changes

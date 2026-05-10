@@ -1,5 +1,11 @@
 # vanilla
 
+## 1.2.4
+
+### Patch Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 1.2.3
 
 ### Patch Changes

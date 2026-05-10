@@ -1,5 +1,11 @@
 # @stephansama/eslint-config
 
+## 0.2.0
+
+### Minor Changes
+
+- 26e068d: updated eslint type aware implementation
+
 ## 0.1.3
 
 ### Patch Changes

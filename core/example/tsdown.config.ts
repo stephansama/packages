@@ -1,7 +1,7 @@
 import { defineConfig } from "tsdown";
 
 export default defineConfig({
-	attw: true,
+	attw: { profile: "esm-only" },
 	dts: true,
 	entry: {
 		cli: "./src/cli.ts",

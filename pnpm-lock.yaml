@@ -496,7 +496,7 @@ catalogs:
       version: 1.1.2
   typescript:
     tsnapi:
-      specifier: ^0.3.2
+      specifier: 0.3.2
       version: 0.3.2
   vitepress:
     '@catppuccin/vitepress':

@@ -17,7 +17,12 @@ export default defineConfig({
 		bin: "./src/cli.ts",
 		customExports(exports) {
 			exports["./schema.json"] = "./dist/schema.json";
-			return exports;
+
+			return Object.fromEntries(
+				Object.entries(exports)
+					.toSorted(([keyA], [keyB]) => keyA.localeCompare(keyB))
+					.map((entry) => entry),
+			);
 		},
 		enabled: true,
 		legacy: true,

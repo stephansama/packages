@@ -1,5 +1,11 @@
 # @stephansama/multipublish
 
+## 1.0.12
+
+### Patch Changes
+
+- ce47508: added cross agent skill to packages
+
 ## 1.0.11
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @stephansama/typed-templates
 
+## 1.1.7
+
+### Patch Changes
+
+- ce47508: added cross agent skill to packages
+
 ## 1.1.6
 
 ### Patch Changes

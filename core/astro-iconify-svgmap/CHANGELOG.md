@@ -1,5 +1,11 @@
 # @stephansama/astro-iconify-svgmap
 
+## 1.0.15
+
+### Patch Changes
+
+- ce47508: added cross agent skill to packages
+
 ## 1.0.14
 
 ### Patch Changes

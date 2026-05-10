@@ -1,5 +1,11 @@
 # @stephansama/ai-commit-msg
 
+## 1.0.8
+
+### Patch Changes
+
+- ce47508: added cross agent skill to packages
+
 ## 1.0.7
 
 ### Patch Changes

@@ -18,7 +18,7 @@
   "scripts": {
     "build": "pnpm run --sequential \"/^build:.*/\"",
     "build:examples": "turbo build --filter='./examples/*'",
-    "build:packages": "turbo build --filter=...'./core/*'",
+    "build:packages": "turbo build --filter='./core/*'",
     "build:www": "pnpm --filter=scripts run build-www",
     "changeset": "changeset",
     "fmt:check": "prettier . --check",

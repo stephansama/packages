@@ -1,8 +1,12 @@
+#!/usr/bin/env node
+
 import { cli } from "cleye";
 import * as fs from "node:fs";
 
 import { convertPageToSingleFile } from "./convert";
 import * as log from "./log";
+
+await run();
 
 export async function run() {
 	const argv = cli({

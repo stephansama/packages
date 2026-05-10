@@ -35,7 +35,7 @@ is already a namespace import
 ```javascript
 import * as z from "zod";
 
-import { createEnvironment } from "@stephansama/typed-env";
+import { createEnvironment } from "../dist/index.mjs";
 
 export const config = createEnvironment(
   z.object({

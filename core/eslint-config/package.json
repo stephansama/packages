@@ -24,19 +24,11 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    },
-    "./cli": {
-      "import": "./dist/cli.mjs",
-      "require": "./dist/cli.cjs"
-    },
+    ".": "./dist/index.mjs",
+    "./cli": "./dist/cli.mjs",
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.cts",
+  "types": "./dist/index.d.mts",
   "bin": {
     "eslint-config": "./dist/cli.mjs"
   },
@@ -158,5 +150,7 @@
     "terminal-columns": "2.0.0",
     "type-flag": "4.2.0",
     "ufo": "1.6.3"
-  }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs"
 }

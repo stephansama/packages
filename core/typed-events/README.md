@@ -280,7 +280,7 @@ you can use `useListener` or `useListeners` to automatically register and cleanu
 <details><summary>open example</summary>
 
 ```javascript
-import { useListeners } from "../dist/react.cjs";
+import { useListeners } from "../dist/react.mjs";
 
 const map = createBroadcastEvent("react-example", {
   first: z.object({}),

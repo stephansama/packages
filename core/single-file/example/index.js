@@ -1,4 +1,4 @@
-import * as singleFile from "../dist/index.cjs";
+import * as singleFile from "../dist/index.mjs";
 
 export async function useAPI() {
 	const file = await singleFile.convertPageToSingleFile(

@@ -1,18 +1,17 @@
 import { defineConfig } from "tsdown";
 
-export default defineConfig([
-	{
-		attw: true,
-		dts: true,
-		entry: "src/index.ts",
-		exports: true,
-		format: ["esm", "cjs"],
-		publint: true,
-		target: "esnext",
+export default defineConfig({
+	attw: { profile: "esm-only" },
+	dts: true,
+	entry: {
+		cli: "./src/cli.ts",
+		index: "src/index.ts",
 	},
-	{
-		entry: "src/cli.ts",
-		format: ["esm", "cjs"],
-		target: "esnext",
+	exports: {
+		bin: "./src/cli.ts",
+		enabled: true,
 	},
-]);
+	format: "esm",
+	publint: true,
+	target: "esnext",
+});

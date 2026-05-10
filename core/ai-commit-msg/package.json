@@ -20,15 +20,10 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./config/schema.mjs",
-      "require": "./config/schema.cjs"
-    },
+    ".": "./config/schema.mjs",
     "./package.json": "./package.json",
     "./schema.json": "./config/schema.json"
   },
-  "main": "./config/schema.cjs",
-  "module": "./config/schema.mjs",
   "types": "./config/schema.d.cts",
   "bin": "./cli.mjs",
   "files": [
@@ -37,8 +32,6 @@
   ],
   "scripts": {
     "build": "tsdown",
-    "postbuild": "tsnapi",
-    "snapshot:update": "tsnapi -u",
     "dev": "tsdown --watch",
     "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"

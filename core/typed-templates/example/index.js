@@ -8,7 +8,7 @@ import {
 	createHandlebarSchemaMap,
 	createHandlebarSchemaSingleton,
 	getFileContext,
-} from "../dist/index.cjs";
+} from "../dist/index.mjs";
 
 const { isLinting, templateDirectory } = getFileContext(import.meta.url);
 

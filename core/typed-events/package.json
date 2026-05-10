@@ -24,23 +24,12 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    },
-    "./errors": {
-      "import": "./dist/errors.mjs",
-      "require": "./dist/errors.cjs"
-    },
-    "./react": {
-      "import": "./dist/react.mjs",
-      "require": "./dist/react.cjs"
-    },
+    ".": "./dist/index.mjs",
+    "./errors": "./dist/errors.mjs",
+    "./react": "./dist/react.mjs",
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.cts",
+  "types": "./dist/index.d.mts",
   "files": [
     "./dist/"
   ],

@@ -49,7 +49,7 @@ export declare function createBroadcastChannel<Name extends string, Map extends 
 export declare function createBroadcastEvent<Name extends string, Map extends Record<string, StandardSchemaV1>>(_: Name, _: Map): {
   readonly channel: BroadcastChannel;
   dispatch<Event extends keyof Map & string, Input extends object & StandardSchemaV1.InferInput<Map[Event]>>(_: Event, _: Input): void;
-  listen<Event extends keyof Map & string, Input extends object & StandardSchemaV1.InferInput<Map[Event]>>(_: Event, _: ListenerCallback<Input, "event" | "message">): () => void;
+  listen<Event extends keyof Map & string, Input extends object & StandardSchemaV1.InferInput<Map[Event]>>(_: Event, _: ListenerCallback<Input, "message" | "event">): () => void;
   map: Map;
   name: Name;
   target: EventTarget;

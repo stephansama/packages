@@ -3,7 +3,6 @@
   "tasks": {
     "setup": {
       "outputs": [
-        "./api/",
         "./public/healthcheck.json",
         "./public/node_modules",
         "./public/eslint",

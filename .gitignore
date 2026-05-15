@@ -1,4 +1,3 @@
-!.config/www/public/favicon.svg
 **/.vitepress/cache
 **/coverage/
 *.bak
@@ -6,8 +5,6 @@
 *storybook.log
 .DS_Store
 .astro
-.config/www/api
-.config/www/public/*
 .env**
 .next
 .publish
@@ -26,3 +23,5 @@ node_modules
 single-file.html
 storybook-static
 test-report.junit.xml
+www/docs/src/content/docs/api
+www/docs/public/*

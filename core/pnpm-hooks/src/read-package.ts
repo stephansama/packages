@@ -1,3 +1,5 @@
+import type { BaseManifest } from "@pnpm/types";
+
 import type { ReadPackageHook } from "./types";
 
 const versionRegex = /^[~^]/;
@@ -6,17 +8,25 @@ function removePackageUpdates(version: string) {
 	return version.trim().replace(versionRegex, "");
 }
 
+const dependencyTypes = [
+	"dependencies",
+	"devDependencies",
+	"optionalDependencies",
+] as const satisfies Array<
+	keyof Pick<
+		BaseManifest,
+		"dependencies" | "devDependencies" | "optionalDependencies"
+	>
+>;
+
 /** Pin all dependencies in a pnpm workspace (including nested dependencies) */
 export const pinAllDependencies = ((pkg, _context) => {
-	if (pkg.devDependencies) {
-		for (const [dependency, value] of Object.entries(pkg.devDependencies)) {
-			pkg.devDependencies[dependency] = removePackageUpdates(value);
-		}
-	}
+	for (const current of dependencyTypes) {
+		const dependencies = pkg[current];
+		if (!dependencies) continue;
 
-	if (pkg.dependencies) {
-		for (const [dependency, value] of Object.entries(pkg.dependencies)) {
-			pkg.dependencies[dependency] = removePackageUpdates(value);
+		for (const [dependency, value] of Object.entries(dependencies)) {
+			dependencies[dependency] = removePackageUpdates(value);
 		}
 	}
 

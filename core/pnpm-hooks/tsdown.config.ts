@@ -1,4 +1,5 @@
 import { defineConfig } from "tsdown";
+import ApiSnapshot from "tsnapi/rolldown";
 
 export default defineConfig({
 	attw: { profile: "esm-only" },
@@ -11,6 +12,7 @@ export default defineConfig({
 			);
 		},
 	},
+	plugins: [ApiSnapshot()],
 	publint: true,
 	target: "esnext",
 });

@@ -15,6 +15,7 @@ autoInstallPeers: true
 
 catalog:
   '@antfu/install-pkg': 1.1.0
+  '@arethetypeswrong/core': ^0.18.2
   '@astrojs/starlight': ^0.39.2
   '@astrojs/ts-plugin': ^1.10.7
   '@bluwy/giget-core': 0.1.6
@@ -220,6 +221,7 @@ overrides:
   create-stephansama-example: workspace:*
 
 shellEmulator: true
+
 allowBuilds:
   esbuild: true
   lefthook: true
@@ -230,5 +232,3 @@ allowBuilds:
   sharp: false
   unrs-resolver: false
   workerd: false
-patchedDependencies:
-  starlight-typedoc: patches/starlight-typedoc.patch

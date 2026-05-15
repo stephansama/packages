@@ -204,9 +204,9 @@ catalogs:
     vitepress: 1.6.4
     vitepress-plugin-llms: 1.11.0
   vitest:
-    '@vitest/coverage-v8': 4.0.18
-    '@vitest/ui': 4.0.18
-    vitest: 4.0.18
+    '@vitest/coverage-v8': *vitest
+    '@vitest/ui': *vitest
+    vitest: *vitest
 
 cleanupUnusedCatalogs: true
 

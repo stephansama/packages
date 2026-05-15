@@ -207,19 +207,6 @@ cleanupUnusedCatalogs: true
 
 engineStrict: true
 
-ignoredBuiltDependencies:
-  - '@parcel/watcher'
-  - '@swc/core'
-  - core-js-pure
-  - highlight.js
-  - sharp
-  - unrs-resolver
-  - workerd
-
-onlyBuiltDependencies:
-  - esbuild
-  - lefthook
-
 overrides:
   '@stephansama/astro-iconify-svgmap': workspace:*
   '@stephansama/catppuccin-xsl': workspace:*
@@ -229,3 +216,14 @@ overrides:
   create-stephansama-example: workspace:*
 
 shellEmulator: true
+
+allowBuilds:
+  esbuild: true
+  lefthook: true
+  '@parcel/watcher': false
+  '@swc/core': false
+  core-js-pure: false
+  highlight.js: false
+  sharp: false
+  unrs-resolver: false
+  workerd: false

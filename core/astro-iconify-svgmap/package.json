@@ -42,6 +42,7 @@
   ],
   "scripts": {
     "build": "tsdown --profile=node16",
+    "build:snapshot": "tsdown -u",
     "dev": "tsdown --watch",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",

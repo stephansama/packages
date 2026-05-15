@@ -41,12 +41,13 @@
     "auto-readme": "./dist/cli.mjs"
   },
   "files": [
-    "./dist",
+    "dist",
     "skills"
   ],
   "scripts": {
     "build": "tsdown",
     "postbuild": "publint",
+    "build:snapshot": "tsdown -u",
     "dev": "tsdown --watch",
     "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"

@@ -15,6 +15,7 @@ autoInstallPeers: true
 
 catalog:
   '@antfu/install-pkg': 1.1.0
+  '@arethetypeswrong/core': ^0.18.2
   '@bluwy/giget-core': 0.1.6
   '@catppuccin/palette': 1.7.1
   '@catppuccin/tailwindcss': 1.0.0
@@ -150,6 +151,10 @@ catalogs:
     '@manypkg/find-root': *manypkg
     '@manypkg/get-packages': *manypkg
     '@manypkg/tools': 2.1.1
+  pnpm:
+    '@pnpm/hooks.pnpmfile': ^1100.0.8
+    '@pnpm/lockfile.types': ^1100.0.5
+    '@pnpm/types': ^1101.1.0
   prettier:
     prettier: 3.8.1
     prettier-plugin-astro: 0.14.1
@@ -199,9 +204,9 @@ catalogs:
     vitepress: 1.6.4
     vitepress-plugin-llms: 1.11.0
   vitest:
-    '@vitest/coverage-v8': *vitest
-    '@vitest/ui': *vitest
-    vitest: *vitest
+    '@vitest/coverage-v8': 4.0.18
+    '@vitest/ui': 4.0.18
+    vitest: 4.0.18
 
 cleanupUnusedCatalogs: true
 

@@ -6,6 +6,8 @@ import * as fs from "node:fs";
 import path from "node:path";
 import * as url from "node:url";
 
+if (process.env.CI) process.exit(0);
+
 const sh = String.raw;
 
 const { packages, rootPackage } = await getPackages(process.cwd());

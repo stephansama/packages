@@ -17,10 +17,10 @@ name: Check Skills
 on:
   pull_request:
     paths:
-      - 'skills/**'
-      - '**/skills/**'
-      - '_artifacts/**'
-      - '**/_artifacts/**'
+      - "skills/**"
+      - "**/skills/**"
+      - "_artifacts/**"
+      - "**/_artifacts/**"
   release:
     types: [published]
   workflow_dispatch: {}

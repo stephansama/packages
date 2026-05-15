@@ -11,6 +11,10 @@
       "dependsOn": ["^build"],
       "outputs": ["dist*/**", "config", "!.next/cache/**"]
     },
+    "build:snapshot": {
+      "dependsOn": ["^build:snapshot"],
+      "outputs": ["__snapshots__"]
+    },
     "build:storybook": {
       "dependsOn": ["^build"],
       "outputs": ["storybook-static"]

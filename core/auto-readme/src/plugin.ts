@@ -57,7 +57,6 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			INFO("found badge zone");
 
 			const first = data.find((d) => d?.action === "BADGE");
-			console.log(first, config.badgeOptions?.dependencyTypes);
 			const dependencyTypes = config.badgeOptions?.dependencyTypes || [
 				"dependencies",
 				"devDependencies",
@@ -102,7 +101,8 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				if (!color) continue;
 				const contrastText = getContrastText(color);
 				const linkUrl = `https://npmx.dev/package/${key}`;
-				const imageUrl = `https://img.shields.io/badge/${key}-${value}-${color}.svg?logo=${slug}&logoColor=${contrastText}&labelColor=${color}`;
+				const badgeKey = key.replaceAll("-", "--").replace("_", "__");
+				const imageUrl = `https://img.shields.io/badge/${badgeKey}-${value}-${color}.svg?logo=${slug}&logoColor=${contrastText}&labelColor=${color}`;
 				packageBadges.push(md`[![${key}](${imageUrl})](${linkUrl})`);
 			}
 

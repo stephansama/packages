@@ -36,9 +36,18 @@ export function createSlugName(iconName: string) {
 export function getSimpleIconColor(slug: string) {
 	INFO(`checking ${slug} for simple icon color`);
 
+	const capitalizedSlug = slug
+		.split("-")
+		.map((word) => capitalize(word))
+		.join("");
+
 	return icons[
-		`si${slug.at(0)?.toUpperCase()}${slug.slice(1)}` as keyof typeof icons
+		`si${capitalize(capitalizedSlug)}` as keyof typeof icons
 	]?.hex.replace("#", "");
+}
+
+function capitalize(word: string) {
+	return word.at(0)?.toUpperCase() + word.slice(1);
 }
 
 function isAlternateName(name: unknown): name is keyof typeof alternateNames {

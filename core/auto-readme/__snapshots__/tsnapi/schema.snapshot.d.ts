@@ -49,8 +49,8 @@ export declare const configSchema: z.ZodOptional<z.ZodObject<{
     ZOD: "ZOD";
     BADGE: "BADGE";
   }>, z.ZodOptional<z.ZodArray<z.ZodEnum<{
-    default: "default";
     description: "description";
+    default: "default";
     devDependency: "devDependency";
     downloads: "downloads";
     name: "name";
@@ -64,8 +64,8 @@ export declare const configSchema: z.ZodOptional<z.ZodObject<{
   templates: z.ZodDefault<z.ZodOptional<z.ZodObject<{
     downloadImage: z.ZodDefault<z.ZodString>;
     emojis: z.ZodDefault<z.ZodRecord<z.ZodEnum<{
-      default: "default";
       description: "description";
+      default: "default";
       devDependency: "devDependency";
       downloads: "downloads";
       name: "name";
@@ -81,10 +81,10 @@ export declare const configSchema: z.ZodOptional<z.ZodObject<{
   usageHeading: z.ZodDefault<z.ZodString>;
   verbose: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>>;
-export declare const defaultTableHeadings: Record<"ACTION" | "PKG" | "USAGE" | "WORKSPACE" | "ZOD" | "BADGE", ("default" | "description" | "devDependency" | "downloads" | "name" | "private" | "required" | "version")[] | undefined>;
+export declare const defaultTableHeadings: Record<"ACTION" | "PKG" | "USAGE" | "WORKSPACE" | "ZOD" | "BADGE", ("description" | "default" | "devDependency" | "downloads" | "name" | "private" | "required" | "version")[] | undefined>;
 export declare const defaultTemplates: {
   downloadImage: string;
-  emojis: Record<"default" | "description" | "devDependency" | "downloads" | "name" | "private" | "required" | "version", string>;
+  emojis: Record<"description" | "default" | "devDependency" | "downloads" | "name" | "private" | "required" | "version", string>;
   registryUrl: string;
   versionImage: string;
 };

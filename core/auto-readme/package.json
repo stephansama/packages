@@ -41,7 +41,7 @@
     "auto-readme": "./dist/cli.mjs"
   },
   "files": [
-    "./dist",
+    "dist",
     "skills"
   ],
   "scripts": {

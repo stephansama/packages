@@ -84,7 +84,7 @@
     "svelte-eslint-parser": "catalog:eslint",
     "taze": "catalog:"
   },
-  "packageManager": "pnpm@10.29.3",
+  "packageManager": "pnpm@11.1.2",
   "engines": {
     "node": ">=24"
   }

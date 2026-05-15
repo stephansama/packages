@@ -14,6 +14,13 @@ preconfigured pnpm hooks and types for pnpmfile
 <details><summary>Open Table of contents</summary>
 
 - [Installation](#installation)
+- [Why](#why)
+- [What this package exports](#what-this-package-exports)
+- [Included hooks](#included-hooks)
+  - [`readPackageHooks.pinAllDependencies`](#readpackagehookspinalldependencies)
+- [Hook examples](#hook-examples)
+  - [`readPackageHooks.pinAllDependencies`](#readpackagehookspinalldependencies-1)
+- [Requirements](#requirements)
 - [Usage](#usage)
 
 </details>
@@ -23,6 +30,77 @@ preconfigured pnpm hooks and types for pnpmfile
 ```sh
 pnpm install @stephansama/pnpm-hooks
 ```
+
+## Why
+
+`pnpmfile` hooks are useful, but the types and small reusable hook helpers are easy to reimplement in every workspace. This package collects both:
+
+- ready-to-use pnpm hook implementations
+- exported TypeScript types for authoring your own `pnpmfile` hooks
+
+## What this package exports
+
+The package exposes two top-level namespaces:
+
+- `readPackageHooks`
+  prebuilt `readPackage` hook utilities
+- `types`
+  pnpm hook types including `PnpmFileHooks`, `ReadPackageHook`, `BeforePackingHook`, `AfterAllResolvedHook`, `ImportPackageHook`, `PreResolutionHook`, and `UpdateConfigHook`
+
+## Included hooks
+
+The sections below are organized so each hook can carry its own behavior notes and example output as the package grows.
+
+### `readPackageHooks.pinAllDependencies`
+
+Pins dependency ranges by removing leading `^` and `~` prefixes from:
+
+- `dependencies`
+- `devDependencies`
+- `optionalDependencies`
+
+This runs on every manifest processed by pnpm through the `readPackage` hook, which makes it useful for workspaces that want consistently pinned transitive and nested dependency ranges during resolution.
+
+## Hook examples
+
+### `readPackageHooks.pinAllDependencies`
+
+Given a dependency manifest like this:
+
+```json
+{
+  "dependencies": {
+    "react": "^19.1.0"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.2"
+  },
+  "optionalDependencies": {
+    "@types/node": "^24.0.0"
+  }
+}
+```
+
+`pinAllDependencies` rewrites it to:
+
+```json
+{
+  "dependencies": {
+    "react": "19.1.0"
+  },
+  "devDependencies": {
+    "typescript": "5.9.2"
+  },
+  "optionalDependencies": {
+    "@types/node": "24.0.0"
+  }
+}
+```
+
+## Requirements
+
+- Node.js `>=24`
+- a pnpm setup that loads a `pnpmfile`
 
 ## Usage
 

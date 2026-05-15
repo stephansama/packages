@@ -2,6 +2,13 @@
 
 # [`@stephansama`](https://github.com/stephansama) / eslint-config
 
+<!-- BADGE start -->
+
+[![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-catalog:tanstack-000000.svg?logo=tanstack&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/@tanstack/intent)
+[![eslint](https://img.shields.io/badge/eslint-catalog:eslint-4B32C3.svg?logo=eslint&logoColor=ffffff&labelColor=4B32C3)](https://npmx.dev/package/eslint)
+
+<!-- BADGE end -->
+
 </div>
 
 [![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/eslint-config)

@@ -50,6 +50,7 @@ export async function loadActionData(
 					};
 				}
 
+				case "BADGE":
 				case "PKG": {
 					const inputPath = find("path");
 					const filename = inputPath

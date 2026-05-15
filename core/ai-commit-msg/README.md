@@ -2,6 +2,15 @@
 
 # [`@stephansama`](https://github.com/stephansama) / ai-commit-msg
 
+<!-- BADGE start -->
+
+[![@dotenvx/dotenvx](https://img.shields.io/badge/@dotenvx/dotenvx-catalog:-ECD53F.svg?logo=dotenv&logoColor=ffffff&labelColor=ECD53F)](https://npmx.dev/package/@dotenvx/dotenvx)
+[![ai](https://img.shields.io/badge/ai-catalog:ai-000000.svg?logo=vercel&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/ai)
+[![zod](https://img.shields.io/badge/zod-catalog:schema-408AFF.svg?logo=zod&logoColor=ffffff&labelColor=408AFF)](https://npmx.dev/package/zod)
+[![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-catalog:tanstack-000000.svg?logo=tanstack&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/@tanstack/intent)
+
+<!-- BADGE end -->
+
 </div>
 
 [![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/ai-commit-msg)

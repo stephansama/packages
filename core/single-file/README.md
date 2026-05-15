@@ -2,6 +2,13 @@
 
 # [`@stephansama`](https://github.com/stephansama) / single-file
 
+<!-- BADGE start -->
+
+[![cheerio](https://img.shields.io/badge/cheerio-catalog:-E88C1F.svg?logo=cheerio&logoColor=ffffff&labelColor=E88C1F)](https://npmx.dev/package/cheerio)
+[![oxc-parser](https://img.shields.io/badge/oxc-parser-catalog:-00F7F1.svg?logo=oxc&logoColor=ffffff&labelColor=00F7F1)](https://npmx.dev/package/oxc-parser)
+
+<!-- BADGE end -->
+
 </div>
 
 [![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/single-file)

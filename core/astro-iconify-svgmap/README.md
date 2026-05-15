@@ -2,6 +2,15 @@
 
 # [`@stephansama`](https://github.com/stephansama) / astro-iconify-svgmap
 
+<!-- BADGE start -->
+
+[![@iconify/types](https://img.shields.io/badge/@iconify/types-catalog:-026C9C.svg?logo=iconify&logoColor=ffffff&labelColor=026C9C)](https://npmx.dev/package/@iconify/types)
+[![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-catalog:tanstack-000000.svg?logo=tanstack&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/@tanstack/intent)
+[![astro](https://img.shields.io/badge/astro-catalog:-BC52EE.svg?logo=astro&logoColor=ffffff&labelColor=BC52EE)](https://npmx.dev/package/astro)
+[![vite](https://img.shields.io/badge/vite-catalog:-9135FF.svg?logo=vite&logoColor=ffffff&labelColor=9135FF)](https://npmx.dev/package/vite)
+
+<!-- BADGE end -->
+
 </div>
 
 [![Source code](https://img.shields.io/badge/Source%20code-211F1F?style=flat&logo=github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/astro-iconify-svgmap)

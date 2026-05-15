@@ -2,6 +2,14 @@
 
 # [`@stephansama`](https://github.com/stephansama) / typed-templates
 
+<!-- BADGE start -->
+
+[![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-catalog:tanstack-000000.svg?logo=tanstack&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/@tanstack/intent)
+[![handlebars](https://img.shields.io/badge/handlebars-catalog:handlebars-000000.svg?logo=handlebarsdotjs&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/handlebars)
+[![zod](https://img.shields.io/badge/zod-catalog:schema-408AFF.svg?logo=zod&logoColor=ffffff&labelColor=408AFF)](https://npmx.dev/package/zod)
+
+<!-- BADGE end -->
+
 </div>
 
 [![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/typed-templates)

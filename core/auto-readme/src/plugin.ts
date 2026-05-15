@@ -10,7 +10,10 @@ import path from "node:path";
 import type { ActionData } from "./data";
 import type { Config } from "./schema";
 
+import { getContrastText } from "./color";
 import { parseComment } from "./comment";
+import { createSlugName, getSimpleIconColor } from "./icon";
+import { INFO } from "./log";
 import { defaultTableHeadings, defaultTemplates } from "./schema";
 
 type TemplateContext = {
@@ -43,6 +46,72 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			}
 
 			const ast = fromMarkdown(zod.body);
+			return [start, ast, end];
+		});
+
+		zone(tree, /.*BADGE.*/gi, function (start, _, end) {
+			const value = start.type === "html" && start.value;
+			const options = value && parseComment(value);
+			if (!options) throw new Error("not able to parse comment");
+
+			INFO("found badge zone");
+
+			const first = data.find((d) => d?.action === "BADGE");
+			console.log(first, config.badgeOptions?.dependencyTypes);
+			const dependencyTypes = config.badgeOptions?.dependencyTypes || [
+				"dependencies",
+				"devDependencies",
+			];
+
+			const allDependencies = Object.assign<
+				Record<string, string>,
+				Record<string, string>
+			>(
+				{},
+				// @ts-expect-error no error
+				...dependencyTypes.map(
+					(dependencyType) => first?.pkgJson?.[dependencyType] || {},
+				),
+			);
+
+			const templateBadges =
+				config.badgeOptions?.templates.map((template) => {
+					const compiled =
+						Handlebars.compile<
+							Partial<
+								Record<
+									"key" | "name" | "value" | "version",
+									string
+								>
+							>
+						>(template);
+					return compiled({
+						name: first?.pkgJson?.name,
+						version: first?.pkgJson?.version,
+					});
+				}) || [];
+
+			const packageBadges = new Array<string>();
+			const md = String.raw;
+
+			INFO(JSON.stringify(allDependencies, undefined, 2));
+
+			for (const [key, value] of Object.entries(allDependencies)) {
+				const slug = createSlugName(key);
+				const color = getSimpleIconColor(slug);
+				if (!color) continue;
+				const contrastText = getContrastText(color);
+				const linkUrl = `https://npmx.dev/package/${key}`;
+				const imageUrl = `https://img.shields.io/badge/${key}-${value}-${color}.svg?logo=${slug}&logoColor=${contrastText}&labelColor=${color}`;
+				packageBadges.push(md`[![${key}](${imageUrl})](${linkUrl})`);
+			}
+
+			const ast = fromMarkdown(
+				[templateBadges.join("\n"), packageBadges.join("\n")].join(
+					"\n\n",
+				),
+			);
+
 			return [start, ast, end];
 		});
 

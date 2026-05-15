@@ -2,6 +2,15 @@
 
 # [`@stephansama`](https://github.com/stephansama) / svelte-social-share-links
 
+<!-- BADGE start -->
+
+[![storybook](https://img.shields.io/badge/storybook-catalog:storybook-FF4785.svg?logo=storybook&logoColor=ffffff&labelColor=FF4785)](https://npmx.dev/package/storybook)
+[![svelte](https://img.shields.io/badge/svelte-catalog:svelte-FF3E00.svg?logo=svelte&logoColor=ffffff&labelColor=FF3E00)](https://npmx.dev/package/svelte)
+[![typescript](https://img.shields.io/badge/typescript-catalog:-3178C6.svg?logo=typescript&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/typescript)
+[![vite](https://img.shields.io/badge/vite-catalog:-9135FF.svg?logo=vite&logoColor=ffffff&labelColor=9135FF)](https://npmx.dev/package/vite)
+
+<!-- BADGE end -->
+
 </div>
 
 [![Source code](https://img.shields.io/badge/Source%20code-211F1F?style=flat&logo=github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/svelte-social-share-links)

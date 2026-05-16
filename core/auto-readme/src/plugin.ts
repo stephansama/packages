@@ -1,10 +1,10 @@
 import type { Root } from "mdast";
 import type { Plugin } from "unified";
 
+import { zone } from "@stephansama/mdast-zone";
 import Handlebars from "handlebars";
 import { markdownTable } from "markdown-table";
 import { fromMarkdown } from "mdast-util-from-markdown";
-import { zone } from "mdast-zone";
 import path from "node:path";
 
 import type { ActionData } from "./data";

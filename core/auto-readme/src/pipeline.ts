@@ -1,9 +1,9 @@
+import remarkUsage from "@stephansama/remark-usage";
 import path from "node:path";
 import { remark } from "remark";
 import remarkCodeImport from "remark-code-import";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
-import remarkUsage from "remark-usage";
 import { VFile } from "vfile";
 
 import type { ActionData } from "./data";

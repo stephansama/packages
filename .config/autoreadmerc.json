@@ -2,6 +2,40 @@
   "$schema": "../node_modules/@stephansama/auto-readme/dist/schema.json",
   "usageFile": "./example/index.js",
   "collapseHeadings": ["Configuration File", "Schema"],
+  "badgeOptions": {
+    "templates": [
+      {
+        "url": "https://github.com/stephansama/packages/tree/main/core/{{unscoped_name}}",
+        "image": "https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F",
+        "label": "source code"
+      },
+      {
+        "url": "https://packages.stephansama.info/api/{{name}}",
+        "image": "https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F",
+        "label": "documentation"
+      },
+      {
+        "url": "https://www.npmx.dev/package/{{name}}",
+        "image": "https://img.shields.io/npm/v/{{escaped_name}}?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F",
+        "label": "npm"
+      },
+      {
+        "url": "https://socket.dev/npm/package/{{name}}/overview",
+        "image": "https://badge.socket.dev/npm/package/{{name}}",
+        "label": "socket.dev"
+      },
+      {
+        "url": "https://jsr.io/{{name}}",
+        "image": "https://jsr.io/badges/{{name}}",
+        "label": "jsr"
+      },
+      {
+        "url": "https://www.npmx.dev/package/{{name}}",
+        "image": "https://img.shields.io/npm/dw/{{name}}?labelColor=211F1F",
+        "label": "npm downloads"
+      }
+    ]
+  },
   "enablePrettier": false,
   "enableToc": true,
   "enableUsage": true,

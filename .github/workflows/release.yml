@@ -66,6 +66,7 @@ jobs:
       - name: 📦 Installing dependencies
         run: pnpm install
       - run: pnpm run build:packages
+      - run: pnpm rebuild
       - if: github.ref_name == 'main'
         name: 🦋 Create Changeset Release Pull Request
         uses: changesets/action@6a0a831ff30acef54f2c6aa1cbbc1096b066edaf # v1.7.0

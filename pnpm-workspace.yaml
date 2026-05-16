@@ -15,7 +15,7 @@ autoInstallPeers: true
 
 catalog:
   '@antfu/install-pkg': 1.1.0
-  '@arethetypeswrong/core': ^0.18.2
+  '@arethetypeswrong/core': 0.18.2
   '@bluwy/giget-core': 0.1.6
   '@catppuccin/palette': 1.7.1
   '@catppuccin/tailwindcss': 1.0.0
@@ -40,6 +40,7 @@ catalog:
   alfy: 2.1.0
   astro: 5.9.3
   cheerio: 1.2.0
+  colord: 2.9.3
   dedent: 1.7.2
   deepmerge: 4.3.1
   es-toolkit: 1.43.0
@@ -68,6 +69,7 @@ catalog:
   pkg-types: 2.3.0
   publint: 0.3.17
   react: 19.2.0
+  simple-icons: 16.19.0
   smol-toml: 1.6.1
   tailwind-scrollbar: 4.0.2
   tailwindcss: 4.1.18
@@ -152,9 +154,9 @@ catalogs:
     '@manypkg/get-packages': *manypkg
     '@manypkg/tools': 2.1.1
   pnpm:
-    '@pnpm/hooks.pnpmfile': ^1100.0.8
-    '@pnpm/lockfile.types': ^1100.0.5
-    '@pnpm/types': ^1101.1.0
+    '@pnpm/hooks.pnpmfile': 1100.0.8
+    '@pnpm/lockfile.types': 1100.0.5
+    '@pnpm/types': 1101.1.0
   prettier:
     prettier: 3.8.1
     prettier-plugin-astro: 0.14.1

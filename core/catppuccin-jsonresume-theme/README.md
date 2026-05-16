@@ -2,14 +2,22 @@
 
 # [`@stephansama`](https://github.com/stephansama) / catppuccin-jsonresume-theme
 
-</div>
+<!-- BADGE start -->
 
-[![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/catppuccin-jsonresume-theme)
-[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/catppuccin-jsonresume-theme)
-[![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Fcatppuccin-jsonresume-theme?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/catppuccin-jsonresume-theme)
-[![JSR](https://jsr.io/badges/@stephansama/catppuccin-jsonresume-theme)](https://jsr.io/@stephansama/catppuccin-jsonresume-theme)
+[![source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/catppuccin-jsonresume-theme)
+[![documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/catppuccin-jsonresume-theme)
+[![npm](https://img.shields.io/npm/v/%40stephansama%2Fcatppuccin-jsonresume-theme?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/catppuccin-jsonresume-theme)
 [![socket.dev](https://badge.socket.dev/npm/package/@stephansama/catppuccin-jsonresume-theme)](https://socket.dev/npm/package/@stephansama/catppuccin-jsonresume-theme/overview)
+[![jsr](https://jsr.io/badges/@stephansama/catppuccin-jsonresume-theme)](https://jsr.io/@stephansama/catppuccin-jsonresume-theme)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/catppuccin-jsonresume-theme?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/catppuccin-jsonresume-theme)
+
+[![handlebars](https://img.shields.io/badge/handlebars-4.7.9-d46926.svg?logo=handlebarsdotjs&logoColor=ffffff&labelColor=d46926)](https://npmx.dev/package/handlebars)
+[![tailwindcss](https://img.shields.io/badge/tailwindcss-4.1.18-06B6D4.svg?logo=tailwindcss&logoColor=ffffff&labelColor=06B6D4)](https://npmx.dev/package/tailwindcss)
+[![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
+
+<!-- BADGE end -->
+
+</div>
 
 theme for [resume cli](https://github.com/jsonresume/resume-cli) website
 

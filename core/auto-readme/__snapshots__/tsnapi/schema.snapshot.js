@@ -3,6 +3,7 @@
  */
 // #region Variables
 export var actionsSchema /* const */
+export var badgeDependencyTypeOptionsSchema /* const */
 export var configSchema /* const */
 export var defaultTableHeadings /* const */
 export var defaultTemplates /* const */

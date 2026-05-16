@@ -38,7 +38,7 @@ pnpm install @stephansama/prettier-plugin-handlebars
 ## Usage
 
 ```javascript
-import prettierPluginHandlebars from "../dist/index.mjs";
+import prettierPluginHandlebars from "@stephansama/prettier-plugin-handlebars";
 
 /** @type {import("prettier").Config} */
 export default {

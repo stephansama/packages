@@ -51,12 +51,6 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 		});
 
 		zone(tree, /.*BADGE.*/gi, function (start, _, end) {
-			const value = start.type === "html" && start.value;
-			const options = value && parseComment(value);
-			if (!options) throw new Error("not able to parse comment");
-
-			INFO("found badge zone");
-
 			const first = data.find((d) => d?.action === "BADGE");
 			const dependencyTypes = config.badgeOptions?.dependencyTypes || [
 				"dependencies",

@@ -4,6 +4,13 @@
 
 <!-- BADGE start -->
 
+[![source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core//eslint-config)
+[![documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/eslint-config)
+[![npm](https://img.shields.io/npm/v/%40stephansama%2Feslint-config?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/eslint-config)
+[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/eslint-config)](https://socket.dev/npm/package/@stephansama/eslint-config/overview)
+[![jsr](https://jsr.io/badges/@stephansama/eslint-config)](https://jsr.io/@stephansama/eslint-config)
+[![npm downloads](https://img.shields.io/npm/dw/@stephansama/eslint-config?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/eslint-config)
+
 [![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-0.0.41-00a6f4.svg?logo=tanstack&logoColor=ffffff&labelColor=00a6f4)](https://npmx.dev/package/@tanstack/intent)
 [![eslint](https://img.shields.io/badge/eslint-10.2.1-4B32C3.svg?logo=eslint&logoColor=ffffff&labelColor=4B32C3)](https://npmx.dev/package/eslint)
 [![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
@@ -11,13 +18,6 @@
 <!-- BADGE end -->
 
 </div>
-
-[![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/eslint-config)
-[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/eslint-config)
-[![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Feslint-config?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/eslint-config)
-[![JSR](https://jsr.io/badges/@stephansama/eslint-config)](https://jsr.io/@stephansama/eslint-config)
-[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/eslint-config)](https://socket.dev/npm/package/@stephansama/eslint-config/overview)
-[![npm downloads](https://img.shields.io/npm/dw/@stephansama/eslint-config?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/eslint-config)
 
 A modular, composable ESLint flat config package with 25+ configs covering JavaScript, TypeScript, frameworks, testing, and file formats. Supports auto-detection of installed packages and ships with a CLI for interactive setup.
 

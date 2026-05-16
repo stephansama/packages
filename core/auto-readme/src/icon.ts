@@ -22,6 +22,7 @@ const alternateNames = {
 	"@iconify/types": "iconify",
 	"@tanstack/intent": "tanstack",
 	"ai": "vercel",
+	"alfy": "alfred",
 	"c#": "sharp",
 	"dockerfile": "docker",
 	"handlebars": "handlebarsdotjs",

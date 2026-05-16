@@ -4,6 +4,13 @@
 
 <!-- BADGE start -->
 
+[![source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core//typed-env)
+[![documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/typed-env)
+[![npm](https://img.shields.io/npm/v/%40stephansama%2Ftyped-env?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-env)
+[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/typed-env)](https://socket.dev/npm/package/@stephansama/typed-env/overview)
+[![jsr](https://jsr.io/badges/@stephansama/typed-env)](https://jsr.io/@stephansama/typed-env)
+[![npm downloads](https://img.shields.io/npm/dw/@stephansama/typed-env?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-env)
+
 [![@dotenvx/dotenvx](https://img.shields.io/badge/@dotenvx/dotenvx-1.52.0-ECD53F.svg?logo=dotenv&logoColor=ffffff&labelColor=ECD53F)](https://npmx.dev/package/@dotenvx/dotenvx)
 [![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-0.0.41-00a6f4.svg?logo=tanstack&logoColor=ffffff&labelColor=00a6f4)](https://npmx.dev/package/@tanstack/intent)
 [![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
@@ -12,13 +19,6 @@
 <!-- BADGE end -->
 
 </div>
-
-[![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/typed-env)
-[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/typed-env)
-[![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Ftyped-env?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-env)
-[![JSR](https://jsr.io/badges/@stephansama/typed-env)](https://jsr.io/@stephansama/typed-env)
-[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/typed-env)](https://socket.dev/npm/package/@stephansama/typed-env/overview)
-[![npm downloads](https://img.shields.io/npm/dw/@stephansama/typed-env?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-env)
 
 standard schema compatible environment validator
 

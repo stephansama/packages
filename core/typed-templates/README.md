@@ -4,6 +4,13 @@
 
 <!-- BADGE start -->
 
+[![source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core//typed-templates)
+[![documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/typed-templates)
+[![npm](https://img.shields.io/npm/v/%40stephansama%2Ftyped-templates?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-templates)
+[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/typed-templates)](https://socket.dev/npm/package/@stephansama/typed-templates/overview)
+[![jsr](https://jsr.io/badges/@stephansama/typed-templates)](https://jsr.io/@stephansama/typed-templates)
+[![npm downloads](https://img.shields.io/npm/dw/@stephansama/typed-templates?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-templates)
+
 [![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-0.0.41-00a6f4.svg?logo=tanstack&logoColor=ffffff&labelColor=00a6f4)](https://npmx.dev/package/@tanstack/intent)
 [![handlebars](https://img.shields.io/badge/handlebars-4.7.9-d46926.svg?logo=handlebarsdotjs&logoColor=ffffff&labelColor=d46926)](https://npmx.dev/package/handlebars)
 [![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
@@ -12,13 +19,6 @@
 <!-- BADGE end -->
 
 </div>
-
-[![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/typed-templates)
-[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/typed-templates)
-[![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Ftyped-templates?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-templates)
-[![JSR](https://jsr.io/badges/@stephansama/typed-templates)](https://jsr.io/@stephansama/typed-templates)
-[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/typed-templates)](https://socket.dev/npm/package/@stephansama/typed-templates/overview)
-[![npm downloads](https://img.shields.io/npm/dw/@stephansama/typed-templates?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-templates)
 
 Use standard schema to validate and use handlebar template directories
 

@@ -2,14 +2,18 @@
 
 # [`@stephansama`](https://github.com/stephansama) / catppuccin-typedoc
 
-</div>
+<!-- BADGE start -->
 
-[![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/catppuccin-typedoc)
-[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/catppuccin-typedoc)
+[![source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core//catppuccin-typedoc)
+[![documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/catppuccin-typedoc)
+[![npm](https://img.shields.io/npm/v/%40stephansama%2Fcatppuccin-typedoc?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/catppuccin-typedoc)
 [![socket.dev](https://badge.socket.dev/npm/package/@stephansama/catppuccin-typedoc)](https://socket.dev/npm/package/@stephansama/catppuccin-typedoc/overview)
-[![JSR](https://jsr.io/badges/@stephansama/catppuccin-typedoc)](https://jsr.io/@stephansama/catppuccin-typedoc)
-[![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Fcatppuccin-typedoc?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/catppuccin-typedoc)
+[![jsr](https://jsr.io/badges/@stephansama/catppuccin-typedoc)](https://jsr.io/@stephansama/catppuccin-typedoc)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/catppuccin-typedoc?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/catppuccin-typedoc)
+
+<!-- BADGE end -->
+
+</div>
 
 Catppuccin theme for typedoc
 

@@ -84,10 +84,19 @@ export const badgeDependencyTypeOptionsSchema = z
 	)
 	.default(["dependencies", "devDependencies"]);
 
-const badgeTemplateSchema = z.array(z.string().trim()).default([]).meta({
-	description:
-		"handlebar template strings where {{scope}}, {{name}} / {{key}} and {{version}} / {{value}} represent the package",
-});
+const badgeTemplateSchema = z
+	.array(
+		z.object({
+			image: z.string().trim(),
+			label: z.string().trim(),
+			url: z.string().trim(),
+		}),
+	)
+	.default([])
+	.meta({
+		description:
+			"handlebar template strings where {{scope}}, {{name}} / {{key}} and {{version}} / {{value}} represent the package",
+	});
 
 const _configSchema = z.object({
 	affectedRegexes: z.array(z.string().trim()),

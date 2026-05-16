@@ -4,19 +4,19 @@
 
 <!-- BADGE start -->
 
+[![source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core//typed-events)
+[![documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/typed-events)
+[![npm](https://img.shields.io/npm/v/%40stephansama%2Ftyped-events?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-events)
+[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/typed-events)](https://socket.dev/npm/package/@stephansama/typed-events/overview)
+[![jsr](https://jsr.io/badges/@stephansama/typed-events)](https://jsr.io/@stephansama/typed-events)
+[![npm downloads](https://img.shields.io/npm/dw/@stephansama/typed-events?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-events)
+
 [![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-0.0.41-00a6f4.svg?logo=tanstack&logoColor=ffffff&labelColor=00a6f4)](https://npmx.dev/package/@tanstack/intent)
 [![react](https://img.shields.io/badge/react-19.2.0-61DAFB.svg?logo=react&logoColor=ffffff&labelColor=61DAFB)](https://npmx.dev/package/react)
 [![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
 [![zod](https://img.shields.io/badge/zod-4.2.1-408AFF.svg?logo=zod&logoColor=ffffff&labelColor=408AFF)](https://npmx.dev/package/zod)
 
 <!-- BADGE end -->
-
-[![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/typed-events)
-[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/typed-events)
-[![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Ftyped-events?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-events)
-[![JSR](https://jsr.io/badges/@stephansama/typed-events)](https://jsr.io/@stephansama/typed-events)
-[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/typed-events)](https://socket.dev/npm/package/@stephansama/typed-events/overview)
-[![npm downloads](https://img.shields.io/npm/dw/@stephansama/typed-events?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-events)
 
 </div>
 

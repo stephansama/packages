@@ -29,7 +29,11 @@ export declare const configSchema: z.ZodOptional<z.ZodObject<{
       peerDependencies: "peerDependencies";
       optionalDependencies: "optionalDependencies";
     }>>>;
-    templates: z.ZodDefault<z.ZodArray<z.ZodString>>;
+    templates: z.ZodDefault<z.ZodArray<z.ZodObject<{
+      image: z.ZodString;
+      label: z.ZodString;
+      url: z.ZodString;
+    }, z.core.$strip>>>;
   }, z.core.$strip>>;
   collapseHeadings: z.ZodArray<z.ZodString>;
   defaultLanguage: z.ZodDefault<z.ZodEnum<{

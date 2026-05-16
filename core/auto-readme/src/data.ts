@@ -58,7 +58,6 @@ export async function loadActionData(
 						: path.dirname(file);
 					const pkgJson = await readPackageJSON(filename);
 					const catalogs = await loadCatalogs();
-					console.log(catalogs);
 					return {
 						action: action.action,
 						catalogs: catalogs,

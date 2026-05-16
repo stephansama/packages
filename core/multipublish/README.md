@@ -2,14 +2,24 @@
 
 # [`@stephansama`](https://github.com/stephansama) / multipublish
 
-</div>
+<!-- BADGE start -->
 
-[![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/multipublish)
-[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/multipublish)
-[![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Fmultipublish?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/multipublish)
-[![JSR](https://jsr.io/badges/@stephansama/multipublish)](https://jsr.io/@stephansama/multipublish)
+[![source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core//multipublish)
+[![documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/multipublish)
+[![npm](https://img.shields.io/npm/v/%40stephansama%2Fmultipublish?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/multipublish)
 [![socket.dev](https://badge.socket.dev/npm/package/@stephansama/multipublish)](https://socket.dev/npm/package/@stephansama/multipublish/overview)
+[![jsr](https://jsr.io/badges/@stephansama/multipublish)](https://jsr.io/@stephansama/multipublish)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/multipublish?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/multipublish)
+
+[![yaml](https://img.shields.io/badge/yaml-2.8.2-CB171E.svg?logo=yaml&logoColor=ffffff&labelColor=CB171E)](https://npmx.dev/package/yaml)
+[![zod](https://img.shields.io/badge/zod-4.2.1-408AFF.svg?logo=zod&logoColor=ffffff&labelColor=408AFF)](https://npmx.dev/package/zod)
+[![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-0.0.41-00a6f4.svg?logo=tanstack&logoColor=ffffff&labelColor=00a6f4)](https://npmx.dev/package/@tanstack/intent)
+[![jsr](https://img.shields.io/badge/jsr-0.13.5-F7DF1E.svg?logo=jsr&logoColor=ffffff&labelColor=F7DF1E)](https://npmx.dev/package/jsr)
+[![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
+
+<!-- BADGE end -->
+
+</div>
 
 Publish packages to multiple providers easily
 

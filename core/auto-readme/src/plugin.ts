@@ -76,19 +76,47 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 
 			const templateBadges =
 				config.badgeOptions?.templates.map((template) => {
-					const compiled =
-						Handlebars.compile<
-							Partial<
-								Record<
-									"key" | "name" | "value" | "version",
-									string
-								>
-							>
-						>(template);
-					return compiled({
-						name: first?.pkgJson?.name,
-						version: first?.pkgJson?.version,
-					});
+					type TemplateType = Partial<
+						Record<
+							| "escaped_name"
+							| "key"
+							| "name"
+							| "unscoped_name"
+							| "value"
+							| "version",
+							string
+						>
+					>;
+
+					const compiledImage = Handlebars.compile<TemplateType>(
+						template.image,
+					);
+
+					const compiledUrl = Handlebars.compile<TemplateType>(
+						template.url,
+					);
+
+					const name = first?.pkgJson?.name || "";
+					const version = first?.pkgJson?.version;
+					const scope =
+						(first?.pkgJson?.name?.includes("@") &&
+							first.pkgJson.name.split("/").at(0)) ||
+						"";
+
+					const context = {
+						escaped_name: encodeURIComponent(name),
+						key: name,
+						name,
+						scope,
+						unscoped_name: name?.replace(scope, ""),
+						value: version,
+						version,
+					};
+
+					const image = compiledImage(context);
+					const url = compiledUrl(context);
+
+					return `[![${template.label}](${image})](${url})`;
 				}) || [];
 
 			const packageBadges = new Array<string>();

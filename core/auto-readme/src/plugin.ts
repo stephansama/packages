@@ -112,7 +112,7 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 							key: name,
 							name,
 							scope,
-							unscoped_name: name?.replace(scope, ""),
+							unscoped_name: name?.replace(`${scope}/`, ""),
 							value: version,
 							version,
 						};
@@ -135,7 +135,9 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 
 				const contrastText = getContrastText(color);
 				const linkUrl = `https://npmx.dev/package/${key}`;
-				const badgeKey = key.replaceAll("-", "--").replace("_", "__");
+				const badgeKey = key
+					.replaceAll("-", "--")
+					.replaceAll("_", "__");
 				const imageUrl = `https://img.shields.io/badge/${badgeKey}-${resolveVersion(
 					{
 						catalogs: first?.catalogs,
@@ -147,9 +149,10 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			}
 
 			const ast = fromMarkdown(
-				[templateBadges.join("\n"), packageBadges.join("\n")].join(
-					"\n\n",
-				),
+				[
+					templateBadges.filter(Boolean).join("\n"),
+					packageBadges.filter(Boolean).join("\n"),
+				].join("\n\n"),
 			);
 
 			return [start, ast, end];

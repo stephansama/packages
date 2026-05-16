@@ -4,7 +4,7 @@
 
 <!-- BADGE start -->
 
-[![source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core//catppuccin-jsonresume-theme)
+[![source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/catppuccin-jsonresume-theme)
 [![documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/catppuccin-jsonresume-theme)
 [![npm](https://img.shields.io/npm/v/%40stephansama%2Fcatppuccin-jsonresume-theme?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/catppuccin-jsonresume-theme)
 [![socket.dev](https://badge.socket.dev/npm/package/@stephansama/catppuccin-jsonresume-theme)](https://socket.dev/npm/package/@stephansama/catppuccin-jsonresume-theme/overview)

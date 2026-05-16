@@ -83,5 +83,5 @@ function capitalize(word: string) {
 }
 
 function isAlternateName(name: unknown): name is keyof typeof alternateNames {
-	return Object.keys(alternateNames).includes(name as string);
+	return typeof name === "string" && name in alternateNames;
 }

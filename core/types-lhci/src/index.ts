@@ -105,7 +105,8 @@ export const lhciUploadSchema = z
 						"s/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/UUID/ig",
 					]),
 			})
-			.partial(),
+			.partial()
+			.required({ target: true }),
 		z.object({
 			outputDir: z.string().trim(),
 			reportFilenamePattern: z

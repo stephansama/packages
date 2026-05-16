@@ -37,11 +37,12 @@ pnpm install @stephansama/prettier-plugin-handlebars
 
 ## Usage
 
-```javascript
+```typescript
+import type { Config } from "prettier";
+
 import prettierPluginHandlebars from "@stephansama/prettier-plugin-handlebars";
 
-/** @type {import("prettier").Config} */
 export default {
   plugins: [prettierPluginHandlebars],
-};
+} satisfies Config;
 ```

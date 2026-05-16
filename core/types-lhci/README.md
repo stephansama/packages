@@ -37,10 +37,9 @@ pnpm install @stephansama/types-lhci
 
 ## Usage
 
-```javascript
-import { lhciSchema } from "@stephansama/types-lhci";
+```typescript
+import { lhciSchema, type LhciSchema } from "@stephansama/types-lhci";
 
-/** @type {import("../dist/index.mjs").LhciSchema} */
 const config = {
   ci: {
     upload: {
@@ -50,11 +49,11 @@ const config = {
       token: "project-token",
     },
   },
-};
+} satisfies LhciSchema;
 ```
 
 you can also verify the config object later
 
-```javascript
+```typescript
 lhciSchema.parse(config);
 ```

@@ -85,20 +85,27 @@ export const lhciCollectSchema = z.object({
 export type LhciUploadSchema = z.infer<typeof lhciUploadSchema>;
 export const lhciUploadSchema = z
 	.discriminatedUnion("target", [
-		z.object({
-			basicAuth: lhciBasicAuthSchema.optional(),
-			extraHeaders: z.record(z.string(), z.string().trim()).optional(),
-			ignoreDuplicateBuildFailure: z.boolean().optional(),
-			serverBaseUrl: z.string().trim().default("http://localhost:9001/"),
-			target: z.literal("lhci"),
-			token: z.string().trim(),
-			urlReplacementPatterns: z
-				.array(z.string().trim())
-				.default([
-					"s#:[0-9]{3,5}/#:PORT/#",
-					"s/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/UUID/ig",
-				]),
-		}),
+		z
+			.object({
+				basicAuth: lhciBasicAuthSchema.optional(),
+				extraHeaders: z
+					.record(z.string(), z.string().trim())
+					.optional(),
+				ignoreDuplicateBuildFailure: z.boolean().optional(),
+				serverBaseUrl: z
+					.string()
+					.trim()
+					.default("http://localhost:9001/"),
+				target: z.literal("lhci"),
+				token: z.string().trim(),
+				urlReplacementPatterns: z
+					.array(z.string().trim())
+					.default([
+						"s#:[0-9]{3,5}/#:PORT/#",
+						"s/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/UUID/ig",
+					]),
+			})
+			.partial(),
 		z.object({
 			outputDir: z.string().trim(),
 			reportFilenamePattern: z
@@ -115,12 +122,17 @@ export const lhciUploadSchema = z
 		}),
 	])
 	.and(
-		z.object({
-			githubApiHost: z.string().trim().default("https://api.github.com"),
-			githubAppToken: z.string().trim().optional(),
-			githubStatusContextSuffix: z.string().trim().optional(),
-			githubToken: z.string().trim().optional(),
-		}),
+		z
+			.object({
+				githubApiHost: z
+					.string()
+					.trim()
+					.default("https://api.github.com"),
+				githubAppToken: z.string().trim().optional(),
+				githubStatusContextSuffix: z.string().trim().optional(),
+				githubToken: z.string().trim().optional(),
+			})
+			.partial(),
 	);
 
 export type LhciServerSchema = z.infer<typeof lhciServerSchema>;

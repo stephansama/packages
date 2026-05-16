@@ -46,6 +46,12 @@ pnpm install @stephansama/typed-events
 
 ## Usage
 
+```typescript
+/* eslint-disable perfectionist/sort-modules */
+
+import * as z from "zod";
+```
+
 ### createEvent
 
 create a typed [`CustomEvent`](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent)
@@ -53,7 +59,7 @@ using a [standard-schema](https://github.com/standard-schema/standard-schema) co
 
 <details><summary>open example</summary>
 
-```javascript
+```typescript
 import { createEvent } from "@stephansama/typed-events";
 
 export const customAnimationEvent = createEvent(
@@ -67,13 +73,15 @@ export const customAnimationEvent = createEvent(
 
 somewhere in your codebase
 
-```javascript
+```typescript
 export function listenForAnimationEvent() {
-  const item = document.querySelector("#item");
+  const item = document.querySelector<HTMLElement>("#item");
+
+  if (!item) throw new Error("unable to find item");
 
   const cleanup = customAnimationEvent.listen((event) => {
-    item.style.x = event.data.x;
-    item.style.y = event.data.y;
+    item.style.x = String(event.data.x);
+    item.style.y = String(event.data.y);
   });
 
   return () => cleanup();
@@ -82,14 +90,17 @@ export function listenForAnimationEvent() {
 
 somewhere else in your codebase
 
-```javascript
+```typescript
 export function dispatchEvent() {
+  const button = document.querySelector("#button");
   const x = document.querySelector("#x");
   const y = document.querySelector("#y");
 
-  const button = document.querySelector("#button");
+  if (!button) throw new Error("unable to find button");
+  if (!x) throw new Error("unable to find x");
+  if (!y) throw new Error("unable to find y");
 
-  button.addEventListener("click", () => {
+  button?.addEventListener("click", () => {
     customAnimationEvent.dispatch({
       x: +x.textContent,
       y: +y.textContent,
@@ -104,7 +115,7 @@ export function dispatchEvent() {
 
 <details><summary>open example</summary>
 
-```javascript
+```typescript
 import { createEventMap } from "@stephansama/typed-events";
 
 export const eventMap = createEventMap("event-map", {
@@ -115,12 +126,13 @@ export const eventMap = createEventMap("event-map", {
 
 somewhere in your codebase
 
-```javascript
+```typescript
 export function listenForEventMap() {
   const value = document.querySelector("#value");
+  if (!value) throw new Error("unable to find value");
 
   const cleanup = eventMap.listen("update", (message) => {
-    value.textContent = message.data.value;
+    value.textContent = String(message.data.value);
   });
 
   return () => cleanup();
@@ -129,9 +141,10 @@ export function listenForEventMap() {
 
 somewhere else in your codebase
 
-```javascript
+```typescript
 export function dispatchEventMap() {
   const button = document.querySelector("#button");
+  if (!button) throw new Error("unable to find button");
 
   button.addEventListener("click", () => {
     eventMap.dispatch("update", {
@@ -150,7 +163,7 @@ using a [standard-schema](https://github.com/standard-schema/standard-schema) co
 
 <details><summary>open example</summary>
 
-```javascript
+```typescript
 import { createBroadcastChannel } from "@stephansama/typed-events";
 
 export const channel = createBroadcastChannel("broadcaster", {
@@ -161,12 +174,13 @@ export const channel = createBroadcastChannel("broadcaster", {
 
 somewhere in your codebase
 
-```javascript
+```typescript
 export function listenForChannelMessage() {
   const value = document.querySelector("#value");
+  if (!value) throw new Error("unable to find value");
 
   const cleanup = channel.listen("update", (message) => {
-    value.textContent = message.data.value;
+    value.textContent = String(message.data.value);
   });
 
   return () => cleanup();
@@ -175,9 +189,10 @@ export function listenForChannelMessage() {
 
 somewhere else in your codebase
 
-```javascript
+```typescript
 export function dispatchChannelMessage() {
   const button = document.querySelector("#button");
+  if (!button) throw new Error("unable to find button");
 
   button.addEventListener("click", () => {
     channel.dispatch("update", {
@@ -197,7 +212,7 @@ using a [standard-schema](https://github.com/standard-schema/standard-schema) co
 
 <details><summary>open example</summary>
 
-```javascript
+```typescript
 import { createBroadcastEvent } from "@stephansama/typed-events";
 
 export const broadcastEvent = createBroadcastEvent("broadcaster", {
@@ -208,12 +223,13 @@ export const broadcastEvent = createBroadcastEvent("broadcaster", {
 
 somewhere in your codebase
 
-```javascript
+```typescript
 export function listenForBroadcastEvent() {
   const value = document.querySelector("#value");
+  if (!value) throw new Error("unable to find value");
 
   const cleanup = broadcastEvent.listen("update", (message) => {
-    value.textContent = message.data.value;
+    value.textContent = String(message.data.value);
   });
 
   return () => cleanup();
@@ -222,9 +238,10 @@ export function listenForBroadcastEvent() {
 
 somewhere else in your codebase
 
-```javascript
+```typescript
 export function dispatchBroadcastEvent() {
   const button = document.querySelector("#button");
+  if (!button) throw new Error("unable to find button");
 
   button.addEventListener("click", () => {
     broadcastEvent.dispatch("update", {
@@ -243,7 +260,7 @@ using a [standard-schema](https://github.com/standard-schema/standard-schema) co
 
 <details><summary>open example</summary>
 
-```javascript
+```typescript
 import { createMessage } from "@stephansama/typed-events";
 
 export const message = createMessage("event-map", {
@@ -254,12 +271,13 @@ export const message = createMessage("event-map", {
 
 somewhere in your codebase
 
-```javascript
+```typescript
 export function listenForMessage() {
   const value = document.querySelector("#value");
+  if (!value) throw new Error("unable to find value");
 
   const cleanup = message.listen("update", (message) => {
-    value.textContent = message.data.value;
+    value.textContent = String(message.data.value);
   });
 
   return () => cleanup();
@@ -268,9 +286,10 @@ export function listenForMessage() {
 
 somewhere else in your codebase
 
-```javascript
+```typescript
 export function dispatchMessage() {
   const button = document.querySelector("#button");
+  if (!button) throw new Error("unable to find button");
 
   button.addEventListener("click", () => {
     message.dispatch("update", {
@@ -288,21 +307,25 @@ you can use `useListener` or `useListeners` to automatically register and cleanu
 
 <details><summary>open example</summary>
 
-```javascript
+```typescript
 import { useListeners } from "../dist/react.mjs";
 
 const map = createBroadcastEvent("react-example", {
-  first: z.object({}),
-  second: z.object({ payload: z.number() }),
+	first: z.object({}),
+	second: z.object({ payload: z.number() }),
 });
 
 export function ExampleComponent() {
-  useListeners(map, {
-    first: () => console.info("first event happened"),
-    second: ({ data }) => console.info(data.payload),
-  });
+	useListeners(map, {
+		first(_payload) {
+```
 
-  return; // more jsx...
+```typescript
+		},
+		second(_payload) {},
+	});
+
+	return; // more jsx...
 }
 ```
 

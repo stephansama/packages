@@ -1,6 +1,5 @@
-// remark-usage-ignore-next
-/* eslint-disable perfectionist/sort-modules, import-x/no-duplicates, zod/consistent-import */
-// remark-usage-ignore-next
+/* eslint-disable perfectionist/sort-modules */
+
 import * as z from "zod";
 
 // ### createEvent
@@ -21,11 +20,13 @@ export const customAnimationEvent = createEvent(
 
 // somewhere in your codebase
 export function listenForAnimationEvent() {
-	const item = document.querySelector("#item");
+	const item = document.querySelector<HTMLElement>("#item");
+
+	if (!item) throw new Error("unable to find item");
 
 	const cleanup = customAnimationEvent.listen((event) => {
-		item.style.x = event.data.x;
-		item.style.y = event.data.y;
+		item.style.x = String(event.data.x);
+		item.style.y = String(event.data.y);
 	});
 
 	return () => cleanup();
@@ -33,12 +34,15 @@ export function listenForAnimationEvent() {
 
 // somewhere else in your codebase
 export function dispatchEvent() {
+	const button = document.querySelector("#button");
 	const x = document.querySelector("#x");
 	const y = document.querySelector("#y");
 
-	const button = document.querySelector("#button");
+	if (!button) throw new Error("unable to find button");
+	if (!x) throw new Error("unable to find x");
+	if (!y) throw new Error("unable to find y");
 
-	button.addEventListener("click", () => {
+	button?.addEventListener("click", () => {
 		customAnimationEvent.dispatch({
 			x: +x.textContent,
 			y: +y.textContent,
@@ -61,9 +65,10 @@ export const eventMap = createEventMap("event-map", {
 // somewhere in your codebase
 export function listenForEventMap() {
 	const value = document.querySelector("#value");
+	if (!value) throw new Error("unable to find value");
 
 	const cleanup = eventMap.listen("update", (message) => {
-		value.textContent = message.data.value;
+		value.textContent = String(message.data.value);
 	});
 
 	return () => cleanup();
@@ -72,6 +77,7 @@ export function listenForEventMap() {
 // somewhere else in your codebase
 export function dispatchEventMap() {
 	const button = document.querySelector("#button");
+	if (!button) throw new Error("unable to find button");
 
 	button.addEventListener("click", () => {
 		eventMap.dispatch("update", {
@@ -97,9 +103,10 @@ export const channel = createBroadcastChannel("broadcaster", {
 // somewhere in your codebase
 export function listenForChannelMessage() {
 	const value = document.querySelector("#value");
+	if (!value) throw new Error("unable to find value");
 
 	const cleanup = channel.listen("update", (message) => {
-		value.textContent = message.data.value;
+		value.textContent = String(message.data.value);
 	});
 
 	return () => cleanup();
@@ -108,6 +115,7 @@ export function listenForChannelMessage() {
 // somewhere else in your codebase
 export function dispatchChannelMessage() {
 	const button = document.querySelector("#button");
+	if (!button) throw new Error("unable to find button");
 
 	button.addEventListener("click", () => {
 		channel.dispatch("update", {
@@ -134,9 +142,10 @@ export const broadcastEvent = createBroadcastEvent("broadcaster", {
 // somewhere in your codebase
 export function listenForBroadcastEvent() {
 	const value = document.querySelector("#value");
+	if (!value) throw new Error("unable to find value");
 
 	const cleanup = broadcastEvent.listen("update", (message) => {
-		value.textContent = message.data.value;
+		value.textContent = String(message.data.value);
 	});
 
 	return () => cleanup();
@@ -145,6 +154,7 @@ export function listenForBroadcastEvent() {
 // somewhere else in your codebase
 export function dispatchBroadcastEvent() {
 	const button = document.querySelector("#button");
+	if (!button) throw new Error("unable to find button");
 
 	button.addEventListener("click", () => {
 		broadcastEvent.dispatch("update", {
@@ -170,9 +180,10 @@ export const message = createMessage("event-map", {
 // somewhere in your codebase
 export function listenForMessage() {
 	const value = document.querySelector("#value");
+	if (!value) throw new Error("unable to find value");
 
 	const cleanup = message.listen("update", (message) => {
-		value.textContent = message.data.value;
+		value.textContent = String(message.data.value);
 	});
 
 	return () => cleanup();
@@ -181,6 +192,7 @@ export function listenForMessage() {
 // somewhere else in your codebase
 export function dispatchMessage() {
 	const button = document.querySelector("#button");
+	if (!button) throw new Error("unable to find button");
 
 	button.addEventListener("click", () => {
 		message.dispatch("update", {
@@ -204,8 +216,10 @@ const map = createBroadcastEvent("react-example", {
 
 export function ExampleComponent() {
 	useListeners(map, {
-		first: () => console.info("first event happened"),
-		second: ({ data }) => console.info(data.payload),
+		first(_payload) {
+			//
+		},
+		second(_payload) {},
 	});
 
 	return; // more jsx...

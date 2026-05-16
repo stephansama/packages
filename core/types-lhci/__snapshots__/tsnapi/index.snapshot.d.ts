@@ -136,16 +136,16 @@ export declare const lhciSchema: z.ZodObject<{
       }, z.core.$strip>;
     }, z.core.$strip>>;
     upload: z.ZodOptional<z.ZodIntersection<z.ZodDiscriminatedUnion<[z.ZodObject<{
-      basicAuth: z.ZodOptional<z.ZodObject<{
+      basicAuth: z.ZodOptional<z.ZodOptional<z.ZodObject<{
         password: z.ZodString;
         username: z.ZodString;
-      }, z.core.$strip>>;
-      extraHeaders: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodString>>;
-      ignoreDuplicateBuildFailure: z.ZodOptional<z.ZodBoolean>;
-      serverBaseUrl: z.ZodDefault<z.ZodString>;
-      target: z.ZodLiteral<"lhci">;
-      token: z.ZodString;
-      urlReplacementPatterns: z.ZodDefault<z.ZodArray<z.ZodString>>;
+      }, z.core.$strip>>>;
+      extraHeaders: z.ZodOptional<z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodString>>>;
+      ignoreDuplicateBuildFailure: z.ZodOptional<z.ZodOptional<z.ZodBoolean>>;
+      serverBaseUrl: z.ZodOptional<z.ZodDefault<z.ZodString>>;
+      target: z.ZodOptional<z.ZodLiteral<"lhci">>;
+      token: z.ZodOptional<z.ZodString>;
+      urlReplacementPatterns: z.ZodOptional<z.ZodDefault<z.ZodArray<z.ZodString>>>;
     }, z.core.$strip>, z.ZodObject<{
       outputDir: z.ZodString;
       reportFilenamePattern: z.ZodDefault<z.ZodString>;
@@ -154,10 +154,10 @@ export declare const lhciSchema: z.ZodObject<{
       target: z.ZodLiteral<"temporary-public-storage">;
       uploadUrlMap: z.ZodDefault<z.ZodBoolean>;
     }, z.core.$strip>], "target">, z.ZodObject<{
-      githubApiHost: z.ZodDefault<z.ZodString>;
-      githubAppToken: z.ZodOptional<z.ZodString>;
-      githubStatusContextSuffix: z.ZodOptional<z.ZodString>;
-      githubToken: z.ZodOptional<z.ZodString>;
+      githubApiHost: z.ZodOptional<z.ZodDefault<z.ZodString>>;
+      githubAppToken: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+      githubStatusContextSuffix: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+      githubToken: z.ZodOptional<z.ZodOptional<z.ZodString>>;
     }, z.core.$strip>>>;
     wizard: z.ZodOptional<z.ZodObject<{
       extraHeaders: z.ZodOptional<z.ZodString>;
@@ -191,16 +191,16 @@ export declare const lhciServerSchema: z.ZodObject<{
   }, z.core.$strip>;
 }, z.core.$strip>;
 export declare const lhciUploadSchema: z.ZodIntersection<z.ZodDiscriminatedUnion<[z.ZodObject<{
-  basicAuth: z.ZodOptional<z.ZodObject<{
+  basicAuth: z.ZodOptional<z.ZodOptional<z.ZodObject<{
     password: z.ZodString;
     username: z.ZodString;
-  }, z.core.$strip>>;
-  extraHeaders: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodString>>;
-  ignoreDuplicateBuildFailure: z.ZodOptional<z.ZodBoolean>;
-  serverBaseUrl: z.ZodDefault<z.ZodString>;
-  target: z.ZodLiteral<"lhci">;
-  token: z.ZodString;
-  urlReplacementPatterns: z.ZodDefault<z.ZodArray<z.ZodString>>;
+  }, z.core.$strip>>>;
+  extraHeaders: z.ZodOptional<z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodString>>>;
+  ignoreDuplicateBuildFailure: z.ZodOptional<z.ZodOptional<z.ZodBoolean>>;
+  serverBaseUrl: z.ZodOptional<z.ZodDefault<z.ZodString>>;
+  target: z.ZodOptional<z.ZodLiteral<"lhci">>;
+  token: z.ZodOptional<z.ZodString>;
+  urlReplacementPatterns: z.ZodOptional<z.ZodDefault<z.ZodArray<z.ZodString>>>;
 }, z.core.$strip>, z.ZodObject<{
   outputDir: z.ZodString;
   reportFilenamePattern: z.ZodDefault<z.ZodString>;
@@ -209,10 +209,10 @@ export declare const lhciUploadSchema: z.ZodIntersection<z.ZodDiscriminatedUnion
   target: z.ZodLiteral<"temporary-public-storage">;
   uploadUrlMap: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>], "target">, z.ZodObject<{
-  githubApiHost: z.ZodDefault<z.ZodString>;
-  githubAppToken: z.ZodOptional<z.ZodString>;
-  githubStatusContextSuffix: z.ZodOptional<z.ZodString>;
-  githubToken: z.ZodOptional<z.ZodString>;
+  githubApiHost: z.ZodOptional<z.ZodDefault<z.ZodString>>;
+  githubAppToken: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+  githubStatusContextSuffix: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+  githubToken: z.ZodOptional<z.ZodOptional<z.ZodString>>;
 }, z.core.$strip>>;
 export declare const lhciWizardSchema: z.ZodObject<{
   extraHeaders: z.ZodOptional<z.ZodString>;

@@ -37,13 +37,13 @@ pnpm install @stephansama/typed-nocodb-api
 
 ## Usage
 
-```javascript
+```typescript
 import * as z from "zod";
 
 import { createApi } from "@stephansama/typed-nocodb-api";
 
 const api = createApi({
-  baseId: process.env.NOCODB_BASE,
+  baseId: process.env.NOCODB_BASE!,
   origin: "https://nocodb.com",
   schema: z.object({
     column1: z.string().trim(),
@@ -51,7 +51,7 @@ const api = createApi({
     column3: z.number(),
     column4: z.boolean(),
   }),
-  tableId: process.env.NOCODB_TABLE,
+  tableId: process.env.NOCODB_TABLE!,
   token: process.env.NOCODB_TOKEN,
 });
 

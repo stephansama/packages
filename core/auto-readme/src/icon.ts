@@ -45,7 +45,10 @@ const alternateNames = {
 export function createSlugName(iconName: string) {
 	iconName = iconName.toLowerCase();
 	if (isAlternateName(iconName)) return alternateNames[iconName];
-	return iconName.replaceAll("+", "plus").replaceAll("#", "sharp");
+	return iconName
+		.replaceAll("+", "plus")
+		.replaceAll("#", "sharp")
+		.replaceAll("-", "");
 }
 
 export function getSimpleIconColor(name: string) {

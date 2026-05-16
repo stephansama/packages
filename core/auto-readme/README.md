@@ -6,6 +6,7 @@
 
 [![handlebars](https://img.shields.io/badge/handlebars-4.7.9-d46926.svg?logo=handlebarsdotjs&logoColor=ffffff&labelColor=d46926)](https://npmx.dev/package/handlebars)
 [![remark](https://img.shields.io/badge/remark-15.0.1-000000.svg?logo=remark&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/remark)
+[![simple-icons](https://img.shields.io/badge/simple--icons-16.19.0-111111.svg?logo=simpleicons&logoColor=ffffff&labelColor=111111)](https://npmx.dev/package/simple-icons)
 [![yaml](https://img.shields.io/badge/yaml-2.8.2-CB171E.svg?logo=yaml&logoColor=ffffff&labelColor=CB171E)](https://npmx.dev/package/yaml)
 [![zod](https://img.shields.io/badge/zod-4.2.1-408AFF.svg?logo=zod&logoColor=ffffff&labelColor=408AFF)](https://npmx.dev/package/zod)
 [![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-0.0.41-00a6f4.svg?logo=tanstack&logoColor=ffffff&labelColor=00a6f4)](https://npmx.dev/package/@tanstack/intent)

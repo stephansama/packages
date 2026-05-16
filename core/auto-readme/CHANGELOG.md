@@ -1,5 +1,11 @@
 # @stephansama/auto-readme
 
+## 0.3.0
+
+### Minor Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 0.2.12
 
 ### Patch Changes

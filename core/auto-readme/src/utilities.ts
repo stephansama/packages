@@ -1,8 +1,10 @@
+import { findRoot } from "@manypkg/find-root";
 import * as cp from "node:child_process";
 import * as fs from "node:fs";
 import * as fsp from "node:fs/promises";
 import path from "node:path";
 import { glob } from "tinyglobby";
+import * as yaml from "yaml";
 
 import type { Config } from "./schema";
 
@@ -21,6 +23,15 @@ const matches = [
 	/.*package\.json$/gi,
 	/.*pnpm-workspace\.yaml$/gi,
 ];
+
+type BunWorkspace = { workspaces?: Workspace };
+type Catalog = Record<string, string>;
+type LoadedCatalogs = Awaited<ReturnType<typeof loadCatalogs>>;
+
+type Workspace = {
+	catalog: Catalog;
+	catalogs: Record<string, Catalog>;
+};
 
 export async function fileExists(file: string) {
 	return await fsp
@@ -97,6 +108,56 @@ export async function getPrettierPaths(paths: string[]) {
 			return path.join(path.dirname(file), symlink);
 		}),
 	);
+}
+
+export async function loadCatalogs() {
+	const { rootDir } = await findRoot(process.cwd());
+	const pnpmWorkspacePath = path.join(rootDir, "pnpm-workspace.yaml");
+
+	if (fs.existsSync(pnpmWorkspacePath)) {
+		const file = await fs.promises.readFile(pnpmWorkspacePath, "utf8");
+		const parsed = yaml.parse(file) as Workspace;
+
+		return {
+			catalogs: parsed.catalogs,
+			default: parsed.catalog,
+		};
+	}
+
+	const rootJsonPath = path.join(rootDir, "package.json");
+	const rootJsonFile = await fs.promises.readFile(rootJsonPath, "utf8");
+	const rootPackageJson = JSON.parse(rootJsonFile) as BunWorkspace;
+
+	return {
+		catalogs: rootPackageJson?.workspaces?.catalogs,
+		default: rootPackageJson?.workspaces?.catalog,
+	};
+}
+
+export function resolveVersion({
+	catalogs,
+	name,
+	version,
+}: {
+	catalogs?: LoadedCatalogs;
+	name: string;
+	version: string;
+}) {
+	if (!version.startsWith("catalog:")) return version;
+
+	if (!version.endsWith(":")) {
+		const catalogName = version.split(":").at(-1);
+		const pulled =
+			catalogs?.catalogs?.[
+				catalogName as keyof typeof catalogs.catalogs
+			]?.[name];
+		if (pulled) return pulled;
+	}
+
+	const defaultVersion = catalogs?.default?.[name];
+	if (defaultVersion) return defaultVersion;
+
+	return version;
 }
 
 function findNearestReadme(

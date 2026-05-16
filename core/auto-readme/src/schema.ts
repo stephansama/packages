@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 export const actionsSchema = z
-	.enum(["ACTION", "PKG", "USAGE", "WORKSPACE", "ZOD"])
+	.enum(["ACTION", "PKG", "USAGE", "WORKSPACE", "ZOD", "BADGE"])
 	.meta({
 		description: "Comment action options",
 	});
@@ -29,6 +29,7 @@ const tableHeadingsSchema = z
 	.record(actionsSchema, headingsSchema.array().optional())
 	.default({
 		ACTION: ["name", "required", "default", "description"],
+		BADGE: [],
 		PKG: ["name", "version", "devDependency"],
 		USAGE: [],
 		WORKSPACE: ["name", "version", "downloads", "description"],
@@ -57,7 +58,7 @@ const templatesSchema = z.object({
 	registryUrl: z
 		.string()
 		.trim()
-		.default("https://www.npmjs.com/package/{{name}}"),
+		.default("https://www.npmx.dev/package/{{name}}"),
 	versionImage: z
 		.string()
 		.trim()
@@ -72,8 +73,44 @@ export const defaultTemplates = templatesSchema.parse({});
 // eslint-disable-next-line unicorn/no-useless-undefined
 export const defaultTableHeadings = tableHeadingsSchema.parse(undefined);
 
+export const badgeDependencyTypeOptionsSchema = z
+	.array(
+		z.enum([
+			"dependencies",
+			"devDependencies",
+			"peerDependencies",
+			"optionalDependencies",
+		]),
+	)
+	.default(["dependencies", "devDependencies"]);
+
+const badgeTemplateSchema = z
+	.array(
+		z.object({
+			image: z.string().trim(),
+			label: z.string().trim(),
+			url: z.string().trim(),
+		}),
+	)
+	.default([])
+	.meta({
+		description:
+			"handlebar template strings where {{scope}}, {{name}} / {{key}} and {{version}} / {{value}} represent the package",
+	});
+
 const _configSchema = z.object({
 	affectedRegexes: z.array(z.string().trim()),
+	badgeOptions: z
+		.object({
+			dependencyTypes: badgeDependencyTypeOptionsSchema,
+			templates: badgeTemplateSchema,
+		})
+		.default({
+			/* eslint-disable-next-line unicorn/no-useless-undefined */
+			dependencyTypes: badgeDependencyTypeOptionsSchema.parse(undefined),
+			/* eslint-disable-next-line unicorn/no-useless-undefined */
+			templates: badgeTemplateSchema.parse(undefined),
+		}),
 	collapseHeadings: z.array(z.string().trim()),
 	defaultLanguage: languageSchema.meta({
 		alias: "l",

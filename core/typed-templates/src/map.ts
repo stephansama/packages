@@ -51,7 +51,7 @@ export function createHandlebarSchemaMap<
 				path.resolve(options.templateDirectory, map[template].path),
 				"utf8",
 			);
-			const compiled = Handlebars.compile(file);
+			const compiled = Handlebars.compile<typeof data>(file);
 
 			const schema = map[template].schema;
 

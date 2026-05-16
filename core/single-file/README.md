@@ -2,14 +2,22 @@
 
 # [`@stephansama`](https://github.com/stephansama) / single-file
 
-</div>
+<!-- BADGE start -->
 
-[![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/single-file)
-[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/single-file)
-[![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Fsingle-file?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/single-file)
-[![JSR](https://jsr.io/badges/@stephansama/single-file)](https://jsr.io/@stephansama/single-file)
+[![source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/single-file)
+[![documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/single-file)
+[![npm](https://img.shields.io/npm/v/%40stephansama%2Fsingle-file?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/single-file)
 [![socket.dev](https://badge.socket.dev/npm/package/@stephansama/single-file)](https://socket.dev/npm/package/@stephansama/single-file/overview)
+[![jsr](https://jsr.io/badges/@stephansama/single-file)](https://jsr.io/@stephansama/single-file)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/single-file?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/single-file)
+
+[![cheerio](https://img.shields.io/badge/cheerio-1.2.0-E88C1F.svg?logo=cheerio&logoColor=ffffff&labelColor=E88C1F)](https://npmx.dev/package/cheerio)
+[![oxc-parser](https://img.shields.io/badge/oxc--parser-0.127.0-00F7F1.svg?logo=oxc&logoColor=ffffff&labelColor=00F7F1)](https://npmx.dev/package/oxc-parser)
+[![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
+
+<!-- BADGE end -->
+
+</div>
 
 Fetch any webpage and produce a fully self-contained HTML file with all external resources — images, stylesheets, scripts, and SVGs — inlined directly into the document.
 

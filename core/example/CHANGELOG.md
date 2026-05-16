@@ -1,5 +1,11 @@
 # create-stephansama-example
 
+## 1.4.8
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 1.4.7
 
 ### Patch Changes

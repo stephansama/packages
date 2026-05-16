@@ -10,8 +10,12 @@ import path from "node:path";
 import type { ActionData } from "./data";
 import type { Config } from "./schema";
 
+import { getContrastText } from "./color";
 import { parseComment } from "./comment";
+import { getSimpleIconColor } from "./icon";
+import { INFO } from "./log";
 import { defaultTableHeadings, defaultTemplates } from "./schema";
+import { resolveVersion } from "./utilities";
 
 type TemplateContext = {
 	name: string;
@@ -43,6 +47,108 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			}
 
 			const ast = fromMarkdown(zod.body);
+			return [start, ast, end];
+		});
+
+		zone(tree, /.*BADGE.*/gi, function (start, _, end) {
+			const first = data.find((d) => d?.action === "BADGE");
+			const dependencyTypes = config.badgeOptions?.dependencyTypes || [
+				"dependencies",
+				"devDependencies",
+			];
+
+			const allDependencies = Object.assign<
+				Record<string, string>,
+				Record<string, string>
+			>(
+				{},
+				// @ts-expect-error no error
+				...dependencyTypes.map(
+					(dependencyType) => first?.pkgJson?.[dependencyType] || {},
+				),
+			);
+
+			const skipTemplates =
+				first?.parameters.includes(`--skip-templates`);
+
+			const templateBadges =
+				(!skipTemplates &&
+					config.badgeOptions?.templates.map((template) => {
+						type TemplateType = Partial<
+							Record<
+								| "escaped_name"
+								| "key"
+								| "name"
+								| "unscoped_name"
+								| "value"
+								| "version",
+								string
+							>
+						>;
+
+						const compiledImage = Handlebars.compile<TemplateType>(
+							template.image,
+						);
+
+						const compiledUrl = Handlebars.compile<TemplateType>(
+							template.url,
+						);
+
+						const name = first?.pkgJson?.name || "";
+						const version = first?.pkgJson?.version;
+						const scope =
+							(first?.pkgJson?.name?.includes("@") &&
+								first.pkgJson.name.split("/").at(0)) ||
+							"";
+
+						const context = {
+							escaped_name: encodeURIComponent(name),
+							key: name,
+							name,
+							scope,
+							unscoped_name: name?.replace(`${scope}/`, ""),
+							value: version,
+							version,
+						};
+
+						const image = compiledImage(context);
+						const url = compiledUrl(context);
+
+						return `[![${template.label}](${image})](${url})`;
+					})) ||
+				[];
+
+			const packageBadges = new Array<string>();
+			const md = String.raw;
+
+			INFO(JSON.stringify(allDependencies, undefined, 2));
+
+			for (const [key, version] of Object.entries(allDependencies)) {
+				const [color, slug] = getSimpleIconColor(key);
+				if (!color) continue;
+
+				const contrastText = getContrastText(color);
+				const linkUrl = `https://npmx.dev/package/${key}`;
+				const badgeKey = key
+					.replaceAll("-", "--")
+					.replaceAll("_", "__");
+				const imageUrl = `https://img.shields.io/badge/${badgeKey}-${resolveVersion(
+					{
+						catalogs: first?.catalogs,
+						name: key,
+						version,
+					},
+				)}-${color}.svg?logo=${slug}&logoColor=${contrastText}&labelColor=${color}`;
+				packageBadges.push(md`[![${key}](${imageUrl})](${linkUrl})`);
+			}
+
+			const ast = fromMarkdown(
+				[
+					templateBadges.filter(Boolean).join("\n"),
+					packageBadges.filter(Boolean).join("\n"),
+				].join("\n\n"),
+			);
+
 			return [start, ast, end];
 		});
 

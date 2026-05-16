@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-typedoc
 
+## 1.0.9
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 1.0.8
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @stephansama/github-env
 
+## 1.0.4
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 1.0.3
 
 ### Patch Changes

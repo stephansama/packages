@@ -1,5 +1,11 @@
 # @stephansama/eslint-config
 
+## 0.2.3
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 0.2.2
 
 ### Patch Changes

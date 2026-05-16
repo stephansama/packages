@@ -132,6 +132,9 @@ catalogs:
     cheerio:
       specifier: 1.2.0
       version: 1.2.0
+    colord:
+      specifier: 2.9.3
+      version: 2.9.3
     dedent:
       specifier: 1.7.2
       version: 1.7.2
@@ -216,6 +219,9 @@ catalogs:
     react:
       specifier: 19.2.0
       version: 19.2.0
+    simple-icons:
+      specifier: 16.19.0
+      version: 16.19.0
     smol-toml:
       specifier: 1.6.1
       version: 1.6.1
@@ -420,13 +426,13 @@ catalogs:
       version: 2.1.1
   pnpm:
     '@pnpm/hooks.pnpmfile':
-      specifier: ^1100.0.8
+      specifier: 1100.0.8
       version: 1100.0.8
     '@pnpm/lockfile.types':
-      specifier: ^1100.0.5
+      specifier: 1100.0.5
       version: 1100.0.5
     '@pnpm/types':
-      specifier: ^1101.1.0
+      specifier: 1101.1.0
       version: 1101.1.0
   prettier:
     prettier:
@@ -786,9 +792,15 @@ importers:
 
   core/auto-readme:
     dependencies:
+      '@manypkg/find-root':
+        specifier: catalog:manypkg
+        version: 3.1.0
       '@manypkg/get-packages':
         specifier: catalog:manypkg
         version: 3.1.0
+      colord:
+        specifier: 'catalog:'
+        version: 2.9.3
       cosmiconfig:
         specifier: catalog:cli
         version: 9.0.0(typescript@5.9.3)
@@ -798,6 +810,9 @@ importers:
       handlebars:
         specifier: catalog:handlebars
         version: 4.7.9
+      local-pkg:
+        specifier: 'catalog:'
+        version: 1.1.2
       markdown-table:
         specifier: 'catalog:'
         version: 3.0.4
@@ -816,6 +831,9 @@ importers:
       obug:
         specifier: catalog:cli
         version: 2.1.1
+      picospinner:
+        specifier: catalog:cli
+        version: 3.0.0
       pkg-types:
         specifier: 'catalog:'
         version: 2.3.0
@@ -834,6 +852,9 @@ importers:
       remark-usage:
         specifier: catalog:remark
         version: 11.0.1
+      simple-icons:
+        specifier: 'catalog:'
+        version: 16.19.0
       smol-toml:
         specifier: 'catalog:'
         version: 1.6.1
@@ -868,9 +889,6 @@ importers:
       '@types/yargs':
         specifier: 'catalog:'
         version: 17.0.35
-      picospinner:
-        specifier: catalog:cli
-        version: 3.0.0
       tsdown:
         specifier: 'catalog:'
         version: 0.21.10(@arethetypeswrong/core@0.18.2)(oxc-resolver@11.19.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0))(publint@0.3.18)(synckit@0.11.12)(typescript@5.9.3)
@@ -6241,6 +6259,9 @@ packages:
     resolution: {integrity: sha512-1rXeuUUiGGrykh+CeBdu5Ie7OJwinCgQY0bc7GCRxy5xVHy+moaqkpL/jqQq0MtQOeYcrqEz4abc5f0KtU7W4A==}
     engines: {node: '>=12.5.0'}
 
+  colord@2.9.3:
+    resolution: {integrity: sha512-jeC1axXpnb0/2nn/Y1LPuLdgXBLH7aDcHu4KEKfqw3CUhX7ZpfBSlPKyqXE6btIgEzfWtrX3/tyBCaCvXvMkOw==}
+
   colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
 
@@ -10774,6 +10795,10 @@ packages:
   signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
+
+  simple-icons@16.19.0:
+    resolution: {integrity: sha512-muxcz/FDvWFPrKJdsjaz79qsBjtZeVKUVIFl7wLVOwb+yqAag8FPe8+hFlMVRnmAXYQIm4eUDDm2+dhOj0cFgQ==}
+    engines: {node: '>=0.12.18'}
 
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
@@ -17691,6 +17716,8 @@ snapshots:
       color-string: 1.9.1
     optional: true
 
+  colord@2.9.3: {}
+
   colorette@2.0.20: {}
 
   comma-separated-tokens@2.0.3: {}
@@ -23349,6 +23376,8 @@ snapshots:
   signal-exit@3.0.7: {}
 
   signal-exit@4.1.0: {}
+
+  simple-icons@16.19.0: {}
 
   simple-swizzle@0.2.2:
     dependencies:

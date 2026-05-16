@@ -1,6 +1,6 @@
 {
   "name": "@stephansama/typed-env",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "standard schema compatible environment validator",
   "keywords": [
     "typed-env",
@@ -21,15 +21,9 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    },
+    ".": "./dist/index.mjs",
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.cts",
   "files": [
     "dist",
     "skills"

@@ -2,14 +2,21 @@
 
 # [`@stephansama`](https://github.com/stephansama) / typed-nocodb-api
 
-</div>
+<!-- BADGE start -->
 
-[![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/typed-nocodb-api)
-[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/typed-nocodb-api)
-[![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Ftyped-nocodb-api?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-nocodb-api)
-[![JSR](https://jsr.io/badges/@stephansama/typed-nocodb-api)](https://jsr.io/@stephansama/typed-nocodb-api)
+[![source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/typed-nocodb-api)
+[![documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/typed-nocodb-api)
+[![npm](https://img.shields.io/npm/v/%40stephansama%2Ftyped-nocodb-api?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-nocodb-api)
 [![socket.dev](https://badge.socket.dev/npm/package/@stephansama/typed-nocodb-api)](https://socket.dev/npm/package/@stephansama/typed-nocodb-api/overview)
+[![jsr](https://jsr.io/badges/@stephansama/typed-nocodb-api)](https://jsr.io/@stephansama/typed-nocodb-api)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/typed-nocodb-api?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/typed-nocodb-api)
+
+[![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
+[![zod](https://img.shields.io/badge/zod-4.2.1-408AFF.svg?logo=zod&logoColor=ffffff&labelColor=408AFF)](https://npmx.dev/package/zod)
+
+<!-- BADGE end -->
+
+</div>
 
 standard schema compatible nocodb api
 

@@ -12,9 +12,29 @@ export declare const actionsSchema: z.ZodEnum<{
   USAGE: "USAGE";
   WORKSPACE: "WORKSPACE";
   ZOD: "ZOD";
+  BADGE: "BADGE";
 }>;
+export declare const badgeDependencyTypeOptionsSchema: z.ZodDefault<z.ZodArray<z.ZodEnum<{
+  dependencies: "dependencies";
+  devDependencies: "devDependencies";
+  peerDependencies: "peerDependencies";
+  optionalDependencies: "optionalDependencies";
+}>>>;
 export declare const configSchema: z.ZodOptional<z.ZodObject<{
   affectedRegexes: z.ZodArray<z.ZodString>;
+  badgeOptions: z.ZodDefault<z.ZodObject<{
+    dependencyTypes: z.ZodDefault<z.ZodArray<z.ZodEnum<{
+      dependencies: "dependencies";
+      devDependencies: "devDependencies";
+      peerDependencies: "peerDependencies";
+      optionalDependencies: "optionalDependencies";
+    }>>>;
+    templates: z.ZodDefault<z.ZodArray<z.ZodObject<{
+      image: z.ZodString;
+      label: z.ZodString;
+      url: z.ZodString;
+    }, z.core.$strip>>>;
+  }, z.core.$strip>>;
   collapseHeadings: z.ZodArray<z.ZodString>;
   defaultLanguage: z.ZodDefault<z.ZodEnum<{
     JS: "JS";
@@ -31,6 +51,7 @@ export declare const configSchema: z.ZodOptional<z.ZodObject<{
     USAGE: "USAGE";
     WORKSPACE: "WORKSPACE";
     ZOD: "ZOD";
+    BADGE: "BADGE";
   }>, z.ZodOptional<z.ZodArray<z.ZodEnum<{
     description: "description";
     default: "default";
@@ -64,7 +85,7 @@ export declare const configSchema: z.ZodOptional<z.ZodObject<{
   usageHeading: z.ZodDefault<z.ZodString>;
   verbose: z.ZodDefault<z.ZodBoolean>;
 }, z.core.$strip>>;
-export declare const defaultTableHeadings: Record<"ACTION" | "PKG" | "USAGE" | "WORKSPACE" | "ZOD", ("description" | "default" | "devDependency" | "downloads" | "name" | "private" | "required" | "version")[] | undefined>;
+export declare const defaultTableHeadings: Record<"ACTION" | "PKG" | "USAGE" | "WORKSPACE" | "ZOD" | "BADGE", ("description" | "default" | "devDependency" | "downloads" | "name" | "private" | "required" | "version")[] | undefined>;
 export declare const defaultTemplates: {
   downloadImage: string;
   emojis: Record<"description" | "default" | "devDependency" | "downloads" | "name" | "private" | "required" | "version", string>;

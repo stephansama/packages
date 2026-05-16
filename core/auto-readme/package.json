@@ -1,6 +1,6 @@
 {
   "name": "@stephansama/auto-readme",
-  "version": "0.2.12",
+  "version": "0.3.0",
   "description": "Generate lists and tables for your README automagically based on your repository and comments",
   "keywords": [
     "auto",
@@ -53,22 +53,27 @@
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
+    "@manypkg/find-root": "catalog:manypkg",
     "@manypkg/get-packages": "catalog:manypkg",
+    "colord": "catalog:",
     "cosmiconfig": "catalog:cli",
     "deepmerge": "catalog:",
     "handlebars": "catalog:handlebars",
+    "local-pkg": "catalog:",
     "markdown-table": "catalog:",
     "mdast": "catalog:",
     "mdast-comment-marker": "catalog:",
     "mdast-util-from-markdown": "catalog:",
     "mdast-zone": "catalog:",
     "obug": "catalog:cli",
+    "picospinner": "catalog:cli",
     "pkg-types": "catalog:",
     "remark": "catalog:remark",
     "remark-code-import": "catalog:remark",
     "remark-collapse": "catalog:remark",
     "remark-toc": "catalog:remark",
     "remark-usage": "catalog:remark",
+    "simple-icons": "catalog:",
     "smol-toml": "catalog:",
     "tinyglobby": "catalog:",
     "vfile": "catalog:",
@@ -82,7 +87,6 @@
     "@types/mdast": "catalog:",
     "@types/vfile": "catalog:",
     "@types/yargs": "catalog:",
-    "picospinner": "catalog:cli",
     "tsdown": "catalog:",
     "unified": "catalog:"
   },

@@ -1,5 +1,11 @@
 # @stephansama/remark-asciinema
 
+## 1.0.18
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 1.0.17
 
 ### Patch Changes

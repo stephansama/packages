@@ -4,7 +4,8 @@
 
 <!-- BADGE start -->
 
-[![prettier](https://img.shields.io/badge/prettier-catalog:prettier-F7B93E.svg?logo=prettier&logoColor=ffffff&labelColor=F7B93E)](https://npmx.dev/package/prettier)
+[![prettier](https://img.shields.io/badge/prettier-3.8.1-F7B93E.svg?logo=prettier&logoColor=ffffff&labelColor=F7B93E)](https://npmx.dev/package/prettier)
+[![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
 
 <!-- BADGE end -->
 

@@ -4,7 +4,8 @@
 
 <!-- BADGE start -->
 
-[![remark](https://img.shields.io/badge/remark-catalog:remark-000000.svg?logo=remark&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/remark)
+[![remark](https://img.shields.io/badge/remark-15.0.1-000000.svg?logo=remark&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/remark)
+[![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
 
 <!-- BADGE end -->
 

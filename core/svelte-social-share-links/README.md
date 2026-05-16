@@ -4,10 +4,10 @@
 
 <!-- BADGE start -->
 
-[![storybook](https://img.shields.io/badge/storybook-catalog:storybook-FF4785.svg?logo=storybook&logoColor=ffffff&labelColor=FF4785)](https://npmx.dev/package/storybook)
-[![svelte](https://img.shields.io/badge/svelte-catalog:svelte-FF3E00.svg?logo=svelte&logoColor=ffffff&labelColor=FF3E00)](https://npmx.dev/package/svelte)
-[![typescript](https://img.shields.io/badge/typescript-catalog:-3178C6.svg?logo=typescript&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/typescript)
-[![vite](https://img.shields.io/badge/vite-catalog:-9135FF.svg?logo=vite&logoColor=ffffff&labelColor=9135FF)](https://npmx.dev/package/vite)
+[![storybook](https://img.shields.io/badge/storybook-10.2.8-FF4785.svg?logo=storybook&logoColor=ffffff&labelColor=FF4785)](https://npmx.dev/package/storybook)
+[![svelte](https://img.shields.io/badge/svelte-5.51.2-FF3E00.svg?logo=svelte&logoColor=ffffff&labelColor=FF3E00)](https://npmx.dev/package/svelte)
+[![typescript](https://img.shields.io/badge/typescript-5.9.3-3178C6.svg?logo=typescript&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/typescript)
+[![vite](https://img.shields.io/badge/vite-6.3.5-9135FF.svg?logo=vite&logoColor=ffffff&labelColor=9135FF)](https://npmx.dev/package/vite)
 
 <!-- BADGE end -->
 

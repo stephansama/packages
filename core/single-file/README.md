@@ -4,8 +4,9 @@
 
 <!-- BADGE start -->
 
-[![cheerio](https://img.shields.io/badge/cheerio-catalog:-E88C1F.svg?logo=cheerio&logoColor=ffffff&labelColor=E88C1F)](https://npmx.dev/package/cheerio)
-[![oxc-parser](https://img.shields.io/badge/oxc--parser-catalog:-00F7F1.svg?logo=oxc&logoColor=ffffff&labelColor=00F7F1)](https://npmx.dev/package/oxc-parser)
+[![cheerio](https://img.shields.io/badge/cheerio-1.2.0-E88C1F.svg?logo=cheerio&logoColor=ffffff&labelColor=E88C1F)](https://npmx.dev/package/cheerio)
+[![oxc-parser](https://img.shields.io/badge/oxc--parser-0.127.0-00F7F1.svg?logo=oxc&logoColor=ffffff&labelColor=00F7F1)](https://npmx.dev/package/oxc-parser)
+[![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
 
 <!-- BADGE end -->
 

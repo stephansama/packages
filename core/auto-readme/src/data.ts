@@ -8,7 +8,7 @@ import { zod2md } from "zod2md";
 
 import type { AstComments } from "./comment";
 
-import { fileExists } from "./utilities";
+import { fileExists, loadCatalogs } from "./utilities";
 
 export type ActionData = Awaited<ReturnType<typeof loadActionData>>;
 
@@ -57,8 +57,11 @@ export async function loadActionData(
 						? path.resolve(path.dirname(file), inputPath)
 						: path.dirname(file);
 					const pkgJson = await readPackageJSON(filename);
+					const catalogs = await loadCatalogs();
+					console.log(catalogs);
 					return {
 						action: action.action,
+						catalogs: catalogs,
 						parameters: action.parameters,
 						pkgJson,
 					};

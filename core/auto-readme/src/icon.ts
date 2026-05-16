@@ -2,6 +2,20 @@ import * as icons from "simple-icons";
 
 import { INFO } from "./log";
 
+const colorMapOverride = {
+	"@tanstack/ai": "#f6339a",
+	"@tanstack/devtools": "#62748e",
+	"@tanstack/hotkeys": "#ec003f",
+	"@tanstack/intent": "#00a6f4",
+	"@tanstack/start": "#00b8db",
+	"@tanstack/table-core": "#2b7fff",
+	"@tanstack/virtual": "#ad46ff",
+	"handlebars": "#d46926",
+	"tsdown": "#3178C6",
+} as const satisfies Partial<
+	Record<keyof typeof icons | (string & {}), string>
+>;
+
 const alternateNames = {
 	"@commitlint/cli": "commitlint",
 	"@dotenvx/dotenvx": "dotenv",
@@ -22,6 +36,7 @@ const alternateNames = {
 	"nuxt": "nuxtdotjs",
 	"oxc-parser": "oxc",
 	"scss": "sass",
+	"tsdown": "rolldown",
 	"turbo": "turborepo",
 	/* cspell:disable-next-line */
 	"vue": "vuedotjs",
@@ -33,17 +48,30 @@ export function createSlugName(iconName: string) {
 	return iconName.replaceAll("+", "plus").replaceAll("#", "sharp");
 }
 
-export function getSimpleIconColor(slug: string) {
-	INFO(`checking ${slug} for simple icon color`);
+export function getSimpleIconColor(name: string) {
+	INFO(`checking ${name} for simple icon color`);
+
+	const slug = createSlugName(name);
+
+	const colorOverride = colorMapOverride[
+		name as keyof typeof colorMapOverride
+	]?.replace("#", "");
+
+	if (colorOverride) {
+		return [colorOverride, slug];
+	}
 
 	const capitalizedSlug = slug
 		.split("-")
 		.map((word) => capitalize(word))
 		.join("");
 
-	return icons[
-		`si${capitalize(capitalizedSlug)}` as keyof typeof icons
-	]?.hex.replace("#", "");
+	return [
+		icons[
+			`si${capitalize(capitalizedSlug)}` as keyof typeof icons
+		]?.hex.replace("#", ""),
+		slug,
+	];
 }
 
 function capitalize(word: string) {

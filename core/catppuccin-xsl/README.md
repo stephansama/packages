@@ -4,8 +4,8 @@
 
 <!-- BADGE start -->
 
-[![handlebars](https://img.shields.io/badge/handlebars-catalog:handlebars-000000.svg?logo=handlebarsdotjs&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/handlebars)
-[![zod](https://img.shields.io/badge/zod-catalog:schema-408AFF.svg?logo=zod&logoColor=ffffff&labelColor=408AFF)](https://npmx.dev/package/zod)
+[![handlebars](https://img.shields.io/badge/handlebars-4.7.9-d46926.svg?logo=handlebarsdotjs&logoColor=ffffff&labelColor=d46926)](https://npmx.dev/package/handlebars)
+[![zod](https://img.shields.io/badge/zod-4.2.1-408AFF.svg?logo=zod&logoColor=ffffff&labelColor=408AFF)](https://npmx.dev/package/zod)
 
 <!-- BADGE end -->
 

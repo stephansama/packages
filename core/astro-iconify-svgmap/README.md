@@ -4,10 +4,11 @@
 
 <!-- BADGE start -->
 
-[![@iconify/types](https://img.shields.io/badge/@iconify/types-catalog:-026C9C.svg?logo=iconify&logoColor=ffffff&labelColor=026C9C)](https://npmx.dev/package/@iconify/types)
-[![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-catalog:tanstack-000000.svg?logo=tanstack&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/@tanstack/intent)
-[![astro](https://img.shields.io/badge/astro-catalog:-BC52EE.svg?logo=astro&logoColor=ffffff&labelColor=BC52EE)](https://npmx.dev/package/astro)
-[![vite](https://img.shields.io/badge/vite-catalog:-9135FF.svg?logo=vite&logoColor=ffffff&labelColor=9135FF)](https://npmx.dev/package/vite)
+[![@iconify/types](https://img.shields.io/badge/@iconify/types-2.0.0-026C9C.svg?logo=iconify&logoColor=ffffff&labelColor=026C9C)](https://npmx.dev/package/@iconify/types)
+[![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-0.0.41-00a6f4.svg?logo=tanstack&logoColor=ffffff&labelColor=00a6f4)](https://npmx.dev/package/@tanstack/intent)
+[![astro](https://img.shields.io/badge/astro-5.9.3-BC52EE.svg?logo=astro&logoColor=ffffff&labelColor=BC52EE)](https://npmx.dev/package/astro)
+[![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
+[![vite](https://img.shields.io/badge/vite-6.3.5-9135FF.svg?logo=vite&logoColor=ffffff&labelColor=9135FF)](https://npmx.dev/package/vite)
 
 <!-- BADGE end -->
 

@@ -4,15 +4,15 @@
 
 <!-- BADGE start -->
 
-[![@commitlint/cli](https://img.shields.io/badge/@commitlint/cli-catalog:commitlint-000000.svg?logo=commitlint&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/@commitlint/cli)
-[![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-catalog:tanstack-000000.svg?logo=tanstack&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/@tanstack/intent)
-[![eslint](https://img.shields.io/badge/eslint-catalog:eslint-4B32C3.svg?logo=eslint&logoColor=ffffff&labelColor=4B32C3)](https://npmx.dev/package/eslint)
-[![knip](https://img.shields.io/badge/knip-catalog:-F56E0F.svg?logo=knip&logoColor=ffffff&labelColor=F56E0F)](https://npmx.dev/package/knip)
-[![prettier](https://img.shields.io/badge/prettier-catalog:prettier-F7B93E.svg?logo=prettier&logoColor=ffffff&labelColor=F7B93E)](https://npmx.dev/package/prettier)
-[![turbo](https://img.shields.io/badge/turbo-catalog:turbo-FF1E56.svg?logo=turborepo&logoColor=ffffff&labelColor=FF1E56)](https://npmx.dev/package/turbo)
-[![typescript](https://img.shields.io/badge/typescript-catalog:-3178C6.svg?logo=typescript&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/typescript)
-[![vitest](https://img.shields.io/badge/vitest-catalog:vitest-00FF74.svg?logo=vitest&logoColor=ffffff&labelColor=00FF74)](https://npmx.dev/package/vitest)
-[![lefthook](https://img.shields.io/badge/lefthook-catalog:-FF1E1E.svg?logo=lefthook&logoColor=ffffff&labelColor=FF1E1E)](https://npmx.dev/package/lefthook)
+[![@commitlint/cli](https://img.shields.io/badge/@commitlint/cli-19.8.1-000000.svg?logo=commitlint&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/@commitlint/cli)
+[![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-0.0.41-00a6f4.svg?logo=tanstack&logoColor=ffffff&labelColor=00a6f4)](https://npmx.dev/package/@tanstack/intent)
+[![eslint](https://img.shields.io/badge/eslint-10.2.1-4B32C3.svg?logo=eslint&logoColor=ffffff&labelColor=4B32C3)](https://npmx.dev/package/eslint)
+[![knip](https://img.shields.io/badge/knip-5.88.1-F56E0F.svg?logo=knip&logoColor=ffffff&labelColor=F56E0F)](https://npmx.dev/package/knip)
+[![prettier](https://img.shields.io/badge/prettier-3.8.1-F7B93E.svg?logo=prettier&logoColor=ffffff&labelColor=F7B93E)](https://npmx.dev/package/prettier)
+[![turbo](https://img.shields.io/badge/turbo-2.8.20-FF1E56.svg?logo=turborepo&logoColor=ffffff&labelColor=FF1E56)](https://npmx.dev/package/turbo)
+[![typescript](https://img.shields.io/badge/typescript-5.9.3-3178C6.svg?logo=typescript&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/typescript)
+[![vitest](https://img.shields.io/badge/vitest-4.0.18-00FF74.svg?logo=vitest&logoColor=ffffff&labelColor=00FF74)](https://npmx.dev/package/vitest)
+[![lefthook](https://img.shields.io/badge/lefthook-2.1.6-FF1E1E.svg?logo=lefthook&logoColor=ffffff&labelColor=FF1E1E)](https://npmx.dev/package/lefthook)
 
 <!-- BADGE end -->
 

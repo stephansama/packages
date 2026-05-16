@@ -86,7 +86,7 @@ export const badgeDependencyTypeOptionsSchema = z
 
 const badgeTemplateSchema = z.array(z.string().trim()).default([]).meta({
 	description:
-		"handlebar template strings where {{name}} / {{key}} and {{version}} / {{value}} represent the package",
+		"handlebar template strings where {{scope}}, {{name}} / {{key}} and {{version}} / {{value}} represent the package",
 });
 
 const _configSchema = z.object({

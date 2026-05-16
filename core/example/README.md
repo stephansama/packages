@@ -4,6 +4,8 @@
 
 <!-- BADGE start -->
 
+[![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
+
 <!-- BADGE end -->
 
 </div>

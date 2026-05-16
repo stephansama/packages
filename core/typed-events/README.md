@@ -46,12 +46,6 @@ pnpm install @stephansama/typed-events
 
 ## Usage
 
-```typescript
-/* eslint-disable perfectionist/sort-modules */
-
-import * as z from "zod";
-```
-
 ### createEvent
 
 create a typed [`CustomEvent`](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent)

@@ -2,14 +2,7 @@
 
 # [`@stephansama`](https://github.com/stephansama/packages) packages
 
-<!-- BADGE start -->
-
-[![source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/root)
-[![documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/root)
-[![npm](https://img.shields.io/npm/v/root?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/root)
-[![socket.dev](https://badge.socket.dev/npm/package/root)](https://socket.dev/npm/package/root/overview)
-[![jsr](https://jsr.io/badges/root)](https://jsr.io/root)
-[![npm downloads](https://img.shields.io/npm/dw/root?labelColor=211F1F)](https://www.npmx.dev/package/root)
+<!-- BADGE --skip-templates start -->
 
 [![@commitlint/cli](https://img.shields.io/badge/@commitlint/cli-19.8.1-000000.svg?logo=commitlint&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/@commitlint/cli)
 [![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-0.0.41-00a6f4.svg?logo=tanstack&logoColor=ffffff&labelColor=00a6f4)](https://npmx.dev/package/@tanstack/intent)

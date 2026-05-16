@@ -74,50 +74,55 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				),
 			);
 
+			const skipTemplates =
+				first?.parameters.includes(`--skip-templates`);
+
 			const templateBadges =
-				config.badgeOptions?.templates.map((template) => {
-					type TemplateType = Partial<
-						Record<
-							| "escaped_name"
-							| "key"
-							| "name"
-							| "unscoped_name"
-							| "value"
-							| "version",
-							string
-						>
-					>;
+				(!skipTemplates &&
+					config.badgeOptions?.templates.map((template) => {
+						type TemplateType = Partial<
+							Record<
+								| "escaped_name"
+								| "key"
+								| "name"
+								| "unscoped_name"
+								| "value"
+								| "version",
+								string
+							>
+						>;
 
-					const compiledImage = Handlebars.compile<TemplateType>(
-						template.image,
-					);
+						const compiledImage = Handlebars.compile<TemplateType>(
+							template.image,
+						);
 
-					const compiledUrl = Handlebars.compile<TemplateType>(
-						template.url,
-					);
+						const compiledUrl = Handlebars.compile<TemplateType>(
+							template.url,
+						);
 
-					const name = first?.pkgJson?.name || "";
-					const version = first?.pkgJson?.version;
-					const scope =
-						(first?.pkgJson?.name?.includes("@") &&
-							first.pkgJson.name.split("/").at(0)) ||
-						"";
+						const name = first?.pkgJson?.name || "";
+						const version = first?.pkgJson?.version;
+						const scope =
+							(first?.pkgJson?.name?.includes("@") &&
+								first.pkgJson.name.split("/").at(0)) ||
+							"";
 
-					const context = {
-						escaped_name: encodeURIComponent(name),
-						key: name,
-						name,
-						scope,
-						unscoped_name: name?.replace(scope, ""),
-						value: version,
-						version,
-					};
+						const context = {
+							escaped_name: encodeURIComponent(name),
+							key: name,
+							name,
+							scope,
+							unscoped_name: name?.replace(scope, ""),
+							value: version,
+							version,
+						};
 
-					const image = compiledImage(context);
-					const url = compiledUrl(context);
+						const image = compiledImage(context);
+						const url = compiledUrl(context);
 
-					return `[![${template.label}](${image})](${url})`;
-				}) || [];
+						return `[![${template.label}](${image})](${url})`;
+					})) ||
+				[];
 
 			const packageBadges = new Array<string>();
 			const md = String.raw;

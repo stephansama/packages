@@ -1,5 +1,11 @@
 # @stephansama/single-file
 
+## 0.1.4
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 0.1.3
 
 ### Patch Changes

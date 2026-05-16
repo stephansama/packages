@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 3.0.11
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 3.0.10
 
 ### Patch Changes

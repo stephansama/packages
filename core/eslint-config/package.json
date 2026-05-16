@@ -1,6 +1,6 @@
 {
   "name": "@stephansama/eslint-config",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "stephansama eslint configuration for multiple use cases",
   "keywords": [
     "eslint-config",

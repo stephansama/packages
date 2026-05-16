@@ -1,5 +1,11 @@
 # @stephansama/types-lhci
 
+## 0.2.5
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 0.2.4
 
 ### Patch Changes

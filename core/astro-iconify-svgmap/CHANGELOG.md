@@ -1,5 +1,11 @@
 # @stephansama/astro-iconify-svgmap
 
+## 1.0.16
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 1.0.15
 
 ### Patch Changes

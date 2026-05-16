@@ -1,5 +1,11 @@
 # @stephansama/typed-env
 
+## 0.0.9
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 0.0.8
 
 ### Patch Changes

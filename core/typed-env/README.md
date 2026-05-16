@@ -44,7 +44,7 @@ is already a namespace import
 ```javascript
 import * as z from "zod";
 
-import { createEnvironment } from "../dist/index.mjs";
+import { createEnvironment } from "@stephansama/typed-env";
 
 export const config = createEnvironment(
   z.object({

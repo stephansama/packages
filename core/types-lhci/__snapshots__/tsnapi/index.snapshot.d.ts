@@ -143,7 +143,7 @@ export declare const lhciSchema: z.ZodObject<{
       extraHeaders: z.ZodOptional<z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodString>>>;
       ignoreDuplicateBuildFailure: z.ZodOptional<z.ZodOptional<z.ZodBoolean>>;
       serverBaseUrl: z.ZodOptional<z.ZodDefault<z.ZodString>>;
-      target: z.ZodOptional<z.ZodLiteral<"lhci">>;
+      target: z.ZodNonOptional<z.ZodOptional<z.ZodLiteral<"lhci">>>;
       token: z.ZodOptional<z.ZodString>;
       urlReplacementPatterns: z.ZodOptional<z.ZodDefault<z.ZodArray<z.ZodString>>>;
     }, z.core.$strip>, z.ZodObject<{
@@ -198,7 +198,7 @@ export declare const lhciUploadSchema: z.ZodIntersection<z.ZodDiscriminatedUnion
   extraHeaders: z.ZodOptional<z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodString>>>;
   ignoreDuplicateBuildFailure: z.ZodOptional<z.ZodOptional<z.ZodBoolean>>;
   serverBaseUrl: z.ZodOptional<z.ZodDefault<z.ZodString>>;
-  target: z.ZodOptional<z.ZodLiteral<"lhci">>;
+  target: z.ZodNonOptional<z.ZodOptional<z.ZodLiteral<"lhci">>>;
   token: z.ZodOptional<z.ZodString>;
   urlReplacementPatterns: z.ZodOptional<z.ZodDefault<z.ZodArray<z.ZodString>>>;
 }, z.core.$strip>, z.ZodObject<{

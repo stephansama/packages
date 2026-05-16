@@ -42,7 +42,7 @@ export function dispatchEvent() {
 	if (!x) throw new Error("unable to find x");
 	if (!y) throw new Error("unable to find y");
 
-	button?.addEventListener("click", () => {
+	button.addEventListener("click", () => {
 		customAnimationEvent.dispatch({
 			x: +x.textContent,
 			y: +y.textContent,

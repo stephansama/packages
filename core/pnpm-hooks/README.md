@@ -110,11 +110,10 @@ Given a dependency manifest like this:
 
 ## Usage
 
-```javascript
-import { readPackageHooks } from "@stephansama/pnpm-hooks";
+```typescript
+import { readPackageHooks, type types } from "@stephansama/pnpm-hooks";
 
-/** @type {import("../dist/index.mjs").types.PnpmFileHooks} */
 export const hooks = {
   readPackage: readPackageHooks.pinAllDependencies,
-};
+} satisfies types.PnpmFileHooks;
 ```

@@ -1,6 +1,6 @@
 {
   "$schema": "../node_modules/@stephansama/auto-readme/dist/schema.json",
-  "usageFile": "./example/index.js",
+  "usageFile": "./example/index.ts",
   "collapseHeadings": ["Configuration File", "Schema"],
   "badgeOptions": {
     "templates": [

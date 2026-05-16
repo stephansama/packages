@@ -39,9 +39,7 @@ pnpm install @stephansama/typed-env
 
 ## Usage
 
-is already a namespace import
-
-```javascript
+```typescript
 import * as z from "zod";
 
 import { createEnvironment } from "@stephansama/typed-env";

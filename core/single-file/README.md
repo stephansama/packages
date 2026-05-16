@@ -59,7 +59,7 @@ npx @stephansama/single-file <url> -v
 
 ## Usage
 
-```javascript
+```typescript
 import * as singleFile from "@stephansama/single-file";
 
 export async function useAPI() {

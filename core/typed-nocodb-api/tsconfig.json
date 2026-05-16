@@ -1,6 +1,6 @@
 {
   "extends": ["../../tsconfig.base.json"],
-  "include": ["./src/**/*", "tsdown.config.ts", "./test/**/*"],
+  "include": ["./src/**/*", "tsdown.config.ts", "./test/**/*", "example"],
   "compilerOptions": {
     "types": ["node"],
     "composite": true

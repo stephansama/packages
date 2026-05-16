@@ -1,7 +1,5 @@
 // create a map of different handlebar schemas
 //
-// remark-usage-ignore-next
-// eslint-disable-next-line zod/consistent-import
 import * as z from "zod";
 
 import {

@@ -1,6 +1,7 @@
+import type { Config } from "prettier";
+
 import prettierPluginHandlebars from "../dist/index.cjs";
 
-/** @type {import("prettier").Config} */
 export default {
 	plugins: [prettierPluginHandlebars],
-};
+} satisfies Config;

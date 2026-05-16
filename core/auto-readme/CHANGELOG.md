@@ -1,5 +1,11 @@
 # @stephansama/auto-readme
 
+## 0.4.0
+
+### Minor Changes
+
+- 4defdad: updated dependencies to not use github link instead using homebrew packages
+
 ## 0.3.0
 
 ### Minor Changes

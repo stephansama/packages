@@ -1,3 +1,4 @@
+/* eslint-disable e18e/prefer-static-regex */
 import { remark } from "remark";
 import { afterEach, expect, it, vi } from "vitest";
 
@@ -39,9 +40,10 @@ async function processMarkdown(
 	config: Config = defaultConfig,
 	data: ActionData = [],
 ) {
-	return (
-		await remark().use(autoReadmeRemarkPlugin, config, data).process(md)
-	).toString();
+	const result = await remark()
+		.use(autoReadmeRemarkPlugin, config, data)
+		.process(md);
+	return result.toString();
 }
 
 function withZone(name: string) {

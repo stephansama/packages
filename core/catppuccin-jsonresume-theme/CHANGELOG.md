@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-jsonresume-theme
 
+## 1.0.6
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 1.0.5
 
 ### Patch Changes

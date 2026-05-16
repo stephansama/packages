@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-xsl
 
+## 1.1.7
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 1.1.6
 
 ### Patch Changes

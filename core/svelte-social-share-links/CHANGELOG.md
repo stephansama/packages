@@ -1,5 +1,11 @@
 # @stephansama/svelte-social-share-links
 
+## 1.1.6
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 1.1.5
 
 ### Patch Changes

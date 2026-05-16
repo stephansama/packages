@@ -1,5 +1,11 @@
 # @stephansama/multipublish
 
+## 1.0.13
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 1.0.12
 
 ### Patch Changes

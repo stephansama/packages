@@ -1,5 +1,11 @@
 # @stephansama/typed-nocodb-api
 
+## 0.2.7
+
+### Patch Changes
+
+- fdf1800: updated auto-readme badge implementation
+
 ## 0.2.6
 
 ### Patch Changes

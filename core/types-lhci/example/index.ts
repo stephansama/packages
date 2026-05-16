@@ -1,6 +1,5 @@
-import { lhciSchema } from "../dist/index.mjs";
+import { lhciSchema, type LhciSchema } from "../dist/index.mjs";
 
-/** @type {import("../dist/index.mjs").LhciSchema} */
 const config = {
 	ci: {
 		upload: {
@@ -10,7 +9,7 @@ const config = {
 			token: "project-token",
 		},
 	},
-};
+} satisfies LhciSchema;
 
 // you can also verify the config object later
 

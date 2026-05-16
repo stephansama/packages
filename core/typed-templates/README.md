@@ -41,7 +41,7 @@ pnpm install @stephansama/typed-templates
 
 create a map of different handlebar schemas
 
-```javascript
+```typescript
 import * as z from "zod";
 
 import {
@@ -84,7 +84,7 @@ if (isLinting()) await schemaMap.audit();
 
 or create a singleton schema used to validate multiple templates
 
-```javascript
+```typescript
 export const singleSchema = createHandlebarSchemaSingleton(
   [
     "../tests/fixtures/singleton/valid.hbs",
@@ -105,7 +105,7 @@ if (isLinting()) await singleSchema.audit();
 
 then later on in the code in another file:
 
-```javascript
+```typescript
 export async function useTemplate() {
   return await schemaMap.compile("constList", {
     body: "body",

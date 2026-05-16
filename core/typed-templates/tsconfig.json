@@ -1,6 +1,13 @@
 {
   "extends": ["../../tsconfig.base.json"],
-  "include": ["src", "types", "tests", "vitest.config.ts", "tsdown.config.ts"],
+  "include": [
+    "src",
+    "types",
+    "tests",
+    "vitest.config.ts",
+    "tsdown.config.ts",
+    "example"
+  ],
   "compilerOptions": {
     "types": ["node"],
     "paths": {

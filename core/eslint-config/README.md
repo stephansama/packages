@@ -145,7 +145,7 @@ export default config({
 
 ## Usage
 
-```javascript
+```typescript
 import { config, presets } from "@stephansama/eslint-config";
 
 const loadConfig = async () =>

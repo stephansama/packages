@@ -1,7 +1,7 @@
+import remarkUsage from "@stephansama/remark-usage";
 import remarkCodeImport from "remark-code-import";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
-import remarkUsage from "remark-usage";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 
 import type { ActionData } from "./data";
@@ -27,16 +27,16 @@ const mocks = vi.hoisted(() => {
 	};
 });
 
+vi.mock("./data", () => ({ createFindParameter: mocks.createFindParameter }));
+vi.mock("./log", () => ({ INFO: vi.fn(), WARN: mocks.warn }));
+vi.mock("./plugin", () => ({ autoReadmeRemarkPlugin: vi.fn() }));
+vi.mock("./utilities", () => ({ fileExists: mocks.fileExists }));
+vi.mock("@stephansama/remark-usage", () => ({ default: vi.fn() }));
 vi.mock("remark", () => ({ remark: mocks.remark }));
 vi.mock("remark-code-import", () => ({ default: vi.fn() }));
 vi.mock("remark-collapse", () => ({ default: vi.fn() }));
 vi.mock("remark-toc", () => ({ default: vi.fn() }));
-vi.mock("remark-usage", () => ({ default: vi.fn() }));
 vi.mock("vfile", () => ({ VFile: vi.fn() }));
-vi.mock("./plugin", () => ({ autoReadmeRemarkPlugin: vi.fn() }));
-vi.mock("./data", () => ({ createFindParameter: mocks.createFindParameter }));
-vi.mock("./utilities", () => ({ fileExists: mocks.fileExists }));
-vi.mock("./log", () => ({ INFO: vi.fn(), WARN: mocks.warn }));
 
 afterEach(vi.clearAllMocks);
 

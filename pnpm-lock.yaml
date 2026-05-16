@@ -78,6 +78,9 @@ catalogs:
     '@kba/makefile-parser':
       specifier: 0.0.6
       version: 0.0.6
+    '@stephansama/mdast-zone':
+      specifier: 6.1.0
+      version: 6.1.0
     '@tailwindcss/cli':
       specifier: 4.2.1
       version: 4.2.1
@@ -174,9 +177,6 @@ catalogs:
     mdast-util-from-markdown:
       specifier: 2.0.2
       version: 2.0.2
-    mdast-zone:
-      specifier: github:stephansama/mdast-zone#1c5b08cd97240debeed4c9c6afad49df5877a132
-      version: 6.1.0
     minify:
       specifier: 14.0.0
       version: 14.0.0
@@ -433,6 +433,9 @@ catalogs:
       specifier: 0.7.2
       version: 0.7.2
   remark:
+    '@stephansama/remark-usage':
+      specifier: 11.0.1
+      version: 11.0.1
     remark:
       specifier: 15.0.1
       version: 15.0.1
@@ -445,9 +448,6 @@ catalogs:
     remark-toc:
       specifier: 9.0.0
       version: 9.0.0
-    remark-usage:
-      specifier: 11.0.1
-      version: 11.0.1
   schema:
     '@standard-schema/spec':
       specifier: 1.1.0
@@ -812,6 +812,12 @@ importers:
       '@manypkg/get-packages':
         specifier: catalog:manypkg
         version: 3.1.0
+      '@stephansama/mdast-zone':
+        specifier: 'catalog:'
+        version: 6.1.0
+      '@stephansama/remark-usage':
+        specifier: catalog:remark
+        version: 11.0.1
       colord:
         specifier: 'catalog:'
         version: 2.9.3
@@ -839,9 +845,6 @@ importers:
       mdast-util-from-markdown:
         specifier: 'catalog:'
         version: 2.0.2
-      mdast-zone:
-        specifier: 'catalog:'
-        version: https://codeload.github.com/stephansama/mdast-zone/tar.gz/1c5b08cd97240debeed4c9c6afad49df5877a132
       obug:
         specifier: catalog:cli
         version: 2.1.1
@@ -863,9 +866,6 @@ importers:
       remark-toc:
         specifier: catalog:remark
         version: 9.0.0
-      remark-usage:
-        specifier: catalog:remark
-        version: 11.0.1
       simple-icons:
         specifier: 'catalog:'
         version: 16.19.0
@@ -4338,6 +4338,12 @@ packages:
 
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
+
+  '@stephansama/mdast-zone@6.1.0':
+    resolution: {integrity: sha512-BnAn17mIZedlyCcNebKEStMQ0YZ6cuS6DXSVnLquMhAfQnv7lrwjPn0D0682wSQYz6PZp4XBO5svVoMg32FGsg==}
+
+  '@stephansama/remark-usage@11.0.1':
+    resolution: {integrity: sha512-rjZprojcBYSYWDeiY1m4FLvZZ9/xkuqnmQOqZFm+FdUC9RKFehJN2cwml1GXcG7ngj8FaeOgXlCXuNfkJ+ahQQ==}
 
   '@storybook/addon-a11y@10.2.8':
     resolution: {integrity: sha512-EW5MzPKNzyPorvodd416U2Np+zEdMPe+BSyomjm0oCXoC/6rDurf05H1pa99rZsrTDRrpog+HCz8iVa4XSwN5Q==}
@@ -8919,10 +8925,6 @@ packages:
   mdast-util-toc@7.1.0:
     resolution: {integrity: sha512-2TVKotOQzqdY7THOdn2gGzS9d1Sdd66bvxUyw3aNpWfcPXCLYSJCCgfPy30sEtuzkDraJgqF35dzgmz6xlvH/w==}
 
-  mdast-zone@https://codeload.github.com/stephansama/mdast-zone/tar.gz/1c5b08cd97240debeed4c9c6afad49df5877a132:
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/stephansama/mdast-zone/tar.gz/1c5b08cd97240debeed4c9c6afad49df5877a132}
-    version: 6.1.0
-
   mdast@3.0.0:
     resolution: {integrity: sha512-xySmf8g4fPKMeC07jXGz971EkLbWAJ83s4US2Tj9lEdnZ142UP5grN73H1Xd3HzrdbU5o9GYYP/y8F9ZSwLE9g==}
     deprecated: '`mdast` was renamed to `remark`'
@@ -10266,9 +10268,6 @@ packages:
 
   remark-toc@9.0.0:
     resolution: {integrity: sha512-KJ9txbo33GjDAV1baHFze7ij4G8c7SGYoY8Kzsm2gzFpbhL/bSoVpMMzGa3vrNDSWASNd/3ppAqL7cP2zD6JIA==}
-
-  remark-usage@11.0.1:
-    resolution: {integrity: sha512-zzZlVmmLM6vCAw0XEihJlKNi2YRGr52XKatyZ9R5QjN6PAsmCbJlgIjrGj55OwFWE+tAwVoolhrp0oO136xEcw==}
 
   remark@15.0.1:
     resolution: {integrity: sha512-Eht5w30ruCXgFmxVUSlNWQ9iiimq07URKeFS3hNc8cUWy1llX4KDWfyEDZRycMc+znsN9Ux5/tJ/BFdgdOwA3A==}
@@ -14885,6 +14884,31 @@ snapshots:
   '@sindresorhus/merge-streams@4.0.0': {}
 
   '@standard-schema/spec@1.1.0': {}
+
+  '@stephansama/mdast-zone@6.1.0':
+    dependencies:
+      '@types/mdast': 4.0.4
+      '@types/unist': 3.0.3
+      mdast-comment-marker: 3.0.0
+      unist-util-visit: 5.1.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@stephansama/remark-usage@11.0.1':
+    dependencies:
+      '@babel/core': 7.28.0
+      '@babel/preset-typescript': 7.28.5(@babel/core@7.28.0)
+      '@types/mdast': 4.0.4
+      import-meta-resolve: 4.2.0
+      mdast-util-from-markdown: 2.0.3
+      mdast-util-heading-range: 4.0.0
+      nanoid: 4.0.2
+      unist-util-remove-position: 5.0.0
+      vfile: 6.0.3
+      vfile-find-up: 7.1.0
+      vfile-message: 4.0.2
+    transitivePeerDependencies:
+      - supports-color
 
   '@storybook/addon-a11y@10.2.8(storybook@10.2.8(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.0(react@19.2.1))(react@19.2.1))':
     dependencies:
@@ -20371,15 +20395,6 @@ snapshots:
       unist-util-is: 6.0.1
       unist-util-visit: 5.1.0
 
-  mdast-zone@https://codeload.github.com/stephansama/mdast-zone/tar.gz/1c5b08cd97240debeed4c9c6afad49df5877a132:
-    dependencies:
-      '@types/mdast': 4.0.4
-      '@types/unist': 3.0.3
-      mdast-comment-marker: 3.0.0
-      unist-util-visit: 5.1.0
-    transitivePeerDependencies:
-      - supports-color
-
   mdast@3.0.0: {}
 
   mdn-data@2.0.28: {}
@@ -22079,21 +22094,6 @@ snapshots:
     dependencies:
       '@types/mdast': 4.0.4
       mdast-util-toc: 7.1.0
-
-  remark-usage@11.0.1:
-    dependencies:
-      '@babel/core': 7.28.0
-      '@types/mdast': 4.0.4
-      import-meta-resolve: 4.2.0
-      mdast-util-from-markdown: 2.0.3
-      mdast-util-heading-range: 4.0.0
-      nanoid: 4.0.2
-      unist-util-remove-position: 5.0.0
-      vfile: 6.0.3
-      vfile-find-up: 7.1.0
-      vfile-message: 4.0.2
-    transitivePeerDependencies:
-      - supports-color
 
   remark@15.0.1:
     dependencies:

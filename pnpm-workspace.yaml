@@ -57,7 +57,7 @@ catalog:
   mdast: 3.0.0
   mdast-comment-marker: 3.0.0
   mdast-util-from-markdown: 2.0.2
-  mdast-zone: github:stephansama/mdast-zone#1c5b08cd97240debeed4c9c6afad49df5877a132
+  '@stephansama/mdast-zone': 6.1.0
   minify: 14.0.0
   monoman: 0.8.2
   nano-staged: 1.0.2
@@ -167,11 +167,11 @@ catalogs:
     prettier-plugin-svelte: 3.4.1
     prettier-plugin-tailwindcss: 0.7.2
   remark:
+    '@stephansama/remark-usage': 11.0.1
     remark: 15.0.1
     remark-code-import: 1.2.0
     remark-collapse: 0.1.2
     remark-toc: 9.0.0
-    remark-usage: 11.0.1
   schema:
     '@standard-schema/spec': 1.1.0
     arktype: 2.2.0

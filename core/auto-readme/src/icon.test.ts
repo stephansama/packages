@@ -1,8 +1,8 @@
 import * as icons from "simple-icons";
 import { afterEach, expect, it, vi } from "vitest";
 
-import * as logger from "./log";
 import * as module from "./icon";
+import * as logger from "./log";
 
 afterEach(vi.clearAllMocks);
 
@@ -15,12 +15,9 @@ it.each([
 	["c++", "cplusplus"],
 	["react-router", "reactrouter"],
 	["REACT", "react"],
-] as [string, string][])(
-	"createSlugName(%s) returns %s",
-	(input, expected) => {
-		expect(module.createSlugName(input)).toBe(expected);
-	},
-);
+] as [string, string][])("createSlugName(%s) returns %s", (input, expected) => {
+	expect(module.createSlugName(input)).toBe(expected);
+});
 
 it("returns colorMapOverride color for @tanstack/ai", () => {
 	const [color, slug] = module.getSimpleIconColor("@tanstack/ai");

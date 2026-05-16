@@ -10,7 +10,9 @@ import { defaultTableHeadings, defaultTemplates } from "./schema";
 const mocks = vi.hoisted(() => ({
 	getContrastText: vi.fn().mockReturnValue("ffffff"),
 	getSimpleIconColor: vi.fn().mockReturnValue(["61DAFB", "react"]),
-	resolveVersion: vi.fn().mockImplementation(({ version }: { version: string }) => version),
+	resolveVersion: vi
+		.fn()
+		.mockImplementation(({ version }: { version: string }) => version),
 }));
 
 vi.mock("./color", () => ({ getContrastText: mocks.getContrastText }));
@@ -21,7 +23,10 @@ vi.mock("./utilities", () => ({ resolveVersion: mocks.resolveVersion }));
 afterEach(vi.clearAllMocks);
 
 const defaultConfig: Config = {
-	badgeOptions: { dependencyTypes: ["dependencies", "devDependencies"], templates: [] },
+	badgeOptions: {
+		dependencyTypes: ["dependencies", "devDependencies"],
+		templates: [],
+	},
 	disableEmojis: false,
 	headings: defaultTableHeadings,
 	onlyShowPublicPackages: false,
@@ -35,9 +40,7 @@ async function processMarkdown(
 	data: ActionData = [],
 ) {
 	return (
-		await remark()
-			.use(autoReadmeRemarkPlugin, config, data)
-			.process(md)
+		await remark().use(autoReadmeRemarkPlugin, config, data).process(md)
 	).toString();
 }
 
@@ -56,11 +59,20 @@ it("BADGE: generates shield badge for dependency with known icon color", async (
 			action: "BADGE",
 			catalogs: undefined,
 			parameters: [],
-			pkgJson: { dependencies: { react: "^18.0.0" }, devDependencies: {}, name: "my-package", version: "1.0.0" },
+			pkgJson: {
+				dependencies: { react: "^18.0.0" },
+				devDependencies: {},
+				name: "my-package",
+				version: "1.0.0",
+			},
 		},
 	] as unknown as ActionData;
 
-	const result = await processMarkdown(withZone("BADGE"), defaultConfig, data);
+	const result = await processMarkdown(
+		withZone("BADGE"),
+		defaultConfig,
+		data,
+	);
 
 	expect(result).toContain("img.shields.io/badge");
 	expect(result).toContain("61DAFB");
@@ -75,11 +87,20 @@ it("BADGE: skips badge when getSimpleIconColor returns no color", async () => {
 			action: "BADGE",
 			catalogs: undefined,
 			parameters: [],
-			pkgJson: { dependencies: { "unknown-lib": "^1.0.0" }, devDependencies: {}, name: "my-package", version: "1.0.0" },
+			pkgJson: {
+				dependencies: { "unknown-lib": "^1.0.0" },
+				devDependencies: {},
+				name: "my-package",
+				version: "1.0.0",
+			},
 		},
 	] as unknown as ActionData;
 
-	const result = await processMarkdown(withZone("BADGE"), defaultConfig, data);
+	const result = await processMarkdown(
+		withZone("BADGE"),
+		defaultConfig,
+		data,
+	);
 
 	expect(result).not.toContain("img.shields.io/badge");
 });
@@ -104,7 +125,12 @@ it("BADGE: includes template badges when configured", async () => {
 			action: "BADGE",
 			catalogs: undefined,
 			parameters: [],
-			pkgJson: { dependencies: {}, devDependencies: {}, name: "my-package", version: "1.0.0" },
+			pkgJson: {
+				dependencies: {},
+				devDependencies: {},
+				name: "my-package",
+				version: "1.0.0",
+			},
 		},
 	] as unknown as ActionData;
 
@@ -134,7 +160,12 @@ it("BADGE: skips template badges when --skip-templates is present", async () => 
 			action: "BADGE",
 			catalogs: undefined,
 			parameters: ["--skip-templates"],
-			pkgJson: { dependencies: {}, devDependencies: {}, name: "my-package", version: "1.0.0" },
+			pkgJson: {
+				dependencies: {},
+				devDependencies: {},
+				name: "my-package",
+				version: "1.0.0",
+			},
 		},
 	] as unknown as ActionData;
 
@@ -151,15 +182,27 @@ it("ACTION: generates markdown table for TABLE format", async () => {
 			action: "ACTION",
 			actionYaml: {
 				inputs: {
-					"dry-run": { default: "false", description: "Skip changes", required: false },
-					token: { default: "github_token", description: "GitHub token", required: true },
+					"dry-run": {
+						default: "false",
+						description: "Skip changes",
+						required: false,
+					},
+					"token": {
+						default: "github_token",
+						description: "GitHub token",
+						required: true,
+					},
 				},
 			},
 			parameters: [],
 		},
 	] as unknown as ActionData;
 
-	const result = await processMarkdown(withZone("ACTION"), defaultConfig, data);
+	const result = await processMarkdown(
+		withZone("ACTION"),
+		defaultConfig,
+		data,
+	);
 
 	expect(result).toContain("token");
 	expect(result).toContain("dry-run");
@@ -172,7 +215,11 @@ it("ACTION: generates list for LIST format", async () => {
 			action: "ACTION",
 			actionYaml: {
 				inputs: {
-					token: { default: "github_token", description: "GitHub token", required: true },
+					token: {
+						default: "github_token",
+						description: "GitHub token",
+						required: true,
+					},
 				},
 			},
 			parameters: [],
@@ -218,7 +265,10 @@ it("PKG: returns empty content for LIST format", async () => {
 			action: "PKG",
 			catalogs: undefined,
 			parameters: [],
-			pkgJson: { dependencies: { react: "^18.0.0" }, devDependencies: {} },
+			pkgJson: {
+				dependencies: { react: "^18.0.0" },
+				devDependencies: {},
+			},
 		},
 	] as unknown as ActionData;
 
@@ -262,7 +312,11 @@ it("WORKSPACE: generates table with package names", async () => {
 				packages: [
 					{
 						dir: "/root/packages/my-pkg",
-						packageJson: { description: "A test package", name: "@scope/my-pkg", version: "1.0.0" },
+						packageJson: {
+							description: "A test package",
+							name: "@scope/my-pkg",
+							version: "1.0.0",
+						},
 					},
 				],
 				root: { dir: "/root", packageJson: {} },
@@ -271,7 +325,11 @@ it("WORKSPACE: generates table with package names", async () => {
 		},
 	] as unknown as ActionData;
 
-	const result = await processMarkdown(withZone("WORKSPACE"), defaultConfig, data);
+	const result = await processMarkdown(
+		withZone("WORKSPACE"),
+		defaultConfig,
+		data,
+	);
 
 	expect(result).toContain("my-pkg");
 	expect(result).toMatch(/\|.*\|/);
@@ -294,7 +352,11 @@ it("WORKSPACE: excludes private packages when onlyShowPublicPackages is true", a
 					},
 					{
 						dir: "/root/packages/private-pkg",
-						packageJson: { name: "private-pkg", private: true, version: "1.0.0" },
+						packageJson: {
+							name: "private-pkg",
+							private: true,
+							version: "1.0.0",
+						},
 					},
 				],
 				root: { dir: "/root", packageJson: {} },

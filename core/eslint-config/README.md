@@ -26,6 +26,7 @@ A modular, composable ESLint flat config package with 25+ configs covering JavaS
 <details><summary>Open Table of contents</summary>
 
 - [Installation](#installation)
+- [Usage](#usage)
 - [Configs](#configs)
   - [Core](#core)
   - [Code Quality](#code-quality)
@@ -37,7 +38,6 @@ A modular, composable ESLint flat config package with 25+ configs covering JavaS
 - [Presets](#presets)
 - [CLI Commands](#cli-commands)
   - [CLI Flags](#cli-flags)
-- [Usage](#usage)
 
 </details>
 
@@ -45,6 +45,16 @@ A modular, composable ESLint flat config package with 25+ configs covering JavaS
 
 ```sh
 pnpm install @stephansama/eslint-config
+```
+
+## Usage
+
+```typescript
+import { config, presets } from "@stephansama/eslint-config";
+
+export default await config({
+  ...presets.base,
+});
 ```
 
 ## Configs
@@ -142,16 +152,3 @@ export default config({
 | `--config`       | `-c`  | Both     | Location of ESLint configuration file | `eslint.config.ts` |
 | `--verbose`      | `-v`  | Both     | Enable verbose output                 |                    |
 | `--package-json` | `-p`  | `update` | Location of `package.json` to update  | `package.json`     |
-
-## Usage
-
-```typescript
-import { config, presets } from "@stephansama/eslint-config";
-
-const loadConfig = async () =>
-  await config({
-    ...presets.base,
-  });
-
-export default loadConfig;
-```

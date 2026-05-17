@@ -25,9 +25,9 @@
 	--color-line: var(--sl-color-gray-5);
 	--color-red: var(--sl-color-red);
 
-	--color-peach: #f5a97f;
-	--color-sapphire: #7dc4e4;
-	--color-pistachio: #a6da95;
+	--color-peach: var(--sl-color-orange);
+	--color-sapphire: var(--sl-color-blue);
+	--color-pistachio: var(--sl-color-green);
 }
 
 :root {
@@ -50,6 +50,11 @@
 .sl-link-button.minimal {
 	border: 1px solid var(--sl-color-white);
 	padding-inline: 1em;
+	border-radius: 0;
+}
+
+site-search button[data-open-modal],
+site-search dialog {
 	border-radius: 0;
 }
 

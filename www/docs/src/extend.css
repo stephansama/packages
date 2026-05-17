@@ -8,6 +8,13 @@
 
 @import "tailwindcss";
 
+.content-panel:first-child:has(> .sl-container > h1#_top) {
+	@apply hidden;
+}
+.content-panel:nth-child(2) {
+	@apply border-t-0;
+}
+
 @theme {
 	--font-sans: "Fira Sans", system-ui, sans-serif;
 	--font-mono: "Fira Code", ui-monospace, monospace;
@@ -16,8 +23,8 @@
 	--color-fg: var(--sl-color-white);
 	--color-muted: var(--sl-color-gray-3);
 	--color-line: var(--sl-color-gray-5);
+	--color-red: var(--sl-color-red);
 
-	--color-mauve: #c6a0f6;
 	--color-peach: #f5a97f;
 	--color-sapphire: #7dc4e4;
 	--color-pistachio: #a6da95;
@@ -26,10 +33,6 @@
 :root {
 	--sl-font: "Fira Sans", system-ui, sans-serif;
 	--sl-font-mono: "Fira Code", ui-monospace, monospace;
-}
-
-[data-theme="light"] {
-	--color-mauve: #8839ef;
 }
 
 .sl-markdown-content > p:has(> a):not(:has(> :not(a))),

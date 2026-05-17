@@ -4,6 +4,7 @@ import starlightTypeDoc, {
 	typeDocSidebarGroup,
 } from "@stephansama/starlight-typedoc";
 import tailwindcss from "@tailwindcss/vite";
+import icon from "astro-icon";
 import { defineConfig } from "astro/config";
 import starlightGiscus from "starlight-giscus";
 import starlightGithubAlerts from "starlight-github-alerts";
@@ -11,33 +12,24 @@ import starlightHeadingBadges from "starlight-heading-badges";
 import starlightLlmsTxt from "starlight-llms-txt";
 import { starlightIconsPlugin } from "starlight-plugin-icons";
 
-const css = String.raw;
+const js = String.raw;
+
+const script = js`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PJ2232VH');`;
 
 export default defineConfig({
 	integrations: [
+		icon(),
 		starlight({
+			components: {
+				SkipLink: "./src/components/skip-link.astro",
+			},
 			customCss: ["./src/extend.css"],
 			favicon: "./src/favicon.svg",
-			head: [
-				{
-					attrs: {
-						defer: true,
-						src: "", // google tag manager
-					},
-					tag: "script",
-				},
-				{
-					content: css`
-						.content-panel:first-child:has(> .sl-container > h1#_top) {
-							display: none;
-						}
-						.content-panel:nth-child(2) {
-							border-top: 0;
-						}
-					`,
-					tag: "style",
-				},
-			],
+			head: [{ attrs: { src: script }, tag: "script" }],
 			logo: {
 				src: "./src/favicon.svg",
 			},

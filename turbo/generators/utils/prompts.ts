@@ -21,13 +21,13 @@ export const name = {
 export const snapshot = {
 	message: "Generate a snapshot definition",
 	name: "snapshot",
-	type: "input",
+	type: "confirm",
 } as const satisfies PlopTypes.PromptQuestion;
 
 export const schema = {
 	message: "Generate a schema definition",
 	name: "schema",
-	type: "input",
+	type: "confirm",
 } as const satisfies PlopTypes.PromptQuestion;
 
 export const description = {

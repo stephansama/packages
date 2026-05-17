@@ -28,16 +28,31 @@ const animatedLines = [
 ];
 ---
 
-<section class="hero">
-	<div class="hero-content">
-		<span class="badge">PACKAGES :: MONOREPO</span>
-		<h1>@stephansama packages.</h1>
-		<p class="hero-sub">
+<section
+	class="grid grid-cols-1 items-center gap-12 py-[clamp(64px,10vw,120px)] font-sans lg:grid-cols-[1.2fr_1fr] lg:gap-20"
+>
+	<div class="max-w-[600px]">
+		<span
+			class="inline-flex items-center border border-line bg-surface px-3 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--sl-color-red)]"
+		>
+			PACKAGES :: MONOREPO
+		</span>
+		<h1
+			class="mb-6 mt-[0.5em] font-sans text-[clamp(40px,8vw,72px)] font-semibold leading-[1.1] tracking-tight text-fg"
+		>
+			@stephansama packages.
+		</h1>
+		<p
+			class="mb-12 max-w-[480px] text-xl font-normal leading-[1.5] text-muted"
+		>
 			A collection of TypeScript-first, open-source packages crafted for the
 			terminal-native engineer.
 		</p>
-		<div class="btn-group">
-			<a class="btn btn-primary" href="/api/">
+		<div class="flex flex-wrap gap-4">
+			<a
+				class="inline-flex cursor-pointer items-center gap-3 border-0 bg-[var(--sl-color-red)] px-7 py-3.5 font-mono text-sm font-semibold text-[var(--sl-color-bg)] no-underline transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:text-[var(--sl-color-bg)] hover:shadow-[0_8px_24px_color-mix(in_srgb,var(--sl-color-red)_30%,transparent)]"
+				href="/api/"
+			>
 				<svg
 					aria-hidden="true"
 					fill="none"
@@ -52,7 +67,7 @@ const animatedLines = [
 				Browse API docs
 			</a>
 			<a
-				class="btn btn-secondary"
+				class="inline-flex cursor-pointer items-center gap-3 border border-line bg-surface px-7 py-3.5 font-mono text-sm font-semibold text-fg no-underline transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-muted hover:bg-line hover:text-fg"
 				href="https://github.com/stephansama/packages"
 				rel="noopener"
 			>
@@ -72,15 +87,24 @@ const animatedLines = [
 		</div>
 	</div>
 
-	<div aria-hidden="true" class="terminal">
-		<div class="terminal-header">
-			<span class="dot dot-red"></span>
-			<span class="dot dot-yellow"></span>
-			<span class="dot dot-green"></span>
-			<span class="terminal-title">nvim — manifesto.md</span>
+	<div
+		aria-hidden="true"
+		class="terminal relative flex h-[440px] flex-col overflow-hidden border border-line bg-surface shadow-[0_32px_64px_rgba(0,0,0,0.4)]"
+	>
+		<div
+			class="flex items-center gap-3 border-b border-line bg-surface px-4 py-3"
+		>
+			<span class="inline-block size-2 rounded-[2px] bg-[#ed8796]"></span>
+			<span class="inline-block size-2 rounded-[2px] bg-[#eed49f]"></span>
+			<span class="inline-block size-2 rounded-[2px] bg-pistachio"></span>
+			<span
+				class="ml-auto mr-auto font-mono text-[11px] text-muted opacity-80"
+			>
+				nvim — manifesto.md
+			</span>
 		</div>
 		<div
-			class="terminal-body"
+			class="terminal-body grow overflow-y-auto p-5 font-mono text-[13px] leading-[1.6] text-muted [scrollbar-color:var(--sl-color-gray-5)_transparent] [scrollbar-width:thin]"
 			data-animated-lines={JSON.stringify(animatedLines)}
 			data-terminal-body
 		>
@@ -105,110 +129,6 @@ const animatedLines = [
 </section>
 
 <style is:global>
-	.home-root .hero {
-		padding: var(--home-space-section) 0;
-		display: grid;
-		grid-template-columns: 1.2fr 1fr;
-		gap: 80px;
-		align-items: center;
-		font-family: var(--home-font-display);
-	}
-
-	.home-root .hero-content {
-		max-width: 600px;
-	}
-
-	.home-root .hero .badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 4px 12px;
-		background: var(--sl-color-black);
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: var(--home-radius-sm);
-		font-size: 11px;
-		font-family: var(--home-font-mono);
-		color: var(--sl-color-red);
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-	}
-
-	.home-root .hero-content h1 {
-		font-family: var(--home-font-display);
-		font-weight: 600;
-		letter-spacing: -0.02em;
-		font-size: clamp(40px, 8vw, 72px);
-		line-height: 1.1;
-		margin-bottom: 24px;
-		margin-top: 0.5em;
-		color: var(--sl-color-white);
-	}
-
-	.home-root .hero-sub {
-		font-size: 20px;
-		color: var(--sl-color-gray-3);
-		margin-bottom: 48px;
-		max-width: 480px;
-		font-weight: 400;
-		line-height: 1.5;
-	}
-
-	.home-root .btn-group {
-		display: flex;
-		gap: 16px;
-		flex-wrap: wrap;
-	}
-
-	.home-root .btn {
-		padding: 14px 28px;
-		border-radius: var(--home-radius-sm);
-		font-weight: 600;
-		font-size: 14px;
-		cursor: pointer;
-		display: inline-flex;
-		align-items: center;
-		gap: 12px;
-		font-family: var(--home-font-mono);
-		transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-		text-decoration: none;
-		border: none;
-	}
-
-	.home-root .btn-primary {
-		background: var(--sl-color-red);
-		color: var(--sl-color-bg);
-	}
-
-	.home-root .btn-primary:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 8px 24px
-			color-mix(in srgb, var(--sl-color-red) 30%, transparent);
-		color: var(--sl-color-bg);
-	}
-
-	.home-root .btn-secondary {
-		background: var(--sl-color-black);
-		border: 1px solid var(--sl-color-gray-5);
-		color: var(--sl-color-white);
-	}
-
-	.home-root .btn-secondary:hover {
-		background: var(--sl-color-gray-5);
-		border-color: var(--sl-color-gray-3);
-		color: var(--sl-color-white);
-	}
-
-	.home-root .terminal {
-		background: var(--sl-color-black);
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: var(--home-radius-sm);
-		overflow: hidden;
-		box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
-		height: 440px;
-		display: flex;
-		flex-direction: column;
-		position: relative;
-	}
-
 	.home-root .terminal::before {
 		content: "";
 		position: absolute;
@@ -225,81 +145,29 @@ const animatedLines = [
 		opacity: 0.5;
 	}
 
-	.home-root .terminal-header {
-		background: var(--sl-color-black);
-		padding: 12px 16px;
-		display: flex;
-		align-items: center;
-		gap: 12px;
-		border-bottom: 1px solid var(--sl-color-gray-5);
-	}
-
-	.home-root .terminal .dot {
-		width: 8px;
-		height: 8px;
-		border-radius: 2px;
-		display: inline-block;
-	}
-	.home-root .terminal .dot-red {
-		background: #ed8796;
-	}
-	.home-root .terminal .dot-yellow {
-		background: #eed49f;
-	}
-	.home-root .terminal .dot-green {
-		background: var(--home-green);
-	}
-
-	.home-root .terminal-title {
-		margin-left: auto;
-		margin-right: auto;
-		font-size: 11px;
-		color: var(--sl-color-gray-3);
-		font-family: var(--home-font-mono);
-		opacity: 0.8;
-	}
-
-	.home-root .terminal-body {
-		padding: 20px;
-		margin-top: 0;
-		font-family: var(--home-font-mono);
-		font-size: 13px;
-		overflow-y: auto;
-		flex-grow: 1;
-		scrollbar-width: thin;
-		scrollbar-color: var(--sl-color-gray-5) transparent;
-		line-height: 1.6;
-		color: var(--sl-color-gray-3);
-	}
-
+	/* Line styling — initial server-rendered lines and dynamically injected
+	   lines from the typing script share these classes. */
 	.home-root .terminal-body .line {
-		margin-bottom: 6px;
 		display: flex;
-		gap: 12px;
+		gap: 0.75rem;
+		margin-bottom: 0.375rem;
+		word-break: break-all;
 	}
 	.home-root .terminal-body .line .prompt {
-		color: var(--home-peach);
+		color: var(--color-peach);
 		opacity: 0.8;
 	}
 	.home-root .terminal-body .line .cmd {
-		color: var(--sl-color-white);
-		word-break: break-all;
+		color: var(--color-fg);
 	}
 	.home-root .terminal-body .line.output {
-		color: var(--sl-color-gray-3);
+		color: var(--color-muted);
 	}
 	.home-root .terminal-body .line.success {
-		color: var(--home-green);
+		color: var(--color-pistachio);
 	}
 	.home-root .terminal-body .line.info {
-		color: var(--home-sapphire);
-	}
-
-	@media (max-width: 1024px) {
-		.home-root .hero {
-			grid-template-columns: 1fr;
-			gap: 48px;
-		}
+		color: var(--color-sapphire);
 	}
 </style>
 

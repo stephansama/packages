@@ -21,9 +21,13 @@
   },
   "dependencies": {
     "@eslint/config-inspector": "catalog:inspector",
+    "@fontsource/fira-code": "catalog:",
+    "@fontsource/fira-sans": "catalog:",
+    "@tailwindcss/vite": "catalog:",
     "node-modules-inspector": "catalog:inspector",
     "starlight-heading-badges": "catalog:",
     "starlight-package-managers": "catalog:",
+    "tailwindcss": "catalog:",
     "typedoc": "catalog:typedoc",
     "typedoc-plugin-markdown": "catalog:typedoc"
   },

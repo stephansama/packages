@@ -1,8 +1,35 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Fira+Sans:wght@400;500;600;700&display=swap");
+@import "@fontsource/fira-sans/400.css";
+@import "@fontsource/fira-sans/500.css";
+@import "@fontsource/fira-sans/600.css";
+@import "@fontsource/fira-sans/700.css";
+@import "@fontsource/fira-code/400.css";
+@import "@fontsource/fira-code/500.css";
+@import "@fontsource/fira-code/700.css";
+
+@import "tailwindcss";
+
+@theme {
+	--font-sans: "Fira Sans", system-ui, sans-serif;
+	--font-mono: "Fira Code", ui-monospace, monospace;
+
+	--color-surface: var(--sl-color-black);
+	--color-fg: var(--sl-color-white);
+	--color-muted: var(--sl-color-gray-3);
+	--color-line: var(--sl-color-gray-5);
+
+	--color-mauve: #c6a0f6;
+	--color-peach: #f5a97f;
+	--color-sapphire: #7dc4e4;
+	--color-pistachio: #a6da95;
+}
 
 :root {
 	--sl-font: "Fira Sans", system-ui, sans-serif;
 	--sl-font-mono: "Fira Code", ui-monospace, monospace;
+}
+
+[data-theme="light"] {
+	--color-mauve: #8839ef;
 }
 
 .sl-markdown-content > p:has(> a):not(:has(> :not(a))),
@@ -14,35 +41,13 @@
 }
 
 .sl-link-button {
-	border-radius: 0px;
+	border-radius: 0;
 }
 
 .sl-link-button.minimal {
 	border: 1px solid var(--sl-color-white);
 	padding-inline: 1em;
-	border-radius: 0px;
-}
-
-.home-root {
-	--home-accent: #c6a0f6;
-	--home-peach: #f5a97f;
-	--home-sapphire: #7dc4e4;
-	--home-green: #a6da95;
-	--home-font-display: "Fira Sans", system-ui, sans-serif;
-	--home-font-mono: "Fira Code", ui-monospace, monospace;
-	--home-radius-sm: 2px;
-	--home-radius-md: 4px;
-	--home-radius-lg: 8px;
-	--home-space-section: clamp(64px, 10vw, 120px);
-
-	width: 100%;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0 24px;
-}
-
-[data-theme="light"] .home-root {
-	--home-accent: #8839ef;
+	border-radius: 0;
 }
 
 .sl-markdown-content:has(> .home-root) {

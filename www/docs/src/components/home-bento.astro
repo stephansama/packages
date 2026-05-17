@@ -1,69 +1,122 @@
-<section class="features">
-	<div class="bento-grid" data-bento-grid>
-		<div class="bento-item bento-dx" data-status="[NORMAL] README.md 10:24">
+<section class="pb-[clamp(64px,10vw,120px)]">
+	<div
+		class="relative grid grid-cols-1 gap-6 font-sans lg:grid-cols-3 lg:grid-rows-[repeat(2,320px)]"
+		data-bento-grid
+	>
+		<div
+			class="bento-item relative flex h-[320px] flex-col justify-between overflow-hidden border border-line bg-surface p-10 transition-[border-color] duration-300 ease-in-out hover:border-mauve lg:col-span-2 lg:h-auto"
+			data-status="[NORMAL] README.md 10:24"
+		>
 			<div>
-				<span class="badge">DEVELOPER_EXPERIENCE</span>
-				<h3>Developer experience.</h3>
-				<p>
+				<span
+					class="mb-4 inline-flex items-center border border-line bg-[var(--sl-color-bg)] px-3 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-mauve"
+				>
+					DEVELOPER_EXPERIENCE
+				</span>
+				<h3
+					class="mb-4 font-sans text-[22px] font-semibold tracking-[-0.01em] text-fg"
+				>
+					Developer experience.
+				</h3>
+				<p class="max-w-[320px] text-[15px] leading-[1.5] text-muted">
 					Consistent tooling across the monorepo: Turborepo, pnpm workspaces,
 					ESLint, and automated releases.
 				</p>
 			</div>
-			<div class="bento-graphic mono">
+			<div
+				class="bento-graphic pointer-events-none absolute bottom-10 right-10 z-0 max-w-[60%] text-right font-mono text-[11px] leading-[1.6] text-muted opacity-10 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+			>
 				<span>import &#123; ai &#125; from "@stephansama/ai-commit-msg";</span>
 				<br />
 				<span>ai.generate(&#123; staged: true &#125;);</span>
 			</div>
 		</div>
 
-		<div class="bento-item bento-modular" data-status="[INSERT] tree.pkg 42:12">
+		<div
+			class="bento-item relative flex h-[320px] flex-col justify-between overflow-hidden border border-line bg-surface p-10 transition-[border-color] duration-300 ease-in-out hover:border-mauve lg:row-span-2 lg:h-auto"
+			data-status="[INSERT] tree.pkg 42:12"
+		>
 			<div>
-				<span class="badge">COMPOSABILITY</span>
-				<h3>Modular &amp; composable.</h3>
-				<p>
+				<span
+					class="mb-4 inline-flex items-center border border-line bg-[var(--sl-color-bg)] px-3 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-mauve"
+				>
+					COMPOSABILITY
+				</span>
+				<h3
+					class="mb-4 font-sans text-[22px] font-semibold tracking-[-0.01em] text-fg"
+				>
+					Modular &amp; composable.
+				</h3>
+				<p class="max-w-[320px] text-[15px] leading-[1.5] text-muted">
 					Packages are small and focused. Use only what you need — each package
 					is independently published.
 				</p>
 			</div>
-			<div class="bento-graphic">
+			<div
+				class="bento-graphic pointer-events-none absolute bottom-10 right-10 z-0 max-w-[60%] opacity-10 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+			>
 				<svg
 					aria-hidden="true"
 					fill="none"
 					height="180"
-					stroke="var(--home-accent)"
+					stroke="var(--color-mauve)"
 					stroke-width="0.7"
 					viewBox="0 0 100 100"
 					width="180"
 				>
 					<path d="M50 10 L90 30 L90 70 L50 90 L10 70 L10 30 Z"></path>
 					<path d="M50 10 L50 50 L90 30 M50 50 L10 30 M50 50 L50 90"></path>
-					<circle cx="50" cy="50" fill="var(--home-accent)" r="3"></circle>
+					<circle cx="50" cy="50" fill="var(--color-mauve)" r="3"></circle>
 				</svg>
 			</div>
 		</div>
 
-		<div class="bento-item bento-oss" data-status="[VISUAL] git_branch 0:0">
+		<div
+			class="bento-item relative flex h-[320px] flex-col justify-between overflow-hidden border border-line bg-surface p-10 transition-[border-color] duration-300 ease-in-out hover:border-mauve lg:h-auto"
+			data-status="[VISUAL] git_branch 0:0"
+		>
 			<div>
-				<span class="badge">OPEN_SOURCE</span>
-				<h3>Open source.</h3>
-				<p>
+				<span
+					class="mb-4 inline-flex items-center border border-line bg-[var(--sl-color-bg)] px-3 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-mauve"
+				>
+					OPEN_SOURCE
+				</span>
+				<h3
+					class="mb-4 font-sans text-[22px] font-semibold tracking-[-0.01em] text-fg"
+				>
+					Open source.
+				</h3>
+				<p class="max-w-[320px] text-[15px] leading-[1.5] text-muted">
 					All packages are open source on
-					<a href="https://github.com/stephansama/packages">GitHub</a>. Built in
-					the open, battle-tested by use.
+					<a class="text-mauve underline" href="https://github.com/stephansama/packages">GitHub</a>.
+					Built in the open, battle-tested by use.
 				</p>
 			</div>
 		</div>
 
-		<div class="bento-item bento-ts" data-status="[NORMAL] main.ts 100:100">
+		<div
+			class="bento-item relative flex h-[320px] flex-col justify-between overflow-hidden border border-line bg-surface p-10 transition-[border-color] duration-300 ease-in-out hover:border-mauve lg:h-auto"
+			data-status="[NORMAL] main.ts 100:100"
+		>
 			<div>
-				<span class="badge">TYPESCRIPT</span>
-				<h3>TypeScript-first.</h3>
-				<p>
+				<span
+					class="mb-4 inline-flex items-center border border-line bg-[var(--sl-color-bg)] px-3 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-mauve"
+				>
+					TYPESCRIPT
+				</span>
+				<h3
+					class="mb-4 font-sans text-[22px] font-semibold tracking-[-0.01em] text-fg"
+				>
+					TypeScript-first.
+				</h3>
+				<p class="max-w-[320px] text-[15px] leading-[1.5] text-muted">
 					Every package is written in TypeScript with full type definitions and
 					generated API documentation.
 				</p>
 			</div>
-			<div class="bento-graphic mono">
+			<div
+				class="bento-graphic pointer-events-none absolute bottom-10 right-10 z-0 max-w-[60%] text-right font-mono text-[11px] leading-[1.6] text-muted opacity-10 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+			>
 				<span>type Package&lt;T&gt; = Readonly&lt;T&gt;;</span>
 			</div>
 		</div>
@@ -71,32 +124,6 @@
 </section>
 
 <style is:global>
-	.home-root .features {
-		padding-bottom: var(--home-space-section);
-	}
-
-	.home-root .bento-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: repeat(2, 320px);
-		gap: 24px;
-		position: relative;
-		font-family: var(--home-font-display);
-	}
-
-	.home-root .bento-item {
-		background: var(--sl-color-black);
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: var(--home-radius-sm);
-		padding: 40px;
-		position: relative;
-		overflow: hidden;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		transition: border-color 0.3s ease;
-	}
-
 	.home-root .bento-item::before {
 		content: "";
 		position: absolute;
@@ -104,16 +131,12 @@
 		pointer-events: none;
 		background: radial-gradient(
 			300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-			color-mix(in srgb, var(--home-accent) 22%, transparent),
+			color-mix(in srgb, var(--color-mauve) 22%, transparent),
 			transparent 70%
 		);
 		opacity: var(--spotlight-opacity, 0);
 		transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 		z-index: 0;
-	}
-
-	.home-root .bento-item:hover {
-		border-color: var(--home-accent);
 	}
 
 	.home-root .bento-item::after {
@@ -123,11 +146,11 @@
 		left: 0;
 		right: 0;
 		background: var(--sl-color-bg);
-		border-top: 1px solid var(--sl-color-gray-5);
+		border-top: 1px solid var(--color-line);
 		padding: 6px 12px;
-		font-family: var(--home-font-mono);
+		font-family: var(--font-mono);
 		font-size: 10px;
-		color: var(--sl-color-gray-3);
+		color: var(--color-muted);
 		display: flex;
 		justify-content: flex-end;
 		opacity: 0.6;
@@ -137,8 +160,8 @@
 
 	.home-root .bento-item:hover::after {
 		opacity: 1;
-		color: var(--home-accent);
-		background: color-mix(in srgb, var(--home-accent) 5%, var(--sl-color-bg));
+		color: var(--color-mauve);
+		background: color-mix(in srgb, var(--color-mauve) 5%, var(--sl-color-bg));
 	}
 
 	.home-root .bento-item > * {
@@ -146,91 +169,9 @@
 		z-index: 1;
 	}
 
-	.bento-item.bento-modular {
-		margin: 0;
-	}
-
-	.home-root .bento-item h3 {
-		margin: 0 0 16px;
-		font-size: 22px;
-		font-weight: 600;
-		letter-spacing: -0.01em;
-		color: var(--sl-color-white);
-		font-family: var(--home-font-display);
-	}
-
-	.home-root .bento-item p {
-		margin: 0;
-		color: var(--sl-color-gray-3);
-		font-size: 15px;
-		max-width: 320px;
-		line-height: 1.5;
-	}
-
-	.home-root .bento-item p a {
-		color: var(--home-accent);
-		text-decoration: underline;
-	}
-
-	.home-root .bento-item .badge {
-		display: inline-flex;
-		align-items: center;
-		padding: 4px 12px;
-		background: var(--sl-color-bg);
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: var(--home-radius-sm);
-		font-size: 11px;
-		font-family: var(--home-font-mono);
-		color: var(--home-accent);
-		margin-bottom: 16px;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-	}
-
-	.home-root .bento-dx {
-		grid-column: span 2;
-	}
-	.home-root .bento-modular {
-		grid-row: span 2;
-	}
-
-	.home-root .bento-graphic {
-		position: absolute;
-		bottom: 40px;
-		right: 40px;
-		opacity: 0.1;
-		transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-		z-index: 0;
-		pointer-events: none;
-		max-width: 60%;
-	}
-
-	.home-root .bento-graphic.mono {
-		font-family: var(--home-font-mono);
-		font-size: 11px;
-		color: var(--sl-color-gray-3);
-		text-align: right;
-		line-height: 1.6;
-	}
-
 	.home-root .bento-item:hover .bento-graphic {
 		opacity: 0.3;
 		transform: scale(1.05) rotate(2deg);
-	}
-
-	@media (max-width: 1024px) {
-		.home-root .bento-grid {
-			grid-template-columns: 1fr;
-			grid-template-rows: auto;
-		}
-		.home-root .bento-dx,
-		.home-root .bento-modular {
-			grid-column: span 1;
-			grid-row: span 1;
-		}
-		.home-root .bento-item {
-			height: 320px;
-		}
 	}
 </style>
 

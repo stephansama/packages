@@ -3,6 +3,7 @@ import starlightCatppuccin from "@catppuccin/starlight";
 import starlightTypeDoc, {
 	typeDocSidebarGroup,
 } from "@stephansama/starlight-typedoc";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import starlightGiscus from "starlight-giscus";
 import starlightGithubAlerts from "starlight-github-alerts";
@@ -93,4 +94,7 @@ export default defineConfig({
 		}),
 	],
 	site: "https://packages.stephansama.info",
+	vite: {
+		plugins: [tailwindcss()],
+	},
 });

@@ -78,6 +78,12 @@ catalogs:
     '@dotenvx/dotenvx':
       specifier: 1.52.0
       version: 1.52.0
+    '@fontsource/fira-code':
+      specifier: 5.2.7
+      version: 5.2.7
+    '@fontsource/fira-sans':
+      specifier: 5.2.7
+      version: 5.2.7
     '@iconify/types':
       specifier: 2.0.0
       version: 2.0.0
@@ -96,6 +102,9 @@ catalogs:
     '@tailwindcss/cli':
       specifier: 4.2.1
       version: 4.2.1
+    '@tailwindcss/vite':
+      specifier: 4.1.18
+      version: 4.1.18
     '@testing-library/jest-dom':
       specifier: 6.9.1
       version: 6.9.1
@@ -1574,6 +1583,15 @@ importers:
       '@eslint/config-inspector':
         specifier: catalog:inspector
         version: 1.3.0(eslint@10.2.1(jiti@2.6.1))
+      '@fontsource/fira-code':
+        specifier: 'catalog:'
+        version: 5.2.7
+      '@fontsource/fira-sans':
+        specifier: 'catalog:'
+        version: 5.2.7
+      '@tailwindcss/vite':
+        specifier: 'catalog:'
+        version: 4.1.18(vite@7.3.3(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))
       node-modules-inspector:
         specifier: catalog:inspector
         version: 1.2.0
@@ -1583,6 +1601,9 @@ importers:
       starlight-package-managers:
         specifier: 'catalog:'
         version: 0.12.0(@astrojs/starlight@0.39.2(astro@6.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.52.5)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))(typescript@5.9.3))
+      tailwindcss:
+        specifier: 'catalog:'
+        version: 4.1.18
       typedoc:
         specifier: catalog:typedoc
         version: 0.28.10(typescript@5.9.3)
@@ -2678,6 +2699,12 @@ packages:
 
   '@expressive-code/plugin-text-markers@0.42.0':
     resolution: {integrity: sha512-l59lUx8fq1v5g6SpmbDjiU0+7IdfbiWnAyRmtTVSpfhyq+nZMN4UcmYyu2b9Mynhzt7Gr+O+cXyEPDNb2AVWVQ==}
+
+  '@fontsource/fira-code@5.2.7':
+    resolution: {integrity: sha512-tnB9NNund9TwIym8/7DMJe573nlPEQb+fKUV5GL8TBYXjIhDvL0D7mgmNVNQUPhXp+R7RylQeiBdkA4EbOHPGQ==}
+
+  '@fontsource/fira-sans@5.2.7':
+    resolution: {integrity: sha512-5DE4AealD/VnbwdzMgnpWfCttMQBbteNiK9DCJE7cVwZEbDTPLUoFDMMvxNQ498nZc5in7Mta9c/s+3Ehh0BAg==}
 
   '@gerrit0/mini-shiki@3.23.0':
     resolution: {integrity: sha512-bEMORlG0cqdjVyCEuU0cDQbORWX+kYCeo0kV1lbxF5bt4r7SID2l9bqsxJEM0zndaxpOUT7riCyIVEuqq/Ynxg==}
@@ -13880,6 +13907,10 @@ snapshots:
     dependencies:
       '@expressive-code/core': 0.42.0
 
+  '@fontsource/fira-code@5.2.7': {}
+
+  '@fontsource/fira-sans@5.2.7': {}
+
   '@gerrit0/mini-shiki@3.23.0':
     dependencies:
       '@shikijs/engine-oniguruma': 3.23.0
@@ -15715,6 +15746,13 @@ snapshots:
       '@tailwindcss/oxide': 4.1.18
       tailwindcss: 4.1.18
       vite: 7.3.1(@types/node@22.19.11)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)
+
+  '@tailwindcss/vite@4.1.18(vite@7.3.3(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))':
+    dependencies:
+      '@tailwindcss/node': 4.1.18
+      '@tailwindcss/oxide': 4.1.18
+      tailwindcss: 4.1.18
+      vite: 7.3.3(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)
 
   '@tanstack/intent@0.0.41':
     dependencies:

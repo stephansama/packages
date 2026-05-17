@@ -15,19 +15,20 @@ autoInstallPeers: true
 
 catalog:
   '@antfu/install-pkg': 1.1.0
-  '@arethetypeswrong/core': ^0.18.2
-  '@astrojs/starlight': ^0.39.2
-  '@astrojs/ts-plugin': ^1.10.7
+  '@arethetypeswrong/core': 0.18.2
+  '@astrojs/starlight': 0.39.2
+  '@astrojs/ts-plugin': 1.10.7
   '@bluwy/giget-core': 0.1.6
   '@catppuccin/palette': 1.7.1
-  '@catppuccin/starlight': ^2.0.1
+  '@catppuccin/starlight': 2.0.1
   '@catppuccin/tailwindcss': 1.0.0
   '@changesets/cli': 2.31.0
   '@clack/prompts': 1.3.0
   '@dotenvx/dotenvx': 1.52.0
   '@fontsource/fira-code': 5.2.7
   '@fontsource/fira-sans': 5.2.7
-  '@iconify/tailwind4': ^1.2.3
+  '@iconify-json/devicon': 1.2.62
+  '@iconify/tailwind4': 1.2.3
   '@iconify/types': 2.0.0
   '@iconify/utils': 2.3.0
   '@kba/makefile-parser': 0.0.6
@@ -47,7 +48,7 @@ catalog:
   actions-up: 1.11.0
   alfy: 2.1.0
   astro: 6.3.1
-  astro-icon: ^1.1.5
+  astro-icon: 1.1.5
   cheerio: 1.2.0
   colord: 2.9.3
   dedent: 1.7.2
@@ -80,12 +81,12 @@ catalog:
   react: 19.2.0
   simple-icons: 16.19.0
   smol-toml: 1.6.1
-  starlight-giscus: ^0.9.1
-  starlight-github-alerts: ^0.2.0
-  starlight-heading-badges: ^0.7.0
-  starlight-llms-txt: ^0.9.0
-  starlight-package-managers: ^0.12.0
-  starlight-plugin-icons: ^1.1.6
+  starlight-giscus: npm:@stephansama/starlight-giscus@0.9.1
+  starlight-github-alerts: 0.2.0
+  starlight-heading-badges: 0.7.0
+  starlight-llms-txt: 0.9.0
+  starlight-package-managers: 0.12.0
+  starlight-plugin-icons: 1.1.6
   tailwind-scrollbar: 4.0.2
   tailwindcss: 4.1.18
   taze: 19.9.2
@@ -118,9 +119,9 @@ catalogs:
     picospinner: 3.0.0
     yargs: 18.0.0
   commitlint:
-    '@commitlint/cli': 19.8.1
-    '@commitlint/config-conventional': 19.8.1
-    '@commitlint/types': 19.8.1
+    '@commitlint/cli': *commitlint
+    '@commitlint/config-conventional': *commitlint
+    '@commitlint/types': *commitlint
   eslint:
     '@e18e/eslint-plugin': 0.4.1
     '@eslint/css': 1.1.0
@@ -147,7 +148,7 @@ catalogs:
     eslint-plugin-pnpm: 1.5.0
     eslint-plugin-prettier: 5.5.5
     eslint-plugin-regexp: 3.1.0
-    eslint-plugin-storybook: 10.2.8
+    eslint-plugin-storybook: *storybook
     eslint-plugin-svelte: 3.17.1
     eslint-plugin-testing-library: 7.15.4
     eslint-plugin-unicorn: 64.0.0
@@ -166,8 +167,8 @@ catalogs:
     '@eslint/config-inspector': 1.3.0
     node-modules-inspector: 1.2.0
   manypkg:
-    '@manypkg/find-root': 3.1.0
-    '@manypkg/get-packages': 3.1.0
+    '@manypkg/find-root': *manypkg
+    '@manypkg/get-packages': *manypkg
     '@manypkg/tools': 2.1.1
   pnpm:
     '@pnpm/hooks.pnpmfile': 1100.0.8
@@ -195,11 +196,11 @@ catalogs:
     zod: 4.2.1
   storybook:
     '@chromatic-com/storybook': 4.1.3
-    '@storybook/addon-a11y': 10.2.8
-    '@storybook/addon-docs': 10.2.8
+    '@storybook/addon-a11y': *storybook
+    '@storybook/addon-docs': *storybook
     '@storybook/addon-svelte-csf': 5.0.11
-    '@storybook/svelte-vite': 10.2.8
-    storybook: 10.2.8
+    '@storybook/svelte-vite': *storybook
+    storybook: *storybook
   svelte:
     '@sveltejs/package': 2.5.7
     '@sveltejs/vite-plugin-svelte': 6.2.4
@@ -209,17 +210,17 @@ catalogs:
   tanstack:
     '@tanstack/intent': 0.0.41
   turbo:
-    '@turbo/gen': 2.8.20
-    turbo: 2.8.20
+    '@turbo/gen': *turbo
+    turbo: *turbo
   typedoc:
     typedoc: 0.28.10
     typedoc-plugin-markdown: 4.8.1
   typescript:
     tsnapi: 0.3.2
   vitest:
-    '@vitest/coverage-v8': 4.0.18
-    '@vitest/ui': 4.0.18
-    vitest: 4.0.18
+    '@vitest/coverage-v8': *vitest
+    '@vitest/ui': *vitest
+    vitest: *vitest
 
 cleanupUnusedCatalogs: true
 

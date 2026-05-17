@@ -49,14 +49,14 @@ catalogs:
       specifier: 1.1.0
       version: 1.1.0
     '@arethetypeswrong/core':
-      specifier: ^0.18.2
+      specifier: 0.18.2
       version: 0.18.2
     '@astrojs/starlight':
-      specifier: ^0.39.2
+      specifier: 0.39.2
       version: 0.39.2
     '@astrojs/ts-plugin':
-      specifier: ^1.10.7
-      version: 1.10.8
+      specifier: 1.10.7
+      version: 1.10.7
     '@bluwy/giget-core':
       specifier: 0.1.6
       version: 0.1.6
@@ -64,7 +64,7 @@ catalogs:
       specifier: 1.7.1
       version: 1.7.1
     '@catppuccin/starlight':
-      specifier: ^2.0.1
+      specifier: 2.0.1
       version: 2.0.1
     '@catppuccin/tailwindcss':
       specifier: 1.0.0
@@ -85,13 +85,13 @@ catalogs:
       specifier: 5.2.7
       version: 5.2.7
     '@iconify-json/devicon':
-      specifier: ^1.2.62
+      specifier: 1.2.62
       version: 1.2.62
     '@iconify-json/octicon':
       specifier: 1.2.21
       version: 1.2.21
     '@iconify/tailwind4':
-      specifier: ^1.2.3
+      specifier: 1.2.3
       version: 1.2.3
     '@iconify/types':
       specifier: 2.0.0
@@ -154,7 +154,7 @@ catalogs:
       specifier: 6.3.1
       version: 6.3.1
     astro-icon:
-      specifier: ^1.1.5
+      specifier: 1.1.5
       version: 1.1.5
     cheerio:
       specifier: 1.2.0
@@ -250,19 +250,19 @@ catalogs:
       specifier: 1.6.1
       version: 1.6.1
     starlight-github-alerts:
-      specifier: ^0.2.0
+      specifier: 0.2.0
       version: 0.2.0
     starlight-heading-badges:
-      specifier: ^0.7.0
+      specifier: 0.7.0
       version: 0.7.0
     starlight-llms-txt:
-      specifier: ^0.9.0
+      specifier: 0.9.0
       version: 0.9.0
     starlight-package-managers:
-      specifier: ^0.12.0
+      specifier: 0.12.0
       version: 0.12.0
     starlight-plugin-icons:
-      specifier: ^1.1.6
+      specifier: 1.1.6
       version: 1.1.6
     tailwind-scrollbar:
       specifier: 4.0.2
@@ -1632,7 +1632,7 @@ importers:
         version: 0.39.2(astro@6.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.52.5)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))(typescript@5.9.3)
       '@astrojs/ts-plugin':
         specifier: 'catalog:'
-        version: 1.10.8
+        version: 1.10.7
       '@catppuccin/starlight':
         specifier: 'catalog:'
         version: 2.0.1(@astrojs/starlight@0.39.2(astro@6.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.52.5)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))(typescript@5.9.3))(astro@6.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.52.5)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))
@@ -1865,8 +1865,8 @@ packages:
     resolution: {integrity: sha512-j8DNruA8ors99Al39RYZPJK4DC1bKkoNm93mAMuBhY9TCNC4R8n1q7ovFnJ5qhGh5Lsh7pa1gpQVpYpsJPeTHQ==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0}
 
-  '@astrojs/ts-plugin@1.10.8':
-    resolution: {integrity: sha512-fispa3VB/bRozjeLb8SqsnEWOIX8AIbDM9+yX2WTIhkIgO7axcstQYmfc6Oq0ZYRWQfLqdsW4CKxeClNcJ35tA==}
+  '@astrojs/ts-plugin@1.10.7':
+    resolution: {integrity: sha512-CFJQgMLxi7F21VMcLBuAQmD9KrnT/ACfhZgdhsmVzOcb5Lscu7MIUl/ZxYDviXqDnhDBF1JzYOj+kusJlGmG8w==}
 
   '@astrojs/yaml2ts@0.2.2':
     resolution: {integrity: sha512-GOfvSr5Nqy2z5XiwqTouBBpy5FyI6DEe+/g/Mk5am9SjILN1S5fOEvYK0GuWHg98yS/dobP4m8qyqw/URW35fQ==}
@@ -13064,7 +13064,7 @@ snapshots:
       is-wsl: 3.1.1
       which-pm-runs: 1.1.0
 
-  '@astrojs/ts-plugin@1.10.8':
+  '@astrojs/ts-plugin@1.10.7':
     dependencies:
       '@astrojs/compiler': 2.13.1
       '@astrojs/yaml2ts': 0.2.3
@@ -14536,7 +14536,7 @@ snapshots:
       remark-mdx: 3.1.0
       remark-parse: 11.0.0
       remark-rehype: 11.1.2
-      source-map: 0.7.4
+      source-map: 0.7.6
       unified: 11.0.5
       unist-util-position-from-estree: 2.0.0
       unist-util-stringify-position: 4.0.0
@@ -19090,7 +19090,7 @@ snapshots:
     dependencies:
       '@types/estree-jsx': 1.0.5
       astring: 1.9.0
-      source-map: 0.7.4
+      source-map: 0.7.6
 
   estree-util-visit@2.0.0:
     dependencies:
@@ -23587,7 +23587,7 @@ snapshots:
       '@types/node': 24.12.2
       '@types/sax': 1.2.7
       arg: 5.0.2
-      sax: 1.4.3
+      sax: 1.6.0
 
   slash@3.0.0: {}
 

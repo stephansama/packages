@@ -8,7 +8,7 @@ export default defineConfig({
 		cli: "./src/cli.ts",
 		{{/if}}
 		index: "./src/index.ts",
-		{{#if config}}
+		{{#if schema}}
 		schema: "./src/schema.ts",
 		{{/if}}
 	},
@@ -18,7 +18,7 @@ export default defineConfig({
 		bin: "./src/cli.ts",
 		{{/if}}
 		customExports(exports) {
-			{{#if config}}
+			{{#if schema}}
 			exports["./schema.json"] = "./dist/schema.json";
 			{{/if}}
 
@@ -32,7 +32,7 @@ export default defineConfig({
 	{{/if}}
 	publint: true,
 	target: "esnext",
-	{{#if config}}
+	{{#if schema}}
 	hooks: {
 		async "build:done"() {
 			const { configSchema } = await import("./dist/schema.mjs");

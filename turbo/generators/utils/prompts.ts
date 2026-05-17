@@ -18,6 +18,12 @@ export const name = {
 	},
 } as const satisfies PlopTypes.PromptQuestion;
 
+export const schema = {
+	message: "Generate a schema definition",
+	name: "schema",
+	type: "input",
+} as const satisfies PlopTypes.PromptQuestion;
+
 export const description = {
 	message: "What is the description of the new package?",
 	name: "description",

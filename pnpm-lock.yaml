@@ -249,6 +249,9 @@ catalogs:
     smol-toml:
       specifier: 1.6.1
       version: 1.6.1
+    starlight-giscus:
+      specifier: npm:@stephansama/starlight-giscus@0.9.1
+      version: 0.9.1
     starlight-github-alerts:
       specifier: 0.2.0
       version: 0.2.0
@@ -584,7 +587,6 @@ overrides:
   '@stephansama/svelte-social-share-links': workspace:*
   '@stephansama/typed-events': workspace:*
   create-stephansama-example: workspace:*
-  starlight-giscus: link:../starlight-giscus/packages/starlight-giscus
 
 importers:
 
@@ -1649,8 +1651,8 @@ importers:
         specifier: 'catalog:'
         version: 6.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.52.5)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)
       starlight-giscus:
-        specifier: link:../../../starlight-giscus/packages/starlight-giscus
-        version: link:../../../starlight-giscus/packages/starlight-giscus
+        specifier: 'catalog:'
+        version: '@stephansama/starlight-giscus@0.9.1(@astrojs/starlight@0.39.2(astro@6.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.52.5)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))(typescript@5.9.3))'
       starlight-github-alerts:
         specifier: 'catalog:'
         version: 0.2.0(@astrojs/starlight@0.39.2(astro@6.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.52.5)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))(typescript@5.9.3))
@@ -4467,6 +4469,12 @@ packages:
 
   '@stephansama/remark-usage@11.0.1':
     resolution: {integrity: sha512-rjZprojcBYSYWDeiY1m4FLvZZ9/xkuqnmQOqZFm+FdUC9RKFehJN2cwml1GXcG7ngj8FaeOgXlCXuNfkJ+ahQQ==}
+
+  '@stephansama/starlight-giscus@0.9.1':
+    resolution: {integrity: sha512-DGxu0T8KG2vQ5KjvcpO5Lfv6hjXMjxD8EJj15e63gG8lWpvE3DyM4pHs4qeTlCwcK9neQGgGoIvRW0Scf6sLEQ==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.37.0'
 
   '@stephansama/starlight-typedoc@0.22.0':
     resolution: {integrity: sha512-c/8/c3fPpBNPiBxdE+QXkgHiMAFjxn+tR+unwlRXNVtEkI3eqORDB0BtYRe/4jTJ2lFO4rZVeWgWotc43AIarA==}
@@ -15478,6 +15486,10 @@ snapshots:
       vfile-message: 4.0.2
     transitivePeerDependencies:
       - supports-color
+
+  '@stephansama/starlight-giscus@0.9.1(@astrojs/starlight@0.39.2(astro@6.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.52.5)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))(typescript@5.9.3))':
+    dependencies:
+      '@astrojs/starlight': 0.39.2(astro@6.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.52.5)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))(typescript@5.9.3)
 
   '@stephansama/starlight-typedoc@0.22.0(@astrojs/starlight@0.39.2(astro@6.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.52.5)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))(typescript@5.9.3))(typedoc-plugin-markdown@4.8.1(typedoc@0.28.10(typescript@5.9.3)))(typedoc@0.28.10(typescript@5.9.3))':
     dependencies:

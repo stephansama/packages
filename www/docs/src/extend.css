@@ -1,4 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Fira+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+	--sl-font: "Fira Sans", system-ui, sans-serif;
+	--sl-font-mono: "Fira Code", ui-monospace, monospace;
+}
 
 .sl-markdown-content > p:has(> a):not(:has(> :not(a))),
 .sl-markdown-content > * > p:has(> a):not(:has(> :not(a))) {
@@ -23,8 +28,8 @@
 	--home-peach: #f5a97f;
 	--home-sapphire: #7dc4e4;
 	--home-green: #a6da95;
-	--home-font-display: "Inter", system-ui, sans-serif;
-	--home-font-mono: "JetBrains Mono", ui-monospace, monospace;
+	--home-font-display: "Fira Sans", system-ui, sans-serif;
+	--home-font-mono: "Fira Code", ui-monospace, monospace;
 	--home-radius-sm: 2px;
 	--home-radius-md: 4px;
 	--home-radius-lg: 8px;

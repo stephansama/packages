@@ -21,13 +21,6 @@
 
 </div>
 
-[![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/ai-commit-msg)
-[![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/ai-commit-msg)
-[![NPM Version](https://img.shields.io/npm/v/%40stephansama%2Fai-commit-msg?logo=npm&logoColor=red&color=211F1F&labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/ai-commit-msg)
-[![JSR](https://jsr.io/badges/@stephansama/ai-commit-msg)](https://jsr.io/@stephansama/ai-commit-msg)
-[![socket.dev](https://badge.socket.dev/npm/package/@stephansama/ai-commit-msg)](https://socket.dev/npm/package/@stephansama/ai-commit-msg/overview)
-[![npm downloads](https://img.shields.io/npm/dw/@stephansama/ai-commit-msg?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/ai-commit-msg)
-
 generate commit messages using ai
 
 ##### Table of contents

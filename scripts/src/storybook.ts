@@ -18,8 +18,10 @@ for (const pkg of packages) {
 		path.join(pkg.dir, "storybook-static"),
 	);
 
+	const scopedPath = pkg.packageJson.name.replace(/^@/, "");
+
 	const outputDirectory = path.resolve(
-		path.join(www.dir, "public", "api", pkg.packageJson.name, "storybook"),
+		path.join(www.dir, "public", "api", scopedPath, "storybook"),
 	);
 
 	await fs.promises.cp(storybookDirectory, outputDirectory, {

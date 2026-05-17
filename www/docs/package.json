@@ -4,13 +4,12 @@
   "description": "website for @stephansama packages",
   "type": "module",
   "scripts": {
-    "build": "vitepress build",
-    "predev": "pnpm run setup",
-    "dev": "vitepress dev",
-    "prelint": "pnpm run setup:examples && pnpm run setup:typedoc",
+    "build": "astro build",
+    "dev": "astro dev",
+    "prelint": "pnpm run setup:examples",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
-    "preview": "vitepress preview",
+    "preview": "astro preview",
     "setup": "pnpm run --sequential \"/^setup:.*/\"",
     "presetup:eslint-config-inspector": "pnpm --filter=@stephansama/eslint-config run build",
     "setup:eslint-config-inspector": "eslint-config-inspector build --base /eslint --outDir public/eslint",
@@ -18,20 +17,34 @@
     "setup:healthcheck": "node -e \"console.log(JSON.stringify({message: Date.now()}))\" >public/healthcheck.json",
     "setup:meta": "pnpm --filter=scripts meta >public/meta.json",
     "setup:node-modules-inspector": "node-modules-inspector build --base /node_modules --outDir public/node_modules",
-    "setup:storybook": "pnpm --filter=scripts storybook",
-    "setup:typedoc": "typedoc",
-    "setup:typedoc-sidebar": "pnpm --filter=scripts typedoc-sidebar"
+    "setup:storybook": "pnpm --filter=scripts storybook"
   },
   "dependencies": {
-    "@catppuccin/vitepress": "catalog:vitepress",
     "@eslint/config-inspector": "catalog:inspector",
+    "@fontsource/fira-code": "catalog:",
+    "@fontsource/fira-sans": "catalog:",
+    "@iconify-json/octicon": "catalog:",
+    "@tailwindcss/vite": "catalog:",
+    "astro-icon": "catalog:",
     "node-modules-inspector": "catalog:inspector",
+    "starlight-heading-badges": "catalog:",
+    "starlight-package-managers": "catalog:",
+    "tailwindcss": "catalog:",
     "typedoc": "catalog:typedoc",
-    "typedoc-plugin-markdown": "catalog:typedoc",
-    "typedoc-vitepress-theme": "catalog:typedoc",
-    "vitepress": "catalog:vitepress"
+    "typedoc-plugin-markdown": "catalog:typedoc"
   },
   "devDependencies": {
-    "vitepress-plugin-llms": "catalog:vitepress"
+    "@astrojs/starlight": "catalog:",
+    "@astrojs/ts-plugin": "catalog:",
+    "@catppuccin/starlight": "catalog:",
+    "@iconify-json/devicon": "catalog:",
+    "@iconify/tailwind4": "catalog:",
+    "@stephansama/starlight-typedoc": "catalog:",
+    "astro": "catalog:",
+    "starlight-giscus": "catalog:",
+    "starlight-github-alerts": "catalog:",
+    "starlight-llms-txt": "catalog:",
+    "starlight-plugin-icons": "catalog:",
+    "zod": "catalog:schema"
   }
 }

@@ -6,17 +6,17 @@ export function addTemplate({
 	type: "cli" | "env" | "lib";
 }) {
 	return {
-		base: `{{turbo.paths.root}}/turbo/generators/templates/${templateType}`,
+		base: `{{ turbo.paths.root }}/turbo/generators/templates/${templateType}`,
 		destination: `{{ turbo.paths.root }}/core/{{ dashCase name }}`,
-		templateFiles: `{{turbo.paths.root}}/turbo/generators/templates/${templateType}/**`,
+		templateFiles: `{{ turbo.paths.root }}/turbo/generators/templates/${templateType}/**`,
 		type: "addMany",
 	} as const satisfies PlopTypes.ActionType;
 }
 
 export const addAllCommon = {
 	base: `{{ turbo.paths.root }}/turbo/generators/templates/common`,
-	destination: `{{turbo.paths.root}}/core/{{dashCase name}}`,
-	templateFiles: `{{turbo.paths.root}}/turbo/generators/templates/common/**`,
+	destination: `{{ turbo.paths.root }}/core/{{ dashCase name }}`,
+	templateFiles: `{{ turbo.paths.root }}/turbo/generators/templates/common/**`,
 	type: "addMany",
 } as const;
 

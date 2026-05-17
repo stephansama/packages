@@ -1,3 +1,5 @@
+<div align="center">
+
 # @stephansama/{{name}}
 
 [![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/{{name}})
@@ -8,6 +10,8 @@
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/{{name}}?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/{{name}})
 
 {{description}}
+
+</div>
 
 ##### Table of contents
 

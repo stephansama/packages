@@ -1,8 +1,8 @@
 {
   "$schema": "https://typedoc-plugin-markdown.org/schema.json",
   "name": "@stephansama packages",
+  "tsconfig": "../../tsconfig.json",
   "readme": "../../README.md",
-  "plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
   "indexFormat": "htmlTable",
   "useCodeBlocks": true,
   "hideBreadcrumbs": true,
@@ -31,6 +31,7 @@
     ],
     "skipErrorChecking": true,
     "excludeExternals": true,
-    "jsDocCompatibility": true
+    "jsDocCompatibility": true,
+    "sourceLinkTemplate": "https://github.com/stephansama/packages/blob/{gitRevision}/{path}#L{line}"
   }
 }

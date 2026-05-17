@@ -1,0 +1,203 @@
+<section class="pb-[clamp(64px,10vw,120px)]">
+	<div
+		class="relative grid grid-cols-1 gap-6 font-sans lg:grid-cols-3 lg:grid-rows-[repeat(2,320px)]"
+		data-bento-grid
+	>
+		<div
+			class="bento-item border-line bg-surface hover:border-red relative flex h-[320px] flex-col justify-between overflow-hidden border p-10 transition-[border-color] duration-300 ease-in-out lg:col-span-2 lg:h-auto"
+			data-status="[NORMAL] README.md 10:24"
+		>
+			<div>
+				<span
+					class="border-line text-red mb-4 inline-flex items-center border bg-[var(--sl-color-bg)] px-3 py-1 font-mono text-[11px] tracking-[0.1em] uppercase"
+				>
+					DEVELOPER_EXPERIENCE
+				</span>
+				<h3
+					class="text-fg mb-4 font-sans text-[22px] font-semibold tracking-[-0.01em]"
+				>
+					Developer experience.
+				</h3>
+				<p class="text-muted max-w-[320px] text-[15px] leading-[1.5]">
+					Consistent tooling across the monorepo: Turborepo, pnpm workspaces,
+					ESLint, and automated releases.
+				</p>
+			</div>
+			<div
+				class="bento-graphic text-muted pointer-events-none absolute right-10 bottom-10 z-0 max-w-[60%] text-right font-mono text-[11px] leading-[1.6] opacity-10 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+			>
+				<span>import &#123; ai &#125; from "@stephansama/ai-commit-msg";</span>
+				<br />
+				<span>ai.generate(&#123; staged: true &#125;);</span>
+			</div>
+		</div>
+
+		<div
+			class="bento-item border-line bg-surface hover:border-red relative mt-0! flex h-[320px] flex-col justify-between overflow-hidden border p-10 transition-[border-color] duration-300 ease-in-out lg:row-span-2 lg:h-auto"
+			data-status="[INSERT] tree.pkg 42:12"
+		>
+			<div>
+				<span
+					class="border-line text-red mb-4 inline-flex items-center border bg-[var(--sl-color-bg)] px-3 py-1 font-mono text-[11px] tracking-[0.1em] uppercase"
+				>
+					COMPOSABILITY
+				</span>
+				<h3
+					class="text-fg mb-4 font-sans text-[22px] font-semibold tracking-[-0.01em]"
+				>
+					Modular &amp; composable.
+				</h3>
+				<p class="text-muted max-w-[320px] text-[15px] leading-[1.5]">
+					Packages are small and focused. Use only what you need — each package
+					is independently published.
+				</p>
+			</div>
+			<div
+				class="bento-graphic pointer-events-none absolute right-10 bottom-10 z-0 max-w-[60%] opacity-10 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+			>
+				<svg
+					aria-hidden="true"
+					fill="none"
+					height="180"
+					stroke="var(--color-red)"
+					stroke-width="0.7"
+					viewBox="0 0 100 100"
+					width="180"
+				>
+					<path d="M50 10 L90 30 L90 70 L50 90 L10 70 L10 30 Z"></path>
+					<path d="M50 10 L50 50 L90 30 M50 50 L10 30 M50 50 L50 90"></path>
+					<circle cx="50" cy="50" fill="var(--color-red)" r="3"></circle>
+				</svg>
+			</div>
+		</div>
+
+		<div
+			class="bento-item border-line bg-surface hover:border-red relative flex h-[320px] flex-col justify-between overflow-hidden border p-10 transition-[border-color] duration-300 ease-in-out lg:h-auto"
+			data-status="[VISUAL] git_branch 0:0"
+		>
+			<div>
+				<span
+					class="border-line text-red mb-4 inline-flex items-center border bg-[var(--sl-color-bg)] px-3 py-1 font-mono text-[11px] tracking-[0.1em] uppercase"
+				>
+					OPEN_SOURCE
+				</span>
+				<h3
+					class="text-fg mb-4 font-sans text-[22px] font-semibold tracking-[-0.01em]"
+				>
+					Open source.
+				</h3>
+				<p class="text-muted max-w-[320px] text-[15px] leading-[1.5]">
+					All packages are open source on
+					<a
+						class="text-red underline"
+						href="https://github.com/stephansama/packages">GitHub</a
+					>. Built in the open, battle-tested by use.
+				</p>
+			</div>
+		</div>
+
+		<div
+			class="bento-item border-line bg-surface hover:border-red relative flex h-[320px] flex-col justify-between overflow-hidden border p-10 transition-[border-color] duration-300 ease-in-out lg:h-auto"
+			data-status="[NORMAL] main.ts 100:100"
+		>
+			<div>
+				<span
+					class="border-line text-red mb-4 inline-flex items-center border bg-[var(--sl-color-bg)] px-3 py-1 font-mono text-[11px] tracking-[0.1em] uppercase"
+				>
+					TYPESCRIPT
+				</span>
+				<h3
+					class="text-fg mb-4 font-sans text-[22px] font-semibold tracking-[-0.01em]"
+				>
+					TypeScript-first.
+				</h3>
+				<p class="text-muted max-w-[320px] text-[15px] leading-[1.5]">
+					Every package is written in TypeScript with full type definitions and
+					generated API documentation.
+				</p>
+			</div>
+			<div
+				class="bento-graphic text-muted pointer-events-none absolute right-10 bottom-10 z-0 max-w-[60%] text-right font-mono text-[11px] leading-[1.6] opacity-10 transition-all duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+			>
+				<span>type Package&lt;T&gt; = Readonly&lt;T&gt;;</span>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style is:global>
+	.home-root .bento-item::before {
+		content: "";
+		position: absolute;
+		inset: -1px;
+		pointer-events: none;
+		background: radial-gradient(
+			300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+			color-mix(in srgb, var(--color-red) 22%, transparent),
+			transparent 70%
+		);
+		opacity: var(--spotlight-opacity, 0);
+		transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+		z-index: 0;
+	}
+
+	.home-root .bento-item::after {
+		content: attr(data-status);
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: var(--sl-color-bg);
+		border-top: 1px solid var(--color-line);
+		padding: 6px 12px;
+		font-family: var(--font-mono);
+		font-size: 10px;
+		color: var(--color-muted);
+		text-align: right;
+		opacity: 0.6;
+		transition: all 0.3s ease;
+		z-index: 2;
+	}
+
+	.home-root .bento-item:hover::after {
+		opacity: 1;
+		color: var(--color-red);
+		background: color-mix(in srgb, var(--color-red) 5%, var(--sl-color-bg));
+	}
+
+	.home-root .bento-item > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.home-root .bento-item:hover .bento-graphic {
+		opacity: 0.3;
+		transform: scale(1.05) rotate(2deg);
+	}
+</style>
+
+<script>
+	const prefersReducedMotion = window.matchMedia(
+		"(prefers-reduced-motion: reduce)",
+	).matches;
+	const grid = document.querySelector<HTMLElement>("[data-bento-grid]");
+
+	if (grid && !prefersReducedMotion) {
+		const items = grid.querySelectorAll<HTMLElement>(".bento-item");
+		for (const item of items) {
+			item.addEventListener("mousemove", (event) => {
+				const rect = item.getBoundingClientRect();
+				item.style.setProperty("--mouse-x", `${event.clientX - rect.left}px`);
+				item.style.setProperty("--mouse-y", `${event.clientY - rect.top}px`);
+			});
+
+			item.addEventListener("mouseenter", () => {
+				item.style.setProperty("--spotlight-opacity", "1");
+			});
+
+			item.addEventListener("mouseleave", () => {
+				item.style.setProperty("--spotlight-opacity", "0");
+			});
+		}
+	}
+</script>

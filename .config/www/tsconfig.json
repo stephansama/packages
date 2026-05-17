@@ -1,8 +1,0 @@
-{
-  "extends": "../../tsconfig.base.json",
-  "include": [".vitepress/**/*"],
-  "compilerOptions": {
-    "composite": true,
-    "types": ["node"]
-  }
-}

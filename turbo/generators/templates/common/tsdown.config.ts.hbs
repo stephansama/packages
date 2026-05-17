@@ -1,0 +1,57 @@
+import { defineConfig } from "tsdown";
+{{#if snapshot}}
+import ApiSnapshot from "tsnapi/rolldown";
+{{/if}}
+{{#if schema}}
+import * as fs from "node:fs";
+import path from "node:path";
+import * as z from "zod";
+{{/if}}
+
+export default defineConfig({
+	attw: { profile: "esm-only" },
+	dts: true,
+	entry: {
+		{{#if bin}}
+		cli: "./src/cli.ts",
+		{{/if}}
+		index: "./src/index.ts",
+		{{#if schema}}
+		schema: "./src/schema.ts",
+		{{/if}}
+	},
+	{{#if bin}}
+	exports: {
+		{{#if bin}}
+		bin: "./src/cli.ts",
+		{{/if}}
+		customExports(exports) {
+			{{#if schema}}
+			exports["./schema.json"] = "./dist/schema.json";
+			{{/if}}
+
+			return Object.fromEntries(
+				Object.entries(exports).toSorted(([a], [b]) => a.localeCompare(b)),
+			);
+		},
+		enabled: true,
+		legacy: true,
+	},
+	{{/if}}
+	publint: true,
+	target: "esnext",
+	{{#if schema}}
+	hooks: {
+		async "build:done"() {
+			const { configSchema } = await import("./dist/schema.mjs");
+			const jsonSchema = z.toJSONSchema(configSchema);
+			const jsonSchemaFile = JSON.stringify(jsonSchema);
+			const jsonSchemaPath = path.join("./dist", "schema.json");
+			await fs.promises.writeFile(jsonSchemaPath, jsonSchemaFile);
+		},
+	},
+	{{/if }}
+	{{#if snapshot}}
+	plugins: [ApiSnapshot()],
+	{{/if}}
+});

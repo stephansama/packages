@@ -31,6 +31,7 @@
     ],
     "skipErrorChecking": true,
     "excludeExternals": true,
-    "jsDocCompatibility": true
+    "jsDocCompatibility": true,
+    "sourceLinkTemplate": "https://github.com/stephansama/packages/blob/{gitRevision}/{path}#L{line}"
   }
 }

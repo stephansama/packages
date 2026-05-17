@@ -7,6 +7,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI) {
 		description: "Generate a new cli package",
 		prompts: [prompts.name, prompts.description],
 		actions(data) {
+			data.config = "";
 			return [actions.addTemplate({ type: "cli" }), actions.addAllCommon];
 		},
 	});

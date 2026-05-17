@@ -5,7 +5,12 @@ import { actions, prompts } from "./utils";
 export default function generator(plop: PlopTypes.NodePlopAPI) {
 	plop.setGenerator("cli", {
 		description: "Generate a new cli package",
-		prompts: [prompts.name, prompts.description, prompts.schema],
+		prompts: [
+			prompts.name,
+			prompts.description,
+			prompts.schema,
+			prompts.snapshot,
+		],
 		actions(data) {
 			if (!data) throw new Error("unable to find original answers");
 			data.bin = true;
@@ -29,7 +34,12 @@ export default function generator(plop: PlopTypes.NodePlopAPI) {
 
 	plop.setGenerator("lib", {
 		description: "Generate a new lib package",
-		prompts: [prompts.name, prompts.description, prompts.schema],
+		prompts: [
+			prompts.name,
+			prompts.description,
+			prompts.schema,
+			prompts.snapshot,
+		],
 		actions(data) {
 			if (!data) throw new Error("unable to find original answers");
 			data.build = true;

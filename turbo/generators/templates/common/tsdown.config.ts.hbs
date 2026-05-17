@@ -1,4 +1,12 @@
 import { defineConfig } from "tsdown";
+{{#if snapshot}}
+import ApiSnapshot from "tsnapi/rolldown";
+{{/if}}
+{{#if schema}}
+import * as fs from "node:fs";
+import path from "node:path";
+import * as z from "zod";
+{{/if}}
 
 export default defineConfig({
 	attw: { profile: "esm-only" },

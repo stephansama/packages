@@ -56,6 +56,10 @@ export default defineConfig({
 					sidebar: {
 						removeScope: true,
 					},
+					typeDoc: {
+						gitRevision: process.env.VERCEL_GIT_COMMIT_SHA,
+						sourceLinkTemplate: `https://github.com/stephansama/packages/blob/{gitRevision}/{path}#L{line}`,
+					},
 				}),
 			],
 			sidebar: [typeDocSidebarGroup],

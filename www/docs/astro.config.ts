@@ -28,11 +28,8 @@ export default defineConfig({
 				SkipLink: "./src/components/skip-link.astro",
 			},
 			customCss: ["./src/extend.css"],
-			favicon: "./src/favicon.svg",
 			head: [{ attrs: { src: script }, tag: "script" }],
-			logo: {
-				src: "./src/favicon.svg",
-			},
+			logo: { src: "./public/favicon.svg" },
 			plugins: [
 				starlightCatppuccin({
 					dark: { accent: "red", flavor: "macchiato" },
@@ -62,7 +59,24 @@ export default defineConfig({
 					},
 				}),
 			],
-			sidebar: [typeDocSidebarGroup],
+			sidebar: [
+				{
+					items: [
+						{
+							attrs: { class: "tool-icon-eslint" },
+							label: "ESLint Config",
+							link: "/eslint/",
+						},
+						{
+							attrs: { class: "tool-icon-package" },
+							label: "Node Modules",
+							link: "/node_modules/",
+						},
+					],
+					label: "Tools",
+				},
+				typeDocSidebarGroup,
+			],
 			social: [
 				{
 					href: "https://bsky.app/profile/stephansama.info",

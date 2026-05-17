@@ -37,6 +37,8 @@
     "@astrojs/starlight": "catalog:",
     "@astrojs/ts-plugin": "catalog:",
     "@catppuccin/starlight": "catalog:",
+    "@iconify-json/devicon": "catalog:",
+    "@iconify/tailwind4": "catalog:",
     "@stephansama/starlight-typedoc": "catalog:",
     "astro": "catalog:",
     "starlight-giscus": "catalog:",

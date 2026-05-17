@@ -25,3 +25,4 @@ storybook-static
 test-report.junit.xml
 www/docs/src/content/docs/api
 www/docs/public/*
+!www/docs/public/favicon.svg

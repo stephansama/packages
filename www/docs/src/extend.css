@@ -8,6 +8,8 @@
 
 @import "tailwindcss";
 
+@plugin "@iconify/tailwind4";
+
 .content-panel:first-child:has(> .sl-container > h1#_top) {
 	@apply hidden;
 }
@@ -56,6 +58,37 @@
 site-search button[data-open-modal],
 site-search dialog {
 	border-radius: 0;
+}
+
+.tool-icon-eslint,
+.tool-icon-package {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5em;
+}
+
+.tool-icon-eslint::before,
+.tool-icon-package::before {
+	content: "";
+	display: inline-block;
+	flex-shrink: 0;
+	width: 1em;
+	height: 1em;
+	background-color: currentColor;
+	-webkit-mask-image: var(--tool-icon-url);
+	mask-image: var(--tool-icon-url);
+	-webkit-mask-size: contain;
+	mask-size: contain;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+}
+
+.tool-icon-package::before {
+	@apply icon-[devicon--nodejs] text-transparent content-[""];
+}
+
+.tool-icon-eslint::before {
+	@apply icon-[devicon--eslint] text-transparent content-[""];
 }
 
 .sl-markdown-content:has(> .home-root) {

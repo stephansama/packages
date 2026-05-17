@@ -36,7 +36,7 @@ const animatedLines = [
 		<span
 			class="border-line bg-surface inline-flex items-center border px-3 py-1 font-mono text-[11px] tracking-[0.1em] text-[var(--sl-color-red)] uppercase"
 		>
-			PACKAGES :: MONOREPO
+			deployed: {new Date().toLocaleDateString("en-US")}
 		</span>
 		<h1
 			class="text-fg mt-[0.5em] mb-6 font-sans text-[clamp(40px,8vw,72px)] leading-[1.1] font-semibold tracking-tight"
@@ -47,7 +47,7 @@ const animatedLines = [
 			A collection of TypeScript-first, open-source packages crafted for the
 			terminal-native engineer.
 		</p>
-		<div class="flex flex-wrap gap-4">
+		<div class="flex flex-wrap gap-4 pt-4">
 			<a
 				class="inline-flex cursor-pointer items-center gap-3 border-0 bg-[var(--sl-color-accent)] px-7 py-3.5 font-mono text-sm font-semibold text-white no-underline transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:text-white hover:shadow-[0_8px_24px_color-mix(in_srgb,var(--sl-color-accent)_30%,transparent)]"
 				href="/api/"

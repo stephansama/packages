@@ -233,9 +233,6 @@ overrides:
   '@stephansama/svelte-social-share-links': workspace:*
   '@stephansama/typed-events': workspace:*
   create-stephansama-example: workspace:*
-  # Temporary local override while https://github.com/dragomano/starlight-giscus/pull/9 is in review.
-  # Tracks fork branch fix/initial-theme-from-localstorage. Linear: STE-230.
-  starlight-giscus: link:../starlight-giscus/packages/starlight-giscus
 
 shellEmulator: true
 

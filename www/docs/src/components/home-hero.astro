@@ -33,18 +33,16 @@ const animatedLines = [
 >
 	<div class="max-w-[600px]">
 		<span
-			class="inline-flex items-center border border-line bg-surface px-3 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--sl-color-red)]"
+			class="border-line bg-surface inline-flex items-center border px-3 py-1 font-mono text-[11px] tracking-[0.1em] text-[var(--sl-color-red)] uppercase"
 		>
 			PACKAGES :: MONOREPO
 		</span>
 		<h1
-			class="mb-6 mt-[0.5em] font-sans text-[clamp(40px,8vw,72px)] font-semibold leading-[1.1] tracking-tight text-fg"
+			class="text-fg mt-[0.5em] mb-6 font-sans text-[clamp(40px,8vw,72px)] leading-[1.1] font-semibold tracking-tight"
 		>
 			@stephansama packages.
 		</h1>
-		<p
-			class="mb-12 max-w-[480px] text-xl font-normal leading-[1.5] text-muted"
-		>
+		<p class="text-muted mb-12 max-w-[480px] text-xl leading-[1.5] font-normal">
 			A collection of TypeScript-first, open-source packages crafted for the
 			terminal-native engineer.
 		</p>
@@ -67,7 +65,7 @@ const animatedLines = [
 				Browse API docs
 			</a>
 			<a
-				class="inline-flex cursor-pointer items-center gap-3 border border-line bg-surface px-7 py-3.5 font-mono text-sm font-semibold text-fg no-underline transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-muted hover:bg-line hover:text-fg"
+				class="border-line bg-surface text-fg hover:border-muted hover:bg-line hover:text-fg inline-flex cursor-pointer items-center gap-3 border px-7 py-3.5 font-mono text-sm font-semibold no-underline transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]"
 				href="https://github.com/stephansama/packages"
 				rel="noopener"
 			>
@@ -89,22 +87,20 @@ const animatedLines = [
 
 	<div
 		aria-hidden="true"
-		class="terminal relative flex h-[440px] flex-col overflow-hidden border border-line bg-surface shadow-[0_32px_64px_rgba(0,0,0,0.4)]"
+		class="terminal border-line bg-surface relative flex h-[440px] flex-col overflow-hidden border shadow-[0_32px_64px_rgba(0,0,0,0.4)]"
 	>
 		<div
-			class="flex items-center gap-3 border-b border-line bg-surface px-4 py-3"
+			class="border-line bg-surface flex items-center gap-3 border-b px-4 py-3"
 		>
 			<span class="inline-block size-2 rounded-[2px] bg-[#ed8796]"></span>
 			<span class="inline-block size-2 rounded-[2px] bg-[#eed49f]"></span>
-			<span class="inline-block size-2 rounded-[2px] bg-pistachio"></span>
-			<span
-				class="ml-auto mr-auto font-mono text-[11px] text-muted opacity-80"
-			>
+			<span class="bg-pistachio inline-block size-2 rounded-[2px]"></span>
+			<span class="text-muted mr-auto ml-auto font-mono text-[11px] opacity-80">
 				nvim — manifesto.md
 			</span>
 		</div>
 		<div
-			class="terminal-body grow overflow-y-auto p-5 font-mono text-[13px] leading-[1.6] text-muted [scrollbar-color:var(--sl-color-gray-5)_transparent] [scrollbar-width:thin]"
+			class="terminal-body text-muted grow overflow-y-auto p-5 font-mono text-[13px] leading-[1.6] [scrollbar-color:var(--sl-color-gray-5)_transparent] [scrollbar-width:thin]"
 			data-animated-lines={JSON.stringify(animatedLines)}
 			data-terminal-body
 		>

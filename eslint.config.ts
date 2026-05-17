@@ -10,8 +10,9 @@ export default await config({
 	},
 	ignore: [
 		`**/__snapshots__/**`,
-		`./.config/www/api/**`,
 		`./turbo/generators/**`,
+		`./www/docs/public/**`,
+		`./www/docs/src/content/docs/api/**`,
 	],
 	imports: {
 		ignore: ["astro:.*", "virtual:.*", "$app/state"],

@@ -1,0 +1,17 @@
+.sl-markdown-content > p:has(> a):not(:has(> :not(a))),
+.sl-markdown-content > * > p:has(> a):not(:has(> :not(a))) {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5em;
+}
+
+.sl-link-button {
+	border-radius: 0px;
+}
+
+.sl-link-button.minimal {
+	border: 1px solid var(--sl-color-white);
+	padding-inline: 1em;
+	border-radius: 0px;
+}

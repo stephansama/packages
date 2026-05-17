@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "build": "astro build",
-    "predev": "pnpm run setup",
     "dev": "astro dev",
     "prelint": "pnpm run setup:examples",
     "lint": "eslint ./",
@@ -23,6 +22,8 @@
   "dependencies": {
     "@eslint/config-inspector": "catalog:inspector",
     "node-modules-inspector": "catalog:inspector",
+    "starlight-heading-badges": "catalog:",
+    "starlight-package-managers": "catalog:",
     "typedoc": "catalog:typedoc",
     "typedoc-plugin-markdown": "catalog:typedoc"
   },
@@ -30,13 +31,13 @@
     "@astrojs/starlight": "catalog:",
     "@astrojs/ts-plugin": "catalog:",
     "@catppuccin/starlight": "catalog:",
+    "@stephansama/starlight-typedoc": "0.22.5",
     "astro": "catalog:",
     "starlight-giscus": "catalog:",
     "starlight-github-alerts": "catalog:",
     "starlight-llms-txt": "catalog:",
     "starlight-package-managers": "catalog:",
     "starlight-plugin-icons": "catalog:",
-    "starlight-typedoc": "catalog:",
     "zod": "catalog:schema"
   }
 }

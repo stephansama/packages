@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
 .sl-markdown-content > p:has(> a):not(:has(> :not(a))),
 .sl-markdown-content > * > p:has(> a):not(:has(> :not(a))) {
 	display: flex;
@@ -14,4 +16,30 @@
 	border: 1px solid var(--sl-color-white);
 	padding-inline: 1em;
 	border-radius: 0px;
+}
+
+.home-root {
+	--home-accent: #c6a0f6;
+	--home-peach: #f5a97f;
+	--home-sapphire: #7dc4e4;
+	--home-green: #a6da95;
+	--home-font-display: "Inter", system-ui, sans-serif;
+	--home-font-mono: "JetBrains Mono", ui-monospace, monospace;
+	--home-radius-sm: 2px;
+	--home-radius-md: 4px;
+	--home-radius-lg: 8px;
+	--home-space-section: clamp(64px, 10vw, 120px);
+
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 24px;
+}
+
+[data-theme="light"] .home-root {
+	--home-accent: #8839ef;
+}
+
+.sl-markdown-content:has(> .home-root) {
+	max-width: none;
 }

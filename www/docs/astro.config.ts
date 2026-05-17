@@ -10,11 +10,33 @@ import starlightHeadingBadges from "starlight-heading-badges";
 import starlightLlmsTxt from "starlight-llms-txt";
 import { starlightIconsPlugin } from "starlight-plugin-icons";
 
+const css = String.raw;
+
 export default defineConfig({
 	integrations: [
 		starlight({
 			customCss: ["./src/extend.css"],
 			favicon: "./src/favicon.svg",
+			head: [
+				{
+					attrs: {
+						defer: true,
+						src: "", // google tag manager
+					},
+					tag: "script",
+				},
+				{
+					content: css`
+						.content-panel:first-child:has(> .sl-container > h1#_top) {
+							display: none;
+						}
+						.content-panel:nth-child(2) {
+							border-top: 0;
+						}
+					`,
+					tag: "style",
+				},
+			],
 			logo: {
 				src: "./src/favicon.svg",
 			},

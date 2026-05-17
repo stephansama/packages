@@ -1,0 +1,376 @@
+---
+const initialLines = [
+	{ cmd: "pnpm add @stephansama/ai-commit-msg", type: "prompt" },
+	{ text: "Resolving dependencies...", type: "output" },
+	{ text: "Verified sha256:7dc4e4...", type: "info" },
+	{
+		text: "Success: @stephansama/ai-commit-msg installed.",
+		type: "success",
+	},
+];
+
+const animatedLines = [
+	{
+		cmd: "cat manifesto.md",
+		output: "Small packages, sharp tools, zero bloat.",
+		type: "info",
+	},
+	{
+		cmd: "pnpm -r test",
+		output: "All workspace packages verified.",
+		type: "success",
+	},
+	{
+		cmd: 'git commit -m "ship"',
+		output: "Pushed to origin/main.",
+		type: "info",
+	},
+];
+---
+
+<section class="hero">
+	<div class="hero-content">
+		<span class="badge">PACKAGES :: MONOREPO</span>
+		<h1>@stephansama packages.</h1>
+		<p class="hero-sub">
+			A collection of TypeScript-first, open-source packages crafted for the
+			terminal-native engineer.
+		</p>
+		<div class="btn-group">
+			<a class="btn btn-primary" href="/api/">
+				<svg
+					aria-hidden="true"
+					fill="none"
+					height="18"
+					stroke="currentColor"
+					stroke-width="2"
+					viewBox="0 0 24 24"
+					width="18"
+				>
+					<path d="M5 12h14M12 5l7 7-7 7"></path>
+				</svg>
+				Browse API docs
+			</a>
+			<a
+				class="btn btn-secondary"
+				href="https://github.com/stephansama/packages"
+				rel="noopener"
+			>
+				<svg
+					aria-hidden="true"
+					fill="currentColor"
+					height="18"
+					viewBox="0 0 24 24"
+					width="18"
+				>
+					<path
+						d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.412-4.041-1.412-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+					></path>
+				</svg>
+				GitHub
+			</a>
+		</div>
+	</div>
+
+	<div aria-hidden="true" class="terminal">
+		<div class="terminal-header">
+			<span class="dot dot-red"></span>
+			<span class="dot dot-yellow"></span>
+			<span class="dot dot-green"></span>
+			<span class="terminal-title">nvim — manifesto.md</span>
+		</div>
+		<div
+			class="terminal-body"
+			data-animated-lines={JSON.stringify(animatedLines)}
+			data-terminal-body
+		>
+			{
+				initialLines.map((line) =>
+					line.type === "prompt" ? (
+						<div class="line">
+							<span class="prompt">➜</span>
+							<span class="cmd">{line.cmd}</span>
+						</div>
+					) : (
+						<div class={`line ${line.type}`}>{line.text}</div>
+					),
+				)
+			}
+			<div class="line" data-terminal-cursor>
+				<span class="prompt">➜</span>
+				<span class="cmd" data-terminal-typing></span>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style is:global>
+	.home-root .hero {
+		padding: var(--home-space-section) 0;
+		display: grid;
+		grid-template-columns: 1.2fr 1fr;
+		gap: 80px;
+		align-items: center;
+		font-family: var(--home-font-display);
+	}
+
+	.home-root .hero-content {
+		max-width: 600px;
+	}
+
+	.home-root .hero .badge {
+		display: inline-flex;
+		align-items: center;
+		padding: 4px 12px;
+		background: var(--sl-color-black);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: var(--home-radius-sm);
+		font-size: 11px;
+		font-family: var(--home-font-mono);
+		color: var(--sl-color-red);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.home-root .hero-content h1 {
+		font-family: var(--home-font-display);
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		font-size: clamp(40px, 8vw, 72px);
+		line-height: 1.1;
+		margin-bottom: 24px;
+		margin-top: 0.5em;
+		color: var(--sl-color-white);
+	}
+
+	.home-root .hero-sub {
+		font-size: 20px;
+		color: var(--sl-color-gray-3);
+		margin-bottom: 48px;
+		max-width: 480px;
+		font-weight: 400;
+		line-height: 1.5;
+	}
+
+	.home-root .btn-group {
+		display: flex;
+		gap: 16px;
+		flex-wrap: wrap;
+	}
+
+	.home-root .btn {
+		padding: 14px 28px;
+		border-radius: var(--home-radius-sm);
+		font-weight: 600;
+		font-size: 14px;
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		font-family: var(--home-font-mono);
+		transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+		text-decoration: none;
+		border: none;
+	}
+
+	.home-root .btn-primary {
+		background: var(--sl-color-red);
+		color: var(--sl-color-bg);
+	}
+
+	.home-root .btn-primary:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 24px
+			color-mix(in srgb, var(--sl-color-red) 30%, transparent);
+		color: var(--sl-color-bg);
+	}
+
+	.home-root .btn-secondary {
+		background: var(--sl-color-black);
+		border: 1px solid var(--sl-color-gray-5);
+		color: var(--sl-color-white);
+	}
+
+	.home-root .btn-secondary:hover {
+		background: var(--sl-color-gray-5);
+		border-color: var(--sl-color-gray-3);
+		color: var(--sl-color-white);
+	}
+
+	.home-root .terminal {
+		background: var(--sl-color-black);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: var(--home-radius-sm);
+		overflow: hidden;
+		box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
+		height: 440px;
+		display: flex;
+		flex-direction: column;
+		position: relative;
+	}
+
+	.home-root .terminal::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			var(--sl-color-red),
+			transparent
+		);
+		opacity: 0.5;
+	}
+
+	.home-root .terminal-header {
+		background: var(--sl-color-black);
+		padding: 12px 16px;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		border-bottom: 1px solid var(--sl-color-gray-5);
+	}
+
+	.home-root .terminal .dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 2px;
+		display: inline-block;
+	}
+	.home-root .terminal .dot-red {
+		background: #ed8796;
+	}
+	.home-root .terminal .dot-yellow {
+		background: #eed49f;
+	}
+	.home-root .terminal .dot-green {
+		background: var(--home-green);
+	}
+
+	.home-root .terminal-title {
+		margin-left: auto;
+		margin-right: auto;
+		font-size: 11px;
+		color: var(--sl-color-gray-3);
+		font-family: var(--home-font-mono);
+		opacity: 0.8;
+	}
+
+	.home-root .terminal-body {
+		padding: 20px;
+		margin-top: 0;
+		font-family: var(--home-font-mono);
+		font-size: 13px;
+		overflow-y: auto;
+		flex-grow: 1;
+		scrollbar-width: thin;
+		scrollbar-color: var(--sl-color-gray-5) transparent;
+		line-height: 1.6;
+		color: var(--sl-color-gray-3);
+	}
+
+	.home-root .terminal-body .line {
+		margin-bottom: 6px;
+		display: flex;
+		gap: 12px;
+	}
+	.home-root .terminal-body .line .prompt {
+		color: var(--home-peach);
+		opacity: 0.8;
+	}
+	.home-root .terminal-body .line .cmd {
+		color: var(--sl-color-white);
+		word-break: break-all;
+	}
+	.home-root .terminal-body .line.output {
+		color: var(--sl-color-gray-3);
+	}
+	.home-root .terminal-body .line.success {
+		color: var(--home-green);
+	}
+	.home-root .terminal-body .line.info {
+		color: var(--home-sapphire);
+	}
+
+	@media (max-width: 1024px) {
+		.home-root .hero {
+			grid-template-columns: 1fr;
+			gap: 48px;
+		}
+	}
+</style>
+
+<script>
+	type AnimatedLine = { cmd: string; output: string; type: string };
+
+	const body = document.querySelector<HTMLElement>("[data-terminal-body]");
+	const cursorLine = body?.querySelector<HTMLElement>("[data-terminal-cursor]");
+	const typingSpan = body?.querySelector<HTMLElement>("[data-terminal-typing]");
+
+	if (body && cursorLine && typingSpan) {
+		const lines: AnimatedLine[] = JSON.parse(
+			body.dataset.animatedLines ?? "[]",
+		);
+		const prefersReducedMotion = window.matchMedia(
+			"(prefers-reduced-motion: reduce)",
+		).matches;
+
+		const makeLine = (cmd: string): HTMLElement => {
+			const wrap = document.createElement("div");
+			wrap.className = "line";
+			const prompt = document.createElement("span");
+			prompt.className = "prompt";
+			prompt.textContent = "➜";
+			const cmdSpan = document.createElement("span");
+			cmdSpan.className = "cmd";
+			cmdSpan.textContent = cmd;
+			wrap.appendChild(prompt);
+			wrap.appendChild(cmdSpan);
+			return wrap;
+		};
+
+		const makeOutput = (text: string, type: string): HTMLElement => {
+			const el = document.createElement("div");
+			el.className = `line ${type}`;
+			el.textContent = text;
+			return el;
+		};
+
+		if (prefersReducedMotion) {
+			cursorLine.remove();
+			for (const l of lines) {
+				body.appendChild(makeLine(l.cmd));
+				body.appendChild(makeOutput(l.output, l.type));
+			}
+		} else {
+			let lineIndex = 0;
+			let charIndex = 0;
+			let activeSpan: HTMLElement = typingSpan;
+
+			const tick = () => {
+				if (lineIndex >= lines.length) return;
+				const line = lines[lineIndex];
+				if (charIndex < line.cmd.length) {
+					activeSpan.textContent =
+						(activeSpan.textContent ?? "") + line.cmd.charAt(charIndex);
+					charIndex++;
+					setTimeout(tick, 40);
+				} else {
+					body.appendChild(makeOutput(line.output, line.type));
+					lineIndex++;
+					charIndex = 0;
+					if (lineIndex < lines.length) {
+						const next = makeLine("");
+						body.appendChild(next);
+						activeSpan = next.querySelector(".cmd") as HTMLElement;
+						setTimeout(tick, 800);
+					}
+				}
+			};
+			setTimeout(tick, 1500);
+		}
+	}
+</script>

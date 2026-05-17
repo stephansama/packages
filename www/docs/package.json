@@ -31,12 +31,11 @@
     "@astrojs/starlight": "catalog:",
     "@astrojs/ts-plugin": "catalog:",
     "@catppuccin/starlight": "catalog:",
-    "@stephansama/starlight-typedoc": "0.22.5",
+    "@stephansama/starlight-typedoc": "catalog:",
     "astro": "catalog:",
     "starlight-giscus": "catalog:",
     "starlight-github-alerts": "catalog:",
     "starlight-llms-txt": "catalog:",
-    "starlight-package-managers": "catalog:",
     "starlight-plugin-icons": "catalog:",
     "zod": "catalog:schema"
   }

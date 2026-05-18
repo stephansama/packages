@@ -1,6 +1,7 @@
 packages:
   - core/**
   - examples/**
+  - private/**
   - scripts
   - www/*
 

@@ -6,6 +6,8 @@
   "scripts": {
     "build": "astro build",
     "dev": "astro dev",
+    "predev": "pnpm run setup:examples",
+    "prebuild": "pnpm run setup:examples",
     "prelint": "pnpm run setup:examples",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",

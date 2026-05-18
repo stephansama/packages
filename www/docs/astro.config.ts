@@ -82,6 +82,11 @@ export default defineConfig({
 					],
 					label: "Tools",
 				},
+				{
+					collapsed: true,
+					items: [{ autogenerate: { directory: "examples" } }],
+					label: "Examples",
+				},
 				typeDocSidebarGroup,
 			],
 			social: [

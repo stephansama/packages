@@ -25,6 +25,7 @@ export default defineConfig({
 		starlight({
 			components: {
 				Head: "./src/components/head.astro",
+				Search: "./src/components/search.astro",
 				SkipLink: "./src/components/skip-link.astro",
 			},
 			customCss: ["./src/extend.css"],

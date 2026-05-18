@@ -105,12 +105,26 @@ function escape(value: string): string {
 	return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 }
 
+const HEAD_TITLE_OVERRIDE = `head:
+  - tag: style
+    content: |
+      .content-panel:first-child:has(> .sl-container > h1#_top) {
+        display: revert;
+      }`;
+
 function exampleMdx(example: Example): string {
 	const depth = example.slug.split("/").length;
 	const upward = "../".repeat(depth + 2);
+	const segments = example.slug.split("/");
+	const sidebarBlock =
+		segments.length > 1
+			? `\nsidebar:\n  label: "${escape(segments.at(-1)!)}"`
+			: "";
 	return `---
 title: "${escape(example.title)}"
 description: "${escape(example.description ?? `Example: ${example.name}`)}"
+tableOfContents: false
+${HEAD_TITLE_OVERRIDE}${sidebarBlock}
 ---
 
 import StackblitzEmbed from "${upward}components/StackblitzEmbed.astro";
@@ -133,6 +147,8 @@ function indexMdx(examples: Example[]): string {
 	return `---
 title: Examples
 description: Live Stackblitz embeds for every package example.
+tableOfContents: false
+${HEAD_TITLE_OVERRIDE}
 ---
 
 import { CardGrid, LinkCard } from "@astrojs/starlight/components";

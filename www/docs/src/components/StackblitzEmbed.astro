@@ -1,0 +1,57 @@
+---
+type StackblitzView = "default" | "editor" | "preview";
+
+interface Props {
+	repo: string;
+	dir: string;
+	branch?: string;
+	openFile?: string;
+	view?: StackblitzView;
+	height?: number | string;
+	title?: string;
+}
+
+const {
+	repo,
+	dir,
+	branch = "main",
+	openFile,
+	view = "default",
+	height = 640,
+	title,
+} = Astro.props;
+
+const base = `https://stackblitz.com/github/${repo}/tree/${branch}/${dir}`;
+const params = new URLSearchParams({ embed: "1", view });
+if (openFile) params.set("file", openFile);
+const embedUrl = `${base}?${params.toString()}`;
+const openUrl = base;
+const frameHeight = typeof height === "number" ? `${height}px` : height;
+const frameTitle = title ?? `${dir} on StackBlitz`;
+---
+
+<div class="stackblitz-embed">
+	<iframe
+		src={embedUrl}
+		title={frameTitle}
+		loading="lazy"
+		allow="cross-origin-isolated"
+		style={`width: 100%; height: ${frameHeight}; border: 0; border-radius: 8px;`}
+	></iframe>
+	<p class="stackblitz-open">
+		<a href={openUrl} target="_blank" rel="noreferrer noopener">
+			Open in StackBlitz →
+		</a>
+	</p>
+</div>
+
+<style>
+	.stackblitz-embed {
+		margin: 1rem 0;
+	}
+	.stackblitz-open {
+		margin: 0.5rem 0 0;
+		text-align: right;
+		font-size: 0.875rem;
+	}
+</style>

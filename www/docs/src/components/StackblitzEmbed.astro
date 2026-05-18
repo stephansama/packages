@@ -1,0 +1,80 @@
+---
+import examples from "../../../../scripts/dist/examples.js";
+
+type StackblitzView = "default" | "editor" | "preview";
+
+interface Props {
+	slug?: string;
+	repo?: string;
+	dir?: string;
+	branch?: string;
+	openFile?: string;
+	view?: StackblitzView;
+	height?: number | string;
+	title?: string;
+}
+
+const props = Astro.props;
+
+let resolvedDir = props.dir;
+let resolvedOpenFile = props.openFile;
+let resolvedTitle = props.title;
+
+if (props.slug) {
+	const entry = examples.find((ex) => ex.slug === props.slug);
+	if (!entry) {
+		throw new Error(
+			`<StackblitzEmbed slug="${props.slug}"> did not match any example. Available: ${examples
+				.map((ex) => ex.slug)
+				.join(", ")}`,
+		);
+	}
+	resolvedDir ??= entry.relativeDir;
+	resolvedOpenFile ??= entry.openFile ?? undefined;
+	resolvedTitle ??= entry.title;
+}
+
+if (!resolvedDir) {
+	throw new Error(
+		`<StackblitzEmbed> requires either a "slug" prop or an explicit "dir" prop`,
+	);
+}
+
+const repo = props.repo ?? "stephansama/packages";
+const branch = props.branch ?? "main";
+const view = props.view ?? "default";
+const height = props.height ?? 640;
+
+const base = `https://stackblitz.com/github/${repo}/tree/${branch}/${resolvedDir}`;
+const params = new URLSearchParams({ embed: "1", view });
+if (resolvedOpenFile) params.set("file", resolvedOpenFile);
+const embedUrl = `${base}?${params.toString()}`;
+const frameHeight = typeof height === "number" ? `${height}px` : height;
+const frameTitle = resolvedTitle ?? `${resolvedDir} on StackBlitz`;
+---
+
+<div class="stackblitz-embed">
+	<iframe
+		src={embedUrl}
+		title={frameTitle}
+		loading="lazy"
+		allow="cross-origin-isolated"
+		style={`width: 100%; height: ${frameHeight}; border: 0; border-radius: 8px;`}
+	></iframe>
+	<p class="stackblitz-open">
+		<a href={base} target="_blank" rel="noreferrer noopener">
+			Open in StackBlitz →
+		</a>
+	</p>
+</div>
+
+<style>
+	.stackblitz-embed {
+		margin: 1rem 0;
+	}
+	.stackblitz-open {
+		margin: 0.5rem 0 0;
+		text-align: right;
+		font-size: 0.875rem;
+	}
+</style>

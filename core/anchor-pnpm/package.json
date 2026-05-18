@@ -46,12 +46,11 @@
   },
   "dependencies": {
     "@manypkg/find-root": "catalog:manypkg",
+    "cleye": "catalog:cli",
     "yaml": "catalog:",
-    "yargs": "catalog:cli",
     "zod": "catalog:schema"
   },
   "devDependencies": {
-    "@types/yargs": "catalog:",
     "tsdown": "catalog:"
   },
   "packageManager": "pnpm@10.29.3",

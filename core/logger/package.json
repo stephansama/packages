@@ -1,0 +1,49 @@
+{
+  "name": "@stephansama/logger",
+  "version": "0.1.0",
+  "description": "Namespaced logger with debug/info/warn/error levels and optional JSON-line output.",
+  "keywords": [
+    "logger",
+    "logging",
+    "structured-logging"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/logger",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/logger"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix",
+    "prepublishOnly": "tsdown"
+  },
+  "devDependencies": {
+    "tsdown": "catalog:"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

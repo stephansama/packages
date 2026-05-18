@@ -10,7 +10,6 @@ import starlightGiscus from "starlight-giscus";
 import starlightGithubAlerts from "starlight-github-alerts";
 import starlightHeadingBadges from "starlight-heading-badges";
 import starlightLlmsTxt from "starlight-llms-txt";
-import { starlightIconsPlugin } from "starlight-plugin-icons";
 
 const js = String.raw;
 
@@ -28,7 +27,16 @@ export default defineConfig({
 				SkipLink: "./src/components/skip-link.astro",
 			},
 			customCss: ["./src/extend.css"],
-			head: [{ attrs: { src: script }, tag: "script" }],
+			head: [
+				{
+					attrs: {
+						content: "https://og.stephansama.info/api/actions/og.png",
+						property: "og:image",
+					},
+					tag: "meta",
+				},
+				{ attrs: { src: script }, tag: "script" },
+			],
 			logo: { src: "./public/favicon.svg" },
 			plugins: [
 				starlightCatppuccin({
@@ -41,13 +49,13 @@ export default defineConfig({
 					repo: "stephansama/comments",
 					repoId: "R_kgDOQXzR5g",
 					theme: {
+						auto: "catppuccin",
 						dark: "catppuccin_mocha",
 						light: "catppuccin_latte",
 					},
 				}),
 				starlightGithubAlerts(),
 				starlightHeadingBadges(),
-				starlightIconsPlugin(),
 				starlightLlmsTxt(),
 				starlightTypeDoc({
 					sidebar: {

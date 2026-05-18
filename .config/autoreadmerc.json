@@ -33,6 +33,11 @@
         "url": "https://www.npmx.dev/package/{{name}}",
         "image": "https://img.shields.io/npm/dw/{{name}}?labelColor=211F1F",
         "label": "npm downloads"
+      },
+      {
+        "url": "https://npmgraph.js.org/?q={{escaped_name}}",
+        "image": "https://img.shields.io/badge/npmgraph-211F1F?style=flat&logo=graphql&logoColor=white&labelColor=211F1F",
+        "label": "npmgraph"
       }
     ]
   },

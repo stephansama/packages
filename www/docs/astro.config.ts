@@ -49,7 +49,6 @@ export default defineConfig({
 					repo: "stephansama/comments",
 					repoId: "R_kgDOQXzR5g",
 					theme: {
-						auto: "catppuccin",
 						dark: "catppuccin_mocha",
 						light: "catppuccin_latte",
 					},

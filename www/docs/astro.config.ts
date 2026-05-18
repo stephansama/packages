@@ -24,6 +24,7 @@ export default defineConfig({
 		icon(),
 		starlight({
 			components: {
+				Head: "./src/components/head.astro",
 				SkipLink: "./src/components/skip-link.astro",
 			},
 			customCss: ["./src/extend.css"],

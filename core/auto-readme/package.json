@@ -71,6 +71,7 @@
     "pkg-types": "catalog:",
     "remark": "catalog:remark",
     "remark-code-import": "catalog:remark",
+    "remark-github-blockquote-alert": "catalog:remark",
     "remark-collapse": "catalog:remark",
     "remark-toc": "catalog:remark",
     "simple-icons": "catalog:",

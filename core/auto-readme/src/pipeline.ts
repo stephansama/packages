@@ -3,6 +3,7 @@ import path from "node:path";
 import { remark } from "remark";
 import remarkCodeImport from "remark-code-import";
 import remarkCollapse from "remark-collapse";
+import { remarkAlert } from "remark-github-blockquote-alert";
 import remarkToc from "remark-toc";
 import { VFile } from "vfile";
 
@@ -22,6 +23,7 @@ export async function parse(
 	data: ActionData,
 ) {
 	const pipeline = remark()
+		.use(remarkAlert)
 		.use(autoReadmeRemarkPlugin, config, data)
 		.use(remarkCodeImport, {});
 

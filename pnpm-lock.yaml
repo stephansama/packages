@@ -496,6 +496,9 @@ catalogs:
     remark-collapse:
       specifier: 0.1.2
       version: 0.1.2
+    remark-github-blockquote-alert:
+      specifier: 1.3.1
+      version: 1.3.1
     remark-toc:
       specifier: 9.0.0
       version: 9.0.0
@@ -873,6 +876,9 @@ importers:
       remark-collapse:
         specifier: catalog:remark
         version: 0.1.2
+      remark-github-blockquote-alert:
+        specifier: catalog:remark
+        version: 1.3.1
       remark-toc:
         specifier: catalog:remark
         version: 9.0.0
@@ -10555,6 +10561,10 @@ packages:
 
   remark-gfm@4.0.1:
     resolution: {integrity: sha512-1quofZ2RQ9EWdeN34S79+KExV1764+wCUGop5CPL1WGdD0ocPpu91lzPGbwWMECpEpd42kJGQwzRfyov9j4yNg==}
+
+  remark-github-blockquote-alert@1.3.1:
+    resolution: {integrity: sha512-OPNnimcKeozWN1w8KVQEuHOxgN3L4rah8geMOLhA5vN9wITqU4FWD+G26tkEsCGHiOVDbISx+Se5rGZ+D1p0Jg==}
+    engines: {node: '>=16'}
 
   remark-mdx@3.1.0:
     resolution: {integrity: sha512-Ngl/H3YXyBV9RcRNdlYsZujAmhsxwzxpDzpDEhFBVAGthS4GDgnctpDjgFl/ULx5UEDzqtW1cyBSNKqYYrqLBA==}
@@ -23065,6 +23075,10 @@ snapshots:
       unified: 11.0.5
     transitivePeerDependencies:
       - supports-color
+
+  remark-github-blockquote-alert@1.3.1:
+    dependencies:
+      unist-util-visit: 5.1.0
 
   remark-mdx@3.1.0:
     dependencies:

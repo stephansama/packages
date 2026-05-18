@@ -1,5 +1,5 @@
 {
-  "name": "@stephansama/google-analytics-types",
+  "name": "@stephansama/types-google-analytics",
   "version": "0.1.0",
   "description": "TypeScript types for Google Tag Manager dataLayer + GA4 gtag recommended events.",
   "keywords": [
@@ -10,11 +10,11 @@
     "gtm",
     "types"
   ],
-  "homepage": "https://packages.stephansama.info/api/@stephansama/google-analytics-types",
+  "homepage": "https://packages.stephansama.info/api/@stephansama/types-google-analytics",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stephansama/packages.git",
-    "directory": "core/google-analytics-types"
+    "directory": "core/types-google-analytics"
   },
   "license": "MIT",
   "author": {
@@ -25,22 +25,24 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": "./dist/index.mjs",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
     "./package.json": "./package.json"
   },
-  "types": "./dist/index.d.mts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsdown",
-    "dev": "tsdown --watch",
+    "build": "tsc -p tsconfig.build.json",
     "lint": "eslint ./",
-    "lint:fix": "eslint ./ --fix",
-    "prepublishOnly": "tsdown"
+    "lint:fix": "eslint ./ --fix"
   },
   "devDependencies": {
-    "tsdown": "catalog:"
+    "typescript": "catalog:"
   },
   "engines": {
     "node": ">=24"

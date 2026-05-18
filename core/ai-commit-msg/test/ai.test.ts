@@ -22,10 +22,14 @@ vi.mock("ollama-ai-provider-v2", () => ({
 /* eslint-enable @typescript-eslint/no-unsafe-assignment */
 
 describe("ai", () => {
-	const originalEnvironment = process.env;
+	// Clone (not capture by reference) so per-test `delete process.env.X`
+	// mutations don't leak into the "restored" baseline between cases.
+	// See STE-33 for the original flake — in CI, cumulative deletions broke
+	// later tests that expected a clean baseline.
+	const originalEnvironment = { ...process.env };
 
 	afterEach(() => {
-		process.env = originalEnvironment;
+		process.env = { ...originalEnvironment };
 		vi.clearAllMocks();
 	});
 

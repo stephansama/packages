@@ -1,0 +1,65 @@
+{
+  "name": "@stephansama/anchor-pnpm",
+  "version": "0.1.0",
+  "description": "Manage YAML anchor declarations in pnpm-workspace.yaml",
+  "keywords": [
+    "anchor",
+    "anchor-pnpm",
+    "cli",
+    "pnpm",
+    "tanstack-intent",
+    "workspace",
+    "yaml"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/anchor-pnpm",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/anchor-pnpm"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./cli": "./dist/cli.mjs",
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.mts",
+  "bin": {
+    "anchor-pnpm": "./dist/cli.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "build:snapshot": "tsdown -u",
+    "dev": "tsdown --watch",
+    "lint": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
+  },
+  "dependencies": {
+    "@manypkg/find-root": "catalog:manypkg",
+    "yaml": "catalog:",
+    "yargs": "catalog:cli",
+    "zod": "catalog:schema"
+  },
+  "devDependencies": {
+    "@types/yargs": "catalog:",
+    "tsdown": "catalog:"
+  },
+  "packageManager": "pnpm@10.29.3",
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

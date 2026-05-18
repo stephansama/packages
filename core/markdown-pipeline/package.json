@@ -1,0 +1,54 @@
+{
+  "name": "@stephansama/markdown-pipeline",
+  "version": "0.1.0",
+  "description": "Composable factory for a shared remark/rehype pipeline across stars + blog.",
+  "keywords": [
+    "markdown",
+    "pipeline",
+    "rehype",
+    "remark"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/markdown-pipeline",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/markdown-pipeline"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix",
+    "prepublishOnly": "tsdown"
+  },
+  "dependencies": {
+    "remark": "catalog:remark",
+    "unified": "catalog:"
+  },
+  "devDependencies": {
+    "tsdown": "catalog:"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

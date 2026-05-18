@@ -30,7 +30,7 @@ export default defineConfig({
 			head: [
 				{
 					attrs: {
-						content: "https://og.stephansama.info/api/actions/og.png",
+						content: "https://og.stephansama.info/api/packages/og.png",
 						property: "og:image",
 					},
 					tag: "meta",

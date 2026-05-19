@@ -2,7 +2,6 @@
 
 This package provides the following utility scripts used across the workspace:
 
-- `add-socket`
 - `build-www`
 - `generate-examples`
 - `lint-examples`

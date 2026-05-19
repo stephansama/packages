@@ -57,7 +57,7 @@ export default defineConfig({
 			logo: { src: "./public/favicon.svg" },
 			plugins: [
 				starlightCatppuccin({
-					dark: { accent: "red", flavor: "macchiato" },
+					dark: { accent: "red", flavor: "mocha" },
 					light: { accent: "red", flavor: "latte" },
 				}),
 				starlightGiscus({

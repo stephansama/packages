@@ -11,7 +11,7 @@
 [![prettier](https://img.shields.io/badge/prettier-3.8.1-F7B93E.svg?logo=prettier&logoColor=ffffff&labelColor=F7B93E)](https://npmx.dev/package/prettier)
 [![turbo](https://img.shields.io/badge/turbo-2.8.20-FF1E56.svg?logo=turborepo&logoColor=ffffff&labelColor=FF1E56)](https://npmx.dev/package/turbo)
 [![typescript](https://img.shields.io/badge/typescript-5.9.3-3178C6.svg?logo=typescript&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/typescript)
-[![vitest](https://img.shields.io/badge/vitest-4.0.18-00FF74.svg?logo=vitest&logoColor=ffffff&labelColor=00FF74)](https://npmx.dev/package/vitest)
+[![vitest](https://img.shields.io/badge/vitest-4.1.6-00FF74.svg?logo=vitest&logoColor=ffffff&labelColor=00FF74)](https://npmx.dev/package/vitest)
 [![lefthook](https://img.shields.io/badge/lefthook-2.1.6-FF1E1E.svg?logo=lefthook&logoColor=ffffff&labelColor=FF1E1E)](https://npmx.dev/package/lefthook)
 
 <!-- BADGE end -->

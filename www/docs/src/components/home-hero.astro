@@ -149,13 +149,21 @@ const animatedLines = [
 </style>
 
 <script>
-	type AnimatedLine = { cmd: string; output: string; type: string };
+	document.addEventListener("astro:page-load", () => {
+		type AnimatedLine = { cmd: string; output: string; type: string };
 
-	const body = document.querySelector<HTMLElement>("[data-terminal-body]");
-	const cursorLine = body?.querySelector<HTMLElement>("[data-terminal-cursor]");
-	const typingSpan = body?.querySelector<HTMLElement>("[data-terminal-typing]");
+		const body = document.querySelector<HTMLElement>("[data-terminal-body]");
+		const cursorLine = body?.querySelector<HTMLElement>(
+			"[data-terminal-cursor]",
+		);
+		const typingSpan = body?.querySelector<HTMLElement>(
+			"[data-terminal-typing]",
+		);
 
-	if (body && cursorLine && typingSpan) {
+		if (!body) return;
+		if (!cursorLine) return;
+		if (!typingSpan) return;
+
 		const lines: AnimatedLine[] = JSON.parse(
 			body.dataset.animatedLines ?? "[]",
 		);
@@ -217,5 +225,5 @@ const animatedLines = [
 			};
 			setTimeout(tick, 1500);
 		}
-	}
+	});
 </script>

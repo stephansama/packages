@@ -2,4 +2,9 @@
 import Default from "@astrojs/starlight/components/Search.astro";
 ---
 
-<Default transition:persist><slot /></Default>
+<div
+	class="absolute inset-0 left-1/2 flex w-1/2 -translate-x-1/2 items-center justify-center"
+	transition:persist
+>
+	<Default><slot /></Default>
+</div>

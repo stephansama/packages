@@ -9,6 +9,7 @@
 @import "tailwindcss";
 
 @plugin "@iconify/tailwind4";
+@plugin "tailwindcss-debug-screens";
 
 .content-panel:first-child:has(> .sl-container > h1#_top) {
 	@apply hidden;

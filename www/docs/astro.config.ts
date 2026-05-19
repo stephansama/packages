@@ -13,11 +13,35 @@ import starlightLlmsTxt from "starlight-llms-txt";
 
 const js = String.raw;
 
-const script = js`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+const head: Parameters<typeof starlight>[0]["head"] = [
+	{
+		attrs: {
+			content: "https://og.stephansama.info/api/packages/og.png",
+			property: "og:image",
+		},
+		tag: "meta",
+	},
+	{
+		content: js`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PJ2232VH');`;
+})(window,document,'script','dataLayer','GTM-PJ2232VH');`,
+		tag: "script",
+	},
+];
+
+if (import.meta.env.DEV) {
+	head.push({
+		attrs: { defer: true },
+		content: js`
+window.addEventListener('DOMContentLoaded',() => {
+	document.body.classList.add('debug-screens')
+})
+`,
+		tag: "script",
+	});
+}
 
 export default defineConfig({
 	integrations: [
@@ -29,16 +53,7 @@ export default defineConfig({
 				SkipLink: "./src/components/skip-link.astro",
 			},
 			customCss: ["./src/extend.css"],
-			head: [
-				{
-					attrs: {
-						content: "https://og.stephansama.info/api/packages/og.png",
-						property: "og:image",
-					},
-					tag: "meta",
-				},
-				{ attrs: { src: script }, tag: "script" },
-			],
+			head,
 			logo: { src: "./public/favicon.svg" },
 			plugins: [
 				starlightCatppuccin({

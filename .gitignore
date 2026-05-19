@@ -1,3 +1,4 @@
+!www/docs/public/favicon.svg
 **/.vitepress/cache
 **/coverage/
 *.bak
@@ -12,6 +13,7 @@
 .svelte-kit
 .turbo
 .wrangler
+allure-*
 core/ai-commit-msg/config
 core/auto-readme/config
 core/example/scripts/examples.json
@@ -23,6 +25,5 @@ node_modules
 single-file.html
 storybook-static
 test-report.junit.xml
-www/docs/src/content/docs/api
 www/docs/public/*
-!www/docs/public/favicon.svg
+www/docs/src/content/docs/api

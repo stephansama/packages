@@ -45,6 +45,7 @@
     "starlight-github-alerts": "catalog:",
     "starlight-llms-txt": "catalog:",
     "starlight-plugin-icons": "catalog:",
+    "tailwindcss-debug-screens": "catalog:",
     "zod": "catalog:schema"
   }
 }

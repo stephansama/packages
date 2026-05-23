@@ -89,12 +89,12 @@ export default defineConfig({
 						{
 							attrs: { class: "tool-icon-eslint" },
 							label: "ESLint Config",
-							link: "/eslint/",
+							link: "/view/eslint/",
 						},
 						{
 							attrs: { class: "tool-icon-package" },
 							label: "Node Modules",
-							link: "/node_modules/",
+							link: "/view/node_modules/",
 						},
 					],
 					label: "Tools",

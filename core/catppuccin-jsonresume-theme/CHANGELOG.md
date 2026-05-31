@@ -1,5 +1,11 @@
 # @stephansama/catppuccin-jsonresume-theme
 
+## 2.0.0
+
+### Major Changes
+
+- 6669058: updated theme to visually match https://astro-portfolio-template-tbl.netlify.app/
+
 ## 1.0.6
 
 ### Patch Changes

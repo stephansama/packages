@@ -1,8 +1,0 @@
-{
-  "extends": "astro/tsconfigs/strict",
-  "exclude": ["dist", "public"],
-  "compilerOptions": {
-    "plugins": [{ "name": "@astrojs/ts-plugin" }],
-    "types": ["node", "astro/client"]
-  }
-}

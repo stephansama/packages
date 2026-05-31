@@ -16,8 +16,8 @@ export function render(resume: ResumeSchema) {
 	});
 
 	const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-	const templateHtmlPath = path.join(__dirname, "../template/site.html.hbs");
-	const templateCssPath = path.join(__dirname, "../dist-css/site.css");
+	const templateHtmlPath = path.join(__dirname, "../template/cv.html.hbs");
+	const templateCssPath = path.join(__dirname, "../dist-css/cv.css");
 	const templateHtml = fs.readFileSync(templateHtmlPath, "utf8");
 	const templateCss = fs.readFileSync(templateCssPath, "utf8");
 	const compiledTemplate = Handlebars.compile(templateHtml);

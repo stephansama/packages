@@ -33,7 +33,7 @@
     "build": "pnpm run --sequential \"/^build:(?!snapshot).*/\"",
     "build:snapshot": "tsdown -u",
     "build:ts": "tsdown",
-    "build:tw": "tailwindcss -i ./template/site.css -o ./dist-css/site.css",
+    "build:tw": "tailwindcss -i ./template/cv.css -o ./dist-css/cv.css",
     "dev": "pnpm run --parallel \"/^dev:.*/\"",
     "dev:ts": "pnpm run build:ts --watch",
     "dev:tw": "pnpm run build:tw --watch",

@@ -45,4 +45,5 @@ resume dev --theme catppuccin
 
 ## Credits
 
-Special thanks to [jsonresume-theme-github-styled](https://npmx.dev/package-code/jsonresume-theme-github-styled) for the base template.
+- Base template forked from [jsonresume-theme-github-styled](https://npmx.dev/package-code/jsonresume-theme-github-styled).
+- Visual styling inspired by the [astro-portfolio-template-tbl](https://astro-portfolio-template-tbl.netlify.app/) Astro portfolio.

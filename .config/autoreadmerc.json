@@ -36,7 +36,7 @@
       },
       {
         "url": "https://npmgraph.js.org/?q={{escaped_name}}",
-        "image": "https://img.shields.io/badge/npmgraph-211F1F?style=flat&logo=graphql&logoColor=white&labelColor=211F1F",
+        "image": "https://img.shields.io/badge/npmgraph-211F1F?style=flat&logo=npm&logoColor=white&labelColor=211F1F",
         "label": "npmgraph"
       }
     ]

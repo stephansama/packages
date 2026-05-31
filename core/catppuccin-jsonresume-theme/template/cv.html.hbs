@@ -23,7 +23,7 @@
 				<div class="cv-avatar" aria-label="{{basics.name}}">
 					{{#if basics.image}}
 					<img src="{{basics.image}}" alt="{{basics.name}}" />
-					{{else}} {{substring basics.name 0 1}} {{/if}}
+					{{else}} {{initial basics.name}} {{/if}}
 				</div>
 				<h1 class="cv-name">{{basics.name}}</h1>
 				{{#if basics.label}}

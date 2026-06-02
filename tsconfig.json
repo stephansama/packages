@@ -13,6 +13,7 @@
     { "path": "./core/example/tsconfig.json" },
     { "path": "./core/find-makefile-targets/tsconfig.json" },
     { "path": "./core/multipublish/tsconfig.json" },
+    { "path": "./core/monorule/tsconfig.json" },
     { "path": "./core/prettier-plugin-handlebars/tsconfig.json" },
     { "path": "./core/remark-asciinema/tsconfig.json" },
     { "path": "./core/single-file/tsconfig.json" },

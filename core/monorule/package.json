@@ -1,0 +1,74 @@
+{
+  "name": "@stephansama/monorule",
+  "version": "0.0.0",
+  "description": "one rule cli to rule them all",
+  "keywords": [
+    "monorule"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/monorule",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/monorule"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./cli": "./dist/cli.mjs",
+    "./package.json": "./package.json",
+    "./schema": "./dist/schema.mjs",
+    "./schema.json": "./dist/schema.json"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "bin": {
+    "monorule": "./dist/cli.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "cli:config": "node ./dist/cli.mjs -c ./example/monorule.config.ts",
+    "cli:rules": "node ./dist/cli.mjs --ruleDirectory ./example/rules/",
+    "dev": "tsdown --watch",
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --fix"
+  },
+  "dependencies": {
+    "cosmiconfig": "catalog:cli",
+    "es-toolkit": "catalog:",
+    "smol-toml": "catalog:",
+    "tinyglobby": "catalog:",
+    "tsx": "catalog:",
+    "yaml": "catalog:"
+  },
+  "devDependencies": {
+    "cleye": "catalog:cli",
+    "obug": "catalog:cli",
+    "tsdown": "catalog:",
+    "zod": "catalog:schema"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "inlinedDependencies": {
+    "cleye": "2.6.0",
+    "terminal-columns": "2.0.0",
+    "type-flag": "4.2.0",
+    "zod": "4.2.1"
+  },
+  "readme": "./README.md"
+}

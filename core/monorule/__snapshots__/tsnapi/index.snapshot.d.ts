@@ -20,13 +20,13 @@ export type RuleBase<T, Context = DirtyFile> = {
   pattern: string;
   when(_: NoInfer<T>): boolean;
 };
-export type UserConfig<Rules extends Rule[]> = Omit<FullConfigSchema, "rules"> & {
-  rules: Rules;
+export type UserConfig<T> = Omit<FullConfigSchema, "rules"> & {
+  rules: T;
 };
 // #endregion
 
 // #region Functions
-export declare function defineConfig<Rules extends Rule[]>(_: UserConfig<Rules>): UserConfig<Rules>;
+export declare function defineConfig<T>(_: UserConfig<T>): UserConfig<T>;
 export declare function defineRule<const Parse extends DefaultRuleParseType, Context = DirtyFile>(_: DefaultParserRule<Parse, DefaultRuleParseTypeExtract<Parse>, Context>): DefaultParserRule<Parse, DefaultRuleParseTypeExtract<Parse>, Context>;
 // #endregion
 

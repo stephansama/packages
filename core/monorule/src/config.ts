@@ -71,8 +71,6 @@ export async function loadConfig(arguments_: Partial<typeof CliArgument>) {
 
 	const rules = await loadRules(config, search?.filepath);
 
-	// config.rules.push(...rules);
-
 	return {
 		...config,
 		// @ts-expect-error slight mismatch

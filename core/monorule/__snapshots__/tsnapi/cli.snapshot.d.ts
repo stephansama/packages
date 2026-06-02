@@ -9,12 +9,12 @@ export declare function run(): Promise<void>;
 export declare const arguments_: ({
   command: undefined;
   flags: {
+    config: string;
     dryRun: boolean;
     verbose: number;
     ignorePaths: string[] | readonly [];
     ignoreRules: string[] | readonly [];
     ruleDirectory: string;
-    config: string;
     version: boolean | undefined;
     help: boolean | undefined;
   };
@@ -60,14 +60,6 @@ export declare const arguments_: ({
   }) => void;
   showVersion: () => void;
 }) & Promise<void>;
-export declare const baseFlags: {
-  readonly config: {
-    readonly alias: "c";
-    readonly default: "";
-    readonly description: "location of configuration to use";
-    readonly type: StringConstructor;
-  };
-};
 export declare const configFlags: {
   readonly ignorePaths: {
     readonly default: readonly [];

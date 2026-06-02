@@ -5,9 +5,9 @@ export default defineConfig({
 	ignoreRules: [],
 	ruleDirectory: "./rules/",
 	rules: [
-		// @ts-expect-error still developing
 		defineRule({
 			apply(input) {
+				// @ts-expect-error touching
 				input.touched = true;
 				return input;
 			},

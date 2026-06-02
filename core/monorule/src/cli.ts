@@ -12,15 +12,6 @@ import { actions, commands } from "./commands";
 import { loadConfig } from "./config";
 import { configSchema } from "./schema";
 
-export const baseFlags = {
-	config: {
-		alias: "c",
-		default: "",
-		description: `location of configuration to use`,
-		type: String,
-	},
-} as const satisfies Flags;
-
 export const configFlags = {
 	ignorePaths: {
 		default: [],
@@ -45,8 +36,13 @@ export const configFlags = {
 export const arguments_ = cli({
 	commands,
 	flags: {
-		...baseFlags,
 		...configFlags,
+		config: {
+			alias: "c",
+			default: "",
+			description: `location of configuration to use`,
+			type: String,
+		},
 		dryRun: {
 			alias: "d",
 			default: false,
@@ -67,7 +63,7 @@ if (url.fileURLToPath(import.meta.url) === process.argv[1]) await run();
 
 export async function run() {
 	if (arguments_.command && arguments_.command in actions) {
-		actions[arguments_.command]();
+		await actions[arguments_.command](arguments_);
 		process.exit(0);
 	}
 

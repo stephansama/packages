@@ -7,6 +7,5 @@ export async function run() {}
 
 // #region Variables
 export var arguments_ /* const */
-export var baseFlags /* const */
 export var configFlags /* const */
 // #endregion

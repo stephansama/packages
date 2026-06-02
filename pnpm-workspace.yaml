@@ -43,6 +43,7 @@ catalog:
   colord: 2.9.3
   dedent: 1.7.2
   deepmerge: 4.3.1
+  empathic: ^2.0.1
   es-toolkit: 1.43.0
   happy-dom: 20.6.1
   he: 1.2.0
@@ -99,6 +100,7 @@ catalogs:
     cleye: 2.6.0
     cosmiconfig: 9.0.0
     obug: 2.1.1
+    picocolors: ^1.1.1
     picospinner: 3.0.0
     yargs: 18.0.0
   commitlint:

@@ -4,4 +4,6 @@
 // #region Variables
 export var configSchema /* const */
 export var fullConfigSchema /* const */
+export var ruleMapSchema /* const */
+export var ruleSchema /* const */
 // #endregion

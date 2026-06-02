@@ -2,9 +2,7 @@ import * as fs from "node:fs";
 import path from "node:path";
 import { register } from "tsx/esm/api";
 
-import type { ConfigSchema } from "./schema";
-
-import { defineRule } from "./rule";
+import { type ConfigSchema, ruleMapSchema } from "./schema";
 
 export async function loadRules(config: ConfigSchema, configFilepath?: string) {
 	const absolute = path.resolve(
@@ -19,13 +17,10 @@ export async function loadRules(config: ConfigSchema, configFilepath?: string) {
 
 	const loadedRules = await Promise.all(
 		files.map(async (file) => {
-			console.info(`loading ${path.join(absolute, file)}`);
-			return Object.values(
-				(await import(path.join(absolute, file))) as Record<
-					string,
-					ReturnType<typeof defineRule>
-				>,
-			);
+			console.info(`loading ${file}`);
+			// convert to object to remove module namespace key
+			const imported = (await import(path.join(absolute, file))) as {};
+			return Object.values(ruleMapSchema.parse({ ...imported }));
 		}),
 	);
 

@@ -33,7 +33,7 @@ export const configFlags = {
 	Flags[keyof Flags]
 >;
 
-export const arguments_ = cli({
+export const cliArguments = cli({
 	commands,
 	flags: {
 		...configFlags,
@@ -62,14 +62,17 @@ export const arguments_ = cli({
 if (url.fileURLToPath(import.meta.url) === process.argv[1]) await run();
 
 export async function run() {
-	if (arguments_.command && arguments_.command in actions) {
-		await actions[arguments_.command](arguments_);
+	console.info(cliArguments.command);
+	if (cliArguments.command && cliArguments.command in actions) {
+		await actions[cliArguments.command](cliArguments);
 		process.exit(0);
 	}
 
-	const config = await loadConfig(arguments_);
+	const config = await loadConfig(cliArguments);
 
 	const dirty = await checkRules(config.rules);
+
+	if (dirty.length === 0) return console.info("no files to change");
 
 	await applyRules(dirty, config.rules);
 }

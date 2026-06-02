@@ -9,4 +9,6 @@ export function defineRule(_) {}
 // #region Variables
 export var configSchema /* const */
 export var fullConfigSchema /* const */
+export var parsers /* const */
+export var stringifiers /* const */
 // #endregion

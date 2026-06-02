@@ -37,15 +37,23 @@
   ],
   "scripts": {
     "build": "tsdown",
+    "build:snapshot": "tsdown -u",
+    "cli": "node ./dist/cli.mjs",
     "cli:config": "node ./dist/cli.mjs -c ./example/monorule.config.ts",
+    "cli:list": "node ./dist/cli.mjs list -c ./example/monorule.config.ts ",
     "cli:rules": "node ./dist/cli.mjs --ruleDirectory ./example/rules/",
     "dev": "tsdown --watch",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
     "lint:fix": "eslint ./ --fix"
   },
   "dependencies": {
+    "@manypkg/get-packages": "catalog:manypkg",
+    "@manypkg/tools": "catalog:manypkg",
     "cosmiconfig": "catalog:cli",
+    "empathic": "catalog:",
     "es-toolkit": "catalog:",
+    "picocolors": "catalog:cli",
+    "picospinner": "catalog:cli",
     "smol-toml": "catalog:",
     "tinyglobby": "catalog:",
     "tsx": "catalog:",

@@ -2,7 +2,7 @@ import { cosmiconfig, getDefaultSearchPlaces, type Options } from "cosmiconfig";
 import { merge } from "es-toolkit/compat";
 import * as toml from "smol-toml";
 
-import type { arguments_ as CliArgument } from "./cli";
+import type { cliArguments } from "./cli";
 import type { Rule } from "./rule";
 
 import { name as moduleName } from "../package.json";
@@ -13,11 +13,8 @@ const searchPlaces = getSearchPlaces();
 
 const loaders = { [".toml"]: loadToml };
 
-export async function loadConfig(arguments_: Partial<typeof CliArgument>) {
+export async function loadConfig(arguments_: Partial<typeof cliArguments>) {
 	const options = { loaders, searchPlaces } satisfies Partial<Options>;
-
-	if (arguments_.command)
-		throw new Error("somehow called load config during command");
 
 	if (
 		arguments_.flags &&
@@ -44,8 +41,6 @@ export async function loadConfig(arguments_: Partial<typeof CliArgument>) {
 		console.info("using default configuration");
 	}
 
-	arguments_ = removeFalsy(arguments_);
-
 	console.info("merging config with args", arguments_);
 
 	const arguments_config = {
@@ -64,9 +59,7 @@ export async function loadConfig(arguments_: Partial<typeof CliArgument>) {
 	} as Partial<ConfigSchema>;
 
 	const config = fullConfigSchema.parse(
-		merge(merge(search?.config, arguments_config), {
-			rules: [],
-		}),
+		merge(search?.config, removeFalsy(arguments_config)),
 	);
 
 	const rules = await loadRules(config, search?.filepath);

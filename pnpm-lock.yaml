@@ -28,6 +28,9 @@ catalogs:
     obug:
       specifier: 2.1.1
       version: 2.1.1
+    picocolors:
+      specifier: ^1.1.1
+      version: 1.1.1
     picospinner:
       specifier: 3.0.0
       version: 3.0.0
@@ -135,6 +138,9 @@ catalogs:
     deepmerge:
       specifier: 4.3.1
       version: 4.3.1
+    empathic:
+      specifier: ^2.0.1
+      version: 2.0.1
     es-toolkit:
       specifier: 1.43.0
       version: 1.43.0
@@ -1089,12 +1095,27 @@ importers:
 
   core/monorule:
     dependencies:
+      '@manypkg/get-packages':
+        specifier: catalog:manypkg
+        version: 3.1.0
+      '@manypkg/tools':
+        specifier: catalog:manypkg
+        version: 2.1.1
       cosmiconfig:
         specifier: catalog:cli
         version: 9.0.0(typescript@5.9.3)
+      empathic:
+        specifier: 'catalog:'
+        version: 2.0.1
       es-toolkit:
         specifier: 'catalog:'
         version: 1.43.0
+      picocolors:
+        specifier: catalog:cli
+        version: 1.1.1
+      picospinner:
+        specifier: catalog:cli
+        version: 3.0.0
       smol-toml:
         specifier: 'catalog:'
         version: 1.6.1
@@ -6356,6 +6377,10 @@ packages:
 
   empathic@2.0.0:
     resolution: {integrity: sha512-i6UzDscO/XfAcNYD75CfICkmfLedpyPDdozrLMmQc5ORaQcdMoc21OnlEylMIqI7U8eniKrPMxxtj8k0vhmJhA==}
+    engines: {node: '>=14'}
+
+  empathic@2.0.1:
+    resolution: {integrity: sha512-YGRs8knHhKHVShLkFET/rWAU8kmHbOV5LwN938RHI0pljAJ1Gf6SzXsSmRaEzcXTtOOmVqJ5+WtQPL5uigY50Q==}
     engines: {node: '>=14'}
 
   encodeurl@1.0.2:
@@ -16972,6 +16997,8 @@ snapshots:
   emoji-regex@9.2.2: {}
 
   empathic@2.0.0: {}
+
+  empathic@2.0.1: {}
 
   encodeurl@1.0.2: {}
 

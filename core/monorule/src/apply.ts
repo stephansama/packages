@@ -14,6 +14,7 @@ export async function applyRules(dirtyFiles: DirtyFile[], rules: RuleMap) {
 			if (currentRule.apply) {
 				const result = currentRule.apply(
 					file.content as object | string,
+					file,
 				);
 
 				if (result instanceof Promise) {

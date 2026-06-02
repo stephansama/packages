@@ -4,21 +4,27 @@
 // #region Types
 export type ConfigSchema = output<typeof configSchema>;
 export type DefaultRuleParseType = "json" | "toml" | "txt" | "yaml";
-export type DirtyFile<T = unknown> = {
-  absolutePath: string;
+export type DirtyFile<T = unknown> = LocationContext & {
+  closestPackage: Undefinable<PackageContext>;
   content: T;
+  packages: Array<PackageContext>;
   raw: string;
-  relativePath: string;
+  rootPackage: Omit<PackageContext, "relativePath">;
   rule: string;
+};
+export type Error = {
+  fixable?: boolean;
+  id: string;
+  message: string;
 };
 export type FullConfigSchema = output<typeof fullConfigSchema>;
 export type RuleBase<T, Context = DirtyFile> = {
-  apply?: ((_: NoInfer<T>) => Promise<T>) | ((_: NoInfer<T>) => T);
+  apply?: (_: NoInfer<T>, _?: Context) => Promise<T> | T;
   context?(_: string): Context;
   enabled?: boolean;
   name: string;
   pattern: string;
-  when(_: NoInfer<T>): boolean;
+  when(_: NoInfer<T>, _?: Context): Array<Error> | void;
 };
 export type UserConfig<T> = Omit<FullConfigSchema, "rules"> & {
   rules: T;
@@ -42,6 +48,7 @@ export declare const fullConfigSchema: ZodObject<{
   ruleDirectory: ZodDefault<ZodString>;
   rules: ZodDefault<ZodArray<ZodObject<{
     apply: ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>;
+    enabled: ZodDefault<ZodBoolean>;
     name: ZodString;
     parse: ZodUnion<[ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>, ZodEnum<{
       json: "json";
@@ -53,4 +60,19 @@ export declare const fullConfigSchema: ZodObject<{
     when: ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>;
   }, $strip>>>;
 }, $strip>;
+export declare const parsers: {
+  readonly json: (text: string, reviver?: (this: any, key: string, value: any) => any) => any;
+  readonly toml: typeof toml.parse;
+  readonly txt: (input: string) => string;
+  readonly yaml: typeof yaml.parse;
+};
+export declare const stringifiers: {
+  readonly json: {
+    (value: any, replacer?: (this: any, key: string, value: any) => any, space?: string | number): string;
+    (value: any, replacer?: (number | string)[] | null, space?: string | number): string;
+  };
+  readonly toml: typeof toml.stringify;
+  readonly txt: (input: unknown) => string;
+  readonly yaml: typeof yaml.stringify;
+};
 // #endregion

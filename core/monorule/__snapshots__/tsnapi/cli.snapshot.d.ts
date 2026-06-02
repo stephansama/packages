@@ -6,7 +6,7 @@ export declare function run(): Promise<void>;
 // #endregion
 
 // #region Variables
-export declare const arguments_: ({
+export declare const cliArguments: ({
   command: undefined;
   flags: {
     config: string;
@@ -37,8 +37,12 @@ export declare const arguments_: ({
   }) => void;
   showVersion: () => void;
 } | {
-  command: "generate";
+  command: "generate" | "list";
   flags: {
+    help: boolean | undefined;
+  } | {
+    affected: boolean;
+    config: string;
     help: boolean | undefined;
   };
   unknownFlags: {

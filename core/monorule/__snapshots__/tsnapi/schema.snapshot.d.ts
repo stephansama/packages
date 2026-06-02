@@ -4,6 +4,8 @@
 // #region Types
 export type ConfigSchema = output<typeof configSchema>;
 export type FullConfigSchema = output<typeof fullConfigSchema>;
+export type RuleMapSchema = output<typeof ruleMapSchema>;
+export type RuleSchema = output<typeof ruleSchema>;
 // #endregion
 
 // #region Variables
@@ -18,6 +20,7 @@ export declare const fullConfigSchema: ZodObject<{
   ruleDirectory: ZodDefault<ZodString>;
   rules: ZodDefault<ZodArray<ZodObject<{
     apply: ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>;
+    enabled: ZodDefault<ZodBoolean>;
     name: ZodString;
     parse: ZodUnion<[ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>, ZodEnum<{
       json: "json";
@@ -28,5 +31,31 @@ export declare const fullConfigSchema: ZodObject<{
     pattern: ZodString;
     when: ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>;
   }, $strip>>>;
+}, $strip>;
+export declare const ruleMapSchema: ZodRecord<ZodString, ZodObject<{
+  apply: ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>;
+  enabled: ZodDefault<ZodBoolean>;
+  name: ZodString;
+  parse: ZodUnion<[ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>, ZodEnum<{
+    json: "json";
+    txt: "txt";
+    yaml: "yaml";
+    toml: "toml";
+  }>]>;
+  pattern: ZodString;
+  when: ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>;
+}, $strip>>;
+export declare const ruleSchema: ZodObject<{
+  apply: ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>;
+  enabled: ZodDefault<ZodBoolean>;
+  name: ZodString;
+  parse: ZodUnion<[ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>, ZodEnum<{
+    json: "json";
+    txt: "txt";
+    yaml: "yaml";
+    toml: "toml";
+  }>]>;
+  pattern: ZodString;
+  when: ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>;
 }, $strip>;
 // #endregion

@@ -1,12 +1,13 @@
 import * as z from "zod";
 
-import { defineRule } from "@/src/rule";
+import { defineRule } from "@/src";
 
 export const jsonRule = defineRule({
 	apply(input) {
 		input.property = true;
 		return input;
 	},
+	enabled: false,
 	name: "json",
 	parse(input: string) {
 		return z
@@ -14,9 +15,17 @@ export const jsonRule = defineRule({
 			.parse(JSON.parse(input));
 	},
 	pattern: "**/data/*.json",
-	when(input) {
+	when(input, context) {
+		console.info(context);
 		console.info(input);
-		return !("property" in input);
+		if (input.property) return;
+
+		return [
+			{
+				id: "no_property",
+				message: "failed to find property",
+			},
+		];
 	},
 });
 
@@ -28,6 +37,6 @@ export const txtRule = defineRule({
 	parse: "txt",
 	pattern: "**/data/*.txt",
 	when(input) {
-		return !input.includes("stephansama");
+		// return !input.includes("stephansama");
 	},
 });

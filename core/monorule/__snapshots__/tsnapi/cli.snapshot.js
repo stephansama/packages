@@ -6,6 +6,6 @@ export async function run() {}
 // #endregion
 
 // #region Variables
-export var arguments_ /* const */
+export var cliArguments /* const */
 export var configFlags /* const */
 // #endregion

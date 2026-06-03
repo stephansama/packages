@@ -8,24 +8,34 @@ import pc from "picocolors";
 import { glob } from "tinyglobby";
 
 import type { RuleMap } from "./rule";
+import type { ConfigSchema } from "./schema";
 import type { DirtyFile, Error as RuleError } from "./type";
 
 import { info } from "./log";
 import { parse } from "./parse";
+import { DEFAULT_IGNORE_LIST } from "./paths";
 
-export async function checkRules(rules: RuleMap) {
-	const { packages, rootDir, rootPackage } = await getPackages(process.cwd());
+export async function checkRules(
+	config: Omit<ConfigSchema, "rules"> & { rules: RuleMap },
+) {
+	const cwd = process.cwd();
+	const { packages, rootDir, rootPackage } = await getPackages(cwd);
 
 	if (!rootPackage) throw new Error("unable to find root package");
 
 	const checkedErrors = new Array<RuleError>();
 
 	const dirtyFiles = await Promise.all(
-		Object.values(rules)
+		Object.values(config.rules)
 			.filter((rule) => rule.enabled)
 			.map(async (rule) => {
-				const cwd = process.cwd();
-				const fileMatches = await glob(rule.pattern, { cwd });
+				const fileMatches = await glob(rule.pattern, {
+					cwd,
+					ignore:
+						config.ignorePaths.length > 0
+							? config.ignorePaths
+							: DEFAULT_IGNORE_LIST,
+				});
 
 				info(`loading rules for ${rule.name}`);
 

@@ -19,12 +19,8 @@ const loaders = { [".toml"]: loadToml };
 export async function loadConfig(arguments_: CliArguments) {
 	const options = { loaders, searchPlaces } satisfies Partial<Options>;
 
-	if (
-		arguments_.flags &&
-		"config" in arguments_.flags &&
-		arguments_?.flags?.config
-	)
-		options.searchPlaces = [arguments_.flags.config];
+	const argumentConfig = getFlag(arguments_, "config");
+	if (argumentConfig) options.searchPlaces = [argumentConfig];
 
 	const explorer = cosmiconfig(moduleName, options);
 
@@ -34,8 +30,9 @@ export async function loadConfig(arguments_: CliArguments) {
 		info("found configuration file at:", search.filepath);
 		info("loaded cosmiconfig", search.config);
 	} else {
-		const config = getFlag(arguments_, "config");
-		const location = config ? " at location: " + config : "";
+		const location = argumentConfig
+			? " at location: " + argumentConfig
+			: "";
 		warn(`no config file found`, location);
 		info("using default configuration");
 	}

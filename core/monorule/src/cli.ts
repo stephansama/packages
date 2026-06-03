@@ -82,7 +82,7 @@ export async function run() {
 
 	const config = await loadConfig(cliArguments);
 
-	const dirty = await checkRules(config.rules);
+	const dirty = await checkRules(config);
 
 	if (dirty.length === 0) return console.info("no files to change");
 

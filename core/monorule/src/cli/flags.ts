@@ -1,4 +1,4 @@
-import type { CliArguments } from "./cli";
+import type { CliArguments } from "./arguments";
 
 type AllKeys<T> = T extends unknown ? keyof T : never;
 type Flags = CliArguments["flags"];

@@ -1,6 +1,6 @@
 import { command } from "cleye";
 
-import type { CliArguments } from "@/src/cli";
+import type { CliArguments } from "@/cli/arguments";
 
 export const meta = command({
 	name: "generate",

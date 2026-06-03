@@ -1,19 +1,10 @@
-#!/usr/bin/env node
-
 import type * as z from "zod";
 
 import { cli, type Flags } from "cleye";
-import * as url from "node:url";
 
-import pkg from "@/package.json";
-
-import { applyRules } from "./apply";
-import { checkRules } from "./check";
-import { actions, commands } from "./commands";
-import { loadConfig } from "./config";
-import { enable } from "./log";
-import { configSchema } from "./schema";
-import { getFlag } from "./utilities";
+import { commands } from "@/commands";
+import { configSchema } from "@/schema";
+import pkg from "~/package.json";
 
 export const configFlags = {
 	ignorePaths: {
@@ -69,24 +60,3 @@ export const cliArguments = cli({
 	name: pkg.name.replace("@stephansama/", ""),
 	version: pkg.version,
 });
-
-if (url.fileURLToPath(import.meta.url) === process.argv[1]) await run();
-
-export async function run() {
-	if (cliArguments.command && cliArguments.command in actions) {
-		await actions[cliArguments.command](cliArguments);
-		process.exit(0);
-	}
-
-	enable(getFlag(cliArguments, "verbose"));
-
-	const config = await loadConfig(cliArguments);
-
-	const dirty = await checkRules(config);
-
-	if (dirty.length === 0) return console.info("no files to change");
-
-	if (getFlag(cliArguments, "fix")) {
-		await applyRules(dirty, config.rules);
-	}
-}

@@ -1,11 +1,11 @@
 import { command } from "cleye";
 import pc from "picocolors";
 
-import type { CliArguments } from "@/src/cli";
-import type { Rule } from "@/src/rule";
+import type { CliArguments } from "@/cli/arguments";
+import type { Rule } from "@/rule";
 
-import { loadConfig } from "@/src/config";
-import { getFlag } from "@/src/utilities";
+import { getFlag } from "@/cli/flags";
+import { loadConfig } from "@/config";
 
 function propertyToColor(
 	property: keyof Rule,

@@ -8,12 +8,12 @@ export default defineConfig({
 	attw: { excludeEntrypoints: ["schema.json"], profile: "esm-only" },
 	dts: true,
 	entry: {
-		cli: "./src/cli.ts",
+		cli: "./src/cli/index.ts",
 		index: "./src/index.ts",
 		schema: "./src/schema.ts",
 	},
 	exports: {
-		bin: "./src/cli.ts",
+		bin: "./src/cli/index.ts",
 		customExports(exports) {
 			exports["./schema.json"] = "./dist/schema.json";
 

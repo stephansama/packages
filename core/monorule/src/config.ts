@@ -2,24 +2,26 @@ import { cosmiconfig, getDefaultSearchPlaces, type Options } from "cosmiconfig";
 import { merge } from "es-toolkit/compat";
 import * as toml from "smol-toml";
 
-import { name as moduleName } from "@/package.json";
+import type { CliArguments } from "@/cli/arguments";
 
-import type { CliArguments } from "./cli";
+import { getFlag } from "@/cli/flags";
+import { name as moduleName } from "~/package.json";
+
 import type { Rule } from "./rule";
+import type { ConfigSchema } from "./schema";
 
 import { loadRules } from "./load";
 import { info, warn } from "./log";
-import { type ConfigSchema, fullConfigSchema } from "./schema";
-import { getFlag } from "./utilities";
+import { fullConfigSchema } from "./schema";
 
 const searchPlaces = getSearchPlaces();
 
 const loaders = { [".toml"]: loadToml };
 
-export async function loadConfig(arguments_: CliArguments) {
+export async function loadConfig(cliArguments: CliArguments) {
 	const options = { loaders, searchPlaces } satisfies Partial<Options>;
 
-	const argumentConfig = getFlag(arguments_, "config");
+	const argumentConfig = getFlag(cliArguments, "config");
 	if (argumentConfig) options.searchPlaces = [argumentConfig];
 
 	const explorer = cosmiconfig(moduleName, options);
@@ -37,12 +39,12 @@ export async function loadConfig(arguments_: CliArguments) {
 		info("using default configuration");
 	}
 
-	info("merging config with args", arguments_);
+	info("merging config with args", cliArguments);
 
 	const arguments_config = {
-		ignorePaths: getFlag(arguments_, "ignorePaths"),
-		ignoreRules: getFlag(arguments_, "ignoreRules"),
-		ruleDirectory: getFlag(arguments_, "ruleDirectory"),
+		ignorePaths: getFlag(cliArguments, "ignorePaths"),
+		ignoreRules: getFlag(cliArguments, "ignoreRules"),
+		ruleDirectory: getFlag(cliArguments, "ruleDirectory"),
 	} as Partial<ConfigSchema>;
 
 	const config = fullConfigSchema.parse(

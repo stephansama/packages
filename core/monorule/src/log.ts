@@ -1,6 +1,6 @@
 import * as obug from "obug";
 
-import pkg from "@/package.json";
+import pkg from "~/package.json";
 
 export const DEBUG_BASE_NAMESPACE = pkg.name.replace(
 	"@stephansama/",

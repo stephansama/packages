@@ -34,6 +34,14 @@ export type UserConfig<T> = Omit<FullConfigSchema, "rules"> & {
 // #region Functions
 export declare function defineConfig<T>(_: UserConfig<T>): UserConfig<T>;
 export declare function defineRule<const Parse extends DefaultRuleParseType, Context = DirtyFile>(_: DefaultParserRule<Parse, DefaultRuleParseTypeExtract<Parse>, Context>): DefaultParserRule<Parse, DefaultRuleParseTypeExtract<Parse>, Context>;
+export declare function loadRules(_: ConfigSchema, _?: string): Promise<{
+  apply: $InferOuterFunctionType<$ZodFunctionArgs, $ZodFunctionOut>;
+  enabled: boolean;
+  name: string;
+  parse: "json" | "txt" | "yaml" | "toml" | $InferOuterFunctionType<$ZodFunctionArgs, $ZodFunctionOut>;
+  pattern: string;
+  when: $InferOuterFunctionType<$ZodFunctionArgs, $ZodFunctionOut>;
+}[]>;
 // #endregion
 
 // #region Variables

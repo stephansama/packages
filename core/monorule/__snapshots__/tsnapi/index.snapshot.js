@@ -4,6 +4,7 @@
 // #region Functions
 export function defineConfig(_) {}
 export function defineRule(_) {}
+export async function loadRules(_, _) {}
 // #endregion
 
 // #region Variables

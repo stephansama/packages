@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-import { defineRule } from "@/src";
+import { defineRule } from "~/src";
 
 export const jsonRule = defineRule({
 	apply(input) {

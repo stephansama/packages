@@ -2,7 +2,7 @@ import type { FullConfigSchema } from "./schema";
 
 export { parsers, stringifiers } from "./parse";
 export { DEFAULT_IGNORE_LIST } from "./paths";
-export { defineRule } from "./rule";
+export { defineRule, loadRules } from "./rules";
 export { configSchema, fullConfigSchema } from "./schema";
 
 export type { ConfigSchema, FullConfigSchema } from "./schema";

@@ -2,8 +2,8 @@ import * as fs from "node:fs";
 import path from "node:path";
 import { register } from "tsx/esm/api";
 
-import { info } from "./log";
-import { type ConfigSchema, ruleMapSchema } from "./schema";
+import { info } from "@/log";
+import { type ConfigSchema, ruleMapSchema } from "@/schema";
 
 export async function loadRules(config: ConfigSchema, configFilepath?: string) {
 	const absolute = path.resolve(

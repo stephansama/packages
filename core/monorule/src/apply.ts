@@ -1,10 +1,10 @@
 import * as fs from "node:fs";
 
-import type { RuleMap } from "./rule";
-import type { DirtyFile } from "./type";
+import type { RuleMap } from "@/rules";
+import type { DirtyFile } from "@/type";
 
-import { info } from "./log";
-import { stringify } from "./parse";
+import { info } from "@/log";
+import { stringify } from "@/parse";
 
 export async function applyRules(dirtyFiles: DirtyFile[], rules: RuleMap) {
 	await Promise.all(

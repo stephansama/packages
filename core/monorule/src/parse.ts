@@ -1,7 +1,7 @@
 import * as toml from "smol-toml";
 import * as yaml from "yaml";
 
-import type { DefaultRuleParseType, FunctionParserRule } from "./type";
+import type { DefaultRuleParseType, FunctionParserRule } from "@/type";
 
 export const stringifiers = {
 	json: JSON.stringify,

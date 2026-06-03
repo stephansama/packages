@@ -3,16 +3,14 @@ import { merge } from "es-toolkit/compat";
 import * as toml from "smol-toml";
 
 import type { CliArguments } from "@/cli/arguments";
+import type { Rule } from "@/rules";
+import type { ConfigSchema } from "@/schema";
 
 import { getFlag } from "@/cli/flags";
+import { info, warn } from "@/log";
+import { loadRules } from "@/rules/load";
+import { fullConfigSchema } from "@/schema";
 import { name as moduleName } from "~/package.json";
-
-import type { Rule } from "./rule";
-import type { ConfigSchema } from "./schema";
-
-import { loadRules } from "./load";
-import { info, warn } from "./log";
-import { fullConfigSchema } from "./schema";
 
 const searchPlaces = getSearchPlaces();
 

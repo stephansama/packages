@@ -1,7 +1,4 @@
-import type * as types from "./type";
-
-export type Rule = ReturnType<typeof defineRule>;
-export type RuleMap = Record<string, Rule>;
+import type * as types from "@/type";
 
 export function defineRule<T, Context = types.DirtyFile>(
 	rule: types.FunctionParserRule<T, Context>,

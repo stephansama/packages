@@ -2,7 +2,7 @@ import { command } from "cleye";
 import pc from "picocolors";
 
 import type { CliArguments } from "@/cli/arguments";
-import type { Rule } from "@/rule";
+import type { Rule } from "@/rules";
 
 import { getFlag } from "@/cli/flags";
 import { loadConfig } from "@/config";

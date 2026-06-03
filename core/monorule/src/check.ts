@@ -7,13 +7,13 @@ import path from "node:path";
 import pc from "picocolors";
 import { glob } from "tinyglobby";
 
-import type { RuleMap } from "./rule";
-import type { ConfigSchema } from "./schema";
-import type { DirtyFile, Error as RuleError } from "./type";
+import type { RuleMap } from "@/rules";
+import type { ConfigSchema } from "@/schema";
+import type { DirtyFile, Error as RuleError } from "@/type";
 
-import { info } from "./log";
-import { parse } from "./parse";
-import { DEFAULT_IGNORE_LIST } from "./paths";
+import { info } from "@/log";
+import { parse } from "@/parse";
+import { DEFAULT_IGNORE_LIST } from "@/paths";
 
 export async function checkRules(
 	config: Omit<ConfigSchema, "rules"> & { rules: RuleMap },

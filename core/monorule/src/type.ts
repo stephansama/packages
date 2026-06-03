@@ -23,9 +23,9 @@ export type DirtyFile<T = unknown> = LocationContext & {
 	rule: string;
 };
 
-export type Error = {
+export type Error<T extends string = string> = {
 	fixable?: boolean;
-	id: string;
+	id: T;
 	message: string;
 };
 
@@ -54,8 +54,4 @@ export type RuleBase<T, Context = DirtyFile> = {
 
 export type Undefinable<T extends object> = {
 	[k in keyof T]: T[k] | undefined;
-};
-
-export const t: Undefinable<{ test: string }> = {
-	test: undefined,
 };

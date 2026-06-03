@@ -8,6 +8,7 @@ export function defineRule(_) {}
 
 // #region Variables
 export var configSchema /* const */
+export var DEFAULT_IGNORE_LIST /* const */
 export var fullConfigSchema /* const */
 export var parsers /* const */
 export var stringifiers /* const */

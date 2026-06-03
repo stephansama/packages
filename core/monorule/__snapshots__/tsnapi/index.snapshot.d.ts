@@ -12,9 +12,9 @@ export type DirtyFile<T = unknown> = LocationContext & {
   rootPackage: Omit<PackageContext, "relativePath">;
   rule: string;
 };
-export type Error = {
+export type Error<T extends string = string> = {
   fixable?: boolean;
-  id: string;
+  id: T;
   message: string;
 };
 export type FullConfigSchema = output<typeof fullConfigSchema>;
@@ -42,6 +42,7 @@ export declare const configSchema: ZodObject<{
   ignoreRules: ZodDefault<ZodArray<ZodString>>;
   ruleDirectory: ZodDefault<ZodString>;
 }, $strip>;
+export declare const DEFAULT_IGNORE_LIST: readonly ["node_modules", "dist", ".output", ".astro", ".svelte", ".nuxt", ".next"];
 export declare const fullConfigSchema: ZodObject<{
   ignorePaths: ZodDefault<ZodArray<ZodString>>;
   ignoreRules: ZodDefault<ZodArray<ZodString>>;

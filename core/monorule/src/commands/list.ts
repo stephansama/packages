@@ -1,11 +1,11 @@
 import { command } from "cleye";
 import pc from "picocolors";
 
-import type { cliArguments } from "@/src/cli";
+import type { CliArguments } from "@/src/cli";
+import type { Rule } from "@/src/rule";
 
 import { loadConfig } from "@/src/config";
-
-import type { Rule } from "../rule";
+import { getFlag } from "@/src/utilities";
 
 function propertyToColor(
 	property: keyof Rule,
@@ -49,11 +49,16 @@ export const meta = command({
 			description: "config file",
 			type: String,
 		},
+		json: {
+			default: false,
+			description: "export as json",
+			type: Boolean,
+		},
 	},
 	name: "list",
 });
 
-export async function act(arguments_: typeof cliArguments) {
+export async function act(arguments_: CliArguments) {
 	const config = await loadConfig(arguments_);
 
 	const rules = Object.values(config.rules);
@@ -61,6 +66,24 @@ export async function act(arguments_: typeof cliArguments) {
 	const properties = ["enabled", "pattern", "parse"] satisfies Array<
 		keyof Rule
 	>;
+
+	const json = getFlag(arguments_, "json");
+
+	if (json) {
+		return console.info(
+			JSON.stringify(
+				rules.map((rule) => {
+					// @ts-expect-error need to delete anyway
+					delete rule.when;
+					delete rule.apply;
+					delete rule.context;
+					return rule;
+				}),
+				undefined,
+				2,
+			),
+		);
+	}
 
 	const padding = Math.max(...properties.map((property) => property.length));
 

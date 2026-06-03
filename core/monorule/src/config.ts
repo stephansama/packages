@@ -2,18 +2,21 @@ import { cosmiconfig, getDefaultSearchPlaces, type Options } from "cosmiconfig";
 import { merge } from "es-toolkit/compat";
 import * as toml from "smol-toml";
 
-import type { cliArguments } from "./cli";
+import { name as moduleName } from "@/package.json";
+
+import type { CliArguments } from "./cli";
 import type { Rule } from "./rule";
 
-import { name as moduleName } from "../package.json";
 import { loadRules } from "./load";
+import { info, warn } from "./log";
 import { type ConfigSchema, fullConfigSchema } from "./schema";
+import { getFlag } from "./utilities";
 
 const searchPlaces = getSearchPlaces();
 
 const loaders = { [".toml"]: loadToml };
 
-export async function loadConfig(arguments_: Partial<typeof cliArguments>) {
+export async function loadConfig(arguments_: CliArguments) {
 	const options = { loaders, searchPlaces } satisfies Partial<Options>;
 
 	if (
@@ -28,34 +31,21 @@ export async function loadConfig(arguments_: Partial<typeof cliArguments>) {
 	const search = await explorer.search();
 
 	if (search) {
-		console.info("found configuration file at:", search.filepath);
-		console.info("loaded cosmiconfig", search.config);
+		info("found configuration file at:", search.filepath);
+		info("loaded cosmiconfig", search.config);
 	} else {
-		const location =
-			arguments_.flags &&
-			"config" in arguments_.flags &&
-			arguments_.flags?.config
-				? " at location: " + arguments_.flags.config
-				: "";
-		console.warn(`no config file found`, location);
-		console.info("using default configuration");
+		const config = getFlag(arguments_, "config");
+		const location = config ? " at location: " + config : "";
+		warn(`no config file found`, location);
+		info("using default configuration");
 	}
 
-	console.info("merging config with args", arguments_);
+	info("merging config with args", arguments_);
 
 	const arguments_config = {
-		ignorePaths:
-			arguments_.flags &&
-			"ignorePaths" in arguments_.flags &&
-			arguments_.flags.ignorePaths,
-		ignoreRules:
-			arguments_.flags &&
-			"ignoreRules" in arguments_.flags &&
-			arguments_.flags.ignoreRules,
-		ruleDirectory:
-			arguments_.flags &&
-			"ruleDirectory" in arguments_.flags &&
-			arguments_.flags.ruleDirectory,
+		ignorePaths: getFlag(arguments_, "ignorePaths"),
+		ignoreRules: getFlag(arguments_, "ignoreRules"),
+		ruleDirectory: getFlag(arguments_, "ruleDirectory"),
 	} as Partial<ConfigSchema>;
 
 	const config = fullConfigSchema.parse(

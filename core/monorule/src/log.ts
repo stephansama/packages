@@ -1,6 +1,11 @@
 import * as obug from "obug";
 
-export const DEBUG_BASE_NAMESPACE = "single-file" as const;
+import pkg from "@/package.json";
+
+export const DEBUG_BASE_NAMESPACE = pkg.name.replace(
+	"@stephansama/",
+	"",
+) as `monorule`;
 export const DEBUG_NAMESPACES = ["error", "info", "warn"] as const;
 export type DEBUG_NAMESPACE = (typeof DEBUG_NAMESPACES)[number];
 export type DEBUG_SCOPE = `${typeof DEBUG_BASE_NAMESPACE}:${DEBUG_NAMESPACE}`;
@@ -19,9 +24,9 @@ export const [error, info, warn] = DEBUG_NAMESPACES.map((namespace, index) => {
 	return debug.extend(namespace);
 });
 
-export function enable(isVerbose: boolean) {
-	const enabledScopes = DEBUG_NAMESPACES.filter((scope) => {
-		return scope !== VERBOSE_SCOPE || isVerbose;
+export function enable(verbosity: number | undefined) {
+	const enabledScopes = DEBUG_NAMESPACES.filter((_, index) => {
+		return index <= (verbosity || 0);
 	})
 		.map((scope) => `${DEBUG_BASE_NAMESPACE}:${scope}`)
 		.join(",");

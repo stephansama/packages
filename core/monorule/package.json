@@ -39,8 +39,8 @@
     "build": "tsdown",
     "build:snapshot": "tsdown -u",
     "cli": "node ./dist/cli.mjs",
-    "cli:config": "node ./dist/cli.mjs -c ./example/monorule.config.ts",
-    "cli:list": "node ./dist/cli.mjs list -c ./example/monorule.config.ts ",
+    "cli:config": "node ./dist/cli.mjs -c ./example/index.ts",
+    "cli:list": "node ./dist/cli.mjs list -c ./example/index.ts ",
     "cli:rules": "node ./dist/cli.mjs --ruleDirectory ./example/rules/",
     "dev": "tsdown --watch",
     "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
@@ -74,6 +74,7 @@
   },
   "inlinedDependencies": {
     "cleye": "2.6.0",
+    "obug": "2.1.1",
     "terminal-columns": "2.0.0",
     "type-flag": "4.2.0",
     "zod": "4.2.1"

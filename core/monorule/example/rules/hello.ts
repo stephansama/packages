@@ -7,7 +7,6 @@ export const jsonRule = defineRule({
 		input.property = true;
 		return input;
 	},
-	enabled: false,
 	name: "json",
 	parse(input: string) {
 		return z
@@ -15,9 +14,7 @@ export const jsonRule = defineRule({
 			.parse(JSON.parse(input));
 	},
 	pattern: "**/data/*.json",
-	when(input, context) {
-		console.info(context);
-		console.info(input);
+	when(input) {
 		if (input.property) return;
 
 		return [
@@ -36,7 +33,7 @@ export const txtRule = defineRule({
 	name: "txt",
 	parse: "txt",
 	pattern: "**/data/*.txt",
-	when(input) {
+	when() {
 		// return !input.includes("stephansama");
 	},
 });

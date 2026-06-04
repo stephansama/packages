@@ -1,9 +1,10 @@
 export const DEFAULT_IGNORE_LIST = [
-	"node_modules",
-	"dist",
-	".output",
-	".astro",
-	".svelte",
-	".nuxt",
-	".next",
+	"**/.astro/**",
+	"**/.next/**",
+	"**/.nuxt/**",
+	"**/.output/**",
+	"**/.svelte-kit/**",
+	"**/.svelte/**",
+	"**/dist/**",
+	"**/node_modules/**",
 ] as const;

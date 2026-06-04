@@ -1,12 +1,16 @@
 import type { FullConfigSchema } from "./schema";
 
-export { parsers, stringifiers } from "./parse";
+export { parse, parsers, stringifiers, stringify } from "./parse";
 export { DEFAULT_IGNORE_LIST } from "./paths";
 export { defineRule, loadRules } from "./rules";
 export { configSchema, fullConfigSchema } from "./schema";
 
-export type { ConfigSchema, FullConfigSchema } from "./schema";
-export type { DefaultRuleParseType, DirtyFile, Error, RuleBase } from "./type";
+export type {
+	BuiltinParseEnumSchema,
+	ConfigSchema,
+	FullConfigSchema,
+} from "./schema";
+export type { DirtyFile, Error, RuleBase } from "./type";
 
 export type UserConfig<T> = Omit<FullConfigSchema, "rules"> & {
 	rules: T;

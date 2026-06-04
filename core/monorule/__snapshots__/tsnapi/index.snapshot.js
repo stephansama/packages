@@ -5,6 +5,8 @@
 export function defineConfig(_) {}
 export function defineRule(_) {}
 export async function loadRules(_, _) {}
+export function parse(_, _) {}
+export function stringify(_, _) {}
 // #endregion
 
 // #region Variables

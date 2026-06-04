@@ -45,6 +45,7 @@ export default defineConfig({
         input.touched = true;
         return input;
       },
+      include: "**/data/*.json",
       name: "rule1",
       parse(input: string) {
         return z
@@ -54,7 +55,6 @@ export default defineConfig({
           .loose()
           .parse(parsers.json(input));
       },
-      pattern: "**/data/*.json",
       when(input) {
         if (input.touched) return;
         return [

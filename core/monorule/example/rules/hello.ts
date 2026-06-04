@@ -7,13 +7,13 @@ export const jsonRule = defineRule({
 		input.property = true;
 		return input;
 	},
+	include: ["**/data/*.json"],
 	name: "json",
 	parse(input: string) {
 		return z
 			.object({ property: z.boolean().optional() })
 			.parse(JSON.parse(input));
 	},
-	pattern: "**/data/*.json",
 	when(input) {
 		if (input.property) return;
 
@@ -30,9 +30,9 @@ export const txtRule = defineRule({
 	apply(input) {
 		return `stephansama${input}`;
 	},
+	include: ["**/data/*.txt"],
 	name: "txt",
 	parse: "txt",
-	pattern: "**/data/*.txt",
 	when() {
 		// return !input.includes("stephansama");
 	},

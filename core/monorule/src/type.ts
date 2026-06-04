@@ -1,14 +1,18 @@
 import type { PackageJSON } from "@manypkg/tools";
 
+import type { BuiltinParseEnumSchema } from "./schema";
+
+export type { BuiltinParseEnumSchema } from "./schema";
+
+export type ContextWithErrors = { context: DirtyFile; errors: Array<Error> };
+
 export type DefaultParserRule<
-	Parse extends DefaultRuleParseType,
+	Parse extends BuiltinParseEnumSchema,
 	T = DefaultRuleParseTypeExtract<Parse>,
 	Context = DirtyFile,
 > = RuleBase<T, Context> & { parse: Parse };
 
-export type DefaultRuleParseType = "json" | "toml" | "txt" | "yaml";
-
-export type DefaultRuleParseTypeExtract<T extends DefaultRuleParseType> =
+export type DefaultRuleParseTypeExtract<T extends BuiltinParseEnumSchema> =
 	T extends "txt" ? string : object;
 
 export type DirtyFile<T = unknown> = LocationContext & {
@@ -45,10 +49,10 @@ export type PackageJsonContext = { json: PackageJSON };
 
 export type RuleBase<T, Context = DirtyFile> = {
 	apply?: (input: NoInfer<T>, context?: Context) => Promise<T> | T;
-	context?(file: string): Context;
 	enabled?: boolean;
+	exclude?: string | string[];
+	include: string | string[];
 	name: string;
-	pattern: string;
 	when(input: NoInfer<T>, context?: Context): Array<Error> | void;
 };
 

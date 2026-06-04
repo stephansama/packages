@@ -1,10 +1,11 @@
+import type { BuiltinParseEnumSchema } from "@/schema";
 import type * as types from "@/type";
 
 export function defineRule<T, Context = types.DirtyFile>(
 	rule: types.FunctionParserRule<T, Context>,
 ): types.FunctionParserRule<T, Context>;
 export function defineRule<
-	const Parse extends types.DefaultRuleParseType,
+	const Parse extends BuiltinParseEnumSchema,
 	Context = types.DirtyFile,
 >(
 	rule: types.DefaultParserRule<

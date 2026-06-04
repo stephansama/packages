@@ -29,13 +29,12 @@ export async function checkRules(
 		Object.values(config.rules)
 			.filter((rule) => rule.enabled)
 			.map(async (rule) => {
-				const fileMatches = await glob(rule.pattern, {
-					cwd,
-					ignore:
-						config.ignorePaths.length > 0
-							? config.ignorePaths
-							: DEFAULT_IGNORE_LIST,
-				});
+				const defaultIgnore =
+					config.ignorePaths.length > 0
+						? config.ignorePaths
+						: DEFAULT_IGNORE_LIST;
+				const ignore = [...defaultIgnore, ...(rule.exclude || [])];
+				const fileMatches = await glob(rule.include, { cwd, ignore });
 
 				info(`loading rules for ${rule.name}`);
 

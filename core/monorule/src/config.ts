@@ -20,7 +20,17 @@ export async function loadConfig(cliArguments: CliArguments) {
 	const options = { loaders, searchPlaces } satisfies Partial<Options>;
 
 	const argumentConfig = getFlag(cliArguments, "config");
-	if (argumentConfig) options.searchPlaces = [argumentConfig];
+	if (argumentConfig) {
+		options.searchPlaces = [
+			argumentConfig,
+			`${moduleName}.config.js`,
+			// `${moduleName}.config.mjs`,
+			// `${moduleName}.config.cjs`,
+			// `${moduleName}.config.ts`,
+			// `${moduleName}.config.mts`,
+			// `${moduleName}.config.cts`,
+		];
+	}
 
 	const explorer = cosmiconfig(moduleName, options);
 

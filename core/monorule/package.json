@@ -33,7 +33,8 @@
     "monorule": "./dist/cli.mjs"
   },
   "files": [
-    "dist"
+    "dist",
+    "example"
   ],
   "scripts": {
     "build": "tsdown",

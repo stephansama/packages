@@ -15,6 +15,9 @@ function propertyToColor(
 		case "enabled": {
 			return value === "true" ? pc.green : pc.red;
 		}
+		case "include": {
+			return pc.blue;
+		}
 		case "parse": {
 			if (value === "json") return pc.yellow;
 			if (value === "toml") return pc.green;
@@ -24,9 +27,6 @@ function propertyToColor(
 				return (input: string) => pc.bgBlack(pc.red(input));
 			}
 			return pc.red;
-		}
-		case "pattern": {
-			return pc.blue;
 		}
 		default: {
 			return (input: string) => input;
@@ -58,14 +58,17 @@ export const meta = command({
 	name: "list",
 });
 
+const properties = [
+	"enabled",
+	"include",
+	"exclude",
+	"parse",
+] as const satisfies Array<keyof Rule>;
+
 export async function act(arguments_: CliArguments) {
 	const config = await loadConfig(arguments_);
 
 	const rules = Object.values(config.rules);
-
-	const properties = ["enabled", "pattern", "parse"] satisfies Array<
-		keyof Rule
-	>;
 
 	const json = getFlag(arguments_, "json");
 
@@ -76,7 +79,6 @@ export async function act(arguments_: CliArguments) {
 					// @ts-expect-error need to delete anyway
 					delete rule.when;
 					delete rule.apply;
-					delete rule.context;
 					return rule;
 				}),
 				undefined,
@@ -95,7 +97,11 @@ export async function act(arguments_: CliArguments) {
 			const color = propertyToColor(property, value?.toString());
 			console.info(
 				`  ${property}: `.padEnd(padding + 4) +
-					pc.bold(color(`${value}`)),
+					pc.bold(
+						color(
+							`${Array.isArray(value) ? value.join(",") : value}`,
+						),
+					),
 			);
 		}
 	}

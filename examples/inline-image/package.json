@@ -1,0 +1,22 @@
+{
+  "name": "@example/inline-image",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "astro": "astro",
+    "build": "astro build",
+    "dev": "astro dev",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^6.4.6"
+  },
+  "devDependencies": {
+    "@stephansama/inline-image": "workspace:*",
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

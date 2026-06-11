@@ -1,0 +1,64 @@
+{
+  "name": "@stephansama/inline-image",
+  "version": "0.0.0",
+  "description": "inline an image as a data uri",
+  "keywords": [
+    "inline-image"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/inline-image",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/inline-image"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./astro": "./src/astro/index.ts",
+    "./cli": "./dist/cli.mjs",
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "bin": {
+    "inline-image": "./dist/cli.mjs"
+  },
+  "files": [
+    "dist",
+    "src/astro"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --fix"
+  },
+  "devDependencies": {
+    "@astrojs/ts-plugin": "catalog:astro",
+    "astro": "catalog:",
+    "cleye": "catalog:cli",
+    "tsdown": "catalog:"
+  },
+  "peerDependencies": {
+    "astro": "catalog:"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "readme": "./README.md",
+  "dependencies": {
+    "ky": "catalog:"
+  }
+}

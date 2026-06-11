@@ -57,8 +57,5 @@
     "access": "public",
     "provenance": true
   },
-  "readme": "./README.md",
-  "dependencies": {
-    "ky": "catalog:"
-  }
+  "readme": "./README.md"
 }

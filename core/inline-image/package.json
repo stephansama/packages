@@ -1,6 +1,6 @@
 {
   "name": "@stephansama/inline-image",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "inline an image as a data uri",
   "keywords": [
     "inline-image"

@@ -1,0 +1,30 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import { inlineImages } from "./map";
+
+export interface Props extends HTMLAttributes<"img"> {}
+
+const { alt, src: inputSource, ...rest } = Astro.props;
+
+if (!inputSource) {
+	throw new Error("must use a valid source");
+}
+
+const source = await fetchResponse(inputSource);
+
+async function fetchResponse(input: string) {
+	const inlined = inlineImages.get(input);
+	if (inlined) return inlined;
+
+	const response = await fetch(input);
+	const type = response.headers.get("Content-Type");
+	const arrayBuffer = await response.arrayBuffer();
+	const base64 = Buffer.from(arrayBuffer).toString("base64");
+	const image = `data:${type};base64,${base64}`;
+	inlineImages.set(input, image);
+	return image;
+}
+---
+
+<img {alt} src={source} {...rest} />

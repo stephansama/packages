@@ -96,6 +96,8 @@ catalogs:
     '@ai-sdk/openai': 3.0.29
     ai: 6.0.86
     ollama-ai-provider-v2: 1.5.5
+  astro:
+    '@astrojs/ts-plugin': 1.10.9
   cli:
     cleye: 2.6.0
     cosmiconfig: 9.0.0
@@ -208,6 +210,7 @@ engineStrict: true
 overrides:
   '@stephansama/astro-iconify-svgmap': workspace:*
   '@stephansama/catppuccin-xsl': workspace:*
+  '@stephansama/inline-image': workspace:*
   '@stephansama/remark-asciinema': workspace:*
   '@stephansama/svelte-social-share-links': workspace:*
   '@stephansama/typed-events': workspace:*

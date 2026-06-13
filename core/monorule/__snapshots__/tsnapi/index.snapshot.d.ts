@@ -28,7 +28,7 @@ export type RuleBase<T, Errors extends Record<string, ErrorValue>, Context = Dir
 }> & {
   apply?: (_: NoInfer<T>, _?: Context & {
     errors: Array<Error<ErrorId<NoInfer<Errors>>>>;
-  }) => Promise<T> | T | void;
+  }) => Promise<T> | T;
   enabled?: boolean;
   errors: Errors;
   exclude?: string | string[];

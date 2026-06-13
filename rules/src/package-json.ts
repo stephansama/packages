@@ -4,14 +4,14 @@ import { defineRule } from "@stephansama/monorule";
 import * as fs from "node:fs";
 import path from "node:path";
 import * as url from "node:url";
-import * as prettier from "prettier";
 import * as z from "zod";
+
+import { format } from "../utilities/prettier";
 
 const currentFile = url.fileURLToPath(import.meta.url);
 const dirname = path.dirname(currentFile);
 const nodeVersionPath = path.resolve(dirname, "../../.node-version");
 const nodeVersionFile = await fs.promises.readFile(nodeVersionPath, "utf8");
-const prettierOptions = await prettier.resolveConfig(currentFile);
 
 const GIT_REPO_URL = "https://github.com/stephansama/packages" as const;
 const NODE_ENGINE =
@@ -19,7 +19,7 @@ const NODE_ENGINE =
 
 export const verifyPublishedPackageJson = defineRule({
 	apply(input, context) {
-		if (!context?.errors) return;
+		if (!context?.errors) return input;
 
 		for (const error of context.errors) {
 			switch (error.id) {
@@ -87,9 +87,7 @@ export const verifyPublishedPackageJson = defineRule({
 			})
 			.parse(JSON.parse(input)),
 	async stringify(input) {
-		return await prettier.format(JSON.stringify(input), {
-			filepath: "package.json",
-			...prettierOptions,
+		return await format(JSON.stringify(input), "package.json", {
 			useTabs: false,
 		});
 	},

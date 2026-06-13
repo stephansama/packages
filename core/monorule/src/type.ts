@@ -62,7 +62,7 @@ export type RuleBase<
 		context?: Context & {
 			errors: Array<Error<ErrorId<NoInfer<Errors>>>>;
 		},
-	) => Promise<T> | T | void;
+	) => Promise<T> | T;
 	enabled?: boolean;
 	errors: Errors;
 	exclude?: string | string[];

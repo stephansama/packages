@@ -3,6 +3,7 @@
   "include": ["./src/**/*", "tsdown.config.ts", ".astro"],
   "compilerOptions": {
     "plugins": [{ "name": "@astrojs/ts-plugin" }],
-    "types": ["node"]
+    "types": ["node"],
+    "composite": true
   }
 }

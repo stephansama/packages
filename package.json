@@ -1,6 +1,9 @@
 {
   "name": "root",
   "version": "1.0.0",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
   "private": true,
   "description": "root for @stephansama packages monorepo",
   "homepage": "https://packages.stephansama.info",

@@ -2,7 +2,7 @@ import * as toml from "smol-toml";
 import * as yaml from "yaml";
 
 import type { BuiltinParseEnumSchema } from "@/schema";
-import type { FunctionParserRule } from "@/type";
+import type { ErrorValue, FunctionParserRule } from "@/type";
 
 export const stringifiers = {
 	json: JSON.stringify,
@@ -20,7 +20,9 @@ export const parsers = {
 
 export function parse<T>(
 	input: string,
-	format: BuiltinParseEnumSchema | FunctionParserRule<T>["parse"],
+	format:
+		| BuiltinParseEnumSchema
+		| FunctionParserRule<T, Record<string, ErrorValue>>["parse"],
 ): T {
 	if (typeof format === "function") return format(input);
 	const formatter = parsers[format];

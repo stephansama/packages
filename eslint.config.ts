@@ -22,7 +22,13 @@ export default await config({
 	json: true,
 	markdown: true,
 	node: {
-		allowModules: ["vitest", "@manypkg/get-packages", "tsnapi"],
+		allowModules: [
+			"@manypkg/get-packages",
+			"@stephansama/monorule",
+			"prettier",
+			"tsnapi",
+			"vitest",
+		],
 	},
 	svelte: true,
 	vitest: true,

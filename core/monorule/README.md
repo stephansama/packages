@@ -45,24 +45,21 @@ export default defineConfig({
         input.touched = true;
         return input;
       },
+      errors: {
+        id: "json has not been touched",
+      },
       include: "**/data/*.json",
       name: "rule1",
-      parse(input: string) {
-        return z
+      parse: (input: string) =>
+        z
           .object({
             touched: z.boolean().optional(),
           })
           .loose()
-          .parse(parsers.json(input));
-      },
+          .parse(parsers.json(input)),
       when(input) {
         if (input.touched) return;
-        return [
-          {
-            id: "id",
-            message: "json has not been touched",
-          },
-        ];
+        return [{ id: "id", message: this.errors.id }];
       },
     }),
   ],

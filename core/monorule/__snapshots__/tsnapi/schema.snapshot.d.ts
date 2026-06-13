@@ -28,6 +28,7 @@ export declare const fullConfigSchema: ZodObject<{
   rules: ZodDefault<ZodArray<ZodObject<{
     apply: ZodOptional<ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>>;
     enabled: ZodDefault<ZodBoolean>;
+    errors: ZodDefault<ZodRecord<ZodString, ZodUnknown>>;
     exclude: ZodOptional<ZodUnion<[ZodArray<ZodString>, ZodString]>>;
     include: ZodUnion<readonly [ZodArray<ZodString>, ZodString]>;
     name: ZodString;
@@ -37,12 +38,14 @@ export declare const fullConfigSchema: ZodObject<{
       yaml: "yaml";
       toml: "toml";
     }>]>;
+    stringify: ZodOptional<ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>>;
     when: ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>;
-  }, $strip>>>;
+  }, $loose>>>;
 }, $strip>;
 export declare const ruleMapSchema: ZodRecord<ZodString, ZodObject<{
   apply: ZodOptional<ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>>;
   enabled: ZodDefault<ZodBoolean>;
+  errors: ZodDefault<ZodRecord<ZodString, ZodUnknown>>;
   exclude: ZodOptional<ZodUnion<[ZodArray<ZodString>, ZodString]>>;
   include: ZodUnion<readonly [ZodArray<ZodString>, ZodString]>;
   name: ZodString;
@@ -52,11 +55,13 @@ export declare const ruleMapSchema: ZodRecord<ZodString, ZodObject<{
     yaml: "yaml";
     toml: "toml";
   }>]>;
+  stringify: ZodOptional<ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>>;
   when: ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>;
-}, $strip>>;
+}, $loose>>;
 export declare const ruleSchema: ZodObject<{
   apply: ZodOptional<ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>>;
   enabled: ZodDefault<ZodBoolean>;
+  errors: ZodDefault<ZodRecord<ZodString, ZodUnknown>>;
   exclude: ZodOptional<ZodUnion<[ZodArray<ZodString>, ZodString]>>;
   include: ZodUnion<readonly [ZodArray<ZodString>, ZodString]>;
   name: ZodString;
@@ -66,6 +71,7 @@ export declare const ruleSchema: ZodObject<{
     yaml: "yaml";
     toml: "toml";
   }>]>;
+  stringify: ZodOptional<ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>>;
   when: ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>;
-}, $strip>;
+}, $loose>;
 // #endregion

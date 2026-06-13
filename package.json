@@ -4,6 +4,9 @@
   "private": true,
   "description": "root for @stephansama packages monorepo",
   "homepage": "https://packages.stephansama.info",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stephansama/packages.git"
@@ -55,7 +58,6 @@
     "eslint": "catalog:eslint",
     "jsdom": "catalog:",
     "knip": "catalog:",
-    "monoman": "catalog:",
     "nano-staged": "catalog:",
     "pkg-pr-new": "catalog:",
     "prettier": "catalog:prettier",
@@ -74,6 +76,7 @@
   },
   "devDependencies": {
     "@eslint/markdown": "catalog:eslint",
+    "@stephansama/monorule": "workspace:*",
     "@vitest/eslint-plugin": "catalog:eslint",
     "actions-up": "catalog:",
     "eslint-plugin-astro": "catalog:eslint",

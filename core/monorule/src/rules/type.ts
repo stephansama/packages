@@ -1,4 +1,7 @@
-import type { defineRule } from "./define";
+import type { BuiltinParseEnumSchema } from "@/schema";
+import type { DefaultParserRule, ErrorValue, FunctionParserRule } from "@/type";
 
-export type Rule = ReturnType<typeof defineRule>;
+export type Rule =
+	| DefaultParserRule<BuiltinParseEnumSchema, Record<string, ErrorValue>>
+	| FunctionParserRule<any, Record<string, ErrorValue>>;
 export type RuleMap = Record<string, Rule>;

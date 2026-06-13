@@ -7,6 +7,9 @@
     "tanstack-intent"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/typed-env",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stephansama/packages.git",

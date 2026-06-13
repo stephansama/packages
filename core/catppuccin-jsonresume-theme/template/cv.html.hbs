@@ -203,7 +203,11 @@
 			</header>
 			{{/if}} {{#if skills}}
 			<div class="squiggle" aria-hidden="true"></div>
-			<section class="cv-section" id="skills" aria-labelledby="skills-title">
+			<section
+				class="cv-section"
+				id="skills"
+				aria-labelledby="skills-title"
+			>
 				<h2 class="section-title" id="skills-title">skills</h2>
 				<div class="row-list">
 					{{#each skills}}
@@ -254,7 +258,8 @@
 							{{#if startDate}}
 							<span class="row-date"
 								>{{formatDate startDate}}{{#if endDate}} —
-								{{formatDate endDate}}{{else}} — Present{{/if}}</span
+								{{formatDate endDate}}{{else}} —
+								Present{{/if}}</span
 							>
 							{{/if}}
 						</div>
@@ -290,7 +295,8 @@
 							<span class="row-glyph" aria-hidden="true">◈</span>
 							<div class="row-title">
 								<span
-									>{{studyType}}{{#if area}} in {{area}}{{/if}}</span
+									>{{studyType}}{{#if area}} in
+									{{area}}{{/if}}</span
 								>
 								{{#if institution}}
 								<span class="row-title-org"
@@ -314,7 +320,9 @@
 						{{#if (or gpa score courses)}}
 						<div class="row-body">
 							{{#if (or gpa score)}}
-							<p>GPA: {{#if gpa}}{{gpa}}{{else}}{{score}}{{/if}}</p>
+							<p>
+								GPA: {{#if gpa}}{{gpa}}{{else}}{{score}}{{/if}}
+							</p>
 							{{/if}} {{#if courses}}
 							<div class="tag-cluster">
 								{{#each courses}}
@@ -429,7 +437,11 @@
 			</section>
 			{{/if}} {{#if awards}}
 			<div class="squiggle" aria-hidden="true"></div>
-			<section class="cv-section" id="awards" aria-labelledby="awards-title">
+			<section
+				class="cv-section"
+				id="awards"
+				aria-labelledby="awards-title"
+			>
 				<h2 class="section-title" id="awards-title">awards</h2>
 				<div class="row-list">
 					{{#each awards}}

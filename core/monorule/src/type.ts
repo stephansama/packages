@@ -8,9 +8,10 @@ export type ContextWithErrors = { context: DirtyFile; errors: Array<Error> };
 
 export type DefaultParserRule<
 	Parse extends BuiltinParseEnumSchema,
+	Errors extends Record<string, ErrorValue>,
 	T = DefaultRuleParseTypeExtract<Parse>,
 	Context = DirtyFile,
-> = RuleBase<T, Context> & { parse: Parse };
+> = RuleBase<T, Errors, Context> & { parse: Parse };
 
 export type DefaultRuleParseTypeExtract<T extends BuiltinParseEnumSchema> =
 	T extends "txt" ? string : object;
@@ -30,15 +31,19 @@ export type DirtyFile<T = unknown> = LocationContext & {
 export type Error<T extends string = string> = {
 	fixable?: boolean;
 	id: T;
-	message: string;
+	message?: string;
 };
 
-export type FunctionParserRule<T, Context = DirtyFile> = RuleBase<
+export type ErrorId<Errors> = Extract<keyof Errors, string>;
+
+export type ErrorValue = string | { fixable?: boolean; message: string };
+
+export type FunctionParserRule<
 	T,
-	Context
-> & {
+	Errors extends Record<string, ErrorValue>,
+	Context = DirtyFile,
+> = RuleBase<T, Errors, Context> & {
 	parse(input: string): T;
-	stringify?(input: NoInfer<T>): string;
 };
 
 export type LocationContext = { absolutePath: string; relativePath: string };
@@ -47,13 +52,27 @@ export type PackageContext = LocationContext & PackageJsonContext;
 
 export type PackageJsonContext = { json: PackageJSON };
 
-export type RuleBase<T, Context = DirtyFile> = {
-	apply?: (input: NoInfer<T>, context?: Context) => Promise<T> | T;
+export type RuleBase<
+	T,
+	Errors extends Record<string, ErrorValue>,
+	Context = DirtyFile,
+> = ThisType<{ errors: Errors }> & {
+	apply?: (
+		input: NoInfer<T>,
+		context?: Context & {
+			errors: Array<Error<ErrorId<NoInfer<Errors>>>>;
+		},
+	) => Promise<T> | T | void;
 	enabled?: boolean;
+	errors: Errors;
 	exclude?: string | string[];
 	include: string | string[];
 	name: string;
-	when(input: NoInfer<T>, context?: Context): Array<Error> | void;
+	stringify?(input: NoInfer<T>): Promise<string> | string;
+	when(
+		input: NoInfer<T>,
+		context?: Context,
+	): Array<Error<ErrorId<NoInfer<Errors>>>> | void;
 };
 
 export type Undefinable<T extends object> = {

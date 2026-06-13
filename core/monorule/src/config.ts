@@ -10,7 +10,9 @@ import { getFlag } from "@/cli/flags";
 import { info, warn } from "@/log";
 import { loadRules } from "@/rules/load";
 import { fullConfigSchema } from "@/schema";
-import { name as moduleName } from "~/package.json";
+import { name } from "~/package.json";
+
+const moduleName = name.replace("@stephansama", "");
 
 const searchPlaces = getSearchPlaces();
 
@@ -21,15 +23,7 @@ export async function loadConfig(cliArguments: CliArguments) {
 
 	const argumentConfig = getFlag(cliArguments, "config");
 	if (argumentConfig) {
-		options.searchPlaces = [
-			argumentConfig,
-			`${moduleName}.config.js`,
-			// `${moduleName}.config.mjs`,
-			// `${moduleName}.config.cjs`,
-			// `${moduleName}.config.ts`,
-			// `${moduleName}.config.mts`,
-			// `${moduleName}.config.cts`,
-		];
+		options.searchPlaces = [argumentConfig, ...options.searchPlaces];
 	}
 
 	const explorer = cosmiconfig(moduleName, options);
@@ -85,12 +79,17 @@ function getSearchPlaces() {
 	return [
 		...getDefaultSearchPlaces(moduleName),
 		`.${moduleName}rc.toml`,
-		`.config/.${moduleName}rc`,
-		`.config/${moduleName}rc.toml`,
-		`.config/.${moduleName}rc.toml`,
-		`.config/.${moduleName}rc.json`,
-		`.config/.${moduleName}rc.yaml`,
-		`.config/.${moduleName}rc.yml`,
+		`${moduleName}.config.js`,
+		`${moduleName}.config.mjs`,
+		`${moduleName}.config.cjs`,
+		`${moduleName}.config.ts`,
+		`./.config/${moduleName}.config.ts`,
+		`./.config/.${moduleName}rc`,
+		`./.config/${moduleName}rc.toml`,
+		`./.config/.${moduleName}rc.toml`,
+		`./.config/.${moduleName}rc.json`,
+		`./.config/.${moduleName}rc.yaml`,
+		`./.config/.${moduleName}rc.yml`,
 	];
 }
 

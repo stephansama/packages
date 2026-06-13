@@ -4,19 +4,19 @@ export type BuiltinParseEnumSchema = z.infer<typeof builtinParseEnumSchema>;
 export const builtinParseEnumSchema = z.enum(["json", "txt", "yaml", "toml"]);
 
 export type RuleSchema = z.infer<typeof ruleSchema>;
-export const ruleSchema = z.object({
-	apply: z.function().optional(),
-	enabled: z.boolean().default(true),
-	exclude: z.array(z.string().trim()).or(z.string().trim()).optional(),
-	include: z.union([z.array(z.string().trim()), z.string().trim()]),
-	name: z.string().trim(),
-	parse: z.function().or(builtinParseEnumSchema),
-	when: z.function(),
-	// when: z.function({
-	// 	input: [z.string().trim()],
-	// 	output: z.boolean(),
-	// }),
-});
+export const ruleSchema = z
+	.object({
+		apply: z.function().optional(),
+		enabled: z.boolean().default(true),
+		errors: z.record(z.string(), z.unknown()).default({}),
+		exclude: z.array(z.string().trim()).or(z.string().trim()).optional(),
+		include: z.union([z.array(z.string().trim()), z.string().trim()]),
+		name: z.string().trim(),
+		parse: z.function().or(builtinParseEnumSchema),
+		stringify: z.function().optional(),
+		when: z.function(),
+	})
+	.loose();
 
 export type RuleMapSchema = z.infer<typeof ruleMapSchema>;
 export const ruleMapSchema = z.record(z.string(), ruleSchema);

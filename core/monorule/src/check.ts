@@ -9,7 +9,7 @@ import { glob } from "tinyglobby";
 
 import type { RuleMap } from "@/rules";
 import type { ConfigSchema } from "@/schema";
-import type { DirtyFile, Error as RuleError } from "@/type";
+import type { DirtyFile, Error, Error as RuleError } from "@/type";
 
 import { info } from "@/log";
 import { parse } from "@/parse";
@@ -23,7 +23,11 @@ export async function checkRules(
 
 	if (!rootPackage) throw new Error("unable to find root package");
 
-	const checkedErrors = new Array<RuleError>();
+	const checkedErrors = new Array<{
+		context: DirtyFile;
+		error: RuleError;
+		filename: string;
+	}>();
 
 	const dirtyFiles = await Promise.all(
 		Object.values(config.rules)
@@ -92,13 +96,21 @@ export async function checkRules(
 							rule: rule.name,
 						} as const satisfies DirtyFile;
 
-						// @ts-expect-error works
+						/* eslint-disable-next-line @typescript-eslint/no-unsafe-argument */
 						const errors = rule.when(parsed, context);
 						if (!errors || errors.length === 0) return false;
 
-						checkedErrors.push(...errors);
+						checkedErrors.push(
+							...errors.map((error) => {
+								return {
+									context,
+									error,
+									filename: match,
+								};
+							}),
+						);
 
-						return context;
+						return { ...context, errors };
 					}),
 				);
 
@@ -107,18 +119,25 @@ export async function checkRules(
 	);
 
 	const width = Math.max(
-		...checkedErrors.map((error) => ` ${error.id}: `.length),
+		...checkedErrors.map((error) => ` ${error.error.id}: `.length),
 	);
 
 	console.info(
 		checkedErrors
-			.map((error) => {
-				return (
-					pc.bold(` ${error.id}: `.padEnd(width)) + `${error.message}`
-				);
+			.flatMap((error) => {
+				return [
+					pc.bold(` ${error.error.id}: `.padEnd(width)) +
+						`${error.error.message}`,
+					pc.bold(`${error.context.rule}`),
+					pc.bold(`${error.filename}`),
+				];
 			})
 			.join("\n"),
 	);
 
-	return dirtyFiles.flat().filter((match): match is DirtyFile => !!match);
+	return dirtyFiles
+		.flat()
+		.filter(
+			(match): match is DirtyFile & { errors: Array<Error> } => !!match,
+		);
 }

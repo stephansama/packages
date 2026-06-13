@@ -8,17 +8,14 @@ import pkg from "~/package.json";
 
 export const configFlags = {
 	ignorePaths: {
-		default: [],
 		description: "list of files to ignore",
 		type: [String],
 	},
 	ignoreRules: {
-		default: [],
 		description: "list of rules to ignore",
 		type: [String],
 	},
 	ruleDirectory: {
-		default: "rules",
 		description: "rules directory",
 		type: String,
 	},

@@ -3,6 +3,9 @@
   "version": "1.1.6",
   "description": "Svelte/Web component to share the current url with various social media providers",
   "homepage": "https://packages.stephansama.info/api/@stephansama/svelte-social-share-links",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stephansama/packages.git",

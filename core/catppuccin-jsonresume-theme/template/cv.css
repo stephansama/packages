@@ -41,12 +41,12 @@
 
 html,
 body {
-	@apply m-0 p-0 bg-ctp-base min-h-full;
+	@apply bg-ctp-base m-0 min-h-full p-0;
 	transition: background-color 0.25s ease;
 }
 
 body {
-	@apply font-sans text-ctp-text antialiased leading-relaxed scrollbar-thin scrollbar-thumb-ctp-mauve scrollbar-track-ctp-base;
+	@apply text-ctp-text scrollbar-thin scrollbar-thumb-ctp-mauve scrollbar-track-ctp-base font-sans leading-relaxed antialiased;
 	font-feature-settings:
 		"kern" 1,
 		"liga" 1,
@@ -67,7 +67,7 @@ body {
 	--wave-c: var(--color-ctp-mauve);
 	--wave-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 16'><path d='M 0 8 q 6 -6 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0 t 12 0' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/></svg>");
 
-	@apply relative overflow-hidden pointer-events-none my-10 -mx-6;
+	@apply pointer-events-none relative -mx-6 my-10 overflow-hidden;
 	height: var(--wave-h);
 	-webkit-mask-image: linear-gradient(
 		to right,
@@ -85,7 +85,7 @@ body {
 	);
 }
 .squiggle::before {
-	@apply block w-full h-full;
+	@apply block h-full w-full;
 	content: "";
 	background-color: var(--wave-c);
 	-webkit-mask-image: var(--wave-mask);
@@ -142,7 +142,7 @@ body {
 
 @media (min-width: 768px) {
 	.squiggle {
-		@apply my-12 -mx-8;
+		@apply -mx-8 my-12;
 	}
 }
 @media (max-width: 480px) {
@@ -150,7 +150,7 @@ body {
 		--wave-h: 12px;
 		--wave-w: 72px;
 		--wave-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 12'><path d='M 0 6 q 4.5 -4.5 9 0 t 9 0 t 9 0 t 9 0 t 9 0 t 9 0 t 9 0 t 9 0' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'/></svg>");
-		@apply my-8 -mx-4;
+		@apply -mx-4 my-8;
 	}
 }
 
@@ -167,10 +167,14 @@ body {
 }
 
 .cv-avatar {
-	@apply grid place-items-center w-[120px] h-[120px] rounded-full border-[3px] border-ctp-lavender text-ctp-text font-sans font-bold select-none overflow-hidden cursor-default text-[38px] tracking-[-0.04em];
+	@apply border-ctp-lavender text-ctp-text grid h-[120px] w-[120px] cursor-default place-items-center overflow-hidden rounded-full border-[3px] font-sans text-[38px] font-bold tracking-[-0.04em] select-none;
 	background: linear-gradient(
 		135deg,
-		color-mix(in oklab, var(--color-ctp-lavender) 30%, var(--color-ctp-base)),
+		color-mix(
+			in oklab,
+			var(--color-ctp-lavender) 30%,
+			var(--color-ctp-base)
+		),
 		color-mix(in oklab, var(--color-ctp-pink) 28%, var(--color-ctp-base))
 	);
 	transition:
@@ -182,19 +186,19 @@ body {
 	transform: scale(1.05);
 }
 .cv-avatar img {
-	@apply w-full h-full block object-cover;
+	@apply block h-full w-full object-cover;
 }
 
 .cv-name {
-	@apply font-semibold text-ctp-text text-[clamp(1.75rem,2vw+1rem,2.25rem)] tracking-[-0.02em] leading-[1.15] mt-6 mx-0 mb-[0.35rem];
+	@apply text-ctp-text mx-0 mt-6 mb-[0.35rem] text-[clamp(1.75rem,2vw+1rem,2.25rem)] leading-[1.15] font-semibold tracking-[-0.02em];
 }
 
 .cv-label {
-	@apply text-base font-normal text-ctp-subtext0 opacity-85 mb-6 text-balance;
+	@apply text-ctp-subtext0 mb-6 text-base font-normal text-balance opacity-85;
 }
 
 .cv-summary {
-	@apply m-0 text-ctp-text max-w-[56ch] text-[1.0625rem] leading-[1.65] text-pretty;
+	@apply text-ctp-text m-0 max-w-[56ch] text-[1.0625rem] leading-[1.65] text-pretty;
 }
 
 .cv-summary + .cv-summary {
@@ -204,12 +208,12 @@ body {
 /* ─── Contact buttons ─────────────────────────────────────────────────── */
 
 .cv-socials {
-	@apply mt-9 flex justify-center flex-wrap gap-[0.85rem];
+	@apply mt-9 flex flex-wrap justify-center gap-[0.85rem];
 }
 
 .cv-social {
 	--soc: var(--color-ctp-lavender);
-	@apply relative grid place-items-center w-[56px] h-[56px] rounded-full border-2 bg-transparent cursor-pointer no-underline;
+	@apply relative grid h-[56px] w-[56px] cursor-pointer place-items-center rounded-full border-2 bg-transparent no-underline;
 	border-color: var(--soc);
 	color: var(--soc);
 	transition:
@@ -220,7 +224,7 @@ body {
 		border-color 0.25s ease;
 }
 .cv-social[data-tooltip]::after {
-	@apply absolute font-mono whitespace-nowrap pointer-events-none text-[0.72rem] leading-none px-[0.55rem] py-[0.35rem] rounded-md opacity-0;
+	@apply pointer-events-none absolute rounded-md px-[0.55rem] py-[0.35rem] font-mono text-[0.72rem] leading-none whitespace-nowrap opacity-0;
 	content: attr(data-tooltip);
 	bottom: 100%;
 	left: 50%;
@@ -243,7 +247,7 @@ body {
 	}
 }
 .cv-social svg {
-	@apply block w-[22px] h-[22px];
+	@apply block h-[22px] w-[22px];
 }
 .cv-social:hover {
 	background: var(--soc);
@@ -296,7 +300,7 @@ body {
 }
 
 .section-title {
-	@apply text-center font-semibold text-ctp-text capitalize text-[clamp(1.5rem,1vw+1.25rem,2rem)] tracking-[-0.02em] leading-[1.3] mt-0 mx-0 mb-12;
+	@apply text-ctp-text mx-0 mt-0 mb-12 text-center text-[clamp(1.5rem,1vw+1.25rem,2rem)] leading-[1.3] font-semibold tracking-[-0.02em] capitalize;
 }
 
 /* ─── ◈ Row ──────────────────────────────────────────────────────────── */
@@ -307,7 +311,7 @@ body {
 
 .row {
 	--row-accent: var(--color-accent-lavender);
-	@apply relative flex items-center gap-4 rounded-xl border-2 no-underline cursor-default text-ctp-text py-[1.1rem] px-[1.4rem];
+	@apply text-ctp-text relative flex cursor-default items-center gap-4 rounded-xl border-2 px-[1.4rem] py-[1.1rem] no-underline;
 	border-color: var(--row-accent);
 	transition: box-shadow 0.2s ease;
 }
@@ -349,7 +353,7 @@ body {
 }
 
 .row-glyph {
-	@apply flex-none font-sans font-normal select-none text-[1.4rem] leading-none opacity-65;
+	@apply flex-none font-sans text-[1.4rem] leading-none font-normal opacity-65 select-none;
 	color: var(--row-accent);
 	transition:
 		opacity 0.25s ease,
@@ -357,14 +361,14 @@ body {
 }
 
 .row-title {
-	@apply flex-1 min-w-0 flex flex-col font-medium text-[1.0625rem] leading-[1.3] tracking-[-0.005em] gap-[2px];
+	@apply flex min-w-0 flex-1 flex-col gap-[2px] text-[1.0625rem] leading-[1.3] font-medium tracking-[-0.005em];
 }
 .row-title-org {
-	@apply font-normal italic text-ctp-subtext0 text-[0.85rem];
+	@apply text-ctp-subtext0 text-[0.85rem] font-normal italic;
 }
 
 .row-link {
-	@apply no-underline border-b border-transparent;
+	@apply border-b border-transparent no-underline;
 	color: var(--row-accent);
 	transition: border-color 0.2s ease;
 }
@@ -373,42 +377,42 @@ body {
 	border-bottom-color: currentColor;
 }
 .row-link:focus-visible {
-	@apply outline-offset-2 rounded-[2px];
+	@apply rounded-[2px] outline-offset-2;
 	outline: 2px solid var(--row-accent);
 }
 .row-link::after {
-	@apply inline-block ml-[0.2em] text-[0.75em] leading-none align-[0.1em] opacity-70;
+	@apply ml-[0.2em] inline-block align-[0.1em] text-[0.75em] leading-none opacity-70;
 	content: "\2197";
 }
 
 .row-date {
-	@apply flex-none font-mono whitespace-nowrap text-ctp-subtext0 text-[0.78rem] tracking-normal;
+	@apply text-ctp-subtext0 flex-none font-mono text-[0.78rem] tracking-normal whitespace-nowrap;
 }
 
 .row-body {
 	@apply text-ctp-subtext0 mt-[0.85rem] mr-0 mb-0 ml-10 text-[0.95rem] leading-[1.65];
 }
 .row-body p {
-	@apply mt-0 mx-0 mb-2 text-pretty;
+	@apply mx-0 mt-0 mb-2 text-pretty;
 }
 .row-body p:last-child {
 	@apply mb-0;
 }
 .row-body ul {
-	@apply m-0 p-0 list-none flex flex-col gap-[0.35rem];
+	@apply m-0 flex list-none flex-col gap-[0.35rem] p-0;
 }
 .row-body ul li {
 	@apply relative pl-[1.1rem] text-pretty;
 }
 .row-body ul li::before {
-	@apply absolute font-bold left-0 top-[-0.05em];
+	@apply absolute top-[-0.05em] left-0 font-bold;
 	content: "·";
 	color: var(--row-accent, var(--color-ctp-subtext0));
 }
 
 @media (max-width: 480px) {
 	.row {
-		@apply flex-wrap gap-[0.6rem] py-4 px-[1.1rem];
+		@apply flex-wrap gap-[0.6rem] px-[1.1rem] py-4;
 	}
 	.row-date {
 		@apply w-full pl-[2.4rem] text-[0.72rem];
@@ -421,10 +425,10 @@ body {
 /* ─── Tag cluster ─────────────────────────────────────────────────────── */
 
 .tag-cluster {
-	@apply flex flex-wrap font-mono text-ctp-subtext0 gap-y-[0.4rem] gap-x-[0.6rem] text-[0.78rem] mt-[0.65rem];
+	@apply text-ctp-subtext0 mt-[0.65rem] flex flex-wrap gap-x-[0.6rem] gap-y-[0.4rem] font-mono text-[0.78rem];
 }
 .tag-cluster .tag {
-	@apply p-0 border-0;
+	@apply border-0 p-0;
 }
 .tag-cluster .tag + .tag::before {
 	@apply mr-2;
@@ -442,10 +446,10 @@ body {
 	@apply mt-6;
 }
 .quote-text {
-	@apply italic text-ctp-text text-base leading-[1.6] mt-0 mx-0 mb-2 text-pretty;
+	@apply text-ctp-text mx-0 mt-0 mb-2 text-base leading-[1.6] text-pretty italic;
 }
 .quote-attr {
-	@apply font-mono text-ctp-subtext0 text-[0.75rem];
+	@apply text-ctp-subtext0 font-mono text-[0.75rem];
 }
 .quote-block:nth-of-type(6n + 1) {
 	--row-accent: var(--color-accent-lavender);
@@ -469,10 +473,10 @@ body {
 /* ─── Footer ──────────────────────────────────────────────────────────── */
 
 .cv-footer {
-	@apply text-center font-mono flex flex-col text-ctp-overlay1 mt-24 pt-8 text-[0.68rem] tracking-[0.08em] gap-[0.4rem];
+	@apply text-ctp-overlay1 mt-24 flex flex-col gap-[0.4rem] pt-8 text-center font-mono text-[0.68rem] tracking-[0.08em];
 }
 .cv-footer a {
-	@apply no-underline border-b border-ctp-surface0;
+	@apply border-ctp-surface0 border-b no-underline;
 	color: inherit;
 }
 .cv-footer a:hover {

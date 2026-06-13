@@ -45,7 +45,6 @@ export const meta = command({
 		},
 		config: {
 			alias: "c",
-			default: "",
 			description: "config file",
 			type: String,
 		},

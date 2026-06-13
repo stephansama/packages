@@ -10,7 +10,7 @@ export type {
 	ConfigSchema,
 	FullConfigSchema,
 } from "./schema";
-export type { DirtyFile, Error, RuleBase } from "./type";
+export type { DirtyFile, Error, ErrorId, ErrorValue, RuleBase } from "./type";
 
 export type UserConfig<T> = Omit<FullConfigSchema, "rules"> & {
 	rules: T;

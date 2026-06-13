@@ -15,16 +15,27 @@ export type DirtyFile<T = unknown> = LocationContext & {
 export type Error<T extends string = string> = {
   fixable?: boolean;
   id: T;
+  message?: string;
+};
+export type ErrorId<Errors> = Extract<keyof Errors, string>;
+export type ErrorValue = string | {
+  fixable?: boolean;
   message: string;
 };
 export type FullConfigSchema = output<typeof fullConfigSchema>;
-export type RuleBase<T, Context = DirtyFile> = {
-  apply?: (_: NoInfer<T>, _?: Context) => Promise<T> | T;
+export type RuleBase<T, Errors extends Record<string, ErrorValue>, Context = DirtyFile> = ThisType<{
+  errors: Errors;
+}> & {
+  apply?: (_: NoInfer<T>, _?: Context & {
+    errors: Array<Error<ErrorId<NoInfer<Errors>>>>;
+  }) => Promise<T> | T | void;
   enabled?: boolean;
+  errors: Errors;
   exclude?: string | string[];
   include: string | string[];
   name: string;
-  when(_: NoInfer<T>, _?: Context): Array<Error> | void;
+  stringify?(_: NoInfer<T>): Promise<string> | string;
+  when(_: NoInfer<T>, _?: Context): Array<Error<ErrorId<NoInfer<Errors>>>> | void;
 };
 export type UserConfig<T> = Omit<FullConfigSchema, "rules"> & {
   rules: T;
@@ -33,17 +44,20 @@ export type UserConfig<T> = Omit<FullConfigSchema, "rules"> & {
 
 // #region Functions
 export declare function defineConfig<T>(_: UserConfig<T>): UserConfig<T>;
-export declare function defineRule<const Parse extends BuiltinParseEnumSchema, Context = DirtyFile>(_: DefaultParserRule<Parse, DefaultRuleParseTypeExtract<Parse>, Context>): DefaultParserRule<Parse, DefaultRuleParseTypeExtract<Parse>, Context>;
+export declare function defineRule<const Parse extends BuiltinParseEnumSchema, const Errors extends Record<string, ErrorValue>, Context = DirtyFile>(_: DefaultParserRule<Parse, Errors, DefaultRuleParseTypeExtract<Parse>, Context>): DefaultParserRule<Parse, Errors, DefaultRuleParseTypeExtract<Parse>, Context>;
 export declare function loadRules(_: ConfigSchema, _?: string): Promise<{
+  [x: string]: unknown;
   enabled: boolean;
+  errors: Record<string, unknown>;
   include: string | string[];
   name: string;
   parse: "json" | "txt" | "yaml" | "toml" | $InferOuterFunctionType<$ZodFunctionArgs, $ZodFunctionOut>;
   when: $InferOuterFunctionType<$ZodFunctionArgs, $ZodFunctionOut>;
   apply?: $InferOuterFunctionType<$ZodFunctionArgs, $ZodFunctionOut> | undefined;
   exclude?: string | string[] | undefined;
+  stringify?: $InferOuterFunctionType<$ZodFunctionArgs, $ZodFunctionOut> | undefined;
 }[]>;
-export declare function parse<T>(_: string, _: BuiltinParseEnumSchema | FunctionParserRule<T>["parse"]): T;
+export declare function parse<T>(_: string, _: BuiltinParseEnumSchema | FunctionParserRule<T, Record<string, ErrorValue>>["parse"]): T;
 export declare function stringify(_: unknown, _: BuiltinParseEnumSchema): string;
 // #endregion
 
@@ -61,6 +75,7 @@ export declare const fullConfigSchema: ZodObject<{
   rules: ZodDefault<ZodArray<ZodObject<{
     apply: ZodOptional<ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>>;
     enabled: ZodDefault<ZodBoolean>;
+    errors: ZodDefault<ZodRecord<ZodString, ZodUnknown>>;
     exclude: ZodOptional<ZodUnion<[ZodArray<ZodString>, ZodString]>>;
     include: ZodUnion<readonly [ZodArray<ZodString>, ZodString]>;
     name: ZodString;
@@ -70,8 +85,9 @@ export declare const fullConfigSchema: ZodObject<{
       yaml: "yaml";
       toml: "toml";
     }>]>;
+    stringify: ZodOptional<ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>>;
     when: ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>;
-  }, $strip>>>;
+  }, $loose>>>;
 }, $strip>;
 export declare const parsers: {
   readonly json: (text: string, reviver?: (this: any, key: string, value: any) => any) => any;

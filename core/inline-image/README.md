@@ -1,6 +1,6 @@
 <div align="center">
 
-# @stephansama/inline-image
+# [`@stephansama`](https://github.com/stephansama) / inline-image
 
 <!-- BADGE start -->
 

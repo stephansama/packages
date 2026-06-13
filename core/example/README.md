@@ -1,6 +1,6 @@
 <div align="center">
 
-# [`@stephansama`](https://github.com/stephansama) / example cli
+# [`@stephansama`](https://github.com/stephansama) / create-stephansama-example
 
 <!-- BADGE start -->
 

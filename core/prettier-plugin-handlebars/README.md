@@ -1,6 +1,6 @@
 <div align="center">
 
-# @stephansama/prettier-plugin-handlebars
+# [`@stephansama`](https://github.com/stephansama) / prettier-plugin-handlebars
 
 <!-- BADGE start -->
 

@@ -1,4 +1,4 @@
-# @stephansama/pnpm-hooks
+# [`@stephansama`](https://github.com/stephansama) / pnpm-hooks
 
 <!-- BADGE start -->
 

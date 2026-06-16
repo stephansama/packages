@@ -8,7 +8,14 @@ export { configSchema, fullConfigSchema } from "./schema";
 export type {
 	BuiltinParseEnumSchema,
 	ConfigSchema,
+	DirtyFileBase,
 	FullConfigSchema,
+	LocationContext,
+	PackageContext,
+	PackageJsonContext,
+	RuleError,
+	RuleSchema,
+	Undefinable,
 } from "./schema";
 export type { DirtyFile, Error, ErrorId, ErrorValue, RuleBase } from "./type";
 

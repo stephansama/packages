@@ -74,12 +74,8 @@ export async function act(arguments_: CliArguments) {
 	if (json) {
 		return console.info(
 			JSON.stringify(
-				rules.map((rule) => {
-					// @ts-expect-error need to delete anyway
-					delete rule.when;
-					delete rule.apply;
-					return rule;
-				}),
+				// eslint-disable-next-line @typescript-eslint/unbound-method
+				rules.map(({ apply: _apply, when: _when, ...rest }) => rest),
 				undefined,
 				2,
 			),

@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "build": "pnpm run generate-examples",
-    "build-www": "tsx ./src/build-www.ts",
     "generate-examples": "tsx ./src/generate-examples.ts",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",

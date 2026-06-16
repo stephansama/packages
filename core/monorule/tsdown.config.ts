@@ -4,6 +4,8 @@ import { defineConfig } from "tsdown";
 import ApiSnapshot from "tsnapi/rolldown";
 import * as z from "zod";
 
+const MJS_EXTENSION_REGEX = /\.mjs$/;
+
 export default defineConfig({
 	attw: { excludeEntrypoints: ["schema.json"], profile: "esm-only" },
 	dts: true,
@@ -16,6 +18,14 @@ export default defineConfig({
 		bin: "./src/cli/index.ts",
 		customExports(exports) {
 			exports["./schema.json"] = "./dist/schema.json";
+
+			for (const [key, value] of Object.entries(exports)) {
+				if (typeof value !== "string" || !value.endsWith(".mjs")) continue;
+				exports[key] = {
+					import: value,
+					types: value.replace(MJS_EXTENSION_REGEX, ".d.mts"),
+				};
+			}
 
 			return Object.fromEntries(
 				Object.entries(exports).toSorted(([a], [b]) => a.localeCompare(b)),

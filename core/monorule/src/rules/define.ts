@@ -1,6 +1,8 @@
 import type { BuiltinParseEnumSchema } from "@/schema";
 import type * as types from "@/type";
 
+import type { Rule } from "./type";
+
 export function defineRule<
 	T,
 	const Errors extends Record<string, types.ErrorValue>,
@@ -25,12 +27,9 @@ export function defineRule<
 	types.DefaultRuleParseTypeExtract<Parse>,
 	Context
 >;
-export function defineRule(rule?: unknown): unknown {
-	/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
+export function defineRule(rule?: Rule): ((r: unknown) => unknown) | Rule {
 	if (rule === undefined) return (r: unknown) => r;
-	// @ts-expect-error works
 	rule.when = rule.when.bind(rule);
-	// @ts-expect-error works
-	rule.apply = rule.apply.bind(rule);
+	if (rule.apply) rule.apply = rule.apply.bind(rule);
 	return rule;
 }

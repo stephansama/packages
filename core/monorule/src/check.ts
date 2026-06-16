@@ -96,8 +96,10 @@ export async function checkRules(
 							rule: rule.name,
 						} as const satisfies DirtyFile;
 
-						/* eslint-disable-next-line @typescript-eslint/no-unsafe-argument */
-						const errors = rule.when(parsed, context);
+						const errors = rule.when(
+							parsed as object | string,
+							context,
+						);
 						if (!errors || errors.length === 0) return false;
 
 						checkedErrors.push(

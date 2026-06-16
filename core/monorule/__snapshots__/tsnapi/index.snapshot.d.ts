@@ -4,39 +4,33 @@
 // #region Types
 export type BuiltinParseEnumSchema = output<typeof builtinParseEnumSchema>;
 export type ConfigSchema = output<typeof configSchema>;
-export type DirtyFile<T = unknown> = LocationContext & {
-  closestPackage: Undefinable<PackageContext>;
+export type DirtyFile<T = unknown> = Omit<DirtyFileBase, "content"> & {
   content: T;
-  packages: Array<PackageContext>;
-  raw: string;
-  rootPackage: Omit<PackageContext, "relativePath">;
-  rule: string;
 };
-export type Error<T extends string = string> = {
-  fixable?: boolean;
+export type DirtyFileBase = output<typeof dirtyFileBaseSchema>;
+export type Error<T extends string = string> = Omit<RuleError, "id" | "message"> & {
   id: T;
   message?: string;
 };
 export type ErrorId<Errors> = Extract<keyof Errors, string>;
-export type ErrorValue = string | {
-  fixable?: boolean;
-  message: string;
-};
+export type ErrorValue = output<typeof errorValueSchema>;
 export type FullConfigSchema = output<typeof fullConfigSchema>;
-export type RuleBase<T, Errors extends Record<string, ErrorValue>, Context = DirtyFile> = ThisType<{
+export type LocationContext = output<typeof locationContextSchema>;
+export type PackageContext = output<typeof packageContextSchema>;
+export type PackageJsonContext = output<typeof packageJsonContextSchema>;
+export type RuleBase<T, Errors extends Record<string, ErrorValue>, Context = DirtyFile> = Omit<RuleSchema, "apply" | "errors" | "parse" | "stringify" | "when"> & ThisType<{
   errors: Errors;
 }> & {
   apply?: (_: NoInfer<T>, _?: Context & {
     errors: Array<Error<ErrorId<NoInfer<Errors>>>>;
   }) => Promise<T> | T;
-  enabled?: boolean;
   errors: Errors;
-  exclude?: string | string[];
-  include: string | string[];
-  name: string;
   stringify?(_: NoInfer<T>): Promise<string> | string;
   when(_: NoInfer<T>, _?: Context): Array<Error<ErrorId<NoInfer<Errors>>>> | void;
 };
+export type RuleError = output<typeof errorSchema>;
+export type RuleSchema = input<typeof ruleSchema>;
+export type Undefinable<T extends object> = { [k in keyof T]: T[k] | undefined };
 export type UserConfig<T> = Omit<FullConfigSchema, "rules"> & {
   rules: T;
 };
@@ -46,16 +40,20 @@ export type UserConfig<T> = Omit<FullConfigSchema, "rules"> & {
 export declare function defineConfig<T>(_: UserConfig<T>): UserConfig<T>;
 export declare function defineRule<const Parse extends BuiltinParseEnumSchema, const Errors extends Record<string, ErrorValue>, Context = DirtyFile>(_: DefaultParserRule<Parse, Errors, DefaultRuleParseTypeExtract<Parse>, Context>): DefaultParserRule<Parse, Errors, DefaultRuleParseTypeExtract<Parse>, Context>;
 export declare function loadRules(_: ConfigSchema, _?: string): Promise<{
-  [x: string]: unknown;
   enabled: boolean;
-  errors: Record<string, unknown>;
+  errors: Record<string, string | {
+    message: string;
+    fixable?: boolean | undefined;
+  }>;
   include: string | string[];
   name: string;
-  parse: "json" | "txt" | "yaml" | "toml" | $InferOuterFunctionType<$ZodFunctionArgs, $ZodFunctionOut>;
-  when: $InferOuterFunctionType<$ZodFunctionArgs, $ZodFunctionOut>;
-  apply?: $InferOuterFunctionType<$ZodFunctionArgs, $ZodFunctionOut> | undefined;
+  parse: "json" | "txt" | "yaml" | "toml" | ((input: string) => unknown);
+  when: (input: unknown, context?: DirtyFileBase) => Array<RuleError> | void;
+  apply?: ((input: unknown, context?: DirtyFileBase & {
+    errors: Array<RuleError>;
+  }) => unknown) | undefined;
   exclude?: string | string[] | undefined;
-  stringify?: $InferOuterFunctionType<$ZodFunctionArgs, $ZodFunctionOut> | undefined;
+  stringify?: ((input: unknown) => Promise<string> | string) | undefined;
 }[]>;
 export declare function parse<T>(_: string, _: BuiltinParseEnumSchema | FunctionParserRule<T, Record<string, ErrorValue>>["parse"]): T;
 export declare function stringify(_: unknown, _: BuiltinParseEnumSchema): string;
@@ -73,21 +71,24 @@ export declare const fullConfigSchema: ZodObject<{
   ignoreRules: ZodDefault<ZodArray<ZodString>>;
   ruleDirectory: ZodDefault<ZodString>;
   rules: ZodDefault<ZodArray<ZodObject<{
-    apply: ZodOptional<ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>>;
+    apply: ZodOptional<ZodCustom<ApplyFunction, ApplyFunction>>;
     enabled: ZodDefault<ZodBoolean>;
-    errors: ZodDefault<ZodRecord<ZodString, ZodUnknown>>;
+    errors: ZodDefault<ZodRecord<ZodString, ZodUnion<readonly [ZodString, ZodObject<{
+      fixable: ZodOptional<ZodBoolean>;
+      message: ZodString;
+    }, $strip>]>>>;
     exclude: ZodOptional<ZodUnion<[ZodArray<ZodString>, ZodString]>>;
     include: ZodUnion<readonly [ZodArray<ZodString>, ZodString]>;
     name: ZodString;
-    parse: ZodUnion<[ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>, ZodEnum<{
+    parse: ZodUnion<readonly [ZodCustom<ParseFunction, ParseFunction>, ZodEnum<{
       json: "json";
       txt: "txt";
       yaml: "yaml";
       toml: "toml";
     }>]>;
-    stringify: ZodOptional<ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>>;
-    when: ZodFunction<$ZodFunctionArgs, $ZodFunctionOut>;
-  }, $loose>>>;
+    stringify: ZodOptional<ZodCustom<StringifyFunction, StringifyFunction>>;
+    when: ZodCustom<WhenFunction, WhenFunction>;
+  }, $strip>>>;
 }, $strip>;
 export declare const parsers: {
   readonly json: (text: string, reviver?: (this: any, key: string, value: any) => any) => any;

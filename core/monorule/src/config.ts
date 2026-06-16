@@ -57,8 +57,7 @@ export async function loadConfig(cliArguments: CliArguments) {
 
 	return {
 		...config,
-		// @ts-expect-error slight mismatch
-		rules: validateRules(...config.rules, ...rules),
+		rules: validateRules(...(config.rules as Rule[]), ...(rules as Rule[])),
 	};
 }
 
@@ -104,11 +103,8 @@ function hasDuplicate<T>(input: Array<T>) {
 	return false;
 }
 
-function removeFalsy(object: object) {
+function removeFalsy<T extends object>(object: T) {
 	return Object.fromEntries(
-		// @ts-expect-error some sort of mismatch
-		Object.entries(object)
-			.map(([k, v]) => (v ? [k, v] : false))
-			.filter(Boolean),
-	);
+		Object.entries(object).filter(([, v]) => Boolean(v)),
+	) as Partial<T>;
 }

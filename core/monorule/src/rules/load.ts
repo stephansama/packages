@@ -20,7 +20,9 @@ export async function loadRules(config: ConfigSchema, configFilepath?: string) {
 		files.map(async (file) => {
 			info(`loading ${file}`);
 			// convert to object to remove module namespace key
-			const imported = (await import(path.join(absolute, file))) as {};
+			const imported = (await import(
+				path.join(absolute, file)
+			)) as Record<string, unknown>;
 			return Object.values(ruleMapSchema.parse({ ...imported }));
 		}),
 	);

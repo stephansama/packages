@@ -4,7 +4,13 @@
 // #region Variables
 export var builtinParseEnumSchema /* const */
 export var configSchema /* const */
+export var dirtyFileBaseSchema /* const */
+export var errorSchema /* const */
+export var errorValueSchema /* const */
 export var fullConfigSchema /* const */
+export var locationContextSchema /* const */
+export var packageContextSchema /* const */
+export var packageJsonContextSchema /* const */
 export var ruleMapSchema /* const */
 export var ruleSchema /* const */
 // #endregion

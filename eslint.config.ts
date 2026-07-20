@@ -35,6 +35,10 @@ export default await config({
 	// eslint-disable-next-line perfectionist/sort-objects
 	overrides: [
 		{
+			files: ["rules/package.json"],
+			rules: { "package-json/require-exports": "off" },
+		},
+		{
 			files: [`examples/${globs.PKG_JSON}`],
 			rules: {
 				"package-json/require-description": "off",

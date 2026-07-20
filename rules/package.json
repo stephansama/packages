@@ -1,12 +1,22 @@
 {
   "name": "rules",
   "version": "1.0.0",
-  "description": "",
+  "description": "@stephansama/rules for the packages monorepo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "rules"
+  },
   "license": "MIT",
-  "author": "",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
   "sideEffects": false,
   "type": "module",
   "main": "index.js",
+  "files": [],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

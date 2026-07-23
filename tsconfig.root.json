@@ -2,6 +2,7 @@
   "extends": ["./tsconfig.base.json"],
   "include": [
     "./.config/knip.ts",
+    "./.config/monorule.config.ts",
     "./.config/.commitlintrc.ts",
     "monoman.config.ts",
     "eslint.config.ts"

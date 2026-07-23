@@ -1,6 +1,6 @@
 <div align="center">
 
-# [`@stephansama`](https://github.com/stephansama) remark-asciinema
+# [`@stephansama`](https://github.com/stephansama) / remark-asciinema
 
 <!-- BADGE start -->
 

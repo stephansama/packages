@@ -1,7 +1,5 @@
 {
   "references": [
-    { "path": "./tsconfig.root.json" },
-    { "path": "./scripts/tsconfig.json" },
     { "path": "./core/ai-commit-msg/tsconfig.json" },
     { "path": "./core/alfred-kaomoji/jsconfig.json" },
     { "path": "./core/astro-iconify-svgmap/tsconfig.json" },
@@ -12,7 +10,10 @@
     { "path": "./core/eslint-config/tsconfig.json" },
     { "path": "./core/example/tsconfig.json" },
     { "path": "./core/find-makefile-targets/tsconfig.json" },
+    { "path": "./core/inline-image/tsconfig.json" },
+    { "path": "./core/monorule/tsconfig.json" },
     { "path": "./core/multipublish/tsconfig.json" },
+    { "path": "./core/pnpm-hooks/tsconfig.json" },
     { "path": "./core/prettier-plugin-handlebars/tsconfig.json" },
     { "path": "./core/remark-asciinema/tsconfig.json" },
     { "path": "./core/single-file/tsconfig.json" },
@@ -24,10 +25,13 @@
     { "path": "./core/types-github-action-env/tsconfig.json" },
     { "path": "./core/types-lhci/tsconfig.json" },
     { "path": "./examples/astro-iconify-svgmap/tsconfig.json" },
+    { "path": "./examples/inline-image/tsconfig.json" },
     { "path": "./examples/remark-asciinema/tsconfig.json" },
     { "path": "./examples/svelte-social-share-links/astro/tsconfig.json" },
-    {
-      "path": "./examples/svelte-social-share-links/svelte-kit/tsconfig.json"
-    }
+    { "path": "./examples/svelte-social-share-links/svelte-kit/tsconfig.json" },
+    { "path": "./examples/typed-events/react/tsconfig.json" },
+    { "path": "./rules/tsconfig.json" },
+    { "path": "./scripts/tsconfig.json" },
+    { "path": "./tsconfig.root.json" }
   ]
 }

@@ -6,6 +6,9 @@
     "types-lhci"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/types-lhci",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stephansama/packages.git",

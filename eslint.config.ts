@@ -22,12 +22,22 @@ export default await config({
 	json: true,
 	markdown: true,
 	node: {
-		allowModules: ["vitest", "@manypkg/get-packages", "tsnapi"],
+		allowModules: [
+			"@manypkg/get-packages",
+			"@stephansama/monorule",
+			"prettier",
+			"tsnapi",
+			"vitest",
+		],
 	},
 	svelte: true,
 	vitest: true,
 	// eslint-disable-next-line perfectionist/sort-objects
 	overrides: [
+		{
+			files: ["rules/package.json"],
+			rules: { "package-json/require-exports": "off" },
+		},
 		{
 			files: [`examples/${globs.PKG_JSON}`],
 			rules: {

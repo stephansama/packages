@@ -1,0 +1,94 @@
+{
+  "name": "@stephansama/monorule",
+  "version": "0.0.0",
+  "description": "one rule cli to rule them all",
+  "keywords": [
+    "monorule"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/monorule",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/monorule"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
+    },
+    "./cli": {
+      "import": "./dist/cli.mjs",
+      "types": "./dist/cli.d.mts"
+    },
+    "./package.json": "./package.json",
+    "./schema": {
+      "import": "./dist/schema.mjs",
+      "types": "./dist/schema.d.mts"
+    },
+    "./schema.json": "./dist/schema.json"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "bin": {
+    "monorule": "./dist/cli.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "build:snapshot": "tsdown -u",
+    "cli": "node ./dist/cli.mjs",
+    "cli:config": "node ./dist/cli.mjs -c ./example/index.ts",
+    "cli:list": "node ./dist/cli.mjs list -c ./example/index.ts ",
+    "cli:rules": "node ./dist/cli.mjs --ruleDirectory ./example/rules/",
+    "dev": "tsdown --watch",
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --fix"
+  },
+  "dependencies": {
+    "@manypkg/get-packages": "catalog:manypkg",
+    "@manypkg/tools": "catalog:manypkg",
+    "cosmiconfig": "catalog:cli",
+    "empathic": "catalog:",
+    "es-toolkit": "catalog:",
+    "picocolors": "catalog:cli",
+    "smol-toml": "catalog:",
+    "tinyglobby": "catalog:",
+    "tsx": "catalog:",
+    "yaml": "catalog:"
+  },
+  "devDependencies": {
+    "cleye": "catalog:cli",
+    "obug": "catalog:cli",
+    "tsdown": "catalog:",
+    "zod": "catalog:schema"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "inlinedDependencies": {
+    "cleye": "2.6.0",
+    "obug": "2.1.1",
+    "terminal-columns": "2.0.0",
+    "type-flag": "4.2.0",
+    "zod": "4.2.1"
+  },
+  "readme": "./README.md"
+}

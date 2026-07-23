@@ -13,6 +13,9 @@
     "typescript"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/types-github-action-env",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stephansama/packages.git",

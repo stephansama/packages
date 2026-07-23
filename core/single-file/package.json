@@ -6,6 +6,9 @@
     "single-file"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/single-file",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stephansama/packages.git",

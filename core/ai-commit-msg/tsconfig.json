@@ -6,7 +6,5 @@
     "tsdown.config.ts",
     "./test/**/*"
   ],
-  "compilerOptions": {
-    "types": ["node"]
-  }
+  "compilerOptions": { "types": ["node"], "composite": true }
 }

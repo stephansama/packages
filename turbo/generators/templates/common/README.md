@@ -1,6 +1,6 @@
 <div align="center">
 
-# @stephansama/{{name}}
+# [`@stephansama`](https://github.com/stephansama) / {{name}}
 
 [![Source code](https://img.shields.io/badge/Source-666666?style=flat&logo=github&label=Github&labelColor=211F1F)](https://github.com/stephansama/packages/tree/main/core/{{name}})
 [![Documentation](https://img.shields.io/badge/Documentation-211F1F?style=flat&logo=Wikibooks&labelColor=211F1F)](https://packages.stephansama.info/api/@stephansama/{{name}})

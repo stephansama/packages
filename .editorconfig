@@ -14,3 +14,6 @@ insert_final_newline = true
 # Default
 [*.{*rc,astro,cjs,config.{ts,js,mjs},html,json,jsx,tsx,svelte,yml,yaml}]
 indent_size = 2
+
+[rules/src/*]
+indent_size = 2

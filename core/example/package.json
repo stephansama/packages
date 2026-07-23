@@ -6,6 +6,9 @@
     "create-example"
   ],
   "homepage": "https://packages.stephansama.info/api/create-stephansama-example",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stephansama/packages.git",

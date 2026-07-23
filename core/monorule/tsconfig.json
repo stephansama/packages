@@ -1,0 +1,13 @@
+{
+  "extends": ["../../tsconfig.base.json"],
+  "include": [
+    "./example/**/*",
+    "./src/**/*",
+    "tsdown.config.ts",
+    "vitest.config.ts"
+  ],
+  "compilerOptions": {
+    "paths": { "~/*": ["./*"], "@/*": ["./src/*"] },
+    "composite": true
+  }
+}

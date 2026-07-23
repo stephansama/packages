@@ -1,5 +1,6 @@
 packages:
   - core/**
+  - rules/**
   - examples/**
   - scripts
   - www/*
@@ -43,6 +44,7 @@ catalog:
   colord: 2.9.3
   dedent: 1.7.2
   deepmerge: 4.3.1
+  empathic: ^2.0.1
   es-toolkit: 1.43.0
   happy-dom: 20.6.1
   he: 1.2.0
@@ -59,7 +61,6 @@ catalog:
   mdast-util-from-markdown: 2.0.2
   '@stephansama/mdast-zone': 6.1.0
   minify: 14.0.0
-  monoman: 0.8.2
   nano-staged: 1.0.2
   neverthrow: 8.2.0
   node-plop: 0.32.3
@@ -101,6 +102,7 @@ catalogs:
     cleye: 2.6.0
     cosmiconfig: 9.0.0
     obug: 2.1.1
+    picocolors: ^1.1.1
     picospinner: 3.0.0
     yargs: 18.0.0
   commitlint:

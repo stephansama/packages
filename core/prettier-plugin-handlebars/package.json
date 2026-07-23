@@ -6,6 +6,9 @@
     "prettier-plugin-handlebars"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/prettier-plugin-handlebars",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stephansama/packages.git",

@@ -6,6 +6,9 @@
     "inline-image"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/inline-image",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stephansama/packages.git",
@@ -57,10 +60,10 @@
     "access": "public",
     "provenance": true
   },
-  "readme": "./README.md",
   "inlinedDependencies": {
     "cleye": "2.6.0",
     "terminal-columns": "2.0.0",
     "type-flag": "4.2.0"
-  }
+  },
+  "readme": "./README.md"
 }

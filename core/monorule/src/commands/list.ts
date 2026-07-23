@@ -7,7 +7,7 @@ import type { Rule } from "@/rules";
 import { getFlag } from "@/cli/flags";
 import { loadConfig } from "@/config";
 
-function propertyToColor(
+export function propertyToColor(
 	property: keyof Rule,
 	value: boolean | string | undefined,
 ) {
@@ -57,7 +57,7 @@ export const meta = command({
 	name: "list",
 });
 
-const properties = [
+export const properties = [
 	"enabled",
 	"include",
 	"exclude",

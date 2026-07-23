@@ -31,7 +31,6 @@ pnpm install @stephansama/monorule
 ## Usage
 
 ```typescript
-/* eslint-disable import-x/no-unresolved, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment */
 import * as z from "zod";
 
 import { defineConfig, defineRule, parsers } from "@stephansama/monorule";

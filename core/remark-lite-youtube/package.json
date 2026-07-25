@@ -1,0 +1,63 @@
+{
+  "name": "@stephansama/remark-lite-youtube",
+  "version": "0.1.0",
+  "description": "A remark plugin that transforms YouTube links into <lite-youtube> custom-element markup.",
+  "keywords": [
+    "lite-youtube",
+    "remark",
+    "remark-plugin",
+    "youtube"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/remark-lite-youtube",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/remark-lite-youtube"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix",
+    "prepublishOnly": "tsdown"
+  },
+  "devDependencies": {
+    "remark": "catalog:remark",
+    "tsdown": "catalog:",
+    "unist-util-visit": "catalog:"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "inlinedDependencies": {
+    "@types/unist": "3.0.3",
+    "unist-util-is": "6.0.1",
+    "unist-util-visit": "5.1.0",
+    "unist-util-visit-parents": "6.0.2"
+  }
+}

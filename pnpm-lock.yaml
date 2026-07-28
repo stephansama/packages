@@ -262,6 +262,9 @@ catalogs:
     vite-tsconfig-paths:
       specifier: 5.1.4
       version: 5.1.4
+    xdg-app-paths:
+      specifier: ^8.3.0
+      version: 8.3.0
     yaml:
       specifier: 2.8.2
       version: 2.8.2
@@ -1317,6 +1320,28 @@ importers:
       vite:
         specifier: 'catalog:'
         version: 6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)
+
+  core/typed-config:
+    dependencies:
+      '@standard-schema/spec':
+        specifier: catalog:schema
+        version: 1.1.0
+      cosmiconfig:
+        specifier: catalog:cli
+        version: 9.0.0(typescript@5.9.3)
+      smol-toml:
+        specifier: 'catalog:'
+        version: 1.6.1
+      xdg-app-paths:
+        specifier: 'catalog:'
+        version: 8.3.0
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.21.10(@arethetypeswrong/core@0.18.2)(oxc-resolver@11.19.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0))(publint@0.3.18)(synckit@0.11.12)(typescript@5.9.3)
+      zod:
+        specifier: catalog:schema
+        version: 4.2.1
 
   core/typed-env:
     dependencies:
@@ -9096,6 +9121,10 @@ packages:
     resolution: {integrity: sha512-B5JU3cabzk8c67mRRd3ECmROafjYMXbuzlwtqdM8IbS8ktlTix8aFGb2bAGKrSRIlnfKwovGUUr72JUPyOb6kQ==}
     engines: {node: '>=0.10.0'}
 
+  os-paths@7.4.0:
+    resolution: {integrity: sha512-Ux1J4NUqC6tZayBqLN1kUlDAEvLiQlli/53sSddU4IN+h+3xxnv2HmRSMpVSvr1hvJzotfMs3ERvETGK+f4OwA==}
+    engines: {node: '>= 4.0'}
+
   outdent@0.5.0:
     resolution: {integrity: sha512-/jHxFIzoMXdqPzTaCpFzAAWhpkSjZPF4Vsn6jAfNpmbH/ymsmd7Qc6VE9BGn0L6YMj6uwpQLxCECpus4ukKS9Q==}
 
@@ -11693,6 +11722,14 @@ packages:
   wsl-utils@0.1.0:
     resolution: {integrity: sha512-h3Fbisa2nKGPxCpm89Hk33lBLsnaGBvctQopaBSOW/uIs6FTe1ATyAnKFJrzVs9vpGdsTe73WF3V4lIsk4Gacw==}
     engines: {node: '>=18'}
+
+  xdg-app-paths@8.3.0:
+    resolution: {integrity: sha512-mgxlWVZw0TNWHoGmXq+NC3uhCIc55dDpAlDkMQUaIAcQzysb0kxctwv//fvuW61/nAAeUBJMQ8mnZjMmuYwOcQ==}
+    engines: {node: '>= 4.0'}
+
+  xdg-portable@10.6.0:
+    resolution: {integrity: sha512-xrcqhWDvtZ7WLmt8G4f3hHy37iK7D2idtosRgkeiSPZEPmBShp0VfmRBLWAPC6zLF48APJ21yfea+RfQMF4/Aw==}
+    engines: {node: '>= 4.0'}
 
   xml-name-validator@5.0.0:
     resolution: {integrity: sha512-EvGK8EJ3DhaHfbRlETOWAS5pO9MZITeauHKJyb8wyajUfQUenkIg2MvLDTZ4T/TgIcm3HU0TFBgWWboAZ30UHg==}
@@ -20558,6 +20595,10 @@ snapshots:
 
   os-homedir@1.0.2: {}
 
+  os-paths@7.4.0:
+    optionalDependencies:
+      fsevents: 2.3.3
+
   outdent@0.5.0: {}
 
   own-keys@1.0.1:
@@ -23374,6 +23415,18 @@ snapshots:
   wsl-utils@0.1.0:
     dependencies:
       is-wsl: 3.1.1
+
+  xdg-app-paths@8.3.0:
+    dependencies:
+      xdg-portable: 10.6.0
+    optionalDependencies:
+      fsevents: 2.3.3
+
+  xdg-portable@10.6.0:
+    dependencies:
+      os-paths: 7.4.0
+    optionalDependencies:
+      fsevents: 2.3.3
 
   xml-name-validator@5.0.0: {}
 

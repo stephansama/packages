@@ -1,0 +1,59 @@
+{
+  "name": "@stephansama/typed-config",
+  "version": "0.1.0",
+  "description": "Standard-Schema-validated config loader with XDG + TOML support, built on cosmiconfig.",
+  "keywords": [
+    "config",
+    "cosmiconfig",
+    "standard-schema",
+    "toml",
+    "typed-config",
+    "xdg"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/typed-config",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/typed-config"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix",
+    "prepublishOnly": "tsdown"
+  },
+  "dependencies": {
+    "@standard-schema/spec": "catalog:schema",
+    "cosmiconfig": "catalog:cli",
+    "smol-toml": "catalog:",
+    "xdg-app-paths": "catalog:"
+  },
+  "devDependencies": {
+    "tsdown": "catalog:",
+    "zod": "catalog:schema"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

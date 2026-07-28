@@ -1,0 +1,54 @@
+{
+  "name": "@stephansama/types-google-analytics",
+  "version": "0.1.0",
+  "description": "TypeScript types for Google Tag Manager dataLayer + GA4 gtag recommended events.",
+  "keywords": [
+    "datalayer",
+    "ga4",
+    "google-analytics",
+    "gtag",
+    "gtm",
+    "types"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/types-google-analytics",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/types-google-analytics"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

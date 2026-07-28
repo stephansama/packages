@@ -1419,6 +1419,12 @@ importers:
 
   core/types-github-action-env: {}
 
+  core/types-google-analytics:
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+
   core/types-lhci:
     devDependencies:
       tsdown:

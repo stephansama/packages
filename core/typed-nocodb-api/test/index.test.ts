@@ -80,9 +80,8 @@ describe("typed-nocodb-api", () => {
 		const calledOptions = mockFetch.mock.calls[0][1] as object;
 
 		expect(calledUrl).toContain(expectedUrl);
-		expect(calledUrl).toContain(
-			"sort=%7B%22direction%22%3A%22asc%22%2C%22field%22%3A%22title%22%7D",
-		); // URL encoded JSON
+		expect(calledUrl).toContain("fields=title%2Ccompleted");
+		expect(calledUrl).toContain("sort=title");
 
 		expect(calledOptions).toEqual(
 			expect.objectContaining({
@@ -93,6 +92,39 @@ describe("typed-nocodb-api", () => {
 
 		const { pageInfo: _, ...expectedResult } = mockResponse;
 		expect(result).toEqual(expectedResult);
+	});
+
+	it("should serialize all LIST query parameters into the URL", async () => {
+		mockFetch.mockResolvedValue({
+			json: () => ({ records: [] }),
+			ok: true,
+			statusText: "OK",
+		});
+
+		await api.fetch({
+			action: "LIST",
+			query: {
+				fields: ["title", "completed"],
+				limit: 25,
+				nestedFields: { Author: ["name", "email"] },
+				offset: 50,
+				shuffle: true,
+				sort: { direction: "desc", field: "created_at" },
+				viewId: "view-1",
+				where: "(title,eq,foo)",
+			},
+		});
+
+		const calledUrl = mockFetch.mock.calls[0][0] as string;
+
+		expect(calledUrl).toContain("fields=title%2Ccompleted");
+		expect(calledUrl).toContain("where=%28title%2Ceq%2Cfoo%29");
+		expect(calledUrl).toContain("viewId=view-1");
+		expect(calledUrl).toContain("limit=25");
+		expect(calledUrl).toContain("offset=50");
+		expect(calledUrl).toContain("shuffle=true");
+		expect(calledUrl).toContain("sort=-created_at");
+		expect(calledUrl).toContain("nestedFields%5BAuthor%5D=name%2Cemail");
 	});
 
 	it("should perform COUNT action", async () => {

@@ -14,7 +14,11 @@ import { getContrastText } from "./color";
 import { parseComment } from "./comment";
 import { getSimpleIconColor } from "./icon";
 import { INFO } from "./log";
-import { defaultTableHeadings, defaultTemplates } from "./schema";
+import {
+	defaultTableHeadings,
+	defaultTemplates,
+	packageLinkPresets,
+} from "./schema";
 import { resolveVersion } from "./utilities";
 
 type TemplateContext = {
@@ -71,9 +75,20 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			const skipTemplates =
 				first?.parameters.includes(`--skip-templates`);
 
+			const presetTemplates = (
+				config.badgeOptions?.packageLinks || []
+			).map(
+				(name) =>
+					packageLinkPresets[name as keyof typeof packageLinkPresets],
+			);
+			const allTemplates = [
+				...presetTemplates,
+				...(config.badgeOptions?.templates || []),
+			];
+
 			const templateBadges =
 				(!skipTemplates &&
-					config.badgeOptions?.templates.map((template) => {
+					allTemplates.map((template) => {
 						type TemplateType = Partial<
 							Record<
 								| "escaped_name"

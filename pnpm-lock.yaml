@@ -771,6 +771,9 @@ importers:
       '@stephansama/remark-usage':
         specifier: catalog:remark
         version: 11.0.1
+      cleye:
+        specifier: catalog:cli
+        version: 2.6.0
       colord:
         specifier: 'catalog:'
         version: 2.9.3

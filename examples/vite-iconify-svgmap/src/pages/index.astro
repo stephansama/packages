@@ -1,0 +1,39 @@
+---
+import { getIcon } from "virtual:iconify-svgmap";
+import astro from "virtual:iconify-svgmap/logos/astro";
+import copilot from "virtual:iconify-svgmap/octicon/copilot-16";
+
+// icons that are only known while rendering (cms data, frontmatter, ...)
+const dynamicIcons = [
+	["logos", "azure-icon"],
+	["logos", "alpinejs"],
+	["heroicons", "newspaper-solid"],
+].map(([pack, name]) => getIcon(pack!, name!));
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width" name="viewport" />
+		<meta content={Astro.generator} name="generator" />
+		<title>vite-iconify-svgmap</title>
+	</head>
+	<body>
+		<h1>Static imports</h1>
+		{
+			[astro, copilot].map((href) => (
+				<svg height="48" width="48">
+					<use {href} />
+				</svg>
+			))
+		}
+		<h1>Rendered with getIcon</h1>
+		{
+			dynamicIcons.map((href) => (
+				<svg height="48" width="48">
+					<use {href} />
+				</svg>
+			))
+		}
+	</body>
+</html>

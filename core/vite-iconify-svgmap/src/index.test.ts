@@ -1,0 +1,195 @@
+import type { Rollup } from "vite";
+
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { pathToFileURL } from "node:url";
+import { build, createServer } from "vite";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
+
+import iconifySvgmap, { writeSprites } from "./index";
+import { generateSprite } from "./sprite";
+import { getState, loadCollection } from "./state";
+
+const packageRoot = path.resolve(import.meta.dirname, "..");
+
+const LOGOS_ASSET_REGEX = /^assets\/logos-[\w-]+\.svg$/;
+const OCTICON_ASSET_REGEX = /^assets\/octicon-[\w-]+\.svg$/;
+const SSR_HREF_REGEX = /"\/assets\/logos-[\w-]+\.svg#astro"/;
+const RUNTIME_HREF_REGEX = /^\/_iconify\/logos\.svg\?v=\w+#astro$/;
+
+let directory: string;
+
+beforeEach(() => {
+	directory = fs.mkdtempSync(path.join(os.tmpdir(), "iconify-svgmap-"));
+	getState().runtime.clear();
+	getState().root = packageRoot;
+});
+
+afterEach(() => {
+	fs.rmSync(directory, { force: true, recursive: true });
+});
+
+async function buildEntry(source: string, ssr = false) {
+	const result = await build({
+		build: {
+			rollupOptions: { input: writeEntry(source) },
+			ssr,
+			ssrEmitAssets: true,
+			write: false,
+		},
+		configFile: false,
+		logLevel: "silent",
+		plugins: [iconifySvgmap({ root: packageRoot })],
+		root: directory,
+	});
+	const [output] = (Array.isArray(result) ? result : [result]) as [
+		Rollup.RollupOutput,
+	];
+	return output.output;
+}
+
+function writeEntry(source: string) {
+	const entry = path.join(directory, "entry.js");
+	fs.writeFileSync(entry, source);
+	return entry;
+}
+
+describe("generateSprite", () => {
+	it("creates one symbol per icon and reports missing icons", async () => {
+		const collection = await loadCollection("logos");
+		if (!collection) throw new Error("logos collection missing");
+
+		const { missing, svg } = generateSprite(collection, [
+			"astro",
+			"alpinejs",
+			"astro",
+			"not-an-icon",
+		]);
+
+		expect(missing).toEqual(["not-an-icon"]);
+		expect(svg.match(/<symbol /g)).toHaveLength(2);
+		expect(svg).toContain('<symbol id="astro" viewBox=');
+		expect(svg.indexOf('id="alpinejs"')).toBeLessThan(
+			svg.indexOf('id="astro"'),
+		);
+	});
+});
+
+describe("static imports", () => {
+	it("emits a hashed sprite containing only the imported icons", async () => {
+		const output = await buildEntry(`
+			import astro from "virtual:iconify-svgmap/logos/astro";
+			import alpine from "virtual:iconify-svgmap/logos/alpinejs";
+			import copilot from "virtual:iconify-svgmap/octicon/copilot-16";
+			console.log(astro, alpine, copilot);
+		`);
+
+		const assets = output.filter((item) => item.type === "asset");
+		expect(assets.map((asset) => asset.fileName).toSorted()).toEqual([
+			expect.stringMatching(LOGOS_ASSET_REGEX),
+			expect.stringMatching(OCTICON_ASSET_REGEX),
+		]);
+
+		const logos = assets.find((asset) => asset.fileName.includes("logos"))!;
+		expect(String(logos.source).match(/<symbol /g)).toHaveLength(2);
+
+		const chunk = output.find((item) => item.type === "chunk")!;
+		expect(chunk.code).toContain(`"/${logos.fileName}#astro"`);
+		expect(chunk.code).not.toContain("ROLLUP_FILE_URL");
+	});
+
+	it("resolves absolute hrefs in ssr builds", async () => {
+		const output = await buildEntry(
+			`export { default } from "virtual:iconify-svgmap/logos/astro";`,
+			true,
+		);
+		const chunk = output.find((item) => item.type === "chunk")!;
+		expect(chunk.code).toMatch(SSR_HREF_REGEX);
+		expect(chunk.code).not.toContain("import.meta.url");
+	});
+
+	it("fails the build for unknown icons and packs", async () => {
+		await expect(
+			buildEntry(`import "virtual:iconify-svgmap/logos/not-an-icon";`),
+		).rejects.toThrow('unable to find icon "not-an-icon"');
+		await expect(
+			buildEntry(`import "virtual:iconify-svgmap/not-a-pack/icon";`),
+		).rejects.toThrow('unable to find icon pack "not-a-pack"');
+	});
+});
+
+describe("getIcon", () => {
+	it("registers icons while rendering and writes their sprites", async () => {
+		const outDirectory = path.join(directory, "server");
+		await build({
+			build: {
+				outDir: outDirectory,
+				rollupOptions: {
+					input: writeEntry(
+						`export { getIcon } from "virtual:iconify-svgmap";`,
+					),
+					output: { entryFileNames: "[name].mjs" },
+				},
+				ssr: true,
+			},
+			configFile: false,
+			logLevel: "silent",
+			plugins: [iconifySvgmap({ root: packageRoot })],
+			root: directory,
+		});
+
+		const { getIcon } = (await import(
+			pathToFileURL(path.join(outDirectory, "entry.mjs")).href
+		)) as { getIcon: (pack: string, name: string) => string };
+
+		const names = ["astro", "alpinejs"];
+		const hrefs = names.map((name) => getIcon("logos", name));
+		expect(hrefs[0]).toMatch(RUNTIME_HREF_REGEX);
+		expect(() => getIcon("../logos", "astro")).toThrow("invalid icon");
+
+		const written = await writeSprites(pathToFileURL(directory));
+		expect(written).toEqual([
+			path.join(directory, "_iconify", "logos.svg"),
+		]);
+
+		const sprite = fs.readFileSync(written[0], "utf8");
+		for (const name of names) expect(sprite).toContain(`id="${name}"`);
+	});
+});
+
+describe("dev server", () => {
+	it("serves sprites from memory", async () => {
+		const server = await createServer({
+			configFile: false,
+			logLevel: "silent",
+			plugins: [iconifySvgmap({ root: packageRoot })],
+			root: directory,
+			server: { port: 0 },
+		});
+
+		try {
+			await server.listen();
+			const { getIcon } = (await server.ssrLoadModule(
+				"virtual:iconify-svgmap",
+			)) as { getIcon: (pack: string, name: string) => string };
+			const { default: staticHref } = (await server.ssrLoadModule(
+				"virtual:iconify-svgmap/logos/alpinejs",
+			)) as { default: string };
+
+			const href = getIcon("logos", "astro");
+			expect(staticHref).toBe("/_iconify/logos.svg#alpinejs");
+
+			const response = await fetch(
+				new URL(href, server.resolvedUrls!.local[0]),
+			);
+			expect(response.headers.get("content-type")).toBe("image/svg+xml");
+
+			const sprite = await response.text();
+			expect(sprite).toContain('id="astro"');
+			expect(sprite).toContain('id="alpinejs"');
+		} finally {
+			await server.close();
+		}
+	});
+});

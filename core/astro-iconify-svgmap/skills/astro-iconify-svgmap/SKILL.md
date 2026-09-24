@@ -1,7 +1,7 @@
 ---
 name: astro-iconify-svgmap
 description: >
-  Astro integration that generates optimized SVG sprite maps from @iconify-json/*
+  [Deprecated, use @stephansama/vite-iconify-svgmap] Astro integration that generates optimized SVG sprite maps from @iconify-json/*
   icon packs for SSG sites. Add createIntegration() to astro.config.mjs, import
   virtual:iconify-svgmap in your base layout to activate the plugin, then call
   getIcon(pack, name) in .astro components to register icons and get <use> hrefs.
@@ -19,6 +19,8 @@ sources:
 ---
 
 # astro-iconify-svgmap
+
+> **Deprecated:** use `@stephansama/vite-iconify-svgmap` for new projects. It keeps icon usage in memory instead of tracking files, supports static `import href from "virtual:iconify-svgmap/<pack>/<icon>"` imports, and writes sprites straight into the build output.
 
 Generates SVG sprite maps from Iconify icon packs at build time and serves them during dev. Icons are registered lazily via `getIcon()` and assembled into per-pack sprite files.
 

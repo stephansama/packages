@@ -21,6 +21,9 @@
 
 </div>
 
+> \[!WARNING]
+> this package is deprecated please use [`@stephansama/vite-iconify-svgmap`](../vite-iconify-svgmap/README.md) instead
+
 ## This project is a work in progress
 
 > \[!NOTE]

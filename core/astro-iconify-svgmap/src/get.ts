@@ -1,3 +1,4 @@
+/** @deprecated Use `@stephansama/vite-iconify-svgmap` instead */
 export async function getIcon(pack: string, name: string) {
 	const onServer = typeof document === "undefined";
 	const selectedPack = pack === "noto-emoji" ? "noto" : pack;

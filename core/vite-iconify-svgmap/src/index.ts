@@ -301,9 +301,14 @@ function createRuntimeModule(ssr: boolean, development: boolean) {
 		posted.add(pack + "/" + name);
 		if (!channel) {
 			channel = new BroadcastChannel(KEY);
+			// answer flush requests after the icons posted before them
+			channel.onmessage = (event) => {
+				if (event.data?.type !== "flush") return;
+				channel.postMessage({ sender, token: event.data.token, type: "flushed" });
+			};
 			channel.unref?.();
 		}
-		channel.postMessage([pack, name]);
+		channel.postMessage({ name, pack, sender, type: "icon" });
 	}`
 		: "";
 
@@ -311,6 +316,7 @@ function createRuntimeModule(ssr: boolean, development: boolean) {
 const KEY = ${JSON.stringify(STATE_KEY)};
 const NAME_REGEX = ${NAME_REGEX.toString()};
 const posted = new Set();
+const sender = Math.random().toString(36).slice(2);
 let channel;
 
 /** register an icon while rendering and return its sprite href */

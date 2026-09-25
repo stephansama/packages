@@ -10,6 +10,8 @@ export const NAME_REGEX = /^[\w-]+$/;
 export interface State {
 	/** Public path prefix for render time sprites, e.g. `/_iconify/` */
 	baseHref: string;
+	/** Receives icons from `getIcon` calls in worker threads */
+	bridge?: WorkerBridge;
 	collections: Map<string, Promise<IconifyJSON | undefined>>;
 	/** Placeholder sprite files that still need a real sprite or removal */
 	placeholders: Set<string>;
@@ -26,11 +28,67 @@ export interface State {
 	version: string;
 }
 
-/** Let pending worker messages reach the registry */
+/**
+ * Messages exchanged with `getIcon` running in worker threads:
+ *
+ * - `icon`: a worker rendered an icon
+ * - `flush`: the main thread asks every worker to confirm what it sent
+ * - `flushed`: a worker's reply. messages from one sender arrive in order, so
+ *   every `icon` that worker posted has been received once this arrives
+ */
+type WorkerMessage =
+	| { name: string; pack: string; sender: string; type: "icon" }
+	| { sender: string; token: string; type: "flushed" }
+	| { token: string; type: "flush" };
+
+const FLUSH_TIMEOUT = 2000;
+
+interface WorkerBridge {
+	channel: BroadcastChannel;
+	/** Workers that posted at least one icon */
+	senders: Set<string>;
+	/** Pending `flushWorkerIcons` calls waiting for replies */
+	waiters: Set<(message: WorkerMessage) => void>;
+}
+
+/**
+ * Wait until every worker thread that registered icons has confirmed that all
+ * of its icons were received
+ */
 export async function flushWorkerIcons() {
-	for (let tick = 0; tick < 3; tick++) {
-		await new Promise((resolve) => setImmediate(resolve));
-	}
+	const { bridge } = getState();
+	if (!bridge) return;
+
+	// let messages that are already queued land first
+	await new Promise((resolve) => setImmediate(resolve));
+	const pending = new Set(bridge.senders);
+	if (pending.size === 0) return;
+
+	const token = Math.random().toString(36).slice(2);
+	await new Promise<void>((resolve) => {
+		const timer = setTimeout(() => {
+			bridge.waiters.delete(onMessage);
+			console.warn(
+				`[${STATE_KEY}] ${pending.size} worker thread(s) did not confirm their icons; sprites may be missing icons rendered there`,
+			);
+			resolve();
+		}, FLUSH_TIMEOUT);
+
+		function onMessage(message: WorkerMessage) {
+			if (message.type !== "flushed" || message.token !== token) return;
+			pending.delete(message.sender);
+			if (pending.size > 0) return;
+			clearTimeout(timer);
+			bridge!.waiters.delete(onMessage);
+			resolve();
+		}
+
+		bridge.waiters.add(onMessage);
+		bridge.channel.postMessage({
+			token,
+			type: "flush",
+		} satisfies WorkerMessage);
+	});
 }
 
 /**
@@ -56,7 +114,7 @@ export function getState(): State {
 			version: Date.now().toString(36),
 		};
 		store[key] = state;
-		listenForWorkerIcons(state);
+		state.bridge = listenForWorkerIcons(state);
 	}
 
 	return store[key];
@@ -64,13 +122,14 @@ export function getState(): State {
 
 export function loadCollection(pack: string) {
 	const state = getState();
-	let collection = state.collections.get(pack);
+	// a trailing slash makes node resolution start inside `root`
+	const cwd = state.root.endsWith("/") ? state.root : `${state.root}/`;
+	const key = `${cwd}\0${pack}`;
+	let collection = state.collections.get(key);
 
 	if (!collection) {
-		// a trailing slash makes node resolution start inside `root`
-		const cwd = state.root.endsWith("/") ? state.root : `${state.root}/`;
 		collection = loadCollectionFromFS(pack, false, "@iconify-json", cwd);
-		state.collections.set(pack, collection);
+		state.collections.set(key, collection);
 	}
 
 	return collection;
@@ -86,14 +145,34 @@ export function registerIcon(state: State, pack: string, icon: string) {
  * own `globalThis`, so `getIcon` posts icons over a `BroadcastChannel` that
  * this listener adds to the registry
  */
-function listenForWorkerIcons(state: State) {
+function listenForWorkerIcons(state: State): undefined | WorkerBridge {
+	if (typeof BroadcastChannel !== "function") return;
+
 	const channel = new BroadcastChannel(STATE_KEY);
+	const bridge: WorkerBridge = {
+		channel,
+		senders: new Set(),
+		waiters: new Set(),
+	};
+
 	channel.addEventListener("message", (event) => {
-		const [pack, icon] = (event as MessageEvent<unknown>).data as unknown[];
-		if (typeof pack !== "string" || typeof icon !== "string") return;
-		if (!NAME_REGEX.test(pack) || !NAME_REGEX.test(icon)) return;
-		registerIcon(state, pack, icon);
+		const message = (event as MessageEvent<Partial<WorkerMessage>>).data;
+		if (message?.type === "flushed") {
+			for (const waiter of bridge.waiters) {
+				waiter(message as WorkerMessage);
+			}
+			return;
+		}
+		if (message?.type !== "icon") return;
+
+		const { name, pack, sender } = message;
+		if (typeof pack !== "string" || typeof name !== "string") return;
+		if (!NAME_REGEX.test(pack) || !NAME_REGEX.test(name)) return;
+		if (typeof sender === "string") bridge.senders.add(sender);
+		registerIcon(state, pack, name);
 	});
 	// never keep the process alive just to listen
 	(channel as BroadcastChannel & { unref?: () => void }).unref?.();
+
+	return bridge;
 }

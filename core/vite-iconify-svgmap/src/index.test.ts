@@ -11,7 +11,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import iconifySvgmap, { writeSprites } from "./index";
 import { generateSprite } from "./sprite";
-import { getState, loadCollection } from "./state";
+import { getState, loadCollection, STATE_KEY } from "./state";
 
 const packageRoot = path.resolve(import.meta.dirname, "..");
 
@@ -166,22 +166,77 @@ describe("getIcon", () => {
 
 	it("receives icons rendered in worker threads", async () => {
 		const entry = await buildRuntime();
+		// like sveltekit's prerenderer: the worker reports back over
+		// `parentPort` right after rendering and stays alive
 		const worker = new Worker(
-			`import(${JSON.stringify(pathToFileURL(entry).href)}).then(({ getIcon }) => {
-				getIcon("logos", "vitejs");
+			`const { parentPort } = require("node:worker_threads");
+			import(${JSON.stringify(pathToFileURL(entry).href)}).then(({ getIcon }) => {
+				for (let index = 0; index < 50; index++) getIcon("logos", "vitejs");
+				getIcon("logos", "astro");
 				getIcon("octicon", "copilot-16");
-			});`,
+				parentPort.postMessage("done");
+			});
+			parentPort.on("message", () => {});`,
 			{ eval: true },
 		);
-		await once(worker, "exit");
 
-		const written = await writeSprites(directory);
+		let written: string[];
+		try {
+			await once(worker, "message");
+			written = await writeSprites(directory);
+		} finally {
+			await worker.terminate();
+		}
 		expect(written.map((file) => path.basename(file)).toSorted()).toEqual([
 			"logos.svg",
 			"octicon.svg",
 		]);
 		const logos = written.find((file) => file.endsWith("logos.svg"))!;
-		expect(fs.readFileSync(logos, "utf8")).toContain('id="vitejs"');
+		const sprite = fs.readFileSync(logos, "utf8");
+		expect(sprite).toContain('id="vitejs"');
+		expect(sprite).toContain('id="astro"');
+	});
+});
+
+describe("worker flush", () => {
+	it("waits for every worker to confirm its icons", async () => {
+		getState();
+		// stands in for a worker whose icons are still in flight
+		const worker = new BroadcastChannel(STATE_KEY);
+		worker.postMessage({
+			name: "astro",
+			pack: "logos",
+			sender: "slow",
+			type: "icon",
+		});
+		worker.addEventListener("message", (event) => {
+			const message = (
+				event as MessageEvent<{ token: string; type: string }>
+			).data;
+			if (message.type !== "flush") return;
+			setTimeout(() => {
+				worker.postMessage({
+					name: "vitejs",
+					pack: "logos",
+					sender: "slow",
+					type: "icon",
+				});
+				worker.postMessage({
+					sender: "slow",
+					token: message.token,
+					type: "flushed",
+				});
+			}, 200);
+		});
+
+		try {
+			const [written] = await writeSprites(directory);
+			const sprite = fs.readFileSync(written, "utf8");
+			expect(sprite).toContain('id="astro"');
+			expect(sprite).toContain('id="vitejs"');
+		} finally {
+			worker.close();
+		}
 	});
 });
 

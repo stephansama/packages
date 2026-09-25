@@ -246,6 +246,42 @@ describe("worker flush", () => {
 	});
 });
 
+describe("worker discovery", () => {
+	it("waits for workers whose first icon is still in flight", async () => {
+		getState();
+		// stands in for a worker nothing has been received from yet
+		const worker = new BroadcastChannel(STATE_KEY);
+		worker.addEventListener("message", (event) => {
+			const message = (
+				event as MessageEvent<{ token: string; type: string }>
+			).data;
+			if (message.type !== "flush") return;
+			setTimeout(() => {
+				worker.postMessage({
+					name: "alpinejs",
+					pack: "logos",
+					sender: "late",
+					type: "icon",
+				});
+				worker.postMessage({
+					sender: "late",
+					token: message.token,
+					type: "flushed",
+				});
+			}, 10);
+		});
+
+		const warn = vi.spyOn(console, "warn");
+		try {
+			const [written] = await writeSprites(directory);
+			expect(fs.readFileSync(written, "utf8")).toContain('id="alpinejs"');
+			expect(warn).not.toHaveBeenCalled();
+		} finally {
+			worker.close();
+		}
+	});
+});
+
 describe("dev server", () => {
 	it("serves sprites from memory", async () => {
 		const server = await createServer({

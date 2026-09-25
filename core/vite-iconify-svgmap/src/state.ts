@@ -41,6 +41,9 @@ type WorkerMessage =
 	| { sender: string; token: string; type: "flushed" }
 	| { token: string; type: "flush" };
 
+/** How long to wait for workers whose icons have not arrived yet */
+const DISCOVERY_WINDOW = 50;
+/** How long to wait for known workers before warning */
 const FLUSH_TIMEOUT = 2000;
 
 interface WorkerBridge {
@@ -53,7 +56,11 @@ interface WorkerBridge {
 
 /**
  * Wait until every worker thread that registered icons has confirmed that all
- * of its icons were received
+ * of its icons were received.
+ *
+ * Workers already known must answer (or time out). Workers whose first icon is
+ * still in flight are not known yet, so the request is always sent and any
+ * worker answering within {@link DISCOVERY_WINDOW} is waited for as well.
  */
 export async function flushWorkerIcons() {
 	const { bridge } = getState();
@@ -61,27 +68,37 @@ export async function flushWorkerIcons() {
 
 	// let messages that are already queued land first
 	await new Promise((resolve) => setImmediate(resolve));
-	const flushed = new Set(bridge.senders);
-	if (flushed.size === 0) return;
-	const pending = new Set(flushed);
-
+	const pending = new Set(bridge.senders);
+	const answered = new Set<string>();
 	const token = Math.random().toString(36).slice(2);
+
 	await new Promise<void>((resolve) => {
-		const timer = setTimeout(() => {
+		let discovering = true;
+
+		const finish = () => {
+			clearTimeout(discovery);
+			clearTimeout(timeout);
 			bridge.waiters.delete(onMessage);
+			resolve();
+		};
+
+		const discovery = setTimeout(() => {
+			discovering = false;
+			if (pending.size === 0) finish();
+		}, DISCOVERY_WINDOW);
+
+		const timeout = setTimeout(() => {
 			console.warn(
 				`[${STATE_KEY}] ${pending.size} worker thread(s) did not confirm their icons; sprites may be missing icons rendered there`,
 			);
-			resolve();
+			finish();
 		}, FLUSH_TIMEOUT);
 
 		function onMessage(message: WorkerMessage) {
 			if (message.type !== "flushed" || message.token !== token) return;
+			answered.add(message.sender);
 			pending.delete(message.sender);
-			if (pending.size > 0) return;
-			clearTimeout(timer);
-			bridge!.waiters.delete(onMessage);
-			resolve();
+			if (!discovering && pending.size === 0) finish();
 		}
 
 		bridge.waiters.add(onMessage);
@@ -92,7 +109,9 @@ export async function flushWorkerIcons() {
 	});
 
 	// accounted for (or gone); a worker that posts again is added back
-	for (const sender of flushed) bridge.senders.delete(sender);
+	for (const sender of [...bridge.senders, ...answered]) {
+		bridge.senders.delete(sender);
+	}
 }
 
 /**

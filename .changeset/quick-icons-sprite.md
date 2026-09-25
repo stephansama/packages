@@ -4,4 +4,4 @@
 "@example/vite-iconify-svgmap/vite": patch
 ---
 
-created vite iconify svgmap plugin that builds sprite maps in memory, with an astro integration and `Icon` astro component
+created vite iconify svgmap plugin that builds sprite maps in memory, with an astro integration and `Icon` components for astro and svelte

@@ -14,6 +14,7 @@
 [![@iconify/types](https://img.shields.io/badge/@iconify/types-2.0.0-026C9C.svg?logo=iconify&logoColor=ffffff&labelColor=026C9C)](https://npmx.dev/package/@iconify/types)
 [![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-0.0.41-00a6f4.svg?logo=tanstack&logoColor=ffffff&labelColor=00a6f4)](https://npmx.dev/package/@tanstack/intent)
 [![astro](https://img.shields.io/badge/astro-6.3.1-BC52EE.svg?logo=astro&logoColor=ffffff&labelColor=BC52EE)](https://npmx.dev/package/astro)
+[![svelte](https://img.shields.io/badge/svelte-5.51.2-FF3E00.svg?logo=svelte&logoColor=ffffff&labelColor=FF3E00)](https://npmx.dev/package/svelte)
 [![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
 [![vite](https://img.shields.io/badge/vite-6.3.5-9135FF.svg?logo=vite&logoColor=ffffff&labelColor=9135FF)](https://npmx.dev/package/vite)
 
@@ -33,7 +34,7 @@ Vite plugin for generating iconify svg sprite maps in memory
   - [Vite](#vite)
   - [Static imports](#static-imports)
   - [Icons known while rendering](#icons-known-while-rendering)
-  - [Astro Icon component](#astro-icon-component)
+  - [Icon components](#icon-components)
 - [Options](#options)
 - [How it works](#how-it-works)
 
@@ -66,7 +67,7 @@ registered with `getIcon` once every page has rendered.
 
 ```js
 // astro.config.mjs
-import iconifySvgmap from "@stephansama/vite-iconify-svgmap/astro";
+import iconifySvgmap from "@stephansama/vite-iconify-svgmap/astro/integration";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
@@ -137,18 +138,34 @@ have rendered.
 > demand rendered route, or by client side code, are not included in the
 > written sprites.
 
-### Astro Icon component
+### Icon components
 
-`Icon` wraps `getIcon` in an `<svg><use /></svg>` (requires the astro
-integration)
+Each framework subpath exports an `Icon` component that wraps `getIcon` in an
+`<svg><use /></svg>`. They follow the same rules as `getIcon`: icons must be
+rendered on the server during the build (for example astro pages or
+server rendered svelte islands) and the sprites written afterwards (the astro
+integration does this).
+
+| Framework | Import                                                            |
+| --------- | ----------------------------------------------------------------- |
+| astro     | `import { Icon } from "@stephansama/vite-iconify-svgmap/astro";`  |
+| svelte 5  | `import { Icon } from "@stephansama/vite-iconify-svgmap/svelte";` |
 
 ```astro
 ---
-import { Icon } from "@stephansama/vite-iconify-svgmap/components";
+import { Icon } from "@stephansama/vite-iconify-svgmap/astro";
 ---
 
 <Icon pack="logos" name="github-icon" size={24} title="GitHub" />
 <Icon pack="heroicons" name="heart-solid" class="text-red-500" />
+```
+
+```svelte
+<script>
+  import { Icon } from "@stephansama/vite-iconify-svgmap/svelte";
+</script>
+
+<Icon pack="logos" name="svelte-icon" size={24} title="Svelte" />
 ```
 
 | Prop    | Default | Description                                                          |

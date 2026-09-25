@@ -11,7 +11,8 @@
     "svg-sprite",
     "iconify",
     "tanstack-intent",
-    "astro-component"
+    "astro-component",
+    "svelte"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/vite-iconify-svgmap",
   "bugs": {
@@ -32,18 +33,23 @@
   "type": "module",
   "exports": {
     ".": "./dist/index.mjs",
-    "./astro": "./dist/astro.mjs",
+    "./astro": "./frameworks/astro/index.ts",
+    "./astro/integration": "./dist/astro/integration.mjs",
     "./client": {
       "types": "./client.d.ts"
     },
-    "./components": "./components/index.ts",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./svelte": {
+      "types": "./frameworks/svelte/index.d.ts",
+      "svelte": "./frameworks/svelte/index.js",
+      "default": "./frameworks/svelte/index.js"
+    }
   },
   "types": "./dist/index.d.mts",
   "files": [
     "client.d.ts",
-    "components",
     "dist",
+    "frameworks",
     "skills"
   ],
   "scripts": {
@@ -61,15 +67,20 @@
     "@iconify/utils": "catalog:",
     "@tanstack/intent": "catalog:tanstack",
     "astro": "catalog:",
+    "svelte": "catalog:svelte",
     "tsdown": "catalog:",
     "vite": "catalog:"
   },
   "peerDependencies": {
     "astro": ">=5",
+    "svelte": ">=5",
     "vite": ">=6"
   },
   "peerDependenciesMeta": {
     "astro": {
+      "optional": true
+    },
+    "svelte": {
       "optional": true
     }
   },

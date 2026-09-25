@@ -13,8 +13,9 @@ library: "@stephansama/vite-iconify-svgmap"
 library_version: "0.0.0"
 sources:
   - stephansama/packages:core/vite-iconify-svgmap/src/index.ts
-  - stephansama/packages:core/vite-iconify-svgmap/src/astro.ts
-  - stephansama/packages:core/vite-iconify-svgmap/components/icon.astro
+  - stephansama/packages:core/vite-iconify-svgmap/src/astro/integration.ts
+  - stephansama/packages:core/vite-iconify-svgmap/frameworks/astro/icon.astro
+  - stephansama/packages:core/vite-iconify-svgmap/frameworks/svelte/icon.svelte
   - stephansama/packages:core/vite-iconify-svgmap/src/state.ts
   - stephansama/packages:core/vite-iconify-svgmap/client.d.ts
 ---
@@ -34,7 +35,7 @@ pnpm add -D @stephansama/vite-iconify-svgmap @iconify-json/mdi
 1. Astro: add the integration to `astro.config.mjs`:
 
 ```js
-import iconifySvgmap from "@stephansama/vite-iconify-svgmap/astro";
+import iconifySvgmap from "@stephansama/vite-iconify-svgmap/astro/integration";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
@@ -78,17 +79,17 @@ const href = getIcon(entry.data.pack, entry.data.icon);
 
 `getIcon` is synchronous. It registers the icon in memory and returns `/_iconify/<pack>.svg?v=<build>#<icon>`. The Astro integration writes those sprites in `astro:build:done`; without Astro call `writeSprites(clientOutDir)` after rendering.
 
-### Astro Icon component
+### Icon components (astro, svelte)
 
 ```astro
 ---
-import { Icon } from "@stephansama/vite-iconify-svgmap/components";
+import { Icon } from "@stephansama/vite-iconify-svgmap/astro";
 ---
 
 <Icon pack="mdi" name="home" size={24} title="Home" class="nav-icon" />
 ```
 
-`Icon` calls `getIcon` and renders `<svg><use href /></svg>`. Props: `pack`, `name`, `size` (default `"1em"`), `title` (adds `role="img"`, otherwise `aria-hidden="true"`); other attributes pass through to `<svg>`. Same rules as `getIcon`: needs the Astro integration and build-time rendering.
+`@stephansama/vite-iconify-svgmap/astro` and `@stephansama/vite-iconify-svgmap/svelte` (Svelte 5) both export `Icon`. It calls `getIcon` and renders `<svg><use href /></svg>`. Props: `pack`, `name`, `size` (default `"1em"`), `title` (adds `role="img"`, otherwise `aria-hidden="true"`); other attributes pass through to `<svg>`. Same rules as `getIcon`: needs the Astro integration (or `writeSprites`) and server rendering during the build; client-only Svelte components are not registered.
 
 ## Common Mistakes
 
@@ -123,7 +124,7 @@ Correct:
 export default defineConfig({ integrations: [iconifySvgmap()] });
 ```
 
-Astro prerenders after Vite's build hooks, so only the integration (`/astro`) can write `getIcon` sprites. Static imports work either way.
+Astro prerenders after Vite's build hooks, so only the integration (`/astro/integration`) can write `getIcon` sprites. Static imports work either way.
 
 ### MEDIUM getIcon at request time
 

@@ -12,7 +12,7 @@
   },
   "include": [
     "./client.d.ts",
-    "./components/**/*",
+    "./frameworks/**/*",
     "./src/**/*",
     "tsdown.config.ts"
   ]

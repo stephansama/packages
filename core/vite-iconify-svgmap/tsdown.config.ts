@@ -16,12 +16,14 @@ export default defineConfig({
 		customExports(exports) {
 			exports["./astro"] = "./frameworks/astro/index.ts";
 			exports["./client"] = { types: "./client.d.ts" };
+			// condition order matters: `default` must come last
+			/* eslint-disable perfectionist/sort-objects */
 			exports["./svelte"] = {
-				default: "./frameworks/svelte/index.js",
-
-				svelte: "./frameworks/svelte/index.js",
 				types: "./frameworks/svelte/index.d.ts",
+				svelte: "./frameworks/svelte/index.js",
+				default: "./frameworks/svelte/index.js",
 			};
+			/* eslint-enable perfectionist/sort-objects */
 			return Object.fromEntries(
 				Object.entries(exports).toSorted(([a], [b]) => a.localeCompare(b)),
 			);

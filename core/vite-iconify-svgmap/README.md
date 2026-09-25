@@ -31,6 +31,7 @@ Vite plugin for generating iconify svg sprite maps in memory
 - [Installation](#installation)
 - [Usage](#usage)
   - [Astro](#astro)
+  - [SvelteKit](#sveltekit)
   - [Vite](#vite)
   - [Static imports](#static-imports)
   - [Icons known while rendering](#icons-known-while-rendering)
@@ -74,6 +75,32 @@ export default defineConfig({
   integrations: [iconifySvgmap()],
 });
 ```
+
+### SvelteKit
+
+Add the sveltekit plugins **after** `sveltekit()`:
+
+```js
+// vite.config.js
+import iconifySvgmap from "@stephansama/vite-iconify-svgmap/sveltekit";
+import { sveltekit } from "@sveltejs/kit/vite";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  plugins: [sveltekit(), iconifySvgmap()],
+});
+```
+
+SvelteKit prerenders in a worker thread and has no hook after prerendering,
+so this plugin:
+
+- receives `getIcon` calls made inside the prerender worker over an in
+  memory `BroadcastChannel`
+- writes empty placeholder sprites for every installed icon pack when the
+  client build finishes, so the prerender crawler does not fail on
+  `<use href>` links to sprites that do not exist yet
+- writes the real sprites (and removes unused placeholders) after
+  prerendering, before the adapter copies the client output
 
 ### Vite
 
@@ -133,10 +160,11 @@ const href = getIcon(entry.data.iconPack, entry.data.icon);
 have rendered.
 
 > \[!NOTE]
-> `getIcon` icons must be rendered in the same process as the build (the
-> default for static astro sites). Icons first requested at runtime by an on
-> demand rendered route, or by client side code, are not included in the
-> written sprites.
+> `getIcon` icons must be rendered during the build, in the same process or
+> one of its worker threads (static astro sites and prerendered sveltekit
+> pages). Icons first requested at runtime by an on demand rendered route, or
+> only by client side code, are not included in the written sprites. During
+> development every icon works, including client rendered ones.
 
 ### Icon components
 

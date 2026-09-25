@@ -11,6 +11,7 @@ export default defineConfig({
 	entry: {
 		"astro/integration": "src/astro/integration.ts",
 		"index": "src/index.ts",
+		"sveltekit": "src/sveltekit.ts",
 	},
 	exports: {
 		customExports(exports) {

@@ -1657,6 +1657,42 @@ importers:
         specifier: workspace:*
         version: link:../../../core/vite-iconify-svgmap
 
+  examples/vite-iconify-svgmap/sveltekit:
+    devDependencies:
+      '@iconify-json/heroicons':
+        specifier: 1.2.3
+        version: 1.2.3
+      '@iconify-json/logos':
+        specifier: 1.2.10
+        version: 1.2.10
+      '@iconify-json/octicon':
+        specifier: 1.2.21
+        version: 1.2.21
+      '@stephansama/vite-iconify-svgmap':
+        specifier: workspace:*
+        version: link:../../../core/vite-iconify-svgmap
+      '@sveltejs/adapter-static':
+        specifier: 3.0.10
+        version: 3.0.10(@sveltejs/kit@2.52.0(@opentelemetry/api@1.9.0)(@sveltejs/vite-plugin-svelte@6.2.4(supports-color@7.2.0)(svelte@5.51.2)(vite@6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)))(svelte@5.51.2)(typescript@5.9.3)(vite@6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)))
+      '@sveltejs/kit':
+        specifier: 2.52.0
+        version: 2.52.0(@opentelemetry/api@1.9.0)(@sveltejs/vite-plugin-svelte@6.2.4(supports-color@7.2.0)(svelte@5.51.2)(vite@6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)))(svelte@5.51.2)(typescript@5.9.3)(vite@6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))
+      '@sveltejs/vite-plugin-svelte':
+        specifier: 6.2.4
+        version: 6.2.4(supports-color@7.2.0)(svelte@5.51.2)(vite@6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))
+      svelte:
+        specifier: 5.51.2
+        version: 5.51.2
+      svelte-check:
+        specifier: 4.4.0
+        version: 4.4.0(picomatch@4.0.4)(svelte@5.51.2)(typescript@5.9.3)
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vite:
+        specifier: 'catalog:'
+        version: 6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)
+
   examples/vite-iconify-svgmap/vite:
     devDependencies:
       '@iconify-json/heroicons':
@@ -14568,9 +14604,35 @@ snapshots:
     dependencies:
       acorn: 8.16.0
 
+  '@sveltejs/adapter-static@3.0.10(@sveltejs/kit@2.52.0(@opentelemetry/api@1.9.0)(@sveltejs/vite-plugin-svelte@6.2.4(supports-color@7.2.0)(svelte@5.51.2)(vite@6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)))(svelte@5.51.2)(typescript@5.9.3)(vite@6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)))':
+    dependencies:
+      '@sveltejs/kit': 2.52.0(@opentelemetry/api@1.9.0)(@sveltejs/vite-plugin-svelte@6.2.4(supports-color@7.2.0)(svelte@5.51.2)(vite@6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)))(svelte@5.51.2)(typescript@5.9.3)(vite@6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))
+
   '@sveltejs/adapter-static@3.0.10(@sveltejs/kit@2.52.0(@opentelemetry/api@1.9.0)(@sveltejs/vite-plugin-svelte@6.2.4(supports-color@7.2.0)(svelte@5.51.2)(vite@7.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)))(svelte@5.51.2)(typescript@5.9.3)(vite@7.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)))':
     dependencies:
       '@sveltejs/kit': 2.52.0(@opentelemetry/api@1.9.0)(@sveltejs/vite-plugin-svelte@6.2.4(supports-color@7.2.0)(svelte@5.51.2)(vite@7.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)))(svelte@5.51.2)(typescript@5.9.3)(vite@7.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))
+
+  '@sveltejs/kit@2.52.0(@opentelemetry/api@1.9.0)(@sveltejs/vite-plugin-svelte@6.2.4(supports-color@7.2.0)(svelte@5.51.2)(vite@6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)))(svelte@5.51.2)(typescript@5.9.3)(vite@6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))':
+    dependencies:
+      '@standard-schema/spec': 1.1.0
+      '@sveltejs/acorn-typescript': 1.0.6(acorn@8.16.0)
+      '@sveltejs/vite-plugin-svelte': 6.2.4(supports-color@7.2.0)(svelte@5.51.2)(vite@6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))
+      '@types/cookie': 0.6.0
+      acorn: 8.16.0
+      cookie: 0.6.0
+      devalue: 5.6.2
+      esm-env: 1.2.2
+      kleur: 4.1.5
+      magic-string: 0.30.21
+      mrmime: 2.0.1
+      sade: 1.8.1
+      set-cookie-parser: 3.0.1
+      sirv: 3.0.2
+      svelte: 5.51.2
+      vite: 6.3.5(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)
+    optionalDependencies:
+      '@opentelemetry/api': 1.9.0
+      typescript: 5.9.3
 
   '@sveltejs/kit@2.52.0(@opentelemetry/api@1.9.0)(@sveltejs/vite-plugin-svelte@6.2.4(supports-color@7.2.0)(svelte@5.51.2)(vite@7.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)))(svelte@5.51.2)(typescript@5.9.3)(vite@7.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4))':
     dependencies:

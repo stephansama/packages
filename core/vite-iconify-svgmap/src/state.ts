@@ -11,6 +11,8 @@ export interface State {
 	/** Public path prefix for render time sprites, e.g. `/_iconify/` */
 	baseHref: string;
 	collections: Map<string, Promise<IconifyJSON | undefined>>;
+	/** Placeholder sprite files that still need a real sprite or removal */
+	placeholders: Set<string>;
 	/** Directory used to resolve `@iconify-json/*` packages */
 	root: string;
 	/** Icons registered through `getIcon` while pages render, keyed by pack */
@@ -22,6 +24,13 @@ export interface State {
 	spriteDir: string;
 	/** Cache busting id appended to render time sprite urls */
 	version: string;
+}
+
+/** Let pending worker messages reach the registry */
+export async function flushWorkerIcons() {
+	for (let tick = 0; tick < 3; tick++) {
+		await new Promise((resolve) => setImmediate(resolve));
+	}
 }
 
 /**
@@ -36,14 +45,19 @@ export function getState(): State {
 	};
 	const key = Symbol.for(STATE_KEY);
 
-	store[key] ??= {
-		baseHref: "/_iconify/",
-		collections: new Map(),
-		root: process.cwd(),
-		runtime: new Map(),
-		spriteDir: "_iconify",
-		version: Date.now().toString(36),
-	};
+	if (!store[key]) {
+		const state: State = {
+			baseHref: "/_iconify/",
+			collections: new Map(),
+			placeholders: new Set(),
+			root: process.cwd(),
+			runtime: new Map(),
+			spriteDir: "_iconify",
+			version: Date.now().toString(36),
+		};
+		store[key] = state;
+		listenForWorkerIcons(state);
+	}
 
 	return store[key];
 }
@@ -60,4 +74,26 @@ export function loadCollection(pack: string) {
 	}
 
 	return collection;
+}
+
+export function registerIcon(state: State, pack: string, icon: string) {
+	const icons = state.runtime.get(pack) ?? new Set<string>();
+	state.runtime.set(pack, icons.add(icon));
+}
+
+/**
+ * Pages rendered in worker threads (e.g. sveltekit's prerenderer) have their
+ * own `globalThis`, so `getIcon` posts icons over a `BroadcastChannel` that
+ * this listener adds to the registry
+ */
+function listenForWorkerIcons(state: State) {
+	const channel = new BroadcastChannel(STATE_KEY);
+	channel.addEventListener("message", (event) => {
+		const [pack, icon] = (event as MessageEvent<unknown>).data as unknown[];
+		if (typeof pack !== "string" || typeof icon !== "string") return;
+		if (!NAME_REGEX.test(pack) || !NAME_REGEX.test(icon)) return;
+		registerIcon(state, pack, icon);
+	});
+	// never keep the process alive just to listen
+	(channel as BroadcastChannel & { unref?: () => void }).unref?.();
 }

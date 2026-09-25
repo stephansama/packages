@@ -9,7 +9,14 @@ import type { Options } from "./type";
 
 import pkg from "../package.json";
 import { generateSprite } from "./sprite";
-import { getState, loadCollection, NAME_REGEX, STATE_KEY } from "./state";
+import {
+	flushWorkerIcons,
+	getState,
+	loadCollection,
+	NAME_REGEX,
+	registerIcon,
+	STATE_KEY,
+} from "./state";
 
 export type { Options } from "./type";
 
@@ -86,7 +93,12 @@ export default function iconifySvgmap(options: Options = {}): Plugin {
 
 			state.root = options.root ? toPath(options.root) : config.root;
 			state.spriteDir = spriteDirectory;
-			state.baseHref = `${base}${spriteDirectory}/`;
+			// render time hrefs must match between server and client builds, so
+			// relative bases (e.g. sveltekit's client build) keep the last
+			// absolute one
+			if (base.startsWith("/")) {
+				state.baseHref = `${base}${spriteDirectory}/`;
+			}
 		},
 
 		configureServer(server) {
@@ -99,6 +111,13 @@ export default function iconifySvgmap(options: Options = {}): Plugin {
 
 				const pack = url.slice(prefix.length, -".svg".length);
 				if (!NAME_REGEX.test(pack)) return next();
+
+				const requested = new URLSearchParams(
+					request.url?.split("?")[1]?.split("#")[0],
+				).get("icon");
+				if (requested && NAME_REGEX.test(requested)) {
+					registerIcon(state, pack, requested);
+				}
 
 				loadCollection(pack)
 					.then((collection) => {
@@ -130,7 +149,7 @@ export default function iconifySvgmap(options: Options = {}): Plugin {
 				this.environment?.config.consumer === "server";
 
 			if (request === VIRTUAL_MODULE_ID) {
-				return createRuntimeModule(ssr);
+				return createRuntimeModule(ssr, config.command === "serve");
 			}
 
 			const [pack, icon, ...rest] = request
@@ -162,7 +181,7 @@ export default function iconifySvgmap(options: Options = {}): Plugin {
 			}
 
 			if (config.command === "serve") {
-				registerRuntimeIcon(pack, icon);
+				registerIcon(state, pack, icon);
 				return js`export default ${JSON.stringify(`${state.baseHref}${pack}.svg#${icon}`)};`;
 			}
 
@@ -231,6 +250,7 @@ export default function iconifySvgmap(options: Options = {}): Plugin {
  * @returns The paths of the written sprites
  */
 export async function writeSprites(outDirectory: string | URL) {
+	await flushWorkerIcons();
 	const state = getState();
 	const spriteDirectory = path.join(toPath(outDirectory), state.spriteDir);
 	const written: string[] = [];
@@ -263,21 +283,39 @@ export async function writeSprites(outDirectory: string | URL) {
 }
 
 /** Module served for `virtual:iconify-svgmap` */
-function createRuntimeModule(ssr: boolean) {
+function createRuntimeModule(ssr: boolean, development: boolean) {
 	const state = getState();
 	const prefix = JSON.stringify(state.baseHref);
-	const suffix = JSON.stringify(`.svg?v=${state.version}#`);
+	// in dev the icon is also sent as a query so the dev server can include
+	// icons that were only rendered in the browser
+	const suffix = development
+		? js`${JSON.stringify(`.svg?v=${state.version}&icon=`)} + name + "#"`
+		: JSON.stringify(`.svg?v=${state.version}#`);
 
+	// on the server icons go straight into the registry, or over a
+	// BroadcastChannel when rendering happens in a worker thread
 	const register = ssr
 		? js`
-const state = globalThis[Symbol.for(${JSON.stringify(STATE_KEY)})];
-let icons = state?.runtime.get(pack);
-if (state && !icons) state.runtime.set(pack, (icons = new Set()));
-icons?.add(name);`
+	const state = globalThis[Symbol.for(KEY)];
+	if (state) {
+		let icons = state.runtime.get(pack);
+		if (!icons) state.runtime.set(pack, (icons = new Set()));
+		icons.add(name);
+	} else if (!posted.has(pack + "/" + name) && typeof BroadcastChannel === "function") {
+		posted.add(pack + "/" + name);
+		if (!channel) {
+			channel = new BroadcastChannel(KEY);
+			channel.unref?.();
+		}
+		channel.postMessage([pack, name]);
+	}`
 		: "";
 
 	return js`
+const KEY = ${JSON.stringify(STATE_KEY)};
 const NAME_REGEX = ${NAME_REGEX.toString()};
+const posted = new Set();
+let channel;
 
 /** register an icon while rendering and return its sprite href */
 export function getIcon(pack, name) {
@@ -295,12 +333,6 @@ function environmentKey(
 	ssr?: boolean,
 ) {
 	return context.environment?.name ?? (ssr ? "ssr" : "client");
-}
-
-function registerRuntimeIcon(pack: string, icon: string) {
-	const { runtime } = getState();
-	const icons = runtime.get(pack) ?? new Set<string>();
-	runtime.set(pack, icons.add(icon));
 }
 
 function toPath(value: string | URL) {

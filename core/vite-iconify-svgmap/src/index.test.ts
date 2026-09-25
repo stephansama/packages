@@ -1,9 +1,11 @@
 import type { Rollup } from "vite";
 
+import { once } from "node:events";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { Worker } from "node:worker_threads";
 import { build, createServer } from "vite";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
@@ -47,6 +49,28 @@ async function buildEntry(source: string, ssr = false) {
 		Rollup.RollupOutput,
 	];
 	return output.output;
+}
+
+/** Ssr build of the `getIcon` runtime module */
+async function buildRuntime() {
+	const outDirectory = path.join(directory, "server");
+	await build({
+		build: {
+			outDir: outDirectory,
+			rollupOptions: {
+				input: writeEntry(
+					`export { getIcon } from "virtual:iconify-svgmap";`,
+				),
+				output: { entryFileNames: "[name].mjs" },
+			},
+			ssr: true,
+		},
+		configFile: false,
+		logLevel: "silent",
+		plugins: [iconifySvgmap({ root: packageRoot })],
+		root: directory,
+	});
+	return path.join(outDirectory, "entry.mjs");
 }
 
 function writeEntry(source: string) {
@@ -121,27 +145,10 @@ describe("static imports", () => {
 
 describe("getIcon", () => {
 	it("registers icons while rendering and writes their sprites", async () => {
-		const outDirectory = path.join(directory, "server");
-		await build({
-			build: {
-				outDir: outDirectory,
-				rollupOptions: {
-					input: writeEntry(
-						`export { getIcon } from "virtual:iconify-svgmap";`,
-					),
-					output: { entryFileNames: "[name].mjs" },
-				},
-				ssr: true,
-			},
-			configFile: false,
-			logLevel: "silent",
-			plugins: [iconifySvgmap({ root: packageRoot })],
-			root: directory,
-		});
-
-		const { getIcon } = (await import(
-			pathToFileURL(path.join(outDirectory, "entry.mjs")).href
-		)) as { getIcon: (pack: string, name: string) => string };
+		const entry = await buildRuntime();
+		const { getIcon } = (await import(pathToFileURL(entry).href)) as {
+			getIcon: (pack: string, name: string) => string;
+		};
 
 		const names = ["astro", "alpinejs"];
 		const hrefs = names.map((name) => getIcon("logos", name));
@@ -155,6 +162,26 @@ describe("getIcon", () => {
 
 		const sprite = fs.readFileSync(written[0], "utf8");
 		for (const name of names) expect(sprite).toContain(`id="${name}"`);
+	});
+
+	it("receives icons rendered in worker threads", async () => {
+		const entry = await buildRuntime();
+		const worker = new Worker(
+			`import(${JSON.stringify(pathToFileURL(entry).href)}).then(({ getIcon }) => {
+				getIcon("logos", "vitejs");
+				getIcon("octicon", "copilot-16");
+			});`,
+			{ eval: true },
+		);
+		await once(worker, "exit");
+
+		const written = await writeSprites(directory);
+		expect(written.map((file) => path.basename(file)).toSorted()).toEqual([
+			"logos.svg",
+			"octicon.svg",
+		]);
+		const logos = written.find((file) => file.endsWith("logos.svg"))!;
+		expect(fs.readFileSync(logos, "utf8")).toContain('id="vitejs"');
 	});
 });
 
@@ -188,6 +215,15 @@ describe("dev server", () => {
 			const sprite = await response.text();
 			expect(sprite).toContain('id="astro"');
 			expect(sprite).toContain('id="alpinejs"');
+
+			// icons rendered only in the browser are requested through the query
+			const clientOnly = await fetch(
+				new URL(
+					"/_iconify/logos.svg?icon=vitejs",
+					server.resolvedUrls!.local[0],
+				),
+			);
+			expect(await clientOnly.text()).toContain('id="vitejs"');
 		} finally {
 			await server.close();
 		}

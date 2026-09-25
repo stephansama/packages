@@ -43,7 +43,8 @@
       "types": "./frameworks/svelte/index.d.ts",
       "svelte": "./frameworks/svelte/index.js",
       "default": "./frameworks/svelte/index.js"
-    }
+    },
+    "./sveltekit": "./dist/sveltekit.mjs"
   },
   "types": "./dist/index.d.mts",
   "files": [

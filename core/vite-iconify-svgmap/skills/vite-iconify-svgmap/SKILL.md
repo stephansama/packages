@@ -14,6 +14,7 @@ library_version: "0.0.0"
 sources:
   - stephansama/packages:core/vite-iconify-svgmap/src/index.ts
   - stephansama/packages:core/vite-iconify-svgmap/src/astro/integration.ts
+  - stephansama/packages:core/vite-iconify-svgmap/src/sveltekit.ts
   - stephansama/packages:core/vite-iconify-svgmap/frameworks/astro/icon.astro
   - stephansama/packages:core/vite-iconify-svgmap/frameworks/svelte/icon.svelte
   - stephansama/packages:core/vite-iconify-svgmap/src/state.ts
@@ -41,6 +42,15 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   integrations: [iconifySvgmap()],
 });
+```
+
+SvelteKit: add the plugins from `@stephansama/vite-iconify-svgmap/sveltekit` after `sveltekit()` in `vite.config.js`:
+
+```js
+import iconifySvgmap from "@stephansama/vite-iconify-svgmap/sveltekit";
+import { sveltekit } from "@sveltejs/kit/vite";
+
+export default defineConfig({ plugins: [sveltekit(), iconifySvgmap()] });
 ```
 
 Plain Vite: add `iconifySvgmap()` from `@stephansama/vite-iconify-svgmap` to `plugins`.
@@ -110,6 +120,23 @@ const href = getIcon(pack, name);
 
 Vite cannot resolve template-literal virtual imports. Use `getIcon` for dynamic names.
 
+### HIGH Using the raw plugin with getIcon in SvelteKit
+
+Wrong:
+
+```js
+export default defineConfig({ plugins: [sveltekit(), iconifySvgmap()] }); // from "@stephansama/vite-iconify-svgmap"
+```
+
+Correct:
+
+```js
+import iconifySvgmap from "@stephansama/vite-iconify-svgmap/sveltekit";
+export default defineConfig({ plugins: [sveltekit(), iconifySvgmap()] });
+```
+
+Without the `/sveltekit` plugins the prerender crawler fails with `404 /_iconify/<pack>.svg` and sprites are never written.
+
 ### HIGH Using the raw plugin with getIcon in Astro
 
 Wrong:
@@ -128,6 +155,6 @@ Astro prerenders after Vite's build hooks, so only the integration (`/astro/inte
 
 ### MEDIUM getIcon at request time
 
-Icons first requested by on-demand rendered routes, by client-side code, or by prerendering in another runtime (e.g. workerd) are not included in written sprites. Use static imports, or make sure those icons are also rendered during the build.
+Icons first requested by on-demand rendered routes, only by client-side code, or by prerendering in another runtime (e.g. workerd) are not included in written sprites. Worker threads of the build process (SvelteKit's prerenderer) are supported. Use static imports, or make sure those icons are also rendered during the build.
 
 Source: `core/vite-iconify-svgmap/src/index.ts`

@@ -33,6 +33,7 @@ Vite plugin for generating iconify svg sprite maps in memory
   - [Vite](#vite)
   - [Static imports](#static-imports)
   - [Icons known while rendering](#icons-known-while-rendering)
+  - [Astro Icon component](#astro-icon-component)
 - [Options](#options)
 - [How it works](#how-it-works)
 
@@ -135,6 +136,30 @@ have rendered.
 > default for static astro sites). Icons first requested at runtime by an on
 > demand rendered route, or by client side code, are not included in the
 > written sprites.
+
+### Astro Icon component
+
+`Icon` wraps `getIcon` in an `<svg><use /></svg>` (requires the astro
+integration)
+
+```astro
+---
+import { Icon } from "@stephansama/vite-iconify-svgmap/components";
+---
+
+<Icon pack="logos" name="github-icon" size={24} title="GitHub" />
+<Icon pack="heroicons" name="heart-solid" class="text-red-500" />
+```
+
+| Prop    | Default | Description                                                          |
+| ------- | ------- | -------------------------------------------------------------------- |
+| `pack`  |         | iconify pack, e.g. `logos` for `@iconify-json/logos`                 |
+| `name`  |         | icon name inside the pack                                            |
+| `size`  | `"1em"` | width and height                                                     |
+| `title` |         | accessible label; without it the icon gets `aria-hidden="true"`      |
+| ...     |         | any other svg attribute (`class`, `style`, ...) is passed to `<svg>` |
+
+Icons that use `currentColor` follow the css `color` of the component.
 
 ## Options
 

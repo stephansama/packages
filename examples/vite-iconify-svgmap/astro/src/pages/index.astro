@@ -1,4 +1,5 @@
 ---
+import { Icon } from "@stephansama/vite-iconify-svgmap/components";
 import { getIcon } from "virtual:iconify-svgmap";
 import astro from "virtual:iconify-svgmap/logos/astro";
 import copilot from "virtual:iconify-svgmap/octicon/copilot-16";
@@ -35,5 +36,13 @@ const dynamicIcons = [
 				</svg>
 			))
 		}
+		<h1>Icon component</h1>
+		<Icon name="github-icon" pack="logos" size={48} title="GitHub" />
+		<Icon class="accent" name="heart-solid" pack="heroicons" size={48} />
+		<style>
+			.accent {
+				color: crimson;
+			}
+		</style>
 	</body>
 </html>

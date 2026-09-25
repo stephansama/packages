@@ -1,0 +1,31 @@
+---
+/// <reference types="../client.d.ts" />
+import type { HTMLAttributes } from "astro/types";
+
+import { getIcon } from "virtual:iconify-svgmap";
+
+interface Props extends Omit<HTMLAttributes<"svg">, "height" | "width"> {
+	/** Icon name inside the pack, e.g. `astro` */
+	name: string;
+	/** Iconify pack, e.g. `logos` for `@iconify-json/logos` */
+	pack: string;
+	/** Width and height of the icon @default "1em" */
+	size?: number | string;
+	/** Accessible label; without it the icon is hidden from assistive tech */
+	title?: string;
+}
+
+const { name, pack, size = "1em", title, ...attributes } = Astro.props;
+const href = getIcon(pack, name);
+---
+
+<svg
+	aria-hidden={title ? undefined : "true"}
+	height={size}
+	role={title ? "img" : undefined}
+	width={size}
+	{...attributes}
+>
+	{title && <title>{title}</title>}
+	<use href={href}></use>
+</svg>

@@ -14,6 +14,7 @@ library_version: "0.0.0"
 sources:
   - stephansama/packages:core/vite-iconify-svgmap/src/index.ts
   - stephansama/packages:core/vite-iconify-svgmap/src/astro.ts
+  - stephansama/packages:core/vite-iconify-svgmap/components/icon.astro
   - stephansama/packages:core/vite-iconify-svgmap/src/state.ts
   - stephansama/packages:core/vite-iconify-svgmap/client.d.ts
 ---
@@ -76,6 +77,18 @@ const href = getIcon(entry.data.pack, entry.data.icon);
 ```
 
 `getIcon` is synchronous. It registers the icon in memory and returns `/_iconify/<pack>.svg?v=<build>#<icon>`. The Astro integration writes those sprites in `astro:build:done`; without Astro call `writeSprites(clientOutDir)` after rendering.
+
+### Astro Icon component
+
+```astro
+---
+import { Icon } from "@stephansama/vite-iconify-svgmap/components";
+---
+
+<Icon pack="mdi" name="home" size={24} title="Home" class="nav-icon" />
+```
+
+`Icon` calls `getIcon` and renders `<svg><use href /></svg>`. Props: `pack`, `name`, `size` (default `"1em"`), `title` (adds `role="img"`, otherwise `aria-hidden="true"`); other attributes pass through to `<svg>`. Same rules as `getIcon`: needs the Astro integration and build-time rendering.
 
 ## Common Mistakes
 

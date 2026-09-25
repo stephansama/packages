@@ -3,7 +3,17 @@
   "compilerOptions": {
     "lib": ["DOM", "ESNext"],
     "types": ["node"],
-    "composite": true
+    "composite": true,
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ]
   },
-  "include": ["./client.d.ts", "./src/**/*", "tsdown.config.ts"]
+  "include": [
+    "./client.d.ts",
+    "./components/**/*",
+    "./src/**/*",
+    "tsdown.config.ts"
+  ]
 }

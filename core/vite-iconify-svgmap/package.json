@@ -10,7 +10,8 @@
     "svgmap",
     "svg-sprite",
     "iconify",
-    "tanstack-intent"
+    "tanstack-intent",
+    "astro-component"
   ],
   "homepage": "https://packages.stephansama.info/api/@stephansama/vite-iconify-svgmap",
   "bugs": {
@@ -35,11 +36,13 @@
     "./client": {
       "types": "./client.d.ts"
     },
+    "./components": "./components/index.ts",
     "./package.json": "./package.json"
   },
   "types": "./dist/index.d.mts",
   "files": [
     "client.d.ts",
+    "components",
     "dist",
     "skills"
   ],

@@ -31,7 +31,7 @@
     { "path": "./examples/svelte-social-share-links/astro/tsconfig.json" },
     { "path": "./examples/svelte-social-share-links/svelte-kit/tsconfig.json" },
     { "path": "./examples/typed-events/react/tsconfig.json" },
-    { "path": "./examples/vite-iconify-svgmap/tsconfig.json" },
+    { "path": "./examples/vite-iconify-svgmap/astro/tsconfig.json" },
     { "path": "./rules/tsconfig.json" },
     { "path": "./scripts/tsconfig.json" },
     { "path": "./tsconfig.root.json" }

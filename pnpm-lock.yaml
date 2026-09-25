@@ -1626,7 +1626,7 @@ importers:
         specifier: 4.0.15
         version: 4.0.15
 
-  examples/vite-iconify-svgmap:
+  examples/vite-iconify-svgmap/astro:
     dependencies:
       astro:
         specifier: ^6.4.6
@@ -1643,7 +1643,25 @@ importers:
         version: 1.2.21
       '@stephansama/vite-iconify-svgmap':
         specifier: workspace:*
-        version: link:../../core/vite-iconify-svgmap
+        version: link:../../../core/vite-iconify-svgmap
+
+  examples/vite-iconify-svgmap/vite:
+    devDependencies:
+      '@iconify-json/heroicons':
+        specifier: 1.2.3
+        version: 1.2.3
+      '@iconify-json/logos':
+        specifier: 1.2.10
+        version: 1.2.10
+      '@iconify-json/octicon':
+        specifier: 1.2.21
+        version: 1.2.21
+      '@stephansama/vite-iconify-svgmap':
+        specifier: workspace:*
+        version: link:../../../core/vite-iconify-svgmap
+      vite:
+        specifier: 7.3.1
+        version: 7.3.1(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.42.0)(tsx@4.21.0)(yaml@2.8.4)
 
   rules:
     dependencies:

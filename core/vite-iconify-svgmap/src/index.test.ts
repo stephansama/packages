@@ -11,7 +11,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import iconifySvgmap, { writeSprites } from "./index";
 import { generateSprite } from "./sprite";
-import { getState, loadCollection, STATE_KEY } from "./state";
+import { drainWorkerIcons, getState, loadCollection, STATE_KEY } from "./state";
 
 const packageRoot = path.resolve(import.meta.dirname, "..");
 
@@ -167,115 +167,44 @@ describe("getIcon", () => {
 
 	it("receives icons rendered in worker threads", async () => {
 		const entry = await buildRuntime();
+		const collection = await loadCollection("logos");
+		const names = Object.keys(collection!.icons).slice(0, 100);
+
 		// like sveltekit's prerenderer: the worker reports back over
 		// `parentPort` right after rendering and stays alive
 		const worker = new Worker(
-			`const { parentPort } = require("node:worker_threads");
-			import(${JSON.stringify(pathToFileURL(entry).href)}).then(({ getIcon }) => {
-				for (let index = 0; index < 50; index++) getIcon("logos", "vitejs");
-				getIcon("logos", "astro");
-				getIcon("octicon", "copilot-16");
+			`const { parentPort, workerData } = require("node:worker_threads");
+			import(workerData.entry).then(({ getIcon }) => {
+				for (const name of workerData.names) getIcon("logos", name);
 				parentPort.postMessage("done");
 			});
 			parentPort.on("message", () => {});`,
-			{ eval: true },
+			{
+				eval: true,
+				workerData: { entry: pathToFileURL(entry).href, names },
+			},
 		);
 
-		// a flush the worker never answers times out with a warning
-		const warn = vi.spyOn(console, "warn");
 		let written: string[];
 		try {
 			await once(worker, "message");
+			// no waiting: icons posted before "done" are already queued
 			written = await writeSprites(directory);
 		} finally {
 			await worker.terminate();
 		}
-		expect(warn).not.toHaveBeenCalled();
-		expect(written.map((file) => path.basename(file)).toSorted()).toEqual([
-			"logos.svg",
-			"octicon.svg",
-		]);
-		const logos = written.find((file) => file.endsWith("logos.svg"))!;
-		const sprite = fs.readFileSync(logos, "utf8");
-		expect(sprite).toContain('id="vitejs"');
-		expect(sprite).toContain('id="astro"');
+
+		const sprite = fs.readFileSync(written[0], "utf8");
+		for (const name of names) expect(sprite).toContain(`id="${name}"`);
 	});
-});
 
-describe("worker flush", () => {
-	it("waits for every worker to confirm its icons", async () => {
+	it("drains queued worker icons synchronously", () => {
 		getState();
-		// stands in for a worker whose icons are still in flight
 		const worker = new BroadcastChannel(STATE_KEY);
-		worker.postMessage({
-			name: "astro",
-			pack: "logos",
-			sender: "slow",
-			type: "icon",
-		});
-		worker.addEventListener("message", (event) => {
-			const message = (
-				event as MessageEvent<{ token: string; type: string }>
-			).data;
-			if (message.type !== "flush") return;
-			setTimeout(() => {
-				worker.postMessage({
-					name: "vitejs",
-					pack: "logos",
-					sender: "slow",
-					type: "icon",
-				});
-				worker.postMessage({
-					sender: "slow",
-					token: message.token,
-					type: "flushed",
-				});
-			}, 200);
-		});
-
-		const warn = vi.spyOn(console, "warn");
 		try {
-			const [written] = await writeSprites(directory);
-			expect(warn).not.toHaveBeenCalled();
-			const sprite = fs.readFileSync(written, "utf8");
-			expect(sprite).toContain('id="astro"');
-			expect(sprite).toContain('id="vitejs"');
-		} finally {
-			worker.close();
-		}
-	});
-});
-
-describe("worker discovery", () => {
-	it("waits for workers whose first icon is still in flight", async () => {
-		getState();
-		// stands in for a worker nothing has been received from yet
-		const worker = new BroadcastChannel(STATE_KEY);
-		worker.addEventListener("message", (event) => {
-			const message = (
-				event as MessageEvent<{ token: string; type: string }>
-			).data;
-			if (message.type !== "flush") return;
-			setTimeout(() => {
-				worker.postMessage({
-					name: "alpinejs",
-					pack: "logos",
-					sender: "late",
-					type: "icon",
-				});
-				worker.postMessage({
-					sender: "late",
-					token: message.token,
-					type: "flushed",
-				});
-			}, 10);
-		});
-
-		const warn = vi.spyOn(console, "warn");
-		try {
-			const [written] = await writeSprites(directory);
-			expect(fs.readFileSync(written, "utf8")).toContain('id="alpinejs"');
-			expect(warn).not.toHaveBeenCalled();
+			worker.postMessage({ name: "astro", pack: "logos", type: "icon" });
+			drainWorkerIcons();
+			expect(getState().runtime.get("logos")).toContain("astro");
 		} finally {
 			worker.close();
 		}

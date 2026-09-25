@@ -1,6 +1,7 @@
 import type { IconifyJSON } from "@iconify/types";
 
 import { loadCollectionFromFS } from "@iconify/utils/lib/loader/fs";
+import { type MessagePort, receiveMessageOnPort } from "node:worker_threads";
 
 export const STATE_KEY = "@stephansama/vite-iconify-svgmap";
 
@@ -11,7 +12,7 @@ export interface State {
 	/** Public path prefix for render time sprites, e.g. `/_iconify/` */
 	baseHref: string;
 	/** Receives icons from `getIcon` calls in worker threads */
-	bridge?: WorkerBridge;
+	channel?: BroadcastChannel;
 	collections: Map<string, Promise<IconifyJSON | undefined>>;
 	/** Placeholder sprite files that still need a real sprite or removal */
 	placeholders: Set<string>;
@@ -28,89 +29,34 @@ export interface State {
 	version: string;
 }
 
-/**
- * Messages exchanged with `getIcon` running in worker threads:
- *
- * - `icon`: a worker rendered an icon
- * - `flush`: the main thread asks every worker to confirm what it sent
- * - `flushed`: a worker's reply. messages from one sender arrive in order, so
- *   every `icon` that worker posted has been received once this arrives
- */
-type WorkerMessage =
-	| { name: string; pack: string; sender: string; type: "icon" }
-	| { sender: string; token: string; type: "flushed" }
-	| { token: string; type: "flush" };
-
-/** How long to wait for workers whose icons have not arrived yet */
-const DISCOVERY_WINDOW = 50;
-/** How long to wait for known workers before warning */
-const FLUSH_TIMEOUT = 2000;
-
-interface WorkerBridge {
-	channel: BroadcastChannel;
-	/** Workers that posted at least one icon */
-	senders: Set<string>;
-	/** Pending `flushWorkerIcons` calls waiting for replies */
-	waiters: Set<(message: WorkerMessage) => void>;
+/** Message posted by `getIcon` when it runs in a worker thread */
+interface WorkerIconMessage {
+	name: string;
+	pack: string;
+	type: "icon";
 }
 
 /**
- * Wait until every worker thread that registered icons has confirmed that all
- * of its icons were received.
+ * Register every icon worker threads have posted so far.
  *
- * Workers already known must answer (or time out). Workers whose first icon is
- * still in flight are not known yet, so the request is always sent and any
- * worker answering within {@link DISCOVERY_WINDOW} is waited for as well.
+ * `BroadcastChannel` messages are queued at every receiver as soon as they are
+ * posted, so once a worker has reported that it finished rendering (e.g.
+ * sveltekit's prerender result) all of its icons are already queued here.
+ * draining the queue synchronously registers them without waiting on the event
+ * loop or any timing guess.
  */
-export async function flushWorkerIcons() {
-	const { bridge } = getState();
-	if (!bridge) return;
+export function drainWorkerIcons() {
+	const state = getState();
+	if (!state.channel) return;
 
-	// let messages that are already queued land first
-	await new Promise((resolve) => setImmediate(resolve));
-	const pending = new Set(bridge.senders);
-	const answered = new Set<string>();
-	const token = Math.random().toString(36).slice(2);
-
-	await new Promise<void>((resolve) => {
-		let discovering = true;
-
-		const finish = () => {
-			clearTimeout(discovery);
-			clearTimeout(timeout);
-			bridge.waiters.delete(onMessage);
-			resolve();
-		};
-
-		const discovery = setTimeout(() => {
-			discovering = false;
-			if (pending.size === 0) finish();
-		}, DISCOVERY_WINDOW);
-
-		const timeout = setTimeout(() => {
-			console.warn(
-				`[${STATE_KEY}] ${pending.size} worker thread(s) did not confirm their icons; sprites may be missing icons rendered there`,
-			);
-			finish();
-		}, FLUSH_TIMEOUT);
-
-		function onMessage(message: WorkerMessage) {
-			if (message.type !== "flushed" || message.token !== token) return;
-			answered.add(message.sender);
-			pending.delete(message.sender);
-			if (!discovering && pending.size === 0) finish();
-		}
-
-		bridge.waiters.add(onMessage);
-		bridge.channel.postMessage({
-			token,
-			type: "flush",
-		} satisfies WorkerMessage);
-	});
-
-	// accounted for (or gone); a worker that posts again is added back
-	for (const sender of [...bridge.senders, ...answered]) {
-		bridge.senders.delete(sender);
+	// node accepts a BroadcastChannel here; the types only declare MessagePort
+	const port = state.channel as unknown as MessagePort;
+	for (
+		let entry = receiveMessageOnPort(port);
+		entry;
+		entry = receiveMessageOnPort(port)
+	) {
+		registerWorkerIcon(state, entry.message);
 	}
 }
 
@@ -137,7 +83,7 @@ export function getState(): State {
 			version: Date.now().toString(36),
 		};
 		store[key] = state;
-		state.bridge = listenForWorkerIcons(state);
+		state.channel = listenForWorkerIcons(state);
 	}
 
 	return store[key];
@@ -168,34 +114,25 @@ export function registerIcon(state: State, pack: string, icon: string) {
  * own `globalThis`, so `getIcon` posts icons over a `BroadcastChannel` that
  * this listener adds to the registry
  */
-function listenForWorkerIcons(state: State): undefined | WorkerBridge {
+function listenForWorkerIcons(state: State) {
 	if (typeof BroadcastChannel !== "function") return;
 
 	const channel = new BroadcastChannel(STATE_KEY);
-	const bridge: WorkerBridge = {
-		channel,
-		senders: new Set(),
-		waiters: new Set(),
-	};
-
 	channel.addEventListener("message", (event) => {
-		const message = (event as MessageEvent<Partial<WorkerMessage>>).data;
-		if (message?.type === "flushed") {
-			for (const waiter of bridge.waiters) {
-				waiter(message as WorkerMessage);
-			}
-			return;
-		}
-		if (message?.type !== "icon") return;
-
-		const { name, pack, sender } = message;
-		if (typeof pack !== "string" || typeof name !== "string") return;
-		if (!NAME_REGEX.test(pack) || !NAME_REGEX.test(name)) return;
-		if (typeof sender === "string") bridge.senders.add(sender);
-		registerIcon(state, pack, name);
+		registerWorkerIcon(state, (event as MessageEvent<unknown>).data);
 	});
 	// never keep the process alive just to listen
 	(channel as BroadcastChannel & { unref?: () => void }).unref?.();
 
-	return bridge;
+	return channel;
+}
+
+function registerWorkerIcon(state: State, data: unknown) {
+	const message = data as Partial<WorkerIconMessage> | undefined;
+	if (message?.type !== "icon") return;
+
+	const { name, pack } = message;
+	if (typeof pack !== "string" || typeof name !== "string") return;
+	if (!NAME_REGEX.test(pack) || !NAME_REGEX.test(name)) return;
+	registerIcon(state, pack, name);
 }

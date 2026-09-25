@@ -10,7 +10,7 @@ import type { Options } from "./type";
 import pkg from "../package.json";
 import { generateSprite } from "./sprite";
 import {
-	flushWorkerIcons,
+	drainWorkerIcons,
 	getState,
 	loadCollection,
 	NAME_REGEX,
@@ -246,7 +246,7 @@ export default function iconifySvgmap(options: Options = {}): Plugin {
  * @returns The paths of the written sprites
  */
 export async function writeSprites(outDirectory: string | URL) {
-	await flushWorkerIcons();
+	drainWorkerIcons();
 	const state = getState();
 	const spriteDirectory = path.join(toPath(outDirectory), state.spriteDir);
 	const written: string[] = [];
@@ -301,14 +301,9 @@ function createRuntimeModule(ssr: boolean, development: boolean) {
 		posted.add(pack + "/" + name);
 		if (!channel) {
 			channel = new BroadcastChannel(KEY);
-			// answer flush requests after the icons posted before them
-			channel.onmessage = (event) => {
-				if (event.data?.type !== "flush") return;
-				channel.postMessage({ sender, token: event.data.token, type: "flushed" });
-			};
 			channel.unref?.();
 		}
-		channel.postMessage({ name, pack, sender, type: "icon" });
+		channel.postMessage({ name, pack, type: "icon" });
 	}`
 		: "";
 
@@ -316,7 +311,6 @@ function createRuntimeModule(ssr: boolean, development: boolean) {
 const KEY = ${JSON.stringify(STATE_KEY)};
 const NAME_REGEX = ${NAME_REGEX.toString()};
 const posted = new Set();
-const sender = Math.random().toString(36).slice(2);
 let channel;
 
 /** register an icon while rendering and return its sprite href */

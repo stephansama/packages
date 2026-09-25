@@ -39,11 +39,11 @@ interface WorkerIconMessage {
 /**
  * Register every icon worker threads have posted so far.
  *
- * `BroadcastChannel` messages are queued at every receiver as soon as they are
- * posted, so once a worker has reported that it finished rendering (e.g.
- * sveltekit's prerender result) all of its icons are already queued here.
- * draining the queue synchronously registers them without waiting on the event
- * loop or any timing guess.
+ * The channel listener registers icons as the event loop delivers them, which
+ * can lag behind a worker's completion signal (e.g. sveltekit's prerender
+ * result). `BroadcastChannel` messages are queued at every receiver as soon as
+ * they are posted, so draining the queue synchronously picks up whatever the
+ * listener has not seen yet, without any timing guess.
  */
 export function drainWorkerIcons() {
 	const state = getState();

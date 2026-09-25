@@ -11,7 +11,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import iconifySvgmap, { writeSprites } from "./index";
 import { generateSprite } from "./sprite";
-import { drainWorkerIcons, getState, loadCollection, STATE_KEY } from "./state";
+import { drainWorkerIcons, getState, loadCollection } from "./state";
 
 const packageRoot = path.resolve(import.meta.dirname, "..");
 
@@ -188,7 +188,8 @@ describe("getIcon", () => {
 		let written: string[];
 		try {
 			await once(worker, "message");
-			// no waiting: icons posted before "done" are already queued
+			// the channel listener usually has these by now; `writeSprites`
+			// drains anything still queued
 			written = await writeSprites(directory);
 		} finally {
 			await worker.terminate();
@@ -198,15 +199,34 @@ describe("getIcon", () => {
 		for (const name of names) expect(sprite).toContain(`id="${name}"`);
 	});
 
-	it("drains queued worker icons synchronously", () => {
+	it("drains icons queued by a worker thread synchronously", async () => {
+		const entry = await buildRuntime();
 		getState();
-		const worker = new BroadcastChannel(STATE_KEY);
+		// the worker flips this once it has posted its icons
+		const posted = new Int32Array(new SharedArrayBuffer(4));
+		const worker = new Worker(
+			`const { workerData } = require("node:worker_threads");
+			import(workerData.entry).then(({ getIcon }) => {
+				getIcon("logos", "vitejs");
+				getIcon("octicon", "copilot-16");
+				Atomics.store(workerData.posted, 0, 1);
+				Atomics.notify(workerData.posted, 0);
+			});`,
+			{
+				eval: true,
+				workerData: { entry: pathToFileURL(entry).href, posted },
+			},
+		);
+
 		try {
-			worker.postMessage({ name: "astro", pack: "logos", type: "icon" });
+			// block this thread without yielding to the event loop, so the
+			// channel listener cannot run; only the drain can see the icons
+			expect(Atomics.wait(posted, 0, 0, 10_000)).not.toBe("timed-out");
 			drainWorkerIcons();
-			expect(getState().runtime.get("logos")).toContain("astro");
+			expect(getState().runtime.get("logos")).toContain("vitejs");
+			expect(getState().runtime.get("octicon")).toContain("copilot-16");
 		} finally {
-			worker.close();
+			await worker.terminate();
 		}
 	});
 });

@@ -7,7 +7,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { Worker } from "node:worker_threads";
 import { build, createServer } from "vite";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import iconifySvgmap, { writeSprites } from "./index";
 import { generateSprite } from "./sprite";
@@ -29,6 +29,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+	vi.restoreAllMocks();
 	fs.rmSync(directory, { force: true, recursive: true });
 });
 
@@ -180,6 +181,8 @@ describe("getIcon", () => {
 			{ eval: true },
 		);
 
+		// a flush the worker never answers times out with a warning
+		const warn = vi.spyOn(console, "warn");
 		let written: string[];
 		try {
 			await once(worker, "message");
@@ -187,6 +190,7 @@ describe("getIcon", () => {
 		} finally {
 			await worker.terminate();
 		}
+		expect(warn).not.toHaveBeenCalled();
 		expect(written.map((file) => path.basename(file)).toSorted()).toEqual([
 			"logos.svg",
 			"octicon.svg",
@@ -229,8 +233,10 @@ describe("worker flush", () => {
 			}, 200);
 		});
 
+		const warn = vi.spyOn(console, "warn");
 		try {
 			const [written] = await writeSprites(directory);
+			expect(warn).not.toHaveBeenCalled();
 			const sprite = fs.readFileSync(written, "utf8");
 			expect(sprite).toContain('id="astro"');
 			expect(sprite).toContain('id="vitejs"');

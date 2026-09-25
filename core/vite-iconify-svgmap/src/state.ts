@@ -61,8 +61,9 @@ export async function flushWorkerIcons() {
 
 	// let messages that are already queued land first
 	await new Promise((resolve) => setImmediate(resolve));
-	const pending = new Set(bridge.senders);
-	if (pending.size === 0) return;
+	const flushed = new Set(bridge.senders);
+	if (flushed.size === 0) return;
+	const pending = new Set(flushed);
 
 	const token = Math.random().toString(36).slice(2);
 	await new Promise<void>((resolve) => {
@@ -89,6 +90,9 @@ export async function flushWorkerIcons() {
 			type: "flush",
 		} satisfies WorkerMessage);
 	});
+
+	// accounted for (or gone); a worker that posts again is added back
+	for (const sender of flushed) bridge.senders.delete(sender);
 }
 
 /**

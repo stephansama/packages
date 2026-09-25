@@ -23,7 +23,6 @@ export type { Options } from "./type";
 export const VIRTUAL_MODULE_ID = "virtual:iconify-svgmap";
 const RESOLVED_PREFIX = "\0";
 
-const TRIM_SLASHES_REGEX = /^\/+|\/+$/g;
 const QUERY_REGEX = /[?#]/;
 
 const js = String.raw;
@@ -86,10 +85,7 @@ export default function iconifySvgmap(options: Options = {}): Plugin {
 		configResolved(resolvedConfig) {
 			config = resolvedConfig;
 			base = config.base.endsWith("/") ? config.base : `${config.base}/`;
-			const spriteDirectory = (options.dir ?? "_iconify").replaceAll(
-				TRIM_SLASHES_REGEX,
-				"",
-			);
+			const spriteDirectory = trimSlashes(options.dir ?? "_iconify");
 
 			state.root = options.root ? toPath(options.root) : config.root;
 			state.spriteDir = spriteDirectory;
@@ -339,4 +335,13 @@ function toPath(value: string | URL) {
 	return value instanceof URL || value.startsWith("file:")
 		? fileURLToPath(value)
 		: path.resolve(value);
+}
+
+/** Strip leading and trailing slashes in linear time */
+function trimSlashes(value: string) {
+	let start = 0;
+	let end = value.length;
+	while (start < end && value[start] === "/") start++;
+	while (end > start && value[end - 1] === "/") end--;
+	return value.slice(start, end);
 }

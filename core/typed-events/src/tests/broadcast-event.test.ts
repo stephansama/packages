@@ -39,10 +39,14 @@ it("receives the message on the sender and receiver channels", async () => {
 
 	firstChannel.dispatch("reset", {});
 
-	// wait for message delivery in mock
-	await new Promise((r) => setTimeout(r, 0));
+	// the shared document event arrives synchronously; broadcast channel
+	// delivery is asynchronous and can take more than a tick
+	await vi.waitFor(() =>
+		expect(secondCallback).toHaveBeenCalledWith(
+			expect.objectContaining({ type: "message" }),
+		),
+	);
 
 	expect(postMessageSpy).toHaveBeenCalled();
-	expect(secondCallback).toHaveBeenCalled();
 	expect(firstCallback).toHaveBeenCalled();
 });

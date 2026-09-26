@@ -1,0 +1,116 @@
+{
+  "name": "@stephansama/vite-iconify-svgmap",
+  "version": "0.0.0",
+  "description": "Vite plugin for generating iconify svg sprite maps in memory",
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "astro",
+    "astro-integration",
+    "svgmap",
+    "svg-sprite",
+    "iconify",
+    "tanstack-intent",
+    "astro-component",
+    "svelte"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/vite-iconify-svgmap",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/vite-iconify-svgmap"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./astro": "./frameworks/astro/index.ts",
+    "./astro/component": "./frameworks/astro/component.ts",
+    "./astro/integration": "./dist/astro/integration.mjs",
+    "./client": {
+      "types": "./client.d.ts"
+    },
+    "./package.json": "./package.json",
+    "./svelte": {
+      "types": "./frameworks/svelte/index.d.ts",
+      "svelte": "./frameworks/svelte/component.js",
+      "default": "./frameworks/svelte/index.js"
+    },
+    "./svelte/component": {
+      "types": "./frameworks/svelte/component.d.ts",
+      "svelte": "./frameworks/svelte/component.js",
+      "default": "./frameworks/svelte/component.js"
+    },
+    "./svelte/integration": "./dist/svelte/integration.mjs"
+  },
+  "types": "./dist/index.d.mts",
+  "files": [
+    "client.d.ts",
+    "dist",
+    "frameworks",
+    "skills"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "build:snapshot": "tsdown -u",
+    "dev": "tsdown --watch",
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix",
+    "prepublishOnly": "tsdown"
+  },
+  "devDependencies": {
+    "@iconify-json/logos": "catalog:",
+    "@iconify-json/octicon": "catalog:",
+    "@iconify/types": "catalog:",
+    "@iconify/utils": "catalog:",
+    "@tanstack/intent": "catalog:tanstack",
+    "astro": "catalog:",
+    "svelte": "catalog:svelte",
+    "tsdown": "catalog:",
+    "vite": "catalog:"
+  },
+  "peerDependencies": {
+    "astro": ">=5",
+    "svelte": ">=5",
+    "vite": ">=6"
+  },
+  "peerDependenciesMeta": {
+    "astro": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    }
+  },
+  "packageManager": "pnpm@10.29.3",
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "inlinedDependencies": {
+    "@antfu/install-pkg": "1.1.0",
+    "@antfu/utils": "8.1.1",
+    "@iconify/utils": "2.3.0",
+    "acorn": "8.16.0",
+    "kolorist": "1.8.0",
+    "local-pkg": "1.1.2",
+    "mlly": "1.8.2",
+    "package-manager-detector": "1.6.0",
+    "pathe": "2.0.3",
+    "quansync": "0.2.11",
+    "tinyexec": "1.1.2",
+    "ufo": "1.6.3"
+  }
+}

@@ -23,6 +23,8 @@ catalog:
   '@changesets/cli': 2.31.0
   '@clack/prompts': 1.3.0
   '@dotenvx/dotenvx': 1.52.0
+  '@iconify-json/logos': 1.2.10
+  '@iconify-json/octicon': 1.2.21
   '@iconify/types': 2.0.0
   '@iconify/utils': 2.3.0
   '@kba/makefile-parser': 0.0.6
@@ -214,6 +216,7 @@ overrides:
   '@stephansama/remark-asciinema': workspace:*
   '@stephansama/svelte-social-share-links': workspace:*
   '@stephansama/typed-events': workspace:*
+  '@stephansama/vite-iconify-svgmap': workspace:*
   create-stephansama-example: workspace:*
 
 shellEmulator: true

@@ -44,7 +44,7 @@ jobs:
           node-version: 20
 
       - name: Install intent
-        run: npm install -g @tanstack/intent
+        run: npm install -g @tanstack/intent@0.0.41 # keep in sync with the tanstack catalog in pnpm-workspace.yaml
 
       - name: Validate skills
         run: intent validate --github-summary
@@ -65,7 +65,7 @@ jobs:
           node-version: 20
 
       - name: Install intent
-        run: npm install -g @tanstack/intent
+        run: npm install -g @tanstack/intent@0.0.41 # keep in sync with the tanstack catalog in pnpm-workspace.yaml
 
       - name: Check skills
         id: stale

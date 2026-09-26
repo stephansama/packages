@@ -21,7 +21,7 @@ export class TypedBroadcastEventError extends ValidatorError {
 export function createBroadcastEvent<
 	Name extends string,
 	Map extends Record<string, StandardSchemaV1>,
->(name: Name, map: Map) {
+>(name: Name, map: Map): TypedBroadcastEvent<Name, Map> {
 	let _channel: BroadcastChannel | undefined;
 	let _target: EventTarget | undefined;
 

@@ -18,6 +18,7 @@ const js = String.raw;
 
 import type { AstroIntegration } from "astro";
 
+/** @deprecated Use `@stephansama/vite-iconify-svgmap` instead */
 export function createIntegration(options_: Options = {}): AstroIntegration {
 	return {
 		name: "astro-icon",
@@ -52,6 +53,7 @@ export function createIntegration(options_: Options = {}): AstroIntegration {
 	};
 }
 
+/** @deprecated Use `@stephansama/vite-iconify-svgmap` instead */
 export default function createPlugin(options?: Options): Plugin {
 	let _config: ResolvedConfig;
 	let inMemoryCollections: Record<string, IconifyJSON> = {};

@@ -1,6 +1,6 @@
 {
   "name": "@example/vite-iconify-svgmap/astro",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "Example astro site using vite iconify svgmap",
   "repository": {

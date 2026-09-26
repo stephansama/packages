@@ -1,5 +1,11 @@
 # @stephansama/astro-iconify-svgmap
 
+## 1.0.17
+
+### Patch Changes
+
+- 393d8bb: deprecate in favor of `@stephansama/vite-iconify-svgmap`
+
 ## 1.0.16
 
 ### Patch Changes

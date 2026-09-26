@@ -1,6 +1,6 @@
 {
   "name": "@example/vite-iconify-svgmap/sveltekit",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "Example sveltekit site using vite iconify svgmap",
   "repository": {

@@ -1,9 +1,9 @@
 import type { AstroIntegration } from "astro";
 
-import type { Options } from "../type";
+import type { Options } from "./type";
 
-import pkg from "../../package.json";
-import iconifySvgmap, { writeSprites } from "../index";
+import pkg from "../package.json";
+import iconifySvgmap, { writeSprites } from "./index";
 
 /**
  * Astro integration that adds the vite plugin and writes sprites for icons

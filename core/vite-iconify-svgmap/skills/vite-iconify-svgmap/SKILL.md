@@ -13,8 +13,8 @@ library: "@stephansama/vite-iconify-svgmap"
 library_version: "0.0.0"
 sources:
   - stephansama/packages:core/vite-iconify-svgmap/src/index.ts
-  - stephansama/packages:core/vite-iconify-svgmap/src/astro/integration.ts
-  - stephansama/packages:core/vite-iconify-svgmap/src/sveltekit.ts
+  - stephansama/packages:core/vite-iconify-svgmap/src/astro.ts
+  - stephansama/packages:core/vite-iconify-svgmap/src/svelte.ts
   - stephansama/packages:core/vite-iconify-svgmap/frameworks/astro/icon.astro
   - stephansama/packages:core/vite-iconify-svgmap/frameworks/svelte/icon.svelte
   - stephansama/packages:core/vite-iconify-svgmap/src/state.ts
@@ -44,10 +44,10 @@ export default defineConfig({
 });
 ```
 
-SvelteKit: add the plugins from `@stephansama/vite-iconify-svgmap/sveltekit` after `sveltekit()` in `vite.config.js`:
+SvelteKit: add the plugins from `@stephansama/vite-iconify-svgmap/svelte/integration` after `sveltekit()` in `vite.config.js`:
 
 ```js
-import iconifySvgmap from "@stephansama/vite-iconify-svgmap/sveltekit";
+import iconifySvgmap from "@stephansama/vite-iconify-svgmap/svelte/integration";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
 
@@ -132,11 +132,11 @@ export default defineConfig({ plugins: [sveltekit(), iconifySvgmap()] }); // fro
 Correct:
 
 ```js
-import iconifySvgmap from "@stephansama/vite-iconify-svgmap/sveltekit";
+import iconifySvgmap from "@stephansama/vite-iconify-svgmap/svelte/integration";
 export default defineConfig({ plugins: [sveltekit(), iconifySvgmap()] });
 ```
 
-Without the `/sveltekit` plugins the prerender crawler fails with `404 /_iconify/<pack>.svg` and sprites are never written.
+Without the `/svelte/integration` plugins the prerender crawler fails with `404 /_iconify/<pack>.svg` and sprites are never written.
 
 ### HIGH Using the raw plugin with getIcon in Astro
 

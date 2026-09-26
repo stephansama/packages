@@ -1,1 +1,2 @@
-export { default as Icon } from "./icon.svelte";
+export { Icon } from "./component.js";
+export { default as integration } from "../../dist/svelte/integration.mjs";

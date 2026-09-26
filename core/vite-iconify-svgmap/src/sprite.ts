@@ -4,6 +4,8 @@ import { getIconData } from "@iconify/utils/lib/icon-set/get-icon";
 import { iconToSVG } from "@iconify/utils/lib/svg/build";
 import { replaceIDs } from "@iconify/utils/lib/svg/id";
 
+const html = String.raw;
+
 export interface Sprite {
 	/** Requested icons that do not exist in the collection */
 	missing: string[];
@@ -27,11 +29,15 @@ export function generateSprite(
 
 		const { attributes, body } = iconToSVG(data);
 		const scopedBody = replaceIDs(body, (id) => `${icon}-${id}`);
-		symbols += `<symbol id="${icon}" viewBox="${attributes.viewBox}">${scopedBody}</symbol>`;
+		symbols += html`<symbol id="${icon}" viewBox="${attributes.viewBox}">
+			${scopedBody}
+		</symbol>`;
 	}
 
 	return {
 		missing,
-		svg: `<svg xmlns="http://www.w3.org/2000/svg" style="display:none">${symbols}</svg>`,
+		svg: html`<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+			${symbols}
+		</svg>`,
 	};
 }

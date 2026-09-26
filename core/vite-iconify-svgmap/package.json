@@ -34,6 +34,7 @@
   "exports": {
     ".": "./dist/index.mjs",
     "./astro": "./frameworks/astro/index.ts",
+    "./astro/component": "./frameworks/astro/component.ts",
     "./astro/integration": "./dist/astro/integration.mjs",
     "./client": {
       "types": "./client.d.ts"
@@ -41,10 +42,15 @@
     "./package.json": "./package.json",
     "./svelte": {
       "types": "./frameworks/svelte/index.d.ts",
-      "svelte": "./frameworks/svelte/index.js",
+      "svelte": "./frameworks/svelte/component.js",
       "default": "./frameworks/svelte/index.js"
     },
-    "./sveltekit": "./dist/sveltekit.mjs"
+    "./svelte/component": {
+      "types": "./frameworks/svelte/component.d.ts",
+      "svelte": "./frameworks/svelte/component.js",
+      "default": "./frameworks/svelte/component.js"
+    },
+    "./svelte/integration": "./dist/svelte/integration.mjs"
   },
   "types": "./dist/index.d.mts",
   "files": [

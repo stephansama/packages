@@ -1,5 +1,11 @@
 # @stephansama/typed-events
 
+## 3.0.12
+
+### Patch Changes
+
+- 393d8bb: declare the `createBroadcastEvent` return type so its generated types are deterministic
+
 ## 3.0.11
 
 ### Patch Changes

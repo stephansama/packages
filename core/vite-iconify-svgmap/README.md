@@ -174,14 +174,14 @@ rendered on the server during the build (for example astro pages or
 server rendered svelte islands) and the sprites written afterwards (the astro
 integration does this).
 
-| Framework | Import                                                            |
-| --------- | ----------------------------------------------------------------- |
-| astro     | `import { Icon } from "@stephansama/vite-iconify-svgmap/astro";`  |
-| svelte 5  | `import { Icon } from "@stephansama/vite-iconify-svgmap/svelte";` |
+| Framework | Import                                                                      |
+| --------- | --------------------------------------------------------------------------- |
+| astro     | `import { Icon } from "@stephansama/vite-iconify-svgmap/astro/component";`  |
+| svelte 5  | `import { Icon } from "@stephansama/vite-iconify-svgmap/svelte/component";` |
 
 ```astro
 ---
-import { Icon } from "@stephansama/vite-iconify-svgmap/astro";
+import { Icon } from "@stephansama/vite-iconify-svgmap/astro/component";
 ---
 
 <Icon pack="logos" name="github-icon" size={24} title="GitHub" />
@@ -190,7 +190,7 @@ import { Icon } from "@stephansama/vite-iconify-svgmap/astro";
 
 ```svelte
 <script>
-  import { Icon } from "@stephansama/vite-iconify-svgmap/svelte";
+  import { Icon } from "@stephansama/vite-iconify-svgmap/svelte/component";
 </script>
 
 <Icon pack="logos" name="svelte-icon" size={24} title="Svelte" />

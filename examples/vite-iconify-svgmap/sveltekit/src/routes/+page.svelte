@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Icon } from "@stephansama/vite-iconify-svgmap/svelte";
+	import { Icon } from "@stephansama/vite-iconify-svgmap/svelte/component";
 	import { getIcon } from "virtual:iconify-svgmap";
 	import astro from "virtual:iconify-svgmap/logos/astro";
 	import copilot from "virtual:iconify-svgmap/octicon/copilot-16";

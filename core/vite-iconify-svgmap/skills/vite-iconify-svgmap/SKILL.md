@@ -94,13 +94,13 @@ const href = getIcon(entry.data.pack, entry.data.icon);
 
 ```astro
 ---
-import { Icon } from "@stephansama/vite-iconify-svgmap/astro";
+import { Icon } from "@stephansama/vite-iconify-svgmap/astro/component";
 ---
 
 <Icon pack="mdi" name="home" size={24} title="Home" class="nav-icon" />
 ```
 
-`@stephansama/vite-iconify-svgmap/astro` and `@stephansama/vite-iconify-svgmap/svelte` (Svelte 5) both export `Icon`. It calls `getIcon` and renders `<svg><use href /></svg>`. Props: `pack`, `name`, `size` (default `"1em"`), `title` (adds `role="img"`, otherwise `aria-hidden="true"`); other attributes pass through to `<svg>`. Same rules as `getIcon`: needs the Astro integration (or `writeSprites`) and server rendering during the build; client-only Svelte components are not registered.
+`@stephansama/vite-iconify-svgmap/astro/component` and `@stephansama/vite-iconify-svgmap/svelte/component` (Svelte 5) both export `Icon`. It calls `getIcon` and renders `<svg><use href /></svg>`. Props: `pack`, `name`, `size` (default `"1em"`), `title` (adds `role="img"`, otherwise `aria-hidden="true"`); other attributes pass through to `<svg>`. Same rules as `getIcon`: needs the Astro integration (or `writeSprites`) and server rendering during the build; client-only Svelte components are not registered.
 
 ## Common Mistakes
 

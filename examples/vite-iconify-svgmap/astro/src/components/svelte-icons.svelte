@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Icon } from "@stephansama/vite-iconify-svgmap/svelte";
+	import { Icon } from "@stephansama/vite-iconify-svgmap/svelte/component";
 </script>
 
 <Icon name="svelte-icon" pack="logos" size={48} title="Svelte" />

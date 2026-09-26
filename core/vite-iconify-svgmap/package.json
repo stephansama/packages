@@ -42,7 +42,7 @@
     "./package.json": "./package.json",
     "./svelte": {
       "types": "./frameworks/svelte/index.d.ts",
-      "svelte": "./frameworks/svelte/index.js",
+      "svelte": "./frameworks/svelte/component.js",
       "default": "./frameworks/svelte/index.js"
     },
     "./svelte/component": {

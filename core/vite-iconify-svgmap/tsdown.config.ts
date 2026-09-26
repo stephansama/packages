@@ -27,7 +27,9 @@ export default defineConfig({
 			/* eslint-disable perfectionist/sort-objects */
 			exports["./svelte"] = {
 				types: "./frameworks/svelte/index.d.ts",
-				svelte: "./frameworks/svelte/index.js",
+				// browser-compiled .svelte files resolve through `svelte`;
+				// keep the node-only integration out of their bundles
+				svelte: "./frameworks/svelte/component.js",
 				default: "./frameworks/svelte/index.js",
 			};
 			exports["./svelte/component"] = {

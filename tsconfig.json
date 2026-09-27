@@ -25,6 +25,7 @@
     { "path": "./core/types-github-action-env/tsconfig.json" },
     { "path": "./core/types-lhci/tsconfig.json" },
     { "path": "./core/vite-iconify-svgmap/tsconfig.json" },
+    { "path": "./core/vite-devtools-tailwind-debug-screens/tsconfig.json" },
     { "path": "./examples/astro-iconify-svgmap/tsconfig.json" },
     { "path": "./examples/inline-image/tsconfig.json" },
     { "path": "./examples/remark-asciinema/tsconfig.json" },

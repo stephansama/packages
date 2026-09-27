@@ -1,0 +1,25 @@
+{
+  "name": "@example/vite-devtools-tailwind-debug-screens",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Example vite app using @stephansama/vite-devtools-tailwind-debug-screens",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "examples/vite-devtools-tailwind-debug-screens"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@stephansama/vite-devtools-tailwind-debug-screens": "workspace:*",
+    "@vitejs/devtools": "catalog:",
+    "vite": "catalog:"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

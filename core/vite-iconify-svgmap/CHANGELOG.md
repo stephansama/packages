@@ -1,5 +1,11 @@
 # @stephansama/vite-iconify-svgmap
 
+## 0.2.0
+
+### Minor Changes
+
+- 9940deb: astro `Icon` component now accepts optional `width` and `height` props on top of `size`; when either is set it overrides the `size` fallback for that dimension, matching every other svg attribute
+
 ## 0.1.0
 
 ### Minor Changes

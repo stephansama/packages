@@ -25,13 +25,16 @@ export const exportSchema = z
 	.or(z.record(z.string(), conditionalExportsSchema));
 
 /**
- * Runtime conditions we prefer, in order. `types` is intentionally NOT here -
- * jsr needs a runtime module reference, not a type declaration.
+ * Runtime conditions we prefer, in order. jsr is an esm-only registry, so
+ * `import` / `module` come before the `default` catch-all - otherwise a dual `{
+ * import: "./esm.mjs", default: "./cjs.js" }` package would publish the cjs
+ * file, which jsr can't accept. `types` is intentionally NOT here - jsr needs a
+ * runtime module reference, not a type declaration.
  */
 const RUNTIME_CONDITIONS = [
-	"default",
 	"import",
 	"module",
+	"default",
 	"node",
 	"browser",
 	"require",
@@ -117,6 +120,14 @@ export async function updateJsrConfigVersion(
 
 function convertPackageJsonExportsToJsr(exports: ExportsSchema) {
 	if (typeof exports === "string") return exports;
+	const keys = Object.keys(exports);
+	// node treats a top-level exports record with no `.`-prefixed keys as the
+	// `.` entry itself (`{ import, require }` sugar); walk it as one value
+	// so `types`-only sugar and custom conditions collapse to a single subpath
+	if (keys.length > 0 && keys.every((key) => !key.startsWith("."))) {
+		const path = pickRuntimePath(exports);
+		return path ? { ".": path } : {};
+	}
 	const result: Record<string, string> = {};
 	for (const [key, value] of Object.entries(exports)) {
 		const path = pickRuntimePath(value);

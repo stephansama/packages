@@ -36,12 +36,12 @@ describe("jsr", () => {
 			});
 		});
 
-		it("prefers `default` over `import` when both are strings", () => {
+		it("prefers `import` over `default` for esm-only registries", () => {
 			const input = {
 				exports: {
 					".": {
-						default: "./dist/index.mjs",
-						import: "./dist/index.js",
+						default: "./dist/index.cjs",
+						import: "./dist/index.mjs",
 					},
 				},
 				name: "@scope/pkg",
@@ -51,11 +51,10 @@ describe("jsr", () => {
 			expect(result.exports).toEqual({ ".": "./dist/index.mjs" });
 		});
 
-		it("handles custom conditions like `svelte` when no runtime condition is present", () => {
+		it("falls back to custom conditions like `svelte` when no known runtime condition matches", () => {
 			const input = {
 				exports: {
 					"./svelte/component": {
-						default: "./frameworks/svelte/component.js",
 						svelte: "./frameworks/svelte/component.js",
 						types: "./frameworks/svelte/component.d.ts",
 					},
@@ -67,6 +66,20 @@ describe("jsr", () => {
 			expect(result.exports).toEqual({
 				"./svelte/component": "./frameworks/svelte/component.js",
 			});
+		});
+
+		it("treats a top-level conditions object with no `.` keys as the `.` entry", () => {
+			const input = {
+				exports: {
+					import: "./dist/index.mjs",
+					require: "./dist/index.cjs",
+					types: "./dist/index.d.ts",
+				},
+				name: "@scope/pkg",
+				version: "1.0.0",
+			};
+			const result = jsrTransformer.parse(input);
+			expect(result.exports).toEqual({ ".": "./dist/index.mjs" });
 		});
 
 		it("falls back to a non-`types` condition when no known runtime condition matches", () => {

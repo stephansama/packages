@@ -5,6 +5,7 @@ import type { Options, Screens } from "./type";
 
 import pkg from "../package.json";
 import { CLIENT_SOURCE, REPORT_PATH } from "./client";
+import { loadScreensFromConfigFile } from "./config";
 import {
 	buildLabelIcon,
 	buildSpec,
@@ -33,13 +34,27 @@ export const DEFAULT_SCREENS: Screens = [
  * the configured screens.
  */
 export default function tailwindDebugScreens(options: Options = {}): Plugin {
-	const screens = options.screens ?? DEFAULT_SCREENS;
+	let screens: Screens = options.screens ?? DEFAULT_SCREENS;
 	let latest: Snapshot = { active: labelFor(screens, 0), width: 0 };
 	let apply: ((snapshot: Snapshot) => void) | undefined;
 	let currentIconLabel: string | undefined;
 
 	return {
 		apply: "serve",
+
+		async configResolved(config) {
+			if (options.screens || !options.configFile) return;
+			const loaded = await loadScreensFromConfigFile(
+				options.configFile,
+				config.root,
+			);
+			if (!loaded?.length) return;
+			screens = loaded;
+			latest = {
+				active: labelFor(screens, latest.width),
+				width: latest.width,
+			};
+		},
 
 		configureServer(server) {
 			server.middlewares.use(REPORT_PATH, (request, response) => {

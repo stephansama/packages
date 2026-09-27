@@ -1,7 +1,10 @@
 import type { IndexHtmlTransformResult } from "vite";
 
+import fs from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
 import { PassThrough } from "node:stream";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import tailwindDebugScreens, { DEFAULT_SCREENS } from "./index";
 import {
@@ -233,6 +236,76 @@ describe("tailwindDebugScreens plugin", () => {
 	});
 });
 
+describe("configFile option", () => {
+	let directory: string;
+
+	beforeEach(async () => {
+		directory = await fs.mkdtemp(path.join(os.tmpdir(), "vdtds-cf-"));
+	});
+
+	afterEach(async () => {
+		await fs.rm(directory, { force: true, recursive: true });
+	});
+
+	it("reads breakpoints from the css file when configResolved runs", async () => {
+		const file = path.join(directory, "theme.css");
+		await fs.writeFile(
+			file,
+			`@theme {
+				--breakpoint-tablet: 768px;
+				--breakpoint-desktop: 1024px;
+			}`,
+		);
+		const plugin = tailwindDebugScreens({ configFile: file });
+		await callConfigResolved(plugin, directory);
+
+		const context = createFakeDevelopmentToolsContext();
+		void plugin.devtools?.setup(context.ctx);
+		const spec = context.rendererCalls[0] as ReturnType<typeof buildSpec>;
+		expect(spec.elements.table.props.data).toEqual({
+			desktop: "min-width: 1024px",
+			tablet: "min-width: 768px",
+		});
+	});
+
+	it("prefers explicit `screens` over `configFile`", async () => {
+		const file = path.join(directory, "theme.css");
+		await fs.writeFile(file, `--breakpoint-tablet: 768px;`);
+		const plugin = tailwindDebugScreens({
+			configFile: file,
+			screens: [{ name: "phone", value: "480px" }],
+		});
+		await callConfigResolved(plugin, directory);
+
+		const context = createFakeDevelopmentToolsContext();
+		void plugin.devtools?.setup(context.ctx);
+		const spec = context.rendererCalls[0] as ReturnType<typeof buildSpec>;
+		expect(spec.elements.table.props.data).toEqual({
+			phone: "min-width: 480px",
+		});
+	});
+
+	it("keeps `DEFAULT_SCREENS` when the config file resolves to no breakpoints", async () => {
+		const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+		const file = path.join(directory, "empty.css");
+		await fs.writeFile(file, `body { color: red; }`);
+		const plugin = tailwindDebugScreens({ configFile: file });
+		await callConfigResolved(plugin, directory);
+
+		const context = createFakeDevelopmentToolsContext();
+		void plugin.devtools?.setup(context.ctx);
+		const spec = context.rendererCalls[0] as ReturnType<typeof buildSpec>;
+		expect(Object.keys(spec.elements.table.props.data)).toEqual([
+			"sm",
+			"md",
+			"lg",
+			"xl",
+			"2xl",
+		]);
+		warn.mockRestore();
+	});
+});
+
 describe("dev-server middleware", () => {
 	it("responds 405 to non-POST requests", async () => {
 		const { middleware } = await mountPlugin();
@@ -331,6 +404,16 @@ type MiddlewareFunction = (
 	response: FakeResponse,
 	next: () => void,
 ) => void;
+
+async function callConfigResolved(
+	plugin: ReturnType<typeof tailwindDebugScreens>,
+	root: string,
+) {
+	const hook = plugin.configResolved as
+		| ((config: { root: string }) => Promise<void> | void)
+		| undefined;
+	await hook?.({ root });
+}
 
 async function captureMiddleware(
 	plugin: ReturnType<typeof tailwindDebugScreens>,

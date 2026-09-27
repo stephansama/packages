@@ -47,7 +47,8 @@
   "devDependencies": {
     "@vitejs/devtools-kit": "catalog:vite8",
     "tsdown": "catalog:",
-    "vite": "catalog:vite8"
+    "vite": "catalog:vite8",
+    "vitest": "catalog:vitest"
   },
   "peerDependencies": {
     "@vitejs/devtools-kit": ">=0.7",

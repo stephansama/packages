@@ -1,0 +1,69 @@
+{
+  "name": "@stephansama/vite-devtools-tailwind-debug-screens",
+  "version": "0.1.0",
+  "description": "Vite DevTools dock that shows the active tailwind breakpoint during development",
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "vite-devtool",
+    "tailwind",
+    "tailwindcss",
+    "debug-screens",
+    "breakpoints",
+    "responsive"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/vite-devtools-tailwind-debug-screens",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/vite-devtools-tailwind-debug-screens"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --fix",
+    "prepublishOnly": "tsdown"
+  },
+  "devDependencies": {
+    "@vitejs/devtools-kit": "catalog:vite8",
+    "tsdown": "catalog:",
+    "vite": "catalog:vite8",
+    "vitest": "catalog:vitest"
+  },
+  "peerDependencies": {
+    "@vitejs/devtools-kit": ">=0.7",
+    "vite": ">=8.3"
+  },
+  "peerDependenciesMeta": {
+    "@vitejs/devtools-kit": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

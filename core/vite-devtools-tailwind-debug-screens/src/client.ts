@@ -2,8 +2,8 @@ export const REPORT_PATH = "/__vdtds/width";
 
 /**
  * Inline module script injected into the app's html. Sends viewport width
- * updates to the plugin via a POST to `REPORT_PATH` (served by the plugin's
- * dev middleware). Nothing is rendered on the page.
+ * updates to the plugin via a POST to `REPORT_PATH` (served by the plugin's dev
+ * middleware). Nothing is rendered on the page.
  */
 export const CLIENT_SOURCE = `
 if (typeof window !== "undefined") {

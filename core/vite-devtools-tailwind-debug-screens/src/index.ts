@@ -1,9 +1,10 @@
 /// <reference types="@vitejs/devtools-kit" />
 import type { Plugin } from "vite";
 
+import type { Options, Screens } from "./type";
+
 import pkg from "../package.json";
 import { CLIENT_SOURCE, REPORT_PATH } from "./client";
-import type { Options, Screens } from "./type";
 
 export type { Options, Screens } from "./type";
 
@@ -25,9 +26,9 @@ interface Snapshot {
 
 /**
  * Vite devtool that surfaces the active tailwind breakpoint inside the
- * `@vitejs/devtools` dock - no floating badge, no overlay. Open the
- * `Tailwind Screens` dock to see the current viewport width, the active
- * breakpoint, and the configured screens.
+ * `@vitejs/devtools` dock - no floating badge, no overlay. Open the `Tailwind
+ * Screens` dock to see the current viewport width, the active breakpoint, and
+ * the configured screens.
  */
 export default function tailwindDebugScreens(options: Options = {}): Plugin {
 	const screens = options.screens ?? DEFAULT_SCREENS;
@@ -48,7 +49,9 @@ export default function tailwindDebugScreens(options: Options = {}): Plugin {
 				const chunks: Buffer[] = [];
 				request.on("data", (chunk: Buffer) => chunks.push(chunk));
 				request.on("end", () => {
-					const width = readWidth(Buffer.concat(chunks).toString("utf8"));
+					const width = readWidth(
+						Buffer.concat(chunks).toString("utf8"),
+					);
 					if (width !== undefined) {
 						latest = { active: labelFor(screens, width), width };
 						apply?.(latest);
@@ -60,10 +63,12 @@ export default function tailwindDebugScreens(options: Options = {}): Plugin {
 		},
 
 		devtools: {
-			setup(ctx) {
-				const ui = ctx.createJsonRenderer(buildSpec(screens, latest));
+			setup(context) {
+				const ui = context.createJsonRenderer(
+					buildSpec(screens, latest),
+				);
 				currentIconLabel = latest.active;
-				const entry = ctx.docks.register({
+				const entry = context.docks.register({
 					icon: buildLabelIcon(currentIconLabel),
 					id: DOCK_ID,
 					title: "Tailwind Screens",
@@ -74,7 +79,9 @@ export default function tailwindDebugScreens(options: Options = {}): Plugin {
 					void ui.updateSpec(buildSpec(screens, snapshot));
 					if (snapshot.active !== currentIconLabel) {
 						currentIconLabel = snapshot.active;
-						entry.update({ icon: buildLabelIcon(currentIconLabel) });
+						entry.update({
+							icon: buildLabelIcon(currentIconLabel),
+						});
 					}
 				};
 			},
@@ -97,67 +104,16 @@ export default function tailwindDebugScreens(options: Options = {}): Plugin {
 }
 
 /**
- * Build a `{ light, dark }` pair of data-url SVG icons showing the
- * breakpoint label. Font size shrinks with the label length so `<sm`, `md`,
- * `2xl` all fit inside the rail glyph. The DevTools host swaps the two
- * urls based on its own theme, so the icon tracks devtools dark/light mode.
+ * Build a `{ light, dark }` pair of data-url SVG icons showing the breakpoint
+ * label. Font size shrinks with the label length so `<sm`, `md`, `2xl` all fit
+ * inside the rail glyph. The DevTools host swaps the two urls based on its own
+ * theme, so the icon tracks devtools dark/light mode.
  */
 function buildLabelIcon(label: string) {
 	return {
 		dark: renderLabelSvg(label, "#f3f4f6"),
 		light: renderLabelSvg(label, "#1f2937"),
 	};
-}
-
-function renderLabelSvg(label: string, fill: string) {
-	const escaped = label
-		.replaceAll("&", "&amp;")
-		.replaceAll("<", "&lt;")
-		.replaceAll(">", "&gt;");
-	const size =
-		label.length <= 2 ? 15 : label.length === 3 ? 11 : label.length === 4 ? 9 : 8;
-	const svg =
-		`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">` +
-		`<text x="12" y="12" text-anchor="middle" dominant-baseline="central" ` +
-		`font-family="ui-monospace,SFMono-Regular,Menlo,monospace" ` +
-		`font-weight="700" font-size="${size}" fill="${fill}">${escaped}</text>` +
-		`</svg>`;
-	return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-}
-
-/** Find the active breakpoint for a given viewport width. */
-function labelFor(screens: Screens, width: number) {
-	let active = `<${screens[0]?.name ?? ""}`;
-	for (const screen of screens) {
-		if (width >= parseCssLength(screen.value)) active = screen.name;
-	}
-	return active;
-}
-
-/**
- * Best-effort css length parsing: supports `px` and `rem` since those cover
- * every tailwind default and the vast majority of custom screens. Anything
- * unrecognised falls back to `NaN` so the breakpoint is treated as inactive.
- */
-function parseCssLength(value: string) {
-	const trimmed = value.trim();
-	const numeric = Number.parseFloat(trimmed);
-	if (Number.isNaN(numeric)) return Number.NaN;
-	if (trimmed.endsWith("rem")) return numeric * 16;
-	return numeric;
-}
-
-function readWidth(body: string) {
-	if (!body) return;
-	let parsed: unknown;
-	try {
-		parsed = JSON.parse(body);
-	} catch {
-		return;
-	}
-	if (typeof parsed !== "object" || parsed === null) return;
-	const width = (parsed as { width?: unknown }).width;
-	return typeof width === "number" && Number.isFinite(width) ? width : undefined;
 }
 
 function buildSpec(screens: Screens, snapshot: Snapshot) {
@@ -208,4 +164,64 @@ function buildSpec(screens: Screens, snapshot: Snapshot) {
 		},
 		root: "root",
 	};
+}
+
+/** Find the active breakpoint for a given viewport width. */
+function labelFor(screens: Screens, width: number) {
+	let active = `<${screens[0]?.name ?? ""}`;
+	for (const screen of screens) {
+		if (width >= parseCssLength(screen.value)) active = screen.name;
+	}
+	return active;
+}
+
+/**
+ * Best-effort css length parsing: supports `px` and `rem` since those cover
+ * every tailwind default and the vast majority of custom screens. Anything
+ * unrecognised falls back to `NaN` so the breakpoint is treated as inactive.
+ */
+function parseCssLength(value: string) {
+	const trimmed = value.trim();
+	const numeric = Number.parseFloat(trimmed);
+	if (Number.isNaN(numeric)) return Number.NaN;
+	if (trimmed.endsWith("rem")) return numeric * 16;
+	return numeric;
+}
+
+/** Step down the font size as the label gets longer so it always fits. */
+function pickFontSize(length: number) {
+	if (length <= 2) return 15;
+	if (length === 3) return 11;
+	if (length === 4) return 9;
+	return 8;
+}
+
+function readWidth(body: string) {
+	if (!body) return;
+	let parsed: unknown;
+	try {
+		parsed = JSON.parse(body);
+	} catch {
+		return;
+	}
+	if (typeof parsed !== "object" || parsed === null) return;
+	const width = (parsed as { width?: unknown }).width;
+	return typeof width === "number" && Number.isFinite(width)
+		? width
+		: undefined;
+}
+
+function renderLabelSvg(label: string, fill: string) {
+	const escaped = label
+		.replaceAll("&", "&amp;")
+		.replaceAll("<", "&lt;")
+		.replaceAll(">", "&gt;");
+	const size = pickFontSize(label.length);
+	const svg =
+		`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">` +
+		`<text x="12" y="12" text-anchor="middle" dominant-baseline="central" ` +
+		`font-family="ui-monospace,SFMono-Regular,Menlo,monospace" ` +
+		`font-weight="700" font-size="${size}" fill="${fill}">${escaped}</text>` +
+		`</svg>`;
+	return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 }

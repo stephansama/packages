@@ -97,11 +97,19 @@ export default function tailwindDebugScreens(options: Options = {}): Plugin {
 }
 
 /**
- * Build a data-url SVG icon showing the breakpoint label. Font size shrinks
- * with the label length so `<sm`, `md`, `2xl` all fit inside the rail glyph.
- * `currentColor` lets the dock's icon color scheme paint the label.
+ * Build a `{ light, dark }` pair of data-url SVG icons showing the
+ * breakpoint label. Font size shrinks with the label length so `<sm`, `md`,
+ * `2xl` all fit inside the rail glyph. The DevTools host swaps the two
+ * urls based on its own theme, so the icon tracks devtools dark/light mode.
  */
 function buildLabelIcon(label: string) {
+	return {
+		dark: renderLabelSvg(label, "#f3f4f6"),
+		light: renderLabelSvg(label, "#1f2937"),
+	};
+}
+
+function renderLabelSvg(label: string, fill: string) {
 	const escaped = label
 		.replaceAll("&", "&amp;")
 		.replaceAll("<", "&lt;")
@@ -112,7 +120,7 @@ function buildLabelIcon(label: string) {
 		`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">` +
 		`<text x="12" y="12" text-anchor="middle" dominant-baseline="central" ` +
 		`font-family="ui-monospace,SFMono-Regular,Menlo,monospace" ` +
-		`font-weight="700" font-size="${size}" fill="currentColor">${escaped}</text>` +
+		`font-weight="700" font-size="${size}" fill="${fill}">${escaped}</text>` +
 		`</svg>`;
 	return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 }

@@ -1,7 +1,7 @@
 {
   "name": "@stephansama/vite-devtools-tailwind-debug-screens",
   "version": "0.1.0",
-  "description": "Vite devtool that shows the active tailwind breakpoint in a floating badge during development",
+  "description": "Vite DevTools dock that shows the active tailwind breakpoint during development",
   "keywords": [
     "vite",
     "vite-plugin",
@@ -45,13 +45,13 @@
     "prepublishOnly": "tsdown"
   },
   "devDependencies": {
-    "@vitejs/devtools-kit": "catalog:",
+    "@vitejs/devtools-kit": "catalog:vite8",
     "tsdown": "catalog:",
-    "vite": "catalog:"
+    "vite": "catalog:vite8"
   },
   "peerDependencies": {
     "@vitejs/devtools-kit": ">=0.7",
-    "vite": ">=6"
+    "vite": ">=8.3"
   },
   "peerDependenciesMeta": {
     "@vitejs/devtools-kit": {

@@ -16,8 +16,8 @@
   },
   "devDependencies": {
     "@stephansama/vite-devtools-tailwind-debug-screens": "workspace:*",
-    "@vitejs/devtools": "catalog:",
-    "vite": "catalog:"
+    "@vitejs/devtools": "catalog:vite8",
+    "vite": "catalog:vite8"
   },
   "engines": {
     "node": ">=24"

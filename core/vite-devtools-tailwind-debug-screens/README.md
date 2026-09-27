@@ -40,15 +40,16 @@ page itself.
 
 ## How it works
 
-- On start-up, the plugin registers a small virtual module that opens on
-  Vite's HMR socket and reports `window.innerWidth` back to the plugin.
-  Nothing else is injected into the page.
+- During dev, the plugin injects a small inline module script into the
+  page's html that POSTs `window.innerWidth` to a dev-server middleware
+  (`/__vdtds/width`) on load and on resize. Nothing is rendered on the page.
 - The plugin's `devtools.setup` hook creates a
   [`ctx.createJsonRenderer`](https://devtools.vite.dev/kit/devtools-plugin)
   spec and registers a `json-render` dock — no client bundle needs to be
   shipped for the panel UI.
 - Every viewport update recomputes the active breakpoint on the server and
-  calls `ui.updateSpec(...)`, and Vite DevTools re-renders the dock.
+  calls `ui.updateSpec(...)`; Vite DevTools re-renders the dock and swaps
+  the rail icon to a small SVG of the active label.
 - The plugin sets `apply: "serve"`, so it is completely inert in production
   builds.
 

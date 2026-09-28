@@ -38,7 +38,7 @@ option. Add `@vitejs/devtools` as a vite plugin so the DevTools dock loads:
 ```ts
 // astro.config.ts
 import tailwindDebugScreens from "@stephansama/vite-devtools-tailwind-debug-screens/astro/integration";
-import DevTools from "@vitejs/devtools";
+import { DevTools } from "@vitejs/devtools";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({

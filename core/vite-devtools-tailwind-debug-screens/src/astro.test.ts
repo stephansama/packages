@@ -81,20 +81,19 @@ describe("tailwindDebugScreensIntegration", () => {
 
 // ---------- helpers ----------
 
-/// <reference types="@vitejs/devtools-kit" />
+// the `devtools` field on `Plugin` is augmented by @vitejs/devtools-kit; the
+// augmentation reaches this file transitively through `./astro` -> `./index`
 type DevelopmentToolsSetupArguments = Parameters<
 	NonNullable<NonNullable<Plugin["devtools"]>["setup"]>
 >[0];
 
 interface FakeContext {
 	ctx: DevelopmentToolsSetupArguments;
-	dockRegisters: Array<unknown>;
 	rendererCalls: Array<unknown>;
 }
 
 function createFakeDevelopmentToolsContext(): FakeContext {
 	const rendererCalls: Array<unknown> = [];
-	const dockRegisters: Array<unknown> = [];
 	const context = {
 		createJsonRenderer: (spec: unknown) => {
 			rendererCalls.push(spec);
@@ -104,14 +103,11 @@ function createFakeDevelopmentToolsContext(): FakeContext {
 			};
 		},
 		docks: {
-			register: (entry: unknown) => {
-				dockRegisters.push(entry);
-				return { update: () => {} };
-			},
+			register: () => ({ update: () => {} }),
 		},
 	} as unknown as DevelopmentToolsSetupArguments;
 
-	return { ctx: context, dockRegisters, rendererCalls };
+	return { ctx: context, rendererCalls };
 }
 
 async function runConfigSetup(

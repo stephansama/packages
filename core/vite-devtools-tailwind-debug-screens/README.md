@@ -32,13 +32,18 @@ export default defineConfig({
 
 ### Astro
 
+Astro 6 ships with Vite 7, which doesn't have the top-level `devtools: true`
+option. Add `@vitejs/devtools` as a vite plugin so the DevTools dock loads:
+
 ```ts
 // astro.config.ts
 import tailwindDebugScreens from "@stephansama/vite-devtools-tailwind-debug-screens/astro/integration";
+import DevTools from "@vitejs/devtools";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
   integrations: [tailwindDebugScreens()],
+  vite: { plugins: [DevTools()] },
 });
 ```
 
@@ -101,7 +106,11 @@ you can tell the viewport is narrower than any configured screen. `px` and
 
 ## Requirements
 
-- `vite` >= 8.3 (required by `@vitejs/devtools`)
-- `@vitejs/devtools` enabled via `devtools: true` in the vite config
+- `vite` >= 7. The plugin uses `apply`, `configureServer`,
+  `transformIndexHtml`, and the `devtools` plugin field - all stable in
+  vite 7 and 8.
+- `@vitejs/devtools` wired in via either `devtools: true` (vite 8) or as
+  a plugin (`vite: { plugins: [DevTools()] }` - required for astro 6,
+  which bundles vite 7).
 - `@vitejs/devtools-kit` is an optional peer dependency; if missing the
-  plugin silently skips dock registration
+  plugin silently skips dock registration.

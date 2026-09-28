@@ -47,6 +47,7 @@ export default function tailwindDebugScreens(options: Options = {}): Plugin {
 			const loaded = await loadScreensFromConfigFile(
 				options.configFile,
 				config.root,
+				DEFAULT_SCREENS,
 			);
 			if (!loaded?.length) return;
 			screens = loaded;

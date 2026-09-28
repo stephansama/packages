@@ -247,13 +247,12 @@ describe("configFile option", () => {
 		await fs.rm(directory, { force: true, recursive: true });
 	});
 
-	it("reads breakpoints from the css file when configResolved runs", async () => {
+	it("layers `--breakpoint-*` declarations on top of the defaults when configResolved runs", async () => {
 		const file = path.join(directory, "theme.css");
 		await fs.writeFile(
 			file,
 			`@theme {
-				--breakpoint-tablet: 768px;
-				--breakpoint-desktop: 1024px;
+				--breakpoint-3xl: 1920px;
 			}`,
 		);
 		const plugin = tailwindDebugScreens({ configFile: file });
@@ -262,10 +261,15 @@ describe("configFile option", () => {
 		const context = createFakeDevelopmentToolsContext();
 		void plugin.devtools?.setup(context.ctx);
 		const spec = context.rendererCalls[0] as ReturnType<typeof buildSpec>;
-		expect(spec.elements.table.props.data).toEqual({
-			desktop: "min-width: 1024px",
-			tablet: "min-width: 768px",
-		});
+		expect(Object.keys(spec.elements.table.props.data)).toEqual([
+			"sm",
+			"md",
+			"lg",
+			"xl",
+			"2xl",
+			"3xl",
+		]);
+		expect(spec.elements.table.props.data["3xl"]).toBe("min-width: 1920px");
 	});
 
 	it("prefers explicit `screens` over `configFile`", async () => {
@@ -285,7 +289,7 @@ describe("configFile option", () => {
 		});
 	});
 
-	it("keeps `DEFAULT_SCREENS` when the config file resolves to no breakpoints", async () => {
+	it("keeps `DEFAULT_SCREENS` when a css file has no breakpoint declarations", async () => {
 		const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
 		const file = path.join(directory, "empty.css");
 		await fs.writeFile(file, `body { color: red; }`);
@@ -302,7 +306,29 @@ describe("configFile option", () => {
 			"xl",
 			"2xl",
 		]);
-		warn.mockRestore();
+		// css that declares no `--breakpoint-*` just inherits the defaults
+		expect(warn).not.toHaveBeenCalled();
+	});
+
+	it("warns and keeps `DEFAULT_SCREENS` when a js config resolves to no breakpoints", async () => {
+		const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+		const file = path.join(directory, "no-theme.mjs");
+		await fs.writeFile(file, `export default {};`);
+		const plugin = tailwindDebugScreens({ configFile: file });
+		await callConfigResolved(plugin, directory);
+
+		const context = createFakeDevelopmentToolsContext();
+		void plugin.devtools?.setup(context.ctx);
+		const spec = context.rendererCalls[0] as ReturnType<typeof buildSpec>;
+		expect(Object.keys(spec.elements.table.props.data)).toEqual([
+			"sm",
+			"md",
+			"lg",
+			"xl",
+			"2xl",
+		]);
+		expect(warn).toHaveBeenCalledOnce();
+		expect(warn.mock.calls[0]?.[0]).toContain("resolved to no breakpoints");
 	});
 });
 

@@ -8,6 +8,9 @@ import {
 	parseCssBreakpoints,
 	pickScreensFromJsConfig,
 } from "./config";
+import { DEFAULT_SCREENS } from "./index";
+
+const DEFAULTS = DEFAULT_SCREENS;
 
 let directory: string;
 
@@ -21,58 +24,80 @@ afterEach(async () => {
 });
 
 describe("parseCssBreakpoints", () => {
-	it("extracts every `--breakpoint-*` declaration", () => {
+	it("layers `--breakpoint-*` declarations on top of the defaults", () => {
 		const source = `
 			@theme {
-				--breakpoint-sm: 40rem;
-				--breakpoint-md: 48rem;
-				--breakpoint-lg: 64rem;
+				--breakpoint-3xl: 120rem;
 			}
 		`;
-		expect(parseCssBreakpoints(source)).toEqual([
-			{ name: "sm", value: "40rem" },
-			{ name: "md", value: "48rem" },
-			{ name: "lg", value: "64rem" },
-		]);
+		const result = parseCssBreakpoints(source, DEFAULTS);
+		expect(result).toEqual([...DEFAULTS, { name: "3xl", value: "120rem" }]);
 	});
 
-	it("returns an empty list for css with no breakpoint declarations", () => {
-		expect(parseCssBreakpoints("body { color: red; }")).toEqual([]);
+	it("overrides an existing default when the same name is redeclared", () => {
+		const result = parseCssBreakpoints(`--breakpoint-md: 900px;`, DEFAULTS);
+		expect(result.find((s) => s.name === "md")).toEqual({
+			name: "md",
+			value: "900px",
+		});
+		expect(result).toHaveLength(DEFAULTS.length);
+	});
+
+	it("treats `--breakpoint-<name>: initial` as removing that name", () => {
+		const result = parseCssBreakpoints(
+			`--breakpoint-lg: initial;`,
+			DEFAULTS,
+		);
+		expect(result.find((s) => s.name === "lg")).toBeUndefined();
+		expect(result).toHaveLength(DEFAULTS.length - 1);
+	});
+
+	it("returns the defaults unchanged for css with no breakpoint declarations", () => {
+		expect(parseCssBreakpoints("body { color: red; }", DEFAULTS)).toEqual(
+			DEFAULTS,
+		);
 	});
 
 	it("survives repeated calls (regex lastIndex is reset)", () => {
-		const source = `--breakpoint-md: 768px;`;
-		expect(parseCssBreakpoints(source)).toEqual([
-			{ name: "md", value: "768px" },
-		]);
-		expect(parseCssBreakpoints(source)).toEqual([
-			{ name: "md", value: "768px" },
-		]);
+		const source = `--breakpoint-md: 999px;`;
+		const first = parseCssBreakpoints(source, DEFAULTS);
+		const second = parseCssBreakpoints(source, DEFAULTS);
+		expect(first).toEqual(second);
 	});
 });
 
 describe("pickScreensFromJsConfig", () => {
-	it("reads `theme.screens` in insertion order", () => {
+	it("replaces defaults when `theme.screens` is set", () => {
 		expect(
-			pickScreensFromJsConfig({
-				theme: {
-					screens: { md: "768px", sm: "640px" },
-				},
-			}),
+			pickScreensFromJsConfig(
+				{ theme: { screens: { md: "768px", sm: "640px" } } },
+				DEFAULTS,
+			),
 		).toEqual([
 			{ name: "md", value: "768px" },
 			{ name: "sm", value: "640px" },
 		]);
 	});
 
-	it("merges `theme.extend.screens` on top of `theme.screens`", () => {
+	it("extends defaults when only `theme.extend.screens` is set", () => {
+		const result = pickScreensFromJsConfig(
+			{ theme: { extend: { screens: { "3xl": "1920px" } } } },
+			DEFAULTS,
+		);
+		expect(result).toEqual([...DEFAULTS, { name: "3xl", value: "1920px" }]);
+	});
+
+	it("layers `theme.extend.screens` on top of `theme.screens`", () => {
 		expect(
-			pickScreensFromJsConfig({
-				theme: {
-					extend: { screens: { xxl: "1920px" } },
-					screens: { sm: "640px" },
+			pickScreensFromJsConfig(
+				{
+					theme: {
+						extend: { screens: { xxl: "1920px" } },
+						screens: { sm: "640px" },
+					},
 				},
-			}),
+				DEFAULTS,
+			),
 		).toEqual([
 			{ name: "sm", value: "640px" },
 			{ name: "xxl", value: "1920px" },
@@ -81,43 +106,56 @@ describe("pickScreensFromJsConfig", () => {
 
 	it("ignores non-string screen values (e.g. tailwind's `{ min, max }` shape)", () => {
 		expect(
-			pickScreensFromJsConfig({
-				theme: {
-					screens: {
-						sm: "640px",
-						tablet: { max: "1024px", min: "768px" },
+			pickScreensFromJsConfig(
+				{
+					theme: {
+						screens: {
+							sm: "640px",
+							tablet: { max: "1024px", min: "768px" },
+						},
 					},
 				},
-			}),
+				DEFAULTS,
+			),
 		).toEqual([{ name: "sm", value: "640px" }]);
 	});
 
-	it("returns an empty list for a config missing `theme.screens`", () => {
-		expect(pickScreensFromJsConfig({})).toEqual([]);
-		expect(pickScreensFromJsConfig({ theme: {} })).toEqual([]);
-		expect(pickScreensFromJsConfig("not an object")).toEqual([]);
+	it("returns an empty list when the config has no `theme` at all", () => {
+		expect(pickScreensFromJsConfig({}, DEFAULTS)).toEqual([]);
+		expect(pickScreensFromJsConfig("not an object", DEFAULTS)).toEqual([]);
+	});
+
+	it("returns the defaults when `theme` is set but overrides no screens", () => {
+		expect(pickScreensFromJsConfig({ theme: {} }, DEFAULTS)).toEqual(
+			DEFAULTS,
+		);
+	});
+
+	it("returns an empty list when `theme.screens` is explicitly emptied", () => {
+		expect(
+			pickScreensFromJsConfig({ theme: { screens: {} } }, DEFAULTS),
+		).toEqual([]);
 	});
 });
 
 describe("loadScreensFromConfigFile", () => {
-	it("loads and sorts screens from a css file", async () => {
+	it("loads and sorts screens from a css file (layered on defaults)", async () => {
 		const file = path.join(directory, "app.css");
 		await fs.writeFile(
 			file,
 			`
 				@theme {
-					--breakpoint-lg: 1024px;
-					--breakpoint-sm: 640px;
-					--breakpoint-md: 768px;
+					--breakpoint-3xl: 1920px;
 				}
 			`,
 		);
-		const screens = await loadScreensFromConfigFile(file, directory);
-		expect(screens).toEqual([
-			{ name: "sm", value: "640px" },
-			{ name: "md", value: "768px" },
-			{ name: "lg", value: "1024px" },
-		]);
+		const screens = await loadScreensFromConfigFile(
+			file,
+			directory,
+			DEFAULTS,
+		);
+		expect(screens?.at(-1)).toEqual({ name: "3xl", value: "1920px" });
+		expect(screens).toHaveLength(DEFAULTS.length + 1);
 	});
 
 	it("loads and sorts screens from a `.mjs` tailwind config", async () => {
@@ -134,7 +172,11 @@ describe("loadScreensFromConfigFile", () => {
 				},
 			};`,
 		);
-		const screens = await loadScreensFromConfigFile(file, directory);
+		const screens = await loadScreensFromConfigFile(
+			file,
+			directory,
+			DEFAULTS,
+		);
 		expect(screens).toEqual([
 			{ name: "sm", value: "40rem" },
 			{ name: "md", value: "48rem" },
@@ -144,9 +186,16 @@ describe("loadScreensFromConfigFile", () => {
 
 	it("resolves a relative path against the passed root", async () => {
 		const file = path.join(directory, "theme.css");
-		await fs.writeFile(file, `--breakpoint-md: 768px;`);
-		const screens = await loadScreensFromConfigFile("theme.css", directory);
-		expect(screens).toEqual([{ name: "md", value: "768px" }]);
+		await fs.writeFile(file, `--breakpoint-md: 900px;`);
+		const screens = await loadScreensFromConfigFile(
+			"theme.css",
+			directory,
+			DEFAULTS,
+		);
+		expect(screens?.find((s) => s.name === "md")).toEqual({
+			name: "md",
+			value: "900px",
+		});
 	});
 
 	it("logs a warning and returns undefined for an unreadable file", async () => {
@@ -154,6 +203,7 @@ describe("loadScreensFromConfigFile", () => {
 		const result = await loadScreensFromConfigFile(
 			"does-not-exist.css",
 			directory,
+			DEFAULTS,
 		);
 		expect(result).toBeUndefined();
 		expect(warn).toHaveBeenCalledOnce();
@@ -164,10 +214,55 @@ describe("loadScreensFromConfigFile", () => {
 		const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
 		const file = path.join(directory, "config.yml");
 		await fs.writeFile(file, "sm: 640px");
-		const result = await loadScreensFromConfigFile(file, directory);
+		const result = await loadScreensFromConfigFile(
+			file,
+			directory,
+			DEFAULTS,
+		);
 		expect(result).toBeUndefined();
 		expect(warn.mock.calls[0]?.[0]).toContain(
 			`unsupported config file extension ".yml"`,
 		);
+	});
+
+	it("logs a warning and returns undefined when a js config explicitly zeroes out screens", async () => {
+		const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+		const file = path.join(directory, "empty-screens.mjs");
+		await fs.writeFile(file, `export default { theme: { screens: {} } };`);
+		const result = await loadScreensFromConfigFile(
+			file,
+			directory,
+			DEFAULTS,
+		);
+		expect(result).toBeUndefined();
+		expect(warn).toHaveBeenCalledOnce();
+		expect(warn.mock.calls[0]?.[0]).toContain("resolved to no breakpoints");
+	});
+
+	it("re-reads a js config after it's edited (cache-busted)", async () => {
+		const file = path.join(directory, "tailwind.config.mjs");
+		await fs.writeFile(
+			file,
+			`export default { theme: { screens: { sm: "640px" } } };`,
+		);
+		const first = await loadScreensFromConfigFile(
+			file,
+			directory,
+			DEFAULTS,
+		);
+		expect(first).toEqual([{ name: "sm", value: "640px" }]);
+
+		// force a distinct mtime so the cache-buster URL changes
+		await new Promise((resolve) => setTimeout(resolve, 20));
+		await fs.writeFile(
+			file,
+			`export default { theme: { screens: { lg: "1024px" } } };`,
+		);
+		const second = await loadScreensFromConfigFile(
+			file,
+			directory,
+			DEFAULTS,
+		);
+		expect(second).toEqual([{ name: "lg", value: "1024px" }]);
 	});
 });

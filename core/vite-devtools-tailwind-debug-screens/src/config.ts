@@ -14,12 +14,17 @@ const BREAKPOINT_DECL_REGEX = /--breakpoint-([\w-]+)\s*:([^;]*);/g;
 
 /**
  * Load screens from a user-provided config file. Returns `undefined` (with a
- * warning logged) if the file can't be read or nothing looks like a screen
- * declaration; callers should fall back to defaults.
+ * warning logged) if the file can't be read or resolves to no screen
+ * declarations; callers should fall back to defaults.
+ *
+ * `defaults` seeds the base tailwind screens so `extend`-style JS configs and
+ * v4 css files that only add / override a single breakpoint don't accidentally
+ * throw away the built-ins.
  */
 export async function loadScreensFromConfigFile(
 	configFile: string,
 	root: string,
+	defaults: Screens,
 ): Promise<Screens | undefined> {
 	const absolute = path.isAbsolute(configFile)
 		? configFile
@@ -29,15 +34,19 @@ export async function loadScreensFromConfigFile(
 	try {
 		if (CSS_EXTENSIONS.has(extension)) {
 			const source = await fs.readFile(absolute, "utf8");
-			const screens = parseCssBreakpoints(source);
-			return sortAscending(screens);
+			return finalise(parseCssBreakpoints(source, defaults), configFile);
 		}
 		if (JS_EXTENSIONS.has(extension)) {
-			const module_ = (await import(pathToFileURL(absolute).href)) as {
-				default?: unknown;
-			};
-			const screens = pickScreensFromJsConfig(module_.default);
-			return sortAscending(screens);
+			// bust node's module cache so config edits pick up on a `r`estart
+			// inside the same process; `?t=<mtime>` keeps hits cheap while the
+			// file is unchanged
+			const stats = await fs.stat(absolute);
+			const url = pathToFileURL(absolute).href + `?t=${stats.mtimeMs}`;
+			const module_ = (await import(url)) as { default?: unknown };
+			return finalise(
+				pickScreensFromJsConfig(module_.default, defaults),
+				configFile,
+			);
 		}
 		warn(`unsupported config file extension "${extension}"`);
 	} catch (error) {
@@ -47,41 +56,78 @@ export async function loadScreensFromConfigFile(
 	return undefined;
 }
 
-/** Extract every `--breakpoint-<name>: <value>` declaration from css source. */
-export function parseCssBreakpoints(source: string): Screens {
-	const screens: Screens = [];
+/**
+ * Fold every `--breakpoint-<name>: <value>` declaration from a css file over
+ * the defaults, honouring tailwind v4's `--breakpoint-<name>: initial` reset
+ * semantics (removes that name).
+ */
+export function parseCssBreakpoints(
+	source: string,
+	defaults: Screens,
+): Screens {
+	const map = toMap(defaults);
 	// state-carrying regex, needs a fresh `lastIndex` per call
 	BREAKPOINT_DECL_REGEX.lastIndex = 0;
 	let match: null | RegExpExecArray;
 	while ((match = BREAKPOINT_DECL_REGEX.exec(source)) !== null) {
-		const [, name, value] = match;
-		if (!name || !value) continue;
-		const trimmed = value.trim();
-		if (trimmed) screens.push({ name, value: trimmed });
+		const [, name, rawValue] = match;
+		if (!name) continue;
+		const trimmed = rawValue?.trim() ?? "";
+		if (!trimmed) continue;
+		if (trimmed === "initial") {
+			map.delete(name);
+			continue;
+		}
+		map.set(name, trimmed);
 	}
-	return screens;
+	return toScreens(map);
 }
 
 /**
- * Read `theme.screens` (merged with `theme.extend.screens`) from a tailwind v3
- * style config object. Returns an empty array if nothing usable is found.
+ * Compute the effective `theme.screens` for a tailwind v3-style js config,
+ * matching tailwind's own semantics: `theme.screens` REPLACES the defaults,
+ * while `theme.extend.screens` ADDS to whichever base is in effect.
  */
-export function pickScreensFromJsConfig(config: unknown): Screens {
+export function pickScreensFromJsConfig(
+	config: unknown,
+	defaults: Screens,
+): Screens {
 	if (!isRecord(config)) return [];
 	const theme = isRecord(config.theme) ? config.theme : undefined;
 	if (!theme) return [];
+
+	const base = isRecord(theme.screens)
+		? filterStringEntries(theme.screens)
+		: toMap(defaults);
 	const extend = isRecord(theme.extend) ? theme.extend : undefined;
-	const merged = {
-		...(isRecord(theme.screens) ? theme.screens : {}),
-		...(isRecord(extend?.screens) ? extend.screens : {}),
-	};
-	const screens: Screens = [];
-	for (const [name, value] of Object.entries(merged)) {
+	const extensions = isRecord(extend?.screens)
+		? filterStringEntries(extend.screens)
+		: new Map<string, string>();
+	for (const [name, value] of extensions) base.set(name, value);
+	return toScreens(base);
+}
+
+function filterStringEntries(
+	record: Record<string, unknown>,
+): Map<string, string> {
+	const map = new Map<string, string>();
+	for (const [name, value] of Object.entries(record)) {
 		if (typeof value === "string" && value.trim()) {
-			screens.push({ name, value: value.trim() });
+			map.set(name, value.trim());
 		}
 	}
-	return screens;
+	return map;
+}
+
+/** Sort ascending, log a warning + return undefined if nothing was resolved. */
+function finalise(screens: Screens, configFile: string) {
+	if (screens.length === 0) {
+		warn(
+			`config file "${configFile}" resolved to no breakpoints; falling back to defaults`,
+		);
+		return;
+	}
+	return sortAscending(screens);
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -97,6 +143,14 @@ function sortAscending(screens: Screens): Screens {
 		if (Number.isNaN(numericB)) return -1;
 		return numericA - numericB;
 	});
+}
+
+function toMap(screens: Screens): Map<string, string> {
+	return new Map(screens.map((screen) => [screen.name, screen.value]));
+}
+
+function toScreens(map: Map<string, string>): Screens {
+	return Array.from(map, ([name, value]) => ({ name, value }));
 }
 
 function warn(message: string) {

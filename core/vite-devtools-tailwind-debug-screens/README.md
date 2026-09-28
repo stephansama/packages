@@ -97,13 +97,24 @@ export default {
 };
 ```
 
-`configFile` is resolved against vite's `root`. `.css` files are scanned
-for any `--breakpoint-*: <value>;` declaration (so `@theme`, `:root`,
-`@layer base` etc. all work). `.js` / `.mjs` / `.cjs` / `.ts` files are
-dynamic-imported; the default export's `theme.screens` is merged with
-`theme.extend.screens`. Screens with non-string values (tailwind's
-`{ min, max }` shape) are ignored. If loading fails a warning is logged
-and the plugin falls back to `DEFAULT_SCREENS`.
+`configFile` is resolved against vite's `root`. Loaded screens are
+layered over tailwind's defaults so single-breakpoint configs don't drop
+the built-ins.
+
+- **`.css`** files are scanned for any `--breakpoint-*: <value>;`
+  declaration (so `@theme`, `:root`, `@layer base` etc. all work). Each
+  declaration adds to, or overrides, the default of the same name.
+  `--breakpoint-<name>: initial;` removes that default.
+- **`.js` / `.mjs` / `.cjs` / `.ts`** files are dynamic-imported and
+  follow tailwind v3 semantics: `theme.screens` replaces the defaults,
+  `theme.extend.screens` adds to whichever base is in effect. The js
+  path is cache-busted by the file's mtime, so edits are picked up on
+  a dev-server restart in the same process.
+
+Screens with non-string values (tailwind's `{ min, max }` shape) are
+ignored. If loading fails, or the file resolves to no breakpoints at all
+(e.g. `theme: { screens: {} }`), a warning is logged and the plugin falls
+back to `DEFAULT_SCREENS`.
 
 ### Passing screens directly
 

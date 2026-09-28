@@ -6,10 +6,13 @@ export interface Options {
 	 * Supported shapes:
 	 *
 	 * - `.css` files are scanned for `@theme` blocks / any `--breakpoint-*:
-	 *   <value>;` declarations (tailwind v4)
-	 * - `.js` / `.mjs` / `.cjs` / `.ts` files are dynamic-imported; the default
-	 *   export's `theme.screens` (merged with `theme.extend.screens`) is used
-	 *   (tailwind v3, or v4 with the `@config` directive)
+	 *   <value>;` declarations (tailwind v4). Declarations layer over
+	 *   tailwind's default screens; `--breakpoint-*: initial` clears them and
+	 *   `--breakpoint-<name>: initial` removes a single one
+	 * - `.js` / `.mjs` / `.cjs` / `.ts` files are dynamic-imported (tailwind v3,
+	 *   or v4 with the `@config` directive). `theme.screens` replaces
+	 *   tailwind's default screens and `theme.extend.screens` is added on top
+	 *   of whichever base is in effect
 	 *
 	 * If loading fails a warning is logged and the plugin falls back to
 	 * tailwind's default screens.

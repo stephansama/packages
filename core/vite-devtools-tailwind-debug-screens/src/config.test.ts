@@ -52,6 +52,22 @@ describe("parseCssBreakpoints", () => {
 		expect(result).toHaveLength(DEFAULTS.length - 1);
 	});
 
+	it("clears every breakpoint on `--breakpoint-*: initial`", () => {
+		const result = parseCssBreakpoints(
+			`@theme { --breakpoint-*: initial; --breakpoint-tablet: 40rem; }`,
+			DEFAULTS,
+		);
+		expect(result).toEqual([{ name: "tablet", value: "40rem" }]);
+	});
+
+	it("applies the `*` reset in source order", () => {
+		const result = parseCssBreakpoints(
+			`--breakpoint-tablet: 40rem; --breakpoint-*: initial; --breakpoint-desktop: 80rem;`,
+			DEFAULTS,
+		);
+		expect(result).toEqual([{ name: "desktop", value: "80rem" }]);
+	});
+
 	it("returns the defaults unchanged for css with no breakpoint declarations", () => {
 		expect(parseCssBreakpoints("body { color: red; }", DEFAULTS)).toEqual(
 			DEFAULTS,
@@ -120,8 +136,13 @@ describe("pickScreensFromJsConfig", () => {
 		).toEqual([{ name: "sm", value: "640px" }]);
 	});
 
-	it("returns an empty list when the config has no `theme` at all", () => {
-		expect(pickScreensFromJsConfig({}, DEFAULTS)).toEqual([]);
+	it("returns the defaults when the config has no `theme` at all", () => {
+		expect(pickScreensFromJsConfig({ content: [] }, DEFAULTS)).toEqual(
+			DEFAULTS,
+		);
+	});
+
+	it("returns an empty list when the config is not an object", () => {
 		expect(pickScreensFromJsConfig("not an object", DEFAULTS)).toEqual([]);
 	});
 

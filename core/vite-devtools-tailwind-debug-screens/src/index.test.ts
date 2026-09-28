@@ -312,8 +312,8 @@ describe("configFile option", () => {
 
 	it("warns and keeps `DEFAULT_SCREENS` when a js config resolves to no breakpoints", async () => {
 		const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-		const file = path.join(directory, "no-theme.mjs");
-		await fs.writeFile(file, `export default {};`);
+		const file = path.join(directory, "empty-screens.mjs");
+		await fs.writeFile(file, `export default { theme: { screens: {} } };`);
 		const plugin = tailwindDebugScreens({ configFile: file });
 		await callConfigResolved(plugin, directory);
 

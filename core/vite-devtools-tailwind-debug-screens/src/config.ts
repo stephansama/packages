@@ -10,7 +10,7 @@ const CSS_EXTENSIONS = new Set([".css"]);
 const JS_EXTENSIONS = new Set([".cjs", ".cts", ".js", ".mjs", ".mts", ".ts"]);
 
 /** Matches `--breakpoint-<name>: <value>;` declarations anywhere in a css file. */
-const BREAKPOINT_DECL_REGEX = /--breakpoint-([\w-]+)\s*:([^;]*);/g;
+const BREAKPOINT_DECL_REGEX = /--breakpoint-([\w-]+|\*)\s*:([^;]*);/g;
 
 /**
  * Load screens from a user-provided config file. Returns `undefined` (with a
@@ -58,8 +58,9 @@ export async function loadScreensFromConfigFile(
 
 /**
  * Fold every `--breakpoint-<name>: <value>` declaration from a css file over
- * the defaults, honouring tailwind v4's `--breakpoint-<name>: initial` reset
- * semantics (removes that name).
+ * the defaults, honouring tailwind v4's reset semantics in source order:
+ * `--breakpoint-*: initial` clears every breakpoint declared so far (defaults
+ * included) and `--breakpoint-<name>: initial` removes just that name.
  */
 export function parseCssBreakpoints(
 	source: string,
@@ -75,9 +76,11 @@ export function parseCssBreakpoints(
 		const trimmed = rawValue?.trim() ?? "";
 		if (!trimmed) continue;
 		if (trimmed === "initial") {
-			map.delete(name);
+			if (name === "*") map.clear();
+			else map.delete(name);
 			continue;
 		}
+		if (name === "*") continue;
 		map.set(name, trimmed);
 	}
 	return toScreens(map);
@@ -93,8 +96,8 @@ export function pickScreensFromJsConfig(
 	defaults: Screens,
 ): Screens {
 	if (!isRecord(config)) return [];
-	const theme = isRecord(config.theme) ? config.theme : undefined;
-	if (!theme) return [];
+	// tailwind treats a missing `theme` like `theme: {}` (defaults apply)
+	const theme = isRecord(config.theme) ? config.theme : {};
 
 	const base = isRecord(theme.screens)
 		? filterStringEntries(theme.screens)

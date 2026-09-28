@@ -1,19 +1,7 @@
-# @stephansama/vite-devtools-tailwind-debug-screens
+# @example/vite-devtools-tailwind-debug-screens
 
-## 0.4.0
+## 0.0.2
 
-### Minor Changes
+### Patch Changes
 
 - 019ac09: add `configFile` option that loads breakpoints from an existing tailwind config or css theme file instead of duplicating the list in the vite config. `.css` files are scanned for `--breakpoint-*: <value>;` declarations (tailwind v4 `@theme`), layered over tailwind's default screens (`--breakpoint-*: initial` clears them, `--breakpoint-<name>: initial` removes one). `.js` / `.mjs` / `.cjs` / `.ts` files are dynamic-imported (tailwind v3, or v4 with the `@config` directive): `theme.screens` replaces the defaults and `theme.extend.screens` is added on top. Explicit `screens` still wins, and the plugin falls back to `DEFAULT_SCREENS` with a warning if the file can't be read.
-
-## 0.3.0
-
-### Minor Changes
-
-- 48eacfd: Add Astro integration entry at `/astro/integration`. Wraps the vite plugin AND uses `injectScript("page", …)` so the viewport-reporter reaches `.astro`-rendered pages that Vite's `transformIndexHtml` doesn't cover.
-
-## 0.2.0
-
-### Minor Changes
-
-- 8a003a0: created vite devtools integration that surfaces the active tailwind breakpoint inside the `@vitejs/devtools` dock, replacing the floating badge from `tailwindcss-debug-screens` with a `json-render` panel and a live dock-rail icon that tracks the current viewport

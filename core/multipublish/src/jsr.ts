@@ -6,28 +6,39 @@ import * as z from "zod";
 
 import type { JsrPlatformOptionsSchema } from "./schema";
 
-type ExportsSchema = z.infer<typeof exportSchema>;
+export type ExportsSchema = string | { [subpath: string]: ConditionalExports };
+type ConditionalExports = string | { [condition: string]: ConditionalExports };
+
+/**
+ * Package.json conditional exports value: a file path (`string`) or a recursive
+ * record of condition keys - `import`, `require`, `default`, `node`, `browser`,
+ * `types`, `svelte`, custom conditions, ... - each resolving to another
+ * conditional exports value.
+ */
+const conditionalExportsSchema: z.ZodType<ConditionalExports> = z.lazy(() =>
+	z.string().trim().or(z.record(z.string(), conditionalExportsSchema)),
+);
+
 export const exportSchema = z
 	.string()
 	.trim()
-	.or(
-		z.record(
-			z.string(),
-			z
-				.string()
-				.trim()
-				.or(
-					z.object({
-						import: z
-							.object({ default: z.string().trim() })
-							.or(z.string().trim()),
-						require: z
-							.object({ default: z.string().trim() })
-							.or(z.string().trim()),
-					}),
-				),
-		),
-	);
+	.or(z.record(z.string(), conditionalExportsSchema));
+
+/**
+ * Runtime conditions we prefer, in order. jsr is an esm-only registry, so
+ * `import` / `module` come before the `default` catch-all - otherwise a dual `{
+ * import: "./esm.mjs", default: "./cjs.js" }` package would publish the cjs
+ * file, which jsr can't accept. `types` is intentionally NOT here - jsr needs a
+ * runtime module reference, not a type declaration.
+ */
+const RUNTIME_CONDITIONS = [
+	"import",
+	"module",
+	"default",
+	"node",
+	"browser",
+	"require",
+];
 
 export const packageJsonSchema = z.object({
 	exports: exportSchema,
@@ -109,13 +120,41 @@ export async function updateJsrConfigVersion(
 
 function convertPackageJsonExportsToJsr(exports: ExportsSchema) {
 	if (typeof exports === "string") return exports;
-	return Object.fromEntries(
-		Object.entries(exports).map(([key, value]) => {
-			let current: string | undefined;
-			if (typeof value === "string") current = value;
-			else if (typeof value.import === "string") current = value.import;
-			else current = value.import.default;
-			return [key, current];
-		}),
-	);
+	const keys = Object.keys(exports);
+	// node treats a top-level exports record with no `.`-prefixed keys as the
+	// `.` entry itself (`{ import, require }` sugar); walk it as one value
+	// so `types`-only sugar and custom conditions collapse to a single subpath
+	if (keys.length > 0 && keys.every((key) => !key.startsWith("."))) {
+		const path = pickRuntimePath(exports);
+		return path ? { ".": path } : {};
+	}
+	const result: Record<string, string> = {};
+	for (const [key, value] of Object.entries(exports)) {
+		const path = pickRuntimePath(value);
+		if (path) result[key] = path;
+	}
+	return result;
+}
+
+/**
+ * Walk a conditional exports value and return the first runtime module path we
+ * can resolve. Prefers well-known runtime conditions
+ * ({@link RUNTIME_CONDITIONS}); falls back to any non-`types` string value so
+ * custom conditions like `svelte` or `deno` still work.
+ */
+function pickRuntimePath(value: ConditionalExports): string | undefined {
+	if (typeof value === "string") return value;
+	for (const condition of RUNTIME_CONDITIONS) {
+		const inner = value[condition];
+		if (inner !== undefined) {
+			const resolved = pickRuntimePath(inner);
+			if (resolved) return resolved;
+		}
+	}
+	for (const [condition, inner] of Object.entries(value)) {
+		if (condition === "types") continue;
+		const resolved = pickRuntimePath(inner);
+		if (resolved) return resolved;
+	}
+	return undefined;
 }

@@ -17,6 +17,8 @@ pnpm install -D @stephansama/vite-devtools-tailwind-debug-screens \
 
 ## Usage
 
+### Vite
+
 ```js
 // vite.config.js
 import tailwindDebugScreens from "@stephansama/vite-devtools-tailwind-debug-screens";
@@ -27,6 +29,25 @@ export default defineConfig({
   plugins: [tailwindDebugScreens()],
 });
 ```
+
+### Astro
+
+```ts
+// astro.config.ts
+import tailwindDebugScreens from "@stephansama/vite-devtools-tailwind-debug-screens/astro/integration";
+import { defineConfig } from "astro/config";
+
+export default defineConfig({
+  integrations: [tailwindDebugScreens()],
+});
+```
+
+The Astro integration registers the vite plugin AND injects the
+viewport-reporter on every rendered `.astro` page via
+`injectScript("page", ...)`. Vite's `transformIndexHtml` on its own does not
+fire for `.astro`-rendered pages, so plain vite users get the plugin default
+export instead. The integration only runs during `astro dev` - production
+builds get nothing, matching the vite plugin's `apply: "serve"`.
 
 Run `vite` and open the embedded Vite DevTools dock — the **Tailwind
 Screens** panel shows:

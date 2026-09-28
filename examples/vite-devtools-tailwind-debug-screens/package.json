@@ -1,6 +1,6 @@
 {
   "name": "@example/vite-devtools-tailwind-debug-screens",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "description": "Example vite app using @stephansama/vite-devtools-tailwind-debug-screens",
   "repository": {

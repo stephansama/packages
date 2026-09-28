@@ -1,6 +1,6 @@
 {
   "name": "@stephansama/vite-devtools-tailwind-debug-screens",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Vite DevTools dock that shows the active tailwind breakpoint during development",
   "keywords": [
     "vite",

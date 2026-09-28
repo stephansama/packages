@@ -81,13 +81,70 @@ page itself.
 
 ## Options
 
-| Option    | Default                          | Description                                                                       |
-| --------- | -------------------------------- | --------------------------------------------------------------------------------- |
-| `screens` | tailwind's `sm`, `md`, ... `2xl` | Ordered breakpoint list. Each entry becomes a `(min-width: <value>)` media query. |
+| Option       | Default                          | Description                                                                                     |
+| ------------ | -------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `configFile` | -                                | Path to a tailwind config or css theme file to read breakpoints from. Ignored if `screens` set. |
+| `screens`    | tailwind's `sm`, `md`, ... `2xl` | Ordered breakpoint list. Each entry becomes a `(min-width: <value>)` media query.               |
 
-### Custom breakpoints
+### Reading breakpoints from your tailwind config
 
-Pass whatever screens your tailwind config uses:
+Point `configFile` at whatever file already declares your screens - the
+plugin loads it at `configResolved` time and skips shipping a duplicate
+list in your vite config.
+
+**Tailwind v4** (css-first, `@theme` block):
+
+```js
+tailwindDebugScreens({ configFile: "src/app.css" });
+```
+
+```css
+/* src/app.css */
+@theme {
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+}
+```
+
+**Tailwind v3 or v4 `@config`** (js/ts config):
+
+```js
+tailwindDebugScreens({ configFile: "tailwind.config.ts" });
+```
+
+```ts
+// tailwind.config.ts
+export default {
+  theme: {
+    screens: { sm: "640px", md: "768px", lg: "1024px" },
+    extend: { screens: { "3xl": "1920px" } },
+  },
+};
+```
+
+`configFile` is resolved against vite's `root`. Loaded screens are
+layered over tailwind's defaults so single-breakpoint configs don't drop
+the built-ins.
+
+- **`.css`** files are scanned for any `--breakpoint-*: <value>;`
+  declaration (so `@theme`, `:root`, `@layer base` etc. all work). Each
+  declaration adds to, or overrides, the default of the same name.
+  `--breakpoint-<name>: initial;` removes that default.
+- **`.js` / `.mjs` / `.cjs` / `.ts`** files are dynamic-imported and
+  follow tailwind v3 semantics: `theme.screens` replaces the defaults,
+  `theme.extend.screens` adds to whichever base is in effect. The js
+  path is cache-busted by the file's mtime, so edits are picked up on
+  a dev-server restart in the same process.
+
+Screens with non-string values (tailwind's `{ min, max }` shape) are
+ignored. If loading fails, or the file resolves to no breakpoints at all
+(e.g. `theme: { screens: {} }`), a warning is logged and the plugin falls
+back to `DEFAULT_SCREENS`.
+
+### Passing screens directly
+
+If you'd rather keep the list next to your plugin config:
 
 ```js
 tailwindDebugScreens({

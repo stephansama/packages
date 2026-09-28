@@ -31,6 +31,7 @@
   "type": "module",
   "exports": {
     ".": "./dist/index.mjs",
+    "./astro/integration": "./dist/astro/integration.mjs",
     "./package.json": "./package.json"
   },
   "types": "./dist/index.d.mts",
@@ -46,16 +47,21 @@
   },
   "devDependencies": {
     "@vitejs/devtools-kit": "catalog:vite8",
+    "astro": "catalog:",
     "tsdown": "catalog:",
     "vite": "catalog:vite8",
     "vitest": "catalog:vitest"
   },
   "peerDependencies": {
     "@vitejs/devtools-kit": ">=0.7",
-    "vite": ">=8.3"
+    "astro": ">=5",
+    "vite": ">=7"
   },
   "peerDependenciesMeta": {
     "@vitejs/devtools-kit": {
+      "optional": true
+    },
+    "astro": {
       "optional": true
     }
   },

@@ -9,8 +9,11 @@ import { parseCssLength } from "./internal";
 const CSS_EXTENSIONS = new Set([".css"]);
 const JS_EXTENSIONS = new Set([".cjs", ".cts", ".js", ".mjs", ".mts", ".ts"]);
 
-/** Matches `--breakpoint-<name>: <value>;` declarations anywhere in a css file. */
-const BREAKPOINT_DECL_REGEX = /--breakpoint-([\w-]+|\*)\s*:([^;]*);/g;
+/**
+ * Matches `--breakpoint-<name>: <value>;` declarations anywhere in a css file,
+ * plus the global `--*: <value>;` theme reset (captured with no name).
+ */
+const BREAKPOINT_DECL_REGEX = /--(?:breakpoint-([\w-]+|\*)|\*)\s*:([^;]*);/g;
 
 /**
  * Load screens from a user-provided config file. Returns `undefined` (with a
@@ -58,9 +61,10 @@ export async function loadScreensFromConfigFile(
 
 /**
  * Fold every `--breakpoint-<name>: <value>` declaration from a css file over
- * the defaults, honouring tailwind v4's reset semantics in source order:
- * `--breakpoint-*: initial` clears every breakpoint declared so far (defaults
- * included) and `--breakpoint-<name>: initial` removes just that name.
+ * the defaults, honouring tailwind v4's reset semantics in source order: `--*:
+ * initial` / `--breakpoint-*: initial` clear every breakpoint declared so far
+ * (defaults included) and `--breakpoint-<name>: initial` removes just that
+ * name.
  */
 export function parseCssBreakpoints(
 	source: string,
@@ -71,8 +75,8 @@ export function parseCssBreakpoints(
 	BREAKPOINT_DECL_REGEX.lastIndex = 0;
 	let match: null | RegExpExecArray;
 	while ((match = BREAKPOINT_DECL_REGEX.exec(source)) !== null) {
-		const [, name, rawValue] = match;
-		if (!name) continue;
+		// no captured name means the global `--*` reset, same as `--breakpoint-*`
+		const [, name = "*", rawValue] = match;
 		const trimmed = rawValue?.trim() ?? "";
 		if (!trimmed) continue;
 		if (trimmed === "initial") {

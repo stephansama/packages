@@ -60,6 +60,14 @@ describe("parseCssBreakpoints", () => {
 		expect(result).toEqual([{ name: "tablet", value: "40rem" }]);
 	});
 
+	it("clears every breakpoint on the global `--*: initial` reset", () => {
+		const result = parseCssBreakpoints(
+			`@theme { --*: initial; --breakpoint-tablet: 40rem; }`,
+			DEFAULTS,
+		);
+		expect(result).toEqual([{ name: "tablet", value: "40rem" }]);
+	});
+
 	it("applies the `*` reset in source order", () => {
 		const result = parseCssBreakpoints(
 			`--breakpoint-tablet: 40rem; --breakpoint-*: initial; --breakpoint-desktop: 80rem;`,

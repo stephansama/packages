@@ -8,6 +8,8 @@ floating badge, no overlay.
 
 </div>
 
+![screenshot](https://raw.githubusercontent.com/stephansama/static/refs/heads/main/screenshots/vite-devtools-tailwind-debug-screens.png)
+
 ## Installation
 
 ```sh

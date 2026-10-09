@@ -1,11 +1,12 @@
 import * as dotenvx from "@dotenvx/dotenvx";
-import { generateText } from "ai";
+import { chat } from "@tanstack/ai";
 import * as cp from "node:child_process";
 import * as fsp from "node:fs/promises";
 
 import { getProvider } from "./ai";
 import { parseArguments } from "./arguments";
 import { loadConfig } from "./config";
+import { buildPrompt, readExistingMessage } from "./message";
 import { defaultPrompt } from "./schema";
 
 export async function run() {
@@ -28,17 +29,22 @@ export async function run() {
 		throw new Error(providerResult.error.message);
 	}
 
-	const model = providerResult.value;
+	const adapter = providerResult.value;
 
 	const diff = getDiff();
 
 	if (!diff) throw new Error("unable to get git diff");
 
-	const prompt = config.prompt || defaultPrompt;
+	const template = config.prompt || defaultPrompt;
 
-	const { text } = await generateText({
-		model,
-		prompt: prompt.replace("{{diff}}", diff),
+	const message = await readExistingMessage(parsed.output);
+
+	const text = await chat({
+		adapter,
+		messages: [
+			{ content: buildPrompt(template, diff, message), role: "user" },
+		],
+		stream: false,
 	});
 
 	await fsp.writeFile(parsed.output, text);

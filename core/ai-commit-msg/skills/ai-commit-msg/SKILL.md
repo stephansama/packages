@@ -4,8 +4,11 @@ description: >
   Generate conventional commit messages from staged git diffs using an AI model
   via a prepare-commit-msg Git hook. Configure provider (google, openai, ollama)
   and model via cosmiconfig (ai-commit-msg.config.ts, package.json ai-commit-msg
-  key, etc.). Default is ollama/llama2. Requires GOOGLE_GENERATIVE_AI_API_KEY for
-  google or OPENAI_API_KEY for openai. Use skipNextRun to bypass a single hook run.
+  key, etc.). Built on TanStack AI. Default is ollama/llama2. Requires
+  GOOGLE_GENERATIVE_AI_API_KEY, GOOGLE_API_KEY, or GEMINI_API_KEY for google, or
+  OPENAI_API_KEY for openai. Use skipNextRun to bypass a single hook run. An existing commit message
+  (e.g. from git commit -m) is preserved as the intent and reformatted;
+  empty or n/a-style messages are regenerated from scratch.
 type: core
 library: "@stephansama/ai-commit-msg"
 library_version: "1.0.7"
@@ -14,12 +17,13 @@ sources:
   - stephansama/packages:core/ai-commit-msg/src/schema.ts
   - stephansama/packages:core/ai-commit-msg/src/config.ts
   - stephansama/packages:core/ai-commit-msg/src/ai.ts
+  - stephansama/packages:core/ai-commit-msg/src/message.ts
   - stephansama/packages:core/ai-commit-msg/README.md
 ---
 
 # ai-commit-msg
 
-Writes an AI-generated conventional commit message to the `COMMIT_EDITMSG` file via the `prepare-commit-msg` Git hook. Reads the staged diff and passes it to your configured AI provider.
+Writes an AI-generated conventional commit message to the `COMMIT_EDITMSG` file via the `prepare-commit-msg` Git hook. Reads the staged diff and passes it to your configured AI provider through [TanStack AI](https://tanstack.com/ai) adapters.
 
 ## Setup
 
@@ -63,7 +67,7 @@ export default {
 };
 ```
 
-Requires `GOOGLE_GENERATIVE_AI_API_KEY` in the environment.
+Requires `GOOGLE_GENERATIVE_AI_API_KEY`, `GOOGLE_API_KEY`, or `GEMINI_API_KEY` in the environment (checked in that order).
 
 ### OpenAI provider
 
@@ -85,7 +89,7 @@ export default {
 };
 ```
 
-Requires the Ollama server running locally (`ollama serve`).
+Requires the Ollama server running locally (`ollama serve`). Set `OLLAMA_HOST` to use a server other than `http://localhost:11434`.
 
 ### Custom prompt
 
@@ -99,6 +103,28 @@ export default {
 ```
 
 The `{{diff}}` placeholder is replaced with the staged diff (truncated at 8000 characters). The prompt must include `{{diff}}` or the model receives no diff context.
+
+### Preserve an existing commit message
+
+```sh
+git commit -m "fix login redirect"
+# -> fix(auth): fix login redirect after session refresh
+```
+
+When the output file already holds a message, it is passed to the model as the original intent and only reformatted to match the prompt and diff. Git comment lines and the verbose-diff scissors section are stripped first. Empty, punctuation-only, or `n/a`-style messages (`N/A`, `na`, `n.a.`, `none`) are ignored and a fresh message is generated.
+
+Custom prompts can position the message with `{{message}}`:
+
+```ts
+export default {
+  provider: "google",
+  model: "gemini-2.5-flash",
+  prompt:
+    "Rewrite this commit message as a conventional commit: {{message}}\n\nDiff:\n{{diff}}",
+};
+```
+
+Without `{{message}}`, intent instructions are appended automatically when a message exists.
 
 ### Skip the hook for one commit
 
@@ -143,7 +169,7 @@ Wrong:
 
 ```ts
 export default { provider: "google", model: "gemini-2.5-flash" };
-// GOOGLE_GENERATIVE_AI_API_KEY not set in environment
+// no google API key set in environment
 // hook runs: "unable to validate env due to the following issues: ..."
 ```
 
@@ -154,7 +180,7 @@ Correct:
 export GOOGLE_GENERATIVE_AI_API_KEY=your-key
 ```
 
-`getProvider` validates environment variables before constructing the model instance. Google requires `GOOGLE_GENERATIVE_AI_API_KEY`; OpenAI requires `OPENAI_API_KEY`. Missing keys fail with a validation error at hook time.
+`getProvider` validates environment variables before constructing the adapter. Google requires one of `GOOGLE_GENERATIVE_AI_API_KEY`, `GOOGLE_API_KEY`, or `GEMINI_API_KEY`; OpenAI requires `OPENAI_API_KEY`. Missing keys fail with a validation error at hook time.
 
 Source: `core/ai-commit-msg/src/ai.ts:getProvider`
 

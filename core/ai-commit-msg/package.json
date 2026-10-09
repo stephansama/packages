@@ -46,16 +46,16 @@
     "lint:fix": "eslint ./src/ --pass-on-no-patterns --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
-    "@ai-sdk/google": "catalog:ai",
-    "@ai-sdk/openai": "catalog:ai",
     "@commitlint/config-conventional": "catalog:commitlint",
     "@dotenvx/dotenvx": "catalog:",
-    "ai": "catalog:ai",
+    "@tanstack/ai": "catalog:ai",
+    "@tanstack/ai-gemini": "catalog:ai",
+    "@tanstack/ai-ollama": "catalog:ai",
+    "@tanstack/ai-openai": "catalog:ai",
     "cosmiconfig": "catalog:cli",
     "es-toolkit": "catalog:",
     "neverthrow": "catalog:",
     "obug": "catalog:cli",
-    "ollama-ai-provider-v2": "catalog:ai",
     "yargs": "catalog:cli",
     "zod": "catalog:schema"
   },

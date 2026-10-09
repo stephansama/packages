@@ -67,6 +67,20 @@ describe("ai", () => {
 		);
 	});
 
+	it("should skip a blank google key in favor of a valid one", () => {
+		process.env = {
+			...withoutGoogleKeys(),
+			GEMINI_API_KEY: "gemini-key",
+			GOOGLE_GENERATIVE_AI_API_KEY: "  ",
+		};
+		const result = getProvider("google", "gemini-pro");
+		expect(result.isOk()).toBe(true);
+		expect(createGeminiChat).toHaveBeenCalledWith(
+			"gemini-pro",
+			"gemini-key",
+		);
+	});
+
 	it("should fail google provider when env is missing", () => {
 		process.env = withoutGoogleKeys();
 

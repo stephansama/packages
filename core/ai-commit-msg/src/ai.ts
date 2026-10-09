@@ -35,7 +35,7 @@ export function getProvider(
 
 	const selected = providerMap[provider];
 
-	if (selected) return ok(selected(model, process.env));
+	if (selected) return ok(selected(model, result.data));
 
 	return err(new Error("unable to find message"));
 }

@@ -1,5 +1,12 @@
 # @stephansama/ai-commit-msg
 
+## 1.1.0
+
+### Minor Changes
+
+- e7610a4: use the existing commit message as the intent for the generated message. empty or n/a-style messages are ignored, and custom prompts can use a `{{message}}` placeholder
+- e7610a4: migrate from the vercel ai sdk to tanstack ai. the google provider now also accepts `GOOGLE_API_KEY` or `GEMINI_API_KEY`, and ollama respects `OLLAMA_HOST`. the `model` config option is now typed as the known adapter models or any other string, so editors can autocomplete model names
+
 ## 1.0.9
 
 ### Patch Changes

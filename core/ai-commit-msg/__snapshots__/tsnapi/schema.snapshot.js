@@ -5,6 +5,7 @@
 export var configSchema /* const */
 export var defaultPrompt /* const */
 export var environmentSchema /* const */
+export var intentPrompt /* const */
 export var models /* const */
 export var providers /* const */
 export var providerSchema /* const */

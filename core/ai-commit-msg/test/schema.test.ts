@@ -1,14 +1,27 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, expectTypeOf, it } from "vitest";
 
 import {
+	type Config,
 	configSchema,
 	defaultPrompt,
 	environmentSchema,
+	type KnownModel,
+	type Model,
 	providers,
 	providerSchema,
 } from "../src/schema";
 
 describe("schema", () => {
+	describe("model type", () => {
+		it("should type config model as known models or any string", () => {
+			expectTypeOf<Config["model"]>().toEqualTypeOf<Model | undefined>();
+			expectTypeOf<"gemini-2.5-flash">().toExtend<KnownModel>();
+			expectTypeOf<"llama2:latest">().toExtend<KnownModel>();
+			expectTypeOf<"my-custom-model">().toExtend<Model>();
+			expectTypeOf<"my-custom-model">().not.toExtend<KnownModel>();
+		});
+	});
+
 	describe("constants", () => {
 		it("should have valid default prompt", () => {
 			expect(defaultPrompt).toContain("{{diff}}");
@@ -37,6 +50,31 @@ describe("schema", () => {
 			const valid = { GOOGLE_GENERATIVE_AI_API_KEY: "key" };
 			const result = environmentSchema.google.safeParse(valid);
 			expect(result.success).toBe(true);
+		});
+
+		it.each(["GOOGLE_API_KEY", "GEMINI_API_KEY"])(
+			"should validate google env with %s",
+			(key) => {
+				const result = environmentSchema.google.safeParse({
+					[key]: "key",
+				});
+				expect(result.success).toBe(true);
+			},
+		);
+
+		it("should ignore blank google keys when another is set", () => {
+			const result = environmentSchema.google.safeParse({
+				GEMINI_API_KEY: "key",
+				GOOGLE_API_KEY: "  ",
+			});
+			expect(result.success).toBe(true);
+		});
+
+		it("should fail google env without any key", () => {
+			const result = environmentSchema.google.safeParse({
+				GOOGLE_API_KEY: "",
+			});
+			expect(result.success).toBe(false);
 		});
 
 		it("should validate openai env", () => {

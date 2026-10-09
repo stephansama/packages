@@ -12,7 +12,7 @@
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/ai-commit-msg?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/ai-commit-msg)
 
 [![@dotenvx/dotenvx](https://img.shields.io/badge/@dotenvx/dotenvx-1.52.0-ECD53F.svg?logo=dotenv&logoColor=ffffff&labelColor=ECD53F)](https://npmx.dev/package/@dotenvx/dotenvx)
-[![ai](https://img.shields.io/badge/ai-6.0.86-000000.svg?logo=vercel&logoColor=ffffff&labelColor=000000)](https://npmx.dev/package/ai)
+[![@tanstack/ai](https://img.shields.io/badge/@tanstack/ai-0.65.0-f6339a.svg?logo=@tanstack/ai&logoColor=ffffff&labelColor=f6339a)](https://npmx.dev/package/@tanstack/ai)
 [![zod](https://img.shields.io/badge/zod-4.2.1-408AFF.svg?logo=zod&logoColor=ffffff&labelColor=408AFF)](https://npmx.dev/package/zod)
 [![@tanstack/intent](https://img.shields.io/badge/@tanstack/intent-0.0.41-00a6f4.svg?logo=tanstack&logoColor=ffffff&labelColor=00a6f4)](https://npmx.dev/package/@tanstack/intent)
 [![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
@@ -31,6 +31,7 @@ generate commit messages using ai
 - [CLI Options](#cli-options)
 - [Usage](#usage)
   - [Husky](#husky)
+  - [Preserving your commit message](#preserving-your-commit-message)
 
 </details>
 
@@ -66,3 +67,18 @@ pnpm install @stephansama/ai-commit-msg
 
    ai-commit-msg -o "$1"
    ```
+
+### Preserving your commit message
+
+If the output file already contains a message (for example from
+`git commit -m "fix login redirect"`), it is passed to the model as the
+original intent. The message is then rewritten to match the prompt's format and
+the staged diff, without changing what it means.
+
+Git comment lines (`#`) and verbose diff output are ignored. A message that is
+empty, punctuation only, or a variant of `n/a` (`N/A`, `na`, `n.a.`, `none`) is
+treated as no message, and a fresh one is generated from the diff.
+
+A custom `prompt` can place the existing message with the `{{message}}`
+placeholder. Without the placeholder, intent instructions are appended to the
+prompt when a message exists.

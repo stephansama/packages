@@ -94,10 +94,10 @@ catalogMode: strict
 
 catalogs:
   ai:
-    '@ai-sdk/google': 3.0.29
-    '@ai-sdk/openai': 3.0.29
-    ai: 6.0.86
-    ollama-ai-provider-v2: 1.5.5
+    '@tanstack/ai': 0.65.0
+    '@tanstack/ai-gemini': 0.35.0
+    '@tanstack/ai-ollama': 0.11.13
+    '@tanstack/ai-openai': 0.27.0
   astro:
     '@astrojs/ts-plugin': 1.10.9
   cli:
@@ -229,10 +229,12 @@ shellEmulator: true
 allowBuilds:
   esbuild: true
   lefthook: true
+  '@google/genai': false
   '@parcel/watcher': false
   '@swc/core': false
   core-js-pure: false
   highlight.js: false
+  protobufjs: false
   sharp: false
   unrs-resolver: false
   workerd: false

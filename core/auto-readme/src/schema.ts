@@ -98,16 +98,50 @@ const badgeTemplateSchema = z
 			"handlebar template strings where {{scope}}, {{name}} / {{key}} and {{version}} / {{value}} represent the package",
 	});
 
+/**
+ * Built-in badge presets, keyed by short name. Each preset expands into the
+ * same {url,image,label} shape as a user-supplied badge template, so the
+ * Handlebars renderer can treat them identically.
+ */
+export const packageLinkPresets = {
+	bundlesize: {
+		image: "https://badgen.net/bundlephobia/min/{{name}}",
+		label: "minified size",
+		url: "https://bundlephobia.com/package/{{name}}",
+	},
+	bundlesizeGzip: {
+		image: "https://badgen.net/bundlephobia/minzip/{{name}}",
+		label: "minified + gzip size",
+		url: "https://bundlephobia.com/package/{{name}}",
+	},
+	jsr: {
+		image: "https://jsr.io/badges/{{name}}",
+		label: "jsr",
+		url: "https://jsr.io/{{name}}",
+	},
+} as const;
+
+const packageLinkPresetsSchema = z
+	.array(z.enum(Object.keys(packageLinkPresets) as [string, ...string[]]))
+	.default([])
+	.meta({
+		description:
+			"Built-in badge presets to include in the BADGE row. Each name expands to a {url,image,label} entry using the same Handlebars context as `templates`.",
+	});
+
 const _configSchema = z.object({
 	affectedRegexes: z.array(z.string().trim()),
 	badgeOptions: z
 		.object({
 			dependencyTypes: badgeDependencyTypeOptionsSchema,
+			packageLinks: packageLinkPresetsSchema,
 			templates: badgeTemplateSchema,
 		})
 		.default({
 			/* eslint-disable-next-line unicorn/no-useless-undefined */
 			dependencyTypes: badgeDependencyTypeOptionsSchema.parse(undefined),
+			/* eslint-disable-next-line unicorn/no-useless-undefined */
+			packageLinks: packageLinkPresetsSchema.parse(undefined),
 			/* eslint-disable-next-line unicorn/no-useless-undefined */
 			templates: badgeTemplateSchema.parse(undefined),
 		}),

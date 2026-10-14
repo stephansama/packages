@@ -53,8 +53,12 @@ export declare function createApi<Schema extends z.ZodObject>({
     LIST: {
       method: "get";
       querySchema: z.ZodObject<{
-        fields: z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>;
-        sort: z.ZodPipe<z.ZodObject<{
+        fields: z.ZodOptional<z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>>;
+        limit: z.ZodOptional<z.ZodInt>;
+        nestedFields: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>>>;
+        offset: z.ZodOptional<z.ZodInt>;
+        shuffle: z.ZodOptional<z.ZodBoolean>;
+        sort: z.ZodOptional<z.ZodPipe<z.ZodObject<{
           direction: z.ZodEnum<{
             asc: "asc";
             desc: "desc";
@@ -63,7 +67,9 @@ export declare function createApi<Schema extends z.ZodObject>({
         }, z.core.$strip>, z.ZodTransform<string, {
           direction: "asc" | "desc";
           field: string;
-        }>>;
+        }>>>;
+        viewId: z.ZodOptional<z.ZodString>;
+        where: z.ZodOptional<z.ZodString>;
       }, z.core.$strip>;
       responseSchema: z.ZodObject<{
         nestedNext: z.ZodNullable<z.ZodOptional<z.ZodString>>;
@@ -129,8 +135,12 @@ export declare function createApi<Schema extends z.ZodObject>({
       LIST: {
         method: "get";
         querySchema: z.ZodObject<{
-          fields: z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>;
-          sort: z.ZodPipe<z.ZodObject<{
+          fields: z.ZodOptional<z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>>;
+          limit: z.ZodOptional<z.ZodInt>;
+          nestedFields: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>>>;
+          offset: z.ZodOptional<z.ZodInt>;
+          shuffle: z.ZodOptional<z.ZodBoolean>;
+          sort: z.ZodOptional<z.ZodPipe<z.ZodObject<{
             direction: z.ZodEnum<{
               asc: "asc";
               desc: "desc";
@@ -139,7 +149,9 @@ export declare function createApi<Schema extends z.ZodObject>({
           }, z.core.$strip>, z.ZodTransform<string, {
             direction: "asc" | "desc";
             field: string;
-          }>>;
+          }>>>;
+          viewId: z.ZodOptional<z.ZodString>;
+          where: z.ZodOptional<z.ZodString>;
         }, z.core.$strip>;
         responseSchema: z.ZodObject<{
           nestedNext: z.ZodNullable<z.ZodOptional<z.ZodString>>;
@@ -205,8 +217,12 @@ export declare function createApi<Schema extends z.ZodObject>({
     LIST: {
       method: "get";
       querySchema: z.ZodObject<{
-        fields: z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>;
-        sort: z.ZodPipe<z.ZodObject<{
+        fields: z.ZodOptional<z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>>;
+        limit: z.ZodOptional<z.ZodInt>;
+        nestedFields: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>>>;
+        offset: z.ZodOptional<z.ZodInt>;
+        shuffle: z.ZodOptional<z.ZodBoolean>;
+        sort: z.ZodOptional<z.ZodPipe<z.ZodObject<{
           direction: z.ZodEnum<{
             asc: "asc";
             desc: "desc";
@@ -215,7 +231,9 @@ export declare function createApi<Schema extends z.ZodObject>({
         }, z.core.$strip>, z.ZodTransform<string, {
           direction: "asc" | "desc";
           field: string;
-        }>>;
+        }>>>;
+        viewId: z.ZodOptional<z.ZodString>;
+        where: z.ZodOptional<z.ZodString>;
       }, z.core.$strip>;
       responseSchema: z.ZodObject<{
         nestedNext: z.ZodNullable<z.ZodOptional<z.ZodString>>;
@@ -281,8 +299,12 @@ export declare function createApi<Schema extends z.ZodObject>({
       LIST: {
         method: "get";
         querySchema: z.ZodObject<{
-          fields: z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>;
-          sort: z.ZodPipe<z.ZodObject<{
+          fields: z.ZodOptional<z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>>;
+          limit: z.ZodOptional<z.ZodInt>;
+          nestedFields: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>>>;
+          offset: z.ZodOptional<z.ZodInt>;
+          shuffle: z.ZodOptional<z.ZodBoolean>;
+          sort: z.ZodOptional<z.ZodPipe<z.ZodObject<{
             direction: z.ZodEnum<{
               asc: "asc";
               desc: "desc";
@@ -291,7 +313,9 @@ export declare function createApi<Schema extends z.ZodObject>({
           }, z.core.$strip>, z.ZodTransform<string, {
             direction: "asc" | "desc";
             field: string;
-          }>>;
+          }>>>;
+          viewId: z.ZodOptional<z.ZodString>;
+          where: z.ZodOptional<z.ZodString>;
         }, z.core.$strip>;
         responseSchema: z.ZodObject<{
           nestedNext: z.ZodNullable<z.ZodOptional<z.ZodString>>;
@@ -360,8 +384,12 @@ export declare function createApi<Schema extends z.ZodObject>({
     LIST: {
       method: "get";
       querySchema: z.ZodObject<{
-        fields: z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>;
-        sort: z.ZodPipe<z.ZodObject<{
+        fields: z.ZodOptional<z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>>;
+        limit: z.ZodOptional<z.ZodInt>;
+        nestedFields: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnion<[z.ZodArray<z.ZodString>, z.ZodString]>>>;
+        offset: z.ZodOptional<z.ZodInt>;
+        shuffle: z.ZodOptional<z.ZodBoolean>;
+        sort: z.ZodOptional<z.ZodPipe<z.ZodObject<{
           direction: z.ZodEnum<{
             asc: "asc";
             desc: "desc";
@@ -370,7 +398,9 @@ export declare function createApi<Schema extends z.ZodObject>({
         }, z.core.$strip>, z.ZodTransform<string, {
           direction: "asc" | "desc";
           field: string;
-        }>>;
+        }>>>;
+        viewId: z.ZodOptional<z.ZodString>;
+        where: z.ZodOptional<z.ZodString>;
       }, z.core.$strip>;
       responseSchema: z.ZodObject<{
         nestedNext: z.ZodNullable<z.ZodOptional<z.ZodString>>;

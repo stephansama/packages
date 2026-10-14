@@ -1,5 +1,43 @@
 import * as z from "zod";
 
+function stringifyScalar(value: unknown): string {
+	if (typeof value === "boolean") return value ? "true" : "false";
+	if (typeof value === "number") return String(value);
+	if (typeof value === "string") return value;
+	return JSON.stringify(value);
+}
+
+/**
+ * Serialize a parsed query object to a nocodb-compatible query string. Arrays
+ * comma-join, booleans → "true"/"false", numbers stringify, and nested objects
+ * (e.g. `nestedFields`) expand into bracketed keys like
+ * `nestedFields[Author]=title,year`. undefined / null values are skipped.
+ */
+function toQueryString(parameters: unknown): string {
+	const pairs: [string, string][] = [];
+	for (const [key, value] of Object.entries(
+		parameters as Record<string, unknown>,
+	)) {
+		if (value === undefined || value === null) continue;
+		if (Array.isArray(value)) {
+			pairs.push([key, value.map((v) => stringifyScalar(v)).join(",")]);
+		} else if (typeof value === "object") {
+			for (const [nestedKey, nestedValue] of Object.entries(
+				value as Record<string, unknown>,
+			)) {
+				if (nestedValue === undefined || nestedValue === null) continue;
+				const serialized = Array.isArray(nestedValue)
+					? nestedValue.map((v) => stringifyScalar(v)).join(",")
+					: stringifyScalar(nestedValue);
+				pairs.push([`${key}[${nestedKey}]`, serialized]);
+			}
+		} else {
+			pairs.push([key, stringifyScalar(value)]);
+		}
+	}
+	return new URLSearchParams(pairs).toString();
+}
+
 export const ACTIONS = [
 	"LIST",
 	"CREATE",
@@ -52,13 +90,32 @@ export function createApi<Schema extends z.ZodObject>({
 		LIST: {
 			method: "get",
 			querySchema: z.object({
-				fields: z.array(z.string().trim()).or(z.string().trim()),
+				fields: z
+					.array(z.string().trim())
+					.or(z.string().trim())
+					.optional(),
+				limit: z.int().positive().optional(),
+				nestedFields: z
+					.record(
+						z.string().trim(),
+						z.array(z.string().trim()).or(z.string().trim()),
+					)
+					.optional(),
+				offset: z.int().nonnegative().optional(),
+				shuffle: z.boolean().optional(),
 				sort: z
 					.object({
 						direction: z.enum(["asc", "desc"]),
 						field: z.string().trim(),
 					})
-					.transform((input) => JSON.stringify(input)),
+					.transform((input) =>
+						input.direction === "desc"
+							? `-${input.field}`
+							: input.field,
+					)
+					.optional(),
+				viewId: z.string().trim().optional(),
+				where: z.string().trim().optional(),
 			}),
 			responseSchema: z.object({
 				nestedNext: z.string().trim().optional().nullable(),
@@ -121,7 +178,7 @@ export function createApi<Schema extends z.ZodObject>({
 
 			if ("query" in props && "querySchema" in current) {
 				const parsed = current.querySchema.parse(props.query);
-				parameters = "?" + new URLSearchParams(parsed).toString();
+				parameters = "?" + toQueryString(parsed);
 			}
 
 			let body: string | undefined;

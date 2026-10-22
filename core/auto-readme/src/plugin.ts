@@ -7,7 +7,7 @@ import { markdownTable } from "markdown-table";
 import { fromMarkdown } from "mdast-util-from-markdown";
 import path from "node:path";
 
-import type { ActionData } from "./data";
+import type { ActionData, McpServer, Skill } from "./data";
 import type { Config } from "./schema";
 
 import { getContrastText } from "./color";
@@ -21,6 +21,10 @@ type TemplateContext = {
 	name: string;
 	uri_name: string;
 };
+
+const GITHUB_URL = "https://github.com";
+const HTTP_PROTOCOL = /^https?:\/\//;
+const SHIELD_URL = "https://img.shields.io/badge";
 
 function createHeading(
 	headings: (keyof NonNullable<Config["templates"]>["emojis"])[],
@@ -142,11 +146,29 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				packageBadges.push(md`[![${key}](${imageUrl})](${linkUrl})`);
 			}
 
+			const skipMcp = first?.parameters.includes("--skip-mcp");
+			const mcpBadges = skipMcp
+				? []
+				: Object.entries(first?.mcp?.mcpServers || {}).map(
+						([name, server]) => createMcpBadge(name, server),
+					);
+
+			const skipSkills = first?.parameters.includes("--skip-skills");
+			const skillBadges = skipSkills
+				? []
+				: Object.entries(first?.skills?.skills || {}).map(
+						([name, skill]) => createSkillBadge(name, skill),
+					);
+
 			const ast = fromMarkdown(
 				[
 					templateBadges.filter(Boolean).join("\n"),
 					packageBadges.filter(Boolean).join("\n"),
-				].join("\n\n"),
+					mcpBadges.join("\n"),
+					skillBadges.join("\n"),
+				]
+					.filter(Boolean)
+					.join("\n\n"),
 			);
 
 			return [start, ast, end];
@@ -324,6 +346,61 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			return [start, tableAst, end];
 		});
 	};
+
+function createBadge(label: string, image: string, url?: string) {
+	const badge = `![${label}](${image})`;
+	return url ? `[${badge}](${url})` : badge;
+}
+
+/** Badge for a server defined in a `.mcp.json` next to the readme */
+function createMcpBadge(name: string, server: McpServer) {
+	const [color, slug] = getSimpleIconColor("modelcontextprotocol");
+	const image = createShieldImage("mcp", name, color || "000000", slug);
+	return createBadge(name, image, server.url);
+}
+
+/** Shield image in the same style as the dependency badges */
+function createShieldImage(
+	label: string,
+	message: string,
+	color: string,
+	logo: string,
+) {
+	const contrastText = getContrastText(color);
+	return `${SHIELD_URL}/${escapeShield(label)}-${escapeShield(message)}-${color}.svg?logo=${logo}&logoColor=${contrastText}&labelColor=${color}`;
+}
+
+/** Badge for a skill defined in a `skills-lock.json` next to the readme */
+function createSkillBadge(name: string, skill: Skill) {
+	const [color, slug] = getSimpleIconColor("github");
+	const image = createShieldImage("skill", name, color || "181717", slug);
+	return createBadge(name, image, getSkillUrl(skill));
+}
+
+function escapeShield(input: string) {
+	return encodeURIComponent(
+		input.replaceAll("-", "--").replaceAll("_", "__"),
+	);
+}
+
+/** Resolve the repository url that a skill was installed from */
+function getSkillRepositoryUrl(skill: Skill): string | undefined {
+	if (!skill.source) return;
+	if (HTTP_PROTOCOL.test(skill.source)) return skill.source;
+	if (!skill.sourceType || skill.sourceType === "github") {
+		return `${GITHUB_URL}/${skill.source}`;
+	}
+}
+
+/** Resolve a url directly to the skill definition when possible */
+function getSkillUrl(skill: Skill): string | undefined {
+	const repository = getSkillRepositoryUrl(skill);
+	if (!repository) return;
+	if (!skill.skillPath || !repository.startsWith(GITHUB_URL)) {
+		return repository;
+	}
+	return `${repository}/blob/HEAD/${skill.skillPath}`;
+}
 
 function loadTemplates(
 	templates: Config["templates"],

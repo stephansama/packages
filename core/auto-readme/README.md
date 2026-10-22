@@ -78,6 +78,20 @@ To use the zod generator add the following comments
 <!-- ZOD end -->
 ```
 
+To generate badges for your dependencies add the following comments
+
+```md
+<!-- BADGE start -->
+<!-- BADGE end -->
+```
+
+If a `.mcp.json` or a `skills-lock.json` file lives next to the `README`, the badge section automatically adds a badge for every MCP server and a badge linking to every skill underneath the dependency badges. Pass `--skip-mcp` or `--skip-skills` on the comment to opt out:
+
+```md
+<!-- BADGE --skip-mcp --skip-skills start -->
+<!-- BADGE end -->
+```
+
 There are more [Actions](#actions) that you can use in conjunction with different [languages](#language) and [formats](#formats) like so:
 
 ```md

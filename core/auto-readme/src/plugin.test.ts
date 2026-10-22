@@ -403,3 +403,168 @@ it("ZOD: throws when body is missing", async () => {
 		processMarkdown(withZone("ZOD"), defaultConfig, data),
 	).rejects.toThrow("unable to load zod body");
 });
+
+// BADGE zone: auto discovered .mcp.json / skills-lock.json
+
+const badgeWithExtras = [
+	{
+		action: "BADGE",
+		catalogs: undefined,
+		mcp: {
+			mcpServers: {
+				"karakeep": {
+					args: ["dlx", "@karakeep/mcp@0.33.1"],
+					command: "pnpm",
+				},
+				"n8n-mcp": {
+					headers: { Authorization: "Bearer ${N8N_MCP_TOKEN}" },
+					type: "http",
+					url: "https://n8n.example.com/mcp-server/http",
+				},
+			},
+		},
+		parameters: [],
+		pkgJson: {
+			dependencies: {},
+			devDependencies: {},
+			name: "my-package",
+			version: "1.0.0",
+		},
+		skills: {
+			skills: {
+				"ab-testing": {
+					computedHash: "abc",
+					skillPath: "skills/ab-testing/SKILL.md",
+					source: "coreyhaines31/marketingskills",
+					sourceType: "github",
+				},
+				"local-skill": {
+					computedHash: "def",
+					source: "./skills/local-skill",
+					sourceType: "local",
+				},
+			},
+		},
+	},
+] as unknown as ActionData;
+
+/** Remark escapes `&` inside urls when it serializes the tree */
+function unescape(markdown: string) {
+	return markdown.replaceAll(String.raw`\&`, "&");
+}
+
+it("BADGE: renders a badge for each mcp server, linking http servers", async () => {
+	mocks.getSimpleIconColor.mockImplementation((name: string) => [
+		"000000",
+		name,
+	]);
+	mocks.getContrastText.mockReturnValue("ffffff");
+
+	const result = unescape(
+		await processMarkdown(
+			withZone("BADGE"),
+			defaultConfig,
+			badgeWithExtras,
+		),
+	);
+
+	expect(result).toContain(
+		"[![n8n-mcp](https://img.shields.io/badge/mcp-n8n--mcp-000000.svg?logo=modelcontextprotocol&logoColor=ffffff&labelColor=000000)](https://n8n.example.com/mcp-server/http)",
+	);
+	expect(result).toContain(
+		"![karakeep](https://img.shields.io/badge/mcp-karakeep-000000.svg?logo=modelcontextprotocol",
+	);
+	expect(result).not.toContain("[![karakeep]");
+	expect(result).not.toContain("N8N_MCP_TOKEN");
+});
+
+it("BADGE: renders a badge for each skill linking to its definition", async () => {
+	mocks.getSimpleIconColor.mockImplementation((name: string) => [
+		"181717",
+		name,
+	]);
+	mocks.getContrastText.mockReturnValue("ffffff");
+
+	const result = unescape(
+		await processMarkdown(
+			withZone("BADGE"),
+			defaultConfig,
+			badgeWithExtras,
+		),
+	);
+
+	expect(result).toContain(
+		"[![ab-testing](https://img.shields.io/badge/skill-ab--testing-181717.svg?logo=github&logoColor=ffffff&labelColor=181717)](https://github.com/coreyhaines31/marketingskills/blob/HEAD/skills/ab-testing/SKILL.md)",
+	);
+	expect(result).toContain("![local-skill](");
+	expect(result).not.toContain("[![local-skill]");
+});
+
+it("BADGE: places mcp and skill badges after the dependency badges", async () => {
+	mocks.getSimpleIconColor.mockReturnValue(["61DAFB", "react"]);
+
+	const data = [
+		{
+			...(badgeWithExtras[0] as object),
+			pkgJson: {
+				dependencies: { react: "^18.0.0" },
+				devDependencies: {},
+				name: "my-package",
+				version: "1.0.0",
+			},
+		},
+	] as unknown as ActionData;
+
+	const result = await processMarkdown(
+		withZone("BADGE"),
+		defaultConfig,
+		data,
+	);
+
+	expect(result.indexOf("![react]")).toBeLessThan(
+		result.indexOf("badge/mcp-"),
+	);
+	expect(result.indexOf("badge/mcp-")).toBeLessThan(
+		result.indexOf("badge/skill-"),
+	);
+});
+
+it("BADGE: skips mcp and skill badges with --skip-mcp / --skip-skills", async () => {
+	const data = [
+		{
+			...(badgeWithExtras[0] as object),
+			parameters: ["--skip-mcp", "--skip-skills"],
+		},
+	] as unknown as ActionData;
+
+	const result = await processMarkdown(
+		withZone("BADGE"),
+		defaultConfig,
+		data,
+	);
+
+	expect(result).not.toContain("badge/mcp-");
+	expect(result).not.toContain("badge/skill-");
+});
+
+it("BADGE: renders nothing extra when no mcp or skills data is loaded", async () => {
+	mocks.getSimpleIconColor.mockReturnValue([undefined, "unknown"]);
+
+	const data = [
+		{
+			action: "BADGE",
+			catalogs: undefined,
+			parameters: [],
+			pkgJson: { dependencies: {}, devDependencies: {}, name: "x" },
+		},
+	] as unknown as ActionData;
+
+	const result = await processMarkdown(
+		withZone("BADGE"),
+		defaultConfig,
+		data,
+	);
+
+	expect(result).not.toContain("badge/mcp-");
+	expect(result).not.toContain("badge/skill-");
+});

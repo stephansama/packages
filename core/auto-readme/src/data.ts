@@ -8,9 +8,27 @@ import { zod2md } from "zod2md";
 
 import type { AstComments } from "./comment";
 
+import { INFO } from "./log";
 import { fileExists, loadCatalogs } from "./utilities";
 
 export type ActionData = Awaited<ReturnType<typeof loadActionData>>;
+
+export type McpJson = { mcpServers?: Record<string, McpServer> };
+
+export type McpServer = {
+	args?: string[];
+	command?: string;
+	type?: string;
+	url?: string;
+};
+
+export type Skill = {
+	skillPath?: string;
+	source?: string;
+	sourceType?: string;
+};
+
+export type SkillsLock = { skills?: Record<string, Skill> };
 
 type ActionInput = {
 	default?: string;
@@ -19,6 +37,9 @@ type ActionInput = {
 };
 
 type ActionYaml = { inputs?: Record<string, ActionInput> };
+
+const MCP_FILE = ".mcp.json";
+const SKILLS_LOCK_FILE = "skills-lock.json";
 
 export function createFindParameter(parameterList: string[]) {
 	return function (parameterName: string) {
@@ -50,7 +71,31 @@ export async function loadActionData(
 					};
 				}
 
-				case "BADGE":
+				case "BADGE": {
+					const inputPath = find("path");
+					const filename = inputPath
+						? path.resolve(path.dirname(file), inputPath)
+						: path.dirname(file);
+					const pkgJson = await readPackageJSON(filename);
+					const catalogs = await loadCatalogs();
+					const mcp = await loadJsonBesideReadme<McpJson>(
+						file,
+						MCP_FILE,
+					);
+					const skills = await loadJsonBesideReadme<SkillsLock>(
+						file,
+						SKILLS_LOCK_FILE,
+					);
+					return {
+						action: action.action,
+						catalogs: catalogs,
+						mcp,
+						parameters: action.parameters,
+						pkgJson,
+						skills,
+					};
+				}
+
 				case "PKG": {
 					const inputPath = find("path");
 					const filename = inputPath
@@ -133,4 +178,20 @@ async function loadActionYaml(baseDirectory: string) {
 	const actionFile = await fsp.readFile(actualPath, { encoding: "utf8" });
 
 	return yaml.parse(actionFile) as ActionYaml;
+}
+
+/** Load an optional json file that lives in the same directory as the readme */
+async function loadJsonBesideReadme<T>(
+	readme: string,
+	filename: string,
+): Promise<T | undefined> {
+	const filePath = path.resolve(path.dirname(readme), filename);
+
+	if (!(await fileExists(filePath))) return;
+
+	INFO(`found ${filename} next to readme`, filePath);
+
+	const contents = await fsp.readFile(filePath, { encoding: "utf8" });
+
+	return JSON.parse(contents) as T;
 }

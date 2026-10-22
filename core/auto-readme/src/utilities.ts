@@ -22,6 +22,8 @@ const matches = [
 	/.*action\.ya?ml$/gi,
 	/.*package\.json$/gi,
 	/.*pnpm-workspace\.yaml$/gi,
+	/.*\.mcp\.json$/gi,
+	/.*skills-lock\.json$/gi,
 ];
 
 type BunWorkspace = { workspaces?: Workspace };

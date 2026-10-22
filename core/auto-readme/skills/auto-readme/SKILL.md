@@ -4,7 +4,8 @@ description: >
   Auto-generate and update tables and lists in README files using HTML comment
   markers. Supports WORKSPACE (monorepo package tables), ACTION (GitHub Action
   inputs from action.yml), PKG (package.json dependency tables), ZOD (zod schema
-  reference tables), USAGE actions. Run via CLI or as a pre-commit hook with
+  reference tables), BADGE (dependency badges plus auto discovered .mcp.json
+  servers and skills-lock.json skill links), USAGE actions. Run via CLI or as a pre-commit hook with
   --changes to process only modified READMEs.
 type: core
 library: "@stephansama/auto-readme"
@@ -91,6 +92,15 @@ Generates a table of dependencies and devDependencies from the nearest `package.
 ```
 
 Generates a markdown reference table from the default export of the given file using `zod2md`. The `path=` parameter is required and must point to a file with a zod schema as its default export.
+
+### Dependency badges with MCP servers and skills
+
+```md
+<!-- BADGE start -->
+<!-- BADGE end -->
+```
+
+Generates shields.io badges for the dependencies in the nearest `package.json` (or `path=`). When a `.mcp.json` or `skills-lock.json` file exists in the same directory as the README, the zone also appends one badge per MCP server (http servers link to their url, headers and env are never rendered) and one badge per skill linking to its `SKILL.md` on GitHub. Nothing needs to be enabled; opt out with `--skip-mcp` / `--skip-skills` on the comment.
 
 ### Pre-commit hook (changed files only)
 

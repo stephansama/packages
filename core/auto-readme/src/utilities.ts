@@ -24,6 +24,12 @@ const matches = [
 	/.*pnpm-workspace\.yaml$/gi,
 	/.*\.mcp\.json$/gi,
 	/.*skills-lock\.json$/gi,
+	// mcp configuration files of other tools, see MCP_CONFIG_FILES
+	/.*\.claude-plugin\/plugin\.json$/gi,
+	/.*\.(cursor|vscode|roo|amazonq)\/mcp\.json$/gi,
+	/.*\.kiro\/settings\/mcp\.json$/gi,
+	/.*\.(gemini|zed)\/settings\.json$/gi,
+	/.*opencode\.jsonc?$/gi,
 ];
 
 type BunWorkspace = { workspaces?: Workspace };

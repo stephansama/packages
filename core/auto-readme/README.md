@@ -85,7 +85,27 @@ To generate badges for your dependencies add the following comments
 <!-- BADGE end -->
 ```
 
-If a `.mcp.json` or a `skills-lock.json` file lives next to the `README`, the badge section automatically adds a badge for every MCP server and a badge linking to every skill underneath the dependency badges. MCP badges link to the server `url` with any credentials and query string removed; `args`, `env` and `headers` are never rendered. Skill badges link to the `SKILL.md` at the installed `ref` (or `HEAD`). Pass `--skip-mcp` or `--skip-skills` on the comment to opt out:
+If an MCP configuration file or a `skills-lock.json` file lives next to the `README`, the badge section automatically adds a badge for every MCP server and a badge linking to every skill underneath the dependency badges. MCP badges link to the server `url` with any credentials and query string removed; `args`, `env` and `headers` are never rendered. Skill badges link to the `SKILL.md` at the installed `ref` (or `HEAD`).
+
+The following MCP configuration files are discovered relative to the `README`. Every file found is merged, and when a server name repeats the file listed first wins:
+
+| File                         | Tool                     |
+| :--------------------------- | :----------------------- |
+| `.mcp.json`                  | Claude Code              |
+| `.claude-plugin/plugin.json` | Claude Code plugins      |
+| `.cursor/mcp.json`           | Cursor                   |
+| `.vscode/mcp.json`           | VS Code / GitHub Copilot |
+| `.gemini/settings.json`      | Gemini CLI               |
+| `.roo/mcp.json`              | Roo Code                 |
+| `.kiro/settings/mcp.json`    | Kiro                     |
+| `.amazonq/mcp.json`          | Amazon Q Developer       |
+| `opencode.json` / `.jsonc`   | OpenCode                 |
+| `.zed/settings.json`         | Zed                      |
+
+> [!NOTE]
+> Only JSON based configuration files are read. TOML based files such as `.codex/config.toml` (OpenAI Codex) and YAML based files such as `.continue/config.yaml` (Continue) are intentionally not supported.
+
+Pass `--skip-mcp` or `--skip-skills` on the comment to opt out:
 
 ```md
 <!-- BADGE --skip-mcp --skip-skills start -->

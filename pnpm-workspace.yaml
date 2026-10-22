@@ -51,6 +51,7 @@ catalog:
   happy-dom: 20.6.1
   he: 1.2.0
   jsdom: 27.4.0
+  jsonc-parser: 3.3.1
   json-schema-to-typescript: 15.0.4
   jsr: 0.13.5
   knip: 5.88.1

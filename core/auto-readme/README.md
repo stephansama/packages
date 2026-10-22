@@ -85,7 +85,7 @@ To generate badges for your dependencies add the following comments
 <!-- BADGE end -->
 ```
 
-If a `.mcp.json` or a `skills-lock.json` file lives next to the `README`, the badge section automatically adds a badge for every MCP server and a badge linking to every skill underneath the dependency badges. Pass `--skip-mcp` or `--skip-skills` on the comment to opt out:
+If a `.mcp.json` or a `skills-lock.json` file lives next to the `README`, the badge section automatically adds a badge for every MCP server and a badge linking to every skill underneath the dependency badges. MCP badges link to the server `url` with any credentials and query string removed; `args`, `env` and `headers` are never rendered. Skill badges link to the `SKILL.md` at the installed `ref` (or `HEAD`). Pass `--skip-mcp` or `--skip-skills` on the comment to opt out:
 
 ```md
 <!-- BADGE --skip-mcp --skip-skills start -->

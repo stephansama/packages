@@ -23,9 +23,11 @@ export type McpServer = {
 };
 
 export type Skill = {
+	ref?: string;
 	skillPath?: string;
 	source?: string;
 	sourceType?: string;
+	sourceUrl?: string;
 };
 
 export type SkillsLock = { skills?: Record<string, Skill> };
@@ -78,14 +80,15 @@ export async function loadActionData(
 						: path.dirname(file);
 					const pkgJson = await readPackageJSON(filename);
 					const catalogs = await loadCatalogs();
-					const mcp = await loadJsonBesideReadme<McpJson>(
-						file,
-						MCP_FILE,
-					);
-					const skills = await loadJsonBesideReadme<SkillsLock>(
-						file,
-						SKILLS_LOCK_FILE,
-					);
+					const mcp = action.parameters.includes("--skip-mcp")
+						? undefined
+						: await loadJsonBesideReadme<McpJson>(file, MCP_FILE);
+					const skills = action.parameters.includes("--skip-skills")
+						? undefined
+						: await loadJsonBesideReadme<SkillsLock>(
+								file,
+								SKILLS_LOCK_FILE,
+							);
 					return {
 						action: action.action,
 						catalogs: catalogs,
@@ -193,5 +196,12 @@ async function loadJsonBesideReadme<T>(
 
 	const contents = await fsp.readFile(filePath, { encoding: "utf8" });
 
-	return JSON.parse(contents) as T;
+	try {
+		return JSON.parse(contents) as T;
+	} catch (error) {
+		const reason = error instanceof Error ? error.message : String(error);
+		throw new Error(`unable to parse ${filePath}: ${reason}`, {
+			cause: error,
+		});
+	}
 }

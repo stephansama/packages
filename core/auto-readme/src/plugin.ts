@@ -22,7 +22,9 @@ type TemplateContext = {
 	uri_name: string;
 };
 
-const GITHUB_URL = "https://github.com";
+const GITHUB_HOST = "github.com";
+const GITHUB_URL = `https://${GITHUB_HOST}`;
+const GIT_SUFFIX = /(?:\.git)?\/?$/;
 const HTTP_PROTOCOL = /^https?:\/\//;
 const SHIELD_URL = "https://img.shields.io/badge";
 
@@ -356,7 +358,7 @@ function createBadge(label: string, image: string, url?: string) {
 function createMcpBadge(name: string, server: McpServer) {
 	const [color, slug] = getSimpleIconColor("modelcontextprotocol");
 	const image = createShieldImage("mcp", name, color || "000000", slug);
-	return createBadge(name, image, server.url);
+	return createBadge(name, image, getMcpServerUrl(server));
 }
 
 /** Shield image in the same style as the dependency badges */
@@ -383,8 +385,29 @@ function escapeShield(input: string) {
 	);
 }
 
+/**
+ * Public link for an mcp server. Credentials and query strings are stripped
+ * since readmes are usually published further than the repository itself
+ */
+function getMcpServerUrl(server: McpServer): string | undefined {
+	if (!server.url) return;
+	try {
+		const url = new URL(server.url);
+		url.username = "";
+		url.password = "";
+		url.search = "";
+		url.hash = "";
+		return url.href;
+	} catch {
+		return;
+	}
+}
+
 /** Resolve the repository url that a skill was installed from */
 function getSkillRepositoryUrl(skill: Skill): string | undefined {
+	if (skill.sourceUrl && HTTP_PROTOCOL.test(skill.sourceUrl)) {
+		return skill.sourceUrl;
+	}
 	if (!skill.source) return;
 	if (HTTP_PROTOCOL.test(skill.source)) return skill.source;
 	if (!skill.sourceType || skill.sourceType === "github") {
@@ -396,10 +419,17 @@ function getSkillRepositoryUrl(skill: Skill): string | undefined {
 function getSkillUrl(skill: Skill): string | undefined {
 	const repository = getSkillRepositoryUrl(skill);
 	if (!repository) return;
-	if (!skill.skillPath || !repository.startsWith(GITHUB_URL)) {
-		return repository;
+	if (!skill.skillPath || !isGithubUrl(repository)) return repository;
+	const base = repository.replace(GIT_SUFFIX, "");
+	return `${base}/blob/${skill.ref || "HEAD"}/${skill.skillPath}`;
+}
+
+function isGithubUrl(input: string) {
+	try {
+		return new URL(input).hostname === GITHUB_HOST;
+	} catch {
+		return false;
 	}
-	return `${repository}/blob/HEAD/${skill.skillPath}`;
 }
 
 function loadTemplates(

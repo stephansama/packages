@@ -568,3 +568,93 @@ it("BADGE: renders nothing extra when no mcp or skills data is loaded", async ()
 	expect(result).not.toContain("badge/mcp-");
 	expect(result).not.toContain("badge/skill-");
 });
+
+it("BADGE: strips credentials and query strings from mcp server links", async () => {
+	const data = [
+		{
+			...(badgeWithExtras[0] as object),
+			mcp: {
+				mcpServers: {
+					secret: {
+						type: "http",
+						url: "https://user:pass@mcp.example.com/path?token=abc#frag",
+					},
+				},
+			},
+		},
+	] as unknown as ActionData;
+
+	const result = unescape(
+		await processMarkdown(withZone("BADGE"), defaultConfig, data),
+	);
+
+	expect(result).toContain("](https://mcp.example.com/path)");
+	expect(result).not.toContain("user:pass");
+	expect(result).not.toContain("token=abc");
+});
+
+it("BADGE: honors ref and sourceUrl from skills-lock.json", async () => {
+	const data = [
+		{
+			...(badgeWithExtras[0] as object),
+			skills: {
+				skills: {
+					elsewhere: {
+						skillPath: "skills/elsewhere/SKILL.md",
+						source: "owner/elsewhere",
+						sourceType: "gitlab",
+						sourceUrl: "https://gitlab.com/owner/elsewhere",
+					},
+					pinned: {
+						ref: "v1.2.0",
+						skillPath: "skills/pinned/SKILL.md",
+						source: "owner/repo",
+						sourceType: "github",
+					},
+					remote: {
+						skillPath: "skills/remote/SKILL.md",
+						source: "owner/other",
+						sourceType: "github",
+						sourceUrl: "https://github.com/owner/other.git",
+					},
+				},
+			},
+		},
+	] as unknown as ActionData;
+
+	const result = unescape(
+		await processMarkdown(withZone("BADGE"), defaultConfig, data),
+	);
+
+	expect(result).toContain(
+		"](https://github.com/owner/repo/blob/v1.2.0/skills/pinned/SKILL.md)",
+	);
+	expect(result).toContain(
+		"](https://github.com/owner/other/blob/HEAD/skills/remote/SKILL.md)",
+	);
+	expect(result).toContain("](https://gitlab.com/owner/elsewhere)");
+});
+
+it("BADGE: does not treat look-alike hosts as github", async () => {
+	const data = [
+		{
+			...(badgeWithExtras[0] as object),
+			skills: {
+				skills: {
+					spoof: {
+						skillPath: "skills/spoof/SKILL.md",
+						source: "https://github.com.evil.example/owner/repo",
+						sourceType: "github",
+					},
+				},
+			},
+		},
+	] as unknown as ActionData;
+
+	const result = unescape(
+		await processMarkdown(withZone("BADGE"), defaultConfig, data),
+	);
+
+	expect(result).toContain("](https://github.com.evil.example/owner/repo)");
+	expect(result).not.toContain("/blob/");
+});

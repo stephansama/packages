@@ -100,7 +100,7 @@ Generates a markdown reference table from the default export of the given file u
 <!-- BADGE end -->
 ```
 
-Generates shields.io badges for the dependencies in the nearest `package.json` (or `path=`). When a `.mcp.json` or `skills-lock.json` file exists in the same directory as the README, the zone also appends one badge per MCP server (http servers link to their url, headers and env are never rendered) and one badge per skill linking to its `SKILL.md` on GitHub. Nothing needs to be enabled; opt out with `--skip-mcp` / `--skip-skills` on the comment.
+Generates shields.io badges for the dependencies in the nearest `package.json` (or `path=`). When a `.mcp.json` or `skills-lock.json` file exists in the same directory as the README, the zone also appends one badge per MCP server (http servers link to their url with credentials and query string stripped; `args`, `env` and `headers` are never rendered) and one badge per skill linking to its `SKILL.md` at the installed `ref` (or `HEAD`) on GitHub. Nothing needs to be enabled; opt out with `--skip-mcp` / `--skip-skills` on the comment, which also skips reading the files. A malformed file fails the run with an error naming the file.
 
 ### Pre-commit hook (changed files only)
 

@@ -84,3 +84,29 @@ it("BADGE: looks next to the readme even when path= points elsewhere", async () 
 	expect(result).toMatchObject({ action: "BADGE", mcp });
 	expect(result).not.toHaveProperty("skills.skills");
 });
+
+it("BADGE: names the file when a discovered json file is malformed", async () => {
+	const readme = path.join(directory, "README.md");
+	const file = path.join(directory, ".mcp.json");
+	await fsp.writeFile(file, "{ mcpServers: }");
+
+	await expect(loadActionData(badge, readme, directory)).rejects.toThrow(
+		`unable to parse ${file}`,
+	);
+});
+
+it("BADGE: does not read the files when --skip-mcp / --skip-skills are set", async () => {
+	const readme = path.join(directory, "README.md");
+	await fsp.writeFile(path.join(directory, ".mcp.json"), "not json");
+	await fsp.writeFile(path.join(directory, "skills-lock.json"), "not json");
+
+	const [result] = await loadActionData(
+		[{ ...badge[0], parameters: ["--skip-mcp", "--skip-skills"] }],
+		readme,
+		directory,
+	);
+
+	expect(result).toMatchObject({ action: "BADGE" });
+	expect(result).not.toHaveProperty("mcp.mcpServers");
+	expect(result).not.toHaveProperty("skills.skills");
+});

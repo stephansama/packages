@@ -14,8 +14,10 @@ export function getSkillRepositoryUrl(skill: Skill): string | undefined {
 	if (skill.sourceUrl && HTTP_PROTOCOL.test(skill.sourceUrl)) {
 		return skill.sourceUrl;
 	}
+
 	if (!skill.source) return;
 	if (HTTP_PROTOCOL.test(skill.source)) return skill.source;
+
 	if (!skill.sourceType || skill.sourceType === "github") {
 		return `${GITHUB_URL}/${skill.source}`;
 	}

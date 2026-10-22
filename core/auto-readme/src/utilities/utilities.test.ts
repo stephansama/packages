@@ -1,7 +1,7 @@
 import { afterEach, expect, it, vi } from "vitest";
 
-import * as logger from "./log";
-import * as module from "./utilities";
+import * as logger from "../log";
+import * as module from "./index";
 
 const mockGitRoot = "/Users/stephansama/Code/packages/";
 

@@ -7,26 +7,16 @@ import { markdownTable } from "markdown-table";
 import { fromMarkdown } from "mdast-util-from-markdown";
 import path from "node:path";
 
-import type { ActionData, McpServer, Skill } from "./data";
+import type { ActionData } from "./data";
 import type { Config } from "./schema";
+import type { TemplateContext } from "./utilities";
 
 import { getContrastText } from "./color";
 import { parseComment } from "./comment";
 import { getSimpleIconColor } from "./icon";
 import { INFO } from "./log";
 import { defaultTableHeadings, defaultTemplates } from "./schema";
-import { resolveVersion } from "./utilities";
-
-type TemplateContext = {
-	name: string;
-	uri_name: string;
-};
-
-const GITHUB_HOST = "github.com";
-const GITHUB_URL = `https://${GITHUB_HOST}`;
-const GIT_SUFFIX = /(?:\.git)?\/?$/;
-const HTTP_PROTOCOL = /^https?:\/\//;
-const SHIELD_URL = "https://img.shields.io/badge";
+import { createMcpBadge, createSkillBadge, resolveVersion } from "./utilities";
 
 function createHeading(
 	headings: (keyof NonNullable<Config["templates"]>["emojis"])[],
@@ -348,89 +338,6 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 			return [start, tableAst, end];
 		});
 	};
-
-function createBadge(label: string, image: string, url?: string) {
-	const badge = `![${label}](${image})`;
-	return url ? `[${badge}](${url})` : badge;
-}
-
-/** Badge for a server defined in a `.mcp.json` next to the readme */
-function createMcpBadge(name: string, server: McpServer) {
-	const [color, slug] = getSimpleIconColor("modelcontextprotocol");
-	const image = createShieldImage("mcp", name, color || "000000", slug);
-	return createBadge(name, image, getMcpServerUrl(server));
-}
-
-/** Shield image in the same style as the dependency badges */
-function createShieldImage(
-	label: string,
-	message: string,
-	color: string,
-	logo: string,
-) {
-	const contrastText = getContrastText(color);
-	return `${SHIELD_URL}/${escapeShield(label)}-${escapeShield(message)}-${color}.svg?logo=${logo}&logoColor=${contrastText}&labelColor=${color}`;
-}
-
-/** Badge for a skill defined in a `skills-lock.json` next to the readme */
-function createSkillBadge(name: string, skill: Skill) {
-	const [color, slug] = getSimpleIconColor("github");
-	const image = createShieldImage("skill", name, color || "181717", slug);
-	return createBadge(name, image, getSkillUrl(skill));
-}
-
-function escapeShield(input: string) {
-	return encodeURIComponent(
-		input.replaceAll("-", "--").replaceAll("_", "__"),
-	);
-}
-
-/**
- * Public link for an mcp server. Credentials and query strings are stripped
- * since readmes are usually published further than the repository itself
- */
-function getMcpServerUrl(server: McpServer): string | undefined {
-	if (!server.url) return;
-	try {
-		const url = new URL(server.url);
-		url.username = "";
-		url.password = "";
-		url.search = "";
-		url.hash = "";
-		return url.href;
-	} catch {
-		return;
-	}
-}
-
-/** Resolve the repository url that a skill was installed from */
-function getSkillRepositoryUrl(skill: Skill): string | undefined {
-	if (skill.sourceUrl && HTTP_PROTOCOL.test(skill.sourceUrl)) {
-		return skill.sourceUrl;
-	}
-	if (!skill.source) return;
-	if (HTTP_PROTOCOL.test(skill.source)) return skill.source;
-	if (!skill.sourceType || skill.sourceType === "github") {
-		return `${GITHUB_URL}/${skill.source}`;
-	}
-}
-
-/** Resolve a url directly to the skill definition when possible */
-function getSkillUrl(skill: Skill): string | undefined {
-	const repository = getSkillRepositoryUrl(skill);
-	if (!repository) return;
-	if (!skill.skillPath || !isGithubUrl(repository)) return repository;
-	const base = repository.replace(GIT_SUFFIX, "");
-	return `${base}/blob/${skill.ref || "HEAD"}/${skill.skillPath}`;
-}
-
-function isGithubUrl(input: string) {
-	try {
-		return new URL(input).hostname === GITHUB_HOST;
-	} catch {
-		return false;
-	}
-}
 
 function loadTemplates(
 	templates: Config["templates"],

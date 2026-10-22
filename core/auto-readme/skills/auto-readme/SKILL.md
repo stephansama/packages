@@ -15,6 +15,8 @@ sources:
   - stephansama/packages:core/auto-readme/src/data.ts
   - stephansama/packages:core/auto-readme/src/plugin.ts
   - stephansama/packages:core/auto-readme/src/schema.ts
+  - stephansama/packages:core/auto-readme/src/utilities/mcp.ts
+  - stephansama/packages:core/auto-readme/src/utilities/skills.ts
   - stephansama/packages:core/auto-readme/README.md
 ---
 
@@ -173,7 +175,7 @@ Correct:
 
 The ACTION data loader looks for `action.yml` or `action.yaml` in the same directory as the README file. Place the ACTION comment in the README co-located with the action definition, or use PKG for dependency tables in other directories.
 
-Source: `core/auto-readme/src/data.ts:loadActionYaml`
+Source: `core/auto-readme/src/utilities/action.ts:loadActionYaml`
 
 ### MEDIUM Unclosed or mismatched comment markers
 

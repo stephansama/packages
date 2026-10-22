@@ -19,7 +19,10 @@ const mocks = vi.hoisted(() => ({
 vi.mock("./color", () => ({ getContrastText: mocks.getContrastText }));
 vi.mock("./icon", () => ({ getSimpleIconColor: mocks.getSimpleIconColor }));
 vi.mock("./log", () => ({ INFO: vi.fn() }));
-vi.mock("./utilities", () => ({ resolveVersion: mocks.resolveVersion }));
+vi.mock("./utilities", async (importOriginal) => ({
+	...(await importOriginal<typeof import("./utilities")>()),
+	resolveVersion: mocks.resolveVersion,
+}));
 
 afterEach(vi.clearAllMocks);
 

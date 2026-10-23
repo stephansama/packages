@@ -1,5 +1,11 @@
 # @stephansama/auto-readme
 
+## 0.5.0
+
+### Minor Changes
+
+- 2631315: the `BADGE` action now automatically renders badges for every MCP server found in json configuration files next to the readme (`.mcp.json`, `.cursor/mcp.json`, `.vscode/mcp.json`, `.gemini/settings.json`, `opencode.json` and more) and for every skill in a `skills-lock.json`
+
 ## 0.4.0
 
 ### Minor Changes

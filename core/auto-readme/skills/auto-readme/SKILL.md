@@ -43,7 +43,7 @@ Add configuration to `package.json`:
 
 ```json
 {
-  "auto-readme": {
+  "autoreadme": {
     "disableEmojis": false,
     "onlyShowPublicPackages": true
   }
@@ -56,7 +56,7 @@ Skip markdown files with `ignoreGlobs` (globs relative to the git root, also app
 
 ```json
 {
-  "auto-readme": {
+  "autoreadme": {
     "ignoreGlobs": ["examples/**", "**/CHANGELOG.md"]
   }
 }

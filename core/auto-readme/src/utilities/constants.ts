@@ -14,6 +14,7 @@ export const DEFAULT_COLLAPSE_BADGES_AFTER = 8;
 /** Optional trailing `.git` and `/` on a repository url */
 export const GIT_SUFFIX = /(?:\.git)?\/?$/;
 export const HTTP_PROTOCOL = /^https?:\/\//;
+export const TRAILING_SLASH = /\/$/;
 
 /** Globs never traversed when looking for markdown files */
 export const IGNORED_GLOBS = ["**/node_modules/**"];

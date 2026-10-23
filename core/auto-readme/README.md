@@ -148,7 +148,7 @@ Most of the options in the [schema](#schema) below can also be used as command-l
 
 ## Configuration
 
-`auto-readme` can be configured using a variety of files, such as `package.json` with an `auto-readme` property, or a standalone `.autoreadmerc` file. For more information on configuration files, see [cosmiconfig](https://github.com/cosmiconfig/cosmiconfig).
+`auto-readme` can be configured using a variety of files, such as `package.json` with an `autoreadme` property, or a standalone `.autoreadmerc` file. For more information on configuration files, see [cosmiconfig](https://github.com/cosmiconfig/cosmiconfig).
 
 ### Configuration File
 
@@ -228,7 +228,7 @@ Use `ignoreGlobs` to skip markdown files. Globs are matched relative to the git 
 }
 ```
 
-The same option is available on the cli with `--ignoreGlobs` / `-i`.
+The same option is available on the cli with `--ignoreGlobs` / `-i`. Quote each glob so the shell does not expand it (`-i "examples/**"`).
 
 ### Schema
 

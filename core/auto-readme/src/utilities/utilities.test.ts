@@ -99,6 +99,27 @@ it("matches files relative to the root against ignoreGlobs", () => {
 	);
 });
 
+it("treats bare directory ignoreGlobs like tinyglobby", () => {
+	for (const glob of ["examples", "examples/"]) {
+		const config = { ignoreGlobs: [glob] };
+
+		expect(
+			module.isIgnored(
+				mockGitRoot,
+				mockGitRoot + "examples/a/README.md",
+				config,
+			),
+		).toBe(true);
+		expect(
+			module.isIgnored(
+				mockGitRoot,
+				mockGitRoot + "examplesX/README.md",
+				config,
+			),
+		).toBe(false);
+	}
+});
+
 it("successfully returns git root", () => {
 	const infoSpy = vi.spyOn(logger, "INFO");
 	mocks.execSync.mockReturnValue(mockGitRoot);

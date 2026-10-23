@@ -66,8 +66,8 @@ function isEmpty(value: unknown) {
 }
 
 /**
- * Drop falsy values and empty arrays so cli defaults never override the config
- * file
+ * Drop falsy values and empty arrays so empty cli defaults do not override the
+ * config file (truthy cli defaults still take precedence)
  */
 function removeFalsy(object: object) {
 	return Object.fromEntries(

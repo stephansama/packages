@@ -5,6 +5,12 @@ export const GITHUB_HOST = "github.com";
 export const GITHUB_URL = `https://${GITHUB_HOST}`;
 export const SHIELD_URL = "https://img.shields.io/badge";
 
+/**
+ * Badge groups (mcp servers, skills) larger than this are wrapped in a
+ * collapsed `<details>` block. Override per readme with `collapse=<n>`
+ */
+export const DEFAULT_COLLAPSE_BADGES_AFTER = 8;
+
 /** Optional trailing `.git` and `/` on a repository url */
 export const GIT_SUFFIX = /(?:\.git)?\/?$/;
 export const HTTP_PROTOCOL = /^https?:\/\//;

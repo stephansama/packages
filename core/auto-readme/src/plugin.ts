@@ -13,10 +13,17 @@ import type { TemplateContext } from "./utilities";
 
 import { getContrastText } from "./color";
 import { parseComment } from "./comment";
+import { createFindParameter } from "./data";
 import { getSimpleIconColor } from "./icon";
 import { INFO } from "./log";
 import { defaultTableHeadings, defaultTemplates } from "./schema";
-import { createMcpBadge, createSkillBadge, resolveVersion } from "./utilities";
+import {
+	collapseBadges,
+	createMcpBadge,
+	createSkillBadge,
+	DEFAULT_COLLAPSE_BADGES_AFTER,
+	resolveVersion,
+} from "./utilities";
 
 function createHeading(
 	headings: (keyof NonNullable<Config["templates"]>["emojis"])[],
@@ -152,12 +159,16 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 						([name, skill]) => createSkillBadge(name, skill),
 					);
 
+			const find = createFindParameter(first?.parameters || []);
+			const collapseAfter =
+				Number(find("collapse")) || DEFAULT_COLLAPSE_BADGES_AFTER;
+
 			const ast = fromMarkdown(
 				[
 					templateBadges.filter(Boolean).join("\n"),
 					packageBadges.filter(Boolean).join("\n"),
-					mcpBadges.join("\n"),
-					skillBadges.join("\n"),
+					collapseBadges(mcpBadges, "mcp servers", collapseAfter),
+					collapseBadges(skillBadges, "skills", collapseAfter),
 				]
 					.filter(Boolean)
 					.join("\n\n"),

@@ -1,4 +1,4 @@
-import type { McpServer, Skill } from "./types";
+import type { BadgeStyle, McpServer, Skill } from "./types";
 
 import { getContrastText } from "../color";
 import { getSimpleIconColor } from "../icon";
@@ -8,12 +8,25 @@ import { getSkillUrl } from "./skills";
 
 /**
  * Join a group of badges, wrapping them in a collapsed `<details>` block once
- * the group grows past `after` entries so long lists stay out of the way
+ * the group grows past `after` entries so long lists stay out of the way. The
+ * summary is a badge of its own showing the group logo, name and count
  */
-export function collapseBadges(badges: string[], label: string, after: number) {
+export function collapseBadges(
+	badges: string[],
+	style: BadgeStyle,
+	after: number,
+) {
 	const body = badges.join("\n");
 	if (badges.length <= after) return body;
-	const summary = `<summary>${badges.length} ${label}</summary>`;
+	const count = String(badges.length);
+	const image = createShieldImage(
+		style.label,
+		count,
+		style.color,
+		style.logo,
+	);
+	// markdown is not parsed inside <summary>, so the badge is an <img> tag
+	const summary = `<summary><img alt="${style.label}" src="${image}"></summary>`;
 	return ["<details>", summary, "", body, "", "</details>"].join("\n");
 }
 
@@ -27,8 +40,8 @@ export function createBadge(label: string, image: string, url?: string) {
  * label is left empty so only the mcp logo shows next to the server name
  */
 export function createMcpBadge(name: string, server: McpServer) {
-	const [color, slug] = getSimpleIconColor("modelcontextprotocol");
-	const image = createShieldImage("", name, color || "000000", slug);
+	const { color, logo } = getMcpBadgeStyle();
+	const image = createShieldImage("", name, color, logo);
 	return createBadge(name, image, getMcpServerUrl(server));
 }
 
@@ -47,12 +60,12 @@ export function createShieldImage(
 }
 
 /**
- * Badge for a skill defined in a `skills-lock.json` next to the readme. Uses
- * the vercel logo since the lock file is written by vercel's `skills` cli
+ * Badge for a skill defined in a `skills-lock.json` next to the readme. The
+ * label is left empty so only the logo shows next to the skill name
  */
 export function createSkillBadge(name: string, skill: Skill) {
-	const [color, slug] = getSimpleIconColor("vercel");
-	const image = createShieldImage("skill", name, color || "000000", slug);
+	const { color, logo } = getSkillBadgeStyle();
+	const image = createShieldImage("", name, color, logo);
 	return createBadge(name, image, getSkillUrl(skill));
 }
 
@@ -61,4 +74,19 @@ export function escapeShield(input: string) {
 	return encodeURIComponent(
 		input.replaceAll("-", "--").replaceAll("_", "__"),
 	);
+}
+
+/** Logo and color shared by every mcp badge and the collapsed summary */
+export function getMcpBadgeStyle(): BadgeStyle {
+	const [color, logo] = getSimpleIconColor("modelcontextprotocol");
+	return { color: color || "000000", label: "mcp", logo };
+}
+
+/**
+ * Logo and color shared by every skill badge and the collapsed summary. Uses
+ * the vercel logo since the lock file is written by vercel's `skills` cli
+ */
+export function getSkillBadgeStyle(): BadgeStyle {
+	const [color, logo] = getSimpleIconColor("vercel");
+	return { color: color || "000000", label: "skills", logo };
 }

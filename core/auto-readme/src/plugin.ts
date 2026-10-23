@@ -22,6 +22,8 @@ import {
 	createMcpBadge,
 	createSkillBadge,
 	DEFAULT_COLLAPSE_BADGES_AFTER,
+	getMcpBadgeStyle,
+	getSkillBadgeStyle,
 	resolveVersion,
 } from "./utilities";
 
@@ -167,8 +169,16 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				[
 					templateBadges.filter(Boolean).join("\n"),
 					packageBadges.filter(Boolean).join("\n"),
-					collapseBadges(mcpBadges, "mcp servers", collapseAfter),
-					collapseBadges(skillBadges, "skills", collapseAfter),
+					collapseBadges(
+						mcpBadges,
+						getMcpBadgeStyle(),
+						collapseAfter,
+					),
+					collapseBadges(
+						skillBadges,
+						getSkillBadgeStyle(),
+						collapseAfter,
+					),
 				]
 					.filter(Boolean)
 					.join("\n\n"),

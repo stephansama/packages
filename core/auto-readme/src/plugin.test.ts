@@ -497,7 +497,7 @@ it("BADGE: renders a badge for each skill linking to its definition", async () =
 	);
 
 	expect(result).toContain(
-		"[![ab-testing](https://img.shields.io/badge/skill-ab--testing-000000.svg?logo=vercel&logoColor=ffffff&labelColor=000000)](https://github.com/coreyhaines31/marketingskills/blob/HEAD/skills/ab-testing/SKILL.md)",
+		"[![ab-testing](https://img.shields.io/badge/-ab--testing-000000.svg?logo=vercel&logoColor=ffffff&labelColor=000000)](https://github.com/coreyhaines31/marketingskills/blob/HEAD/skills/ab-testing/SKILL.md)",
 	);
 	expect(result).toContain("![local-skill](");
 	expect(result).not.toContain("[![local-skill]");
@@ -529,7 +529,7 @@ it("BADGE: places mcp and skill badges after the dependency badges", async () =>
 		result.indexOf("badge/-karakeep-"),
 	);
 	expect(result.indexOf("badge/-karakeep-")).toBeLessThan(
-		result.indexOf("badge/skill-"),
+		result.indexOf("badge/-ab--testing-"),
 	);
 });
 
@@ -550,10 +550,12 @@ it("BADGE: collapses a badge group into <details> once it grows past the thresho
 		data,
 	);
 
-	expect(result).toContain("<details>\n<summary>9 skills</summary>");
+	expect(result).toContain(
+		'<details>\n<summary><img alt="skills" src="https://img.shields.io/badge/skills-9-',
+	);
 	expect(result).toContain("</details>");
 	// two mcp servers stay inline
-	expect(result).not.toContain("mcp servers</summary>");
+	expect(result).not.toContain('alt="mcp"');
 });
 
 it("BADGE: collapse=<n> on the comment overrides the threshold", async () => {
@@ -567,8 +569,12 @@ it("BADGE: collapse=<n> on the comment overrides the threshold", async () => {
 		data,
 	);
 
-	expect(result).toContain("<summary>2 mcp servers</summary>");
-	expect(result).toContain("<summary>2 skills</summary>");
+	expect(result).toContain(
+		'<summary><img alt="mcp" src="https://img.shields.io/badge/mcp-2-',
+	);
+	expect(result).toContain(
+		'<summary><img alt="skills" src="https://img.shields.io/badge/skills-2-',
+	);
 });
 
 it("BADGE: skips mcp and skill badges with --skip-mcp / --skip-skills", async () => {
@@ -586,7 +592,7 @@ it("BADGE: skips mcp and skill badges with --skip-mcp / --skip-skills", async ()
 	);
 
 	expect(result).not.toContain("logo=modelcontextprotocol");
-	expect(result).not.toContain("badge/skill-");
+	expect(result).not.toContain("logo=vercel");
 });
 
 it("BADGE: renders nothing extra when no mcp or skills data is loaded", async () => {
@@ -608,7 +614,7 @@ it("BADGE: renders nothing extra when no mcp or skills data is loaded", async ()
 	);
 
 	expect(result).not.toContain("logo=modelcontextprotocol");
-	expect(result).not.toContain("badge/skill-");
+	expect(result).not.toContain("logo=vercel");
 });
 
 it("BADGE: links mcp servers to their host only", async () => {

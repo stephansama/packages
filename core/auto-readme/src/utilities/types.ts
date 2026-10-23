@@ -6,6 +6,16 @@ export type ActionInput = {
 
 export type ActionYaml = { inputs?: Record<string, ActionInput> };
 
+/** Shield styling shared by a group of badges */
+export type BadgeStyle = {
+	/** Hex color without the leading `#` */
+	color: string;
+	/** Shown on the left side of the collapsed summary badge */
+	label: string;
+	/** Simple-icons slug */
+	logo: string;
+};
+
 export type BunWorkspace = { workspaces?: Workspace };
 
 export type Catalog = Record<string, string>;

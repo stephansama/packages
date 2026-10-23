@@ -9,18 +9,23 @@ import path from "node:path";
 
 import type { ActionData } from "./data";
 import type { Config } from "./schema";
+import type { TemplateContext } from "./utilities";
 
 import { getContrastText } from "./color";
 import { parseComment } from "./comment";
+import { createFindParameter } from "./data";
 import { getSimpleIconColor } from "./icon";
 import { INFO } from "./log";
 import { defaultTableHeadings, defaultTemplates } from "./schema";
-import { resolveVersion } from "./utilities";
-
-type TemplateContext = {
-	name: string;
-	uri_name: string;
-};
+import {
+	collapseBadges,
+	createMcpBadge,
+	createSkillBadge,
+	DEFAULT_COLLAPSE_BADGES_AFTER,
+	getMcpBadgeStyle,
+	getSkillBadgeStyle,
+	resolveVersion,
+} from "./utilities";
 
 function createHeading(
 	headings: (keyof NonNullable<Config["templates"]>["emojis"])[],
@@ -142,11 +147,41 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				packageBadges.push(md`[![${key}](${imageUrl})](${linkUrl})`);
 			}
 
+			const skipMcp = first?.parameters.includes("--skip-mcp");
+			const mcpBadges = skipMcp
+				? []
+				: Object.entries(first?.mcp?.mcpServers || {}).map(
+						([name, server]) => createMcpBadge(name, server),
+					);
+
+			const skipSkills = first?.parameters.includes("--skip-skills");
+			const skillBadges = skipSkills
+				? []
+				: Object.entries(first?.skills?.skills || {}).map(
+						([name, skill]) => createSkillBadge(name, skill),
+					);
+
+			const find = createFindParameter(first?.parameters || []);
+			const collapseAfter =
+				Number(find("collapse")) || DEFAULT_COLLAPSE_BADGES_AFTER;
+
 			const ast = fromMarkdown(
 				[
 					templateBadges.filter(Boolean).join("\n"),
 					packageBadges.filter(Boolean).join("\n"),
-				].join("\n\n"),
+					collapseBadges(
+						mcpBadges,
+						getMcpBadgeStyle(),
+						collapseAfter,
+					),
+					collapseBadges(
+						skillBadges,
+						getSkillBadgeStyle(),
+						collapseAfter,
+					),
+				]
+					.filter(Boolean)
+					.join("\n\n"),
 			);
 
 			return [start, ast, end];

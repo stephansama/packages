@@ -1,24 +1,19 @@
 import { getPackages } from "@manypkg/get-packages";
 import * as fs from "node:fs";
-import * as fsp from "node:fs/promises";
 import path from "node:path";
 import { readPackageJSON } from "pkg-types";
-import * as yaml from "yaml";
 import { zod2md } from "zod2md";
 
 import type { AstComments } from "./comment";
 
-import { fileExists, loadCatalogs } from "./utilities";
+import {
+	loadActionYaml,
+	loadCatalogs,
+	loadMcpServers,
+	loadSkillsLock,
+} from "./utilities";
 
 export type ActionData = Awaited<ReturnType<typeof loadActionData>>;
-
-type ActionInput = {
-	default?: string;
-	description?: string;
-	required?: boolean;
-};
-
-type ActionYaml = { inputs?: Record<string, ActionInput> };
 
 export function createFindParameter(parameterList: string[]) {
 	return function (parameterName: string) {
@@ -50,7 +45,29 @@ export async function loadActionData(
 					};
 				}
 
-				case "BADGE":
+				case "BADGE": {
+					const inputPath = find("path");
+					const filename = inputPath
+						? path.resolve(path.dirname(file), inputPath)
+						: path.dirname(file);
+					const pkgJson = await readPackageJSON(filename);
+					const catalogs = await loadCatalogs();
+					const mcp = action.parameters.includes("--skip-mcp")
+						? undefined
+						: await loadMcpServers(file);
+					const skills = action.parameters.includes("--skip-skills")
+						? undefined
+						: await loadSkillsLock(file);
+					return {
+						action: action.action,
+						catalogs: catalogs,
+						mcp,
+						parameters: action.parameters,
+						pkgJson,
+						skills,
+					};
+				}
+
 				case "PKG": {
 					const inputPath = find("path");
 					const filename = inputPath
@@ -115,22 +132,4 @@ export async function loadActionData(
 			}
 		}),
 	);
-}
-
-async function loadActionYaml(baseDirectory: string) {
-	const actionYmlPath = path.resolve(baseDirectory, "action.yml");
-	const actionYamlPath = path.resolve(baseDirectory, "action.yaml");
-	const actualPath =
-		((await fileExists(actionYamlPath)) && actionYamlPath) ||
-		((await fileExists(actionYmlPath)) && actionYmlPath);
-
-	if (!actualPath) {
-		const locations = [actionYmlPath, actionYamlPath];
-		const error = `no yaml file found at locations: ${locations.join(",")}`;
-		throw new Error(error);
-	}
-
-	const actionFile = await fsp.readFile(actualPath, { encoding: "utf8" });
-
-	return yaml.parse(actionFile) as ActionYaml;
 }

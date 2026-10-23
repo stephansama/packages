@@ -4,7 +4,8 @@ description: >
   Auto-generate and update tables and lists in README files using HTML comment
   markers. Supports WORKSPACE (monorepo package tables), ACTION (GitHub Action
   inputs from action.yml), PKG (package.json dependency tables), ZOD (zod schema
-  reference tables), USAGE actions. Run via CLI or as a pre-commit hook with
+  reference tables), BADGE (dependency badges plus auto discovered MCP servers
+  from json configs and skills-lock.json skill links), USAGE actions. Run via CLI or as a pre-commit hook with
   --changes to process only modified READMEs.
 type: core
 library: "@stephansama/auto-readme"
@@ -14,6 +15,8 @@ sources:
   - stephansama/packages:core/auto-readme/src/data.ts
   - stephansama/packages:core/auto-readme/src/plugin.ts
   - stephansama/packages:core/auto-readme/src/schema.ts
+  - stephansama/packages:core/auto-readme/src/utilities/mcp.ts
+  - stephansama/packages:core/auto-readme/src/utilities/skills.ts
   - stephansama/packages:core/auto-readme/README.md
 ---
 
@@ -92,6 +95,15 @@ Generates a table of dependencies and devDependencies from the nearest `package.
 
 Generates a markdown reference table from the default export of the given file using `zod2md`. The `path=` parameter is required and must point to a file with a zod schema as its default export.
 
+### Dependency badges with MCP servers and skills
+
+```md
+<!-- BADGE start -->
+<!-- BADGE end -->
+```
+
+Generates shields.io badges for the dependencies in the nearest `package.json` (or `path=`). When an MCP configuration file (`.mcp.json`, `.claude-plugin/plugin.json`, `.cursor/mcp.json`, `.vscode/mcp.json`, `.gemini/settings.json`, `.roo/mcp.json`, `.kiro/settings/mcp.json`, `.amazonq/mcp.json`, `opencode.json(c)` or `.zed/settings.json`; all found files are merged and the first listed wins on duplicate names. TOML/YAML configs such as `.codex/config.toml` and `.continue/config.yaml` are intentionally not read) or a `skills-lock.json` file exists in the same directory as the README, the zone also appends one badge per MCP server (logo only, no label; http servers link to the host of their url only, never the endpoint path, credentials or query string; `args`, `env` and `headers` are never rendered) and one badge per skill (Vercel logo, no label) linking to its `SKILL.md` at the installed `ref` (or `HEAD`) on GitHub. Groups with more than 8 badges are wrapped in a collapsed `<details>` block whose summary is a logo + name + count badge (override with `collapse=<n>` on the comment). Nothing needs to be enabled; opt out with `--skip-mcp` / `--skip-skills` on the comment, which also skips reading the files. A malformed file fails the run with an error naming the file.
+
 ### Pre-commit hook (changed files only)
 
 ```sh
@@ -163,7 +175,7 @@ Correct:
 
 The ACTION data loader looks for `action.yml` or `action.yaml` in the same directory as the README file. Place the ACTION comment in the README co-located with the action definition, or use PKG for dependency tables in other directories.
 
-Source: `core/auto-readme/src/data.ts:loadActionYaml`
+Source: `core/auto-readme/src/utilities/action.ts:loadActionYaml`
 
 ### MEDIUM Unclosed or mismatched comment markers
 

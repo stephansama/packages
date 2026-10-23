@@ -64,6 +64,7 @@
     "cosmiconfig": "catalog:cli",
     "deepmerge": "catalog:",
     "handlebars": "catalog:handlebars",
+    "jsonc-parser": "catalog:",
     "local-pkg": "catalog:",
     "markdown-table": "catalog:",
     "mdast": "catalog:",

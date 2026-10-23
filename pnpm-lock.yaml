@@ -166,6 +166,9 @@ catalogs:
     json-schema-to-typescript:
       specifier: 15.0.4
       version: 15.0.4
+    jsonc-parser:
+      specifier: 3.3.1
+      version: 3.3.1
     jsr:
       specifier: 0.13.5
       version: 0.13.5
@@ -801,6 +804,9 @@ importers:
       handlebars:
         specifier: catalog:handlebars
         version: 4.7.9
+      jsonc-parser:
+        specifier: 'catalog:'
+        version: 3.3.1
       local-pkg:
         specifier: 'catalog:'
         version: 1.1.2

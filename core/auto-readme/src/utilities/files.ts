@@ -1,6 +1,7 @@
 import * as fs from "node:fs";
 import * as fsp from "node:fs/promises";
 import path from "node:path";
+import picomatch from "picomatch";
 import { glob } from "tinyglobby";
 
 import type { Config } from "../schema";
@@ -44,7 +45,8 @@ export function findNearestReadme(
 
 export async function getMarkdownPaths(cwd: string, config: Config) {
 	const pattern = `**/${config?.onlyReadmes ? "README" : "*"}.md`;
-	const readmes = await glob(pattern, { cwd, ignore: IGNORED_GLOBS });
+	const ignore = [...IGNORED_GLOBS, ...(config?.ignoreGlobs ?? [])];
+	const readmes = await glob(pattern, { cwd, ignore });
 	return readmes.map((readme) => path.resolve(cwd, readme));
 }
 
@@ -59,4 +61,10 @@ export async function getPrettierPaths(paths: string[]) {
 			return path.join(path.dirname(file), symlink);
 		}),
 	);
+}
+
+/** Whether a file matches one of the configured `ignoreGlobs` */
+export function isIgnored(root: string, file: string, config: Config) {
+	if (!config.ignoreGlobs?.length) return false;
+	return picomatch(config.ignoreGlobs)(path.relative(root, file));
 }

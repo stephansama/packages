@@ -62,6 +62,7 @@ export declare const configSchema: z.ZodOptional<z.ZodObject<{
     required: "required";
     version: "version";
   }>>>>>>>;
+  ignoreGlobs: z.ZodDefault<z.ZodArray<z.ZodString>>;
   onlyReadmes: z.ZodDefault<z.ZodBoolean>;
   onlyShowPublicPackages: z.ZodDefault<z.ZodBoolean>;
   removeScope: z.ZodDefault<z.ZodString>;

@@ -52,6 +52,16 @@ Add configuration to `package.json`:
 
 Or use a standalone config file (`.autoreadmerc.json`, `.config/autoreadmerc.ts`, `autoreadme.config.ts`, etc.).
 
+Skip markdown files with `ignoreGlobs` (globs relative to the git root, also applied to `--changes`; `node_modules` is always ignored):
+
+```json
+{
+  "auto-readme": {
+    "ignoreGlobs": ["examples/**", "**/CHANGELOG.md"]
+  }
+}
+```
+
 ## Core Patterns
 
 ### Monorepo workspace table

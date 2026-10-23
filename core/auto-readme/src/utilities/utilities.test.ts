@@ -60,6 +60,45 @@ it("logs additional affected regexes when supplied", () => {
 	expect(infoSpy).toHaveBeenCalledTimes(4);
 });
 
+it("skips affected readmes matching ignoreGlobs", () => {
+	mocks.execSync.mockReturnValue(
+		["examples/demo/package.json", "core/pkg/package.json"]
+			.map((f) => mockGitRoot + f)
+			.join("\n"),
+	);
+	mocks.existsSync.mockReturnValue(true);
+
+	const readmes = module.findAffectedMarkdowns(mockGitRoot, {
+		ignoreGlobs: ["examples/**"],
+	});
+
+	expect(readmes).toEqual([
+		mockGitRoot + "core/pkg/README.md",
+		mockGitRoot + "README.md",
+	]);
+});
+
+it("matches files relative to the root against ignoreGlobs", () => {
+	const config = { ignoreGlobs: ["examples/**", "CHANGELOG.md"] };
+
+	expect(
+		module.isIgnored(
+			mockGitRoot,
+			mockGitRoot + "examples/a/README.md",
+			config,
+		),
+	).toBe(true);
+	expect(
+		module.isIgnored(mockGitRoot, mockGitRoot + "CHANGELOG.md", config),
+	).toBe(true);
+	expect(
+		module.isIgnored(mockGitRoot, mockGitRoot + "core/README.md", config),
+	).toBe(false);
+	expect(module.isIgnored(mockGitRoot, mockGitRoot + "README.md", {})).toBe(
+		false,
+	);
+});
+
 it("successfully returns git root", () => {
 	const infoSpy = vi.spyOn(logger, "INFO");
 	mocks.execSync.mockReturnValue(mockGitRoot);

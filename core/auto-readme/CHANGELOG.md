@@ -1,5 +1,11 @@
 # @stephansama/auto-readme
 
+## 0.6.0
+
+### Minor Changes
+
+- 58e7eb8: add `ignoreGlobs` option to skip markdown files when traversing or checking staged changes
+
 ## 0.5.0
 
 ### Minor Changes

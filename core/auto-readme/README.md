@@ -103,7 +103,7 @@ The following MCP configuration files are discovered relative to the `README`. E
 | `opencode.json` / `.jsonc`   | OpenCode                 |
 | `.zed/settings.json`         | Zed                      |
 
-> \[!NOTE]
+> [!NOTE]
 > Only JSON based configuration files are read. TOML based files such as `.codex/config.toml` (OpenAI Codex) and YAML based files such as `.continue/config.yaml` (Continue) are intentionally not supported.
 
 A group with more than 8 badges is wrapped in a collapsed `<details>` block whose summary is a badge showing the group logo, name and count. Change the threshold with `collapse=<n>` on the comment:

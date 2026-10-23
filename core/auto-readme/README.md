@@ -85,7 +85,7 @@ To generate badges for your dependencies add the following comments
 <!-- BADGE end -->
 ```
 
-If an MCP configuration file or a `skills-lock.json` file lives next to the `README`, the badge section automatically adds a badge for every MCP server and a badge linking to every skill underneath the dependency badges. MCP badges show only the MCP logo next to the server name and link to the server `url` with any credentials and query string removed; `args`, `env` and `headers` are never rendered. Skill badges carry the Vercel logo (the lock file is written by Vercel's `skills` CLI) and link to the `SKILL.md` at the installed `ref` (or `HEAD`).
+If an MCP configuration file or a `skills-lock.json` file lives next to the `README`, the badge section automatically adds a badge for every MCP server and a badge linking to every skill underneath the dependency badges. MCP badges show only the MCP logo next to the server name and link to the host of the server `url` (scheme and domain only, never the endpoint path, credentials or query string); `args`, `env` and `headers` are never rendered. Skill badges carry the Vercel logo (the lock file is written by Vercel's `skills` CLI) and link to the `SKILL.md` at the installed `ref` (or `HEAD`).
 
 The following MCP configuration files are discovered relative to the `README`. Every file found is merged, and when a server name repeats the file listed first wins:
 

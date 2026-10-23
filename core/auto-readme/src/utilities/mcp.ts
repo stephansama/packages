@@ -39,18 +39,14 @@ export const MCP_CONFIG_FILES = [
 ] as const satisfies McpConfigFile[];
 
 /**
- * Public link for an mcp server. Credentials and query strings are stripped
- * since readmes are usually published further than the repository itself
+ * Public link for an mcp server: only the host the server runs on. The mcp
+ * endpoint itself is not browsable and its path or query may carry tokens, and
+ * readmes are usually published further than the repository itself
  */
 export function getMcpServerUrl(server: McpServer): string | undefined {
 	if (!server.url) return;
 	try {
-		const url = new URL(server.url);
-		url.username = "";
-		url.password = "";
-		url.search = "";
-		url.hash = "";
-		return url.href;
+		return new URL(server.url).origin;
 	} catch {
 		return;
 	}

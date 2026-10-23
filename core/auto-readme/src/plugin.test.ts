@@ -472,7 +472,7 @@ it("BADGE: renders a badge for each mcp server, linking http servers", async () 
 	);
 
 	expect(result).toContain(
-		"[![n8n-mcp](https://img.shields.io/badge/-n8n--mcp-000000.svg?logo=modelcontextprotocol&logoColor=ffffff&labelColor=000000)](https://n8n.example.com/mcp-server/http)",
+		"[![n8n-mcp](https://img.shields.io/badge/-n8n--mcp-000000.svg?logo=modelcontextprotocol&logoColor=ffffff&labelColor=000000)](https://n8n.example.com)",
 	);
 	expect(result).toContain(
 		"![karakeep](https://img.shields.io/badge/-karakeep-000000.svg?logo=modelcontextprotocol",
@@ -611,7 +611,7 @@ it("BADGE: renders nothing extra when no mcp or skills data is loaded", async ()
 	expect(result).not.toContain("badge/skill-");
 });
 
-it("BADGE: strips credentials and query strings from mcp server links", async () => {
+it("BADGE: links mcp servers to their host only", async () => {
 	const data = [
 		{
 			...(badgeWithExtras[0] as object),
@@ -630,7 +630,8 @@ it("BADGE: strips credentials and query strings from mcp server links", async ()
 		await processMarkdown(withZone("BADGE"), defaultConfig, data),
 	);
 
-	expect(result).toContain("](https://mcp.example.com/path)");
+	expect(result).toContain("](https://mcp.example.com)");
+	expect(result).not.toContain("/path");
 	expect(result).not.toContain("user:pass");
 	expect(result).not.toContain("token=abc");
 });

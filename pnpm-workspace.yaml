@@ -36,6 +36,7 @@ catalog:
   '@types/mdast': 4.0.4
   '@types/minify': 9.1.4
   '@types/node': 24.12.2
+  '@types/picomatch': 4.0.2
   '@types/react': 19.2.14
   '@types/vfile': 4.0.0
   '@types/yargs': 17.0.35
@@ -69,6 +70,7 @@ catalog:
   node-plop: 0.32.3
   oxc-parser: 0.127.0
   package-manager-detector: 1.6.0
+  picomatch: 4.0.7
   pkg-pr-new: 0.0.51
   pkg-types: 2.3.0
   publint: 0.3.17

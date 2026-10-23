@@ -137,6 +137,11 @@ const _configSchema = z.object({
 		.optional()
 		.default(defaultTableHeadings)
 		.describe("List of headings for different table outputs"),
+	ignoreGlobs: z.array(z.string().trim()).default([]).meta({
+		alias: "i",
+		description:
+			"Globs relative to the git root of markdown files to skip (node_modules is always ignored)",
+	}),
 	onlyReadmes: z.boolean().default(true).meta({
 		alias: "r",
 		description: "Whether or not to only traverse readmes",

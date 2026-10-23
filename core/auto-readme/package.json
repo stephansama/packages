@@ -71,6 +71,7 @@
     "mdast-comment-marker": "catalog:",
     "mdast-util-from-markdown": "catalog:",
     "obug": "catalog:cli",
+    "picomatch": "catalog:",
     "picospinner": "catalog:cli",
     "pkg-types": "catalog:",
     "remark": "catalog:remark",
@@ -89,6 +90,7 @@
   "devDependencies": {
     "@tanstack/intent": "catalog:tanstack",
     "@types/mdast": "catalog:",
+    "@types/picomatch": "catalog:",
     "@types/vfile": "catalog:",
     "@types/yargs": "catalog:",
     "tsdown": "catalog:",

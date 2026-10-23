@@ -58,6 +58,21 @@ it("loads the default config", async () => {
 	expect(loaded?.defaultLanguage).toBe(defaultConfig?.defaultLanguage);
 });
 
+it("does not let empty cli arrays override the config file", async () => {
+	searchMock.mock.mockResolvedValue({
+		config: { ignoreGlobs: ["examples/**"] },
+		filepath: "",
+	});
+
+	await module.loadConfig({ i: [], ignoreGlobs: [], verbose: true });
+
+	expect(mocks.deepmerge).toHaveBeenCalledWith(
+		{ ignoreGlobs: ["examples/**"] },
+		{ verbose: true },
+		expect.anything(),
+	);
+});
+
 it("warns the user when the supplied config cannot be found", async () => {
 	const infoSpy = vi.spyOn(logger, "INFO");
 	const warnSpy = vi.spyOn(logger, "WARN");

@@ -1,11 +1,12 @@
 import * as fs from "node:fs";
 import * as fsp from "node:fs/promises";
 import path from "node:path";
+import picomatch from "picomatch";
 import { glob } from "tinyglobby";
 
 import type { Config } from "../schema";
 
-import { IGNORED_GLOBS } from "./constants";
+import { IGNORED_GLOBS, TRAILING_SLASH } from "./constants";
 
 export async function fileExists(file: string) {
 	return await fsp
@@ -44,7 +45,8 @@ export function findNearestReadme(
 
 export async function getMarkdownPaths(cwd: string, config: Config) {
 	const pattern = `**/${config?.onlyReadmes ? "README" : "*"}.md`;
-	const readmes = await glob(pattern, { cwd, ignore: IGNORED_GLOBS });
+	const ignore = [...IGNORED_GLOBS, ...(config?.ignoreGlobs ?? [])];
+	const readmes = await glob(pattern, { cwd, ignore });
 	return readmes.map((readme) => path.resolve(cwd, readme));
 }
 
@@ -59,4 +61,19 @@ export async function getPrettierPaths(paths: string[]) {
 			return path.join(path.dirname(file), symlink);
 		}),
 	);
+}
+
+/**
+ * Whether a file matches one of the configured `ignoreGlobs`, normalized the
+ * same way tinyglobby treats `ignore` so bare paths also match their contents
+ */
+export function isIgnored(root: string, file: string, config: Config) {
+	if (!config.ignoreGlobs?.length) return false;
+	const globs = config.ignoreGlobs.map((glob) => {
+		const trimmed = glob.replace(TRAILING_SLASH, "");
+		return trimmed.endsWith("*") ? trimmed : `${trimmed}/**`;
+	});
+	// git and tinyglobby use posix separators, path.relative does not on windows
+	const relative = path.relative(root, file).split(path.sep).join("/");
+	return picomatch(globs)(relative);
 }

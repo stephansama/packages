@@ -43,7 +43,7 @@ Add configuration to `package.json`:
 
 ```json
 {
-  "auto-readme": {
+  "autoreadme": {
     "disableEmojis": false,
     "onlyShowPublicPackages": true
   }
@@ -51,6 +51,16 @@ Add configuration to `package.json`:
 ```
 
 Or use a standalone config file (`.autoreadmerc.json`, `.config/autoreadmerc.ts`, `autoreadme.config.ts`, etc.).
+
+Skip markdown files with `ignoreGlobs` (globs relative to the git root, also applied to `--changes`; `node_modules` is always ignored):
+
+```json
+{
+  "autoreadme": {
+    "ignoreGlobs": ["examples/**", "**/CHANGELOG.md"]
+  }
+}
+```
 
 ## Core Patterns
 

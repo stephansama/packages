@@ -5,7 +5,7 @@ import type { Config } from "../schema";
 
 import { ERROR, INFO } from "../log";
 import { AFFECTED_FILE_MATCHES } from "./constants";
-import { findNearestReadme } from "./files";
+import { findNearestReadme, isIgnored } from "./files";
 
 const sh = String.raw;
 
@@ -44,7 +44,7 @@ export function findAffectedMarkdowns(root: string, config: Config) {
 	const rootMd = path.join(root, "README.md");
 
 	const dedupe = [...new Set(md), rootMd].filter(
-		(item): item is string => !!item,
+		(item): item is string => !!item && !isIgnored(root, item, config),
 	);
 
 	INFO("Found the following readmes", dedupe);

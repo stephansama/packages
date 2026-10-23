@@ -61,11 +61,19 @@ function getSearchPlaces() {
 	];
 }
 
+function isEmpty(value: unknown) {
+	return !value || (Array.isArray(value) && value.length === 0);
+}
+
+/**
+ * Drop falsy values and empty arrays so empty cli defaults do not override the
+ * config file (truthy cli defaults still take precedence)
+ */
 function removeFalsy(object: object) {
 	return Object.fromEntries(
 		// @ts-expect-error some sort of mismatch
 		Object.entries(object)
-			.map(([k, v]) => (v ? [k, v] : false))
+			.map(([k, v]) => (isEmpty(v) ? false : [k, v]))
 			.filter(Boolean),
 	);
 }

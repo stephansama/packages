@@ -42,19 +42,52 @@ it.each([
 		"<!-- JS-PKG-TABLE start -->",
 		{ action: "PKG", format: "TABLE", isStart: true, language: "JS" },
 	],
-] as [string, ReturnType<typeof module.parseComment>][])(
-	"parseComment",
-	(input, expected) => {
-		const output = module.parseComment(input);
-		expect(output.action).toBe(expected.action);
-		expect(output.format).toBe(
-			// eslint-disable-next-line unicorn/no-useless-undefined
-			expected.format || formatsSchema.parse(undefined),
-		);
-		expect(output.language).toBe(
-			// eslint-disable-next-line unicorn/no-useless-undefined
-			expected.language || languageSchema.parse(undefined),
-		);
-		expect(output.isStart).toBe(expected.isStart);
-	},
-);
+] as [string, module.ParsedComment][])("parseComment", (input, expected) => {
+	const output = module.parseComment(input);
+	if (!output) throw new Error(`failed to parse ${input}`);
+	expect(output.action).toBe(expected.action);
+	expect(output.format).toBe(
+		// eslint-disable-next-line unicorn/no-useless-undefined
+		expected.format || formatsSchema.parse(undefined),
+	);
+	expect(output.language).toBe(
+		// eslint-disable-next-line unicorn/no-useless-undefined
+		expected.language || languageSchema.parse(undefined),
+	);
+	expect(output.isStart).toBe(expected.isStart);
+});
+
+it.each([
+	"<!-- markdownlint-disable MD013 -->",
+	"<!-- markdownlint-disable MD013 MD033 MD041 -->",
+	"<!-- arbitrary blog change to trigger build -->",
+	"<!-- markdown-list:start -->",
+	"<!-- PKG-FOO start -->",
+])("skips non action comment %s without throwing", (input) => {
+	expect(module.parseComment(input)).toBe(false);
+});
+
+it("keeps action comments in a readme mixed with other comments", () => {
+	const comments = module.loadAstComments(
+		fromMarkdown(md`
+# x
+
+<!-- markdownlint-disable MD013 -->
+
+<!-- arbitrary text here -->
+
+<!-- PKG start -->
+<!-- PKG end -->
+
+<!-- ZOD-TABLE start -->
+<!-- ZOD-TABLE end -->
+		`),
+	);
+
+	expect(comments.map((c) => [c.action, c.isStart])).toEqual([
+		["PKG", true],
+		["PKG", false],
+		["ZOD", true],
+		["ZOD", false],
+	]);
+});

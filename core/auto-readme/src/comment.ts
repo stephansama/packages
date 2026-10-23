@@ -9,12 +9,15 @@ const SEPARATOR = "-" as const;
 
 export type AstComments = ReturnType<typeof loadAstComments>;
 
+export type ParsedComment = Exclude<ReturnType<typeof parseComment>, false>;
+
 export function loadAstComments(root: Root) {
 	return root.children
 		.map((child) => child.type === "html" && getComment(child))
-		.filter((f): f is ReturnType<typeof parseComment> => f !== false);
+		.filter((f): f is ParsedComment => !!f);
 }
 
+/** Parse an action comment, returning `false` for any other html comment */
 export function parseComment(comment: string) {
 	const input = trimComment(comment);
 	const [type, ...parameters] = input.split(" ");
@@ -25,11 +28,23 @@ export function parseComment(comment: string) {
 	const languageInput = third ? first : undefined;
 	const actionInput = third ? second : first;
 	const formatInput = third || second;
-	const language = languageSchema.parse(languageInput);
-	const action = actionsSchema.parse(actionInput);
-	const format = formatsSchema.parse(formatInput);
+	const language = languageSchema.safeParse(languageInput);
+	const action = actionsSchema.safeParse(actionInput);
+	const format = formatsSchema.safeParse(formatInput);
+
+	if (!language.success || !action.success || !format.success) {
+		INFO(`Skipping non action comment ${comment}`);
+		return false;
+	}
+
 	const isStart = comment.includes("start");
-	const parsed = { action, format, isStart, language, parameters };
+	const parsed = {
+		action: action.data,
+		format: format.data,
+		isStart,
+		language: language.data,
+		parameters,
+	};
 
 	INFO(`Parsed comment ${comment}`, parsed);
 

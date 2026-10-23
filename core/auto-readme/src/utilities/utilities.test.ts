@@ -10,6 +10,7 @@ const mocks = vi.hoisted(() => ({
 	access: vi.fn().mockResolvedValue(undefined),
 	execSync: vi.fn(),
 	existsSync: vi.fn(),
+	glob: vi.fn(),
 	isSymbolicLink: vi.fn(),
 	lstat: vi.fn(() => ({ isSymbolicLink: mocks.isSymbolicLink })),
 	readlink: vi.fn(),
@@ -17,6 +18,7 @@ const mocks = vi.hoisted(() => ({
 
 vi.mock("node:child_process", () => ({ execSync: mocks.execSync }));
 vi.mock("node:fs", () => ({ existsSync: mocks.existsSync }));
+vi.mock("tinyglobby", () => ({ glob: mocks.glob }));
 vi.mock("node:fs/promises", () => ({
 	access: mocks.access,
 	lstat: mocks.lstat,
@@ -118,6 +120,35 @@ it("treats bare directory ignoreGlobs like tinyglobby", () => {
 			),
 		).toBe(false);
 	}
+});
+
+it("passes ignoreGlobs to tinyglobby alongside node_modules", async () => {
+	mocks.glob.mockResolvedValue(["README.md", "core/pkg/README.md"]);
+
+	const paths = await module.getMarkdownPaths(mockGitRoot, {
+		ignoreGlobs: ["examples/**"],
+		onlyReadmes: true,
+	});
+
+	expect(mocks.glob).toHaveBeenCalledWith("**/README.md", {
+		cwd: mockGitRoot,
+		ignore: ["**/node_modules/**", "examples/**"],
+	});
+	expect(paths).toEqual([
+		mockGitRoot + "README.md",
+		mockGitRoot + "core/pkg/README.md",
+	]);
+});
+
+it("globs every markdown file when onlyReadmes is disabled", async () => {
+	mocks.glob.mockResolvedValue([]);
+
+	await module.getMarkdownPaths(mockGitRoot, {});
+
+	expect(mocks.glob).toHaveBeenCalledWith("**/*.md", {
+		cwd: mockGitRoot,
+		ignore: ["**/node_modules/**"],
+	});
 });
 
 it("successfully returns git root", () => {

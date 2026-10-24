@@ -17,7 +17,10 @@ export function loadAstComments(root: Root) {
 		.filter((f): f is ParsedComment => !!f);
 }
 
-/** Parse an action comment, returning `false` for any other html comment */
+/**
+ * Parse an action comment, returning `false` for any other html comment. Throws
+ * when the action is known but its language or format is not
+ */
 export function parseComment(comment: string) {
 	const input = trimComment(comment);
 	const [type, ...parameters] = input.split(" ");
@@ -32,9 +35,22 @@ export function parseComment(comment: string) {
 	const action = actionsSchema.safeParse(actionInput);
 	const format = formatsSchema.safeParse(formatInput);
 
-	if (!language.success || !action.success || !format.success) {
+	if (!action.success) {
 		INFO(`Skipping non action comment ${comment}`);
 		return false;
+	}
+
+	// a known action with a bad language or format is a typo, not a stray comment
+	if (!language.success) {
+		throw new Error(
+			`Invalid language "${languageInput}" in ${comment}: ${language.error.issues[0]?.message}`,
+		);
+	}
+
+	if (!format.success) {
+		throw new Error(
+			`Invalid format "${formatInput}" in ${comment}: ${format.error.issues[0]?.message}`,
+		);
 	}
 
 	const isStart = comment.includes("start");

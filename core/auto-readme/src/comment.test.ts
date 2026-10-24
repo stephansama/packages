@@ -62,7 +62,6 @@ it.each([
 	"<!-- markdownlint-disable MD013 MD033 MD041 -->",
 	"<!-- arbitrary blog change to trigger build -->",
 	"<!-- markdown-list:start -->",
-	"<!-- PKG-FOO start -->",
 ])("skips non action comment %s without throwing", (input) => {
 	expect(module.parseComment(input)).toBe(false);
 });
@@ -90,4 +89,12 @@ it("keeps action comments in a readme mixed with other comments", () => {
 		["ZOD", true],
 		["ZOD", false],
 	]);
+});
+
+it.each([
+	["<!-- PKG-TABEL start -->", /Invalid format "TABEL"/],
+	["<!-- JS-PKG-TABEL start -->", /Invalid format "TABEL"/],
+	["<!-- PY-PKG-LIST start -->", /Invalid language "PY"/],
+])("throws a clear error for a malformed action comment %s", (input, error) => {
+	expect(() => module.parseComment(input)).toThrowError(error);
 });

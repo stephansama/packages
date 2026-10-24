@@ -67,6 +67,9 @@
     "lint:fix": "eslint ./ --fix",
     "prepublishOnly": "tsdown"
   },
+  "dependencies": {
+    "magic-string": "catalog:"
+  },
   "devDependencies": {
     "@iconify-json/logos": "catalog:",
     "@iconify-json/octicon": "catalog:",
@@ -76,7 +79,7 @@
     "astro": "catalog:",
     "svelte": "catalog:svelte",
     "tsdown": "catalog:",
-    "vite": "catalog:"
+    "vite": "catalog:vite8"
   },
   "peerDependencies": {
     "astro": ">=5",

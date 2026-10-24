@@ -33,10 +33,16 @@ afterEach(() => {
 	fs.rmSync(directory, { force: true, recursive: true });
 });
 
-async function buildEntry(source: string, ssr = false) {
+async function buildEntry(
+	source: string,
+	ssr = false,
+	{ base = "/", sourcemap = false } = {},
+) {
 	const result = await build({
+		base,
 		build: {
 			rollupOptions: { input: writeEntry(source) },
+			sourcemap,
 			ssr,
 			ssrEmitAssets: true,
 			write: false,
@@ -74,6 +80,11 @@ async function buildRuntime() {
 	return path.join(outDirectory, "entry.mjs");
 }
 
+async function logosSpriteName(source: string) {
+	const output = await buildEntry(source);
+	return output.find((item) => item.fileName.includes("logos"))?.fileName;
+}
+
 function writeEntry(source: string) {
 	const entry = path.join(directory, "entry.js");
 	fs.writeFileSync(entry, source);
@@ -103,12 +114,14 @@ describe("generateSprite", () => {
 
 describe("static imports", () => {
 	it("emits a hashed sprite containing only the imported icons", async () => {
-		const output = await buildEntry(`
+		const output = await buildEntry(
+			`
 			import astro from "virtual:iconify-svgmap/logos/astro";
 			import alpine from "virtual:iconify-svgmap/logos/alpinejs";
 			import copilot from "virtual:iconify-svgmap/octicon/copilot-16";
 			console.log(astro, alpine, copilot);
-		`);
+		`,
+		);
 
 		const assets = output.filter((item) => item.type === "asset");
 		expect(assets.map((asset) => asset.fileName).toSorted()).toEqual([
@@ -120,8 +133,9 @@ describe("static imports", () => {
 		expect(String(logos.source).match(/<symbol /g)).toHaveLength(2);
 
 		const chunk = output.find((item) => item.type === "chunk")!;
-		expect(chunk.code).toContain(`"/${logos.fileName}#astro"`);
-		expect(chunk.code).not.toContain("ROLLUP_FILE_URL");
+		// rolldown inlines the href into a template literal, so skip quotes
+		expect(chunk.code).toContain(`/${logos.fileName}#astro`);
+		expect(chunk.code).not.toContain("@@iconify-svgmap:");
 	});
 
 	it("resolves absolute hrefs in ssr builds", async () => {
@@ -132,6 +146,50 @@ describe("static imports", () => {
 		const chunk = output.find((item) => item.type === "chunk")!;
 		expect(chunk.code).toMatch(SSR_HREF_REGEX);
 		expect(chunk.code).not.toContain("import.meta.url");
+	});
+
+	it("changes the sprite hash when the imported icons change", async () => {
+		const one = await logosSpriteName(
+			`import a from "virtual:iconify-svgmap/logos/astro"; console.log(a);`,
+		);
+		const two = await logosSpriteName(`
+			import a from "virtual:iconify-svgmap/logos/astro";
+			import b from "virtual:iconify-svgmap/logos/alpinejs";
+			console.log(a, b);
+		`);
+		expect(one).toMatch(LOGOS_ASSET_REGEX);
+		expect(two).toMatch(LOGOS_ASSET_REGEX);
+		expect(one).not.toBe(two);
+	});
+
+	it("resolves sprites relative to the chunk for relative bases", async () => {
+		const output = await buildEntry(
+			`import a from "virtual:iconify-svgmap/logos/astro"; console.log(a);`,
+			false,
+			{ base: "./" },
+		);
+		const sprite = output.find((item) => item.fileName.includes("logos"))!;
+		const chunk = output.find((item) => item.type === "chunk")!;
+		const relative = path.posix.relative(
+			path.posix.dirname(chunk.fileName),
+			sprite.fileName,
+		);
+		expect(chunk.code).toContain(`./${relative}`);
+		expect(chunk.code).toContain("import.meta.url");
+	});
+
+	it("keeps sourcemaps when replacing sprite urls", async () => {
+		const output = await buildEntry(
+			`import a from "virtual:iconify-svgmap/logos/astro"; console.log(a);`,
+			false,
+			{ sourcemap: true },
+		);
+		const chunk = output.find(
+			(item): item is Rollup.OutputChunk => item.type === "chunk",
+		)!;
+		expect(chunk.map?.sources.some((s) => s.endsWith("entry.js"))).toBe(
+			true,
+		);
 	});
 
 	it("fails the build for unknown icons and packs", async () => {

@@ -202,10 +202,11 @@ export default function iconifySvgmap(options: Options = {}): Plugin {
 			// replaced with the sprite url in renderChunk
 			const placeholder = JSON.stringify(`@@iconify-svgmap:${pack}@@`);
 			const hash = JSON.stringify(`#${icon}`);
-			// relative bases resolve against the chunk like rollup's default
+			// relative bases resolve against the chunk like rollup's default.
+			// @vite-ignore stops vite warning that the placeholder is missing
 			return base.startsWith("/")
 				? js`export default ${placeholder} + ${hash};`
-				: js`export default new URL(${placeholder}, import.meta.url).href + ${hash};`;
+				: js`export default new URL(/* @vite-ignore */ ${placeholder}, import.meta.url).href + ${hash};`;
 		},
 
 		name: pkg.name,

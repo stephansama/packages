@@ -1487,6 +1487,9 @@ importers:
 
   core/vite-iconify-svgmap:
     dependencies:
+      '@iconify/utils':
+        specifier: 'catalog:'
+        version: 2.3.0(supports-color@7.2.0)
       magic-string:
         specifier: 'catalog:'
         version: 0.30.21
@@ -1500,9 +1503,6 @@ importers:
       '@iconify/types':
         specifier: 'catalog:'
         version: 2.0.0
-      '@iconify/utils':
-        specifier: 'catalog:'
-        version: 2.3.0(supports-color@7.2.0)
       '@tanstack/intent':
         specifier: catalog:tanstack
         version: 0.0.41

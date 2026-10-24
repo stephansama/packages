@@ -68,13 +68,13 @@
     "prepublishOnly": "tsdown"
   },
   "dependencies": {
+    "@iconify/utils": "catalog:",
     "magic-string": "catalog:"
   },
   "devDependencies": {
     "@iconify-json/logos": "catalog:",
     "@iconify-json/octicon": "catalog:",
     "@iconify/types": "catalog:",
-    "@iconify/utils": "catalog:",
     "@tanstack/intent": "catalog:tanstack",
     "astro": "catalog:",
     "svelte": "catalog:svelte",
@@ -101,19 +101,5 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "inlinedDependencies": {
-    "@antfu/install-pkg": "1.1.0",
-    "@antfu/utils": "8.1.1",
-    "@iconify/utils": "2.3.0",
-    "acorn": "8.16.0",
-    "kolorist": "1.8.0",
-    "local-pkg": "1.1.2",
-    "mlly": "1.8.2",
-    "package-manager-detector": "1.6.0",
-    "pathe": "2.0.3",
-    "quansync": "0.2.11",
-    "tinyexec": "1.1.2",
-    "ufo": "1.6.3"
   }
 }

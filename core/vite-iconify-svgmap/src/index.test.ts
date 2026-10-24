@@ -1,4 +1,4 @@
-import type { Rollup } from "vite";
+import type { Logger, Rollup } from "vite";
 
 import { once } from "node:events";
 import fs from "node:fs";
@@ -6,7 +6,7 @@ import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { Worker } from "node:worker_threads";
-import { build, createServer } from "vite";
+import { build, createLogger, createServer } from "vite";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import iconifySvgmap, { writeSprites } from "./index";
@@ -36,7 +36,11 @@ afterEach(() => {
 async function buildEntry(
 	source: string,
 	ssr = false,
-	{ base = "/", sourcemap = false } = {},
+	{
+		base = "/",
+		customLogger = undefined as Logger | undefined,
+		sourcemap = false,
+	} = {},
 ) {
 	const result = await build({
 		base,
@@ -48,7 +52,8 @@ async function buildEntry(
 			write: false,
 		},
 		configFile: false,
-		logLevel: "silent",
+		customLogger,
+		logLevel: customLogger ? "warn" : "silent",
 		plugins: [iconifySvgmap({ root: packageRoot })],
 		root: directory,
 	});
@@ -178,6 +183,20 @@ describe("static imports", () => {
 		expect(chunk.code).toContain("import.meta.url");
 	});
 
+	it("does not warn about the placeholder url for relative bases", async () => {
+		const logger = createLogger("warn", { allowClearScreen: false });
+		const messages: string[] = [];
+		const collect = (message: string) => void messages.push(message);
+		vi.spyOn(logger, "warn").mockImplementation(collect);
+		vi.spyOn(logger, "warnOnce").mockImplementation(collect);
+		await buildEntry(
+			`import a from "virtual:iconify-svgmap/logos/astro"; console.log(a);`,
+			false,
+			{ base: "./", customLogger: logger },
+		);
+		expect(messages.join("\n")).not.toContain("@@iconify-svgmap:");
+	});
+
 	it("keeps sourcemaps when replacing sprite urls", async () => {
 		const output = await buildEntry(
 			`import a from "virtual:iconify-svgmap/logos/astro"; console.log(a);`,
@@ -190,6 +209,38 @@ describe("static imports", () => {
 		expect(chunk.map?.sources.some((s) => s.endsWith("entry.js"))).toBe(
 			true,
 		);
+	});
+
+	it("starts fresh when one plugin instance builds twice", async () => {
+		const plugin = iconifySvgmap({ root: packageRoot });
+		const buildWith = async (source: string) => {
+			const result = (await build({
+				build: {
+					rollupOptions: { input: writeEntry(source) },
+					write: false,
+				},
+				configFile: false,
+				logLevel: "silent",
+				plugins: [plugin],
+				root: directory,
+			})) as Rollup.RollupOutput;
+			return result.output.find((item) =>
+				item.fileName.includes("logos"),
+			);
+		};
+
+		await buildWith(`
+			import a from "virtual:iconify-svgmap/logos/astro";
+			import b from "virtual:iconify-svgmap/logos/alpinejs";
+			console.log(a, b);
+		`);
+		const second = await buildWith(
+			`import a from "virtual:iconify-svgmap/logos/astro"; console.log(a);`,
+		);
+
+		expect(second?.type).toBe("asset");
+		const source = String((second as Rollup.OutputAsset).source);
+		expect(source.match(/<symbol /g)).toHaveLength(1);
 	});
 
 	it("fails the build for unknown icons and packs", async () => {

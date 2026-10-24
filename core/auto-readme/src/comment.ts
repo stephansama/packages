@@ -9,12 +9,18 @@ const SEPARATOR = "-" as const;
 
 export type AstComments = ReturnType<typeof loadAstComments>;
 
+export type ParsedComment = Exclude<ReturnType<typeof parseComment>, false>;
+
 export function loadAstComments(root: Root) {
 	return root.children
 		.map((child) => child.type === "html" && getComment(child))
-		.filter((f): f is ReturnType<typeof parseComment> => f !== false);
+		.filter((f): f is ParsedComment => !!f);
 }
 
+/**
+ * Parse an action comment, returning `false` for any other html comment. Throws
+ * when the action is known but its language or format is not
+ */
 export function parseComment(comment: string) {
 	const input = trimComment(comment);
 	const [type, ...parameters] = input.split(" ");
@@ -25,11 +31,36 @@ export function parseComment(comment: string) {
 	const languageInput = third ? first : undefined;
 	const actionInput = third ? second : first;
 	const formatInput = third || second;
-	const language = languageSchema.parse(languageInput);
-	const action = actionsSchema.parse(actionInput);
-	const format = formatsSchema.parse(formatInput);
+	const language = languageSchema.safeParse(languageInput);
+	const action = actionsSchema.safeParse(actionInput);
+	const format = formatsSchema.safeParse(formatInput);
+
+	if (!action.success) {
+		INFO(`Skipping non action comment ${comment}`);
+		return false;
+	}
+
+	// a known action with a bad language or format is a typo, not a stray comment
+	if (!language.success) {
+		throw new Error(
+			`Invalid language "${languageInput}" in ${comment}: ${language.error.issues[0]?.message}`,
+		);
+	}
+
+	if (!format.success) {
+		throw new Error(
+			`Invalid format "${formatInput}" in ${comment}: ${format.error.issues[0]?.message}`,
+		);
+	}
+
 	const isStart = comment.includes("start");
-	const parsed = { action, format, isStart, language, parameters };
+	const parsed = {
+		action: action.data,
+		format: format.data,
+		isStart,
+		language: language.data,
+		parameters,
+	};
 
 	INFO(`Parsed comment ${comment}`, parsed);
 

@@ -59,6 +59,7 @@ catalog:
   ky: 2.0.1
   lefthook: 2.1.6
   local-pkg: 1.1.2
+  magic-string: 0.30.21
   markdown-table: 3.0.4
   mdast: 3.0.0
   mdast-comment-marker: 3.0.0

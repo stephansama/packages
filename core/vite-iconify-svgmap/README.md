@@ -16,7 +16,7 @@
 [![astro](https://img.shields.io/badge/astro-6.3.1-BC52EE.svg?logo=astro&logoColor=ffffff&labelColor=BC52EE)](https://npmx.dev/package/astro)
 [![svelte](https://img.shields.io/badge/svelte-5.51.2-FF3E00.svg?logo=svelte&logoColor=ffffff&labelColor=FF3E00)](https://npmx.dev/package/svelte)
 [![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
-[![vite](https://img.shields.io/badge/vite-6.3.5-9135FF.svg?logo=vite&logoColor=ffffff&labelColor=9135FF)](https://npmx.dev/package/vite)
+[![vite](https://img.shields.io/badge/vite-8.3.1-9135FF.svg?logo=vite&logoColor=ffffff&labelColor=9135FF)](https://npmx.dev/package/vite)
 
 <!-- BADGE end -->
 

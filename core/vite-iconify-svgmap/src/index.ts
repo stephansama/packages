@@ -1,6 +1,7 @@
 import type { Plugin, ResolvedConfig } from "vite";
 
 import { getIconData } from "@iconify/utils/lib/icon-set/get-icon";
+import MagicString from "magic-string";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,6 +26,12 @@ const RESOLVED_PREFIX = "\0";
 
 const QUERY_REGEX = /[?#]/;
 
+/**
+ * Stand in for a sprite url until its file name is known. `@` is outside
+ * {@link NAME_REGEX} so one pack's placeholder never prefixes another's
+ */
+const PLACEHOLDER_REGEX = /@@iconify-svgmap:([\w-]+)@@/g;
+
 const js = String.raw;
 
 /**
@@ -46,9 +53,8 @@ export default function iconifySvgmap(options: Options = {}): Plugin {
 	const usage = new Map<string, Map<string, Set<string>>>();
 	/** Emitted sprite reference ids per vite environment: env -> pack -> ref */
 	const references = new Map<string, Map<string, string>>();
-	const referenceIds = new Set<string>();
-	/** Emitted sprite reference id per env + static icon module id */
-	const moduleReferences = new Map<string, string>();
+	/** Pack of every static icon module per env + module id */
+	const modulePacks = new Map<string, string>();
 	/** Dev sprites keyed by pack, valid while the icon count is unchanged */
 	const developmentSprites = new Map<string, { size: number; svg: string }>();
 
@@ -60,14 +66,18 @@ export default function iconifySvgmap(options: Options = {}): Plugin {
 			const packReferences = references.get(key);
 			if (!packs || !packReferences) return;
 
+			// every icon is known once all modules are loaded. emit with the
+			// final source because rolldown (vite 8) does not support
+			// emitting an asset first and setting its source later
 			for (const [pack, icons] of packs) {
 				const collection = await loadCollection(pack);
-				const reference = packReferences.get(pack);
-				if (!collection || !reference) continue;
-				this.setAssetSource(
-					reference,
-					generateSprite(collection, icons).svg,
-				);
+				if (!collection) continue;
+				const reference = this.emitFile({
+					name: `${pack}.svg`,
+					source: generateSprite(collection, icons).svg,
+					type: "asset",
+				});
+				packReferences.set(pack, reference);
 			}
 		},
 
@@ -75,9 +85,9 @@ export default function iconifySvgmap(options: Options = {}): Plugin {
 			const key = environmentKey(this);
 			usage.set(key, new Map());
 			references.set(key, new Map());
-			for (const moduleKey of moduleReferences.keys()) {
+			for (const moduleKey of modulePacks.keys()) {
 				if (moduleKey.startsWith(`${key}:`)) {
-					moduleReferences.delete(moduleKey);
+					modulePacks.delete(moduleKey);
 				}
 			}
 		},
@@ -183,49 +193,64 @@ export default function iconifySvgmap(options: Options = {}): Plugin {
 
 			const key = environmentKey(this, ssr);
 			const packs = usage.get(key) ?? new Map<string, Set<string>>();
-			const packReferences =
-				references.get(key) ?? new Map<string, string>();
 			usage.set(key, packs);
-			references.set(key, packReferences);
 
 			const icons = packs.get(pack) ?? new Set<string>();
 			packs.set(pack, icons.add(icon));
+			modulePacks.set(`${key}:${id}`, pack);
 
-			let reference = packReferences.get(pack);
-			if (!reference) {
-				reference = this.emitFile({
-					name: `${pack}.svg`,
-					type: "asset",
-				});
-				packReferences.set(pack, reference);
-				referenceIds.add(reference);
-			}
-			moduleReferences.set(`${key}:${id}`, reference);
-
-			return js`export default import.meta.ROLLUP_FILE_URL_${reference} + ${JSON.stringify(`#${icon}`)};`;
+			// replaced with the sprite url in renderChunk
+			const placeholder = JSON.stringify(`@@iconify-svgmap:${pack}@@`);
+			const hash = JSON.stringify(`#${icon}`);
+			// relative bases resolve against the chunk like rollup's default.
+			// @vite-ignore stops vite warning that the placeholder is missing
+			return base.startsWith("/")
+				? js`export default ${placeholder} + ${hash};`
+				: js`export default new URL(/* @vite-ignore */ ${placeholder}, import.meta.url).href + ${hash};`;
 		},
 
 		name: pkg.name,
 
-		renderChunk(_code, chunk) {
+		renderChunk(code, chunk, outputOptions) {
+			const key = environmentKey(this);
+			const packReferences = references.get(key);
+			if (!packReferences) return;
+
 			// list sprites as imported assets so they end up in vite's
 			// manifest; frameworks (e.g. astro) use it to move assets
 			// emitted by ssr builds into the client output
-			const key = environmentKey(this);
 			for (const moduleId of chunk.moduleIds) {
-				const reference = moduleReferences.get(`${key}:${moduleId}`);
+				const pack = modulePacks.get(`${key}:${moduleId}`);
+				const reference = pack && packReferences.get(pack);
 				if (!reference) continue;
 				chunk.viteMetadata?.importedAssets.add(
 					this.getFileName(reference),
 				);
 			}
-		},
 
-		resolveFileUrl({ fileName, referenceId }) {
-			if (!referenceIds.has(referenceId)) return;
-			// relative bases are left to the bundler's default resolution
-			if (!base.startsWith("/")) return;
-			return JSON.stringify(`${base}${fileName}`);
+			if (!code.includes("@@iconify-svgmap:")) return;
+
+			const magic = new MagicString(code);
+			for (const match of code.matchAll(PLACEHOLDER_REGEX)) {
+				const reference = packReferences.get(match[1]);
+				if (!reference) continue;
+				const fileName = this.getFileName(reference);
+				const url = base.startsWith("/")
+					? `${base}${fileName}`
+					: `./${path.posix.relative(path.posix.dirname(chunk.fileName), fileName)}`;
+				magic.overwrite(
+					match.index,
+					match.index + match[0].length,
+					url,
+				);
+			}
+
+			return {
+				code: magic.toString(),
+				map: outputOptions.sourcemap
+					? magic.generateMap({ hires: "boundary" })
+					: undefined,
+			};
 		},
 
 		resolveId(id) {

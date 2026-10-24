@@ -1,4 +1,4 @@
-import type { Rollup } from "vite";
+import type { Logger, Rollup } from "vite";
 
 import { once } from "node:events";
 import fs from "node:fs";
@@ -6,7 +6,7 @@ import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { Worker } from "node:worker_threads";
-import { build, createServer } from "vite";
+import { build, createLogger, createServer } from "vite";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import iconifySvgmap, { writeSprites } from "./index";
@@ -33,16 +33,27 @@ afterEach(() => {
 	fs.rmSync(directory, { force: true, recursive: true });
 });
 
-async function buildEntry(source: string, ssr = false) {
+async function buildEntry(
+	source: string,
+	ssr = false,
+	{
+		base = "/",
+		customLogger = undefined as Logger | undefined,
+		sourcemap = false,
+	} = {},
+) {
 	const result = await build({
+		base,
 		build: {
 			rollupOptions: { input: writeEntry(source) },
+			sourcemap,
 			ssr,
 			ssrEmitAssets: true,
 			write: false,
 		},
 		configFile: false,
-		logLevel: "silent",
+		customLogger,
+		logLevel: customLogger ? "warn" : "silent",
 		plugins: [iconifySvgmap({ root: packageRoot })],
 		root: directory,
 	});
@@ -74,6 +85,11 @@ async function buildRuntime() {
 	return path.join(outDirectory, "entry.mjs");
 }
 
+async function logosSpriteName(source: string) {
+	const output = await buildEntry(source);
+	return output.find((item) => item.fileName.includes("logos"))?.fileName;
+}
+
 function writeEntry(source: string) {
 	const entry = path.join(directory, "entry.js");
 	fs.writeFileSync(entry, source);
@@ -103,12 +119,14 @@ describe("generateSprite", () => {
 
 describe("static imports", () => {
 	it("emits a hashed sprite containing only the imported icons", async () => {
-		const output = await buildEntry(`
+		const output = await buildEntry(
+			`
 			import astro from "virtual:iconify-svgmap/logos/astro";
 			import alpine from "virtual:iconify-svgmap/logos/alpinejs";
 			import copilot from "virtual:iconify-svgmap/octicon/copilot-16";
 			console.log(astro, alpine, copilot);
-		`);
+		`,
+		);
 
 		const assets = output.filter((item) => item.type === "asset");
 		expect(assets.map((asset) => asset.fileName).toSorted()).toEqual([
@@ -120,8 +138,9 @@ describe("static imports", () => {
 		expect(String(logos.source).match(/<symbol /g)).toHaveLength(2);
 
 		const chunk = output.find((item) => item.type === "chunk")!;
-		expect(chunk.code).toContain(`"/${logos.fileName}#astro"`);
-		expect(chunk.code).not.toContain("ROLLUP_FILE_URL");
+		// rolldown inlines the href into a template literal, so skip quotes
+		expect(chunk.code).toContain(`/${logos.fileName}#astro`);
+		expect(chunk.code).not.toContain("@@iconify-svgmap:");
 	});
 
 	it("resolves absolute hrefs in ssr builds", async () => {
@@ -132,6 +151,96 @@ describe("static imports", () => {
 		const chunk = output.find((item) => item.type === "chunk")!;
 		expect(chunk.code).toMatch(SSR_HREF_REGEX);
 		expect(chunk.code).not.toContain("import.meta.url");
+	});
+
+	it("changes the sprite hash when the imported icons change", async () => {
+		const one = await logosSpriteName(
+			`import a from "virtual:iconify-svgmap/logos/astro"; console.log(a);`,
+		);
+		const two = await logosSpriteName(`
+			import a from "virtual:iconify-svgmap/logos/astro";
+			import b from "virtual:iconify-svgmap/logos/alpinejs";
+			console.log(a, b);
+		`);
+		expect(one).toMatch(LOGOS_ASSET_REGEX);
+		expect(two).toMatch(LOGOS_ASSET_REGEX);
+		expect(one).not.toBe(two);
+	});
+
+	it("resolves sprites relative to the chunk for relative bases", async () => {
+		const output = await buildEntry(
+			`import a from "virtual:iconify-svgmap/logos/astro"; console.log(a);`,
+			false,
+			{ base: "./" },
+		);
+		const sprite = output.find((item) => item.fileName.includes("logos"))!;
+		const chunk = output.find((item) => item.type === "chunk")!;
+		const relative = path.posix.relative(
+			path.posix.dirname(chunk.fileName),
+			sprite.fileName,
+		);
+		expect(chunk.code).toContain(`./${relative}`);
+		expect(chunk.code).toContain("import.meta.url");
+	});
+
+	it("does not warn about the placeholder url for relative bases", async () => {
+		const logger = createLogger("warn", { allowClearScreen: false });
+		const messages: string[] = [];
+		const collect = (message: string) => void messages.push(message);
+		vi.spyOn(logger, "warn").mockImplementation(collect);
+		vi.spyOn(logger, "warnOnce").mockImplementation(collect);
+		await buildEntry(
+			`import a from "virtual:iconify-svgmap/logos/astro"; console.log(a);`,
+			false,
+			{ base: "./", customLogger: logger },
+		);
+		expect(messages.join("\n")).not.toContain("@@iconify-svgmap:");
+	});
+
+	it("keeps sourcemaps when replacing sprite urls", async () => {
+		const output = await buildEntry(
+			`import a from "virtual:iconify-svgmap/logos/astro"; console.log(a);`,
+			false,
+			{ sourcemap: true },
+		);
+		const chunk = output.find(
+			(item): item is Rollup.OutputChunk => item.type === "chunk",
+		)!;
+		expect(chunk.map?.sources.some((s) => s.endsWith("entry.js"))).toBe(
+			true,
+		);
+	});
+
+	it("starts fresh when one plugin instance builds twice", async () => {
+		const plugin = iconifySvgmap({ root: packageRoot });
+		const buildWith = async (source: string) => {
+			const result = (await build({
+				build: {
+					rollupOptions: { input: writeEntry(source) },
+					write: false,
+				},
+				configFile: false,
+				logLevel: "silent",
+				plugins: [plugin],
+				root: directory,
+			})) as Rollup.RollupOutput;
+			return result.output.find((item) =>
+				item.fileName.includes("logos"),
+			);
+		};
+
+		await buildWith(`
+			import a from "virtual:iconify-svgmap/logos/astro";
+			import b from "virtual:iconify-svgmap/logos/alpinejs";
+			console.log(a, b);
+		`);
+		const second = await buildWith(
+			`import a from "virtual:iconify-svgmap/logos/astro"; console.log(a);`,
+		);
+
+		expect(second?.type).toBe("asset");
+		const source = String((second as Rollup.OutputAsset).source);
+		expect(source.match(/<symbol /g)).toHaveLength(1);
 	});
 
 	it("fails the build for unknown icons and packs", async () => {

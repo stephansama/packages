@@ -1,5 +1,11 @@
 # @stephansama/auto-readme
 
+## 0.6.1
+
+### Patch Changes
+
+- ff2a367: skip non-action html comments such as `<!-- markdownlint-disable -->` instead of throwing a ZodError
+
 ## 0.6.0
 
 ### Minor Changes

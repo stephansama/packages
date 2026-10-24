@@ -1,5 +1,11 @@
 # @stephansama/vite-iconify-svgmap
 
+## 0.2.1
+
+### Patch Changes
+
+- 894c059: support rolldown (vite 8) production builds by emitting sprites with their source once every icon is known. `@iconify/utils` and `magic-string` are now regular dependencies instead of being bundled
+
 ## 0.2.0
 
 ### Minor Changes

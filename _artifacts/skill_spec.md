@@ -21,7 +21,7 @@ A monorepo of 24+ focused developer-workflow packages under the `@stephansama` s
 | eslint-config        | core      | code-quality    | 25+ configs, presets, autoEnable, overrides                       | 4             |
 | multipublish         | core      | workflow        | JSR + npm publishing, changesets integration                      | 5             |
 | auto-readme          | core      | workflow        | Comment markers, 5 actions, CLI flags, Git hook                   | 4             |
-| ai-commit-msg        | core      | workflow        | 3 AI providers, Git hook, custom prompt, skipNextRun              | 4             |
+| ai-commit-msg        | core      | workflow        | 4 AI providers, Git hook, custom prompt, skipNextRun              | 4             |
 | astro-iconify-svgmap | framework | framework       | createIntegration, virtual module import, @iconify-json discovery | 4             |
 
 ## Failure Mode Inventory
@@ -84,12 +84,12 @@ A monorepo of 24+ focused developer-workflow packages under the `@stephansama` s
 
 ### ai-commit-msg (4 failure modes)
 
-| #   | Mistake                                                             | Priority | Source        | Cross-skill? |
-| --- | ------------------------------------------------------------------- | -------- | ------------- | ------------ |
-| 1   | Default config uses ollama/llama2 which fails if ollama not running | CRITICAL | src/config.ts | —            |
-| 2   | Missing API key env var for non-ollama providers                    | HIGH     | src/ai.ts     | —            |
-| 3   | Custom prompt without {{diff}} placeholder loses the diff           | HIGH     | src/index.ts  | —            |
-| 4   | Running hook with no staged changes throws                          | MEDIUM   | src/index.ts  | —            |
+| #   | Mistake                                                               | Priority | Source        | Cross-skill? |
+| --- | --------------------------------------------------------------------- | -------- | ------------- | ------------ |
+| 1   | Default config uses ollama/llama3.2 which fails if ollama not running | CRITICAL | src/config.ts | —            |
+| 2   | Missing API key env var for non-ollama providers                      | HIGH     | src/ai.ts     | —            |
+| 3   | Custom prompt without {{diff}} placeholder loses the diff             | HIGH     | src/index.ts  | —            |
+| 4   | Running hook with no staged changes throws                            | MEDIUM   | src/index.ts  | —            |
 
 ### astro-iconify-svgmap (4 failure modes)
 

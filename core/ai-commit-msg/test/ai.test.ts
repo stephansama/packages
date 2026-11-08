@@ -1,3 +1,4 @@
+import { createAnthropicChat } from "@tanstack/ai-anthropic";
 import { createGeminiChat } from "@tanstack/ai-gemini";
 import { ollamaText } from "@tanstack/ai-ollama";
 import { createOpenaiChat } from "@tanstack/ai-openai";
@@ -6,6 +7,10 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { getProvider } from "../src/ai";
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
+vi.mock("@tanstack/ai-anthropic", () => ({
+	createAnthropicChat: vi.fn((model) => ({ model, type: "anthropic" })),
+}));
 
 vi.mock("@tanstack/ai-gemini", () => ({
 	createGeminiChat: vi.fn((model) => ({ model, type: "google" })),
@@ -27,6 +32,12 @@ const googleKeys = [
 	"GEMINI_API_KEY",
 ] as const;
 
+const anthropicKeys = [
+	"ANTHROPIC_AUTH_TOKEN",
+	"ANTHROPIC_OAUTH_TOKEN",
+	"ANTHROPIC_API_KEY",
+] as const;
+
 describe("ai", () => {
 	const originalEnvironment = process.env;
 
@@ -40,6 +51,88 @@ describe("ai", () => {
 		for (const key of googleKeys) delete environment[key];
 		return environment;
 	}
+
+	function withoutAnthropicKeys() {
+		const environment = { ...originalEnvironment };
+		for (const key of anthropicKeys) delete environment[key];
+		return environment;
+	}
+
+	it("should return anthropic provider with ANTHROPIC_API_KEY", () => {
+		process.env = {
+			...withoutAnthropicKeys(),
+			ANTHROPIC_API_KEY: "sk-ant-api",
+		};
+		const result = getProvider("anthropic", "claude-opus-5-5");
+		expect(result.isOk()).toBe(true);
+		expect(createAnthropicChat).toHaveBeenCalledWith(
+			"claude-opus-5-5",
+			"sk-ant-api",
+			{ auth: "api-key" },
+		);
+	});
+
+	it("should send ANTHROPIC_AUTH_TOKEN as a bearer token", () => {
+		process.env = {
+			...withoutAnthropicKeys(),
+			ANTHROPIC_API_KEY: "sk-ant-api",
+			ANTHROPIC_AUTH_TOKEN: "gateway-token",
+		};
+		getProvider("anthropic", "claude-opus-5-5");
+		expect(createAnthropicChat).toHaveBeenCalledWith(
+			"claude-opus-5-5",
+			"gateway-token",
+			{ auth: "bearer" },
+		);
+	});
+
+	it("should send a claude oauth token with oauth auth", () => {
+		process.env = {
+			...withoutAnthropicKeys(),
+			ANTHROPIC_AUTH_TOKEN: "sk-ant-oat-123",
+		};
+		getProvider("anthropic", "claude-opus-5-5");
+		expect(createAnthropicChat).toHaveBeenCalledWith(
+			"claude-opus-5-5",
+			"sk-ant-oat-123",
+			{ auth: "oauth" },
+		);
+	});
+
+	it("should use ANTHROPIC_OAUTH_TOKEN with oauth auth", () => {
+		process.env = {
+			...withoutAnthropicKeys(),
+			ANTHROPIC_API_KEY: "sk-ant-api",
+			ANTHROPIC_OAUTH_TOKEN: "oauth-token",
+		};
+		getProvider("anthropic", "claude-opus-5-5");
+		expect(createAnthropicChat).toHaveBeenCalledWith(
+			"claude-opus-5-5",
+			"oauth-token",
+			{ auth: "oauth" },
+		);
+	});
+
+	it("should skip a blank anthropic token in favor of a valid key", () => {
+		process.env = {
+			...withoutAnthropicKeys(),
+			ANTHROPIC_API_KEY: "sk-ant-api",
+			ANTHROPIC_AUTH_TOKEN: "  ",
+		};
+		getProvider("anthropic", "claude-opus-5-5");
+		expect(createAnthropicChat).toHaveBeenCalledWith(
+			"claude-opus-5-5",
+			"sk-ant-api",
+			{ auth: "api-key" },
+		);
+	});
+
+	it("should fail anthropic provider when env is missing", () => {
+		process.env = withoutAnthropicKeys();
+
+		const result = getProvider("anthropic", "claude-opus-5-5");
+		expect(result.isErr()).toBe(true);
+	});
 
 	it.each(googleKeys)(
 		"should return google provider when %s is set",

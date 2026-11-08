@@ -1,6 +1,7 @@
 import * as dotenvx from "@dotenvx/dotenvx";
 import { chat } from "@tanstack/ai";
 import * as cp from "node:child_process";
+import { randomUUID } from "node:crypto";
 import * as fsp from "node:fs/promises";
 
 import { getProvider } from "./ai";
@@ -39,15 +40,16 @@ export async function run() {
 
 	const message = await readExistingMessage(parsed.output);
 
-	const text = await chat({
+	const result = await chat({
 		adapter,
 		messages: [
 			{ content: buildPrompt(template, diff, message), role: "user" },
 		],
 		stream: false,
+		threadId: randomUUID(),
 	});
 
-	await fsp.writeFile(parsed.output, text);
+	await fsp.writeFile(parsed.output, result.text);
 }
 
 function getCommitEditMessageFile() {

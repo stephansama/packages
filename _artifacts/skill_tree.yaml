@@ -171,8 +171,8 @@ skills:
     path: "skills/ai-commit-msg/SKILL.md"
     description: >
       Generate conventional commit messages from staged git diffs using an AI
-      model via a prepare-commit-msg Git hook. Supports google (gemini), openai,
-      and ollama providers. Default provider is ollama/llama2. Configure via
+      model via a prepare-commit-msg Git hook. Supports anthropic (claude),
+      google (gemini), openai, and ollama providers. Default provider is ollama/llama3.2. Configure via
       cosmiconfig (ai-commit-msg.config.ts or package.json ai-commit-msg key).
     requires: []
     sources:
@@ -180,8 +180,10 @@ skills:
       - "stephansama/packages:core/ai-commit-msg/src/schema.ts"
       - "stephansama/packages:core/ai-commit-msg/src/config.ts"
       - "stephansama/packages:core/ai-commit-msg/src/ai.ts"
+      - "stephansama/packages:core/ai-commit-msg/src/message.ts"
       - "stephansama/packages:core/ai-commit-msg/README.md"
     subsystems:
+      - "anthropic provider"
       - "google provider"
       - "openai provider"
       - "ollama provider"

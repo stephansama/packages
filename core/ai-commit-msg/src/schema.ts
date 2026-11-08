@@ -1,3 +1,4 @@
+import type { AnthropicChatModel } from "@tanstack/ai-anthropic";
 import type { GeminiTextModel } from "@tanstack/ai-gemini";
 import type { OllamaTextModels } from "@tanstack/ai-ollama";
 import type { OpenAIChatModel } from "@tanstack/ai-openai";
@@ -13,16 +14,32 @@ export const models = ["gemini-2.5-flash"] as const;
 /** Model names the provider adapters know about */
 export type KnownModel =
 	| (typeof OllamaTextModels)[number]
+	| AnthropicChatModel
 	| GeminiTextModel
 	| OpenAIChatModel;
 
 /** A known model name (for autocompletion) or any other model string */
 export type Model = KnownModel | (string & {});
 
-export const providers = ["google", "openai", "ollama"] as const;
+export const providers = ["anthropic", "google", "openai", "ollama"] as const;
 export type Provider = (typeof providers)[number];
 
 export const environmentSchema = {
+	anthropic: z
+		.object({
+			ANTHROPIC_API_KEY: z.string().trim().optional(),
+			ANTHROPIC_AUTH_TOKEN: z.string().trim().optional(),
+			ANTHROPIC_OAUTH_TOKEN: z.string().trim().optional(),
+		})
+		.refine(
+			(environment) =>
+				environment.ANTHROPIC_AUTH_TOKEN ||
+				environment.ANTHROPIC_OAUTH_TOKEN ||
+				environment.ANTHROPIC_API_KEY,
+			{
+				error: "one of ANTHROPIC_AUTH_TOKEN, ANTHROPIC_OAUTH_TOKEN, or ANTHROPIC_API_KEY is required",
+			},
+		),
 	google: z
 		.object({
 			GEMINI_API_KEY: z.string().trim().optional(),

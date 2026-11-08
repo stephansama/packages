@@ -6,7 +6,7 @@ import { moduleName } from "./utilities";
 const searchPlaces = getSearchPlaces();
 
 const defaultConfig = {
-	model: "llama2",
+	model: "llama3.2",
 	provider: "ollama",
 	useConventionalCommits: true,
 } satisfies Config;

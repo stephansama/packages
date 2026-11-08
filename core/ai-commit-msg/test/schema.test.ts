@@ -29,12 +29,18 @@ describe("schema", () => {
 		});
 
 		it("should have correct providers list", () => {
-			expect(providers).toEqual(["google", "openai", "ollama"]);
+			expect(providers).toEqual([
+				"anthropic",
+				"google",
+				"openai",
+				"ollama",
+			]);
 		});
 	});
 
 	describe("providerSchema", () => {
 		it("should validate correct providers", () => {
+			expect(providerSchema.safeParse("anthropic").success).toBe(true);
 			expect(providerSchema.safeParse("google").success).toBe(true);
 			expect(providerSchema.safeParse("openai").success).toBe(true);
 			expect(providerSchema.safeParse("ollama").success).toBe(true);

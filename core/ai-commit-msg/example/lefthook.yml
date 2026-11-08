@@ -1,0 +1,3 @@
+prepare-commit-msg:
+  jobs:
+    - run: pnpm exec ai-commit-msg -o {1}

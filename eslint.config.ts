@@ -46,6 +46,10 @@ export default await config({
 			},
 		},
 		{
+			files: ["core/*/example/**", "examples/**"],
+			rules: { "no-console": "off" },
+		},
+		{
 			files: [`core/example/${globs.PKG_JSON}`],
 			rules: {
 				"package-json/no-redundant-publishConfig": "off",

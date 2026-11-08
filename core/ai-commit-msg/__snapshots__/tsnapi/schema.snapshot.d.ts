@@ -3,7 +3,7 @@
  */
 // #region Types
 export type Config = Partial<z.infer<typeof configSchema>>;
-export type KnownModel = (typeof OllamaTextModels)[number] | GeminiTextModel | OpenAIChatModel;
+export type KnownModel = (typeof OllamaTextModels)[number] | AnthropicChatModel | GeminiTextModel | OpenAIChatModel;
 export type Model = KnownModel | (string & {});
 export type Provider = (typeof providers)[number];
 // #endregion
@@ -15,6 +15,7 @@ export declare const configSchema: z.ZodObject<{
   model: z.ZodType<Model>;
   prompt: z.ZodDefault<z.ZodString>;
   provider: z.ZodEnum<{
+    anthropic: "anthropic";
     google: "google";
     openai: "openai";
     ollama: "ollama";
@@ -25,6 +26,11 @@ export declare const configSchema: z.ZodObject<{
 }, z.core.$strip>;
 export declare const defaultPrompt: string;
 export declare const environmentSchema: {
+  anthropic: z.ZodObject<{
+    ANTHROPIC_API_KEY: z.ZodOptional<z.ZodString>;
+    ANTHROPIC_AUTH_TOKEN: z.ZodOptional<z.ZodString>;
+    ANTHROPIC_OAUTH_TOKEN: z.ZodOptional<z.ZodString>;
+  }, z.core.$strip>;
   google: z.ZodObject<{
     GEMINI_API_KEY: z.ZodOptional<z.ZodString>;
     GOOGLE_API_KEY: z.ZodOptional<z.ZodString>;
@@ -37,8 +43,9 @@ export declare const environmentSchema: {
 };
 export declare const intentPrompt: string;
 export declare const models: readonly ["gemini-2.5-flash"];
-export declare const providers: readonly ["google", "openai", "ollama"];
+export declare const providers: readonly ["anthropic", "google", "openai", "ollama"];
 export declare const providerSchema: z.ZodEnum<{
+  anthropic: "anthropic";
   google: "google";
   openai: "openai";
   ollama: "ollama";

@@ -2,16 +2,18 @@
 name: ai-commit-msg
 description: >
   Generate conventional commit messages from staged git diffs using an AI model
-  via a prepare-commit-msg Git hook. Configure provider (google, openai, ollama)
-  and model via cosmiconfig (ai-commit-msg.config.ts, package.json ai-commit-msg
-  key, etc.). Built on TanStack AI. Default is ollama/llama2. Requires
-  GOOGLE_GENERATIVE_AI_API_KEY, GOOGLE_API_KEY, or GEMINI_API_KEY for google, or
-  OPENAI_API_KEY for openai. Use skipNextRun to bypass a single hook run. An existing commit message
-  (e.g. from git commit -m) is preserved as the intent and reformatted;
-  empty or n/a-style messages are regenerated from scratch.
+  via a prepare-commit-msg Git hook. Configure provider (anthropic, google,
+  openai, ollama) and model via cosmiconfig (ai-commit-msg.config.ts,
+  package.json ai-commit-msg key, etc.). Built on TanStack AI. Default is
+  ollama/llama3.2. Requires ANTHROPIC_AUTH_TOKEN, ANTHROPIC_OAUTH_TOKEN, or
+  ANTHROPIC_API_KEY for anthropic, GOOGLE_GENERATIVE_AI_API_KEY, GOOGLE_API_KEY,
+  or GEMINI_API_KEY for google, or OPENAI_API_KEY for openai. Use skipNextRun
+  to bypass a single hook run. An existing commit message (e.g. from git commit
+  -m) is preserved as the intent and reformatted; empty or n/a-style messages
+  are regenerated from scratch.
 type: core
 library: "@stephansama/ai-commit-msg"
-library_version: "1.0.7"
+library_version: "1.1.0"
 sources:
   - stephansama/packages:core/ai-commit-msg/src/index.ts
   - stephansama/packages:core/ai-commit-msg/src/schema.ts
@@ -57,6 +59,17 @@ export GOOGLE_GENERATIVE_AI_API_KEY=your-key
 ```
 
 ## Core Patterns
+
+### Anthropic provider
+
+```ts
+export default {
+  provider: "anthropic",
+  model: "claude-opus-5-5",
+};
+```
+
+Requires `ANTHROPIC_AUTH_TOKEN`, `ANTHROPIC_OAUTH_TOKEN`, or `ANTHROPIC_API_KEY` in the environment (checked in that order). `ANTHROPIC_AUTH_TOKEN` is sent as a bearer token (or as a Claude OAuth token when it starts with `sk-ant-oat`), `ANTHROPIC_OAUTH_TOKEN` as a Claude OAuth token, and `ANTHROPIC_API_KEY` as an `x-api-key` header.
 
 ### Google provider
 
@@ -140,12 +153,12 @@ When `skipNextRun` is `true`, the hook logs a warning and exits immediately. Rem
 
 ## Common Mistakes
 
-### CRITICAL Default config uses ollama/llama2 — fails if Ollama not running
+### CRITICAL Default config uses ollama/llama3.2 — fails if Ollama not running
 
 Wrong:
 
 ```sh
-# No config file — hooks use default: provider: 'ollama', model: 'llama2'
+# No config file — hooks use default: provider: 'ollama', model: 'llama3.2'
 # Works locally if ollama is running, fails in CI
 ```
 
@@ -159,7 +172,7 @@ export default {
 };
 ```
 
-Without a config file, `loadConfig` returns `{ provider: 'ollama', model: 'llama2' }`. If the Ollama server is not running, the hook throws a network error and the commit fails. Always provide an explicit config in shared repositories.
+Without a config file, `loadConfig` returns `{ provider: 'ollama', model: 'llama3.2' }`. If the Ollama server is not running, the hook throws a network error and the commit fails; if the model has not been pulled (`ollama pull llama3.2`), the request fails as well. Always provide an explicit config in shared repositories.
 
 Source: `core/ai-commit-msg/src/config.ts:defaultConfig`
 
@@ -180,7 +193,7 @@ Correct:
 export GOOGLE_GENERATIVE_AI_API_KEY=your-key
 ```
 
-`getProvider` validates environment variables before constructing the adapter. Google requires one of `GOOGLE_GENERATIVE_AI_API_KEY`, `GOOGLE_API_KEY`, or `GEMINI_API_KEY`; OpenAI requires `OPENAI_API_KEY`. Missing keys fail with a validation error at hook time.
+`getProvider` validates environment variables before constructing the adapter. Anthropic requires one of `ANTHROPIC_AUTH_TOKEN`, `ANTHROPIC_OAUTH_TOKEN`, or `ANTHROPIC_API_KEY`; Google requires one of `GOOGLE_GENERATIVE_AI_API_KEY`, `GOOGLE_API_KEY`, or `GEMINI_API_KEY`; OpenAI requires `OPENAI_API_KEY`. Missing keys fail with a validation error at hook time.
 
 Source: `core/ai-commit-msg/src/ai.ts:getProvider`
 

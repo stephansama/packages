@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call */
 import * as ai from "@tanstack/ai";
-import { err, ok } from "neverthrow";
+import { Result } from "better-result";
 import * as cp from "node:child_process";
 import * as fsp from "node:fs/promises";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -56,8 +56,11 @@ describe("index run", () => {
 			prompt: "example prompt {{diff}}",
 			provider: "google",
 		});
-		(getProvider as any).mockReturnValue(ok({ type: "mock-model" }));
-		(ai.chat as any).mockResolvedValue("feat: new feature");
+		(getProvider as any).mockReturnValue(Result.ok({ type: "mock-model" }));
+		(ai.chat as any).mockResolvedValue({
+			chunks: [],
+			text: "feat: new feature",
+		});
 		(cp.execSync as any).mockReturnValue("diff content");
 		(fsp.readFile as any).mockResolvedValue("");
 
@@ -80,6 +83,7 @@ describe("index run", () => {
 			expect.objectContaining({
 				adapter: { type: "mock-model" },
 				stream: false,
+				threadId: expect.any(String),
 			}),
 		);
 		expect(getPrompt()).toContain("diff content");
@@ -130,7 +134,9 @@ describe("index run", () => {
 	});
 
 	it("should exit if provider initialization fails", async () => {
-		(getProvider as any).mockReturnValue(err(new Error("Provider error")));
+		(getProvider as any).mockReturnValue(
+			Result.err(new Error("Provider error")),
+		);
 
 		await expect(run()).rejects.toThrowError();
 	});

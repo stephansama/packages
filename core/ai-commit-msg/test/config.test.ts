@@ -41,7 +41,7 @@ describe("config", () => {
 		});
 
 		const config = await loadConfig();
-		expect(config.model).toBe("llama2");
+		expect(config.model).toBe("llama3.2");
 		expect(config.provider).toBe("ollama");
 		expect(config.useConventionalCommits).toBe(true);
 	});

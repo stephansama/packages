@@ -502,13 +502,13 @@ skills:
   - name: "ai-commit-msg"
     slug: "ai-commit-msg"
     domain: "workflow"
-    description: "Generate conventional commit messages from staged git diffs using an AI model (Google, OpenAI, or Ollama), wired as a prepare-commit-msg Git hook."
+    description: "Generate conventional commit messages from staged git diffs using an AI model (Anthropic, Google, OpenAI, or Ollama), wired as a prepare-commit-msg Git hook."
     type: "core"
     packages:
       - "@stephansama/ai-commit-msg"
     covers:
-      - "providers: google, openai, ollama"
-      - "default provider: ollama / default model: llama2"
+      - "providers: anthropic, google, openai, ollama"
+      - "default provider: ollama / default model: llama3.2"
       - "configuration: cosmiconfig (package.json, .ai-commit-msgrc.*, etc.)"
       - "configSchema: provider, model, prompt, skipNextRun, useConventionalCommits, verbose, baseURL, headers"
       - "prepare-commit-msg hook integration"
@@ -516,12 +516,12 @@ skills:
       - "{{diff}} prompt placeholder"
     tasks:
       - "Set up AI commit message generation as a Git hook"
-      - "Switch from the default ollama provider to Google or OpenAI"
+      - "Switch from the default ollama provider to Anthropic, Google, or OpenAI"
       - "Customise the commit message prompt"
       - "Skip the hook for a single commit"
     failure_modes:
-      - mistake: "default config uses ollama/llama2 which fails if ollama is not running"
-        mechanism: 'Without any config file, loadConfig returns provider: "ollama", model: "llama2". If the Ollama server is not running locally the hook throws a network error and the commit fails.'
+      - mistake: "default config uses ollama/llama3.2 which fails if ollama is not running"
+        mechanism: 'Without any config file, loadConfig returns provider: "ollama", model: "llama3.2". If the Ollama server is not running locally the hook throws a network error and the commit fails.'
         wrong_pattern: |
           # No config file — relies on ollama running locally
           # .husky/prepare-commit-msg: ai-commit-msg -o "$1"
@@ -534,7 +534,7 @@ skills:
         status: "active"
 
       - mistake: "missing API key env var for non-ollama providers"
-        mechanism: 'getProvider() validates the environment against environmentSchema before constructing the model. Google requires GOOGLE_GENERATIVE_AI_API_KEY; OpenAI requires OPENAI_API_KEY. Missing keys cause an err() result which throws "unable to validate env due to the following issues".'
+        mechanism: 'getProvider() validates the environment against environmentSchema before constructing the model. Anthropic requires one of ANTHROPIC_AUTH_TOKEN, ANTHROPIC_OAUTH_TOKEN, or ANTHROPIC_API_KEY; Google requires one of GOOGLE_GENERATIVE_AI_API_KEY, GOOGLE_API_KEY, or GEMINI_API_KEY; OpenAI requires OPENAI_API_KEY. Missing keys cause an Err result which throws "unable to validate env due to the following issues".'
         wrong_pattern: |
           export default { provider: 'google', model: 'gemini-2.5-flash' };
           # GOOGLE_GENERATIVE_AI_API_KEY not set → throws on hook run
@@ -661,7 +661,7 @@ tensions:
 
   - name: "default ollama provider vs production AI providers"
     skills: ["ai-commit-msg"]
-    description: "The default config (ollama/llama2) works zero-config in local dev with Ollama installed, but fails in CI or on machines without Ollama. Production-ready configs need an explicit provider and API key."
+    description: "The default config (ollama/llama3.2) works zero-config in local dev with Ollama installed, but fails in CI or on machines without Ollama. Production-ready configs need an explicit provider and API key."
     implication: "An agent generating a hook setup without a config file will produce a setup that works locally on the developer machine but fails in CI pipelines."
 
 cross_references:

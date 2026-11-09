@@ -1,5 +1,11 @@
 # @stephansama/auto-readme
 
+## 0.6.2
+
+### Patch Changes
+
+- a4e5072: keep github alert markers (`> [!NOTE]`, `> [!WARNING]`, …) unescaped. remark escaped the leading `[`, so github rendered alerts as plain blockquotes. already escaped markers are repaired on the next run
+
 ## 0.6.1
 
 ### Patch Changes

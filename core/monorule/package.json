@@ -24,17 +24,17 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.mts"
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
     },
     "./cli": {
-      "import": "./dist/cli.mjs",
-      "types": "./dist/cli.d.mts"
+      "types": "./dist/cli.d.mts",
+      "import": "./dist/cli.mjs"
     },
     "./package.json": "./package.json",
     "./schema": {
-      "import": "./dist/schema.mjs",
-      "types": "./dist/schema.d.mts"
+      "types": "./dist/schema.d.mts",
+      "import": "./dist/schema.mjs"
     },
     "./schema.json": "./dist/schema.json"
   },

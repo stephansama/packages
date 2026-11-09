@@ -22,8 +22,8 @@ export default defineConfig({
 			for (const [key, value] of Object.entries(exports)) {
 				if (typeof value !== "string" || !value.endsWith(".mjs")) continue;
 				exports[key] = {
-					import: value,
 					types: value.replace(MJS_EXTENSION_REGEX, ".d.mts"),
+					import: value,
 				};
 			}
 
@@ -47,5 +47,6 @@ export default defineConfig({
 		},
 	},
 	plugins: [ApiSnapshot()],
+	publint: true,
 	target: "esnext",
 });

@@ -17,7 +17,7 @@ export default defineConfig({
 	exports: {
 		bin: "./src/cli.ts",
 		customExports(exports) {
-			exports["./schema.json"] = "./config/schema.json";
+			exports["./schema.json"] = "./dist/schema.json";
 
 			return Object.fromEntries(
 				Object.entries(exports).toSorted(([a], [b]) => a.localeCompare(b)),

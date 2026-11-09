@@ -6,19 +6,11 @@ const BLUESKY_HOSTS = new Set(["bsky.app", "www.bsky.app"]);
 const POST_PATH = /^\/profile\/[^/]+\/post\/[^/]+\/?$/;
 const TRAILING_SLASH = /\/$/;
 
-export function buildOEmbedURL(postURL: string, maxwidth?: number) {
+export function buildOEmbedURL(postURL: string) {
 	const url = new URL(OEMBED_ENDPOINT);
 	url.searchParams.set("url", postURL);
 	url.searchParams.set("format", "json");
-	if (maxwidth !== undefined) {
-		url.searchParams.set("maxwidth", String(clampWidth(maxwidth)));
-	}
 	return url.toString();
-}
-
-/** Bluesky's oEmbed endpoint only accepts widths between 220 and 600. */
-export function clampWidth(width: number) {
-	return Math.min(600, Math.max(220, Math.round(width)));
 }
 
 /** Keeps only the nodes worth inserting, optionally dropping `<script>` tags. */

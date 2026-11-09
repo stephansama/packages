@@ -53,14 +53,11 @@ describe("getBlueskyPostURL", () => {
 });
 
 describe("buildOEmbedURL", () => {
-	it("clamps maxwidth to Bluesky's range", () => {
-		const url = new URL(buildOEmbedURL(POST_URL, 9999));
+	it("points at Bluesky's oEmbed endpoint with the post URL", () => {
+		const url = new URL(buildOEmbedURL(POST_URL));
 		expect(url.origin + url.pathname).toBe("https://embed.bsky.app/oembed");
 		expect(url.searchParams.get("url")).toBe(POST_URL);
-		expect(url.searchParams.get("maxwidth")).toBe("600");
-		expect(
-			new URL(buildOEmbedURL(POST_URL, 10)).searchParams.get("maxwidth"),
-		).toBe("220");
+		expect(url.searchParams.get("format")).toBe("json");
 	});
 });
 
@@ -150,5 +147,27 @@ describe("rehype bluesky embed", () => {
 		await run(standalone, { cache, fetch });
 
 		expect(fetch).toHaveBeenCalledTimes(1);
+	});
+
+	it("retries a post whose earlier fetch failed", async () => {
+		const cache = new Map();
+		const failing = mockFetch(undefined, false);
+		const working = mockFetch();
+
+		const first = await run(standalone, { cache, fetch: failing });
+		expect(String(first)).toBe(standalone);
+		expect(cache.size).toBe(0);
+
+		const second = await run(standalone, { cache, fetch: working });
+		expect(String(second)).toContain('<blockquote class="bluesky-embed"');
+		expect(working).toHaveBeenCalledTimes(1);
+	});
+
+	it("retries a post whose earlier fetch threw", async () => {
+		const cache = new Map();
+		const throwing = vi.fn(() => Promise.reject(new Error("offline")));
+
+		await run(standalone, { cache, fetch: throwing });
+		expect(cache.size).toBe(0);
 	});
 });

@@ -102,7 +102,6 @@ export default defineConfig({
 | ----------- | ------------------------------------------- | ------------------ | ---------------------------------------------------------------------------------- |
 | `script`    | `boolean`                                   | `true`             | Keep the `embed.bsky.app` script tag. Turn off if your site already loads it once. |
 | `colorMode` | `"system" \| "light" \| "dark"`             | Bluesky's own      | Sets `data-bluesky-embed-color-mode` on the embed.                                 |
-| `maxwidth`  | `number`                                    | Bluesky's own      | Maximum width in pixels, clamped to Bluesky's 220–600 range.                       |
 | `cache`     | `Map<string, Promise<string \| undefined>>` | shared per process | Cache of fetched embeds, so a post used on several pages is fetched once.          |
 | `fetch`     | `typeof fetch`                              | `globalThis.fetch` | Custom fetch, handy for tests or proxies.                                          |
 

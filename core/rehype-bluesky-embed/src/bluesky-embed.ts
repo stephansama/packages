@@ -11,7 +11,8 @@ export type RehypeBlueskyEmbedColorMode = "dark" | "light" | "system";
 export interface RehypeBlueskyEmbedOptions {
 	/**
 	 * Cache of oEmbed HTML keyed by post URL. Shared across files by default so
-	 * a post embedded on several pages is only fetched once per build.
+	 * a post embedded on several pages is only fetched once per build. Failed
+	 * fetches are removed so a later file can retry.
 	 */
 	cache?: Map<string, Promise<string | undefined>>;
 	/**
@@ -21,8 +22,6 @@ export interface RehypeBlueskyEmbedOptions {
 	colorMode?: RehypeBlueskyEmbedColorMode;
 	/** Custom fetch implementation (useful for tests or proxies). */
 	fetch?: typeof globalThis.fetch;
-	/** Maximum embed width in pixels. Bluesky accepts 220–600. */
-	maxwidth?: number;
 	/**
 	 * Keep the `embed.bsky.app` `<script>` tag that comes with each embed. Turn
 	 * this off when your site already loads the embed script once.
@@ -62,8 +61,14 @@ export default function rehypeBlueskyEmbed(
 		let pending = cache.get(url);
 
 		if (!pending) {
-			pending = fetchEmbedHtml(fetchImpl, url, options.maxwidth);
-			cache.set(url, pending);
+			const request = fetchEmbedHtml(fetchImpl, url);
+			const evict = () => {
+				if (cache.get(url) === request) cache.delete(url);
+			};
+
+			cache.set(url, request);
+			request.then((html) => html === undefined && evict(), evict);
+			pending = request;
 		}
 
 		return pending;
@@ -115,12 +120,8 @@ export default function rehypeBlueskyEmbed(
 	};
 }
 
-async function fetchEmbedHtml(
-	fetchImpl: typeof globalThis.fetch,
-	url: string,
-	maxwidth?: number,
-) {
-	const response = await fetchImpl(utilities.buildOEmbedURL(url, maxwidth), {
+async function fetchEmbedHtml(fetchImpl: typeof globalThis.fetch, url: string) {
+	const response = await fetchImpl(utilities.buildOEmbedURL(url), {
 		headers: { accept: "application/json" },
 	});
 

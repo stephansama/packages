@@ -91,7 +91,7 @@ You can configure `multipublish` by creating a configuration file (or object) in
 
 ```json
 {
-  "$schema": "./node_modules/@stephansama/multipublish/config/schema.json",
+  "$schema": "./node_modules/@stephansama/multipublish/dist/schema.json",
   "platforms": [
     ["jsr", { "experimentalGenerateJSR": true, "defaultExclude": ["!dist"] }],
     [

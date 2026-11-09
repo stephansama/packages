@@ -23,6 +23,8 @@ export default defineConfig({
 				if (typeof value !== "string" || !value.endsWith(".mjs")) continue;
 				exports[key] = {
 					types: value.replace(MJS_EXTENSION_REGEX, ".d.mts"),
+					// types must come first for typescript to resolve the condition
+					// eslint-disable-next-line perfectionist/sort-objects
 					import: value,
 				};
 			}

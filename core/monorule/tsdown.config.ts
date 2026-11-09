@@ -22,8 +22,10 @@ export default defineConfig({
 			for (const [key, value] of Object.entries(exports)) {
 				if (typeof value !== "string" || !value.endsWith(".mjs")) continue;
 				exports[key] = {
-					import: value,
 					types: value.replace(MJS_EXTENSION_REGEX, ".d.mts"),
+					// types must come first for typescript to resolve the condition
+					// eslint-disable-next-line perfectionist/sort-objects
+					import: value,
 				};
 			}
 
@@ -35,14 +37,18 @@ export default defineConfig({
 		legacy: true,
 	},
 	hooks: {
-		async "build:done"() {
-			const { configSchema } = await import("./dist/schema.mjs");
+		async "build:before"() {
+			const { configSchema } = await import("./src/schema.ts");
 			const jsonSchema = z.toJSONSchema(configSchema);
 			const jsonSchemaFile = JSON.stringify(jsonSchema);
 			const jsonSchemaPath = path.join("./dist", "schema.json");
+			await fs.promises.mkdir(path.dirname(jsonSchemaPath), {
+				recursive: true,
+			});
 			await fs.promises.writeFile(jsonSchemaPath, jsonSchemaFile);
 		},
 	},
 	plugins: [ApiSnapshot()],
+	publint: true,
 	target: "esnext",
 });

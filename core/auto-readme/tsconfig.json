@@ -3,6 +3,7 @@
   "include": ["./src/**/*", "tsdown.config.ts"],
   "compilerOptions": {
     "types": ["./types/plugins.d.ts", "node"],
-    "composite": true
+    "composite": true,
+    "rewriteRelativeImportExtensions": true
   }
 }

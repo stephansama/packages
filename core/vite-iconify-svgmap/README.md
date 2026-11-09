@@ -159,7 +159,7 @@ const href = getIcon(entry.data.iconPack, entry.data.icon);
 `/_iconify/<pack>.svg?v=<build>#<icon>`. The sprite is written after all pages
 have rendered.
 
-> \[!NOTE]
+> [!NOTE]
 > `getIcon` icons must be rendered during the build, in the same process or
 > one of its worker threads (static astro sites and prerendered sveltekit
 > pages). Icons first requested at runtime by an on demand rendered route, or

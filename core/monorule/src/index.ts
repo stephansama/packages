@@ -14,6 +14,7 @@ export type {
 	PackageContext,
 	PackageJsonContext,
 	RuleError,
+	RuleMapSchema,
 	RuleSchema,
 	Undefinable,
 } from "./schema";

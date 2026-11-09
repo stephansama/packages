@@ -187,7 +187,7 @@ You can configure `auto-readme` by creating a configuration file (or object) in 
 
 ```json
 {
-  "$schema": "./node_modules/@stephansama/auto-readme/config/schema.json",
+  "$schema": "./node_modules/@stephansama/auto-readme/dist/schema.json",
   "disableEmojis": true
 }
 ```

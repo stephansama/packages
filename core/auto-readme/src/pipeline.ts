@@ -9,6 +9,7 @@ import { VFile } from "vfile";
 import type { ActionData } from "./data";
 import type { Config } from "./schema";
 
+import { remarkGithubAlert } from "./alert";
 import { createFindParameter } from "./data";
 import { INFO, WARN } from "./log";
 import { autoReadmeRemarkPlugin } from "./plugin";
@@ -23,7 +24,8 @@ export async function parse(
 ) {
 	const pipeline = remark()
 		.use(autoReadmeRemarkPlugin, config, data)
-		.use(remarkCodeImport, {});
+		.use(remarkCodeImport, {})
+		.use(remarkGithubAlert);
 
 	const usage = data.find((d) => d.action === "USAGE");
 

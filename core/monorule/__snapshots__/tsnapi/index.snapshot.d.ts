@@ -29,6 +29,7 @@ export type RuleBase<T, Errors extends Record<string, ErrorValue>, Context = Dir
   when(_: NoInfer<T>, _?: Context): Array<Error<ErrorId<NoInfer<Errors>>>> | void;
 };
 export type RuleError = output<typeof errorSchema>;
+export type RuleMapSchema = output<typeof ruleMapSchema>;
 export type RuleSchema = input<typeof ruleSchema>;
 export type Undefinable<T extends object> = { [k in keyof T]: T[k] | undefined };
 export type UserConfig<T> = Omit<FullConfigSchema, "rules"> & {
@@ -39,22 +40,7 @@ export type UserConfig<T> = Omit<FullConfigSchema, "rules"> & {
 // #region Functions
 export declare function defineConfig<T>(_: UserConfig<T>): UserConfig<T>;
 export declare function defineRule<const Parse extends BuiltinParseEnumSchema, const Errors extends Record<string, ErrorValue>, Context = DirtyFile>(_: DefaultParserRule<Parse, Errors, DefaultRuleParseTypeExtract<Parse>, Context>): DefaultParserRule<Parse, Errors, DefaultRuleParseTypeExtract<Parse>, Context>;
-export declare function loadRules(_: ConfigSchema, _?: string): Promise<{
-  enabled: boolean;
-  errors: Record<string, string | {
-    message: string;
-    fixable?: boolean | undefined;
-  }>;
-  include: string | string[];
-  name: string;
-  parse: "json" | "txt" | "yaml" | "toml" | ((input: string) => unknown);
-  when: (input: unknown, context?: DirtyFileBase) => Array<RuleError> | void;
-  apply?: ((input: unknown, context?: DirtyFileBase & {
-    errors: Array<RuleError>;
-  }) => unknown) | undefined;
-  exclude?: string | string[] | undefined;
-  stringify?: ((input: unknown) => Promise<string> | string) | undefined;
-}[]>;
+export declare function loadRules(_: ConfigSchema, _?: string): Promise<RuleMapSchema[string][]>;
 export declare function parse<T>(_: string, _: BuiltinParseEnumSchema | FunctionParserRule<T, Record<string, ErrorValue>>["parse"]): T;
 export declare function stringify(_: unknown, _: BuiltinParseEnumSchema): string;
 // #endregion

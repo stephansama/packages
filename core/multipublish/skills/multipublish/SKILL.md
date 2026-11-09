@@ -24,7 +24,7 @@ Publishes monorepo packages to multiple registries in a single step. Reads relea
 
 ```json
 {
-  "$schema": "./node_modules/@stephansama/multipublish/config/schema.json",
+  "$schema": "./node_modules/@stephansama/multipublish/dist/schema.json",
   "platforms": [
     ["jsr", { "experimentalGenerateJSR": true }],
     ["npm", { "tokenEnvironmentKey": "NODE_AUTH_TOKEN" }]

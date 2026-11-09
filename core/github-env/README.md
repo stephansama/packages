@@ -15,6 +15,6 @@
 
 </div>
 
-> \[!CAUTION]
+> [!CAUTION]
 >
 > please use `@stephansama/types-github-action-env` instead

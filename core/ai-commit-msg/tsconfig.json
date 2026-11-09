@@ -7,5 +7,9 @@
     "tsdown.config.ts",
     "./test/**/*"
   ],
-  "compilerOptions": { "types": ["node"], "composite": true }
+  "compilerOptions": {
+    "types": ["node"],
+    "composite": true,
+    "rewriteRelativeImportExtensions": true
+  }
 }

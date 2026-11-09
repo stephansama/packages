@@ -30,13 +30,12 @@
     "./schema": "./dist/schema.mjs",
     "./schema.json": "./dist/schema.json"
   },
-  "types": "./config/schema.d.cts",
+  "types": "./dist/index.d.mts",
   "bin": {
     "multipublish": "./dist/cli.mjs"
   },
   "files": [
     "dist",
-    "config",
     "skills"
   ],
   "scripts": {

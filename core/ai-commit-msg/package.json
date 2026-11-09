@@ -28,9 +28,9 @@
     "./cli": "./dist/cli.mjs",
     "./package.json": "./package.json",
     "./schema": "./dist/schema.mjs",
-    "./schema.json": "./config/schema.json"
+    "./schema.json": "./dist/schema.json"
   },
-  "types": "./config/schema.d.cts",
+  "types": "./dist/index.d.mts",
   "bin": {
     "ai-commit-msg": "./dist/cli.mjs"
   },

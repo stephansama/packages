@@ -109,6 +109,9 @@ catalogs:
     '@tsconfig/recommended':
       specifier: 1.0.13
       version: 1.0.13
+    '@types/hast':
+      specifier: 3.0.4
+      version: 3.0.4
     '@types/he':
       specifier: 1.2.3
       version: 1.2.3
@@ -166,6 +169,9 @@ catalogs:
     happy-dom:
       specifier: 20.6.1
       version: 20.6.1
+    hast-util-from-html:
+      specifier: 2.0.3
+      version: 2.0.3
     he:
       specifier: 1.2.0
       version: 1.2.0
@@ -238,6 +244,12 @@ catalogs:
     react:
       specifier: 19.2.0
       version: 19.2.0
+    rehype-parse:
+      specifier: 9.0.1
+      version: 9.0.1
+    rehype-stringify:
+      specifier: 10.0.1
+      version: 10.0.1
     simple-icons:
       specifier: 16.19.0
       version: 16.19.0
@@ -1277,6 +1289,34 @@ importers:
       tsdown:
         specifier: 'catalog:'
         version: 0.21.10(@arethetypeswrong/core@0.18.2)(@vitejs/devtools@0.7.6)(oxc-resolver@11.19.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0))(publint@0.3.17)(synckit@0.11.12)(typescript@5.9.3)
+
+  core/rehype-bluesky-embed:
+    dependencies:
+      '@types/hast':
+        specifier: 'catalog:'
+        version: 3.0.4
+      hast-util-from-html:
+        specifier: 'catalog:'
+        version: 2.0.3
+      unist-util-visit:
+        specifier: 'catalog:'
+        version: 5.1.0
+      vfile:
+        specifier: 'catalog:'
+        version: 6.0.3
+    devDependencies:
+      rehype-parse:
+        specifier: 'catalog:'
+        version: 9.0.1
+      rehype-stringify:
+        specifier: 'catalog:'
+        version: 10.0.1
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.21.10(@arethetypeswrong/core@0.18.2)(@vitejs/devtools@0.7.6)(oxc-resolver@11.19.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0))(publint@0.3.17)(synckit@0.11.12)(typescript@5.9.3)
+      unified:
+        specifier: 'catalog:'
+        version: 11.0.5
 
   core/remark-asciinema:
     devDependencies:

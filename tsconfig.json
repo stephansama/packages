@@ -15,6 +15,7 @@
     { "path": "./core/multipublish/tsconfig.json" },
     { "path": "./core/pnpm-hooks/tsconfig.json" },
     { "path": "./core/prettier-plugin-handlebars/tsconfig.json" },
+    { "path": "./core/rehype-bluesky-embed/tsconfig.json" },
     { "path": "./core/remark-asciinema/tsconfig.json" },
     { "path": "./core/single-file/tsconfig.json" },
     { "path": "./core/svelte-social-share-links/tsconfig.json" },

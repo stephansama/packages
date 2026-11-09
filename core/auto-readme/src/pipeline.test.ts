@@ -7,6 +7,7 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import type { ActionData } from "./data";
 import type { Config } from "./schema";
 
+import { remarkGithubAlert } from "./alert";
 import * as module from "./pipeline";
 import { autoReadmeRemarkPlugin } from "./plugin";
 
@@ -27,6 +28,7 @@ const mocks = vi.hoisted(() => {
 	};
 });
 
+vi.mock("./alert", () => ({ remarkGithubAlert: vi.fn() }));
 vi.mock("./data", () => ({ createFindParameter: mocks.createFindParameter }));
 vi.mock("./log", () => ({ INFO: vi.fn(), WARN: mocks.warn }));
 vi.mock("./plugin", () => ({ autoReadmeRemarkPlugin: vi.fn() }));
@@ -64,7 +66,7 @@ async function parse(config: Config = baseConfig, data: ActionData = noData) {
 	return module.parse("# content", "/test/README.md", "/test", config, data);
 }
 
-it("always registers autoReadmeRemarkPlugin and remarkCodeImport", async () => {
+it("always registers autoReadmeRemarkPlugin, remarkCodeImport and remarkGithubAlert", async () => {
 	await parse();
 
 	expect(mocks.pipeline.use).toHaveBeenCalledWith(
@@ -73,6 +75,7 @@ it("always registers autoReadmeRemarkPlugin and remarkCodeImport", async () => {
 		noData,
 	);
 	expect(mocks.pipeline.use).toHaveBeenCalledWith(remarkCodeImport, {});
+	expect(mocks.pipeline.use).toHaveBeenCalledWith(remarkGithubAlert);
 });
 
 it("registers remarkUsage when USAGE action exists and example file exists", async () => {

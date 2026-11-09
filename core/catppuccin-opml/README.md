@@ -15,7 +15,7 @@
 
 </div>
 
-> \[!CAUTION]
+> [!CAUTION]
 > this package is deprecated please use `@stephansama/catppuccin-xsl` instead
 
 Catppuccin styled opml stylesheet

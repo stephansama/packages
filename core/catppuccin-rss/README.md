@@ -11,7 +11,7 @@
 
 <!-- BADGE end -->
 
-> \[!CAUTION]
+> [!CAUTION]
 > this package is deprecated please use `@stephansama/catppuccin-xsl` instead
 
 This repository combines the delightful themes of Catppuccin-Mocha

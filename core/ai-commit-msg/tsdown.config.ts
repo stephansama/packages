@@ -13,7 +13,6 @@ export default defineConfig({
 		index: "./src/index.ts",
 		schema: "./src/schema.ts",
 	},
-
 	exports: {
 		bin: "./src/cli.ts",
 		customExports(exports) {
@@ -27,14 +26,17 @@ export default defineConfig({
 	},
 
 	hooks: {
-		async "build:done"() {
-			const { configSchema } = await import("./dist/schema.mjs");
+		async "build:before"() {
+			const { configSchema } = await import("./src/schema.ts");
 			const jsonSchema = z.toJSONSchema(configSchema);
 			const jsonString = JSON.stringify(jsonSchema);
 			const jsonPath = path.join("./dist/", "schema.json");
+			await fs.promises.mkdir(path.dirname(jsonPath), { recursive: true });
 			await fs.promises.writeFile(jsonPath, jsonString);
 		},
 	},
+
 	plugins: [ApiSnapshot()],
+	publint: true,
 	target: "esnext",
 });

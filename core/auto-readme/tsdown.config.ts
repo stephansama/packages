@@ -27,14 +27,18 @@ export default defineConfig({
 	},
 	format: "esm",
 	hooks: {
-		async "build:done"() {
-			const { configSchema } = await import("./dist/schema.mjs");
+		async "build:before"() {
+			const { configSchema } = await import("./src/schema.ts");
 			const jsonSchema = z.toJSONSchema(configSchema);
 			const jsonSchemaFile = JSON.stringify(jsonSchema);
 			const jsonSchemaPath = path.join("./dist", "schema.json");
+			await fs.promises.mkdir(path.dirname(jsonSchemaPath), {
+				recursive: true,
+			});
 			await fs.promises.writeFile(jsonSchemaPath, jsonSchemaFile);
 		},
 	},
 	plugins: [ApiSnapshot()],
+	publint: true,
 	target: "esnext",
 });

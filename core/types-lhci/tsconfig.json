@@ -3,6 +3,7 @@
   "include": ["./src/**/*", "tsdown.config.ts", "types", "example"],
   "compilerOptions": {
     "composite": true,
-    "types": ["node"]
+    "types": ["node"],
+    "allowImportingTsExtensions": true
   }
 }

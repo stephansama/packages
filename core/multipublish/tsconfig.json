@@ -3,6 +3,6 @@
   "include": ["./src/**/*", "tsdown.config.ts", "vitest.config.ts"],
   "compilerOptions": {
     "composite": true,
-    "allowImportingTsExtensions": true
+    "rewriteRelativeImportExtensions": true
   }
 }

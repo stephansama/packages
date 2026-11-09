@@ -12,6 +12,6 @@
       "@/*": ["./src/*"]
     },
     "composite": true,
-    "allowImportingTsExtensions": true
+    "rewriteRelativeImportExtensions": true
   }
 }

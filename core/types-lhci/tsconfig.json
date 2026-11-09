@@ -4,6 +4,6 @@
   "compilerOptions": {
     "composite": true,
     "types": ["node"],
-    "allowImportingTsExtensions": true
+    "rewriteRelativeImportExtensions": true
   }
 }

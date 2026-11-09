@@ -4,6 +4,6 @@
   "compilerOptions": {
     "types": ["./types/plugins.d.ts", "node"],
     "composite": true,
-    "allowImportingTsExtensions": true
+    "rewriteRelativeImportExtensions": true
   }
 }

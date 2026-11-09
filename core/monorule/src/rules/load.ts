@@ -3,9 +3,14 @@ import path from "node:path";
 import { register } from "tsx/esm/api";
 
 import { info } from "@/log";
-import { type ConfigSchema, ruleMapSchema } from "@/schema";
+import { type ConfigSchema, ruleMapSchema, type RuleMapSchema } from "@/schema";
 
-export async function loadRules(config: ConfigSchema, configFilepath?: string) {
+// explicit return type so the emitted d.ts names the type instead of inlining
+// the inferred zod union, whose member order is not stable between builds
+export async function loadRules(
+	config: ConfigSchema,
+	configFilepath?: string,
+): Promise<RuleMapSchema[string][]> {
 	const absolute = path.resolve(
 		path.join(path.dirname(configFilepath || ""), config.ruleDirectory),
 	);

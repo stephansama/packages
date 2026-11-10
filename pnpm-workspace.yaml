@@ -183,6 +183,7 @@ catalogs:
     remark: 15.0.1
     remark-code-import: 1.2.0
     remark-collapse: 0.1.2
+    remark-rehype: 11.1.2
     remark-toc: 9.0.0
   schema:
     '@standard-schema/spec': 1.1.0

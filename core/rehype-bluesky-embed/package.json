@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@types/hast": "catalog:",
+    "@types/mdast": "catalog:",
     "hast-util-from-html": "catalog:",
     "unist-util-visit": "catalog:",
     "vfile": "catalog:"
@@ -50,6 +51,8 @@
   "devDependencies": {
     "rehype-parse": "catalog:",
     "rehype-stringify": "catalog:",
+    "remark": "catalog:remark",
+    "remark-rehype": "catalog:remark",
     "tsdown": "catalog:",
     "unified": "catalog:"
   },

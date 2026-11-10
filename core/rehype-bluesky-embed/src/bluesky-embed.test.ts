@@ -1,15 +1,39 @@
+import type { Root as MdastRoot } from "mdast";
+
 import rehypeParse from "rehype-parse";
 import rehypeStringify from "rehype-stringify";
+import { remark } from "remark";
+import remarkRehype from "remark-rehype";
 import { unified } from "unified";
+import { visit } from "unist-util-visit";
 import { describe, expect, it, vi } from "vitest";
 
-import plugin, { type RehypeBlueskyEmbedOptions } from "../src/index";
+import plugin, {
+	type RehypeBlueskyEmbedOptions,
+	remarkBlueskyPassthrough,
+} from "../src/index";
 import { buildOEmbedURL, getBlueskyPostURL } from "../src/utilities";
 
 const POST_URL = "https://bsky.app/profile/bsky.app/post/3l6oveex3ii2l";
 
 const OEMBED_HTML =
 	'<blockquote class="bluesky-embed" data-bluesky-uri="at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.post/3l6oveex3ii2l" data-bluesky-cid="bafyreiexample"><p lang="en">Hello from Bluesky</p>&mdash; Bluesky (<a href="https://bsky.app/profile/did:plc:z72i7hdynmk6r22z27h6tvur?ref_src=embed">@bsky.app</a>)</blockquote><script async src="https://embed.bsky.app/static/embed.js" charset="utf-8"></script>';
+
+/**
+ * Collects the URL of every paragraph whose only child is a link, the way
+ * remark-oembed picks what to embed.
+ */
+function collectStandaloneLinks(seen: string[]) {
+	return (tree: MdastRoot) => {
+		visit(tree, "paragraph", (node) => {
+			const [child] = node.children;
+
+			if (node.children.length === 1 && child?.type === "link") {
+				seen.push(child.url);
+			}
+		});
+	};
+}
 
 function mockFetch(html: string | undefined = OEMBED_HTML, ok = true) {
 	return vi.fn(() =>
@@ -169,5 +193,38 @@ describe("rehype bluesky embed", () => {
 
 		await run(standalone, { cache, fetch: throwing });
 		expect(cache.size).toBe(0);
+	});
+});
+
+describe("remarkBlueskyPassthrough", () => {
+	// autolinks in angle brackets, which plain CommonMark links the way GFM links bare URLs
+	const markdown = `Intro.\n\n<${POST_URL}>\n\nRead [this post](${POST_URL}) today.\n\n<https://www.youtube.com/watch?v=abc>\n`;
+
+	it("hides standalone post links from paragraph-only plugins", async () => {
+		// stands in for remark-oembed, which only looks at `paragraph` nodes
+		const seen: string[] = [];
+
+		await remark()
+			.use(remarkBlueskyPassthrough)
+			.use(collectStandaloneLinks, seen)
+			.run(remark().parse(markdown));
+
+		expect(seen).toEqual(["https://www.youtube.com/watch?v=abc"]);
+	});
+
+	it("still renders the link as a paragraph for the rehype plugin", async () => {
+		const fetch = mockFetch();
+		const file = await remark()
+			.use(remarkBlueskyPassthrough)
+			.use(remarkRehype)
+			.use(plugin, { cache: new Map(), fetch, script: false })
+			.use(rehypeStringify)
+			.process(markdown);
+		const output = String(file);
+
+		expect(output).toContain('<blockquote class="bluesky-embed"');
+		expect(output).toContain(`<a href="${POST_URL}">this post</a>`);
+		expect(output.match(/<blockquote/g)).toHaveLength(1);
+		expect(fetch).toHaveBeenCalledTimes(1);
 	});
 });

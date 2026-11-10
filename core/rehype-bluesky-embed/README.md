@@ -20,6 +20,7 @@ A rehype plugin that turns links to Bluesky posts into embedded posts.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Options](#options)
+- [With remark-oembed](#with-remark-oembed)
 - [Notes](#notes)
 
 </details>
@@ -104,6 +105,24 @@ export default defineConfig({
 | `colorMode` | `"system" \| "light" \| "dark"`             | Bluesky's own      | Sets `data-bluesky-embed-color-mode` on the embed.                                 |
 | `cache`     | `Map<string, Promise<string \| undefined>>` | shared per process | Cache of fetched embeds, so a post used on several pages is fetched once.          |
 | `fetch`     | `typeof fetch`                              | `globalThis.fetch` | Custom fetch, handy for tests or proxies.                                          |
+
+## With remark-oembed
+
+`remark-oembed` and similar markdown-side oEmbed plugins know Bluesky too. They run before any rehype plugin and swap a standalone post link for their own widget, so this plugin never sees it. Add `remarkBlueskyPassthrough` before them to keep Bluesky links for this plugin:
+
+```typescript
+import blueskyEmbed, {
+  remarkBlueskyPassthrough,
+} from "@stephansama/rehype-bluesky-embed";
+import oembed from "remark-oembed";
+
+export default defineConfig({
+  markdown: {
+    rehypePlugins: [[blueskyEmbed, { script: false }]],
+    remarkPlugins: [remarkBlueskyPassthrough, oembed],
+  },
+});
+```
 
 ## Notes
 

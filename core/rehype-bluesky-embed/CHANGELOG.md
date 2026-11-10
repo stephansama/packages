@@ -1,5 +1,11 @@
 # @stephansama/rehype-bluesky-embed
 
+## 0.2.0
+
+### Minor Changes
+
+- dd11949: add `remarkBlueskyPassthrough` so markdown-side oEmbed plugins such as remark-oembed leave Bluesky post links for the rehype plugin
+
 ## 0.1.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "@stephansama/rehype-bluesky-embed",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A rehype plugin that turns links to Bluesky posts into embedded posts.",
   "keywords": [
     "bluesky",

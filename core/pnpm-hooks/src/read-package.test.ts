@@ -109,6 +109,64 @@ describe("read-package", () => {
 			expect(result.optionalDependencies?.fsevents).toBe("2.3.3");
 		});
 
+		it.each([
+			[">=1.2.3", "1.2.3"],
+			["=1.2.3", "1.2.3"],
+			["v1.2.3", "1.2.3"],
+			["^v1.2.3", "1.2.3"],
+			["~>1.2.3", "1.2.3"],
+			["^ 1.2.3", "1.2.3"],
+			[">= 1.2.3", "1.2.3"],
+			["^1.2.3-beta.1", "1.2.3-beta.1"],
+			["~1.2.3+build.5", "1.2.3+build.5"],
+			["1.2.3 - 2.0.0", "1.2.3"],
+			["  1.2.3 - 2.0.0  ", "1.2.3"],
+			["npm:lodash@^4.17.21", "npm:lodash@4.17.21"],
+			["npm:@scope/pkg@~1.2.3", "npm:@scope/pkg@1.2.3"],
+		])("should pin %j to its lower bound %j", (range, expected) => {
+			const pkg = { dependencies: { dep: range } };
+			const result = pinAllDependencies(pkg, context);
+			expect(result.dependencies?.dep).toBe(expected);
+		});
+
+		it.each([
+			// no single exact lower bound
+			">1.2.3",
+			"<2.0.0",
+			"<=2.0.0",
+			"^1.2",
+			"~1",
+			"1.x",
+			"1.2.x",
+			"*",
+			"",
+			"1.2 - 2.0.0",
+			"^1.2.3 || ^2.0.0",
+			"1.2.3 - 2.0.0||0.5.0",
+			"0.5.0||1.2.3 - 2.0.0",
+			">=1.2.3 <2.0.0",
+			"npm:lodash@4.x",
+			// dist-tags
+			"latest",
+			"next",
+			// protocols
+			"workspace:*",
+			"workspace:^",
+			"workspace:~",
+			"workspace:^1.2.3",
+			"catalog:",
+			"catalog:pnpm",
+			"file:../local",
+			"link:../local",
+			"git+https://github.com/user/repo.git#v1.2.3",
+			"github:user/repo#semver:^1.2.3",
+			"https://example.com/pkg-1.2.3.tgz",
+		])("should leave %j unchanged", (range) => {
+			const pkg = { dependencies: { dep: range } };
+			const result = pinAllDependencies(pkg, context);
+			expect(result.dependencies?.dep).toBe(range);
+		});
+
 		it("should pin multiple packages within the same dependency type", () => {
 			const pkg = {
 				dependencies: {

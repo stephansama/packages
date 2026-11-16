@@ -59,11 +59,28 @@ The sections below are organized so each hook can carry its own behavior notes a
 
 ### `readPackageHooks.pinAllDependencies`
 
-Pins dependency ranges by removing leading `^` and `~` prefixes from:
+Pins dependency ranges to their lower bound in:
 
 - `dependencies`
 - `devDependencies`
 - `optionalDependencies`
+
+Ranges with one exact lower bound are pinned to it:
+
+| Range                 | Pinned to            |
+| --------------------- | -------------------- |
+| `^1.2.3`, `~1.2.3`    | `1.2.3`              |
+| `>=1.2.3`, `=1.2.3`   | `1.2.3`              |
+| `v1.2.3`              | `1.2.3`              |
+| `1.2.3 - 2.0.0`       | `1.2.3`              |
+| `^1.2.3-beta.1`       | `1.2.3-beta.1`       |
+| `npm:lodash@^4.17.21` | `npm:lodash@4.17.21` |
+
+Everything else is left as written, because there's no single version to pin it to without changing what it resolves to:
+
+- ranges without an exact lower bound: `>1.2.3`, `<2.0.0`, `<=2.0.0`, `1.x`, `^1.2`, `*`, `^1.0.0 || ^2.0.0`, `>=1.2.3 <2.0.0`
+- dist-tags such as `latest`
+- protocols such as `workspace:`, `catalog:`, `file:`, `link:`, git and tarball urls
 
 This runs on every manifest processed by pnpm through the `readPackage` hook, which makes it useful for workspaces that want consistently pinned transitive and nested dependency ranges during resolution.
 

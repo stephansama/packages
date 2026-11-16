@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { run } from "./index";
+import { PublishError, run } from "./index";
 
 const mocks = vi.hoisted(() => ({
 	findRoot: vi.fn(() => Promise.resolve({ rootDir: "/mock/root" })),
@@ -85,5 +85,27 @@ describe("run", () => {
 
 		expect(mocks.updateJsrConfigVersion).toHaveBeenCalledOnce();
 		expect(mocks.publishPlatform).not.toHaveBeenCalled();
+	});
+
+	it("should publish the remaining packages after a failure, then throw", async () => {
+		mocks.publishPlatform.mockRejectedValueOnce(
+			new Error("npm publish failed for pkg1"),
+		);
+		const consoleError = vi
+			.spyOn(console, "error")
+			.mockImplementation(() => {});
+
+		const error = await run().catch((error_: unknown) => error_);
+
+		expect(mocks.publishPlatform).toHaveBeenCalledTimes(2);
+		expect(error).toBeInstanceOf(PublishError);
+		expect((error as PublishError).failures).toEqual(["pkg1 (npm)"]);
+		expect((error as PublishError).message).toBe(
+			"1 publish failed: pkg1 (npm)",
+		);
+		expect(consoleError).toHaveBeenCalledWith(
+			"✖ pkg1 (npm): npm publish failed for pkg1",
+		);
+		consoleError.mockRestore();
 	});
 });

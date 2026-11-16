@@ -56,19 +56,63 @@ export const jsrTransformer = packageJsonSchema.transform((schema) => ({
 
 export { jsrTransformer as transformer };
 
+const leadingDotSlashRegex = /^\.\//;
+
+const globListSchema = z.array(z.string().trim()).optional();
+
 export type JsrSchema = z.infer<typeof jsrSchema>;
 export const jsrSchema = z.object({
-	exclude: z.array(z.string().trim()).optional(),
+	exclude: globListSchema,
 	exports: z
 		.string()
 		.trim()
 		.or(z.array(z.string().trim()))
 		.or(z.record(z.string(), z.string().trim())),
-	include: z.array(z.string().trim()).optional(),
+	include: globListSchema,
 	license: z.string().trim().optional(),
 	name: z.string().trim().min(1),
+	/**
+	 * Publish-only file filters. Unlike the top-level `include` / `exclude`, a
+	 * negated `publish.exclude` glob (`!dist`) can publish gitignored files.
+	 */
+	publish: z
+		.object({ exclude: globListSchema, include: globListSchema })
+		.optional(),
 	version: z.string().trim(),
 });
+
+/**
+ * Un-exclude every directory the config's `exports` point into, e.g. `!dist`
+ * for `./dist/index.mjs`. Build output is usually gitignored, and jsr excludes
+ * gitignored files, so without this every export would fail with
+ * `excluded-module`.
+ *
+ * The globs are prepended, because jsr uses the last matching glob: a narrower
+ * exclude inside the directory (e.g. `dist/*.map`) has to come after `!dist` to
+ * still apply. A directory that's already listed keeps its position.
+ */
+export function includeExportDirectories(jsrConfig: JsrSchema) {
+	const exportPaths =
+		typeof jsrConfig.exports === "string"
+			? [jsrConfig.exports]
+			: Object.values(jsrConfig.exports);
+
+	const directories = exportPaths.flatMap((exportPath) => {
+		const [directory, ...rest] = exportPath
+			.replace(leadingDotSlashRegex, "")
+			.split("/");
+		return directory && rest.length > 0 ? [`!${directory}`] : [];
+	});
+
+	const existing = jsrConfig.publish?.exclude ?? [];
+	const missing = [...new Set(directories)].filter(
+		(directory) => !existing.includes(directory),
+	);
+	if (missing.length === 0) return;
+
+	jsrConfig.publish ??= {};
+	jsrConfig.publish.exclude = [...missing, ...existing];
+}
 
 export async function loadConfig(basePath: string) {
 	const files = await glob(basePath + "/{deno,jsr}.json{,c}");
@@ -86,19 +130,18 @@ export async function loadConfig(basePath: string) {
 	return { config: jsrSchema.parse(JSON.parse(file)), filename: configFile };
 }
 
+/**
+ * Add the jsr platform's `defaultInclude` / `defaultExclude` to the config's
+ * `publish.include` / `publish.exclude`. They go under `publish` because jsr
+ * only honors negated globs like `!dist` (which publish gitignored files)
+ * there, not in the top-level `exclude`.
+ */
 export function updateIncludeExcludeList(
 	jsrConfig: JsrSchema,
 	appConfig: JsrPlatformOptionsSchema,
 ) {
-	for (const key of ["include", "exclude"] as const) {
-		const capitalizedKey = key.at(0)?.toUpperCase() + key.slice(1);
-		const appConfigKey =
-			`default${capitalizedKey}` as `default${Capitalize<typeof key>}`;
-		const appConfigList = appConfig[appConfigKey] || [];
-
-		jsrConfig[key] ??= [];
-		jsrConfig[key] = [...jsrConfig[key], ...appConfigList];
-	}
+	addPublishGlobs(jsrConfig, "include", appConfig.defaultInclude);
+	addPublishGlobs(jsrConfig, "exclude", appConfig.defaultExclude);
 }
 
 export async function updateJsrConfigVersion(
@@ -116,6 +159,17 @@ export async function updateJsrConfigVersion(
 		JSON.stringify(userJsr.config, undefined, 2),
 		"utf8",
 	);
+}
+
+function addPublishGlobs(
+	jsrConfig: JsrSchema,
+	key: "exclude" | "include",
+	globs: string[] = [],
+) {
+	if (globs.length === 0) return;
+	jsrConfig.publish ??= {};
+	const existing = jsrConfig.publish[key] ?? [];
+	jsrConfig.publish[key] = [...new Set([...existing, ...globs])];
 }
 
 function convertPackageJsonExportsToJsr(exports: ExportsSchema) {

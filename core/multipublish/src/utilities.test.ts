@@ -41,6 +41,20 @@ describe("chdir", () => {
 	});
 });
 
+describe("chdir rethrow", () => {
+	it("should rethrow callback errors after changing back", async () => {
+		const initialDirectory = fs.realpathSync(process.cwd());
+
+		await expect(
+			chdir(os.tmpdir(), () => {
+				throw new Error("boom");
+			}),
+		).rejects.toThrow("boom");
+
+		expect(fs.realpathSync(process.cwd())).toBe(initialDirectory);
+	});
+});
+
 describe("gitClean", () => {
 	it("should remove the specified file", () => {
 		const temporaryFile = "dummy-file-for-testing.tmp";

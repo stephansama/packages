@@ -24,8 +24,10 @@ preconfigured pnpm hooks and types for pnpmfile
 - [What this package exports](#what-this-package-exports)
 - [Included hooks](#included-hooks)
   - [`readPackageHooks.pinAllDependencies`](#readpackagehookspinalldependencies)
+  - [`readPackageHooks.createPinAllDependencies`](#readpackagehookscreatepinalldependencies)
 - [Hook examples](#hook-examples)
   - [`readPackageHooks.pinAllDependencies`](#readpackagehookspinalldependencies-1)
+  - [`readPackageHooks.createPinAllDependencies`](#readpackagehookscreatepinalldependencies-1)
 - [Requirements](#requirements)
 - [Usage](#usage)
 
@@ -84,6 +86,26 @@ Everything else is left as written, because there's no single version to pin it 
 
 This runs on every manifest processed by pnpm through the `readPackage` hook, which makes it useful for workspaces that want consistently pinned transitive and nested dependency ranges during resolution.
 
+### `readPackageHooks.createPinAllDependencies`
+
+Creates a `pinAllDependencies` hook with options. `pinAllDependencies` is `createPinAllDependencies()` with no options.
+
+- `fallbacks`: exact versions for wildcard specs (`*`, `x`, `X` or empty), keyed by dependency name. A wildcard has no lower bound to pin to, so `pinAllDependencies` leaves it unchanged. With a fallback it's replaced by that version. Wildcards without a fallback, and every non-wildcard spec, are handled the same as `pinAllDependencies`.
+
+Fallbacks are used as written, so give exact versions.
+
+```typescript
+import { readPackageHooks, type types } from "@stephansama/pnpm-hooks";
+
+export const hooks = {
+  readPackage: readPackageHooks.createPinAllDependencies({
+    fallbacks: { "@types/node": "24.12.2", "@types/unist": "3.0.3" },
+  }),
+} satisfies types.PnpmFileHooks;
+```
+
+Compared to pnpm [`overrides`](https://pnpm.io/settings#overrides), a fallback only replaces wildcard specs: a package that asks for `^22.0.0` still gets pinned to `22.0.0`, while an override would replace every reference. Fallbacks also live in code, so a set of them can be shared across repos as a package.
+
 ## Hook examples
 
 ### `readPackageHooks.pinAllDependencies`
@@ -116,6 +138,32 @@ Given a dependency manifest like this:
   },
   "optionalDependencies": {
     "@types/node": "24.0.0"
+  }
+}
+```
+
+### `readPackageHooks.createPinAllDependencies`
+
+With `fallbacks: { "@types/node": "24.12.2" }`, a dependency manifest like this:
+
+```json
+{
+  "dependencies": {
+    "@types/node": "*",
+    "@types/unist": "*",
+    "vfile": "^6.0.3"
+  }
+}
+```
+
+is rewritten to:
+
+```json
+{
+  "dependencies": {
+    "@types/node": "24.12.2",
+    "@types/unist": "*",
+    "vfile": "6.0.3"
   }
 }
 ```

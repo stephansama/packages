@@ -18,6 +18,11 @@ const npmAliasRegex = /^(?<prefix>npm:(?:@[^@/]+\/)?[^@]+@)(?<range>.+)$/;
 /** `<from> - <to>` hyphen ranges, not part of an `||` union */
 const hyphenRangeRegex = /^(?<from>[^\s|]+)\s+-\s+[^\s|]+$/;
 
+/** `*`, `x`, `X` and empty specs match any version */
+function isWildcard(version: string) {
+	return ["", "*", "x", "X"].includes(version.trim());
+}
+
 /**
  * Pin a version range to its lower bound, so `^1.2.3`, `~1.2.3`, `>=1.2.3` and
  * the hyphen range `1.2.3 - 2.0.0` all become `1.2.3`.
@@ -56,16 +61,45 @@ const dependencyTypes = [
 	>
 >;
 
-/** Pin all dependencies in a pnpm workspace (including nested dependencies) */
-export const pinAllDependencies = ((pkg, _context) => {
-	for (const current of dependencyTypes) {
-		const dependencies = pkg[current];
-		if (!dependencies) continue;
+export type PinAllDependenciesOptions = {
+	/**
+	 * Versions to use for wildcard specs (`*`, `x` or empty), keyed by
+	 * dependency name. A wildcard has no lower bound, so without a fallback
+	 * it's left unchanged. Use exact versions: fallbacks are used as written.
+	 *
+	 * @example
+	 * 	{ "@types/node": "24.12.2", "@types/unist": "3.0.3" }
+	 */
+	fallbacks?: Partial<Record<string, string>>;
+};
 
-		for (const [dependency, value] of Object.entries(dependencies)) {
-			dependencies[dependency] = pinVersion(value);
+/**
+ * Create a `readPackage` hook that pins all dependencies in a pnpm workspace
+ * (including nested dependencies), using `fallbacks` for wildcard specs.
+ */
+export function createPinAllDependencies({
+	fallbacks = {},
+}: PinAllDependenciesOptions = {}) {
+	return ((pkg, _context) => {
+		for (const current of dependencyTypes) {
+			const dependencies = pkg[current];
+			if (!dependencies) continue;
+
+			for (const [dependency, value] of Object.entries(dependencies)) {
+				const fallback = Object.hasOwn(fallbacks, dependency)
+					? fallbacks[dependency]
+					: undefined;
+
+				dependencies[dependency] =
+					fallback !== undefined && isWildcard(value)
+						? fallback
+						: pinVersion(value);
+			}
 		}
-	}
 
-	return pkg;
-}) satisfies ReadPackageHook;
+		return pkg;
+	}) satisfies ReadPackageHook;
+}
+
+/** Pin all dependencies in a pnpm workspace (including nested dependencies) */
+export const pinAllDependencies = createPinAllDependencies();

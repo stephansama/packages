@@ -3,7 +3,7 @@ import type { BaseManifest } from "@pnpm/types";
 
 import { describe, expect, it } from "vitest";
 
-import { pinAllDependencies } from "./read-package";
+import { createPinAllDependencies, pinAllDependencies } from "./read-package";
 
 const context = {} as HookContext;
 
@@ -179,6 +179,71 @@ describe("read-package", () => {
 			expect(result.dependencies?.react).toBe("18.0.0");
 			expect(result.dependencies?.["react-dom"]).toBe("18.0.0");
 			expect(result.dependencies?.typescript).toBe("5.4.5");
+		});
+	});
+
+	describe("createPinAllDependencies", () => {
+		const pin = createPinAllDependencies({
+			fallbacks: { "@types/node": "24.12.2", "@types/unist": "3.0.3" },
+		});
+
+		it.each(["*", "x", "X", "", "  *  "])(
+			"should replace the wildcard %j with its fallback",
+			(spec) => {
+				const pkg = { dependencies: { "@types/node": spec } };
+				const result = pin(pkg, context);
+				expect(result.dependencies?.["@types/node"]).toBe("24.12.2");
+			},
+		);
+
+		it("should use fallbacks in every dependency type", () => {
+			const pkg = {
+				dependencies: { "@types/node": "*" },
+				devDependencies: { "@types/unist": "*" },
+				optionalDependencies: { "@types/node": "x" },
+			};
+			const result = pin(pkg, context);
+			expect(result.dependencies?.["@types/node"]).toBe("24.12.2");
+			expect(result.devDependencies?.["@types/unist"]).toBe("3.0.3");
+			expect(result.optionalDependencies?.["@types/node"]).toBe(
+				"24.12.2",
+			);
+		});
+
+		it("should pin non-wildcard ranges normally even with a fallback", () => {
+			const pkg = { dependencies: { "@types/node": "^22.0.0" } };
+			const result = pin(pkg, context);
+			expect(result.dependencies?.["@types/node"]).toBe("22.0.0");
+		});
+
+		it.each(["latest", "1.x", "workspace:*", "npm:@types/node@*"])(
+			"should not use a fallback for the non-wildcard spec %j",
+			(spec) => {
+				const pkg = { dependencies: { "@types/node": spec } };
+				const result = pin(pkg, context);
+				expect(result.dependencies?.["@types/node"]).toBe(spec);
+			},
+		);
+
+		it("should leave wildcards without a fallback unchanged", () => {
+			const pkg = { dependencies: { "@types/ms": "*" } };
+			const result = pin(pkg, context);
+			expect(result.dependencies?.["@types/ms"]).toBe("*");
+		});
+
+		it("should ignore inherited object keys", () => {
+			const pkg = { dependencies: { constructor: "*", toString: "*" } };
+			const result = pin(pkg, context);
+			expect(result.dependencies).toEqual({
+				constructor: "*",
+				toString: "*",
+			});
+		});
+
+		it("should behave like pinAllDependencies without options", () => {
+			const pkg = { dependencies: { a: "*", b: "^1.2.3" } };
+			const result = createPinAllDependencies()(pkg, context);
+			expect(result.dependencies).toEqual({ a: "*", b: "1.2.3" });
 		});
 	});
 });

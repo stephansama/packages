@@ -15,8 +15,8 @@ const lowerBoundOperatorRegex = /^(?:\^|~>?|>=|=)\s*/;
 /** `npm:<name>@<range>` aliases, where `<name>` may be scoped */
 const npmAliasRegex = /^(?<prefix>npm:(?:@[^@/]+\/)?[^@]+@)(?<range>.+)$/;
 
-/** `<from> - <to>` hyphen ranges */
-const hyphenRangeRegex = /^(?<from>\S+)\s+-\s+\S+$/;
+/** `<from> - <to>` hyphen ranges, not part of an `||` union */
+const hyphenRangeRegex = /^(?<from>[^\s|]+)\s+-\s+[^\s|]+$/;
 
 /**
  * Pin a version range to its lower bound, so `^1.2.3`, `~1.2.3`, `>=1.2.3` and

@@ -1,0 +1,201 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`csv > formats no findings 1`] = `
+"parent,parentVersion,dependency,spec,depType,kind,resolved,pinnable
+"
+`;
+
+exports[`csv > formats the fixture findings 1`] = `
+"parent,parentVersion,dependency,spec,depType,kind,resolved,pinnable
+@types/ws,8.18.1,@types/node,*,dependencies,wildcard,24.12.2,false
+vite,6.3.5,picocolors,^1.1.1,dependencies,caret,1.1.1,true
+"needs,quoting",1.0.0,react,"^18 || ""19""",optionalDependencies,union,,false
+"
+`;
+
+exports[`csv > respects --fields and --no-header 1`] = `
+"@types/node,*,@types/ws
+picocolors,^1.1.1,vite
+react,"^18 || ""19""","needs,quoting"
+"
+`;
+
+exports[`github > formats no findings 1`] = `""`;
+
+exports[`github > formats the fixture findings 1`] = `
+"::warning title=Floating dependency::@types/ws@8.18.1 has dependencies.@types/node set to "*" (wildcard)
+::warning title=Floating dependency::vite@6.3.5 has dependencies.picocolors set to "^1.1.1" (caret)
+::warning title=Floating dependency::needs,quoting@1.0.0 has optionalDependencies.react set to "^18 || "19"" (union)
+"
+`;
+
+exports[`json > formats no findings 1`] = `
+"{
+  "findings": [],
+  "summary": {
+    "byDepType": {},
+    "byKind": {},
+    "pinnable": 0,
+    "total": 0
+  }
+}
+"
+`;
+
+exports[`json > formats the fixture findings 1`] = `
+"{
+  "findings": [
+    {
+      "dependency": "@types/node",
+      "depType": "dependencies",
+      "kind": "wildcard",
+      "parent": "@types/ws",
+      "parentVersion": "8.18.1",
+      "pinnable": false,
+      "resolved": "24.12.2",
+      "spec": "*"
+    },
+    {
+      "dependency": "picocolors",
+      "depType": "dependencies",
+      "kind": "caret",
+      "parent": "vite",
+      "parentVersion": "6.3.5",
+      "pinnable": true,
+      "resolved": "1.1.1",
+      "spec": "^1.1.1"
+    },
+    {
+      "dependency": "react",
+      "depType": "optionalDependencies",
+      "kind": "union",
+      "parent": "needs,quoting",
+      "parentVersion": "1.0.0",
+      "pinnable": false,
+      "spec": "^18 || \\"19\\""
+    }
+  ],
+  "summary": {
+    "byDepType": {
+      "dependencies": 2,
+      "optionalDependencies": 1
+    },
+    "byKind": {
+      "wildcard": 1,
+      "caret": 1,
+      "union": 1
+    },
+    "pinnable": 1,
+    "total": 3
+  }
+}
+"
+`;
+
+exports[`jsonl > formats no findings 1`] = `""`;
+
+exports[`jsonl > formats the fixture findings 1`] = `
+"{"dependency":"@types/node","depType":"dependencies","kind":"wildcard","parent":"@types/ws","parentVersion":"8.18.1","pinnable":false,"resolved":"24.12.2","spec":"*"}
+{"dependency":"picocolors","depType":"dependencies","kind":"caret","parent":"vite","parentVersion":"6.3.5","pinnable":true,"resolved":"1.1.1","spec":"^1.1.1"}
+{"dependency":"react","depType":"optionalDependencies","kind":"union","parent":"needs,quoting","parentVersion":"1.0.0","pinnable":false,"spec":"^18 || \\"19\\""}
+"
+`;
+
+exports[`list > formats no findings 1`] = `""`;
+
+exports[`list > formats the fixture findings 1`] = `
+"@types/node
+picocolors
+react
+"
+`;
+
+exports[`markdown > formats no findings 1`] = `
+"| parent | parentVersion | dependency | spec | depType | kind | resolved | pinnable |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+"
+`;
+
+exports[`markdown > formats the fixture findings 1`] = `
+"| parent | parentVersion | dependency | spec | depType | kind | resolved | pinnable |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| @types/ws | 8.18.1 | @types/node | * | dependencies | wildcard | 24.12.2 | false |
+| vite | 6.3.5 | picocolors | ^1.1.1 | dependencies | caret | 1.1.1 | true |
+| needs,quoting | 1.0.0 | react | ^18 \\|\\| "19" | optionalDependencies | union |  | false |
+"
+`;
+
+exports[`markdown > respects --fields and --no-header 1`] = `
+"| @types/node | * | @types/ws |
+| picocolors | ^1.1.1 | vite |
+| react | ^18 \\|\\| "19" | needs,quoting |
+"
+`;
+
+exports[`summary > formats no findings 1`] = `
+"total
+  floating              0
+  pinnable              0
+"
+`;
+
+exports[`summary > formats the fixture findings 1`] = `
+"total
+  floating              3
+  pinnable              1
+
+kind
+  wildcard              1
+  caret                 1
+  union                 1
+
+depType
+  dependencies          2
+  optionalDependencies  1
+"
+`;
+
+exports[`table > formats no findings 1`] = `
+"no floating dependencies
+"
+`;
+
+exports[`table > formats the fixture findings 1`] = `
+"parent         parentVersion  dependency   spec         depType               kind      resolved  pinnable
+@types/ws      8.18.1         @types/node  *            dependencies          wildcard  24.12.2   false
+vite           6.3.5          picocolors   ^1.1.1       dependencies          caret     1.1.1     true
+needs,quoting  1.0.0          react        ^18 || "19"  optionalDependencies  union               false
+
+3 floating dependencies (1 wildcard, 1 caret, 1 union), 1 pinnable
+"
+`;
+
+exports[`table > respects --fields and --no-header 1`] = `
+"dependency   spec         parent
+@types/node  *            @types/ws
+picocolors   ^1.1.1       vite
+react        ^18 || "19"  needs,quoting
+
+3 floating dependencies (1 wildcard, 1 caret, 1 union), 1 pinnable
+"
+`;
+
+exports[`tsv > formats no findings 1`] = `
+"parent	parentVersion	dependency	spec	depType	kind	resolved	pinnable
+"
+`;
+
+exports[`tsv > formats the fixture findings 1`] = `
+"parent	parentVersion	dependency	spec	depType	kind	resolved	pinnable
+@types/ws	8.18.1	@types/node	*	dependencies	wildcard	24.12.2	false
+vite	6.3.5	picocolors	^1.1.1	dependencies	caret	1.1.1	true
+needs,quoting	1.0.0	react	^18 || "19"	optionalDependencies	union		false
+"
+`;
+
+exports[`tsv > respects --fields and --no-header 1`] = `
+"@types/node	*	@types/ws
+picocolors	^1.1.1	vite
+react	^18 || "19"	needs,quoting
+"
+`;

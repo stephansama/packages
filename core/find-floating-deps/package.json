@@ -1,0 +1,85 @@
+{
+  "name": "@stephansama/find-floating-deps",
+  "version": "0.0.0",
+  "description": "Report floating dependency ranges in an installed pnpm dependency tree",
+  "keywords": [
+    "dependencies",
+    "find-floating-deps",
+    "pnpm",
+    "semver"
+  ],
+  "homepage": "https://packages.stephansama.info/api/@stephansama/find-floating-deps",
+  "bugs": {
+    "url": "https://github.com/stephansama/packages/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephansama/packages.git",
+    "directory": "core/find-floating-deps"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Stephan Randle",
+    "email": "stephanrandle.dev@gmail.com",
+    "url": "https://stephansama.info"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "./classify": "./dist/classify.mjs",
+    "./cli": "./dist/cli.mjs",
+    "./filter": "./dist/filter.mjs",
+    "./finding": "./dist/finding.mjs",
+    "./format": "./dist/format.mjs",
+    "./formats/csv": "./dist/formats/csv.mjs",
+    "./formats/github": "./dist/formats/github.mjs",
+    "./formats/json": "./dist/formats/json.mjs",
+    "./formats/jsonl": "./dist/formats/jsonl.mjs",
+    "./formats/list": "./dist/formats/list.mjs",
+    "./formats/markdown": "./dist/formats/markdown.mjs",
+    "./formats/options": "./dist/formats/options.mjs",
+    "./formats/summary": "./dist/formats/summary.mjs",
+    "./formats/table": "./dist/formats/table.mjs",
+    "./formats/tsv": "./dist/formats/tsv.mjs",
+    "./package.json": "./package.json",
+    "./run": "./dist/run.mjs",
+    "./scan": "./dist/scan.mjs",
+    "./summary": "./dist/summary.mjs"
+  },
+  "bin": {
+    "find-floating-deps": "./dist/cli.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint ./ --pass-on-no-patterns --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint ./ --fix"
+  },
+  "dependencies": {
+    "@manypkg/get-packages": "catalog:manypkg",
+    "@stephansama/pnpm-hooks": "workspace:*",
+    "picocolors": "catalog:cli",
+    "picomatch": "catalog:"
+  },
+  "devDependencies": {
+    "@types/picomatch": "catalog:",
+    "cleye": "catalog:cli",
+    "tsdown": "catalog:"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "inlinedDependencies": {
+    "cleye": "2.6.0",
+    "terminal-columns": "2.0.0",
+    "type-flag": "4.2.0"
+  },
+  "readme": "./README.md"
+}

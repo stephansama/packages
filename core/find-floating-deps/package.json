@@ -26,6 +26,7 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
+    "./catalogs": "./dist/catalogs.mjs",
     "./classify": "./dist/classify.mjs",
     "./cli": "./dist/cli.mjs",
     "./filter": "./dist/filter.mjs",
@@ -62,7 +63,8 @@
     "@manypkg/get-packages": "catalog:manypkg",
     "@stephansama/pnpm-hooks": "workspace:*",
     "picocolors": "catalog:cli",
-    "picomatch": "catalog:"
+    "picomatch": "catalog:",
+    "yaml": "catalog:"
   },
   "devDependencies": {
     "@types/picomatch": "catalog:",

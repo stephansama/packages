@@ -4,7 +4,7 @@ import { cli } from "cleye";
 
 import { depTypes, fields, kinds } from "./finding";
 import { formatNames } from "./format";
-import { exitCodes, resolveOptions, run } from "./run";
+import { exitCodes, resolveOptions, run, UsageError } from "./run";
 
 const argv = cli({
 	flags: {
@@ -87,6 +87,14 @@ try {
 		isTTY: Boolean(process.stdout.isTTY),
 		write: (text: string) => process.stdout.write(text),
 	};
+
+	// cleye drops unknown flags, so a typo like `--fail-onn` would pass CI
+	const unknownFlags = Object.keys(argv.unknownFlags);
+	if (unknownFlags.length > 0) {
+		throw new UsageError(
+			`unknown flag: ${unknownFlags.map((flag) => `--${flag}`).join(", ")}`,
+		);
+	}
 
 	const options = resolveOptions(argv.flags, argv._.dir, environment);
 	process.exitCode = await run(options, environment);

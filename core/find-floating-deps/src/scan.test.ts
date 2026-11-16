@@ -165,3 +165,93 @@ describe("findingsFromManifest", () => {
 		).toEqual({ a: true, b: false, c: false, d: true });
 	});
 });
+
+describe("catalogs", () => {
+	const catalogs = {
+		cli: { picocolors: "^1.1.1" },
+		default: { typescript: "5.9.3", vite: "~6.3.5" },
+	};
+
+	it("classifies catalog: specs by the catalog's range", () => {
+		const findings = findingsFromManifest(
+			{
+				dependencies: {
+					picocolors: "catalog:cli",
+					typescript: "catalog:",
+					vite: "catalog:default",
+				},
+				name: "pkg",
+			},
+			["dependencies"],
+			{ catalogs },
+		);
+
+		expect(findings).toEqual([
+			expect.objectContaining({
+				catalog: "cli",
+				dependency: "picocolors",
+				kind: "caret",
+				pinnable: false,
+				spec: "^1.1.1",
+			}),
+			expect.objectContaining({
+				catalog: "default",
+				dependency: "vite",
+				kind: "tilde",
+				pinnable: false,
+				spec: "~6.3.5",
+			}),
+		]);
+	});
+
+	it("skips catalog: specs whose entry is missing", () => {
+		const findings = findingsFromManifest(
+			{ dependencies: { react: "catalog:cli" }, name: "pkg" },
+			["dependencies"],
+			{ catalogs },
+		);
+
+		expect(findings).toEqual([]);
+	});
+
+	it("reads catalogs from pnpm-workspace.yaml in a scan", async () => {
+		fs.writeFileSync(
+			path.join(root, "pnpm-workspace.yaml"),
+			"catalog:\n  left-pad: ^1.3.0\ncatalogs:\n  test:\n    vitest: '>=4'\n",
+		);
+		write("package.json", {
+			dependencies: { "left-pad": "catalog:" },
+			devDependencies: { vitest: "catalog:test" },
+			name: "fixture-root",
+			version: "1.0.0",
+		});
+
+		const findings = await scan({
+			cwd: root,
+			depTypes: ["dependencies", "devDependencies"],
+			workspaceOnly: true,
+		});
+
+		expect(
+			findings.map(({ catalog, dependency, kind, spec }) => ({
+				catalog,
+				dependency,
+				kind,
+				spec,
+			})),
+		).toEqual([
+			{
+				catalog: "default",
+				dependency: "left-pad",
+				kind: "caret",
+				spec: "^1.3.0",
+			},
+			{
+				catalog: "test",
+				dependency: "vitest",
+				kind: "comparison",
+				spec: ">=4",
+			},
+		]);
+	});
+});

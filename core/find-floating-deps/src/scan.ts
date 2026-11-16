@@ -6,13 +6,22 @@ import {
 import * as fs from "node:fs";
 import path from "node:path";
 
+import type { Catalogs } from "./catalogs";
 import type { DepType, Finding } from "./finding";
 
+import { readCatalogs, resolveCatalogSpec } from "./catalogs";
 import { classifySpec } from "./classify";
 
 export type Manifest = Partial<Record<DepType, Record<string, string>>> & {
 	name?: string;
 	version?: string;
+};
+
+export type ManifestOptions = {
+	/** Catalogs to resolve `catalog:` specs against */
+	catalogs?: Catalogs;
+	/** The installed version of a dependency */
+	resolve?: (dependency: string) => string | undefined;
 };
 
 export type ScanOptions = {
@@ -32,25 +41,32 @@ export class ScanError extends Error {
 export function findingsFromManifest(
 	manifest: Manifest,
 	depTypes: readonly DepType[],
-	resolve?: (dependency: string) => string | undefined,
+	options: ManifestOptions = {},
 ): Finding[] {
 	const findings: Finding[] = [];
 
 	for (const depType of depTypes) {
-		for (const [dependency, spec] of Object.entries(
+		for (const [dependency, written] of Object.entries(
 			manifest[depType] ?? {},
 		)) {
+			const fromCatalog = options.catalogs
+				? resolveCatalogSpec(written, dependency, options.catalogs)
+				: undefined;
+			const spec = fromCatalog?.range ?? written;
+
 			const kind = classifySpec(spec);
 			if (!kind) continue;
 
 			findings.push({
+				...(fromCatalog && { catalog: fromCatalog.catalog }),
 				dependency,
 				depType,
 				kind,
 				parent: manifest.name ?? "",
 				parentVersion: manifest.version ?? "",
-				pinnable: isPinnable(spec, depType),
-				resolved: resolve?.(dependency),
+				// pinAllDependencies sees `catalog:`, not the catalog's range
+				pinnable: !fromCatalog && isPinnable(spec, depType),
+				resolved: options.resolve?.(dependency),
 				spec,
 			});
 		}
@@ -69,21 +85,33 @@ export async function scan(options: ScanOptions): Promise<Finding[]> {
 	const seen = new Set<string>();
 	const findings: Finding[] = [];
 
-	const visit = (manifest: Manifest, nodeModules: string) => {
+	const catalogs = readCatalogs(rootDir);
+
+	const visit = (
+		manifest: Manifest,
+		nodeModules: string,
+		manifestCatalogs?: Catalogs,
+	) => {
 		const id = `${manifest.name}@${manifest.version}`;
 		if (seen.has(id)) return;
 		seen.add(id);
 
 		findings.push(
-			...findingsFromManifest(manifest, options.depTypes, (dependency) =>
-				readInstalledVersion(nodeModules, dependency),
-			),
+			...findingsFromManifest(manifest, options.depTypes, {
+				catalogs: manifestCatalogs,
+				resolve: (dependency) =>
+					readInstalledVersion(nodeModules, dependency),
+			}),
 		);
 	};
 
 	const workspace = rootPackage ? [rootPackage, ...packages] : packages;
 	for (const pkg of workspace) {
-		visit(pkg.packageJson as Manifest, path.join(pkg.dir, "node_modules"));
+		visit(
+			pkg.packageJson as Manifest,
+			path.join(pkg.dir, "node_modules"),
+			catalogs,
+		);
 	}
 
 	if (options.workspaceOnly) return findings;

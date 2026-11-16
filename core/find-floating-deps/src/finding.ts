@@ -41,12 +41,15 @@ export const fields = [
 	"kind",
 	"resolved",
 	"pinnable",
+	"catalog",
 ] as const;
 
 export type Field = (typeof fields)[number];
 
 /** One floating range declared by `parent@parentVersion` */
 export type Finding = {
+	/** The pnpm catalog the range came from, for `catalog:` specs */
+	catalog?: string;
 	dependency: string;
 	depType: DepType;
 	kind: Kind;
@@ -56,5 +59,6 @@ export type Finding = {
 	pinnable: boolean;
 	/** The version it is installed as, when it is installed */
 	resolved?: string;
+	/** The range as written, or the catalog's range for `catalog:` specs */
 	spec: string;
 };

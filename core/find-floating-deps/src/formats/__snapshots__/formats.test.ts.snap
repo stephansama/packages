@@ -1,15 +1,15 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`csv > formats no findings 1`] = `
-"parent,parentVersion,dependency,spec,depType,kind,resolved,pinnable
+"parent,parentVersion,dependency,spec,depType,kind,resolved,pinnable,catalog
 "
 `;
 
 exports[`csv > formats the fixture findings 1`] = `
-"parent,parentVersion,dependency,spec,depType,kind,resolved,pinnable
-@types/ws,8.18.1,@types/node,*,dependencies,wildcard,24.12.2,false
-vite,6.3.5,picocolors,^1.1.1,dependencies,caret,1.1.1,true
-"needs,quoting",1.0.0,react,"^18 || ""19""",optionalDependencies,union,,false
+"parent,parentVersion,dependency,spec,depType,kind,resolved,pinnable,catalog
+@types/ws,8.18.1,@types/node,*,dependencies,wildcard,24.12.2,false,
+vite,6.3.5,picocolors,^1.1.1,dependencies,caret,1.1.1,true,
+"needs,quoting",1.0.0,react,"^18 || ""19""",optionalDependencies,union,,false,
 "
 `;
 
@@ -111,17 +111,17 @@ react
 `;
 
 exports[`markdown > formats no findings 1`] = `
-"| parent | parentVersion | dependency | spec | depType | kind | resolved | pinnable |
-| --- | --- | --- | --- | --- | --- | --- | --- |
+"| parent | parentVersion | dependency | spec | depType | kind | resolved | pinnable | catalog |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
 "
 `;
 
 exports[`markdown > formats the fixture findings 1`] = `
-"| parent | parentVersion | dependency | spec | depType | kind | resolved | pinnable |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| @types/ws | 8.18.1 | @types/node | * | dependencies | wildcard | 24.12.2 | false |
-| vite | 6.3.5 | picocolors | ^1.1.1 | dependencies | caret | 1.1.1 | true |
-| needs,quoting | 1.0.0 | react | ^18 \\|\\| "19" | optionalDependencies | union |  | false |
+"| parent | parentVersion | dependency | spec | depType | kind | resolved | pinnable | catalog |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| @types/ws | 8.18.1 | @types/node | * | dependencies | wildcard | 24.12.2 | false |  |
+| vite | 6.3.5 | picocolors | ^1.1.1 | dependencies | caret | 1.1.1 | true |  |
+| needs,quoting | 1.0.0 | react | ^18 \\|\\| "19" | optionalDependencies | union |  | false |  |
 "
 `;
 
@@ -161,7 +161,7 @@ exports[`table > formats no findings 1`] = `
 `;
 
 exports[`table > formats the fixture findings 1`] = `
-"parent         parentVersion  dependency   spec         depType               kind      resolved  pinnable
+"parent         parentVersion  dependency   spec         depType               kind      resolved  pinnable  catalog
 @types/ws      8.18.1         @types/node  *            dependencies          wildcard  24.12.2   false
 vite           6.3.5          picocolors   ^1.1.1       dependencies          caret     1.1.1     true
 needs,quoting  1.0.0          react        ^18 || "19"  optionalDependencies  union               false
@@ -181,15 +181,15 @@ react        ^18 || "19"  needs,quoting
 `;
 
 exports[`tsv > formats no findings 1`] = `
-"parent	parentVersion	dependency	spec	depType	kind	resolved	pinnable
+"parent	parentVersion	dependency	spec	depType	kind	resolved	pinnable	catalog
 "
 `;
 
 exports[`tsv > formats the fixture findings 1`] = `
-"parent	parentVersion	dependency	spec	depType	kind	resolved	pinnable
-@types/ws	8.18.1	@types/node	*	dependencies	wildcard	24.12.2	false
-vite	6.3.5	picocolors	^1.1.1	dependencies	caret	1.1.1	true
-needs,quoting	1.0.0	react	^18 || "19"	optionalDependencies	union		false
+"parent	parentVersion	dependency	spec	depType	kind	resolved	pinnable	catalog
+@types/ws	8.18.1	@types/node	*	dependencies	wildcard	24.12.2	false	
+vite	6.3.5	picocolors	^1.1.1	dependencies	caret	1.1.1	true	
+needs,quoting	1.0.0	react	^18 || "19"	optionalDependencies	union		false	
 "
 `;
 

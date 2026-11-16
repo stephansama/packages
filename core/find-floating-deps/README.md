@@ -11,6 +11,7 @@
 [![jsr](https://jsr.io/badges/@stephansama/find-floating-deps)](https://jsr.io/@stephansama/find-floating-deps)
 [![npm downloads](https://img.shields.io/npm/dw/@stephansama/find-floating-deps?labelColor=211F1F)](https://www.npmx.dev/package/@stephansama/find-floating-deps)
 
+[![yaml](https://img.shields.io/badge/yaml-2.8.2-CB171E.svg?logo=yaml&logoColor=ffffff&labelColor=CB171E)](https://npmx.dev/package/yaml)
 [![tsdown](https://img.shields.io/badge/tsdown-0.21.10-3178C6.svg?logo=rolldown&logoColor=ffffff&labelColor=3178C6)](https://npmx.dev/package/tsdown)
 
 <!-- BADGE end -->
@@ -68,7 +69,9 @@ It scans your workspace manifests and every package in `node_modules/.pnpm`, so 
 | `union`        | `^1.0.0 \|\| ^2.0.0`         |
 | `intersection` | `>=1.2.3 <2.0.0`             |
 
-Exact versions and protocols (`workspace:`, `catalog:`, `file:`, `link:`, git, tarballs) never float. `npm:` aliases are classified by their range.
+Exact versions and protocols (`workspace:`, `file:`, `link:`, git, tarballs) never float. `npm:` aliases are classified by their range.
+
+`catalog:` and `catalog:<name>` specs in your workspace manifests are classified by the range the catalog holds in `pnpm-workspace.yaml`. Their `spec` is that range and `catalog` names the catalog. They're never `pinnable`, because `pinAllDependencies` sees `catalog:`, not the range. Published packages already have real ranges in place of `catalog:`.
 
 ## Output formats
 
@@ -102,6 +105,7 @@ One row per (parent, dependency) pair:
 | `kind`          | `wildcard`                                                                                              |
 | `resolved`      | `24.12.2`, the version it is installed as, when it is installed                                         |
 | `pinnable`      | `false`, whether [`pinAllDependencies`](../pnpm-hooks/README.md) from `@stephansama/pnpm-hooks` pins it |
+| `catalog`       | `cli`, the pnpm catalog the range came from, for `catalog:` specs                                       |
 
 Choose and order columns in `table`, `tsv`, `csv` and `markdown` with `--fields parent,dependency,spec`.
 
@@ -128,8 +132,8 @@ Peer and dev dependencies are opt-in because peers resolve against the consumer 
 
 ## Exit codes
 
-| Code | Meaning                                         |
-| ---- | ----------------------------------------------- |
-| `0`  | No finding matched `--fail-on`                  |
-| `1`  | At least one finding matched `--fail-on`        |
-| `2`  | Usage error, or the project couldn't be scanned |
+| Code | Meaning                                                                     |
+| ---- | --------------------------------------------------------------------------- |
+| `0`  | No finding matched `--fail-on`                                              |
+| `1`  | At least one finding matched `--fail-on`                                    |
+| `2`  | Usage error (including an unknown flag), or the project couldn't be scanned |

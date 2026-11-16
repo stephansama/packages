@@ -13,7 +13,7 @@ const pathOrRepoRegex = /^(?:\.{1,2}\/|\/|~\/)|^[^@\s/][^\s/]*\/[^\s/]/;
 const hyphenRegex = /^\S+\s+-\s+\S+$/;
 
 /** Operators followed by whitespace, as in `>= 1.2.3` */
-const spacedOperatorRegex = /(?<operator>[<=>^~]+)\s+/g;
+const spacedOperatorRegex = /(?<operator>[<=>^~])\s+/g;
 
 const whitespaceRegex = /\s+/;
 

@@ -67,4 +67,10 @@ describe("classifySpec", () => {
 		expect(classifySpec("npm:@scope/foo@*")).toBe("wildcard");
 		expect(classifySpec("npm:@scope/foo@latest")).toBe("tag");
 	});
+
+	it("classifies long runs of operators in linear time", () => {
+		const start = performance.now();
+		expect(classifySpec("<".repeat(50_000) + "1")).toBe("comparison");
+		expect(performance.now() - start).toBeLessThan(100);
+	});
 });

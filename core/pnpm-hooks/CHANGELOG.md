@@ -1,5 +1,11 @@
 # @stephansama/pnpm-hooks
 
+## 0.2.0
+
+### Minor Changes
+
+- 027f61e: Export `pinVersion` and `pinnableDependencyTypes` from `@stephansama/pnpm-hooks/pin-version`
+
 ## 0.1.2
 
 ### Patch Changes

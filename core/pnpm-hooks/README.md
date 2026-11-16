@@ -46,12 +46,26 @@ pnpm install @stephansama/pnpm-hooks
 
 ## What this package exports
 
-The package exposes two top-level namespaces:
+The main entry exposes two top-level namespaces:
 
 - `readPackageHooks`
   prebuilt `readPackage` hook utilities
 - `types`
   pnpm hook types including `PnpmFileHooks`, `ReadPackageHook`, `BeforePackingHook`, `AfterAllResolvedHook`, `ImportPackageHook`, `PreResolutionHook`, and `UpdateConfigHook`
+
+`@stephansama/pnpm-hooks/pin-version` exports the pieces `pinAllDependencies` is built from:
+
+- `pinVersion(range)`
+  pins a range to its lower bound (`^1.2.3` becomes `1.2.3`) and returns anything it can't pin exactly unchanged
+- `pinnableDependencyTypes`
+  the manifest fields `pinAllDependencies` rewrites
+
+```ts
+import { pinVersion } from "@stephansama/pnpm-hooks/pin-version";
+
+pinVersion("^1.2.3"); // "1.2.3"
+pinVersion("*"); // "*"
+```
 
 ## Included hooks
 

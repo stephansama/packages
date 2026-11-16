@@ -64,6 +64,7 @@ export async function publishPlatform(
 			}
 
 			jsr.updateIncludeExcludeList(userJsr.config, config);
+			jsr.includeExportDirectories(userJsr.config);
 
 			const jsrFile = JSON.stringify(userJsr.config, undefined, 2);
 			await fsp.writeFile(userJsr.filename, jsrFile);
@@ -79,25 +80,23 @@ export async function publishPlatform(
 			}
 
 			const authToken = process.env[config.tokenEnvironmentKey];
+			const jsrFilename = userJsr.filename;
 
-			await utilities.chdir(pkg.dir, () => {
-				cp.execSync(
-					[
+			try {
+				await utilities.chdir(pkg.dir, () => {
+					execPublish(pkg, "jsr", [
 						jsrPublishCommand[packageManager],
 						"--allow-dirty",
 						config.allowSlowTypes && "--allow-slow-types",
 						isDryRun && "--dry-run",
 						authToken && `--token ${authToken}`,
-					]
-						.filter((x): x is string => !!x)
-						.join(" "),
-					{ stdio: "inherit" },
-				);
-			});
-
-			utilities.gitClean(userJsr.filename);
-			if (config.experimentalUpdateCatalogs) {
-				utilities.gitClean(packageJsonPath);
+					]);
+				});
+			} finally {
+				utilities.gitClean(jsrFilename);
+				if (config.experimentalUpdateCatalogs) {
+					utilities.gitClean(packageJsonPath);
+				}
 			}
 
 			break;
@@ -126,8 +125,8 @@ export async function publishPlatform(
 
 					const scope = pkg.packageJson.name.split("/").at(0);
 					if (!scope?.startsWith("@")) {
-						return console.error(
-							"scope does not start with @ symbol. aborting.",
+						throw new Error(
+							`${pkg.packageJson.name} is not scoped, the .npmrc strategy needs an @scope`,
 						);
 					}
 
@@ -153,21 +152,18 @@ export async function publishPlatform(
 				}
 			}
 
-			await utilities.chdir(pkg.dir, () => {
-				cp.execSync(
-					[
+			try {
+				await utilities.chdir(pkg.dir, () => {
+					execPublish(pkg, "npm", [
 						npmPublishCommand[packageManager],
 						packageManager === "pnpm" && "--no-git-checks",
 						isDryRun && "--dry-run",
-					]
-						.filter(Boolean)
-						.join(" "),
-					{ stdio: "inherit" },
-				);
-			});
-
-			utilities.gitClean(packageJsonPath);
-			if (config.strategy === ".npmrc") utilities.gitClean(npmrcPath);
+					]);
+				});
+			} finally {
+				utilities.gitClean(packageJsonPath);
+				if (config.strategy === ".npmrc") utilities.gitClean(npmrcPath);
+			}
 			break;
 		}
 		default: {
@@ -175,5 +171,35 @@ export async function publishPlatform(
 				`no implementation found for ${key || "default key"}`,
 			);
 		}
+	}
+}
+
+/**
+ * Run a publish command with inherited stdio, so its output is already shown.
+ * The error `execSync` throws on failure repeats the whole command, auth token
+ * included, so throw one that names the package and exit code instead.
+ */
+function execPublish(
+	pkg: Package,
+	platform: string,
+	parts: Array<false | string | undefined>,
+) {
+	const command = parts.filter((part): part is string => !!part).join(" ");
+
+	try {
+		cp.execSync(command, { stdio: "inherit" });
+	} catch (error) {
+		const status =
+			error &&
+			typeof error === "object" &&
+			"status" in error &&
+			typeof error.status === "number"
+				? ` (exit code ${error.status})`
+				: "";
+
+		// eslint-disable-next-line preserve-caught-error -- the caught error's message repeats the command, auth token included
+		throw new Error(
+			`${platform} publish failed for ${pkg.packageJson.name}${status}`,
+		);
 	}
 }

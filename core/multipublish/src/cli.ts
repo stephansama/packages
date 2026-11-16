@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 
-import { run } from "./index";
+import { PublishError, run } from "./index";
 
-await run();
+try {
+	await run();
+} catch (error) {
+	// failed platforms were already logged, so print the summary without a stack
+	if (!(error instanceof PublishError)) throw error;
+	console.error(error.message);
+	process.exitCode = 1;
+}

@@ -3,7 +3,12 @@ import { describe, expect, it } from "vitest";
 import type { JsrSchema } from "./jsr";
 import type { JsrPlatformOptionsSchema } from "./schema";
 
-import { jsrTransformer, updateIncludeExcludeList } from "./jsr";
+import {
+	includeExportDirectories,
+	jsrSchema,
+	jsrTransformer,
+	updateIncludeExcludeList,
+} from "./jsr";
 
 describe("jsr", () => {
 	describe("jsrTransformer", () => {
@@ -164,21 +169,28 @@ describe("jsr", () => {
 
 			updateIncludeExcludeList(jsrConfig, appConfig);
 
-			expect(jsrConfig.include).toEqual(["src"]);
-			expect(jsrConfig.exclude).toEqual(["test"]);
+			expect(jsrConfig.publish).toEqual({
+				exclude: ["test"],
+				include: ["src"],
+			});
+			expect(jsrConfig.include).toBeUndefined();
+			expect(jsrConfig.exclude).toBeUndefined();
 		});
 
-		it("should merge with existing include/exclude", () => {
+		it("should merge with existing publish include/exclude", () => {
 			const jsrConfig: JsrSchema = {
-				exclude: ["existing-exclude"],
+				exclude: ["top-level-exclude"],
 				exports: "./index.ts",
-				include: ["existing-include"],
 				name: "@scope/pkg",
+				publish: {
+					exclude: ["existing-exclude"],
+					include: ["existing-include"],
+				},
 				version: "1.0.0",
 			};
 			const appConfig: JsrPlatformOptionsSchema = {
 				allowSlowTypes: true,
-				defaultExclude: ["new-exclude"],
+				defaultExclude: ["new-exclude", "existing-exclude"],
 				defaultInclude: ["new-include"],
 				experimentalGenerateJSR: false,
 				experimentalUpdateCatalogs: false,
@@ -187,14 +199,94 @@ describe("jsr", () => {
 
 			updateIncludeExcludeList(jsrConfig, appConfig);
 
-			expect(jsrConfig.include).toEqual([
-				"existing-include",
-				"new-include",
-			]);
-			expect(jsrConfig.exclude).toEqual([
-				"existing-exclude",
-				"new-exclude",
-			]);
+			expect(jsrConfig.publish).toEqual({
+				exclude: ["existing-exclude", "new-exclude"],
+				include: ["existing-include", "new-include"],
+			});
+			expect(jsrConfig.exclude).toEqual(["top-level-exclude"]);
+		});
+
+		it("should not add a publish block when there is nothing to add", () => {
+			const jsrConfig: JsrSchema = {
+				exports: "./index.ts",
+				name: "@scope/pkg",
+				version: "1.0.0",
+			};
+
+			updateIncludeExcludeList(jsrConfig, {
+				allowSlowTypes: true,
+				experimentalGenerateJSR: false,
+				experimentalUpdateCatalogs: false,
+				tokenEnvironmentKey: "test",
+			});
+
+			expect(jsrConfig.publish).toBeUndefined();
+		});
+	});
+
+	describe("includeExportDirectories", () => {
+		const base = { name: "@scope/pkg", version: "1.0.0" };
+
+		it("should un-exclude the directory of a string export", () => {
+			const jsrConfig: JsrSchema = {
+				...base,
+				exports: "./dist/index.mjs",
+			};
+			includeExportDirectories(jsrConfig);
+			expect(jsrConfig.publish?.exclude).toEqual(["!dist"]);
+		});
+
+		it("should un-exclude each directory of a record export once", () => {
+			const jsrConfig: JsrSchema = {
+				...base,
+				exports: {
+					".": "./dist/index.mjs",
+					"./cli": "./dist/cli.mjs",
+					"./schema.json": "./schema/schema.json",
+				},
+			};
+			includeExportDirectories(jsrConfig);
+			expect(jsrConfig.publish?.exclude).toEqual(["!dist", "!schema"]);
+		});
+
+		it("should only use the top-level directory of nested paths", () => {
+			const jsrConfig: JsrSchema = {
+				...base,
+				exports: { ".": "dist/esm/index.mjs" },
+			};
+			includeExportDirectories(jsrConfig);
+			expect(jsrConfig.publish?.exclude).toEqual(["!dist"]);
+		});
+
+		it("should skip exports at the package root", () => {
+			const jsrConfig: JsrSchema = { ...base, exports: "./index.ts" };
+			includeExportDirectories(jsrConfig);
+			expect(jsrConfig.publish).toBeUndefined();
+		});
+
+		it("should keep existing publish excludes", () => {
+			const jsrConfig: JsrSchema = {
+				...base,
+				exports: "./dist/index.mjs",
+				publish: { exclude: ["!config", "!dist"] },
+			};
+			includeExportDirectories(jsrConfig);
+			expect(jsrConfig.publish?.exclude).toEqual(["!config", "!dist"]);
+		});
+	});
+
+	describe("jsrSchema", () => {
+		it("should keep a user's publish block", () => {
+			const config = jsrSchema.parse({
+				exports: "./dist/index.mjs",
+				name: "@scope/pkg",
+				publish: { exclude: ["!dist"], include: ["dist", "README.md"] },
+				version: "1.0.0",
+			});
+			expect(config.publish).toEqual({
+				exclude: ["!dist"],
+				include: ["dist", "README.md"],
+			});
 		});
 	});
 });

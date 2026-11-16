@@ -13,8 +13,6 @@ export async function chdir(
 	try {
 		process.chdir(newDirectory);
 		await callback();
-	} catch (error) {
-		console.error(error);
 	} finally {
 		process.chdir(cwd);
 	}

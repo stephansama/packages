@@ -93,7 +93,7 @@ You can configure `multipublish` by creating a configuration file (or object) in
 {
   "$schema": "./node_modules/@stephansama/multipublish/dist/schema.json",
   "platforms": [
-    ["jsr", { "experimentalGenerateJSR": true, "defaultExclude": ["!dist"] }],
+    ["jsr", { "experimentalGenerateJSR": true }],
     [
       "npm",
       {
@@ -117,6 +117,12 @@ permissions:
 ### JSR Configuration
 
 When publishing to JSR, you must either have a valid `jsr.json` or `deno.json`, or allow `experimentalGenerateJSR` using the config option.
+
+JSR leaves out gitignored files, which usually includes your build output. multipublish adds a negated `publish.exclude` glob for every directory your `exports` point into (`!dist` for `./dist/index.mjs`), so build output is published without any config.
+
+`defaultInclude` and `defaultExclude` are added to the JSR config's `publish.include` and `publish.exclude`. Use them for anything else, e.g. `"defaultExclude": ["!config"]` to publish a gitignored `config` directory. JSR only honors negated globs there, not in the top-level `exclude`.
+
+If any publish fails, multipublish still tries the remaining platforms and packages, then exits with code `1` and lists what failed.
 
 ### Changesets
 

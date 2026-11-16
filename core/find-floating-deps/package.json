@@ -1,6 +1,6 @@
 {
   "name": "@stephansama/find-floating-deps",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Report floating dependency ranges in an installed pnpm dependency tree",
   "keywords": [
     "dependencies",

@@ -280,6 +280,26 @@ describe("publish", () => {
 			);
 		});
 
+		it("should leave out the exit code when the failure has none", async () => {
+			vi.stubEnv("JSR_AUTH_TOKEN", "");
+			mocks.loadConfig.mockResolvedValue({
+				config: {
+					exports: "index.ts",
+					name: "@scope/pkg",
+					version: "1.0.0",
+				},
+				filename: "/path/to/pkg/jsr.json",
+			});
+			mocks.execSync.mockImplementation(() => {
+				throw new Error("spawn failed");
+			});
+
+			// an Error instance makes toThrow compare the whole message
+			await expect(publishPlatform(jsrPackage, "jsr")).rejects.toThrow(
+				new Error("jsr publish failed for @scope/pkg"),
+			);
+		});
+
 		it("should throw when npm publish fails, and still clean up", async () => {
 			vi.stubEnv("NODE_AUTH_TOKEN", "token");
 			mocks.existsSync.mockReturnValue(false);

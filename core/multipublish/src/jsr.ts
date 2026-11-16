@@ -86,6 +86,10 @@ export const jsrSchema = z.object({
  * for `./dist/index.mjs`. Build output is usually gitignored, and jsr excludes
  * gitignored files, so without this every export would fail with
  * `excluded-module`.
+ *
+ * The globs are prepended, because jsr uses the last matching glob: a narrower
+ * exclude inside the directory (e.g. `dist/*.map`) has to come after `!dist` to
+ * still apply. A directory that's already listed keeps its position.
  */
 export function includeExportDirectories(jsrConfig: JsrSchema) {
 	const exportPaths =
@@ -100,7 +104,14 @@ export function includeExportDirectories(jsrConfig: JsrSchema) {
 		return directory && rest.length > 0 ? [`!${directory}`] : [];
 	});
 
-	addPublishGlobs(jsrConfig, "exclude", directories);
+	const existing = jsrConfig.publish?.exclude ?? [];
+	const missing = [...new Set(directories)].filter(
+		(directory) => !existing.includes(directory),
+	);
+	if (missing.length === 0) return;
+
+	jsrConfig.publish ??= {};
+	jsrConfig.publish.exclude = [...missing, ...existing];
 }
 
 export async function loadConfig(basePath: string) {

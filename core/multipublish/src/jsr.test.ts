@@ -264,14 +264,31 @@ describe("jsr", () => {
 			expect(jsrConfig.publish).toBeUndefined();
 		});
 
-		it("should keep existing publish excludes", () => {
+		it("should put the directories before existing excludes, which jsr matches last-wins", () => {
 			const jsrConfig: JsrSchema = {
 				...base,
 				exports: "./dist/index.mjs",
-				publish: { exclude: ["!config", "!dist"] },
+				publish: { exclude: ["dist/**/*.map", "!config"] },
 			};
 			includeExportDirectories(jsrConfig);
-			expect(jsrConfig.publish?.exclude).toEqual(["!config", "!dist"]);
+			expect(jsrConfig.publish?.exclude).toEqual([
+				"!dist",
+				"dist/**/*.map",
+				"!config",
+			]);
+		});
+
+		it("should keep a directory that's already listed where it is", () => {
+			const jsrConfig: JsrSchema = {
+				...base,
+				exports: "./dist/index.mjs",
+				publish: { exclude: ["dist/internal", "!dist"] },
+			};
+			includeExportDirectories(jsrConfig);
+			expect(jsrConfig.publish?.exclude).toEqual([
+				"dist/internal",
+				"!dist",
+			]);
 		});
 	});
 

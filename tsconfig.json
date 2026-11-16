@@ -9,6 +9,7 @@
     { "path": "./core/catppuccin-xsl/tsconfig.json" },
     { "path": "./core/eslint-config/tsconfig.json" },
     { "path": "./core/example/tsconfig.json" },
+    { "path": "./core/find-floating-deps/tsconfig.json" },
     { "path": "./core/find-makefile-targets/tsconfig.json" },
     { "path": "./core/inline-image/tsconfig.json" },
     { "path": "./core/monorule/tsconfig.json" },

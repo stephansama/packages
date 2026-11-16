@@ -4,7 +4,7 @@ import ApiSnapshot from "tsnapi/rolldown";
 export default defineConfig({
 	attw: { profile: "esm-only" },
 	dts: true,
-	entry: ["src/index.ts", "src/types.ts"],
+	entry: ["src/index.ts", "src/pin-version.ts", "src/types.ts"],
 	exports: {
 		customExports(exports) {
 			return Object.fromEntries(

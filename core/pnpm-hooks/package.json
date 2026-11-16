@@ -25,6 +25,7 @@
   "exports": {
     ".": "./dist/index.mjs",
     "./package.json": "./package.json",
+    "./pin-version": "./dist/pin-version.mjs",
     "./types": "./dist/types.mjs"
   },
   "files": [

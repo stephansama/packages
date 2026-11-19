@@ -3,6 +3,7 @@ export const SKILLS_LOCK_FILE = "skills-lock.json";
 
 export const GITHUB_HOST = "github.com";
 export const GITHUB_URL = `https://${GITHUB_HOST}`;
+export const SHIELD_URL = "https://img.shields.io/badge";
 
 /**
  * Badge groups (mcp servers, skills) larger than this are wrapped in a

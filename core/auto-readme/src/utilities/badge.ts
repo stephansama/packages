@@ -1,12 +1,8 @@
-import type { SimpleIcon } from "simple-icons";
-
-import { makeBadge } from "badge-maker";
-import * as icons from "simple-icons";
-
 import type { BadgeStyle, McpServer, Skill } from "./types";
 
 import { getContrastText } from "../color";
 import { getSimpleIconColor } from "../icon";
+import { SHIELD_URL } from "./constants";
 import { getMcpServerUrl } from "./mcp";
 import { getSkillUrl } from "./skills";
 
@@ -50,10 +46,8 @@ export function createMcpBadge(name: string, server: McpServer) {
 }
 
 /**
- * Shield image in the same style as the dependency badges, rendered locally
- * with `badge-maker` and inlined as a `data:image/svg+xml` uri so readers
- * never hit the shields.io cdn. An empty label renders only the logo on the
- * left side of the badge
+ * Shield image in the same style as the dependency badges. An empty label
+ * renders only the logo on the left side of the badge
  */
 export function createShieldImage(
 	label: string,
@@ -62,16 +56,7 @@ export function createShieldImage(
 	logo: string,
 ) {
 	const contrastText = getContrastText(color);
-	const logoBase64 = createLogoDataUri(logo, contrastText);
-	const svg = makeBadge({
-		color: `#${color}`,
-		label,
-		labelColor: `#${color}`,
-		message,
-		style: "flat",
-		...(logoBase64 && { logoBase64 }),
-	});
-	return toSvgDataUri(svg);
+	return `${SHIELD_URL}/${escapeShield(label)}-${escapeShield(message)}-${color}.svg?logo=${logo}&logoColor=${contrastText}&labelColor=${color}`;
 }
 
 /**
@@ -82,6 +67,13 @@ export function createSkillBadge(name: string, skill: Skill) {
 	const { color, logo } = getSkillBadgeStyle();
 	const image = createShieldImage("", name, color, logo);
 	return createBadge(name, image, getSkillUrl(skill));
+}
+
+/** Escape a shields.io path segment, see https://shields.io/badges */
+export function escapeShield(input: string) {
+	return encodeURIComponent(
+		input.replaceAll("-", "--").replaceAll("_", "__"),
+	);
 }
 
 /** Logo and color shared by every mcp badge and the collapsed summary */
@@ -97,25 +89,4 @@ export function getMcpBadgeStyle(): BadgeStyle {
 export function getSkillBadgeStyle(): BadgeStyle {
 	const [color, logo] = getSimpleIconColor("vercel");
 	return { color: color || "000000", label: "skills", logo };
-}
-
-let iconsBySlug: Map<string, SimpleIcon> | undefined;
-
-/**
- * Simple icon for `slug` filled with `color` as a base64 svg data uri, the
- * shape `badge-maker` expects for `logoBase64`. Unknown slugs render no logo
- */
-export function createLogoDataUri(slug: string, color: string) {
-	iconsBySlug ??= new Map(
-		Object.values(icons).map((icon: SimpleIcon) => [icon.slug, icon]),
-	);
-	const icon = iconsBySlug.get(slug);
-	if (!icon) return;
-	return toSvgDataUri(
-		`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#${color}" d="${icon.path}"/></svg>`,
-	);
-}
-
-export function toSvgDataUri(svg: string) {
-	return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`;
 }

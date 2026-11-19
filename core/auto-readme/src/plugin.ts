@@ -11,6 +11,7 @@ import type { ActionData } from "./data";
 import type { Config } from "./schema";
 import type { TemplateContext } from "./utilities";
 
+import { getContrastText } from "./color";
 import { parseComment } from "./comment";
 import { createFindParameter } from "./data";
 import { getSimpleIconColor } from "./icon";
@@ -19,7 +20,6 @@ import { defaultTableHeadings, defaultTemplates } from "./schema";
 import {
 	collapseBadges,
 	createMcpBadge,
-	createShieldImage,
 	createSkillBadge,
 	DEFAULT_COLLAPSE_BADGES_AFTER,
 	getMcpBadgeStyle,
@@ -132,17 +132,18 @@ export const autoReadmeRemarkPlugin: Plugin<[Config, ActionData], Root> =
 				const [color, slug] = getSimpleIconColor(key);
 				if (!color) continue;
 
+				const contrastText = getContrastText(color);
 				const linkUrl = `https://npmx.dev/package/${key}`;
-				const imageUrl = createShieldImage(
-					key,
-					resolveVersion({
+				const badgeKey = key
+					.replaceAll("-", "--")
+					.replaceAll("_", "__");
+				const imageUrl = `https://img.shields.io/badge/${badgeKey}-${resolveVersion(
+					{
 						catalogs: first?.catalogs,
 						name: key,
 						version,
-					}),
-					color,
-					slug,
-				);
+					},
+				)}-${color}.svg?logo=${slug}&logoColor=${contrastText}&labelColor=${color}`;
 				packageBadges.push(md`[![${key}](${imageUrl})](${linkUrl})`);
 			}
 

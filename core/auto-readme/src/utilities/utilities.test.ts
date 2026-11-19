@@ -1,4 +1,4 @@
-import { afterEach, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import * as logger from "../log";
 import * as module from "./index";
@@ -179,4 +179,32 @@ it("successfully resolves symbolic links for prettier", async () => {
 		"/Users/stephansama/Code/packages/docs/auto-readme.md",
 	];
 	expect(response).toStrictEqual(expected);
+});
+
+describe("createShieldImage", () => {
+	it("renders the badge locally as an inline svg data uri", () => {
+		const image = module.createShieldImage("react", "1.0.0", "61DAFB", "react");
+		expect(image).toMatch(/^data:image\/svg\+xml;base64,/);
+		const svg = Buffer.from(image.split(",")[1]!, "base64").toString();
+		expect(svg).toContain('aria-label="react: 1.0.0"');
+		expect(svg).toContain("<image");
+	});
+
+	it("renders without a logo for an unknown simple-icons slug", () => {
+		const image = module.createShieldImage("", "x", "000000", "not-an-icon");
+		const svg = Buffer.from(image.split(",")[1]!, "base64").toString();
+		expect(svg).not.toContain("<image");
+	});
+});
+
+describe("createLogoDataUri", () => {
+	it("fills the simple icon path with the given color", () => {
+		const uri = module.createLogoDataUri("react", "ffffff");
+		const svg = Buffer.from(uri!.split(",")[1]!, "base64").toString();
+		expect(svg).toContain('fill="#ffffff"');
+	});
+
+	it("returns undefined for unknown slugs", () => {
+		expect(module.createLogoDataUri("not-an-icon", "ffffff")).toBeUndefined();
+	});
 });

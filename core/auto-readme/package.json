@@ -59,6 +59,7 @@
     "@manypkg/get-packages": "catalog:manypkg",
     "@stephansama/mdast-zone": "catalog:",
     "@stephansama/remark-usage": "catalog:remark",
+    "badge-maker": "catalog:",
     "colord": "catalog:",
     "cosmiconfig": "catalog:cli",
     "deepmerge": "catalog:",

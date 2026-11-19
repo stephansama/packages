@@ -38,6 +38,13 @@ const defaultConfig: Config = {
 	templates: defaultTemplates,
 };
 
+/** Decode every inlined `data:image/svg+xml` badge so tests can read its svg */
+function decodeBadges(markdown: string) {
+	return [
+		...markdown.matchAll(/data:image\/svg\+xml;base64,([\w+/=]+)/g),
+	].map(([, base64]) => Buffer.from(base64!, "base64").toString());
+}
+
 async function processMarkdown(
 	md: string,
 	config: Config = defaultConfig,
@@ -79,9 +86,14 @@ it("BADGE: generates shield badge for dependency with known icon color", async (
 		data,
 	);
 
-	expect(result).toContain("img.shields.io/badge");
-	expect(result).toContain("61DAFB");
-	expect(result).toContain("react");
+	expect(result).not.toContain("img.shields.io");
+	expect(result).toContain("[![react](data:image/svg+xml;base64,");
+	expect(result).toContain("](https://npmx.dev/package/react)");
+	const [svg] = decodeBadges(result);
+	expect(svg).toContain('aria-label="react: ^18.0.0"');
+	expect(svg).toContain('fill="#61dafb"');
+	// react logo from simple-icons, filled with the contrast text color
+	expect(svg).toContain('<image x="5"');
 });
 
 it("BADGE: skips badge when getSimpleIconColor returns no color", async () => {
@@ -107,7 +119,8 @@ it("BADGE: skips badge when getSimpleIconColor returns no color", async () => {
 		data,
 	);
 
-	expect(result).not.toContain("img.shields.io/badge");
+	expect(result).not.toContain("data:image/svg+xml");
+	expect(result).not.toContain("unknown-lib");
 });
 
 it("BADGE: includes template badges when configured", async () => {
@@ -471,11 +484,14 @@ it("BADGE: renders a badge for each mcp server, linking http servers", async () 
 		),
 	);
 
-	expect(result).toContain(
-		"[![n8n-mcp](https://img.shields.io/badge/-n8n--mcp-000000.svg?logo=modelcontextprotocol&logoColor=ffffff&labelColor=000000)](https://n8n.example.com)",
-	);
-	expect(result).toContain(
-		"![karakeep](https://img.shields.io/badge/-karakeep-000000.svg?logo=modelcontextprotocol",
+	expect(result).toContain("[![n8n-mcp](data:image/svg+xml;base64,");
+	expect(result).toContain("](https://n8n.example.com)");
+	expect(result).toContain("![karakeep](data:image/svg+xml;base64,");
+	const svgs = decodeBadges(result);
+	// empty label, so only the mcp logo shows next to the server name
+	expect(svgs).toContainEqual(expect.stringContaining('aria-label="n8n-mcp"'));
+	expect(svgs).toContainEqual(
+		expect.stringContaining('aria-label="karakeep"'),
 	);
 	expect(result).not.toContain("[![karakeep]");
 	expect(result).not.toContain("N8N_MCP_TOKEN");
@@ -496,8 +512,12 @@ it("BADGE: renders a badge for each skill linking to its definition", async () =
 		),
 	);
 
+	expect(result).toContain("[![ab-testing](data:image/svg+xml;base64,");
 	expect(result).toContain(
-		"[![ab-testing](https://img.shields.io/badge/-ab--testing-000000.svg?logo=vercel&logoColor=ffffff&labelColor=000000)](https://github.com/coreyhaines31/marketingskills/blob/HEAD/skills/ab-testing/SKILL.md)",
+		"](https://github.com/coreyhaines31/marketingskills/blob/HEAD/skills/ab-testing/SKILL.md)",
+	);
+	expect(decodeBadges(result)).toContainEqual(
+		expect.stringContaining('aria-label="ab-testing"'),
 	);
 	expect(result).toContain("![local-skill](");
 	expect(result).not.toContain("[![local-skill]");
@@ -524,12 +544,11 @@ it("BADGE: places mcp and skill badges after the dependency badges", async () =>
 		data,
 	);
 
-	// mcp badges have an empty label, so their path starts with `badge/-`
 	expect(result.indexOf("![react]")).toBeLessThan(
-		result.indexOf("badge/-karakeep-"),
+		result.indexOf("![karakeep]"),
 	);
-	expect(result.indexOf("badge/-karakeep-")).toBeLessThan(
-		result.indexOf("badge/-ab--testing-"),
+	expect(result.indexOf("![karakeep]")).toBeLessThan(
+		result.indexOf("![ab-testing]"),
 	);
 });
 
@@ -551,7 +570,10 @@ it("BADGE: collapses a badge group into <details> once it grows past the thresho
 	);
 
 	expect(result).toContain(
-		'<details>\n<summary><img alt="skills" src="https://img.shields.io/badge/skills-9-',
+		'<details>\n<summary><img alt="skills" src="data:image/svg+xml;base64,',
+	);
+	expect(decodeBadges(result)).toContainEqual(
+		expect.stringContaining('aria-label="skills: 9"'),
 	);
 	expect(result).toContain("</details>");
 	// two mcp servers stay inline
@@ -569,11 +591,14 @@ it("BADGE: collapse=<n> on the comment overrides the threshold", async () => {
 		data,
 	);
 
+	expect(result).toContain('<summary><img alt="mcp" src="data:image/svg+xml');
 	expect(result).toContain(
-		'<summary><img alt="mcp" src="https://img.shields.io/badge/mcp-2-',
+		'<summary><img alt="skills" src="data:image/svg+xml',
 	);
-	expect(result).toContain(
-		'<summary><img alt="skills" src="https://img.shields.io/badge/skills-2-',
+	const svgs = decodeBadges(result);
+	expect(svgs).toContainEqual(expect.stringContaining('aria-label="mcp: 2"'));
+	expect(svgs).toContainEqual(
+		expect.stringContaining('aria-label="skills: 2"'),
 	);
 });
 
@@ -591,8 +616,7 @@ it("BADGE: skips mcp and skill badges with --skip-mcp / --skip-skills", async ()
 		data,
 	);
 
-	expect(result).not.toContain("logo=modelcontextprotocol");
-	expect(result).not.toContain("logo=vercel");
+	expect(result).not.toContain("data:image/svg+xml");
 });
 
 it("BADGE: renders nothing extra when no mcp or skills data is loaded", async () => {
@@ -613,8 +637,7 @@ it("BADGE: renders nothing extra when no mcp or skills data is loaded", async ()
 		data,
 	);
 
-	expect(result).not.toContain("logo=modelcontextprotocol");
-	expect(result).not.toContain("logo=vercel");
+	expect(result).not.toContain("data:image/svg+xml");
 });
 
 it("BADGE: links mcp servers to their host only", async () => {
